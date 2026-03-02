@@ -215,6 +215,7 @@
 
     /* ══════════════════════════════════════════════════════════════
        PRINT STYLES — Professional one-page farm report
+       Calculator ONLY — no site header, footer, or navigation
        ══════════════════════════════════════════════════════════════ */
     @media not print {
       .print-header, .print-footer, .print-summary { display: none; }
@@ -232,10 +233,31 @@
         print-color-adjust: exact !important;
       }
 
-      /* Hide screen-only elements */
-      #site-header, #site-footer, .breadcrumb, .action-bar,
-      .hint-popup, .hint-icon, .live-price-bar,
-      .profit-gauge, .cost-bar { display: none !important; }
+      /* ── TOTAL ISOLATION: hide ALL site chrome ──────────────── */
+      /* Target every possible header/footer/nav element by ID,
+         class, tag, and any children injected by loader.js       */
+      #site-header,
+      #site-header *,
+      #site-footer,
+      #site-footer *,
+      .breadcrumb,
+      .action-bar,
+      .hint-popup,
+      .hint-icon,
+      .live-price-bar,
+      .profit-gauge,
+      .cost-bar {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        line-height: 0 !important;
+        font-size: 0 !important;
+      }
 
       /* Show print-only elements */
       .print-header {
