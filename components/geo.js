@@ -869,6 +869,11 @@ function loadDailyBriefing() {
       return r.json();
     })
     .then(function(d) {
+      // v3 layout: delegate to inline hydrateDaily() if present
+      if (typeof window.hydrateDaily === 'function') {
+        window.hydrateDaily(d);
+        return;
+      }
       var el;
       el = document.getElementById('daily-headline');    if (el && d.headline)    el.textContent = d.headline;
       el = document.getElementById('daily-subheadline'); if (el && d.subheadline) el.textContent = d.subheadline;
@@ -940,7 +945,7 @@ function loadDailyBriefing() {
     fetchAllPrices();
     fetchCryptoLive();
     fetchFFAILive();
-    if (document.getElementById('daily-headline')) loadDailyBriefing();
+    if (document.getElementById('dv3-headline') || document.getElementById('daily-headline')) loadDailyBriefing();
     if (document.getElementById('kalshi-grid'))    fetchKalshiMarkets();
     setInterval(function() {
       fetchAllPrices();
