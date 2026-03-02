@@ -254,9 +254,8 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none }
 /* ── Teaser bar (shown when dismissed) ───────────────────────── */
 .daily-teaser {
   display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: .5rem;
+  flex-direction: column;
+  gap: .2rem;
   padding: .45rem var(--sp-lg);
   cursor: pointer;
   transition: background .15s;
@@ -266,6 +265,13 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none }
 }
 .daily-teaser:hover { background: rgba(230,176,66,.04) }
 .daily-hero.dismissed .daily-teaser { display: flex }
+.teaser-line1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  width: 100%;
+}
 .teaser-left {
   display: flex;
   align-items: center;
@@ -277,6 +283,16 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none }
 .teaser-badge { font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); background: rgba(230,176,66,.1); border: 1px solid rgba(230,176,66,.2); border-radius: 20px; padding: .18rem .55rem; white-space: nowrap; flex-shrink: 0 }
 .teaser-headline { font-size: .85rem; font-weight: 600; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0 }
 .teaser-action { font-size: .75rem; color: var(--gold); white-space: nowrap; font-weight: 600; flex-shrink: 0 }
+.teaser-preview {
+  font-size: .72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding-left: .1rem;
+}
 
 /* ── Daily content layout ─────────────────────────────────────── */
 .daily-grid {
@@ -516,6 +532,8 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none }
   text-decoration: none;
   color: inherit;
   transition: border-color .2s, box-shadow .2s;
+  max-width: 100%;
+  overflow: hidden;
 }
 .tool-widget:hover { border-color: var(--border-g); box-shadow: var(--glow-card) }
 .tool-widget-inner {
@@ -528,6 +546,8 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none }
   border-radius: 7px;
   transition: border-color .2s, background .15s, box-shadow .2s;
   min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 .tool-widget:hover .tool-widget-inner {
   border-color: var(--border-g);
@@ -671,6 +691,16 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none }
 .cal-date { font-size: .72rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-bottom: .3rem }
 .cal-name { font-size: .88rem; font-weight: 600; color: var(--text); margin-bottom: .2rem }
 .cal-time { font-size: .75rem; color: var(--text-muted) }
+
+/* ── Mobile: compact USDA calendar ─────────────────────────────── */
+@media (max-width: 520px) {
+  .cal-strip { gap: .45rem; margin-bottom: 1.25rem }
+  .cal-card { min-width: 140px; padding: .5rem .65rem; border-radius: 7px }
+  .cal-today-badge { font-size: .55rem; padding: .08rem .3rem; margin-bottom: .2rem }
+  .cal-date { font-size: .62rem; margin-bottom: .15rem }
+  .cal-name { font-size: .75rem; margin-bottom: .1rem }
+  .cal-time { font-size: .62rem; line-height: 1.3 }
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    15. FFAI INDEX
@@ -873,6 +903,16 @@ main.tool-main, main#main-content { max-width: 1100px; margin: 0 auto; padding: 
   .nav-logo img { height: 44px }
   .main { padding: 1.25rem .9rem }
   .signup { padding: 1.75rem 1rem }
+
+  /* ── Signup form — compact on mobile ────────────────────────── */
+  .signup-input { padding: .55rem .8rem; font-size: .82rem }
+  .signup-submit { padding: .55rem 1rem; font-size: .82rem }
+  .signup-headline { font-size: clamp(1.5rem, 3vw, 2rem) !important }
+  .signup-sub { font-size: .85rem; margin-bottom: 1.25rem }
+  .signup-row { gap: .5rem }
+  .signup-tabs { margin-bottom: 1rem }
+  .signup-tab { padding: .4rem .6rem; font-size: .78rem }
+  .sms-note { padding: .6rem .8rem; font-size: .78rem }
   .footer-inner { padding-left: .9rem; padding-right: .9rem }
   .footer-cols { grid-template-columns: repeat(2, 1fr) }
 
@@ -897,11 +937,11 @@ main.tool-main, main#main-content { max-width: 1100px; margin: 0 auto; padding: 
   .daily-sec:nth-child(n+4) { display: none }
   .daily-ctas { margin-top: .25rem }
 
-  /* Teaser bar */
-  .daily-teaser { padding: .4rem .9rem; gap: .4rem }
-  .teaser-headline { font-size: .75rem }
+  /* Teaser bar — 2-line mobile */
+  .daily-teaser { padding: .4rem .9rem; gap: .15rem }
   .teaser-action { font-size: .68rem }
   .teaser-badge { font-size: .55rem; padding: .15rem .4rem }
+  .teaser-preview { font-size: .65rem }
 
   /* ── Hero sidebar — compact cards on mobile ──────────────────── */
   .s-card { padding: .7rem .8rem }
@@ -951,6 +991,6 @@ main.tool-main, main#main-content { max-width: 1100px; margin: 0 auto; padding: 
   .one-num { font-size: 2rem }
   .daily-lead { display: none }
   .daily-sec:nth-child(n+3) { display: none }
-  .teaser-headline { display: none }
+  .teaser-preview { font-size: .6rem }
   .daily-teaser { padding: .4rem .75rem }
 }
