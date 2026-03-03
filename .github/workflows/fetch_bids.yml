@@ -1,0 +1,40 @@
+name: Fetch Grain Bids
+
+on:
+  schedule:
+    # Every 30 min, weekdays 6am–4pm CT (11:00–21:00 UTC)
+    - cron: '*/30 11-21 * * 1-5'
+    # Once at 6am CT Saturday for weekend display
+    - cron: '0 11 * * 6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-bids:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch grain bids
+        env:
+          BARCHART_API_KEY: ${{ secrets.BARCHART_API_KEY }}
+        run: python fetch_bids.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "AGSIST Bot"
+          git config user.email "bot@agsist.com"
+          git add data/bids.json
+          git diff --staged --quiet && echo "No changes" && exit 0
+          git commit -m "Update grain bids $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git pull --rebase
+          git push
