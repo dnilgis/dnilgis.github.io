@@ -3,15 +3,13 @@
 // Reads /data/bids.json (pre-fetched national grid) and shows
 // the top 5 nearest bids in the homepage Cash Bids card.
 //
-// DEPLOY: Save as /components/bids-homepage.js
-//         Add <script src="/components/bids-homepage.js"></script>
-//         after geo.js in index.html
-//
-// OR: Call window.loadHomepageBids(lat, lng, label) from geo.js
+// DEPLOY: /components/bids-homepage.js
 // ═══════════════════════════════════════════════════════════════════
 
 (function(){
   'use strict';
+
+  var LOADED = false;
 
   function haversine(lat1,lng1,lat2,lng2){
     var R=3958.8,d2r=Math.PI/180;
@@ -23,15 +21,24 @@
   }
 
   function loadHomepageBids(lat, lng, label){
+    if(LOADED) return;  // prevent double-fire
     var area = document.getElementById('bids-list-area');
     var geoTxt = document.getElementById('bids-geo-txt');
     if(!area) return;
+
+    LOADED = true;
 
     fetch('/data/bids.json?v=' + Date.now())
       .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
       .then(function(data){
         var bids = data.bids || [];
         var grid = data.zip_grid || [];
+
+        if(!bids.length){
+          area.innerHTML = '<div style="text-align:center;padding:1rem;font-size:.82rem;color:var(--text-muted)">'
+            + 'No bids data available yet.<br><a href="/cash-bids" style="color:var(--gold)">Search any ZIP →</a></div>';
+          return;
+        }
 
         var nearZips = grid
           .map(function(z){ return {zip:z.zip, dist:haversine(lat,lng,z.lat,z.lng)}; })
@@ -61,8 +68,7 @@
         if(top.length === 0){
           area.innerHTML = '<div style="text-align:center;padding:1rem;font-size:.82rem;color:var(--text-muted)">'
             + '<div style="font-size:1.2rem;margin-bottom:.3rem">📍</div>'
-            + 'No elevator bids found nearby.<br><a href="/cash-bids" style="color:var(--gold)">Search any ZIP →</a>'
-            + '</div>';
+            + 'No elevator bids found nearby.<br><a href="/cash-bids" style="color:var(--gold)">Search any ZIP →</a></div>';
           return;
         }
 
@@ -100,18 +106,40 @@
       .catch(function(err){
         console.warn('[AGSIST] Homepage bids failed:', err);
         area.innerHTML = '<div style="text-align:center;padding:1rem;font-size:.82rem;color:var(--text-muted)">'
-          + 'Cash bids unavailable.<br><a href="/cash-bids" style="color:var(--gold)">Search cash bids →</a>'
-          + '</div>';
+          + 'Cash bids unavailable.<br><a href="/cash-bids" style="color:var(--gold)">Search cash bids →</a></div>';
       });
   }
 
+  // Expose globally so geo.js CAN call it directly
   window.loadHomepageBids = loadHomepageBids;
 
-  if(window.AGSIST_GEO && window.AGSIST_GEO.lat){
-    loadHomepageBids(
-      window.AGSIST_GEO.lat,
-      window.AGSIST_GEO.lng,
-      (window.AGSIST_GEO.city || '') + ', ' + (window.AGSIST_GEO.state || '')
-    );
+  // ── Poll for AGSIST_GEO since geolocation is async ──
+  // geo.js sets window.AGSIST_GEO after the location resolves,
+  // which happens AFTER this script loads. Poll every 500ms
+  // for up to 15 seconds, then give up gracefully.
+  var attempts = 0;
+  var maxAttempts = 30; // 30 x 500ms = 15 seconds
+
+  function tryLoad(){
+    if(LOADED) return;
+    attempts++;
+
+    if(window.AGSIST_GEO && window.AGSIST_GEO.lat){
+      loadHomepageBids(
+        window.AGSIST_GEO.lat,
+        window.AGSIST_GEO.lng,
+        (window.AGSIST_GEO.city || '') + ', ' + (window.AGSIST_GEO.state || '')
+      );
+      return;
+    }
+
+    if(attempts < maxAttempts){
+      setTimeout(tryLoad, 500);
+    } else {
+      console.warn('[AGSIST] Homepage bids: gave up waiting for geo after 15s');
+    }
   }
+
+  // Start polling
+  tryLoad();
 })();
