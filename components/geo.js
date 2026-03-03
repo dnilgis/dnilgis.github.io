@@ -3,17 +3,16 @@
  * ─────────────────────────────────────────────────────────────────
  * Price sources (all free, no API keys, no trials):
  *   1. data/prices.json  — pre-fetched every 30min by GitHub Actions (yfinance)
- *   2. CoinGecko          — crypto prices (proxied via corsproxy.io)
- *   3. Farmers First API  — FFAI Index
- *   4. Open-Meteo         — weather
- *   5. Nominatim OSM      — reverse geocoding
+ *      Includes all commodities, indices, AND crypto (BTC, XRP, KAS)
+ *   2. Farmers First API  — FFAI Index
+ *   3. Open-Meteo         — weather
+ *   4. Nominatim OSM      — reverse geocoding
  *
- * AUDIT v5 — 2026-03-01
- *   FIX 1: calcUrea() — added temperature gate (frozen ground was showing "Moderate")
- *   FIX 2: uT() — returns 0 for <32°F, 3 for 32-39°F (was 5 for all <40)
- *   FIX 3: Spray badge — distinct "Frozen" message below 32°F
- *   FIX 4: calcUrea returns 'frozen' level for homepage display
- *   NEW 5: Prediction markets v2 — categories, relevance tiers, "why it matters"
+ * AUDIT v6 — 2026-03-03
+ *   FIX 1: Crypto moved from CoinGecko/corsproxy to prices.json (server-side yfinance)
+ *   FIX 2: Removed all corsproxy.io and CoinGecko dependencies
+ *   FIX 3: Added bitcoin, ripple, kaspa to PRICE_MAP for unified price pipeline
+ *   (v5 fixes preserved: urea temp gate, spray frozen, prediction markets v2)
  */
 
 // ─────────────────────────────────────────────────────────────────
@@ -119,6 +118,9 @@ function calcSprayRating(tempF, humid, wind) {
 
 function fetchWeather(lat, lon, label) {
   try { localStorage.setItem('agsist-wx-loc', JSON.stringify({lat:lat, lon:lon, label:label})); } catch(e) {}
+
+  // Expose geo globally for bids-homepage.js and other scripts
+  window.AGSIST_GEO = { lat: lat, lng: lon, city: '', state: '', zip: '' };
 
   var wl = document.getElementById('wx-loading');
   var ze = document.getElementById('wx-zip-entry');
@@ -243,6 +245,13 @@ function propagateLocation(lat, lon, label) {
       var zip  = geo.address.postcode || '';
       var name = city + (st ? ', '+st : '');
 
+      // Update global geo object for bids-homepage.js
+      if (window.AGSIST_GEO) {
+        window.AGSIST_GEO.city = city;
+        window.AGSIST_GEO.state = st;
+        window.AGSIST_GEO.zip = zip;
+      }
+
       var wxLoc = document.getElementById('wx-loc');
       if (wxLoc && name) wxLoc.textContent = '📍 ' + name;
 
@@ -252,10 +261,6 @@ function propagateLocation(lat, lon, label) {
       if (zip) {
         var bidsZip = document.getElementById('bids-zip');
         if (bidsZip && !bidsZip.value) bidsZip.value = zip;
-        if (typeof loadCashBids === 'function') loadCashBids(zip);
-      } else if (name) {
-        var geoTxt = document.getElementById('bids-geo-txt');
-        if (geoTxt) geoTxt.textContent = 'Near ' + name + ' — enter ZIP for live bids';
       }
 
       try {
@@ -362,33 +367,11 @@ function renderForecast(lat, lon) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// CASH BIDS PLACEHOLDER
+// CASH BIDS — no longer writes placeholder (bids-homepage.js handles it)
 // ─────────────────────────────────────────────────────────────────
 function lookupBids() {
   var zip = (document.getElementById('bids-zip') || {}).value;
   if (!zip || zip.length !== 5 || isNaN(zip)) return;
-  loadCashBids(zip);
-}
-
-function loadCashBids(zip) {
-  var geoBar   = document.getElementById('bids-geo-bar');
-  var zipRow   = document.getElementById('bids-zip-row');
-  var listArea = document.getElementById('bids-list-area');
-  if (geoBar) geoBar.style.display = 'none';
-  if (zipRow) zipRow.style.display = 'none';
-  var bz = document.getElementById('bids-zip');
-  if (bz && !bz.value) bz.value = zip;
-  if (!listArea) return;
-  listArea.innerHTML = renderBidsPlaceholder(zip);
-}
-
-function renderBidsPlaceholder(zip) {
-  return '<div style="text-align:center;padding:1.25rem .5rem">'
-    + '<div style="font-size:1.5rem;margin-bottom:.4rem">💵</div>'
-    + '<div style="font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:.25rem">Cash bids coming soon</div>'
-    + '<div style="font-size:.78rem;color:var(--text-muted);line-height:1.5">Live local elevator bids near '
-    + (zip || 'your area') + ' will appear here.</div>'
-    + '</div>';
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -414,6 +397,9 @@ var PRICE_MAP = {
   'dollar':     { label:'Dollar Index',  priceEl:'pcp-dollar',    chgEl:'pcc-dollar',    dec:2, grain:false },
   'treasury10': { label:'10-Yr Treasury',priceEl:'pcp-treasury',  chgEl:'pcc-treasury',  dec:2, grain:false, suffix:'%' },
   'sp500':      { label:'S&P 500',       priceEl:'pcp-sp500',     chgEl:'pcc-sp500',     dec:2, grain:false },
+  'bitcoin':    { label:'Bitcoin',        priceEl:'pc-btc',        chgEl:'pcc-btc',       dec:0, grain:false },
+  'ripple':     { label:'XRP',            priceEl:'pc-xrp',        chgEl:'pcc-xrp',       dec:4, grain:false },
+  'kaspa':      { label:'Kaspa',          priceEl:'pc-kas',        chgEl:'pcc-kas',       dec:4, grain:false },
 };
 
 // ─────────────────────────────────────────────────────────────────
@@ -524,6 +510,7 @@ function applyPriceResult(key, q, close, open, netChg, pctChg) {
 
 // ─────────────────────────────────────────────────────────────────
 // PRIMARY PRICE SOURCE — data/prices.json
+// Fetches ALL prices including crypto (BTC, XRP, KAS) in one call
 // ─────────────────────────────────────────────────────────────────
 function fetchAllPrices() {
   fetch('/data/prices.json', { cache: 'no-store' })
@@ -540,46 +527,6 @@ function fetchAllPrices() {
       });
     })
     .catch(function(e) { console.warn('prices.json fetch failed:', e); });
-}
-
-// ─────────────────────────────────────────────────────────────────
-// CRYPTO — CoinGecko via CORS proxy
-// ─────────────────────────────────────────────────────────────────
-function fetchCryptoLive() {
-  var cgUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ripple,kaspa&vs_currencies=usd&include_24hr_change=true&precision=4';
-  var proxied = 'https://corsproxy.io/?' + encodeURIComponent(cgUrl);
-  fetch(proxied)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      var cmap = {
-        bitcoin: { priceEl:'pc-btc',  chgEl:'pcc-btc',  tickerSym:'bitcoin', dec:2 },
-        ripple:  { priceEl:'pc-xrp',  chgEl:'pcc-xrp',  tickerSym:'ripple',  dec:2 },
-        kaspa:   { priceEl:'pc-kas',  chgEl:'pcc-kas',  tickerSym:'kaspa',   dec:2 },
-      };
-      Object.keys(cmap).forEach(function(id) {
-        var info  = cmap[id];
-        var price = d[id] && d[id].usd;
-        var chgP  = d[id] && d[id].usd_24h_change;
-        if (!price) return;
-        var priceTxt = price < 1 ? price.toFixed(4) : price.toLocaleString('en-US',{maximumFractionDigits:2});
-        updatePriceEl(info.priceEl, priceTxt);
-        if (chgP !== undefined) {
-          var cv = parseFloat(chgP);
-          updatePriceEl(info.chgEl, (cv>0?'▲':'▼')+' '+Math.abs(cv).toFixed(2)+'%', cv>0?'up':'dn');
-        }
-        document.querySelectorAll('[data-sym="'+info.tickerSym+'"]').forEach(function(el) {
-          var pe = el.querySelector('.t-price');
-          var ce = el.querySelector('.t-chg');
-          if (pe) pe.textContent = priceTxt;
-          if (ce && chgP !== undefined) {
-            var cv2 = parseFloat(chgP);
-            ce.textContent = (cv2>0?'▲':'▼')+' '+Math.abs(cv2).toFixed(2)+'%';
-            ce.className = 't-chg '+(cv2>0?'up':'dn');
-          }
-        });
-      });
-      rebuildTickerLoop();
-    }).catch(function(e) { console.warn('CoinGecko fetch failed:', e); });
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -639,7 +586,6 @@ function rebuildTickerLoop() {
 // PREDICTION MARKETS v2 — Categories, Relevance Tiers, Why It Matters
 // ─────────────────────────────────────────────────────────────────
 
-// Category display: icon + sort order for grouped rendering
 var MARKET_CATEGORIES = {
   'Commodities':       { icon: '🌽', order: 1 },
   'Trade & Policy':    { icon: '🏛️', order: 2 },
@@ -650,7 +596,6 @@ var MARKET_CATEGORIES = {
   'Other':             { icon: '🎯', order: 7 }
 };
 
-// Relevance tier badges: color-coded by how directly agricultural
 var RELEVANCE_TIERS = {
   100: { label: 'Direct Ag',      color: 'var(--green)', bg: 'rgba(62,207,110,.10)',  border: 'rgba(62,207,110,.25)' },
   70:  { label: 'Trade & Energy', color: 'var(--gold)',  bg: 'rgba(230,176,66,.10)',  border: 'rgba(230,176,66,.25)' },
@@ -680,7 +625,6 @@ function fetchKalshiMarkets() {
       var markets = data.markets || [];
       var isV2    = data.version >= 2;
 
-      // ── Empty state ──────────────────────────────────────────
       if (!markets.length) {
         container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem 1rem">'
           + '<div style="font-size:2rem;margin-bottom:.5rem;opacity:.6">🎯</div>'
@@ -694,7 +638,6 @@ function fetchKalshiMarkets() {
         return;
       }
 
-      // ── v2: Group by category, render with headers ───────────
       if (isV2 && data.categories) {
         var catKeys = Object.keys(data.categories).sort(function(a, b) {
           return ((MARKET_CATEGORIES[a] || {}).order || 99) - ((MARKET_CATEGORIES[b] || {}).order || 99);
@@ -705,7 +648,6 @@ function fetchKalshiMarkets() {
           if (!catMarkets || !catMarkets.length) return;
           var catMeta = MARKET_CATEGORIES[catName] || { icon: '🎯', order: 99 };
 
-          // Category header row
           var header = document.createElement('div');
           header.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;gap:.45rem;'
             + 'padding:.65rem 0 .2rem;border-bottom:1px solid var(--border);margin-bottom:.2rem';
@@ -716,19 +658,16 @@ function fetchKalshiMarkets() {
             + catMarkets.length + ' market' + (catMarkets.length !== 1 ? 's' : '') + '</span>';
           container.appendChild(header);
 
-          // Cards in this category
           catMarkets.forEach(function(m) {
             container.appendChild(buildMarketCard(m, true));
           });
         });
       } else {
-        // ── v1 fallback: flat list (backward compatible) ──────
         markets.forEach(function(m) {
           container.appendChild(buildMarketCard(m, false));
         });
       }
 
-      // ── Stats + timestamp footer ─────────────────────────────
       var footerParts = [];
       if (data.total_found) footerParts.push(data.total_found + ' markets scanned');
       if (data.tier_breakdown) {
@@ -767,7 +706,6 @@ function buildMarketCard(m, showExtras) {
   var yes   = m.yes || 50;
   var title = (m.title || '').length > 100 ? m.title.slice(0, 97) + '…' : (m.title || 'Market');
 
-  // Probability-based color theming
   var color, bgAlpha, borderC;
   if (yes >= 65)      { color = 'var(--green)'; bgAlpha = 'rgba(62,207,110,.05)';  borderC = 'rgba(62,207,110,.18)'; }
   else if (yes <= 35) { color = 'var(--red)';   bgAlpha = 'rgba(240,96,96,.05)';   borderC = 'rgba(240,96,96,.18)';  }
@@ -781,7 +719,6 @@ function buildMarketCard(m, showExtras) {
              : vol >= 1e3  ? '$' + (vol / 1e3).toFixed(0) + 'k vol'
              : vol > 0     ? '$' + Math.round(vol) + ' vol' : '';
 
-  // Relevance tier badge (v2 only)
   var tierHTML = '';
   if (showExtras && m.relevance) {
     var tier = getRelevanceTier(m.relevance);
@@ -791,7 +728,6 @@ function buildMarketCard(m, showExtras) {
       + 'white-space:nowrap">' + tier.label + '</span>';
   }
 
-  // "Why it matters" blurb (v2 only)
   var whyHTML = '';
   if (showExtras && m.why_it_matters) {
     var whyText = m.why_it_matters.length > 150 ? m.why_it_matters.slice(0, 147) + '…' : m.why_it_matters;
@@ -814,7 +750,6 @@ function buildMarketCard(m, showExtras) {
   div.onclick = function() { window.open(m.url, '_blank', 'noopener'); };
 
   div.innerHTML =
-    // Row 1: Platform badge + relevance tier + time remaining
     '<div style="display:flex;align-items:center;gap:.35rem;flex-wrap:wrap">'
       + '<span style="font-size:.57rem;font-weight:700;letter-spacing:.08em;color:' + platColor
         + ';text-transform:uppercase;background:' + platColor + '12;border:1px solid '
@@ -823,11 +758,7 @@ function buildMarketCard(m, showExtras) {
       + '<span style="font-size:.6rem;color:var(--text-muted);margin-left:auto;white-space:nowrap">'
         + (m.time_left || '') + '</span>'
     + '</div>'
-
-    // Row 2: Title
     + '<div style="font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4">' + title + '</div>'
-
-    // Row 3: Probability + bar
     + '<div>'
       + '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.25rem">'
         + '<span style="font-size:1.5rem;font-weight:700;color:' + color
@@ -839,11 +770,7 @@ function buildMarketCard(m, showExtras) {
           + ';border-radius:3px;transition:width .4s ease"></div>'
       + '</div>'
     + '</div>'
-
-    // Row 4: Why it matters (v2 only — the key new feature)
     + whyHTML
-
-    // Row 5: Footer — NO/volume/link
     + '<div style="display:flex;justify-content:space-between;align-items:center;'
       + 'padding-top:.35rem;border-top:1px solid var(--border);margin-top:.1rem">'
       + '<span style="font-size:.66rem;color:var(--text-muted)">NO: '
@@ -869,7 +796,6 @@ function loadDailyBriefing() {
       return r.json();
     })
     .then(function(d) {
-      // v3 layout: delegate to inline hydrateDaily() if present
       if (typeof window.hydrateDaily === 'function') {
         window.hydrateDaily(d);
         return;
@@ -943,13 +869,11 @@ function loadDailyBriefing() {
   function init() {
     rebuildTickerLoop();
     fetchAllPrices();
-    fetchCryptoLive();
     fetchFFAILive();
     if (document.getElementById('dv3-headline') || document.getElementById('daily-headline')) loadDailyBriefing();
     if (document.getElementById('kalshi-grid'))    fetchKalshiMarkets();
     setInterval(function() {
       fetchAllPrices();
-      fetchCryptoLive();
       fetchFFAILive();
     }, 5 * 60 * 1000);
     setTimeout(function() {
