@@ -1521,3 +1521,105 @@ main.tool-main, main#main-content { max-width: 1100px; margin: 0 auto; padding: 
   .daily-sec-action { display: none }
   .daily-sec-bottomline { font-size: .62rem; padding: .3rem .4rem }
 }
+
+/* ── Force consistent card dimensions ────────────────────────── */
+.price-cards-grid .pc,
+.price-cards-grid-2 .pc {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* allow grid to equalize */
+}
+
+/* ── Prevent name wrapping, truncate with ellipsis ───────────── */
+.pc-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* ── Prevent price number from wrapping ──────────────────────── */
+.pc-price {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Reserve consistent height for prev-close line ───────────── */
+.pc-prev {
+  min-height: 1.1em;    /* reserves space even when empty */
+  line-height: 1.1;
+}
+
+/* ── Contract badge: never wrap, shrink if needed ────────────── */
+.pc-contract {
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 50%;        /* prevent badge from pushing name off */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Change row: align items consistently ────────────────────── */
+.pc-change {
+  min-height: 1.3em;     /* reserve space for the change value */
+  flex-wrap: nowrap;      /* override the existing wrap */
+  overflow: hidden;
+}
+
+/* ── Range section: push to bottom of card ───────────────────── */
+.pc-range {
+  margin-top: auto;      /* push range bar to bottom */
+  padding-top: .45rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Mobile 2-wide: tighter name handling ────────────────────── */
+@media (max-width: 520px) {
+  .pc-name {
+    font-size: .68rem;
+    gap: .3rem;
+  }
+  .pc-name-icon {
+    font-size: .85rem;
+  }
+  .pc-contract {
+    font-size: .52rem;
+    padding: .08rem .25rem;
+    max-width: 45%;
+  }
+  /* Slightly smaller prices on compact cards for consistency */
+  .pc-sm .pc-price {
+    font-size: 1.15rem;
+  }
+  .pc-prev {
+    font-size: .55rem;
+  }
+  /* Ensure change values don't overflow */
+  .pc-chg-val {
+    font-size: .68rem;
+    white-space: nowrap;
+  }
+}
+
+/* ── iPhone SE (375px): ultra-compact ────────────────────────── */
+@media (max-width: 380px) {
+  .pc-name {
+    font-size: .62rem;
+    gap: .25rem;
+  }
+  .pc-contract {
+    font-size: .48rem;
+    padding: .06rem .2rem;
+  }
+  .pc-sm .pc-price {
+    font-size: 1.05rem;
+  }
+  .pc-chg-val {
+    font-size: .62rem;
+  }
+  .pc-prev {
+    font-size: .5rem;
+    min-height: .8em;
+  }
+}
