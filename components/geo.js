@@ -8,12 +8,10 @@
  *   3. Open-Meteo         — weather
  *   4. Nominatim OSM      — reverse geocoding
  *
- * AUDIT v8 — 2026-03-03
- *   FIX 1: Crypto prev-close was overwriting price element — pc-btc.replace('pcp-','pcprev-')
- *          returned 'pc-btc' unchanged (same element!). Now uses explicit prefix detection
- *          AND guards against prevElId === priceEl so prev never overwrites the price display.
- *   FIX 2: propagateLocation now updates bids-geo-txt once Nominatim resolves city name,
- *          so the "Detecting your location…" / "Location found" text gets the real name.
+ * AUDIT v9 — 2026-03-04
+ *   Daily Briefing v3: overnight surprises, conviction badges, farmer actions,
+ *   bottom lines, heat section, market mood badge. Backward compatible with v2 JSON.
+ *   (v8 fixes preserved: crypto prev-close, bids-geo-txt update)
  *   (v6 fixes preserved: crypto to yfinance, removed CoinGecko/corsproxy)
  *   (v5 fixes preserved: urea temp gate, spray frozen, prediction markets v2)
  */
@@ -823,7 +821,8 @@ function buildMarketCard(m, showExtras) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// DAILY BRIEFING — v2 schema
+// DAILY BRIEFING — v3 schema with overnight surprises, conviction,
+// bottom lines, farmer actions, heat sections
 // ─────────────────────────────────────────────────────────────────
 function loadDailyBriefing() {
   fetch('/data/daily.json', { cache: 'no-store' })
@@ -836,6 +835,7 @@ function loadDailyBriefing() {
         window.hydrateDaily(d);
         return;
       }
+
       var el;
       el = document.getElementById('daily-headline');    if (el && d.headline)    el.textContent = d.headline;
       el = document.getElementById('daily-subheadline'); if (el && d.subheadline) el.textContent = d.subheadline;
@@ -850,10 +850,92 @@ function loadDailyBriefing() {
         el = document.getElementById('daily-number-context'); if (el) el.textContent = d.one_number.context;
       }
 
+      // Market mood badge (v3)
+      var moodEl = document.getElementById('daily-mood');
+      if (moodEl && d.meta && d.meta.market_mood) {
+        var mood = d.meta.market_mood;
+        var moodColors = {
+          bullish:  { color: 'var(--green)', bg: 'rgba(58,139,60,.08)',  border: 'rgba(58,139,60,.22)' },
+          bearish:  { color: 'var(--red)',   bg: 'rgba(184,76,42,.08)', border: 'rgba(184,76,42,.22)' },
+          mixed:    { color: 'var(--gold)',  bg: 'rgba(218,165,32,.08)',border: 'rgba(218,165,32,.22)' },
+          cautious: { color: 'var(--blue)',  bg: 'rgba(74,143,186,.08)',border: 'rgba(74,143,186,.22)' },
+          volatile: { color: 'var(--orange)',bg: 'rgba(200,122,40,.08)',border: 'rgba(200,122,40,.22)' }
+        };
+        var mc = moodColors[mood] || moodColors.mixed;
+        var moodIcons = { bullish:'📈', bearish:'📉', mixed:'↔️', cautious:'⚠️', volatile:'🔥' };
+        moodEl.textContent = (moodIcons[mood] || '📊') + ' ' + mood.charAt(0).toUpperCase() + mood.slice(1);
+        moodEl.style.color = mc.color;
+        moodEl.style.background = mc.bg;
+        moodEl.style.border = '1px solid ' + mc.border;
+        moodEl.style.display = 'inline-flex';
+      }
+
+      // Overnight surprise banner (v3)
+      var surpriseBanner = document.getElementById('daily-surprise-banner');
+      var surpriseCount = (d.meta && d.meta.overnight_surprises_count) || 0;
+      if (surpriseBanner) {
+        if (surpriseCount > 0) {
+          var surpriseNames = [];
+          if (d.surprises && d.surprises.length) {
+            d.surprises.forEach(function(s) {
+              var arrow = s.direction === 'up' ? '▲' : '▼';
+              surpriseNames.push(s.commodity + ' ' + arrow + Math.abs(s.pct_change).toFixed(1) + '%');
+            });
+          }
+          surpriseBanner.innerHTML = '<span class="surprise-icon">⚡</span>'
+            + '<span class="surprise-text">'
+            + '<strong>Overnight Surprise' + (surpriseCount > 1 ? 's' : '') + ':</strong> '
+            + (surpriseNames.length ? surpriseNames.join(' · ') : surpriseCount + ' unusual move' + (surpriseCount > 1 ? 's' : ''))
+            + '</span>';
+          surpriseBanner.style.display = 'flex';
+        } else {
+          surpriseBanner.style.display = 'none';
+        }
+      }
+
+      // Sections with v3 fields
+      var heatIdx = (d.meta && d.meta.heat_section != null) ? d.meta.heat_section : -1;
+
       if (d.sections && Array.isArray(d.sections)) {
         d.sections.forEach(function(sec, i) {
-          el = document.getElementById('daily-section-' + (i+1) + '-title'); if (el && sec.title) el.textContent = sec.title;
-          el = document.getElementById('daily-section-' + (i+1) + '-body');  if (el && sec.body)  el.textContent = sec.body;
+          var n = i + 1;
+          el = document.getElementById('daily-section-' + n + '-title');
+          if (el && sec.title) el.textContent = sec.title;
+          el = document.getElementById('daily-section-' + n + '-icon');
+          if (el && sec.icon) el.textContent = sec.icon;
+          el = document.getElementById('daily-section-' + n + '-body');
+          if (el && sec.body) el.innerHTML = sec.body;
+
+          // Bottom line (v3)
+          el = document.getElementById('daily-section-' + n + '-bottomline');
+          if (el && sec.bottom_line) { el.textContent = sec.bottom_line; el.style.display = 'block'; }
+
+          // Conviction badge (v3)
+          el = document.getElementById('daily-section-' + n + '-conviction');
+          if (el && sec.conviction_level) {
+            var cvColors = {
+              high:   { color: 'var(--green)', bg: 'rgba(58,139,60,.10)',  border: 'rgba(58,139,60,.25)' },
+              medium: { color: 'var(--gold)',  bg: 'rgba(218,165,32,.10)', border: 'rgba(218,165,32,.25)' },
+              low:    { color: 'var(--text-muted)', bg: 'var(--surface2)', border: 'var(--border)' }
+            };
+            var cv = cvColors[sec.conviction_level] || cvColors.medium;
+            el.textContent = sec.conviction_level.toUpperCase() + ' CONVICTION';
+            el.style.color = cv.color;
+            el.style.background = cv.bg;
+            el.style.border = '1px solid ' + cv.border;
+            el.style.display = 'inline-block';
+          }
+
+          // Farmer action (v3)
+          el = document.getElementById('daily-section-' + n + '-action');
+          if (el && sec.farmer_action) { el.textContent = '🎯 ' + sec.farmer_action; el.style.display = 'block'; }
+
+          // Overnight surprise flag + heat section (v3)
+          var secEl = document.getElementById('daily-sec-' + n);
+          if (secEl) {
+            if (sec.overnight_surprise) secEl.classList.add('daily-sec--surprise');
+            if (i === heatIdx) secEl.classList.add('daily-sec--heat');
+          }
         });
       }
 
@@ -886,7 +968,7 @@ function loadDailyBriefing() {
         });
       }
 
-      el = document.getElementById('daily-source');  if (el) el.textContent = d.source_summary || d.source || 'USDA \u00b7 Yahoo Finance \u00b7 Open-Meteo';
+      el = document.getElementById('daily-source');  if (el) el.textContent = d.source_summary || d.source || 'USDA \u00b7 CME Group \u00b7 Open-Meteo';
       el = document.getElementById('daily-loading'); if (el) el.style.display = 'none';
       el = document.getElementById('daily-content'); if (el) el.style.display = 'block';
     })

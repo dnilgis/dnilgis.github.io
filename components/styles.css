@@ -1,8 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════════
    AGSIST — Shared Stylesheet
-   Brand alignment: v8 — 2026-03-02
+   Brand alignment: v9 — 2026-03-04
    Palette & typography aligned to Farmers First Agri Service
    (farmers1st.com) for cross-brand recognition.
+   v9: Daily Briefing v3 styles (surprise banner, mood badge,
+   conviction, bottom line, farmer action, heat/surprise sections)
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── Fonts ──────────────────────────────────────────────────────── */
@@ -1341,4 +1343,181 @@ main.tool-main, main#main-content { max-width: 1100px; margin: 0 auto; padding: 
   .daily-sec:nth-child(n+3) { display: none }
   .teaser-preview { font-size: .6rem }
   .daily-teaser { padding: .4rem .75rem }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   22. DAILY BRIEFING v3 — Overnight Surprises, Conviction, Actions
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Overnight Surprise Banner ──────────────────────────────────── */
+.daily-surprise-banner {
+  display: none;
+  align-items: center;
+  gap: .65rem;
+  padding: .65rem 1.1rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, rgba(218,165,32,.06) 0%, rgba(218,165,32,.02) 100%);
+  border: 2px solid rgba(218,165,32,.25);
+  border-radius: var(--r-md);
+  animation: surprise-glow 3s ease-in-out infinite alternate;
+}
+@keyframes surprise-glow {
+  0% { border-color: rgba(218,165,32,.25); box-shadow: none }
+  100% { border-color: rgba(218,165,32,.40); box-shadow: 0 0 12px rgba(218,165,32,.08) }
+}
+.surprise-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  animation: surprise-pulse 2s ease-in-out infinite;
+}
+@keyframes surprise-pulse {
+  0%, 100% { transform: scale(1) }
+  50% { transform: scale(1.15) }
+}
+.surprise-text {
+  font-size: .85rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.surprise-text strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ── Market Mood Badge ──────────────────────────────────────────── */
+.daily-mood {
+  display: none;
+  align-items: center;
+  gap: .3rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .2rem .55rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-left: .5rem;
+}
+
+/* ── Section: Surprise flag ─────────────────────────────────────── */
+.daily-sec--surprise {
+  border-color: rgba(218,165,32,.35) !important;
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(218,165,32,.04) 100%);
+  position: relative;
+}
+.daily-sec--surprise::after {
+  content: '\26A1';
+  position: absolute;
+  top: .45rem;
+  right: .55rem;
+  font-size: .85rem;
+  opacity: .7;
+}
+
+/* ── Section: Heat (top story) flag ─────────────────────────────── */
+.daily-sec--heat {
+  border-color: rgba(58,139,60,.35) !important;
+  border-width: 2px;
+  position: relative;
+}
+.daily-sec--heat::before {
+  content: 'TOP STORY';
+  position: absolute;
+  top: -.55rem;
+  left: .8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--bg2);
+  padding: .05rem .45rem;
+  border-radius: 2px;
+}
+
+/* ── Section: Bottom Line ───────────────────────────────────────── */
+.daily-sec-bottomline {
+  display: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .76rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.5;
+  padding: .45rem .65rem;
+  margin-top: .5rem;
+  background: var(--surface2);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+/* ── Section: Conviction Badge ──────────────────────────────────── */
+.daily-sec-conviction {
+  display: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .12rem .4rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  vertical-align: middle;
+  margin-left: .4rem;
+}
+
+/* ── Section: Farmer Action ─────────────────────────────────────── */
+.daily-sec-action {
+  display: none;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--green);
+  line-height: 1.5;
+  padding: .35rem .55rem;
+  margin-top: .4rem;
+  background: rgba(58,139,60,.04);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(58,139,60,.12);
+}
+
+/* ── Section: Label row (title + conviction inline) ─────────────── */
+.daily-sec-label-row {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  margin-bottom: .3rem;
+  flex-wrap: wrap;
+}
+
+/* ── Mobile adjustments for v3 elements ─────────────────────────── */
+@media (max-width: 520px) {
+  .daily-surprise-banner {
+    padding: .45rem .75rem;
+    gap: .45rem;
+    margin-bottom: .6rem;
+  }
+  .surprise-icon { font-size: 1rem }
+  .surprise-text { font-size: .75rem }
+  .daily-mood { font-size: .55rem; padding: .15rem .4rem }
+  .daily-sec-bottomline {
+    font-size: .68rem;
+    padding: .35rem .5rem;
+    margin-top: .35rem;
+  }
+  .daily-sec-conviction { font-size: .48rem; padding: .08rem .3rem }
+  .daily-sec-action {
+    font-size: .7rem;
+    padding: .25rem .45rem;
+    margin-top: .3rem;
+  }
+  .daily-sec--surprise::after { font-size: .7rem; top: .3rem; right: .4rem }
+  .daily-sec--heat::before { font-size: .48rem; top: -.45rem; left: .55rem }
+}
+
+@media (max-width: 380px) {
+  .daily-surprise-banner { padding: .35rem .55rem; gap: .35rem }
+  .surprise-text { font-size: .68rem }
+  .daily-sec-action { display: none }
+  .daily-sec-bottomline { font-size: .62rem; padding: .3rem .4rem }
 }
