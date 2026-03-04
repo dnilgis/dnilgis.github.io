@@ -206,11 +206,19 @@
     return 'other';
   }
 
-  // ── Flatten Barchart response ──
-  // getGrainBids returns NESTED structure:
-  //   results[] → each is a LOCATION with bids[] inside
-  //   OR results[] → flat bid objects (varies by API version)
-  // This handles both formats.
+  // ── Flatten Barchart getGrainBids response ──
+  //
+  // Barchart returns NESTED structure:
+  //   results[] → each is a LOCATION with fields:
+  //     company (elevator name), location (branch name STRING),
+  //     city, state, distance, lat, lng, phone, url, zip, county
+  //   Each location contains bids[] with fields:
+  //     commodity, basis (string in cents e.g. "-38.00"),
+  //     cashprice (lowercase!), price (futures), deliveryMonth, symbol, etc.
+  //
+  // CRITICAL: "location" is a STRING, NOT an object.
+  //           "company" is the elevator name (not "name").
+  //           "cashprice" is all-lowercase (not "cashPrice").
   function flattenBarchartResponse(data){
     var flat = [];
     var raw = data.results || data.bids || data.data || [];
@@ -219,52 +227,59 @@
     raw.forEach(function(item){
       // Case 1: item has a bids[] array → nested location+bids format
       if(item.bids && Array.isArray(item.bids)){
-        var loc = item.location || item;
+        // Location fields are directly on item — NOT on item.location (that's a string!)
+        var facName = item.company || item.name || item.locationName || 'Unknown';
+        var branchName = (typeof item.location === 'string') ? item.location : '';
+
         item.bids.forEach(function(bid){
           flat.push({
-            facility: loc.name || loc.locationName || bid.facility || 'Unknown',
-            city:     loc.city || bid.city || '',
-            state:    loc.state || bid.state || '',
-            lat:      parseFloat(loc.latitude || loc.lat) || null,
-            lng:      parseFloat(loc.longitude || loc.lng) || null,
-            distance: parseFloat(item.distance || loc.distance || bid.distance) || null,
-            phone:    loc.phone || bid.phone || '',
-            commodity:    bid.commodity || bid.commodityName || '',
-            cashPrice:    parseFloat(bid.cashPrice) || null,
+            facility:     facName,
+            branch:       branchName,
+            city:         item.city || bid.city || '',
+            state:        item.state || bid.state || '',
+            lat:          parseFloat(item.lat || item.latitude) || null,
+            lng:          parseFloat(item.lng || item.longitude) || null,
+            distance:     parseFloat(item.distance || bid.distance) || null,
+            phone:        item.phone || bid.phone || '',
+            url:          item.url || '',
+            commodity:    bid.commodity || bid.commodity_display_name || bid.commodityName || '',
+            cashPrice:    parseFloat(bid.cashprice || bid.cashPrice) || null,
+            futuresPrice: parseFloat(bid.price) || null,
             basis:        parseFloat(bid.basis) || null,
             deliveryMonth: bid.deliveryMonth || bid.delivery_month || '',
             deliveryStart: bid.deliveryStart || bid.delivery_start || '',
             deliveryEnd:   bid.deliveryEnd || bid.delivery_end || '',
-            symbol:   bid.symbol || bid.basisSymbol || '',
-            category: classifyCommodity(bid.commodity || bid.commodityName || '')
+            symbol:       bid.symbol || bid.basisSymbol || '',
+            category:     classifyCommodity(bid.commodity || bid.commodity_display_name || bid.commodityName || '')
           });
         });
       }
-      // Case 2: flat bid object (has cashPrice or commodity directly)
-      else if(item.commodity || item.commodityName || item.cashPrice !== undefined){
-        var loc2 = item.location || {};
-        if(typeof loc2 === 'string') loc2 = {};
+      // Case 2: flat bid object (has cashprice or commodity directly)
+      else if(item.commodity || item.commodityName || item.cashprice !== undefined || item.cashPrice !== undefined){
         flat.push({
-          facility: loc2.name || item.facility || item.locationName || 'Unknown',
-          city:     loc2.city || item.city || '',
-          state:    loc2.state || item.state || '',
-          lat:      parseFloat(loc2.lat || loc2.latitude || item.latitude) || null,
-          lng:      parseFloat(loc2.lng || loc2.longitude || item.longitude) || null,
-          distance: parseFloat(item.distance || loc2.distance) || null,
-          phone:    loc2.phone || item.phone || '',
-          commodity:    item.commodity || item.commodityName || '',
-          cashPrice:    parseFloat(item.cashPrice) || null,
+          facility:     item.company || item.name || item.facility || item.locationName || 'Unknown',
+          branch:       (typeof item.location === 'string') ? item.location : '',
+          city:         item.city || '',
+          state:        item.state || '',
+          lat:          parseFloat(item.lat || item.latitude) || null,
+          lng:          parseFloat(item.lng || item.longitude) || null,
+          distance:     parseFloat(item.distance) || null,
+          phone:        item.phone || '',
+          url:          item.url || '',
+          commodity:    item.commodity || item.commodity_display_name || item.commodityName || '',
+          cashPrice:    parseFloat(item.cashprice || item.cashPrice) || null,
+          futuresPrice: parseFloat(item.price) || null,
           basis:        parseFloat(item.basis) || null,
           deliveryMonth: item.deliveryMonth || item.delivery_month || '',
           deliveryStart: item.deliveryStart || item.delivery_start || '',
           deliveryEnd:   item.deliveryEnd || item.delivery_end || '',
-          symbol:   item.symbol || item.basisSymbol || '',
-          category: classifyCommodity(item.commodity || item.commodityName || '')
+          symbol:       item.symbol || item.basisSymbol || '',
+          category:     classifyCommodity(item.commodity || item.commodity_display_name || item.commodityName || '')
         });
       }
-      // Case 3: location wrapper without bids array — log for debugging
+      // Case 3: unknown format — log for debugging
       else {
-        console.log('[AGSIST] Unknown bid format:', JSON.stringify(item).slice(0,200));
+        console.log('[AGSIST] Unknown bid format:', JSON.stringify(item).slice(0,300));
       }
     });
     return flat;
@@ -283,16 +298,28 @@
       .then(function(data){
         console.log('[AGSIST] Barchart response keys:', Object.keys(data));
         var rawResults = data.results || data.bids || data.data || [];
-        console.log('[AGSIST] Raw results count:', rawResults.length);
+        console.log('[AGSIST] Raw results (locations) count:', rawResults.length);
         if(rawResults.length > 0){
           console.log('[AGSIST] First result keys:', Object.keys(rawResults[0]));
-          if(rawResults[0].bids) console.log('[AGSIST] Nested bids found, count:', rawResults[0].bids.length);
+          console.log('[AGSIST] First result company:', rawResults[0].company);
+          console.log('[AGSIST] First result location:', rawResults[0].location);
+          if(rawResults[0].bids){
+            console.log('[AGSIST] Nested bids count:', rawResults[0].bids.length);
+            if(rawResults[0].bids[0]){
+              console.log('[AGSIST] First bid keys:', Object.keys(rawResults[0].bids[0]));
+              console.log('[AGSIST] First bid cashprice:', rawResults[0].bids[0].cashprice);
+              console.log('[AGSIST] First bid basis:', rawResults[0].bids[0].basis);
+            }
+          }
         }
 
         var bids = flattenBarchartResponse(data);
         // Keep bids that have at least a cash price or basis
         bids = bids.filter(function(b){ return b.cashPrice !== null || b.basis !== null; });
         console.log('[AGSIST] Flattened bids with prices:', bids.length);
+        if(bids.length > 0){
+          console.log('[AGSIST] Sample bid:', JSON.stringify(bids[0]));
+        }
         callback(null, bids);
       })
       .catch(function(err){
@@ -337,21 +364,33 @@
       var cc = b.category || 'other';
       var ci = cc==='corn'?'🌽':cc==='soybeans'?'🫘':cc==='wheat'?'🌾':'🌱';
       var cashStr = b.cashPrice != null ? '$' + b.cashPrice.toFixed(2) : '—';
+
+      // Basis: Barchart returns basis as a string in cents (e.g. "-38.00").
+      // After parseFloat this is already in cents (e.g. -38).
       var bN = b.basis, bStr = '—', bCls = 'flat';
       if(bN != null){
-        // Basis: if absolute value > 5, it's already in cents; otherwise multiply
-        var cents = Math.abs(bN) > 5 ? bN : bN * 100;
+        // Barchart basis values are already in cents (e.g. -38, -71, +15).
+        // Values like -0.38 would be fractional dollars — convert those to cents.
+        var cents = Math.abs(bN) < 5 ? bN * 100 : bN;
         bStr = (cents >= 0 ? '+' : '') + cents.toFixed(0) + '¢';
         bCls = cents > 0 ? 'pos' : cents < 0 ? 'neg' : 'flat';
       }
       var distStr = b.distance != null ? b.distance.toFixed(0) + ' mi' : '';
       var del = b.deliveryMonth || '';
       if(!del && b.deliveryStart) del = b.deliveryStart;
+
+      // Build location line: branch + city, state
+      var locParts = [];
+      if(b.branch && b.branch !== b.facility) locParts.push(b.branch);
+      var cityState = (b.city || '') + (b.city && b.state ? ', ' : '') + (b.state || '');
+      if(cityState && cityState !== b.branch) locParts.push(cityState);
+      var locLine = locParts.join(' · ');
+
       html += '<div class="cb-card">'
         + '<div class="cb-card-head"><span class="cb-card-fac" title="'+escHtml(b.facility)+'">'+escHtml(b.facility)+'</span>'
         + (distStr ? '<span class="cb-card-dist">'+distStr+'</span>' : '')
         + '</div>'
-        + '<div class="cb-card-loc">'+escHtml(b.city)+(b.city&&b.state?', ':'')+escHtml(b.state)+'</div>'
+        + (locLine ? '<div class="cb-card-loc">'+escHtml(locLine)+'</div>' : '')
         + '<span class="cb-card-comm '+cc+'">'+ci+' '+escHtml(b.commodity)+'</span>'
         + '<div class="cb-card-prices">'
           + '<div class="cb-price-main"><span class="cb-price-label">Cash</span><span class="cb-price-val">'+cashStr+'</span></div>'
