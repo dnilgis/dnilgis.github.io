@@ -294,84 +294,149 @@
   <!-- Full briefing -->
   <div class="daily-full" id="daily-full">
     <div class="daily-hero-inner">
-      <div class="dh">
-        <div class="dh-inner">
+      <!-- Overnight surprise banner — hidden by default, shown by geo.js when surprises detected -->
+<div id="daily-surprise-banner" class="daily-surprise-banner" style="display:none" role="alert">
+  <span class="surprise-icon">⚡</span>
+  <span class="surprise-text"><strong>Loading...</strong></span>
+</div>
 
-          <!-- ── Meta ── -->
-          <div class="dh-greeting" id="site-greeting">Good Morning</div>
-          <div class="dh-eyebrow">AGSIST Daily — Today's Briefing</div>
-          <div class="dh-date" id="daily-date"></div>
-          <script>document.getElementById('daily-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})</script>
+<div class="daily-grid">
+  <!-- ── Left column: headline + sections ──────────────────────── -->
+  <div class="daily-left">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem">
+      <div class="daily-eyebrow">
+        <span class="daily-eyebrow-dot"></span>
+        AGSIST DAILY
+      </div>
+      <!-- Market mood badge — populated by geo.js -->
+      <span id="daily-mood" class="daily-mood" style="display:none"></span>
+    </div>
 
-          <!-- ── Field Call (injected by hydration) ── -->
-          <div id="daily-field-call-slot"></div>
+    <div id="daily-date" class="daily-date"></div>
 
-          <!-- ── Headline ── -->
-          <h1 class="dh-headline" id="daily-headline">AGSIST Daily Market Briefing</h1>
-          <p class="dh-lead" id="daily-lead">Your daily agricultural market briefing with overnight futures, grain prices, weather outlook, and USDA report previews. Updated every weekday morning by 6am CT.</p>
+    <div id="site-greeting" class="daily-greeting">Good Morning</div>
 
-          <!-- ── Top-line Prices (injected by hydration) ── -->
-          <div id="daily-topline-slot"></div>
+    <h1 id="daily-headline" class="daily-headline">Loading Today's Briefing…</h1>
 
-          <!-- ── Quick-glance: One Number + Watch List ── -->
-          <div class="dh-cards">
-            <div class="dh-card dh-card--gold">
-              <div class="dh-card-label">#️⃣ One Number to Know</div>
-              <div class="dh-one-val" id="daily-number-value">--</div>
-              <div class="dh-one-unit" id="daily-number-unit">Today's Key Metric</div>
-              <div class="dh-one-ctx" id="daily-number-context">The single most important data point for agricultural markets today.</div>
-            </div>
-            <div class="dh-card">
-              <div class="dh-card-label">📅 Today's Watch List</div>
-              <div id="daily-watch-list">
-                <div class="dh-watch-item"><span class="dh-watch-label">6:00 AM</span><span class="dh-watch-text">AGSIST Daily briefing publishes</span></div>
-                <div class="dh-watch-item"><span class="dh-watch-label">8:30 AM</span><span class="dh-watch-text">Check for USDA weekly export data</span></div>
-              </div>
-            </div>
+    <p id="daily-subheadline" style="font-size:.88rem;color:var(--gold);font-weight:600;margin-bottom:.5rem;letter-spacing:.02em"></p>
+
+    <p id="daily-lead" class="daily-lead"></p>
+
+    <div class="daily-sections">
+      <!-- Section 1: Grains & Oilseeds -->
+      <div id="daily-sec-1" class="daily-sec" style="position:relative">
+        <span id="daily-section-1-icon" class="daily-sec-icon">🌾</span>
+        <div>
+          <div class="daily-sec-label-row">
+            <div id="daily-section-1-title" class="daily-sec-label">GRAINS & OILSEEDS</div>
+            <span id="daily-section-1-conviction" class="daily-sec-conviction"></span>
           </div>
+          <div id="daily-section-1-body" class="daily-sec-text"></div>
+          <div id="daily-section-1-bottomline" class="daily-sec-bottomline"></div>
+          <div id="daily-section-1-action" class="daily-sec-action"></div>
+        </div>
+      </div>
 
-          <!-- ── Market Sections (collapsible) ── -->
-          <div class="dh-sections" id="dh-sections">
-            <details class="dh-sec" open>
-              <summary><span class="dh-sec-icon">🌽</span><span id="daily-section-1-title">Grains & Oilseeds</span><span class="dh-sec-arrow">▼</span></summary>
-              <div class="dh-sec-body" id="daily-section-1-body">Corn, soybean, and wheat futures analysis — what moved, why, and what it means for your marketing plan.</div>
-            </details>
-            <details class="dh-sec" open>
-              <summary><span class="dh-sec-icon">🐄</span><span id="daily-section-2-title">Livestock & Dairy</span><span class="dh-sec-arrow">▼</span></summary>
-              <div class="dh-sec-body" id="daily-section-2-body">Cattle, hogs, dairy, and feed markets — what livestock producers and feed buyers need to know today.</div>
-            </details>
-            <details class="dh-sec" open>
-              <summary><span class="dh-sec-icon">🌦️</span><span id="daily-section-3-title">Weather & Fieldwork</span><span class="dh-sec-arrow">▼</span></summary>
-              <div class="dh-sec-body" id="daily-section-3-body">Corn Belt weather outlook, spray windows, soil conditions, and what the 5-day forecast means for your week.</div>
-            </details>
-            <details class="dh-sec" open>
-              <summary><span class="dh-sec-icon">⛽</span><span id="daily-section-4-title">Energy & Macro</span><span class="dh-sec-arrow">▼</span></summary>
-              <div class="dh-sec-body" id="daily-section-4-body">Crude, natural gas, dollar, and equities — what they mean for input costs, ethanol margins, and exports.</div>
-            </details>
-            <details class="dh-sec" open>
-              <summary><span class="dh-sec-icon">🏛️</span><span id="daily-section-5-title">Policy & Trade</span><span class="dh-sec-arrow">▼</span></summary>
-              <div class="dh-sec-body" id="daily-section-5-body">USDA reports, trade policy, global supply stories, and anything in Washington or abroad that hits your bottom line.</div>
-            </details>
+      <!-- Section 2: Livestock & Dairy -->
+      <div id="daily-sec-2" class="daily-sec" style="position:relative">
+        <span id="daily-section-2-icon" class="daily-sec-icon">🐄</span>
+        <div>
+          <div class="daily-sec-label-row">
+            <div id="daily-section-2-title" class="daily-sec-label">LIVESTOCK & DAIRY</div>
+            <span id="daily-section-2-conviction" class="daily-sec-conviction"></span>
           </div>
+          <div id="daily-section-2-body" class="daily-sec-text"></div>
+          <div id="daily-section-2-bottomline" class="daily-sec-bottomline"></div>
+          <div id="daily-section-2-action" class="daily-sec-action"></div>
+        </div>
+      </div>
 
-          <!-- ── Bottom: TMYK + Quote ── -->
-          <div class="dh-bottom">
-            <div class="dh-card dh-card--blue">
-              <div class="dh-card-label">💡 The More You Know</div>
-              <div class="dh-tmyk-title" id="daily-tmyk-title">Did You Know?</div>
-              <div class="dh-tmyk-body" id="daily-tmyk-body">A new ag fact, historical tidbit, or agronomic insight appears here every weekday morning.</div>
-            </div>
-            <div class="dh-card dh-card--quote">
-              <div class="dh-quote-icon">🌾</div>
-              <div class="dh-quote-text" id="daily-quote-text">"The farmer has to be an optimist or he wouldn't still be a farmer."</div>
-              <div class="dh-quote-attr" id="daily-quote-attr">— Will Rogers</div>
-            </div>
+      <!-- Section 3: Energy & Inputs -->
+      <div id="daily-sec-3" class="daily-sec" style="position:relative">
+        <span id="daily-section-3-icon" class="daily-sec-icon">⛽</span>
+        <div>
+          <div class="daily-sec-label-row">
+            <div id="daily-section-3-title" class="daily-sec-label">ENERGY & INPUTS</div>
+            <span id="daily-section-3-conviction" class="daily-sec-conviction"></span>
           </div>
+          <div id="daily-section-3-body" class="daily-sec-text"></div>
+          <div id="daily-section-3-bottomline" class="daily-sec-bottomline"></div>
+          <div id="daily-section-3-action" class="daily-sec-action"></div>
+        </div>
+      </div>
 
+      <!-- Section 4: Macro & Trade -->
+      <div id="daily-sec-4" class="daily-sec" style="position:relative">
+        <span id="daily-section-4-icon" class="daily-sec-icon">🏛️</span>
+        <div>
+          <div class="daily-sec-label-row">
+            <div id="daily-section-4-title" class="daily-sec-label">MACRO & TRADE</div>
+            <span id="daily-section-4-conviction" class="daily-sec-conviction"></span>
+          </div>
+          <div id="daily-section-4-body" class="daily-sec-text"></div>
+          <div id="daily-section-4-bottomline" class="daily-sec-bottomline"></div>
+          <div id="daily-section-4-action" class="daily-sec-action"></div>
         </div>
       </div>
     </div>
+
+    <!-- The More You Know -->
+    <div class="daily-sec" style="border-color:rgba(74,143,186,.20);background:linear-gradient(135deg,var(--surface) 0%,rgba(74,143,186,.03) 100%)">
+      <span class="daily-sec-icon">🧠</span>
+      <div>
+        <div class="daily-sec-label" style="color:var(--blue)">THE MORE YOU KNOW</div>
+        <div class="daily-sec-text">
+          <strong id="daily-tmyk-title"></strong>
+          <span id="daily-tmyk-body" style="display:block;margin-top:.25rem"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="daily-ctas" style="margin-top:1.25rem">
+      <a href="/daily" class="btn-gold">Read Full Briefing →</a>
+      <a href="/daily#subscribe" class="btn-ghost">Get Daily Alerts</a>
+    </div>
   </div>
+
+  <!-- ── Right column: sidebar cards ───────────────────────────── -->
+  <div class="hero-sidebar">
+    <!-- One Number -->
+    <div class="s-card s-card--gold">
+      <div class="s-card-label">📊 THE NUMBER</div>
+      <div id="daily-number-value" class="one-num">—</div>
+      <div id="daily-number-unit" class="one-num-unit"></div>
+      <div id="daily-number-context" class="one-num-ctx"></div>
+    </div>
+
+    <!-- Watch List -->
+    <div class="s-card">
+      <div class="s-card-label">📅 TODAY'S WATCH LIST</div>
+      <ul id="daily-watch-list" class="watch-list" role="list">
+        <li class="watch-item">
+          <span class="watch-time">—</span>
+          <span class="watch-desc">Loading watch list…</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Quote -->
+    <div class="s-card" style="border-color:rgba(218,165,32,.15)">
+      <div class="s-card-label" style="color:var(--gold)">💬 DAILY QUOTE</div>
+      <blockquote style="margin:0;padding:0">
+        <p id="daily-quote-text" style="font-size:.92rem;font-style:italic;color:var(--text-dim);line-height:1.65;margin-bottom:.4rem">"Loading…"</p>
+        <cite id="daily-quote-attr" style="font-size:.76rem;color:var(--text-muted);font-style:normal">— …</cite>
+      </blockquote>
+    </div>
+
+    <!-- Source -->
+    <div style="font-size:.62rem;color:var(--text-muted);text-align:center;padding:.2rem 0">
+      <span id="daily-source">USDA · CME Group · Open-Meteo</span>
+    </div>
+  </div>
+</div>
+
+
+        
 
   <!-- Dismiss row -->
   <div class="daily-dismiss-row" id="daily-dismiss-row">
