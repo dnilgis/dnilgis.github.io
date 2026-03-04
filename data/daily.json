@@ -1,85 +1,86 @@
 {
-  "headline": "GRAINS SIDEWAYS AS METALS CRATER",
-  "subheadline": "Corn and beans drift while gold's worst day in months signals broader risk-off mood.",
-  "lead": "Grain futures barely budged overnight while precious metals got hammered — gold down 5.2% and silver off 8.4% in their worst session since late 2024. The divergence tells the story: ag fundamentals are holding steady while financial markets recalibrate risk. With planting decisions looming and USDA's Prospective Plantings report three weeks out, this sideways action might be the calm before the storm.",
-  "teaser": "Metals crater while grains hold — what the divergence means for your spring decisions.",
+  "headline": "CRUDE RALLIES 3% AS GRAINS DRIFT SIDEWAYS",
+  "subheadline": "Energy surge boosts input costs while precious metals crater on dollar strength ahead of planting season.",
+  "lead": "Crude oil jumped $2.10 to $74.80 on geopolitical tensions, pushing diesel and fertilizer costs higher just as spring fieldwork approaches. Meanwhile, corn and soybeans barely budged despite the energy rally, suggesting grain markets are waiting for clearer planting signals. Gold and silver got hammered — down 5.2% and 8.4% respectively — as the dollar flexed muscle.",
+  "teaser": "Energy costs surge while grains stay flat — what's really driving markets before planting season?",
   "one_number": {
-    "value": "$4.71",
-    "unit": "December 2026 corn futures",
-    "context": "New-crop corn futures gained a penny while nearby stayed flat — a subtle but important signal that the market sees tighter supplies ahead. This 25¢ premium over cash corn reflects growing confidence in demand destruction from higher prices. That spread could be your friend if you're willing to price some 2026 production now."
+    "value": "$74.80",
+    "unit": "WTI crude oil per barrel",
+    "context": "The 3% jump adds real pressure to spring input costs. Every $10 move in crude translates to roughly 25¢ per gallon in diesel — and you're about to burn a lot of diesel. Factor this into cash flow planning for the next 60 days.",
+    "conviction_level": "high"
   },
   "sections": [
     {
       "title": "GRAINS & OILSEEDS",
       "icon": "🌽",
-      "body": "Corn barely flinched while December futures crept higher — a sign the market's looking past current abundance toward tighter new-crop scenarios. Soybeans split the difference with nearby beans up a penny and November down the same amount. <strong>The real story is what didn't happen</strong>: grains ignored the broader risk-off mood that crushed metals. Wheat dropped 2¼¢ on continued Black Sea competition, but even that's minor compared to the chaos elsewhere. Oats bucked the trend with a 1.1% rally on short covering.",
-      "bottom_line": "Grains showing remarkable stability while everything else wobbles.",
+      "body": "Corn barely flinched at $4.46 while December gained a penny to $4.71 — classic pre-plant price action where nearby stays defensive but new-crop shows some life. Soybeans split the difference with May up 1¢ to $11.71 but November down 1¢ to $11.31. <strong>The real story is what's NOT happening</strong> — grains are ignoring a 3% crude rally that should pressure ethanol margins and boost input costs. Wheat dropped 2¼¢ to $5.75 as Black Sea supplies keep flowing, but oats surged 3½¢ to $3.20 on tight old-crop stocks.",
+      "bottom_line": "Grains treading water while waiting for planting intentions.",
       "conviction_level": "medium",
       "overnight_surprise": false,
-      "farmer_action": "Use this stability to assess spring planting plans — volatility is coming with USDA reports."
+      "farmer_action": "Hold current positions — market lacks conviction until USDA Prospective Plantings."
     },
     {
       "title": "LIVESTOCK & DAIRY",
       "icon": "🐄",
-      "body": "Live cattle edged higher while Class III milk took a 2.8% hit — the biggest move in the livestock complex today. <strong>Feed costs remain supportive</strong> with corn steady and soybean meal up 0.4%, giving cattle feeders some breathing room. Lean hogs gained modestly despite export concerns lingering from recent trade tensions. The milk collapse reflects seasonal patterns and ongoing margin pressure for dairy producers. Feeder cattle dipped slightly as ranchers weigh spring grass conditions against feed costs.",
-      "bottom_line": "Mixed signals but feed costs staying manageable for now.",
-      "conviction_level": "low",
+      "body": "Live cattle gained 70¢ to $234.30 while feeders slipped 35¢ to $353.30 — <strong>the spread compression signals tighter feeder supplies ahead of grazing season</strong>. Lean hogs added 19¢ to $95.78 on export optimism, but the real shock was Class III milk crashing $4.90 to $17.51 on oversupply fears. Soybean meal gained $1.30 to $315.20, partially offsetting cheaper corn for feed rations. The livestock complex is caught between rising feed costs from today's energy rally and decent demand fundamentals.",
+      "bottom_line": "Cattle strong, milk weak, feed costs climbing with crude.",
+      "conviction_level": "medium",
       "overnight_surprise": false,
-      "farmer_action": "Monitor milk futures for potential forward pricing opportunities if you're in dairy."
+      "farmer_action": "Milk producers should hedge Q2 production — this drop looks overdone."
     },
     {
       "title": "ENERGY & INPUTS",
       "icon": "⛽",
-      "body": "Crude oil surged 2.9% to $74.80 on fresh geopolitical tensions, while natural gas held steady around $3.04. <strong>This oil rally translates directly to higher diesel and fertilizer costs</strong> just as spring applications begin across the Corn Belt. The timing couldn't be worse for input planning — every $10 move in crude adds roughly 25¢ to diesel and pressures nitrogen prices. Natural gas stability provides some relief for fertilizer producers, but crude's strength is the dominant factor for field operations costs.",
-      "bottom_line": "Oil surge means higher fieldwork costs heading into spring.",
+      "body": "Crude oil's $2.10 surge to $74.80 changes the input cost equation heading into spring work. Natural gas added 9¢ to $3.04, pressuring nitrogen costs that were already elevated. <strong>The timing couldn't be worse</strong> — most Upper Midwest operations haven't locked diesel or NH3 for planting season yet. Soybean oil fell 32¢ to $62.91 despite crude's rally, showing biodiesel demand remains sluggish. Every $5 move in crude adds roughly $12 per acre to total input costs when you factor in fuel, fertilizer, and chemical transportation.",
+      "bottom_line": "Energy rally hits farmers where it hurts most — input costs.",
       "conviction_level": "high",
       "overnight_surprise": false,
-      "farmer_action": "Consider topping off diesel storage now before further crude oil strength hits pump prices."
+      "farmer_action": "Lock remaining diesel needs now — crude momentum looks sticky."
     },
     {
       "title": "MACRO & TRADE",
-      "icon": "💰",
-      "body": "The dollar strengthened while stocks fell, but the real shock was precious metals' collapse — <strong>gold's 5.2% drop and silver's 8.4% plunge</strong> marked their worst session in months. This wasn't agriculture-driven but rather a broad unwinding of inflation hedges as markets reassess Fed policy. The stronger dollar theoretically pressures grain exports, but today's ag market ignored that signal completely. S&P 500 fell 0.9% as risk appetite soured, yet grains held their ground remarkably well.",
-      "bottom_line": "Financial markets in turmoil but grains march to their own drum.",
+      "icon": "🌍",
+      "body": "The dollar index jumped 40 points to 99.03, crushing precious metals and keeping pressure on grain exports. Gold plummeted $280 to $5,100 while silver got demolished, falling $7.60 to $82.30 in <strong>the biggest precious metals rout in months</strong>. The S&P 500 dropped 62 points to 6,816 as higher energy costs spooked inflation hawks. For agriculture, the stronger dollar makes U.S. crops less competitive globally just as South American harvest pressure builds. Bitcoin fell to $68,275, suggesting risk-off sentiment despite crude's rally.",
+      "bottom_line": "Strong dollar crushing export competitiveness at worst possible time.",
       "conviction_level": "high",
       "overnight_surprise": true,
-      "farmer_action": "No action needed — grain fundamentals trumping macro noise for now."
+      "farmer_action": "Export-dependent operations should consider currency hedges for Q2 sales."
     }
   ],
   "the_more_you_know": {
-    "title": "Why Grains Ignored the Metal Meltdown",
-    "body": "When gold and silver crater while grains hold steady, it usually signals that agricultural fundamentals are strong enough to overcome macro headwinds. Precious metals are pure financial plays — they move on Fed policy, inflation expectations, and risk sentiment. Grains have real supply and demand drivers that can insulate them from broader market chaos. Today's divergence suggests the ag market sees through current volatility to underlying tight supply scenarios. That independence is bullish for grain prices medium-term."
+    "title": "Why Crude Rallies Hurt Corn More Than Help",
+    "body": "Every farmer knows higher crude should boost ethanol demand and corn prices. But that's only half the equation. A 3% crude jump adds roughly 7¢ per gallon to diesel costs and pressures fertilizer prices through natural gas. For corn, the net effect is often negative — especially pre-plant when input purchasing peaks. The ethanol boost takes months to materialize, but the input cost hit happens immediately."
   },
   "watch_list": [
     {
-      "time": "7:30 AM CT",
-      "desc": "Weekly export sales report — watch for <strong>corn and soybean</strong> demand signals."
-    },
-    {
       "time": "9:30 AM CT",
-      "desc": "Crude oil inventory data — further strength could pressure <strong>input costs</strong>."
+      "desc": "Weekly petroleum inventories — <strong>crude draw</strong> could extend energy rally"
     },
     {
-      "time": "This Week",
-      "desc": "<strong>Weather models</strong> for early planting conditions across Iowa and Illinois."
+      "time": "This week",
+      "desc": "Southern field conditions — <strong>any planting delays</strong> could spark new-crop optimism"
     },
     {
       "time": "March 31",
-      "desc": "USDA Prospective Plantings report — the <strong>biggest market mover</strong> before planting season."
+      "desc": "USDA Prospective Plantings — <strong>corn acres</strong> will set the tone for summer"
+    },
+    {
+      "time": "Overnight",
+      "desc": "Dollar strength continuation — <strong>export sales</strong> get tougher above DXY 99"
     }
   ],
   "daily_quote": {
     "text": "To own a bit of ground, to scratch it with a hoe, to plant seeds, and watch the renewal of life — this is the commonest delight of the race.",
     "attribution": "Charles Dudley Warner"
   },
-  "source_summary": "CME Group · USDA · EIA · Federal Reserve",
+  "source_summary": "CME Group · NYMEX · Yahoo Finance · USDA",
   "date": "Wednesday, March 4, 2026",
   "meta": {
     "market_mood": "mixed",
-    "heat_section": 3,
+    "heat_section": 2,
     "overnight_surprises_count": 2
   },
-  "generated_at": "2026-03-04T01:15:53.489251+00:00",
+  "generated_at": "2026-03-04T11:57:59.731343+00:00",
   "generator_version": "3.0",
   "surprise_count": 2,
   "surprises": [
