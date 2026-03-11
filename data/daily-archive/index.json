@@ -1,6 +1,16 @@
 {
   "briefings": [
     {
+      "date": "2026-03-11",
+      "date_display": "Wednesday, March 11, 2026",
+      "headline": "HOGS SPIKE 11% ON PORK EXPORT SURGE",
+      "teaser": "Hog rally creates ripple effects across feed grains while dairy faces harsh reality check.",
+      "market_mood": "bullish",
+      "surprise_count": 3,
+      "sections": 4,
+      "url": "/daily/2026-03-11"
+    },
+    {
       "date": "2026-03-10",
       "date_display": "Tuesday, March 10, 2026",
       "headline": "CRUDE OIL CRASHES 24% — GRAINS FOLLOW DEEPER",
@@ -51,6 +61,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-03-10T12:00:34.848332+00:00",
-  "count": 5
+  "updated": "2026-03-11T12:00:59.264020+00:00",
+  "count": 6
 }
