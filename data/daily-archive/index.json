@@ -1,6 +1,16 @@
 {
   "briefings": [
     {
+      "date": "2026-03-18",
+      "date_display": "Wednesday, March 18, 2026",
+      "headline": "HOGS EXPLODE 25% ON SUPPLY SHOCK",
+      "teaser": "Hogs explode on disease fears while wheat gets hammered by Black Sea competition.",
+      "market_mood": "volatile",
+      "surprise_count": 4,
+      "sections": 4,
+      "url": "/daily/2026-03-18"
+    },
+    {
       "date": "2026-03-17",
       "date_display": "Tuesday, March 17, 2026",
       "headline": "LIVESTOCK EXPLODES AS GRAIN COMPLEX CRATERS",
@@ -101,6 +111,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-03-17T12:08:36.724629+00:00",
-  "count": 10
+  "updated": "2026-03-18T12:34:10.845101+00:00",
+  "count": 11
 }
