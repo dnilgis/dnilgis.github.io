@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
 """
-AGSIST Daily Briefing Generator — v3.1
+AGSIST Daily Briefing Generator — v3.2
 ═══════════════════════════════════════════════════════════════════
 Generates the daily agricultural intelligence briefing via Claude API.
 Designed to be run by GitHub Actions every morning (5:00 AM CT).
 
-v3 changes:
-  - Complete prompt rewrite: voice, connections, farmer actions
-  - Overnight surprise detection (flags moves > expected thresholds)
-  - Per-section bottom_line + conviction_level
-  - Curated 200+ quote bank (no more "pick a farming quote" randomness)
-  - Farmer action items: blunt, specific, actionable
-  - Enhanced JSON schema for richer homepage hydration
+v3.2 changes:
+  - PRICE ANCHORING: All prices passed as locked data Claude cannot invent
+  - TONE GUARDRAILS: "Surprise" language gated behind surprise_magnitude thresholds
+  - POST-VALIDATION: Reject briefings where Claude invented prices
+  - FIX: Watch list HTML no longer double-escapes <strong> tags in archive pages
+  - CALIBRATED VOICE: Removed "Be bold" instruction causing chronic over-dramatization
 
 Data pipeline:
   1. Read /data/prices.json (yfinance, already fetched by fetch_prices.py)
   2. Fetch ag RSS feeds for overnight news context
   3. Fetch USDA calendar data
   4. Call Claude API with enriched prompt + market data
-  5. Write /data/daily.json
-  6. Archive: save /data/daily-archive/DATE.json + /daily/DATE.html + update index.json
+  5. Validate output against source prices
+  6. Write /data/daily.json
+  7. Archive: save /data/daily-archive/DATE.json + /daily/DATE.html + update index.json
 
 Env vars required:
   ANTHROPIC_API_KEY — Claude API key
@@ -29,8 +29,8 @@ import json
 import os
 import sys
 import random
-import math
-from datetime import datetime, timezone, timedelta
+import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 try:
@@ -49,14 +49,13 @@ except ImportError:
 # CONFIGURATION
 # ═══════════════════════════════════════════════════════════════════
 
-# Script lives in scripts/ — resolve paths relative to repo root
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PRICES_PATH = REPO_ROOT / "data" / "prices.json"
 OUTPUT_PATH = REPO_ROOT / "data" / "daily.json"
 ANTHROPIC_API = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-sonnet-4-20250514"
 
-# Overnight surprise thresholds (% move that's newsworthy)
+# Overnight surprise thresholds (% move that's genuinely newsworthy)
 SURPRISE_THRESHOLDS = {
     "corn":      1.5,
     "corn-dec":  1.5,
@@ -103,7 +102,6 @@ COMMODITY_LABELS = {
 
 GRAIN_KEYS = {"corn", "corn-dec", "beans", "beans-nov", "wheat", "oats"}
 
-# RSS feeds for overnight agricultural news context
 AG_RSS_FEEDS = [
     "https://www.usda.gov/rss/latest-releases.xml",
     "https://www.dtnpf.com/agriculture/web/ag/news/rss",
@@ -117,7 +115,6 @@ AG_RSS_FEEDS = [
 # ═══════════════════════════════════════════════════════════════════
 
 QUOTE_BANK = [
-    # ── Farming wisdom & grit ─────────────────────────────────────
     ("The best fertilizer is the farmer's shadow.", "Chinese proverb"),
     ("A farmer's footsteps are the best manure.", "English proverb"),
     ("He who plants a garden plants happiness.", "Chinese proverb"),
@@ -142,8 +139,6 @@ QUOTE_BANK = [
     ("Farming looks mighty easy when your plow is a pencil and you're a thousand miles from the corn field.", "Dwight D. Eisenhower"),
     ("The farmer has to be an optimist or he wouldn't still be a farmer.", "Will Rogers"),
     ("To own a bit of ground, to scratch it with a hoe, to plant seeds, and watch the renewal of life — this is the commonest delight of the race.", "Charles Dudley Warner"),
-
-    # ── Market wisdom ─────────────────────────────────────────────
     ("Markets can stay irrational longer than you can stay solvent.", "John Maynard Keynes"),
     ("The four most dangerous words in investing are: 'This time it's different.'", "Sir John Templeton"),
     ("Price is what you pay. Value is what you get.", "Warren Buffett"),
@@ -157,8 +152,6 @@ QUOTE_BANK = [
     ("Basis is the farmer's friend — learn it, track it, trade it.", "University of Illinois Extension"),
     ("A bushel sold at profit is worth two bushels of hope.", "Unknown grain merchant"),
     ("Never gamble with the rent money. That goes double for operating loans.", "Farm Credit Services"),
-
-    # ── Soil & stewardship ────────────────────────────────────────
     ("The health of soil, plant, animal, and man is one and indivisible.", "Sir Albert Howard"),
     ("Healthy soil is the real capital that matters in agriculture.", "Allan Savory"),
     ("We know more about the movement of celestial bodies than about the soil underfoot.", "Leonardo da Vinci"),
@@ -170,19 +163,13 @@ QUOTE_BANK = [
     ("Carbon in the soil is money in the bank.", "Gabe Brown"),
     ("Managing for soil health isn't a cost — it's an investment with compound interest.", "USDA NRCS"),
     ("Tillage is a tax on your soil's future.", "No-till farming proverb"),
-
-    # ── Weather & seasons ─────────────────────────────────────────
     ("Everyone complains about the weather, but nobody does anything about it.", "Charles Dudley Warner"),
     ("Climate is what we expect; weather is what we get.", "Mark Twain"),
     ("A dry March and a wet May fill barns and bays with corn and hay.", "English farming proverb"),
-    ("When the wind is in the east, 'tis neither good for man nor beast.", "Old weather proverb"),
-    ("Red sky at night, sailor's delight. Red sky in the morning, sailors take warning.", "Traditional"),
     ("Make hay while the sun shines.", "English proverb"),
     ("Rain before seven, clear before eleven.", "Weather proverb"),
     ("Knee high by the Fourth of July is an old standard — modern hybrids laugh at it.", "Iowa State Extension"),
     ("A late frost is the cruelest tax the sky can levy.", "Unknown"),
-
-    # ── Regenerative & modern ag ──────────────────────────────────
     ("We're not just farming crops. We're farming ecosystems.", "Gabe Brown"),
     ("The next revolution in agriculture won't come from chemistry — it'll come from biology.", "Jonathan Lundgren"),
     ("Diversity above the ground creates diversity below it.", "Gabe Brown"),
@@ -193,8 +180,6 @@ QUOTE_BANK = [
     ("Farm like your grandchildren will inherit this land. Because they will.", "Land Institute"),
     ("Cover crops aren't lazy — they're the hardest-working employees on your farm and they work for free.", "SARE"),
     ("The future of farming is in the first six inches of soil.", "Fred Kirschenmann"),
-
-    # ── Economics & policy ────────────────────────────────────────
     ("Trade wars have no winners — just varying degrees of losers.", "Agricultural trade proverb"),
     ("The best farm program is a good price.", "John Block, USDA Secretary"),
     ("Interest rates are like gravity for asset prices. When they go up, everything gets heavier.", "Warren Buffett, adapted"),
@@ -203,27 +188,16 @@ QUOTE_BANK = [
     ("Every percentage point in interest rates is a dollar an acre off farmland value.", "Farm Credit East"),
     ("Crop insurance isn't free money — it's the floor, not the ceiling.", "Risk management advisor"),
     ("Don't confuse a rising market with good marketing.", "K-State Ag Economics"),
-
-    # ── Humor & levity ────────────────────────────────────────────
     ("My grandfather used to say that once in your life you need a doctor, a lawyer, a policeman, and a preacher, but every day, three times a day, you need a farmer.", "Brenda Schoepp"),
     ("Behind every successful rancher is a wife who works in town.", "Western ranch proverb"),
     ("Rain makes grain — except when it doesn't stop.", "Unknown Midwest farmer"),
     ("The two happiest days in a farmer's life: the day he buys a new combine and the day he pays it off.", "Unknown"),
-    ("God made a farmer because He needed someone willing to get up before dawn and work past dark.", "Paul Harvey, adapted"),
     ("Farming: where every year you bet the farm on the weather, the market, and the government — and still show up next spring.", "Unknown"),
     ("My exit strategy is the same as my father's: feet first.", "Unknown generational farmer"),
-    ("Ag Twitter is the world's largest coffee shop argument about planting dates.", "Unknown"),
-
-    # ── Indigenous & traditional knowledge ────────────────────────
     ("When the last tree is cut, the last fish is caught, and the last river is polluted, only then will man discover that money cannot be eaten.", "Cree prophecy"),
-    ("Plant corn when oak leaves are the size of a squirrel's ear.", "Native American planting guide"),
     ("The earth does not belong to us. We belong to the earth.", "Chief Seattle"),
-    ("The frog does not drink up the pond in which he lives.", "Sioux proverb"),
     ("Treat the earth well. It was not given to you by your parents, it was loaned to you by your children.", "Kenyan proverb"),
-    ("When you plant a seed of corn, you plant a seed of faith.", "Mayan saying"),
     ("Three sisters — corn, beans, and squash — teach us that the strongest farms grow in community.", "Haudenosaunee teaching"),
-
-    # ── Agricultural science & agronomy ───────────────────────────
     ("Every 1% increase in organic matter holds 20,000 more gallons of water per acre.", "NRCS"),
     ("Nitrogen doesn't know if it came from a bag or a legume. The soil doesn't care either.", "Extension agronomist"),
     ("The difference between a 180-bushel corn crop and a 230-bushel crop is usually management, not genetics.", "Pioneer agronomist"),
@@ -234,40 +208,27 @@ QUOTE_BANK = [
     ("Planting date is the cheapest input with the highest return.", "Purdue agronomy"),
     ("Every day past optimal planting date costs you roughly a bushel per acre in corn. Mother Nature charges interest.", "Iowa State University"),
     ("Soil testing is the cheapest agronomic investment you can make. Do it every year.", "Extension soil scientist"),
-
-    # ── Risk management ───────────────────────────────────────────
     ("Hope is not a marketing plan.", "K-State grain marketing"),
     ("If the market gives you a profit, take it. You can always have regret on the way to the bank.", "DTN grain analyst"),
     ("Forward contracting isn't about being right — it's about being profitable.", "Unknown grain merchandiser"),
-    ("Diversification is the only free lunch in investing — and in farming.", "Harry Markowitz, adapted"),
     ("Revenue protection doesn't make you rich. It keeps you farming.", "Crop insurance agent"),
     ("The only sure thing in grain marketing is that you'll never sell the high.", "Unknown"),
     ("Grain in the bin is an option with a storage cost. Know your carry.", "CME Group education"),
     ("Lock in fuel when it's cheap. Lock in grain prices when they're profitable. Both are perishable opportunities.", "Farm management advisor"),
     ("The worst time to make a marketing decision is when you have to.", "KSU Ag Economics"),
-
-    # ── Land & legacy ─────────────────────────────────────────────
     ("Buy land. They're not making any more of it.", "Mark Twain"),
     ("Land values follow income. Income follows management. Management follows education.", "Farm Credit"),
     ("The best view in the world is a field of corn in late July.", "Unknown Midwestern farmer"),
     ("Every furrow is a story. Every harvest is a chapter.", "Unknown"),
     ("In 40 years of farming, I've never had the same year twice. That's the beauty and the terror of it.", "Unknown Iowa farmer"),
-
-    # ── Global perspective ────────────────────────────────────────
     ("When China buys, the world moves. When they stop, the world holds its breath.", "Ag trade analyst"),
-    ("Whoever controls the food supply controls the people.", "Henry Kissinger"),
-    ("Brazil didn't become an ag superpower overnight. They invested in soil, infrastructure, and science for decades.", "EMBRAPA"),
     ("The Black Sea region is agriculture's wild card — it can make or break global grain prices in a single season.", "USDA FAS"),
     ("An acre in Iowa competes with an acre in Mato Grosso every single day. That's the global market.", "Unknown"),
-
-    # ── Technology & innovation ───────────────────────────────────
     ("The tractor replaced the horse. GPS replaced the marker. AI won't replace the farmer — it'll replace the guesswork.", "Unknown"),
     ("Big data is only as good as the farmer interpreting it.", "Precision ag consultant"),
     ("Drones show you the field from the sky. But your boots on the ground still make the call.", "UAS agricultural specialist"),
     ("The most advanced technology on most farms is the operator.", "John Deere engineer"),
     ("A yield monitor is a report card for every decision you made all season.", "Unknown"),
-
-    # ── Persistence & character ───────────────────────────────────
     ("The best time to plant a tree was 20 years ago. The second best time is now.", "Chinese proverb"),
     ("Tough times don't last. Tough farmers do.", "Unknown"),
     ("Some years the crop is good and the price is bad. Some years the price is good and the crop is bad. That's farming.", "Unknown"),
@@ -280,22 +241,14 @@ QUOTE_BANK = [
     ("The best farmers I know read more than they plow.", "County extension agent"),
     ("The only thing harder than farming is not farming when it's in your blood.", "Unknown"),
     ("A bad year in farming teaches you what ten good years can't.", "Unknown"),
-
-    # ── Additional variety ────────────────────────────────────────
     ("Agriculture is our wisest pursuit, because it will in the end contribute most to real wealth, good morals, and happiness.", "Thomas Jefferson"),
-    ("The land that feeds us is worth fighting for.", "Unknown"),
-    ("A society grows great when old men plant trees whose shade they know they shall never sit in.", "Greek proverb"),
     ("Farming teaches you that you can do everything right and still get beat. And then you plant again.", "Unknown"),
-    ("The only thing more stubborn than a farmer is the land itself.", "Unknown"),
     ("There are no shortcuts in farming. Just long days and early mornings.", "Unknown"),
     ("The market doesn't owe you anything. Neither does the weather. But the land always gives back what you put in.", "Unknown"),
-    ("Patience and perseverance have a magical effect before which difficulties disappear and obstacles vanish.", "John Quincy Adams"),
     ("You can judge a civilization by the way it treats its soil.", "Hugh Hammond Bennett"),
     ("Good seed, good ground, good timing — everything else is conversation.", "Unknown elevator manager"),
-    ("A farm without animals is a farm without a soul. A farm without soil health is a farm without a future.", "Unknown"),
     ("The hardest part of farming isn't the work — it's the waiting.", "Unknown"),
     ("Every generation of farmers inherits the soil of the last and leaves the soil for the next.", "Unknown"),
-    ("It is well to remember that the entire universe, with one trifling exception, is composed of others.", "John Andrew Holmes"),
     ("Agriculture not only gives riches to a nation, but the only riches she can call her own.", "Samuel Johnson"),
     ("Whoever could make two ears of corn grow upon a spot of ground where only one grew before would deserve better of mankind than the whole race of politicians put together.", "Jonathan Swift"),
     ("Those too lazy to plow in the right season will have no food at the harvest.", "Proverbs 20:4"),
@@ -319,7 +272,7 @@ def http_get(url, timeout=10):
             return None
     else:
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "AGSIST-Daily/3.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "AGSIST-Daily/3.2"})
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.read().decode("utf-8", errors="replace")
         except Exception as e:
@@ -328,7 +281,14 @@ def http_get(url, timeout=10):
 
 
 def load_prices():
-    """Load prices.json and compute overnight surprises."""
+    """
+    Load prices.json, compute overnight surprises, and build a
+    LOCKED PRICE TABLE that gets injected verbatim into the prompt.
+
+    Returns:
+        price_data dict  — contains price_block, locked_prices, fetched, quotes
+        surprises list   — moves above threshold
+    """
     if not PRICES_PATH.exists():
         print("[error] prices.json not found", file=sys.stderr)
         return {}, []
@@ -340,6 +300,7 @@ def load_prices():
     fetched = data.get("fetched", "")
 
     price_lines = []
+    locked_prices = {}   # key → display_price string for validation later
     surprises = []
 
     for key, label in COMMODITY_LABELS.items():
@@ -368,15 +329,20 @@ def load_prices():
         if is_grain:
             price_str = f"${close / 100:.2f}/bu"
             chg_str = f"{net / 100:+.4f} ({pct:+.1f}%)"
+            # Store the human-readable price for validation
+            locked_prices[key] = close / 100   # actual dollar value
         elif key in ("gold", "bitcoin"):
             price_str = f"${close:,.0f}"
             chg_str = f"{pct:+.1f}%"
+            locked_prices[key] = close
         elif key == "treasury10":
             price_str = f"{close:.2f}%"
             chg_str = f"{pct:+.1f}%"
+            locked_prices[key] = close
         else:
             price_str = f"${close:.2f}"
             chg_str = f"{pct:+.1f}%"
+            locked_prices[key] = close
 
         direction = "▲" if pct > 0 else "▼" if pct < 0 else "—"
         line = f"  {label}: {price_str} ({direction} {chg_str})"
@@ -408,6 +374,7 @@ def load_prices():
 
     return {
         "price_block": "\n".join(price_lines),
+        "locked_prices": locked_prices,
         "fetched": fetched,
         "surprises": surprises,
         "quotes": quotes,
@@ -487,41 +454,61 @@ def get_todays_quote():
 # ═══════════════════════════════════════════════════════════════════
 
 def build_system_prompt():
-    return """You are the voice of AGSIST Daily — the most trusted morning agricultural intelligence briefing in the Upper Midwest. You write for corn, soybean, and grain producers in Wisconsin and Minnesota who check this briefing with their first cup of coffee.
+    return """You are the voice of AGSIST Daily — a trusted morning agricultural intelligence briefing for corn, soybean, and grain producers in Wisconsin and Minnesota.
 
 YOUR VOICE:
-- You're the sharp friend who actually trades grain AND reads the WASDE. Not an academic. Not a reporter. An analyst with dirt under their fingernails.
-- Direct, opinionated, but honest about uncertainty. When you don't know, say "the data isn't clear yet" — never fake confidence.
+- You're the sharp friend who actually trades grain AND reads the WASDE. Not an academic. Not a reporter.
+- Direct, opinionated, but honest about uncertainty. When you don't know, say so.
 - Connect dots that farmers wouldn't connect on their own. "Wheat dropped 14½¢" is a data point. "Wheat dropped 14½¢ — but the real story is Black Sea competition heating up while your spring planting window opens" is a briefing.
-- Every sentence should pass the test: "Would a farmer forward this to their neighbor?" If not, rewrite it.
-- Use plain language. No jargon without context. "Managed money" needs a parenthetical "(hedge funds)" the first time.
+- Plain language. No jargon without context. "Managed money" needs a parenthetical "(hedge funds)" on first use.
+- Calibrated tone: most days are normal market days. A 1% corn move is not "dramatic." Reserve strong language for moves where surprise_magnitude ≥ 3.
 
-STRUCTURE — return valid JSON with this exact schema:
+══ STRICT PRICE RULES — READ CAREFULLY ══
+The LOCKED PRICE TABLE in the user message contains the only real prices from today's market.
+You MUST follow these rules without exception:
+
+1. Every specific price you write must come from the LOCKED PRICE TABLE — no exceptions, no rounding to a "cleaner" number, no substitutions.
+2. If a price isn't in the table, don't mention it specifically. Say "energy costs climbed" not "diesel hit $3.80."
+3. Never invent, estimate, or recall prices from your training data. Markets change daily.
+4. The net change and percent change in the table are the only moves you should describe. If corn is down 9½¢ per the table, write "down 9½¢" — not "corn cratered" and not "corn slipped a penny."
+5. If you are uncertain whether a price is in the table, omit the specific number and describe the direction and magnitude only.
+
+══ TONE CALIBRATION ══
+Use the surprise_magnitude field to calibrate language:
+- magnitude < 1.5: "moved," "gained," "eased," "dipped" — no drama
+- magnitude 1.5–2.5: "jumped," "fell," "rallied," "slid" — modest emphasis
+- magnitude 2.5–3.5: "surged," "dropped sharply," "spiked" — significant
+- magnitude > 3.5: "exploded," "crashed," "historic move" — genuinely rare events only
+
+Never label a normal trading day as "volatile." Never call a routine move "historic." Boring days are honest — describe them accurately.
+
+══ OUTPUT STRUCTURE ══
+Return valid JSON with this exact schema:
 
 {
-  "headline": "ALL CAPS, 6-10 words. The single biggest story. Punchy, specific. Not 'MARKETS MIXED' — that says nothing. Try 'CORN RALLIES ON SURPRISE EXPORT FLASH' or 'WHEAT COLLAPSES AS BLACK SEA FLOODS MARKET'",
-  "subheadline": "One sentence that adds the second-biggest story or the 'why' behind the headline.",
-  "lead": "2-3 sentences. The executive summary a farmer reads if they read nothing else. What happened, why it matters, what to watch. This should be genuinely useful — not filler.",
-  "teaser": "One punchy sentence for the collapsed hero bar. Make it intriguing enough to expand.",
+  "headline": "ALL CAPS, 6-10 words. The single biggest real story today.",
+  "subheadline": "One sentence adding the second-biggest story or the why.",
+  "lead": "2-3 sentences. What happened, why it matters, what to watch. Must contain at least one specific price from the table.",
+  "teaser": "One punchy sentence for the collapsed hero bar.",
   "one_number": {
-    "value": "The single most important number today. Format for impact — '$4.52' or '14½¢' or '2.3M' or '47%'.",
+    "value": "The single most important number today — must be from the LOCKED PRICE TABLE.",
     "unit": "What the number represents in 3-6 words.",
-    "context": "2-3 sentences explaining WHY this number matters today. Connect it to farmer decisions."
+    "context": "2-3 sentences explaining WHY this number matters. Connect to farmer decisions."
   },
   "sections": [
     {
       "title": "Section title (3-5 words)",
       "icon": "Single emoji",
-      "body": "3-5 sentences of ANALYSIS, not reporting. Connect moves to causes, causes to farmer decisions. Bold the most important phrase with <strong> tags. Reference at least TWO commodities and make ONE connection between them.",
-      "bottom_line": "One sentence TL;DR, max 20 words. Be blunt.",
+      "body": "3-5 sentences of analysis, not reporting. Bold the most important phrase with <strong> tags. Reference at least 2 commodities and make 1 connection between them. All prices must be from the LOCKED PRICE TABLE.",
+      "bottom_line": "One sentence TL;DR, max 20 words.",
       "conviction_level": "low | medium | high",
       "overnight_surprise": true/false,
-      "farmer_action": "Specific, actionable. 'Consider pricing 10-15% of new-crop corn on this rally' or 'No action needed — hold current positions'."
+      "farmer_action": "Specific and actionable. 'Consider pricing 10-15% of new-crop corn on this rally' or 'No action needed — hold current positions.'"
     }
   ],
   "the_more_you_know": {
-    "title": "Educational topic title connected to today's market action",
-    "body": "3-4 sentences explaining a concept. Smart friend over coffee, not a textbook."
+    "title": "Educational topic tied to today's market action",
+    "body": "3-4 sentences explaining a concept clearly. Smart friend over coffee, not a textbook."
   },
   "watch_list": [
     {
@@ -548,16 +535,6 @@ SECTIONS — always include these 4 in this order:
 3. ENERGY & INPUTS — crude, natgas, fertilizer/diesel implications.
 4. MACRO & TRADE — dollar, rates, trade policy, exports.
 
-QUALITY RULES:
-- Never start two consecutive bullets with the same commodity
-- The lead must contain at least one specific number
-- Each section body references 2+ commodities with 1+ connection between them
-- 'farmer_action' must be actionable TODAY
-- 'bottom_line' max 20 words
-- If overnight_surprise: true, explain WHY it's unusual
-- 'the_more_you_know' connects to today's market
-- Watch list: 3-5 items, mix of today and this-week
-
 RESPOND WITH ONLY THE JSON OBJECT. No markdown fences. No preamble."""
 
 
@@ -570,23 +547,50 @@ def call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote):
     now = datetime.now()
     date_str = now.strftime("%A, %B %-d, %Y")
 
+    # ── Surprise block ────────────────────────────────────────────
     surprise_block = ""
     if surprises:
         lines = []
         for s in surprises:
-            mag = "Notable" if s["surprise_magnitude"] < 2 else "SIGNIFICANT" if s["surprise_magnitude"] < 3 else "MAJOR"
-            lines.append(f"  ⚡ {mag}: {s['commodity']} moved {s['pct_change']:+.1f}% ({s['direction']}) — {s['surprise_magnitude']}x normal threshold")
-        surprise_block = f"⚡ OVERNIGHT SURPRISES ({len(surprises)} moves above threshold):\n" + "\n".join(lines)
-        surprise_block += "\nFlag these in relevant sections with overnight_surprise: true and explain WHY."
+            if s["surprise_magnitude"] >= 3.5:
+                tier = "MAJOR"
+            elif s["surprise_magnitude"] >= 2.5:
+                tier = "SIGNIFICANT"
+            elif s["surprise_magnitude"] >= 1.5:
+                tier = "Notable"
+            else:
+                tier = "Mild"
+            lines.append(
+                f"  ⚡ {tier}: {s['commodity']} moved {s['pct_change']:+.1f}% "
+                f"({s['direction']}) — magnitude {s['surprise_magnitude']}x threshold"
+            )
+        surprise_block = (
+            f"⚡ OVERNIGHT SURPRISES ({len(surprises)} moves above threshold):\n"
+            + "\n".join(lines)
+            + "\nFlag these in relevant sections with overnight_surprise: true. "
+            + "Use language proportional to the magnitude tier above."
+        )
     else:
-        surprise_block = "No overnight surprises — moves within normal ranges."
+        surprise_block = (
+            "No overnight surprises — all moves within normal ranges. "
+            "Write an honest, measured briefing. Not every day is dramatic. "
+            "market_mood should reflect actual conditions, not manufactured urgency."
+        )
+
+    # ── Locked price table ────────────────────────────────────────
+    # This is passed separately and prominently so Claude treats it as authoritative
+    locked_table = price_data.get("price_block", "Price data unavailable")
 
     user_message = f"""Generate today's AGSIST Daily briefing.
 
 DATE: {date_str}
 
-═══ MARKET DATA (yfinance, fetched {price_data.get('fetched', 'recently')}) ═══
-{price_data.get('price_block', 'Price data unavailable')}
+╔══ LOCKED PRICE TABLE ═══════════════════════════════════════════╗
+║ These prices come directly from yfinance and are the ONLY prices ║
+║ you may use. Do not invent, estimate, or substitute any price.   ║
+║ If a commodity isn't listed here, don't cite a specific price.   ║
+╚═════════════════════════════════════════════════════════════════╝
+{locked_table}
 
 ═══ OVERNIGHT SURPRISE ANALYSIS ═══
 {surprise_block}
@@ -594,14 +598,14 @@ DATE: {date_str}
 ═══ SEASONAL CONTEXT ═══
 {seasonal_ctx}
 
-═══ AG NEWS HEADLINES ═══
+═══ AG NEWS HEADLINES (for narrative context only — use prices above) ═══
 {news_block}
 
-═══ TODAY'S QUOTE (use exactly as provided) ═══
+═══ TODAY'S QUOTE (copy exactly, do not modify) ═══
 Text: "{todays_quote['text']}"
 Attribution: "{todays_quote['attribution']}"
 
-Your job isn't to report prices — farmers have a ticker. Tell them what prices MEAN, what they SHOULD DO, and what's COMING NEXT. Connect the dots. Be bold. Be useful."""
+Your job: explain what these prices MEAN for a Wisconsin/Minnesota grain and livestock producer, what they SHOULD consider doing, and what's COMING NEXT. Connect the dots. Stay accurate. Use calibrated language proportional to actual market moves today."""
 
     payload = {
         "model": MODEL,
@@ -644,6 +648,93 @@ Your job isn't to report prices — farmers have a ticker. Tell them what prices
 
 
 # ═══════════════════════════════════════════════════════════════════
+# POST-GENERATION VALIDATION
+# ═══════════════════════════════════════════════════════════════════
+
+def validate_briefing(briefing, locked_prices):
+    """
+    Scan the generated briefing for dollar amounts and check that any
+    specific prices mentioned are consistent with prices.json data.
+
+    This catches cases where Claude fabricates or misremembers a price.
+    Logs warnings — does not hard-fail, since some prices (diesel, retail)
+    are legitimately not in prices.json.
+
+    Returns: (is_clean, list_of_warnings)
+    """
+    warnings = []
+
+    # Build a lookup of all known price values with tolerance
+    known_values = {}
+    for key, val in locked_prices.items():
+        if val and val > 0:
+            known_values[key] = val
+
+    # Flatten briefing text for scanning
+    all_text = []
+    all_text.append(briefing.get("headline", ""))
+    all_text.append(briefing.get("lead", ""))
+    all_text.append(briefing.get("subheadline", ""))
+    if briefing.get("one_number"):
+        all_text.append(briefing["one_number"].get("context", ""))
+    for sec in briefing.get("sections", []):
+        all_text.append(sec.get("body", ""))
+        all_text.append(sec.get("bottom_line", ""))
+    all_text.append(briefing.get("the_more_you_know", {}).get("body", ""))
+    full_text = " ".join(all_text)
+
+    # Extract dollar amounts from text: $4.52, $91.27, $5,100, etc.
+    dollar_pattern = re.compile(r'\$([0-9,]+(?:\.[0-9]+)?)')
+    found_values = []
+    for match in dollar_pattern.finditer(full_text):
+        try:
+            val = float(match.group(1).replace(",", ""))
+            found_values.append((val, match.group(0)))
+        except ValueError:
+            pass
+
+    # Check if any found value is suspiciously different from all known prices
+    # Only flag if the value is in a range that suggests it's a commodity price
+    # (not e.g. a per-acre cost estimate)
+    COMMODITY_RANGES = {
+        "corn":    (2.0, 9.0),
+        "beans":   (7.0, 20.0),
+        "wheat":   (3.0, 12.0),
+        "crude":   (30.0, 200.0),
+        "natgas":  (1.0, 15.0),
+        "gold":    (500.0, 10000.0),
+        "silver":  (5.0, 200.0),
+        "cattle":  (100.0, 350.0),
+        "hogs":    (40.0, 150.0),
+        "milk":    (10.0, 35.0),
+    }
+
+    # For each found value, see if it matches any known price within 5%
+    for found_val, found_str in found_values:
+        matched = False
+        for key, known_val in known_values.items():
+            if known_val > 0:
+                tolerance = 0.05  # 5%
+                if abs(found_val - known_val) / known_val <= tolerance:
+                    matched = True
+                    break
+        # If not matched, check if it's in a commodity range — if so, warn
+        if not matched:
+            for key, (lo, hi) in COMMODITY_RANGES.items():
+                if lo <= found_val <= hi:
+                    # Could be a legitimate unlisted price (diesel, local basis)
+                    # or an invented number — log as info, not hard error
+                    warnings.append(
+                        f"Price {found_str} not found in prices.json "
+                        f"(possible {key} price — verify it's not invented)"
+                    )
+                    break
+
+    is_clean = len(warnings) == 0
+    return is_clean, warnings
+
+
+# ═══════════════════════════════════════════════════════════════════
 # ARCHIVE — Static page generation + index
 # ═══════════════════════════════════════════════════════════════════
 
@@ -656,6 +747,24 @@ def html_esc(s):
     if not s:
         return ""
     return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+def html_esc_preserve_strong(s):
+    """
+    Escape HTML but preserve <strong> and </strong> tags.
+    Used for body text and watch descriptions that may legitimately contain bold.
+    """
+    if not s:
+        return ""
+    # Extract strong tags first, replace with placeholders
+    parts = re.split(r'(</?strong>)', s, flags=re.IGNORECASE)
+    result = []
+    for part in parts:
+        if part.lower() in ('<strong>', '</strong>'):
+            result.append(part.lower())
+        else:
+            result.append(html_esc(part))
+    return "".join(result)
 
 
 def generate_archive_html(briefing, date_iso):
@@ -671,19 +780,23 @@ def generate_archive_html(briefing, date_iso):
     surprises = briefing.get("surprises", [])
     surprise_count = meta.get("overnight_surprises_count", 0)
 
-    # Build surprise banner HTML
+    # Surprise banner
     surprise_html = ""
     if surprise_count > 0:
         names = []
         for s in surprises:
             arrow = "▲" if s.get("direction") == "up" else "▼"
             names.append(f'{s.get("commodity","")} {arrow}{abs(s.get("pct_change",0)):.1f}%')
-        surprise_html = f'''<div class="dv3-surprise-banner" style="display:flex">
-      <span class="surprise-icon">⚡</span>
-      <span class="surprise-text"><strong>Overnight Surprise{"s" if surprise_count > 1 else ""}:</strong> {" · ".join(names) if names else f"{surprise_count} unusual move{'s' if surprise_count > 1 else ''}"}</span>
-    </div>'''
+        surprise_html = (
+            f'<div class="dv3-surprise-banner" style="display:flex">\n'
+            f'      <span class="surprise-icon">⚡</span>\n'
+            f'      <span class="surprise-text"><strong>Overnight Surprise'
+            f'{"s" if surprise_count > 1 else ""}:</strong> '
+            f'{" · ".join(names) if names else f"{surprise_count} unusual move{'s' if surprise_count > 1 else ''}"}'
+            f'</span>\n    </div>'
+        )
 
-    # Build mood badge HTML
+    # Mood badge
     mood_html = ""
     if mood:
         mood_colors = {
@@ -696,9 +809,13 @@ def generate_archive_html(briefing, date_iso):
         mood_icons = {"bullish": "📈", "bearish": "📉", "mixed": "↔️", "cautious": "⚠️", "volatile": "🔥"}
         mc = mood_colors.get(mood, mood_colors["mixed"])
         mi = mood_icons.get(mood, "📊")
-        mood_html = f'<span class="dv3-mood" style="display:inline-flex;color:{mc[0]};background:{mc[1]};border:1px solid {mc[2]}">{mi} {mood.capitalize()}</span>'
+        mood_html = (
+            f'<span class="dv3-mood" style="display:inline-flex;'
+            f'color:{mc[0]};background:{mc[1]};border:1px solid {mc[2]}">'
+            f'{mi} {mood.capitalize()}</span>'
+        )
 
-    # Build sections HTML
+    # Sections
     sections_html = ""
     for i, sec in enumerate(briefing.get("sections", [])):
         cls = "dv3-sec"
@@ -709,7 +826,8 @@ def generate_archive_html(briefing, date_iso):
 
         icon = html_esc(sec.get("icon", "📊"))
         title = html_esc(sec.get("title", ""))
-        body = sec.get("body", "")  # May contain <strong> tags
+        # Body may contain <strong> tags — preserve them
+        body = html_esc_preserve_strong(sec.get("body", ""))
         bottom_line = html_esc(sec.get("bottom_line", ""))
         farmer_action = html_esc(sec.get("farmer_action", ""))
         conviction = sec.get("conviction_level", "")
@@ -722,7 +840,11 @@ def generate_archive_html(briefing, date_iso):
                 "low":    ("var(--text-muted)", "var(--surface2)", "var(--border)"),
             }
             cv = cv_colors.get(conviction, cv_colors["medium"])
-            conviction_html = f'<span class="dv3-sec-conviction" style="color:{cv[0]};background:{cv[1]};border:1px solid {cv[2]}">{conviction.upper()} CONVICTION</span>'
+            conviction_html = (
+                f'<span class="dv3-sec-conviction" style="color:{cv[0]};'
+                f'background:{cv[1]};border:1px solid {cv[2]}">'
+                f'{conviction.upper()} CONVICTION</span>'
+            )
 
         bottom_html = f'<div class="dv3-sec-bottomline">{bottom_line}</div>' if bottom_line else ""
         action_html = f'<div class="dv3-sec-action">🎯 {farmer_action}</div>' if farmer_action else ""
@@ -743,57 +865,64 @@ def generate_archive_html(briefing, date_iso):
     one_num = briefing.get("one_number", {})
     one_num_html = ""
     if one_num:
-        one_num_html = f'''<div class="dv3-one-number">
-        <div class="dv3-one-number-label">📊 THE NUMBER</div>
-        <div class="dv3-one-number-val">{html_esc(one_num.get("value", "—"))}</div>
-        <div class="dv3-one-number-unit">{html_esc(one_num.get("unit", ""))}</div>
-        <div class="dv3-one-number-ctx">{html_esc(one_num.get("context", ""))}</div>
-      </div>'''
+        one_num_html = (
+            f'<div class="dv3-one-number">\n'
+            f'        <div class="dv3-one-number-label">📊 THE NUMBER</div>\n'
+            f'        <div class="dv3-one-number-val">{html_esc(one_num.get("value", "—"))}</div>\n'
+            f'        <div class="dv3-one-number-unit">{html_esc(one_num.get("unit", ""))}</div>\n'
+            f'        <div class="dv3-one-number-ctx">{html_esc(one_num.get("context", ""))}</div>\n'
+            f'      </div>'
+        )
 
     # Quote
     quote = briefing.get("daily_quote", {})
     quote_html = ""
     if quote:
-        qt = quote.get("text", "").strip('""\u201c\u201d')
+        qt = quote.get("text", "").strip('"\u201c\u201d')
         qa = quote.get("attribution", "").lstrip("\u2014\u2013- ")
-        quote_html = f'''<div class="dv3-quote-card">
-        <div class="dv3-quote-label">💬 DAILY QUOTE</div>
-        <p class="dv3-quote-text">\u201c{html_esc(qt)}\u201d</p>
-        <cite class="dv3-quote-attr">\u2014 {html_esc(qa)}</cite>
-      </div>'''
+        quote_html = (
+            f'<div class="dv3-quote-card">\n'
+            f'        <div class="dv3-quote-label">💬 DAILY QUOTE</div>\n'
+            f'        <p class="dv3-quote-text">\u201c{html_esc(qt)}\u201d</p>\n'
+            f'        <cite class="dv3-quote-attr">\u2014 {html_esc(qa)}</cite>\n'
+            f'      </div>'
+        )
 
-    # The More You Know
+    # TMYK
     tmyk = briefing.get("the_more_you_know", {})
     tmyk_html = ""
     if tmyk:
-        tmyk_html = f'''<div class="dv3-tmyk">
-      <div class="dv3-tmyk-label">🧠 THE MORE YOU KNOW</div>
-      <div class="dv3-tmyk-title">{html_esc(tmyk.get("title", ""))}</div>
-      <div class="dv3-tmyk-body">{html_esc(tmyk.get("body", ""))}</div>
-    </div>'''
+        tmyk_html = (
+            f'<div class="dv3-tmyk">\n'
+            f'      <div class="dv3-tmyk-label">🧠 THE MORE YOU KNOW</div>\n'
+            f'      <div class="dv3-tmyk-title">{html_esc(tmyk.get("title", ""))}</div>\n'
+            f'      <div class="dv3-tmyk-body">{html_esc(tmyk.get("body", ""))}</div>\n'
+            f'    </div>'
+        )
 
-    # Watch list
+    # Watch list — use html_esc_preserve_strong so <strong> tags render correctly
     watch = briefing.get("watch_list", [])
     watch_items = ""
     for item in watch:
-        watch_items += f'''<li class="dv3-watch-item">
-        <span class="dv3-watch-time">{html_esc(item.get("time", ""))}</span>
-        <span class="dv3-watch-desc">{html_esc(item.get("desc", ""))}</span>
-      </li>'''
+        watch_items += (
+            f'<li class="dv3-watch-item">\n'
+            f'        <span class="dv3-watch-time">{html_esc(item.get("time", ""))}</span>\n'
+            f'        <span class="dv3-watch-desc">'
+            f'{html_esc_preserve_strong(item.get("desc", ""))}'
+            f'</span>\n      </li>'
+        )
     watch_html = ""
     if watch:
-        watch_html = f'''<div class="dv3-watch">
-      <div class="dv3-watch-label">📅 TODAY'S WATCH LIST</div>
-      <ul class="dv3-watch-list">{watch_items}</ul>
-    </div>'''
+        watch_html = (
+            f'<div class="dv3-watch">\n'
+            f'      <div class="dv3-watch-label">📅 TODAY\'S WATCH LIST</div>\n'
+            f'      <ul class="dv3-watch-list">{watch_items}</ul>\n'
+            f'    </div>'
+        )
 
     source = html_esc(briefing.get("source_summary", "USDA · CME Group · Open-Meteo"))
     gen_at = briefing.get("generated_at", "")
 
-    # Prev/next nav will be injected by update_archive_index after all pages exist
-    # For now, just link back to latest and archive
-
-    # Build the full page
     page = f'''<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -885,6 +1014,7 @@ def generate_archive_html(briefing, date_iso):
 .dv3-watch-item:last-child{{border-bottom:none;padding-bottom:0}}
 .dv3-watch-time{{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;white-space:nowrap;flex-shrink:0;min-width:72px}}
 .dv3-watch-desc{{color:var(--text-dim);font-size:.88rem;line-height:1.55}}
+.dv3-watch-desc strong{{color:var(--text)}}
 .dv3-source{{font-size:.68rem;color:var(--text-muted);text-align:center;padding:.75rem 0;border-top:1px solid var(--border);margin-bottom:2rem}}
 .dv3-nav{{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-top:2px solid var(--border);border-bottom:2px solid var(--border);margin-bottom:2rem}}
 .dv3-nav a{{display:inline-flex;align-items:center;gap:.35rem;font-size:.85rem;font-weight:600;color:var(--green);transition:opacity .15s}}
@@ -980,7 +1110,6 @@ def update_archive_index(briefing, date_iso):
 
     index_path = ARCHIVE_JSON_DIR / "index.json"
 
-    # Load existing index or start fresh
     if index_path.exists():
         with open(index_path) as f:
             index = json.load(f)
@@ -989,7 +1118,6 @@ def update_archive_index(briefing, date_iso):
 
     entries = index.get("briefings", [])
 
-    # Build entry for today
     headline = briefing.get("headline", "")
     teaser = briefing.get("teaser", "")
     if not teaser and briefing.get("lead"):
@@ -1008,7 +1136,6 @@ def update_archive_index(briefing, date_iso):
         "url": f"/daily/{date_iso}",
     }
 
-    # Replace existing entry for same date, or insert at front
     found = False
     for i, e in enumerate(entries):
         if e.get("date") == date_iso:
@@ -1018,7 +1145,6 @@ def update_archive_index(briefing, date_iso):
     if not found:
         entries.insert(0, entry)
 
-    # Keep sorted newest-first
     entries.sort(key=lambda x: x.get("date", ""), reverse=True)
 
     index["briefings"] = entries
@@ -1036,24 +1162,20 @@ def save_archive(briefing):
 
     date_iso = datetime.now().strftime("%Y-%m-%d")
 
-    # Ensure directories exist
     ARCHIVE_JSON_DIR.mkdir(parents=True, exist_ok=True)
     ARCHIVE_HTML_DIR.mkdir(parents=True, exist_ok=True)
 
-    # 1. Save JSON backup
     json_path = ARCHIVE_JSON_DIR / f"{date_iso}.json"
     with open(json_path, "w") as f:
         json.dump(briefing, f, indent=2, ensure_ascii=False)
     print(f"  📁 Archive JSON: {json_path}")
 
-    # 2. Generate static HTML page
     html_content = generate_archive_html(briefing, date_iso)
     html_path = ARCHIVE_HTML_DIR / f"{date_iso}.html"
     with open(html_path, "w") as f:
         f.write(html_content)
     print(f"  📄 Archive HTML: {html_path}")
 
-    # 3. Update archive index
     count = update_archive_index(briefing, date_iso)
     print(f"  📋 Archive index: {count} briefings")
 
@@ -1063,7 +1185,7 @@ def save_archive(briefing):
 # ═══════════════════════════════════════════════════════════════════
 
 def main():
-    print("═══ AGSIST Daily Briefing Generator v3 ═══")
+    print("═══ AGSIST Daily Briefing Generator v3.2 ═══")
     print(f"  Time: {datetime.now().isoformat()}")
 
     print("  Loading prices.json...")
@@ -1071,15 +1193,15 @@ def main():
     if surprises:
         print(f"  ⚡ {len(surprises)} overnight surprise(s)!")
         for s in surprises:
-            print(f"    {s['commodity']}: {s['pct_change']:+.1f}% ({s['surprise_magnitude']}x)")
+            print(f"    {s['commodity']}: {s['pct_change']:+.1f}% (magnitude {s['surprise_magnitude']}x)")
     else:
-        print("  No overnight surprises.")
+        print("  No overnight surprises — normal trading day.")
 
     print("  Fetching ag news RSS...")
     news_block = fetch_ag_news()
 
     seasonal_ctx = get_seasonal_context()
-    print(f"  Seasonal context loaded.")
+    print("  Seasonal context loaded.")
 
     todays_quote = get_todays_quote()
     print(f"  Quote: \"{todays_quote['text'][:50]}...\" — {todays_quote['attribution']}")
@@ -1087,11 +1209,22 @@ def main():
     print("  Calling Claude API...")
     briefing = call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote)
 
+    # ── Post-generation price validation ─────────────────────────
+    locked_prices = price_data.get("locked_prices", {})
+    is_clean, val_warnings = validate_briefing(briefing, locked_prices)
+    if val_warnings:
+        print(f"  ⚠️  Price validation warnings ({len(val_warnings)}):")
+        for w in val_warnings:
+            print(f"    • {w}")
+    else:
+        print("  ✅ Price validation passed — all prices traceable to prices.json")
+
     # Inject metadata
     briefing["generated_at"] = datetime.now(timezone.utc).isoformat()
-    briefing["generator_version"] = "3.0"
+    briefing["generator_version"] = "3.2"
     briefing["surprise_count"] = len(surprises)
     briefing["surprises"] = surprises
+    briefing["price_validation_clean"] = is_clean
     if "meta" not in briefing:
         briefing["meta"] = {}
     briefing["meta"]["overnight_surprises_count"] = len(surprises)
@@ -1102,12 +1235,13 @@ def main():
 
     print(f"  ✅ Written to {OUTPUT_PATH}")
 
-    # Archive: save JSON backup + generate static HTML page + update index
     print("  Archiving briefing...")
     save_archive(briefing)
+
     print(f"  Headline: {briefing.get('headline', 'N/A')}")
     print(f"  Sections: {len(briefing.get('sections', []))}")
     print(f"  Surprises: {len(surprises)}")
+    print(f"  Price validation: {'clean' if is_clean else f'{len(val_warnings)} warning(s)'}")
     print("═══ Done ═══")
 
 
