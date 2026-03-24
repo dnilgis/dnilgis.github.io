@@ -1,0 +1,25 @@
+name: Generate RSS Feed
+
+on:
+  push:
+    paths:
+      - 'data/daily-archive/index.json'
+      - 'data/daily-archive/*.json'
+  workflow_dispatch:
+
+jobs:
+  rss:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate feed.xml
+        run: python3 scripts/generate_rss.py
+
+      - name: Commit feed.xml
+        run: |
+          git config user.name  "AGSIST Bot"
+          git config user.email "bot@agsist.com"
+          git add feed.xml
+          git diff --staged --quiet || git commit -m "chore: regenerate RSS feed"
+          git push
