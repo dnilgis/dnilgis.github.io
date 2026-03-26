@@ -1,6 +1,16 @@
 {
   "briefings": [
     {
+      "date": "2026-03-26",
+      "date_display": "Thursday, March 26, 2026",
+      "headline": "GRAINS RALLY AHEAD OF PLANTING REPORT",
+      "teaser": "Pre-plant rally builds as energy costs spike and USDA acreage report looms.",
+      "market_mood": "bullish",
+      "surprise_count": 5,
+      "sections": 4,
+      "url": "/daily/2026-03-26"
+    },
+    {
       "date": "2026-03-25",
       "date_display": "Wednesday, March 25, 2026",
       "headline": "METALS EXPLODE WHILE GRAINS DRIFT SIDEWAYS",
@@ -161,6 +171,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-03-25T12:07:58.729839+00:00",
-  "count": 16
+  "updated": "2026-03-26T12:39:26.150101+00:00",
+  "count": 17
 }
