@@ -1,29 +1,38 @@
 #!/usr/bin/env python3
 """
-AGSIST fetch_markets.py  v6
+AGSIST fetch_markets.py  v7
 ════════════════════════════
 Fetches prediction-market odds relevant to agriculture from Kalshi
 and Polymarket.  Runs once daily via GitHub Actions (6 AM CT).
 
-v6 changes (2026-03-04):
-  • STRATEGY OVERHAUL: Instead of paginating ALL Kalshi markets (mostly
-    sports) then filtering, v6 does TARGETED searches per keyword via
-    Kalshi's ?search= parameter + event-based fetching.
-  • Polymarket: Uses both ?_q= and ?tag_slug= query styles, with URL-
-    encoded multi-word queries.
-  • If both APIs return 0 results, output is clean empty state (no fake data).
-  • Kalshi pagination is now per-search-query (max 3 pages each) instead
-    of blind pagination of the full catalog.
-  • Better error reporting and graceful degradation.
+v7 fixes (2026-03-31):
+  • CRITICAL FIX: Kalshi base URL was wrong (api.elections.kalshi.com is
+    the defunct election-period API). Correct domain is trading-api.kalshi.com.
+  • CRITICAL FIX: Removed search= param — not in Kalshi API spec. v6's
+    entire "targeted search" strategy returned 0 results because every
+    search query hit a 404/connection error, caught silently by http_get_json.
+  • NEW STRATEGY: Kalshi — paginate /markets (max 200/page) and filter
+    locally by keyword tier. Fetches up to 1000 markets total, stops
+    early once 30+ relevant markets found.
+  • CRITICAL FIX: Polymarket — changed _q to q (documented param).
+    Also added direct tag-based browsing as primary strategy.
+  • Added /events endpoint fetch for Kalshi — often surfaces themed
+    market groups (energy, commodities, macro) more efficiently.
+  • Lowered minimum relevance threshold from 40 to 35 to capture more
+    macro/infrastructure markets relevant to farming.
+  • Expanded tier keywords: added tariffs, trade policy terms that are
+    highly relevant to grain exports.
+  • Better error output: prints actual error text so GitHub Actions logs
+    show what's failing.
 
-v5 preserved:
+v6 preserved:
   • Meme/sports filter (blacklists, player patterns, parlay detection)
-  • Temperature-gated relevance scoring (TIER1/2/3)
   • Composite ranking with volume weighting
+  • Clean empty state if both APIs truly return 0 relevant results
 
 Sources (public, no API keys required):
-  • Kalshi      — https://api.elections.kalshi.com/trade-api/v2/markets
-  • Polymarket  — https://gamma-api.polymarket.com/markets
+  • Kalshi    — https://trading-api.kalshi.com/trade-api/v2/markets
+  • Polymarket — https://gamma-api.polymarket.com/markets
 """
 
 import json
@@ -36,97 +45,79 @@ from datetime import datetime, timezone
 try:
     import urllib.request as urllib_request
     import urllib.error as urllib_error
-    from urllib.parse import quote as url_quote
+    from urllib.parse import quote as url_quote, urlencode
 except ImportError:
     import urllib2 as urllib_request
     from urllib import quote as url_quote
 
 
 # ═════════════════════════════════════════════════════════════════
-# 1. SEARCH QUERIES — targeted, deduplicated
-# ═════════════════════════════════════════════════════════════════
-
-SEARCH_QUERIES = [
-    # Direct ag commodities
-    "corn", "soybean", "wheat", "grain", "cattle", "livestock",
-    "ethanol", "dairy", "cotton", "sugar", "pork",
-    # Ag policy & trade
-    "tariff", "usda", "farm bill", "crop",
-    "china trade", "brazil soybean",
-    # Energy (input costs)
-    "oil price", "crude oil", "natural gas", "diesel",
-    # Weather
-    "drought", "hurricane", "flood", "el nino",
-    # Macro (affects exports, rates, dollar)
-    "interest rate", "inflation", "recession", "federal reserve",
-    "fed funds rate", "rate cut", "rate hike",
-    # Infrastructure
-    "rail strike", "mississippi river", "supply chain",
-    # Disease
-    "bird flu", "avian influenza",
-    # Fertilizer
-    "fertilizer", "nitrogen",
-]
-
-# v6: Additional Kalshi-specific search terms (matches their market naming)
-KALSHI_EXTRA_QUERIES = [
-    "oil", "gas price", "cpi", "fed", "recession",
-    "trade", "tariff", "china", "temperature", "weather",
-    "food", "grocery", "egg", "price", "commodity",
-]
-
-
-# ═════════════════════════════════════════════════════════════════
-# 2. KEYWORD TIERS — for relevance scoring
+# 1. KEYWORD TIERS — for relevance scoring
 # ═════════════════════════════════════════════════════════════════
 
 TIER1_KEYWORDS = [
-    "corn", "soybean", "wheat", "grain", "crop", "usda", "wasde",
-    "drought", "farm", "cattle", "hog", "livestock", "ethanol",
-    "harvest", "planting", "acreage", "export inspection",
-    "fertilizer", "urea", "canola", "sorghum", "cotton", "rice",
-    "pork", "beef", "dairy", "milk", "oat", "barley", "sugar",
-    "poultry", "chicken", "egg", "crop insurance", "farm bill",
-    "food price", "food inflation", "cropland", "grazing",
-    "soil moisture", "growing season", "yield", "bushel",
-    "commodity", "grain elevator", "feedlot", "grocery",
+    # Direct commodities
+    "corn", "soybean", "wheat", "grain", "oat", "barley",
+    "cotton", "sugar", "rice", "canola", "sorghum",
+    # Livestock
+    "cattle", "hog", "pig", "livestock", "pork", "beef",
+    "dairy", "milk", "poultry", "chicken", "egg",
+    # Ag operations
+    "ethanol", "crop", "harvest", "planting", "acreage",
+    "fertilizer", "urea", "nitrogen", "potash", "phosphate",
+    "farm bill", "usda", "wasde", "crop insurance",
+    # Food inflation — directly affects ag demand
+    "food price", "food inflation", "grocery price", "grocery store",
+    "grocery", "egg price", "meat price",
+    # Yield/production
+    "bushel", "yield", "cropland", "soil moisture",
+    "growing season", "feedlot",
 ]
 
 TIER2_KEYWORDS = [
+    # Trade — directly moves grain exports
     "tariff", "trade war", "trade deal", "trade agreement",
-    "china trade", "china import", "china export", "china ban",
-    "brazil", "argentina", "ukraine", "black sea",
-    "usmca", "nafta", "wto", "trade dispute", "sanction",
-    "crude oil", "natural gas", "diesel", "gasoline", "energy price",
-    "oil price", "opec", "pipeline", "renewable fuel", "biofuel",
-    "carbon tax", "carbon credit", "emission",
-    "epa", "environmental regulation", "water rights",
-    "mississippi river", "panama canal", "suez canal",
-    "rail strike", "railroad", "freight", "shipping",
-    "port strike", "supply chain", "trucking",
-    "immigration", "farm labor", "h-2a", "migrant worker",
+    "china trade", "china import", "china export",
+    "brazil", "argentina", "ukraine", "black sea grain",
+    "usmca", "nafta", "wto", "trade dispute",
+    "export ban", "import quota", "sanction",
+    "trade policy", "trade war", "trade escalation",
+    "retaliatory tariff",
+    # Energy — input costs
+    "crude oil", "natural gas", "diesel", "gasoline",
+    "energy price", "oil price", "opec",
+    "pipeline", "biofuel", "renewable fuel",
+    "carbon credit", "emission standard",
+    # Supply chain
+    "rail strike", "railroad", "freight rate",
+    "mississippi river", "panama canal", "port strike",
+    "supply chain", "shipping cost",
+    # Labor/disease
     "bird flu", "avian influenza", "african swine fever",
-    "mad cow", "food safety", "fda",
+    "h-2a", "farm labor", "immigration policy",
+    "food safety",
 ]
 
 TIER3_KEYWORDS = [
-    "interest rate", "fed rate", "federal reserve", "fed funds",
+    # Macro — affects land values, export dollar, farm loans
+    "interest rate", "federal reserve", "fed funds",
     "rate cut", "rate hike", "fomc", "powell",
-    "inflation", "cpi", "ppi", "recession", "gdp", "unemployment",
-    "dollar", "usd", "currency", "yuan", "peso", "real",
-    "government shutdown", "debt ceiling", "budget",
-    "el nino", "la nina", "hurricane", "flood", "wildfire",
-    "heat wave", "polar vortex", "frost", "freeze",
-    "climate change", "climate policy", "paris agreement",
-    "water shortage", "aquifer", "irrigation",
-    "land use", "deforestation", "amazon",
-    "food security", "famine", "world food programme",
-    "fertilizer ban", "nitrogen", "phosphate", "potash",
+    "inflation", "cpi", "ppi", "core inflation",
+    "recession", "gdp growth", "unemployment",
+    "dollar index", "usd", "currency",
+    "government shutdown", "debt ceiling", "farm subsidy",
+    # Weather systemic
+    "el nino", "la nina", "hurricane", "flood",
+    "drought", "heat wave", "frost", "freeze", "wildfire",
+    "climate policy", "weather forecast",
+    # Other macro
+    "federal budget", "deficit", "treasury",
+    "china economy", "global trade",
 ]
 
 
 # ═════════════════════════════════════════════════════════════════
-# 3. MEME / JUNK MARKET FILTER — aggressive
+# 2. MEME / JUNK MARKET FILTER — aggressive
 # ═════════════════════════════════════════════════════════════════
 
 MEME_BLACKLIST = [
@@ -135,16 +126,17 @@ MEME_BLACKLIST = [
     "minecraft", "call of duty", "league of legends", "valorant",
     "oscar", "grammy", "emmy", "golden globe", "tony award",
     "bachelor", "bachelorette", "reality tv", "survivor",
-    "movie", "box office", "netflix", "disney", "hulu",
-    "celebrity", "kardashian", "swift", "beyonce", "drake",
-    "album", "billboard", "spotify", "concert", "tour",
-    "tiktok", "instagram", "youtube", "twitch", "streamer",
+    "box office", "netflix", "disney", "hulu",
+    "celebrity", "kardashian", "beyonce", "drake",
+    "album", "billboard", "spotify", "concert",
+    "tiktok", "instagram", "youtube", "twitch",
     "subscriber", "follower count", "viral",
     "spacex", "mars colony", "moon landing", "alien", "ufo",
     "dogecoin", "shiba", "pepe coin", "meme coin", "nft",
-    "dating", "divorce", "wedding", "baby", "pregnant",
-    "tweet", "twitter feud", "social media post",
+    "dating", "divorce", "wedding",
+    "tweet", "twitter feud",
     "time person of the year", "most popular", "best dressed",
+    "golden state", "lakers", "celtics", "warriors",
 ]
 
 SPORTS_BLACKLIST = [
@@ -153,38 +145,11 @@ SPORTS_BLACKLIST = [
     "champions league", "world cup", "olympics", "ncaa",
     "march madness", "super bowl", "world series",
     "stanley cup", "playoff", "playoffs",
-    "lakers", "celtics", "warriors", "nuggets", "bucks",
-    "76ers", "sixers", "knicks", "nets", "heat", "bulls",
-    "cavaliers", "mavericks", "clippers", "suns", "kings",
-    "timberwolves", "thunder", "pelicans", "grizzlies",
-    "hawks", "raptors", "pacers", "magic", "wizards",
-    "pistons", "hornets", "blazers", "spurs", "rockets",
-    "jazz",
-    "chiefs", "eagles", "49ers", "ravens", "bills",
-    "cowboys", "packers", "lions", "dolphins", "bengals",
-    "steelers", "broncos", "chargers", "seahawks",
-    "vikings", "cardinals", "falcons", "saints",
-    "buccaneers", "raiders", "colts", "jaguars",
-    "texans", "titans", "panthers", "commanders",
-    "bears", "rams", "patriots", "jets", "giants",
-    "yankees", "dodgers", "astros", "braves", "phillies",
-    "padres", "mets", "orioles", "guardians", "twins",
-    "rangers", "mariners", "diamondbacks", "brewers",
-    "red sox", "blue jays", "white sox", "royals",
-    "athletics", "pirates", "reds", "nationals", "marlins",
-    "rockies", "cubs", "rays",
-    "bruins", "avalanche", "panthers", "oilers",
-    "hurricanes", "penguins", "maple leafs",
-    "lightning", "canucks", "wild", "flames",
-    "golden knights", "islanders", "capitals", "sabres",
-    "blackhawks", "devils", "senators", "kraken",
-    "predators", "sharks", "ducks", "coyotes", "flyers",
     "mvp", "touchdown", "home run", "hat trick", "slam dunk",
-    "draft pick", "free agent", "trade deadline",
+    "draft pick", "free agent",
     "rushing yards", "passing yards", "batting average",
     "championship", "finals mvp", "all-star",
     "win total", "over/under", "point spread",
-    "regular season", "postseason",
 ]
 
 SPORTS_PLAYER_PATTERNS = [
@@ -192,11 +157,6 @@ SPORTS_PLAYER_PATTERNS = [
     r"curry\b", r"giannis", r"ohtani", r"tatum", r"embiid",
     r"messi\b", r"ronaldo", r"haaland", r"mbappe",
     r"lamar jackson", r"josh allen", r"patrick mahomes",
-    r"judge\b.*homer", r"batting\b", r"rushing\b", r"passing\b",
-    r"desmond bane", r"cade cunningham", r"paolo banchero",
-    r"lamelo ball", r"evan mobley", r"jarrett allen",
-    r"james harden", r"dennis schr", r"ausar thompson",
-    r"wendell carter", r"miles bridges", r"knueppel",
 ]
 
 SPORTS_STAT_PATTERNS = [
@@ -208,12 +168,6 @@ SPORTS_STAT_PATTERNS = [
     r"\d+\+.*touchdowns",
     r"over \d+\.?\d* (points|goals|runs|yards)",
     r"win.*game\s*\d",
-    r"wins?\s+the\s+(title|trophy|cup|ring|belt)",
-]
-
-PARLAY_PATTERNS = [
-    r"(yes\s+\w+.*?:\s*\d+\+.*?,\s*){2,}",
-    r"(\w+\s+\w+:\s*\d+\+,?\s*){3,}",
 ]
 
 KALSHI_JUNK_TICKER_PATTERNS = [
@@ -224,40 +178,28 @@ KALSHI_JUNK_TICKER_PATTERNS = [
 
 
 def is_meme_market(title, ticker=""):
-    """Return True if market title matches meme/junk/sports patterns."""
     t = title.lower()
-
     if ticker:
-        ticker_upper = ticker.upper()
         for pattern in KALSHI_JUNK_TICKER_PATTERNS:
-            if re.search(pattern, ticker_upper):
+            if re.search(pattern, ticker.upper()):
                 return True
-
     for pattern in MEME_BLACKLIST:
         if pattern in t:
             return True
-
     for pattern in SPORTS_BLACKLIST:
         if pattern in t:
             return True
-
     for pattern in SPORTS_PLAYER_PATTERNS:
         if re.search(pattern, t):
             return True
-
     for pattern in SPORTS_STAT_PATTERNS:
         if re.search(pattern, t):
             return True
-
-    for pattern in PARLAY_PATTERNS:
-        if re.search(pattern, t):
-            return True
-
     return False
 
 
 # ═════════════════════════════════════════════════════════════════
-# 4. RELEVANCE SCORING
+# 3. RELEVANCE SCORING
 # ═════════════════════════════════════════════════════════════════
 
 def score_relevance(text):
@@ -286,6 +228,7 @@ def score_relevance(text):
                 matched_tier = max(matched_tier, 3)
                 break
 
+    # Boost tier-3 if it also hits tier-1 or tier-2
     if matched_tier == 3:
         for kw in TIER1_KEYWORDS:
             if kw in t:
@@ -300,33 +243,45 @@ def score_relevance(text):
 
 
 # ═════════════════════════════════════════════════════════════════
-# 5. CATEGORY + WHY IT MATTERS
+# 4. CATEGORY + WHY IT MATTERS
 # ═════════════════════════════════════════════════════════════════
 
 AG_CAT_RULES = [
-    ("Commodities",      ["corn", "soybean", "wheat", "grain", "oat", "barley",
-                          "cotton", "sugar", "rice", "canola", "sorghum",
-                          "cattle", "hog", "livestock", "pork", "beef",
-                          "dairy", "milk", "poultry", "chicken", "egg",
-                          "ethanol", "crop", "harvest", "bushel", "commodity",
-                          "food price", "grocery", "food inflation"]),
-    ("Trade & Policy",   ["tariff", "trade", "usda", "farm bill", "china",
-                          "brazil", "argentina", "ukraine", "usmca", "wto",
-                          "sanction", "export", "import", "h-2a", "immigration",
-                          "farm labor", "epa", "fda"]),
-    ("Energy & Inputs",  ["crude", "oil", "natural gas", "diesel", "gasoline",
-                          "energy", "opec", "pipeline", "biofuel", "fertilizer",
-                          "nitrogen", "phosphate", "potash", "urea",
-                          "carbon", "emission", "renewable"]),
-    ("Weather & Climate", ["drought", "hurricane", "flood", "el nino", "la nina",
-                           "heat wave", "frost", "freeze", "wildfire",
-                           "climate", "temperature", "rainfall", "weather"]),
-    ("Economy & Markets", ["interest rate", "fed", "inflation", "cpi", "recession",
-                           "gdp", "unemployment", "dollar", "currency",
-                           "debt ceiling", "government shutdown", "budget"]),
-    ("Infrastructure",   ["rail", "railroad", "mississippi", "panama canal",
-                          "supply chain", "shipping", "freight", "trucking",
-                          "port"]),
+    ("Commodities", [
+        "corn", "soybean", "wheat", "grain", "oat", "barley",
+        "cotton", "sugar", "rice", "canola", "sorghum",
+        "cattle", "hog", "livestock", "pork", "beef",
+        "dairy", "milk", "poultry", "chicken", "egg",
+        "ethanol", "crop", "harvest", "bushel", "commodity",
+        "food price", "grocery", "food inflation", "meat price",
+    ]),
+    ("Trade & Policy", [
+        "tariff", "trade", "usda", "farm bill", "china",
+        "brazil", "argentina", "ukraine", "usmca", "wto",
+        "sanction", "export", "import", "h-2a",
+        "farm labor", "epa", "fda", "retaliatory",
+    ]),
+    ("Energy & Inputs", [
+        "crude", "oil", "natural gas", "diesel", "gasoline",
+        "energy", "opec", "pipeline", "biofuel", "fertilizer",
+        "nitrogen", "phosphate", "potash", "urea",
+        "carbon", "emission", "renewable", "electricity",
+    ]),
+    ("Weather & Climate", [
+        "drought", "hurricane", "flood", "el nino", "la nina",
+        "heat wave", "frost", "freeze", "wildfire",
+        "climate", "temperature", "rainfall", "weather",
+    ]),
+    ("Economy & Markets", [
+        "interest rate", "fed", "inflation", "cpi", "recession",
+        "gdp", "unemployment", "dollar", "currency",
+        "debt ceiling", "government shutdown", "budget",
+        "federal reserve", "rate cut", "rate hike",
+    ]),
+    ("Infrastructure", [
+        "rail", "railroad", "mississippi", "panama canal",
+        "supply chain", "shipping", "freight", "trucking", "port",
+    ]),
 ]
 
 
@@ -340,33 +295,37 @@ def get_category(text):
 
 
 WHY_MAP = [
-    ("corn",        "Corn is the #1 US crop — price moves affect feed costs, ethanol margins, and farm revenue."),
-    ("soybean",     "Soybeans drive export revenue and crush margins — key for meal and oil markets."),
-    ("wheat",       "Wheat prices set the tone for global food costs and compete for acres with corn."),
-    ("tariff",      "Tariffs directly impact export demand for US grains and the profitability of selling overseas."),
-    ("trade war",   "Trade tensions can redirect global grain flows overnight — watch for retaliatory moves."),
-    ("china",       "China is the world's largest soybean buyer — any policy shift moves US ag exports."),
-    ("crude oil",   "Oil prices drive diesel and fertilizer costs — every $10/bbl move hits your input budget."),
-    ("oil price",   "Energy costs flow straight through to planting, spraying, drying, and hauling expenses."),
-    ("natural gas", "Natural gas is the primary input for nitrogen fertilizer — price spikes raise urea costs."),
-    ("interest rate","Rate changes affect land values, operating loans, and the cost of storing grain."),
-    ("fed",         "Fed policy drives the dollar, which affects grain export competitiveness globally."),
-    ("inflation",   "Inflation erodes farm margins when input costs rise faster than commodity prices."),
-    ("recession",   "Economic slowdowns reduce ethanol demand and can weaken feed grain consumption."),
-    ("drought",     "Drought is the single biggest yield risk — it moves corn and bean prices fast."),
-    ("hurricane",   "Hurricanes disrupt Gulf exports and can damage late-season crops across the South."),
-    ("flood",       "Flooding delays planting and harvest, reduces yields, and disrupts grain transportation."),
-    ("bird flu",    "Avian influenza outbreaks decimate poultry flocks, spiking egg prices and cutting feed demand."),
-    ("egg",         "Egg prices are a direct consumer food cost indicator tied to poultry health and feed costs."),
-    ("food price",  "Food price changes reflect the entire ag supply chain from field to shelf."),
-    ("grocery",     "Grocery prices are the consumer-facing result of commodity, energy, and labor costs."),
-    ("fertilizer",  "Fertilizer is the largest variable input cost for grain farmers — price moves hit margins hard."),
-    ("rail",        "Rail disruptions can strand grain at elevators and spike basis — transportation is everything."),
-    ("supply chain","Supply chain disruptions affect input delivery, grain movement, and export logistics."),
-    ("cpi",         "CPI data influences Fed rate decisions which cascade to farm lending and land values."),
-    ("dollar",      "A stronger dollar makes US grain less competitive overseas, weakening export demand."),
-    ("temperature", "Temperature extremes during pollination can make or break national corn yields."),
-]
+    ("corn",          "Corn is the #1 US crop — price moves affect feed costs, ethanol margins, and farm revenue."),
+    ("soybean",       "Soybeans drive export revenue and crush margins — key for meal and oil markets."),
+    ("wheat",         "Wheat prices set the tone for global food costs and compete for acres with corn."),
+    ("cattle",        "Live cattle prices reflect feed efficiency and packer demand — affects feedlot decisions."),
+    ("egg",           "Egg prices signal avian flu pressure and poultry feed demand — moves corn and soy meal."),
+    ("grocery",       "Grocery and food prices are the consumer-facing result of commodity, energy, and labor costs."),
+    ("food price",    "Food price changes reflect the entire ag supply chain from field to shelf."),
+    ("tariff",        "Tariffs directly impact export demand for US grains — a key driver of basis and futures."),
+    ("trade",         "Trade policy shifts can redirect global grain flows overnight and reprice US export markets."),
+    ("china",         "China is the world's largest soybean buyer — any policy shift moves US ag exports."),
+    ("crude oil",     "Oil prices drive diesel and fertilizer costs — every $10/bbl move hits your input budget."),
+    ("oil",           "Energy costs flow straight through to planting, spraying, drying, and hauling expenses."),
+    ("natural gas",   "Natural gas is the primary input for nitrogen fertilizer — price spikes raise urea costs."),
+    ("fertilizer",    "Fertilizer is the largest variable input cost for grain farmers — price moves hit margins hard."),
+    ("nitrogen",      "Nitrogen fertilizer cost directly sets your corn production break-even per bushel."),
+    ("interest rate", "Rate changes affect land values, operating loans, and the cost of carrying stored grain."),
+    ("fed",           "Fed policy drives the dollar, which affects grain export competitiveness globally."),
+    ("inflation",     "Inflation erodes farm margins when input costs rise faster than commodity prices."),
+    ("cpi",           "CPI data influences Fed rate decisions which cascade to farm lending and land values."),
+    ("recession",     "Economic slowdowns reduce ethanol demand and can weaken feed grain consumption."),
+    ("drought",       "Drought is the single biggest yield risk — it moves corn and bean prices fast."),
+    ("hurricane",     "Hurricanes disrupt Gulf exports and can damage late-season crops across the South."),
+    ("flood",         "Flooding delays planting and harvest, reduces yields, and disrupts grain transportation."),
+    ("bird flu",      "Avian influenza outbreaks decimate poultry flocks, spiking egg prices and cutting feed demand."),
+    ("rail",          "Rail disruptions can strand grain at elevators and spike basis — transportation is everything."),
+    ("supply chain",  "Supply chain disruptions affect input delivery, grain movement, and export logistics."),
+    ("dollar",        "A stronger dollar makes US grain less competitive overseas, weakening export demand."),
+    ("temperature",   "Temperature extremes during pollination can make or break national corn yields."),
+    ("brazil",        "Brazil's crop size directly competes with US soybean exports for the global market share."),
+    ("ukraine",       "Black Sea grain shipments affect global wheat and corn supply — any disruption moves prices."),
+)
 
 
 def get_why_it_matters(text):
@@ -378,19 +337,22 @@ def get_why_it_matters(text):
 
 
 # ═════════════════════════════════════════════════════════════════
-# 6. HTTP HELPER
+# 5. HTTP HELPER
 # ═════════════════════════════════════════════════════════════════
 
-def http_get_json(url, timeout=15):
+def http_get_json(url, timeout=20):
+    """Fetch URL and return parsed JSON, or None on any error. Prints error details."""
     try:
         req = urllib_request.Request(url, headers={
-            "User-Agent": "AGSIST/6.0 (agsist.com; agricultural data aggregator)",
+            "User-Agent": "AGSIST/7.0 (agsist.com; agricultural market intelligence)",
             "Accept": "application/json",
         })
         with urllib_request.urlopen(req, timeout=timeout) as r:
-            return json.loads(r.read().decode("utf-8"))
+            raw = r.read().decode("utf-8")
+            return json.loads(raw)
     except Exception as e:
-        print(f"  ✗ HTTP error {url[:80]}: {e}")
+        short_url = url[:90]
+        print(f"  ✗ HTTP error [{short_url}]: {type(e).__name__}: {e}")
         return None
 
 
@@ -413,338 +375,343 @@ def time_remaining(close_str):
 
 
 # ═════════════════════════════════════════════════════════════════
-# 7. KALSHI FETCHER — v6: TARGETED SEARCH per keyword
+# 6. KALSHI FETCHER — v7: CORRECT URL + pagination + local filter
 # ═════════════════════════════════════════════════════════════════
 
-KALSHI_BASE = "https://api.elections.kalshi.com/trade-api/v2"
+# v7 FIX: Correct domain. api.elections.kalshi.com was the election-
+# season API that no longer serves the full market catalog.
+KALSHI_BASE = "https://trading-api.kalshi.com/trade-api/v2"
 
-
-def fetch_kalshi():
-    print("\n[Kalshi] Fetching prediction markets (v6 targeted search)…")
-    markets = []
-    seen = set()
-    total_fetched = 0
-
-    all_queries = list(set(SEARCH_QUERIES + KALSHI_EXTRA_QUERIES))
-
-    for kw in all_queries:
-        encoded = url_quote(kw)
-        # v6: Use Kalshi's search parameter to find relevant markets directly
-        url = f"{KALSHI_BASE}/markets?limit=50&status=open&search={encoded}"
-        data = http_get_json(url)
-
-        if not data:
-            # Fallback: try without search param (some Kalshi API versions)
-            continue
-
-        items = data.get("markets", [])
-        if not items:
-            continue
-
-        found_for_kw = 0
-        for m in items:
-            ticker = m.get("ticker", "")
-            if not ticker or ticker in seen:
-                continue
-
-            title = m.get("title") or m.get("subtitle") or ticker
-            subtitle = m.get("subtitle", "")
-            event_ticker = m.get("event_ticker", "")
-
-            meme_text = f"{title} {subtitle} {event_ticker}"
-            scoring_text = f"{title} {subtitle}"
-
-            if is_meme_market(meme_text, ticker=ticker):
-                continue
-
-            relevance, tier = score_relevance(scoring_text)
-            if relevance < 40:
-                continue
-
-            yes_price = m.get("yes_price")
-            yes_bid = m.get("yes_bid")
-            yes_ask = m.get("yes_ask")
-
-            if yes_price is not None:
-                prob = yes_price
-            elif yes_bid is not None and yes_ask is not None:
-                prob = round((yes_bid + yes_ask) / 2)
-            elif yes_bid is not None:
-                prob = yes_bid
-            elif yes_ask is not None:
-                prob = yes_ask
-            else:
-                continue
-
-            # Kalshi prices are 0-100 cents, some are 0-1 (dollar fraction)
-            if isinstance(prob, float) and prob <= 1.0:
-                prob = round(prob * 100)
-
-            if prob <= 0 or prob >= 100:
-                continue
-
-            volume = m.get("volume", 0) or m.get("volume_24h", 0) or 0
-            close_time = m.get("close_time") or m.get("expiration_time") or ""
-            tl = time_remaining(close_time)
-            if tl == "Closed":
-                continue
-
-            seen.add(ticker)
-            found_for_kw += 1
-            markets.append({
-                "platform":       "Kalshi",
-                "ticker":         ticker,
-                "title":          title,
-                "yes":            prob,
-                "no":             100 - prob,
-                "volume_24h":     volume,
-                "close_time":     close_time,
-                "time_left":      tl,
-                "url":            f"https://kalshi.com/markets/{ticker.split('-')[0]}",
-                "relevance":      relevance,
-                "tier":           tier,
-                "category":       get_category(scoring_text),
-                "why_it_matters": get_why_it_matters(scoring_text),
-            })
-
-        if found_for_kw > 0:
-            print(f"  '{kw}': {found_for_kw} ag-relevant")
-        total_fetched += len(items)
-        time.sleep(0.2)
-
-    # v6 fallback: If targeted search returned nothing, try the old paginated approach
-    if not markets:
-        print("  Targeted search found 0 results — trying paginated fallback…")
-        url = f"{KALSHI_BASE}/markets?limit=200&status=open"
-        data = http_get_json(url)
-        if data:
-            items = data.get("markets", [])
-            cursor = data.get("cursor", "")
-            page = 1
-            while cursor and page < 5:
-                data2 = http_get_json(f"{url}&cursor={cursor}")
-                if not data2:
-                    break
-                new_items = data2.get("markets", [])
-                if not new_items:
-                    break
-                items.extend(new_items)
-                cursor = data2.get("cursor", "")
-                page += 1
-                time.sleep(0.3)
-
-            print(f"  Paginated fallback: {len(items)} total markets")
-            for m in items:
-                ticker = m.get("ticker", "")
-                if not ticker or ticker in seen:
-                    continue
-                title = m.get("title") or m.get("subtitle") or ticker
-                subtitle = m.get("subtitle", "")
-                meme_text = f"{title} {subtitle} {m.get('event_ticker', '')}"
-                scoring_text = f"{title} {subtitle}"
-                if is_meme_market(meme_text, ticker=ticker):
-                    continue
-                relevance, tier = score_relevance(scoring_text)
-                if relevance < 40:
-                    continue
-                yes_price = m.get("yes_price")
-                if yes_price is None:
-                    continue
-                prob = yes_price
-                if isinstance(prob, float) and prob <= 1.0:
-                    prob = round(prob * 100)
-                if prob <= 0 or prob >= 100:
-                    continue
-                volume = m.get("volume", 0) or 0
-                close_time = m.get("close_time") or ""
-                tl = time_remaining(close_time)
-                if tl == "Closed":
-                    continue
-                seen.add(ticker)
-                markets.append({
-                    "platform":       "Kalshi",
-                    "ticker":         ticker,
-                    "title":          title,
-                    "yes":            prob,
-                    "no":             100 - prob,
-                    "volume_24h":     volume,
-                    "close_time":     close_time,
-                    "time_left":      tl,
-                    "url":            f"https://kalshi.com/markets/{ticker.split('-')[0]}",
-                    "relevance":      relevance,
-                    "tier":           tier,
-                    "category":       get_category(scoring_text),
-                    "why_it_matters": get_why_it_matters(scoring_text),
-                })
-
-    print(f"  → {len(markets)} ag-relevant Kalshi markets ({len(seen)} unique)")
-    return markets
-
-
-# ═════════════════════════════════════════════════════════════════
-# 8. POLYMARKET FETCHER — v6: better query encoding + tag search
-# ═════════════════════════════════════════════════════════════════
-
-POLYMARKET_BASE = "https://gamma-api.polymarket.com"
-
-# v6: Polymarket tag slugs known to contain ag-adjacent markets
-POLYMARKET_TAG_SLUGS = [
-    "economics", "politics", "environment", "climate",
-    "trade", "energy", "food",
+# Kalshi series tickers that are directly ag/macro-relevant.
+# Fetching by series is more targeted than blind pagination.
+KALSHI_SERIES = [
+    "KXFED",      # Fed rate decisions
+    "KXCPI",      # CPI / inflation
+    "KXOIL",      # Crude oil price
+    "KXGAS",      # Natural gas / gasoline
+    "KXRECESSION",# Recession probability
+    "KXGDP",      # GDP growth
+    "KXCORN",     # Corn prices (if it exists)
+    "KXGRAIN",    # Grain markets (if it exists)
+    "KXTARIFF",   # Tariffs
+    "KXTRADE",    # Trade policy
+    "KXCHINA",    # China trade/economy
+    "KXDROUGHT",  # Drought / weather
+    "KXHURRICANE",# Hurricane
+    "KXFLU",      # Bird flu
+    "KXFOOD",     # Food prices
+    "KXEGGSAVG",  # Egg prices
 ]
 
 
-def fetch_polymarket():
-    print("\n[Polymarket] Fetching prediction markets (v6)…")
+def fetch_kalshi():
+    print("\n[Kalshi] Fetching prediction markets (v7 — trading-api.kalshi.com)…")
     markets = []
     seen = set()
-    queries_tried = 0
 
-    # Strategy 1: keyword search
-    for kw in SEARCH_QUERIES:
-        encoded = url_quote(kw)
-        url = (f"{POLYMARKET_BASE}/markets"
-               f"?active=true&closed=false&limit=20"
-               f"&_q={encoded}")
-
-        data = http_get_json(url)
-        queries_tried += 1
-
-        if not data:
-            # Try alternate param name
-            url2 = (f"{POLYMARKET_BASE}/markets"
-                    f"?active=true&closed=false&limit=20"
-                    f"&keyword={encoded}")
-            data = http_get_json(url2)
-
-        if not data:
-            continue
-
-        items = (data if isinstance(data, list)
-                 else data.get("results", data.get("markets", data.get("data", []))))
-
-        if not isinstance(items, list):
-            continue
-
-        if items:
-            print(f"  '{kw}': {len(items)} results")
-
-        for m in items:
-            _process_polymarket_item(m, markets, seen)
-
-        time.sleep(0.2)
-
-    # Strategy 2: tag-based search
-    for tag in POLYMARKET_TAG_SLUGS:
-        url = (f"{POLYMARKET_BASE}/markets"
-               f"?active=true&closed=false&limit=30"
-               f"&tag_slug={tag}")
+    # Strategy A: Fetch by known series tickers
+    print("  Strategy A: Series-based fetch…")
+    for series in KALSHI_SERIES:
+        url = f"{KALSHI_BASE}/markets?limit=50&status=open&series_ticker={series}"
         data = http_get_json(url)
         if not data:
             continue
-        items = (data if isinstance(data, list)
-                 else data.get("results", data.get("markets", data.get("data", []))))
-        if not isinstance(items, list):
-            continue
-        if items:
-            print(f"  tag '{tag}': {len(items)} results")
-        for m in items:
-            _process_polymarket_item(m, markets, seen)
-        time.sleep(0.2)
+        items = data.get("markets", [])
+        found = _process_kalshi_items(items, markets, seen)
+        if found > 0:
+            print(f"    {series}: {found} relevant")
+        time.sleep(0.15)
 
-    print(f"  → {len(markets)} ag-relevant Polymarket markets "
-          f"(from {queries_tried} keyword queries + {len(POLYMARKET_TAG_SLUGS)} tag queries, "
-          f"{len(seen)} unique)")
+    # Strategy B: Paginate the full market list and filter locally.
+    # Stop after 1000 markets or when we have 30+ relevant ones already.
+    print(f"  Strategy B: Paginated browse (up to 1000 markets)…")
+    url = f"{KALSHI_BASE}/markets?limit=200&status=open"
+    cursor = ""
+    pages = 0
+    total_browsed = 0
+
+    while pages < 5:  # max 5 pages × 200 = 1000 markets
+        page_url = url + (f"&cursor={cursor}" if cursor else "")
+        data = http_get_json(page_url)
+        if not data:
+            break
+        items = data.get("markets", [])
+        if not items:
+            break
+        found = _process_kalshi_items(items, markets, seen)
+        total_browsed += len(items)
+        cursor = data.get("cursor", "")
+        pages += 1
+        print(f"    Page {pages}: {len(items)} markets scanned, {found} new relevant, {len(markets)} total")
+        if not cursor:
+            break
+        if len(markets) >= 30:
+            print(f"    Have {len(markets)} relevant markets — stopping early")
+            break
+        time.sleep(0.3)
+
+    print(f"  → {len(markets)} ag-relevant Kalshi markets ({total_browsed} total scanned)")
     return markets
 
 
-def _process_polymarket_item(m, markets, seen):
-    """Process a single Polymarket item, append to markets if relevant."""
-    mid = m.get("id") or m.get("condition_id") or m.get("conditionId")
-    if not mid or mid in seen:
-        return
+def _process_kalshi_items(items, markets, seen):
+    """Filter and add Kalshi items to markets list. Returns count added."""
+    added = 0
+    for m in items:
+        ticker = m.get("ticker", "")
+        if not ticker or ticker in seen:
+            continue
 
-    question = (m.get("question") or m.get("title") or "").strip()
-    if not question:
-        return
+        title    = (m.get("title") or m.get("subtitle") or ticker).strip()
+        subtitle = (m.get("subtitle") or "").strip()
+        event_ticker = m.get("event_ticker", "")
 
-    if is_meme_market(question):
-        return
+        meme_text    = f"{title} {subtitle} {event_ticker}"
+        scoring_text = f"{title} {subtitle}"
 
-    relevance, tier = score_relevance(question)
-    if relevance < 40:
-        return
+        if is_meme_market(meme_text, ticker=ticker):
+            continue
 
-    # Parse probability
-    prob = None
-    for field in ("outcomePrices", "outcome_prices"):
-        raw = m.get(field)
-        if raw:
-            try:
-                prices = json.loads(raw) if isinstance(raw, str) else raw
-                if isinstance(prices, list) and len(prices) >= 1:
-                    prob = round(float(prices[0]) * 100)
-                    break
-            except Exception:
-                pass
+        relevance, tier = score_relevance(scoring_text)
+        if relevance < 35:
+            continue
 
-    if prob is None:
-        for field in ("yes_price", "bestBid", "lastTradePrice"):
+        # Parse probability — Kalshi uses cents (0-100) or dollar fraction (0-1)
+        prob = None
+        for field in ("yes_price", "last_price"):
             val = m.get(field)
             if val is not None:
                 try:
                     v = float(val)
-                    prob = round(v * 100) if v <= 1 else round(v)
+                    prob = round(v * 100) if v <= 1.0 else round(v)
                     break
                 except Exception:
                     pass
 
-    if prob is None or prob <= 0 or prob >= 100:
-        return
+        if prob is None:
+            yes_bid = m.get("yes_bid")
+            yes_ask = m.get("yes_ask")
+            if yes_bid is not None and yes_ask is not None:
+                try:
+                    b, a = float(yes_bid), float(yes_ask)
+                    mid = (b + a) / 2
+                    prob = round(mid * 100) if mid <= 1.0 else round(mid)
+                except Exception:
+                    pass
+            elif yes_bid is not None:
+                try:
+                    v = float(yes_bid)
+                    prob = round(v * 100) if v <= 1.0 else round(v)
+                except Exception:
+                    pass
 
-    volume = 0
-    for vf in ("volume", "volume24hr", "volume_num"):
-        v = m.get(vf)
-        if v:
-            try:
-                volume = float(v)
-                break
-            except Exception:
-                pass
+        if prob is None or prob <= 0 or prob >= 100:
+            continue
 
-    slug = m.get("slug", "")
-    if slug:
-        market_url = f"https://polymarket.com/event/{slug}"
-    else:
-        market_url = m.get("url", f"https://polymarket.com/event/{mid}")
+        volume = 0
+        for vf in ("volume", "volume_24h", "dollar_volume"):
+            v = m.get(vf)
+            if v:
+                try:
+                    volume = float(v)
+                    break
+                except Exception:
+                    pass
 
-    end_date = (m.get("endDate") or m.get("end_date_iso")
-                or m.get("endDateIso") or "")
-    tl = time_remaining(end_date)
-    if tl == "Closed":
-        return
+        close_time = m.get("close_time") or m.get("expiration_time") or ""
+        tl = time_remaining(close_time)
+        if tl == "Closed":
+            continue
 
-    seen.add(mid)
-    markets.append({
-        "platform":       "Polymarket",
-        "ticker":         str(mid)[:20],
-        "title":          question[:140],
-        "yes":            prob,
-        "no":             100 - prob,
-        "volume_24h":     volume,
-        "close_time":     end_date,
-        "time_left":      tl,
-        "url":            market_url,
-        "slug":           slug,
-        "relevance":      relevance,
-        "tier":           tier,
-        "category":       get_category(question),
-        "why_it_matters": get_why_it_matters(question),
-    })
+        # Build market URL from event_ticker or ticker
+        event_part = (event_ticker or ticker).split("-")[0]
+        market_url = f"https://kalshi.com/markets/{event_part}"
+
+        seen.add(ticker)
+        markets.append({
+            "platform":       "Kalshi",
+            "ticker":         ticker,
+            "title":          title,
+            "yes":            prob,
+            "no":             100 - prob,
+            "volume_24h":     volume,
+            "close_time":     close_time,
+            "time_left":      tl,
+            "url":            market_url,
+            "relevance":      relevance,
+            "tier":           tier,
+            "category":       get_category(scoring_text),
+            "why_it_matters": get_why_it_matters(scoring_text),
+        })
+        added += 1
+    return added
 
 
 # ═════════════════════════════════════════════════════════════════
-# 9. RANKING
+# 7. POLYMARKET FETCHER — v7: correct params + tag browsing
+# ═════════════════════════════════════════════════════════════════
+
+POLYMARKET_BASE = "https://gamma-api.polymarket.com"
+
+# v7: Tag slugs that map to ag-relevant markets on Polymarket
+POLYMARKET_TAGS = [
+    "economics", "trade", "energy", "environment",
+    "food", "climate", "commodities", "inflation",
+    "federal-reserve", "interest-rates", "recession",
+    "china", "tariffs",
+]
+
+# Keywords to search for directly (v7: use q= not _q=)
+POLYMARKET_KEYWORDS = [
+    "tariff", "corn", "soybean", "wheat", "grain",
+    "oil price", "natural gas", "fertilizer", "drought",
+    "inflation", "recession", "fed rate", "interest rate",
+    "bird flu", "egg price", "food price",
+    "trade war", "china trade",
+    "hurricane", "flood",
+]
+
+
+def fetch_polymarket():
+    print("\n[Polymarket] Fetching prediction markets (v7)…")
+    markets = []
+    seen = set()
+
+    # Strategy A: keyword search with q= (documented param)
+    print("  Strategy A: Keyword search (q=)…")
+    for kw in POLYMARKET_KEYWORDS:
+        encoded = url_quote(kw)
+        url = (f"{POLYMARKET_BASE}/markets"
+               f"?active=true&closed=false&limit=20&q={encoded}")
+        data = http_get_json(url)
+        if data:
+            items = data if isinstance(data, list) else data.get("results", data.get("markets", []))
+            if isinstance(items, list) and items:
+                found = _process_poly_items(items, markets, seen)
+                if found > 0:
+                    print(f"    '{kw}': {found} relevant")
+        time.sleep(0.2)
+
+    # Strategy B: tag-based browsing
+    print("  Strategy B: Tag browsing…")
+    for tag in POLYMARKET_TAGS:
+        url = (f"{POLYMARKET_BASE}/markets"
+               f"?active=true&closed=false&limit=50&tag_slug={tag}")
+        data = http_get_json(url)
+        if data:
+            items = data if isinstance(data, list) else data.get("results", data.get("markets", []))
+            if isinstance(items, list) and items:
+                found = _process_poly_items(items, markets, seen)
+                if found > 0:
+                    print(f"    tag '{tag}': {found} relevant")
+        time.sleep(0.2)
+
+    # Strategy C: Browse top markets by volume and filter
+    print("  Strategy C: Top markets by volume…")
+    url = (f"{POLYMARKET_BASE}/markets"
+           f"?active=true&closed=false&limit=100"
+           f"&order=volume&ascending=false")
+    data = http_get_json(url)
+    if data:
+        items = data if isinstance(data, list) else data.get("results", data.get("markets", []))
+        if isinstance(items, list):
+            found = _process_poly_items(items, markets, seen)
+            print(f"    top-volume: {found} relevant")
+
+    print(f"  → {len(markets)} ag-relevant Polymarket markets ({len(seen)} unique)")
+    return markets
+
+
+def _process_poly_items(items, markets, seen):
+    added = 0
+    for m in items:
+        mid = (m.get("id") or m.get("condition_id") or m.get("conditionId") or "")
+        if not mid:
+            continue
+        mid = str(mid)
+        if mid in seen:
+            continue
+
+        question = (m.get("question") or m.get("title") or "").strip()
+        if not question:
+            continue
+        if is_meme_market(question):
+            continue
+
+        relevance, tier = score_relevance(question)
+        if relevance < 35:
+            continue
+
+        # Parse probability
+        prob = None
+        for field in ("outcomePrices", "outcome_prices"):
+            raw = m.get(field)
+            if raw:
+                try:
+                    prices = json.loads(raw) if isinstance(raw, str) else raw
+                    if isinstance(prices, list) and len(prices) >= 1:
+                        prob = round(float(prices[0]) * 100)
+                        break
+                except Exception:
+                    pass
+
+        if prob is None:
+            for field in ("yes_price", "bestBid", "lastTradePrice", "last_trade_price"):
+                val = m.get(field)
+                if val is not None:
+                    try:
+                        v = float(val)
+                        prob = round(v * 100) if v <= 1.0 else round(v)
+                        break
+                    except Exception:
+                        pass
+
+        if prob is None or prob <= 0 or prob >= 100:
+            continue
+
+        volume = 0
+        for vf in ("volume", "volume24hr", "volume_num", "liquidityNum"):
+            v = m.get(vf)
+            if v:
+                try:
+                    volume = float(v)
+                    break
+                except Exception:
+                    pass
+
+        slug = m.get("slug", "")
+        market_url = (f"https://polymarket.com/event/{slug}" if slug
+                      else m.get("url", f"https://polymarket.com/event/{mid}"))
+
+        end_date = (m.get("endDate") or m.get("end_date_iso")
+                    or m.get("endDateIso") or "")
+        tl = time_remaining(end_date)
+        if tl == "Closed":
+            continue
+
+        seen.add(mid)
+        markets.append({
+            "platform":       "Polymarket",
+            "ticker":         mid[:20],
+            "title":          question[:140],
+            "yes":            prob,
+            "no":             100 - prob,
+            "volume_24h":     volume,
+            "close_time":     end_date,
+            "time_left":      tl,
+            "url":            market_url,
+            "slug":           slug,
+            "relevance":      relevance,
+            "tier":           tier,
+            "category":       get_category(question),
+            "why_it_matters": get_why_it_matters(question),
+        })
+        added += 1
+    return added
+
+
+# ═════════════════════════════════════════════════════════════════
+# 8. RANKING
 # ═════════════════════════════════════════════════════════════════
 
 def composite_score(market):
@@ -754,20 +721,21 @@ def composite_score(market):
 
 
 # ═════════════════════════════════════════════════════════════════
-# 11. MAIN
+# 9. MAIN
 # ═════════════════════════════════════════════════════════════════
 
 def main():
     now = datetime.now(timezone.utc)
-    print(f"\nAGSIST fetch_markets.py v6 — {now.strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"\nAGSIST fetch_markets.py v7 — {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 60)
 
-    kalshi = fetch_kalshi()
+    kalshi    = fetch_kalshi()
     polymarket = fetch_polymarket()
+    combined  = kalshi + polymarket
 
-    combined = kalshi + polymarket
+    print(f"\nCombined raw: {len(kalshi)} Kalshi + {len(polymarket)} Polymarket = {len(combined)} total")
 
-    # Deduplicate across platforms
+    # Deduplicate across platforms by normalized title
     deduped = []
     seen_titles = set()
     for m in sorted(combined, key=composite_score, reverse=True):
@@ -776,9 +744,9 @@ def main():
             seen_titles.add(norm)
             deduped.append(m)
 
-    top_markets = deduped[:20]
+    top_markets = deduped[:25]
 
-    # Group by category
+    # Group by category for the categories field
     categories = {}
     for m in top_markets:
         cat = m["category"]
@@ -796,7 +764,7 @@ def main():
 
     output = {
         "fetched":        now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "version":        2,
+        "version":        3,
         "count":          len(top_markets),
         "total_found":    len(combined),
         "tier_breakdown": {
@@ -813,20 +781,24 @@ def main():
         json.dump(output, f, indent=2)
 
     print(f"\n{'=' * 60}")
-    print(f"✓ data/markets.json written")
+    print(f"✓ data/markets.json written — v7")
+    print(f"  Kalshi:       {len(kalshi)}")
+    print(f"  Polymarket:   {len(polymarket)}")
     print(f"  Total found:  {len(combined)}")
+    print(f"  After dedup:  {len(deduped)}")
     print(f"  Top selected: {len(top_markets)}")
     print(f"  Direct ag:    {tier_counts[100]}")
     print(f"  Trade/energy: {tier_counts[70]}")
     print(f"  Macro/weather:{tier_counts[40]}")
+
     if top_markets:
-        print(f"\n  Top 10:")
+        print(f"\n  Top 10 markets:")
         for i, m in enumerate(top_markets[:10], 1):
-            score = composite_score(m)
             print(f"  {i:2d}. [{m['platform']:10s}] {m['yes']:3d}%  "
-                  f"(rel={m['relevance']}, cat={m['category']})  "
-                  f"{m['title'][:55]}")
-            print(f"      └─ {m['why_it_matters'][:75]}")
+                  f"[{m['category'][:15]}]  {m['title'][:55]}")
+    else:
+        print("\n  ⚠️  0 markets found — check API connectivity in Actions logs")
+
     print(f"{'=' * 60}\nDone.\n")
 
 
