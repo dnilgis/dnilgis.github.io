@@ -12,24 +12,26 @@
   <link rel="manifest"                            href="/manifest.json">
 
   <!-- SEO -->
-  <title>Agricultural Fast Facts & Calculators — State Ag Data | AGSIST</title>
-  <meta name="description" content="Free ag quick reference: USDA Census data by state, bushel weights, nutrient removal rates, fertilizer calculators, seeding rates, grain storage, nitrogen guidelines, manure values, tank mix cost, land rent calculator, and unit conversions.">
+  <title>Agricultural Fast Facts &amp; Calculators — State Ag Data | AGSIST</title>
+  <meta name="description" content="Free ag quick reference for farmers. Bushel weights, nutrient removal, nitrogen guidelines, seeding rates, bin capacity, fertilizer analysis, and calculators.">
   <meta name="keywords"    content="agriculture statistics, farm facts, USDA Census, crop production data, state farm data, ag calculators, bushel weight, nutrient removal, nitrogen rate, seeding rate, grain bin capacity, tank mix cost, land rent calculator">
   <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"    href="https://agsist.com/fast-facts">
+  <meta name="author" content="Farmers First Agri Service — AGSIST">
 
   <meta property="og:type"         content="website">
   <meta property="og:site_name"    content="AGSIST">
-  <meta property="og:title"        content="Agricultural Fast Facts & Calculators — AGSIST">
-  <meta property="og:description"  content="USDA Census data by state, bushel weights, nutrient removal, fertilizer analysis, seeding rates, grain storage, tank mix cost, land rent, and free farm calculators.">
+  <meta property="og:title"        content="Agricultural Fast Facts &amp; Calculators — AGSIST">
+  <meta property="og:description"  content="Free agricultural quick reference for farmers. State USDA Census data, standard bushel weights, nutrient removal rates, nitrogen guidelines, seeding rates, grain bin capacity, fertilizer analysis, manure values, tank mix cost, and land rent calculator.">
   <meta property="og:url"          content="https://agsist.com/fast-facts">
   <meta property="og:image"        content="https://agsist.com/img/og/fast-facts.jpg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="AGSIST Agricultural Fast Facts — free farm calculators and USDA data reference">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:site"        content="@agsist">
-  <meta name="twitter:title"       content="Agricultural Fast Facts & Calculators — AGSIST">
-  <meta name="twitter:description" content="USDA Census data by state, bushel weights, nutrient removal, tank mix cost, land rent, and free farm calculators.">
+  <meta name="twitter:title"       content="Agricultural Fast Facts &amp; Calculators — AGSIST">
+  <meta name="twitter:description" content="Free ag quick reference for farmers. State USDA Census data, bushel weights, nutrient removal, tank mix cost, land rent, and free farm calculators.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/fast-facts.jpg">
 
   <script type="application/ld+json">
@@ -87,9 +89,6 @@
   </script>
 
   <style>
-    /* ══════════════════════════════════════════════════════════
-       FAST FACTS — STYLES
-    ══════════════════════════════════════════════════════════ */
     :root {
       --ff-radius: 10px;
       --ff-radius-sm: 6px;
@@ -97,7 +96,6 @@
       --ff-gap: 12px;
     }
 
-    /* ── SKIP LINK ────────────────────────────────────────── */
     .skip-link {
       position: absolute; top: -100%; left: 16px;
       background: var(--gold); color: #000; padding: 8px 16px;
@@ -108,12 +106,10 @@
 
     main { max-width: 1400px; margin: 0 auto; padding: 16px; }
 
-    /* ── BREADCRUMB ───────────────────────────────────────── */
     .breadcrumb { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 12px; }
     .breadcrumb a { color: var(--text-dim); text-decoration: none; }
     .breadcrumb a:hover { color: var(--gold); }
 
-    /* ── STATE HERO ───────────────────────────────────────── */
     .state-hero {
       background: var(--surface);
       border: 1px solid var(--border); border-radius: var(--ff-radius);
@@ -150,7 +146,6 @@
     .detect-btn:hover { opacity: 0.85; }
     .detect-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
-    /* ── STATE STAT CARDS ─────────────────────────────────── */
     .state-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -177,7 +172,6 @@
     }
     .state-stat-link:hover { opacity: 1; text-decoration: underline; }
 
-    /* ── SOURCE NOTE ──────────────────────────────────────── */
     .source-note {
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--ff-radius-sm);
       padding: 10px 14px; margin-bottom: var(--ff-gap); font-size: 0.72rem;
@@ -186,7 +180,6 @@
     .source-note a { color: var(--gold); text-decoration: none; }
     .source-note a:hover { text-decoration: underline; }
 
-    /* ── TABLE OF CONTENTS ────────────────────────────────── */
     .toc {
       display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: var(--ff-gap);
       position: sticky; top: 56px; background: var(--bg);
@@ -203,7 +196,6 @@
     }
     .toc a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
-    /* ── PANEL ────────────────────────────────────────────── */
     .panel {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--ff-radius); margin-bottom: var(--ff-gap);
@@ -224,7 +216,6 @@
     }
     .panel-body { padding: 18px; }
 
-    /* ── DATA GRID (bushel weights etc) ──────────────────── */
     .data-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -240,7 +231,6 @@
     .data-item .crop { color: var(--text-dim); font-size: 0.8rem; }
     .data-item .value { font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
 
-    /* ── CALC GRID ────────────────────────────────────────── */
     .calc-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -283,14 +273,12 @@
     }
     .calc-result .label { font-size: 0.68rem; color: var(--text-dim); margin-top: 3px; }
 
-    /* ── Tank-mix 2-col input grid ────────────────────────── */
     .tm-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 6px; align-items: end;
     }
     .tm-grid .calc-field { margin: 0; }
 
-    /* ── DATA TABLE ───────────────────────────────────────── */
     .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .data-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
     .data-table th {
@@ -307,7 +295,6 @@
     .data-table tbody tr:hover td { background: rgba(230,176,66,0.03); }
     .data-table .hl { color: var(--gold); font-weight: 600; }
 
-    /* ── REFERENCE GRID (storage, fertilizer, conversions) ── */
     .ref-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -329,7 +316,6 @@
     .ref-box .row span:first-child { color: var(--text-dim); }
     .ref-box .row span:last-child { color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
 
-    /* ── INFO BOX ─────────────────────────────────────────── */
     .info-box {
       background: var(--bg); border-left: 3px solid var(--gold);
       padding: 12px 16px; border-radius: 0 var(--ff-radius-sm) var(--ff-radius-sm) 0;
@@ -341,7 +327,6 @@
     .info-box a:hover { text-decoration: underline; }
     .info-box strong { color: var(--text); }
 
-    /* ── N RATE BOXES ─────────────────────────────────────── */
     .n-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
     .n-box {
       background: var(--bg); padding: 14px; border-radius: var(--ff-radius-sm);
@@ -352,7 +337,6 @@
     .n-box .n-unit  { font-size: 0.68rem; color: var(--text-dim); margin-top: 2px; }
     .n-box.credit .n-value { color: var(--green, #4ade80); }
 
-    /* ── TOOLS GRID ───────────────────────────────────────── */
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
@@ -371,7 +355,6 @@
     .tool-link .name { font-weight: 600; color: var(--text); font-size: 0.82rem; }
     .tool-link .desc { font-size: 0.68rem; color: var(--text-dim); margin-top: 3px; }
 
-    /* ── CTA BOX ──────────────────────────────────────────── */
     .cta-box {
       background: var(--surface); border: 1px solid var(--gold);
       border-radius: var(--ff-radius); padding: 28px; text-align: center;
@@ -391,7 +374,6 @@
     }
     .cta-btn:hover { opacity: 0.85; }
 
-    /* ── BACK TO TOP ──────────────────────────────────────── */
     .back-top {
       position: fixed; bottom: 24px; right: 24px; z-index: 200;
       background: var(--gold); color: #000; border: none;
@@ -405,7 +387,6 @@
     .back-top.visible { opacity: 1; pointer-events: auto; }
     .back-top:hover { transform: scale(1.1); }
 
-    /* ── SECTION LINK ─────────────────────────────────────── */
     .section-link {
       display: inline-block; font-size: 0.82rem; color: var(--gold);
       text-decoration: none; margin-top: 12px;
@@ -413,12 +394,10 @@
     }
     .section-link:hover { opacity: 0.8; text-decoration: underline; }
 
-    /* ── NO SPINNERS ──────────────────────────────────────── */
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type="number"] { -moz-appearance: textfield; }
 
-    /* ── RESPONSIVE ───────────────────────────────────────── */
     @media (max-width: 768px) {
       main { padding: 10px; }
       .state-hero { flex-direction: column; text-align: center; padding: 16px; }
@@ -575,7 +554,6 @@
       <div class="panel-body">
         <div class="calc-grid">
 
-          <!-- Nutrient Removal Calc -->
           <div class="calc-card">
             <h3>Nutrient Removal</h3>
             <div class="calc-field">
@@ -602,7 +580,6 @@
             </div>
           </div>
 
-          <!-- Fertilizer Cost/Acre -->
           <div class="calc-card">
             <h3>Fertilizer Cost per Acre</h3>
             <div class="calc-field">
@@ -625,7 +602,6 @@
             </div>
           </div>
 
-          <!-- Seeding Rate -->
           <div class="calc-card">
             <h3>Seeding Rate (row crop)</h3>
             <div class="calc-field">
@@ -651,7 +627,6 @@
             </div>
           </div>
 
-          <!-- Bushel ↔ Weight -->
           <div class="calc-card">
             <h3>Bushel → Weight</h3>
             <div class="calc-field">
@@ -679,7 +654,6 @@
             </div>
           </div>
 
-          <!-- Bin Capacity -->
           <div class="calc-card">
             <h3>Grain Bin Capacity</h3>
             <div class="calc-field">
@@ -710,7 +684,6 @@
             </div>
           </div>
 
-          <!-- Break-Even Price -->
           <div class="calc-card">
             <h3>Break-Even Price</h3>
             <div class="calc-field">
@@ -733,7 +706,6 @@
             </div>
           </div>
 
-          <!-- ═══ NEW: Tank Mix Cost ═══════════════════════── -->
           <div class="calc-card">
             <h3>Tank Mix Cost</h3>
             <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:10px">
@@ -789,7 +761,6 @@
             </div>
           </div>
 
-          <!-- ═══ NEW: Max Affordable Rent ═════════════════── -->
           <div class="calc-card">
             <h3>Max Affordable Rent</h3>
             <div class="calc-field">
@@ -1143,14 +1114,9 @@
   <script src="/components/loader.js"></script>
 
   <script>
-  /* ════════════════════════════════════════════════════════════
-     FAST FACTS — APPLICATION LOGIC
-     Self-contained IIFE to avoid global namespace pollution
-  ════════════════════════════════════════════════════════════ */
   (function() {
     'use strict';
 
-    /* ── STATE DATA — USDA Census of Agriculture 2022 ──────── */
     var STATE_DATA = {
       AL: { name:'Alabama',        flag:'🌿', stats:[
         {label:'Farms',    value:'40,600',  url:'FARM OPERATIONS',url_stat:'OPERATIONS'},
@@ -1328,10 +1294,8 @@
         n:{cornSoy:'140–160',cornCorn:'180–200',soyCred:'40–50',alfCred:'100–150'}}
     };
 
-    /* ── DOM REFS ──────────────────────────────────────────── */
     var $ = function(id) { return document.getElementById(id); };
 
-    /* ── STATE UI ──────────────────────────────────────────── */
     function buildUSDAUrl(commodity, stat, state) {
       return 'https://quickstats.nass.usda.gov/results/?commodity_desc=' +
         encodeURIComponent(commodity) + '&statisticcat_desc=' +
@@ -1360,7 +1324,6 @@
       $('nAlfCredit').textContent = s.n.alfCred;
     }
 
-    /* ── CALCULATORS ───────────────────────────────────────── */
     var REMOVAL = {
       corn:     { n:0.67, p:0.37, k:0.27 },
       soybeans: { n:3.30, p:0.80, k:1.40 },
@@ -1417,14 +1380,12 @@
       $('beqResult').textContent = '$' + (cost / yld).toFixed(2);
     }
 
-    /* ── NEW: Tank Mix Cost ────────────────────────────────── */
     function calcTankMix() {
       var total = 0;
       var parts = [];
       for (var i = 1; i <= 3; i++) {
         var rate  = clamp(num('tmRate' + i, 0), 0, 999);
         var price = clamp(num('tmPrice' + i, 0), 0, 9999);
-        // fl oz/ac ÷ 128 fl oz/gal × $/gal = $/ac
         var cost  = (rate / 128) * price;
         total += cost;
         parts.push('P' + i + ' $' + cost.toFixed(2));
@@ -1433,7 +1394,6 @@
       $('tmBreakdown').textContent = parts.join(' + ');
     }
 
-    /* ── NEW: Max Affordable Rent ──────────────────────────── */
     function calcRentMax() {
       var yld   = clamp(num('rentYield', 0), 0, 999);
       var price = clamp(num('rentPrice', 0), 0, 99);
@@ -1445,13 +1405,11 @@
       $('rentBreakdown').textContent = 'Revenue $' + rev.toFixed(0) + ' − Costs $' + costs.toFixed(0);
     }
 
-    /* ── EVENT BINDING ─────────────────────────────────────── */
     function bind(id, event, fn) {
       var el = $(id);
       if (el) el.addEventListener(event, fn);
     }
 
-    // Calculator bindings
     bind('removalCrop',  'change', calcRemoval);
     bind('removalYield', 'input',  calcRemoval);
     bind('fertPrice',    'input',  calcFertCost);
@@ -1465,21 +1423,16 @@
     bind('binCrop',      'change', calcBin);
     bind('beqCost',      'input',  calcBEQ);
     bind('beqYield',     'input',  calcBEQ);
-
-    // Tank Mix bindings
     bind('tmRate1',  'input', calcTankMix);
     bind('tmPrice1', 'input', calcTankMix);
     bind('tmRate2',  'input', calcTankMix);
     bind('tmPrice2', 'input', calcTankMix);
     bind('tmRate3',  'input', calcTankMix);
     bind('tmPrice3', 'input', calcTankMix);
-
-    // Rent Max bindings
     bind('rentYield', 'input', calcRentMax);
     bind('rentPrice', 'input', calcRentMax);
     bind('rentCosts', 'input', calcRentMax);
 
-    // State selector
     bind('stateSelect', 'change', function() {
       var abbr = $('stateSelect').value;
       if (typeof AGSIST_GEO !== 'undefined' && AGSIST_GEO.setState) {
@@ -1488,13 +1441,11 @@
       changeState(abbr);
     });
 
-    // Detect location
     $('detectBtn').addEventListener('click', function() {
       var btn = $('detectBtn');
       btn.textContent = '⏳'; btn.disabled = true;
 
       if (typeof AGSIST_GEO === 'undefined' || !AGSIST_GEO.detectLocation) {
-        // Fallback: use browser geolocation + reverse geocode
         btn.textContent = '📍 Detect'; btn.disabled = false;
         alert('Location detection unavailable. Please select your state manually.');
         return;
@@ -1514,13 +1465,11 @@
       );
     });
 
-    // Cross-component state sync
     window.addEventListener('agsist-state-change', function(e) {
       $('stateSelect').value = e.detail;
       changeState(e.detail);
     });
 
-    /* ── POPULATE STATE DROPDOWN ───────────────────────────── */
     var sel = $('stateSelect');
     sel.innerHTML = Object.keys(STATE_DATA)
       .sort(function(a, b) { return STATE_DATA[a].name.localeCompare(STATE_DATA[b].name); })
@@ -1528,21 +1477,17 @@
         return '<option value="' + abbr + '">' + STATE_DATA[abbr].name + '</option>';
       }).join('');
 
-    /* ── INIT STATE ────────────────────────────────────────── */
     var initState = 'WI';
     if (typeof AGSIST_GEO !== 'undefined' && AGSIST_GEO.getState) {
       initState = AGSIST_GEO.getState() || 'WI';
     }
-    // Verify the state exists in our data
     if (!STATE_DATA[initState]) initState = 'WI';
     sel.value = initState;
     changeState(initState);
 
-    /* ── INIT CALCULATORS ──────────────────────────────────── */
     calcRemoval(); calcFertCost(); calcSeeds(); calcBushels(); calcBin(); calcBEQ();
     calcTankMix(); calcRentMax();
 
-    /* ── TOC SMOOTH SCROLL + ACTIVE TRACKING ───────────────── */
     var tocLinks = document.querySelectorAll('.toc a');
     var sections = [];
 
@@ -1557,7 +1502,6 @@
       });
     });
 
-    // Scroll spy for TOC active state
     var scrollTimeout;
     function updateActiveToc() {
       var scrollPos = window.scrollY + 140;
@@ -1576,7 +1520,6 @@
       scrollTimeout = requestAnimationFrame(updateActiveToc);
     }, { passive: true });
 
-    /* ── BACK TO TOP ───────────────────────────────────────── */
     var backBtn = $('backTop');
     window.addEventListener('scroll', function() {
       backBtn.classList.toggle('visible', window.scrollY > 600);

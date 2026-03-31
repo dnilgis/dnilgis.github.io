@@ -17,9 +17,9 @@
 <link rel="manifest"                            href="/manifest.json">
 <meta name="theme-color" content="#111a0a">
 
-<title>Corn, Soybean &amp; Wheat Prices Today — Free Farm Dashboard | AGSIST</title>
-<meta name="description" content="Live corn, soybean, and wheat futures prices updated every 30 minutes. Free farm dashboard with local weather, spray advisory, urea volatilization risk, cash grain bids near you, USDA reports, and daily ag market briefing. Built for working farmers.">
-<meta name="keywords" content="corn futures prices today, soybean futures prices today, wheat futures price today, grain prices today, farm weather, spray advisory, urea volatilization risk, cash grain bids near me, USDA reports, agricultural market dashboard, farm break even calculator, grain elevator prices, CBOT corn, crop insurance">
+<title>Corn, Soybean &amp; Wheat Prices Today — Farm Dashboard | AGSIST</title>
+<meta name="description" content="Live corn, soybean, and wheat futures updated every 30 min. Farm dashboard with spray advisory, urea risk, cash grain bids, USDA reports, and daily briefing.">
+<meta name="keywords" content="corn futures prices today, soybean futures prices today, wheat futures price today, grain prices today, farm weather, spray advisory, urea volatilization risk, cash grain bids near me, USDA reports, agricultural market dashboard, farm break even calculator, grain elevator prices, CBOT corn, crop insurance, alcivia cash bids, local grain elevator, wisconsin grain prices, minnesota grain prices">
 <meta name="author"  content="Farmers First Agri Service — AGSIST">
 <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://agsist.com/">
@@ -105,7 +105,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "What are corn futures prices today?", "acceptedAnswer": { "@type": "Answer", "text": "AGSIST displays live CBOT corn futures prices updated every 30 minutes via Yahoo Finance. Both the nearby front-month contract and the December new-crop harvest contract are shown with net change, percent change, and 52-week range. Prices are in dollars per bushel." } },
-        { "@type": "Question", "name": "How do I find cash grain bids near me?", "acceptedAnswer": { "@type": "Answer", "text": "Enter any US ZIP code on AGSIST's Cash Bids page at agsist.com/cash-bids to see live corn, soybean, and wheat elevator prices from every reporting grain elevator within 50 miles. Basis is shown alongside cash price for each location." } },
+        { "@type": "Question", "name": "How do I find cash grain bids near me?", "acceptedAnswer": { "@type": "Answer", "text": "Enter any US ZIP code on AGSIST's Cash Bids page at agsist.com/cash-bids to see live corn, soybean, and wheat elevator prices from every reporting grain elevator within 50 miles. Coverage includes Alcivia, Big Gain, Kasbeer, Cooper Grain, Meyer Brothers, and hundreds more. Basis is shown alongside cash price for each location." } },
         { "@type": "Question", "name": "Is AGSIST free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AGSIST is completely free — no account, no subscription, no ads. All tools including spray advisory, urea volatilization risk monitor, break-even calculator, grain bin calculator, cash bids, and the AGSIST Daily briefing are free for all farmers." } },
         { "@type": "Question", "name": "How often are grain prices updated on AGSIST?", "acceptedAnswer": { "@type": "Answer", "text": "Grain futures prices on AGSIST are updated every 30 minutes during trading hours Monday through Friday via GitHub Actions. The AGSIST Daily briefing is published by 6 AM CT every weekday with overnight market analysis." } },
         { "@type": "Question", "name": "What is urea volatilization risk?", "acceptedAnswer": { "@type": "Answer", "text": "Urea volatilization is the loss of nitrogen fertilizer as ammonia gas when urea is surface-applied without incorporation. Risk is highest when soil temperatures exceed 50°F, humidity is high, and no rain is forecast within 2–4 days. AGSIST's free urea risk monitor scores your real-time local conditions from 0–100." } }
@@ -130,10 +130,6 @@
   .daily-pre-dismissed .daily-teaser{display:flex!important}
   .daily-pre-dismissed .daily-dismiss-row{display:none!important}
 
-  /* ── Sparklines ─────────────────────────────────────────────────
-     Container for inline SVG trend lines on price cards.
-     Fades in once data loads — silently absent until history exists.
-  ─────────────────────────────────────────────────────────────────*/
   .pc-spark{
     margin:.3rem 0 .15rem;
     opacity:0;
@@ -143,12 +139,8 @@
     overflow:hidden;
   }
   .pc-spark.loaded{opacity:1}
-  /* Hide sparklines on very small screens to save space */
   @media(max-width:380px){.pc-spark{display:none}}
 
-  /* ── Market Summary Bar ──────────────────────────────────────
-     Compact scannable overview above the price card grid.
-  ─────────────────────────────────────────────────────────────*/
   .mkt-summary{
     display:flex;align-items:center;
     background:var(--surface);border:1px solid var(--border);border-radius:8px;
@@ -169,10 +161,6 @@
   .msi-chg.up{color:var(--green)} .msi-chg.dn{color:#ef4444} .msi-chg.nc{color:var(--text-muted)}
   @media(max-width:480px){.msi-name{display:none}}
 
-  /* ── Corn/Bean Ratio Widget ──────────────────────────────────
-     Decision support tool using Dec corn + Nov beans.
-     Sits between the 4 key contract cards and the rest.
-  ─────────────────────────────────────────────────────────────*/
   .ratio-widget{
     background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.025) 100%);
     border:1px solid var(--border);border-radius:12px;
@@ -195,7 +183,6 @@
   .ratio-one{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:600;color:var(--text-muted)}
   .ratio-label{font-size:.6rem;color:var(--text-muted);font-weight:600;margin-top:.15rem;letter-spacing:.03em}
   .ratio-right{flex:1;min-width:180px;}
-  /* Gauge */
   .ratio-gauge-track{
     position:relative;height:9px;border-radius:5px;margin-bottom:.35rem;
     background:linear-gradient(90deg,
@@ -238,6 +225,46 @@
   }
   .ratio-link:hover{border-color:var(--gold);color:var(--gold)}
   @media(max-width:480px){.ratio-big{font-size:2rem;}.ratio-right{min-width:140px;}}
+
+  /* ── NOAA Seasonal Outlooks ──────────────────────────────── */
+  .noaa-tabs{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
+  .noaa-tab{
+    padding:.38rem .9rem;border-radius:4px;
+    border:1px solid var(--border);background:var(--surface);
+    color:var(--text-dim);font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;font-weight:700;cursor:pointer;
+    text-transform:uppercase;letter-spacing:.04em;
+    transition:all .15s;
+  }
+  .noaa-tab:hover{border-color:var(--gold);color:var(--text)}
+  .noaa-tab.active{background:var(--gold);color:#0a1a0a;border-color:var(--gold)}
+  .noaa-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  @media(max-width:540px){.noaa-grid{grid-template-columns:1fr}}
+  .noaa-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .noaa-card-head{
+    display:flex;align-items:center;gap:.4rem;
+    padding:.5rem .8rem;border-bottom:1px solid var(--border);
+    font-family:'JetBrains Mono',monospace;font-size:.62rem;
+    font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .noaa-card-head.temp{color:#f4834a}
+  .noaa-card-head.precip{color:#5bb8f5}
+  .noaa-card img{display:block;width:100%;height:auto;background:var(--surface2);min-height:100px}
+  .noaa-legend{
+    display:flex;align-items:center;flex-wrap:wrap;
+    gap:.3rem 1rem;margin-top:.55rem;
+    font-size:.68rem;color:var(--text-dim);
+  }
+  .noaa-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0;vertical-align:middle;margin-right:3px}
+  .noaa-note{margin-top:.5rem;font-size:.65rem;color:var(--text-muted);line-height:1.55}
+  .noaa-note a{color:var(--gold);text-decoration:none}
+  .noaa-note a:hover{text-decoration:underline}
+  .noaa-img-err{
+    display:none;align-items:center;justify-content:center;
+    min-height:100px;font-size:.78rem;color:var(--text-muted);
+    text-align:center;padding:.75rem;flex-direction:column;gap:.4rem;
+  }
+  .noaa-img-err a{color:var(--gold);font-size:.72rem}
 
   @media(prefers-reduced-motion:reduce){
     .ticker-track{animation:none!important}
@@ -309,7 +336,7 @@
   </div>
 </div>
 
-<!-- ══ DAILY HERO STYLES ═════════════════════════════════════════ -->
+<!-- ══ AGSIST DAILY HERO STYLES ══════════════════════════════════ -->
 <style>
 .dh{--dh-pad:1rem;max-width:1400px;margin:0 auto}
 .dh *{box-sizing:border-box}
@@ -543,18 +570,13 @@
     </div>
   </div>
 
-  <!-- ══ PRICE CARDS ═══════════════════════════════════════════════
-       Range bars: hardcoded labels/dots are first-paint fallbacks.
-       geo.js update52WeekRange() overwrites from prices.json wk52 fields.
-       .pc-spark divs fade in once sparklines.js loads prices-history.json.
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ══ PRICE CARDS ═══════════════════════════════════════════════ -->
   <div class="price-cards-section fade-up" id="f-prices">
     <div class="sec-head">
       <div class="sec-title">📈 Market Prices</div>
       <a href="/corn-futures-prices" class="sec-all">All Charts →</a>
     </div>
 
-    <!-- ── Market Summary Bar ────────────────────────────────── -->
     <div class="mkt-summary" id="mkt-summary" aria-label="Market overview">
       <div class="mkt-sum-item"><span class="msi-icon">🌽</span><span class="msi-name">Corn</span><span class="msi-price" id="ms-corn-p">--</span><span class="msi-chg nc" id="ms-corn-c">--</span></div>
       <div class="mkt-sum-item"><span class="msi-icon">🫘</span><span class="msi-name">Beans</span><span class="msi-price" id="ms-beans-p">--</span><span class="msi-chg nc" id="ms-beans-c">--</span></div>
@@ -567,7 +589,6 @@
 
     <div class="pc-section-lbl">🌽 Grains — Key Contracts</div>
     <div class="price-cards-grid">
-
       <div class="pc pc--highlight" data-spark="corn">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌽</span>Corn</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-corn-near">--</div>
@@ -576,7 +597,6 @@
         <div class="pc-spark" data-spark="corn"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$3.90</span><span>52-Wk Range</span><span>$5.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:45%"></div><div class="pc-range-dot" style="left:45%"></div></div></div>
       </div>
-
       <div class="pc pc--highlight" data-spark="corn-dec">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌽</span>Corn Harvest</span><span class="pc-contract">Dec '26</span></div>
         <div class="pc-price" id="pcp-corn-dec">--</div>
@@ -585,7 +605,6 @@
         <div class="pc-spark" data-spark="corn-dec"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$3.85</span><span>52-Wk Range</span><span>$5.25</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:74%"></div><div class="pc-range-dot" style="left:74%"></div></div></div>
       </div>
-
       <div class="pc pc--highlight" data-spark="beans">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🫘</span>Soybeans</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-bean-near">--</div>
@@ -594,7 +613,6 @@
         <div class="pc-spark" data-spark="beans"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.75</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:65%"></div><div class="pc-range-dot" style="left:65%"></div></div></div>
       </div>
-
       <div class="pc pc--highlight" data-spark="beans-nov">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🫘</span>Beans Harvest</span><span class="pc-contract">Nov '26</span></div>
         <div class="pc-price" id="pcp-bean-nov">--</div>
@@ -603,13 +621,9 @@
         <div class="pc-spark" data-spark="beans-nov"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.00</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:79%"></div><div class="pc-range-dot" style="left:79%"></div></div></div>
       </div>
-
     </div>
 
-    <!-- ── Corn/Bean Ratio Widget ──────────────────────────────
-         Dec corn + Nov beans → planting decision support.
-         Populated by renderRatioWidget() below.
-    ──────────────────────────────────────────────────────────-->
+    <!-- ── Corn/Bean Ratio Widget ── -->
     <div class="ratio-widget" id="ratio-widget">
       <div class="ratio-widget-head">
         <span class="ratio-widget-title">🌽🫘 Corn/Bean Ratio — New-Crop Planting Guide</span>
@@ -653,7 +667,6 @@
 
     <div class="pc-section-lbl">🌾 More Grains, Feed &amp; Livestock</div>
     <div class="price-cards-grid-2">
-
       <div class="pc pc-sm" data-spark="wheat">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌾</span>Wheat</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-wheat">--</div>
@@ -662,7 +675,6 @@
         <div class="pc-spark" data-spark="wheat"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$4.88</span><span></span><span>$7.20</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:42%"></div><div class="pc-range-dot" style="left:42%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="oats">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌾</span>Oats</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-oats">--</div>
@@ -671,7 +683,6 @@
         <div class="pc-spark" data-spark="oats"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$2.80</span><span></span><span>$4.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:32%"></div><div class="pc-range-dot" style="left:32%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="meal">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🫘</span>Soy Meal</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-meal">--</div>
@@ -680,10 +691,8 @@
         <div class="pc-spark" data-spark="meal"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$375</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:44%"></div><div class="pc-range-dot" style="left:44%"></div></div></div>
       </div>
-
     </div>
     <div class="price-cards-grid-2" style="margin-bottom:.5rem">
-
       <div class="pc pc-sm" data-spark="cattle">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🐄</span>Live Cattle</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-cattle">--</div>
@@ -692,7 +701,6 @@
         <div class="pc-spark" data-spark="cattle"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$215</span><span></span><span>$265</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:29%"></div><div class="pc-range-dot" style="left:29%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="feeders">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🐄</span>Feeder Cattle</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-feeders">--</div>
@@ -701,7 +709,6 @@
         <div class="pc-spark" data-spark="feeders"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$385</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:52%"></div><div class="pc-range-dot" style="left:52%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="hogs">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🐖</span>Lean Hogs</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-hogs">--</div>
@@ -710,7 +717,6 @@
         <div class="pc-spark" data-spark="hogs"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$70</span><span></span><span>$110</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:38%"></div><div class="pc-range-dot" style="left:38%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="milk">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🥛</span>Class III Milk</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-milk">--</div>
@@ -719,12 +725,10 @@
         <div class="pc-spark" data-spark="milk"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$14</span><span></span><span>$21</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div>
       </div>
-
     </div>
 
     <div class="pc-section-lbl">⚡ Energy &amp; Outside Markets</div>
     <div class="price-cards-grid-2">
-
       <div class="pc pc-sm" data-spark="crude">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🛢️</span>Crude Oil WTI</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-crude">--</div>
@@ -733,7 +737,6 @@
         <div class="pc-spark" data-spark="crude"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$62</span><span></span><span>$106</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:68%"></div><div class="pc-range-dot" style="left:68%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="natgas">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🔥</span>Natural Gas</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-natgas">--</div>
@@ -742,7 +745,6 @@
         <div class="pc-spark" data-spark="natgas"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$1.56</span><span></span><span>$4.88</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:40%"></div><div class="pc-range-dot" style="left:40%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="dollar">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">💵</span>Dollar Index</span><span class="pc-contract">Spot</span></div>
         <div class="pc-price" id="pcp-dollar">--</div>
@@ -751,7 +753,6 @@
         <div class="pc-spark" data-spark="dollar"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$95.55</span><span></span><span>$107.66</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="sp500">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">📈</span>S&amp;P 500</span><span class="pc-contract">Spot</span></div>
         <div class="pc-price" id="pcp-sp500">--</div>
@@ -760,7 +761,6 @@
         <div class="pc-spark" data-spark="sp500"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>4,900</span><span></span><span>6,700</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:92%"></div><div class="pc-range-dot" style="left:92%"></div></div></div>
       </div>
-
     </div>
   </div>
 
@@ -810,6 +810,64 @@
     </div>
   </div>
 
+  <!-- ══ NOAA SEASONAL OUTLOOKS ════════════════════════════════════ -->
+  <div class="fade-up" id="f-noaa">
+    <div class="sec-head">
+      <div class="sec-title">🌡️ NOAA Seasonal Outlooks</div>
+      <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/" target="_blank" rel="noopener" class="sec-all">CPC Full Outlooks →</a>
+    </div>
+
+    <div class="noaa-tabs" id="noaa-tabs">
+      <button class="noaa-tab active" data-period="30" data-label="1-Month (30-Day)">1-Month</button>
+      <button class="noaa-tab" data-period="90" data-label="3-Month (90-Day)">3-Month</button>
+    </div>
+
+    <div class="noaa-grid">
+      <div class="noaa-card">
+        <div class="noaa-card-head temp">🌡️ Temperature Outlook</div>
+        <img id="noaa-temp-img"
+          src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif"
+          alt="NOAA 1-month temperature outlook — above/below normal probabilities for the US"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="noaa-img-err">
+          <span>🌡️ Image unavailable</span>
+          <a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC →</a>
+        </div>
+      </div>
+      <div class="noaa-card">
+        <div class="noaa-card-head precip">🌧️ Precipitation Outlook</div>
+        <img id="noaa-precip-img"
+          src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif"
+          alt="NOAA 1-month precipitation outlook — above/below normal probabilities for the US"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="noaa-img-err">
+          <span>🌧️ Image unavailable</span>
+          <a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="noaa-legend">
+      <span>Temp:
+        <span class="noaa-swatch" style="background:#c1440e"></span>Above normal &nbsp;
+        <span class="noaa-swatch" style="background:#888;opacity:.5"></span>Equal chances &nbsp;
+        <span class="noaa-swatch" style="background:#1a7abf"></span>Below normal
+      </span>
+      <span style="margin-left:.5rem">Precip:
+        <span class="noaa-swatch" style="background:#2d8c4e"></span>Above normal &nbsp;
+        <span class="noaa-swatch" style="background:#888;opacity:.5"></span>Equal chances &nbsp;
+        <span class="noaa-swatch" style="background:#b07d2a"></span>Below normal
+      </span>
+    </div>
+    <div class="noaa-note">
+      Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA Climate Prediction Center</a> ·
+      1-Month issued last day of month · 3-Month issued 3rd Thursday ·
+      Darker shading = higher confidence · Currently showing: <span id="noaa-period-label">1-Month (30-Day)</span>
+    </div>
+  </div>
+
   <!-- ══ USDA CALENDAR ══════════════════════════════════════════════ -->
   <div class="fade-up" id="f5">
     <div class="sec-head">
@@ -823,7 +881,6 @@
   <div class="fade-up" id="f-crypto">
     <div class="pc-section-lbl">🥇 Metals &amp; Digital Assets</div>
     <div class="price-cards-grid-2" style="margin-bottom:1rem">
-
       <div class="pc pc-sm" data-spark="gold">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🥇</span>Gold</span><span class="pc-contract">Spot</span></div>
         <div class="pc-price" id="pcp-gold">--</div>
@@ -832,7 +889,6 @@
         <div class="pc-spark" data-spark="gold"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$2,800</span><span></span><span>$5,400</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:61%"></div><div class="pc-range-dot" style="left:61%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="silver">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🥈</span>Silver</span><span class="pc-contract">Spot</span></div>
         <div class="pc-price" id="pcp-silver">--</div>
@@ -841,7 +897,6 @@
         <div class="pc-spark" data-spark="silver"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$55</span><span></span><span>$100</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="bitcoin">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">₿</span>Bitcoin</span><span class="pc-contract">USD</span></div>
         <div class="pc-price" id="pc-btc">--</div>
@@ -850,7 +905,6 @@
         <div class="pc-spark" data-spark="bitcoin"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$49,000</span><span></span><span>$106,000</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div>
       </div>
-
       <div class="pc pc-sm" data-spark="ripple">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">◎</span>XRP</span><span class="pc-contract">USD</span></div>
         <div class="pc-price" id="pc-xrp">--</div>
@@ -859,10 +913,8 @@
         <div class="pc-spark" data-spark="ripple"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$0.40</span><span></span><span>$3.40</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:34%"></div><div class="pc-range-dot" style="left:34%"></div></div></div>
       </div>
-
     </div>
     <div class="price-cards-grid-2" style="margin-bottom:2rem">
-
       <div class="pc pc-sm" data-spark="kaspa">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">💎</span>Kaspa</span><span class="pc-contract">USD</span></div>
         <div class="pc-price" id="pc-kas">--</div>
@@ -871,7 +923,6 @@
         <div class="pc-spark" data-spark="kaspa"></div>
         <div class="pc-range"><div class="pc-range-labels"><span>$0.025</span><span></span><span>$0.210</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:7%"></div><div class="pc-range-dot" style="left:7%"></div></div></div>
       </div>
-
       <a href="https://farmers1st.com" target="_blank" rel="noopener" class="pc pc-sm" style="display:flex;flex-direction:column;text-decoration:none;color:inherit;cursor:pointer;border-color:rgba(91,163,224,.25);background:linear-gradient(135deg,var(--surface) 0%,rgba(91,163,224,.04) 100%);transition:border-color .15s,transform .1s" onmouseenter="this.style.borderColor='var(--blue)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(91,163,224,.25)';this.style.transform='none'">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">📊</span>FFAI Index</span><span class="pc-contract" style="color:var(--blue)">Farmers First</span></div>
         <div style="display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .15rem">
@@ -884,13 +935,10 @@
           <span style="font-size:.68rem;color:var(--blue);font-weight:600">View Methodology →</span>
         </div>
       </a>
-
     </div>
   </div>
 
-  <!-- ══ PREDICTION MARKETS ═══════════════════════════════════════
-       Rendered by geo.js fetchKalshiMarkets() — single fetch point.
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ══ PREDICTION MARKETS ═══════════════════════════════════════ -->
   <div class="fade-up" id="f-kalshi">
     <div class="sec-head"><div class="sec-title">🎯 What's Moving Agriculture</div></div>
     <div style="font-size:.78rem;color:var(--text-dim);line-height:1.55;margin-bottom:.75rem;max-width:52rem">
@@ -953,11 +1001,7 @@
 <script src="/components/loader.js"></script>
 <script src="/components/geo.js"></script>
 <script src="/components/bids-homepage.js"></script>
-<!-- ══════════════════════════════════════════════════════════════
-     Market Summary Bar + Corn/Bean Ratio Widget
-     Single fetch of prices.json — browser cache serves it
-     immediately after geo.js already fetched it.
-══════════════════════════════════════════════════════════════════ -->
+
 <script>
 (function() {
   'use strict';
@@ -996,30 +1040,23 @@
     var cornDec  = q['corn-dec'];
     var beansNov = q['beans-nov'];
     if (!cornDec || !beansNov || !cornDec.close || !beansNov.close) return;
-
-    var cornPrice  = cornDec.close  / 100;   // cents → dollars
+    var cornPrice  = cornDec.close  / 100;
     var beansPrice = beansNov.close / 100;
     var ratio = beansPrice / cornPrice;
     var ratioStr = ratio.toFixed(2);
-
-    // Verdict thresholds
     var verdictCls, verdictTxt;
     if (ratio < 2.4)       { verdictCls = 'corn';    verdictTxt = '🌽 Favors Corn'; }
     else if (ratio > 2.6)  { verdictCls = 'beans';   verdictTxt = '🫘 Favors Beans'; }
     else                   { verdictCls = 'neutral';  verdictTxt = '↔ Neutral'; }
-
-    // Gauge: map ratio 2.0→3.0 to 0→100%
     var gaugeMin = 2.0, gaugeMax = 3.0;
     var gaugePct = Math.min(100, Math.max(0, ((ratio - gaugeMin) / (gaugeMax - gaugeMin)) * 100));
     var dotColor = verdictCls === 'corn' ? 'var(--gold)' : verdictCls === 'beans' ? 'var(--green)' : 'var(--text-dim)';
-
     var rv  = document.getElementById('ratio-value');
     var rvd = document.getElementById('ratio-verdict');
     var dot = document.getElementById('ratio-gauge-dot');
     var rcp = document.getElementById('ratio-corn-price');
     var rbp = document.getElementById('ratio-beans-price');
     var rb  = document.getElementById('ratio-big');
-
     if (rv)  rv.textContent = ratioStr;
     if (rvd) { rvd.className = 'ratio-verdict ' + verdictCls; rvd.textContent = verdictTxt; }
     if (dot) { dot.style.left = gaugePct.toFixed(1) + '%'; dot.style.background = dotColor; }
@@ -1028,7 +1065,6 @@
     if (rb)  rb.style.color  = dotColor;
   }
 
-  // Fetch prices — browser cache means this is nearly free after geo.js first pull
   fetch('/data/prices.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -1036,20 +1072,39 @@
       renderMarketSummary(q);
       renderRatioWidget(q);
     })
-    .catch(function() {
-      // Silent fail — widgets just stay at "--"
-    });
+    .catch(function() {});
 })();
 </script>
 
-<!-- Sparklines: loads prices-history.json and draws trend lines on price cards.
-     Deferred 700ms — pure progressive enhancement, non-blocking. -->
+<!-- ── NOAA Outlook Tab Switcher ────────────────────────────── -->
+<script>
+(function(){
+  var BASE = 'https://www.cpc.ncep.noaa.gov/products/predictions/';
+  var tempImg   = document.getElementById('noaa-temp-img');
+  var precipImg = document.getElementById('noaa-precip-img');
+  var label     = document.getElementById('noaa-period-label');
+
+  document.querySelectorAll('#noaa-tabs .noaa-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#noaa-tabs .noaa-tab').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var p   = btn.getAttribute('data-period');
+      var lbl = btn.getAttribute('data-label');
+      var bust = '?v=' + Date.now();
+      [tempImg, precipImg].forEach(function(img){
+        if(img){ img.style.display=''; if(img.nextElementSibling) img.nextElementSibling.style.display='none'; }
+      });
+      if(tempImg)   tempImg.src   = BASE + p + 'day/off15_temp.gif'  + bust;
+      if(precipImg) precipImg.src = BASE + p + 'day/off15_prcp.gif'  + bust;
+      if(label) label.textContent = lbl;
+    });
+  });
+})();
+</script>
+
 <script src="/components/sparklines.js"></script>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// AGSIST Homepage JS — v5 2026-03-24
-// ═══════════════════════════════════════════════════════════════════
 (function() {
   'use strict';
 
@@ -1092,7 +1147,6 @@
     track.style.animationDuration = Math.max(20, Math.round(w / 45)) + 's';
   });
 
-  // Drought map
   (function() {
     var img = document.getElementById('drought-img');
     var fallback = document.getElementById('drought-fallback');
@@ -1121,7 +1175,6 @@
     tryNext();
   })();
 
-  // Daily hero expand/collapse
   var teaser = document.getElementById('daily-teaser');
   if (teaser) {
     teaser.addEventListener('click', expandDaily);
@@ -1130,7 +1183,6 @@
   var btnDismiss = document.getElementById('btn-dismiss-daily');
   if (btnDismiss) btnDismiss.addEventListener('click', dismissDaily);
 
-  // Cash bids wiring
   var bidsEnterZip = document.getElementById('bids-enter-zip-btn');
   if (bidsEnterZip) {
     bidsEnterZip.addEventListener('click', function() {
@@ -1145,7 +1197,6 @@
   var bidsZip = document.getElementById('bids-zip');
   if (bidsZip) bidsZip.addEventListener('keydown', function(e) { if (e.key === 'Enter' && typeof lookupBids === 'function') lookupBids(); });
 
-  // Weather wiring
   var btnAllowLoc = document.getElementById('btn-allow-loc');
   if (btnAllowLoc) btnAllowLoc.addEventListener('click', function() { if (typeof requestGeo === 'function') requestGeo(); });
   var btnZipInstead = document.getElementById('btn-zip-instead');
@@ -1157,7 +1208,6 @@
   var btnChangeLoc = document.getElementById('btn-change-loc');
   if (btnChangeLoc) btnChangeLoc.addEventListener('click', function() { if (typeof showZipEntry === 'function') showZipEntry(); });
 
-  // Signup tabs
   var tabEmail = document.getElementById('tab-email');
   var tabSms   = document.getElementById('tab-sms');
   var formEmail = document.getElementById('form-email');
@@ -1179,7 +1229,6 @@
     });
   }
 
-  // Fade-up intersection observer
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
@@ -1189,7 +1238,6 @@
     document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('vis'); });
   }
 
-  // USDA Calendar
   function buildUSDACalendar() {
     var strip = document.getElementById('usda-cal-strip');
     if (!strip) return;
@@ -1242,7 +1290,6 @@
   }
   buildUSDACalendar();
 
-  // Signup visibility logic
   function isSignedUp() {
     try { return document.cookie.split(';').some(function(c){ return c.trim().startsWith('agsist_subscribed='); }) || localStorage.getItem('agsist_subscribed') === '1'; } catch(e) { return false; }
   }
@@ -1317,11 +1364,6 @@
 })();
 </script>
 
-<!-- ══════════════════════════════════════════════════════════════
-     Daily Briefing Hydration v5
-     geo.js loadDailyBriefing() is the single fetch — it calls
-     window.hydrateDaily(data). No second fetch here.
-══════════════════════════════════════════════════════════════════ -->
 <script>
 window.hydrateDaily = (function() {
   'use strict';

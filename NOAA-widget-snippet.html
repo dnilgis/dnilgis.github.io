@@ -1,0 +1,179 @@
+<!-- ══════════════════════════════════════════════════════════════
+     DEPLOYMENT INSTRUCTIONS — index.html
+     
+     Step 1 — ADD CSS
+     Open index.html → find the closing </style> tag in the <head>
+     Paste the CSS block BEFORE </style>
+
+     Step 2 — ADD HTML
+     Find this exact string in index.html:
+       <!-- ══ USDA CALENDAR
+     Replace with the HTML block below (it puts the NOAA section first,
+     then the original USDA Calendar comment follows naturally)
+
+     Step 3 — No JS needed (tabs are pure CSS + minimal inline JS)
+
+     Images update automatically — NOAA overwrites the same filenames
+     at each monthly/seasonal issuance. No cron job needed.
+══════════════════════════════════════════════════════════════════ -->
+
+
+<!-- ████████████████████████████████████████████████████████████
+     CSS — paste BEFORE </style> in the index.html <head>
+     ████████████████████████████████████████████████████████████ -->
+<style>
+/* ── NOAA Seasonal Outlooks Widget ──────────────────────────── */
+.noaa-section{margin-bottom:1.5rem}
+.noaa-tabs{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
+.noaa-tab{
+  padding:.38rem .9rem;border-radius:4px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text-dim);font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;font-weight:700;cursor:pointer;
+  text-transform:uppercase;letter-spacing:.04em;
+  transition:all .15s;
+}
+.noaa-tab:hover{border-color:var(--gold);color:var(--text)}
+.noaa-tab.active{background:var(--gold);color:#0a1a0a;border-color:var(--gold)}
+.noaa-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}
+@media(max-width:540px){.noaa-grid{grid-template-columns:1fr}}
+.noaa-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+}
+.noaa-card-head{
+  display:flex;align-items:center;gap:.4rem;
+  padding:.5rem .8rem;border-bottom:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+}
+.noaa-card-head.temp{color:#f4834a}
+.noaa-card-head.precip{color:#5bb8f5}
+.noaa-card img{
+  display:block;width:100%;height:auto;
+  background:var(--surface2);
+  min-height:120px;
+}
+.noaa-legend{
+  display:flex;align-items:center;flex-wrap:wrap;
+  gap:.3rem 1rem;margin-top:.55rem;
+  font-size:.68rem;color:var(--text-dim);line-height:1.5;
+}
+.noaa-legend-temp{display:flex;gap:.6rem}
+.noaa-legend-temp span,.noaa-legend-precip span{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+}
+.noaa-swatch{
+  display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0;
+}
+.noaa-note{
+  margin-top:.5rem;font-size:.65rem;color:var(--text-muted);
+  line-height:1.5;
+}
+.noaa-note a{color:var(--gold);text-decoration:none}
+.noaa-note a:hover{text-decoration:underline}
+.noaa-img-error{
+  display:flex;align-items:center;justify-content:center;
+  min-height:140px;font-size:.78rem;color:var(--text-muted);
+  text-align:center;padding:.75rem;
+}
+</style>
+
+
+<!-- ████████████████████████████████████████████████████████████
+     HTML — in index.html, FIND:
+       <!-- ══ USDA CALENDAR
+     And paste this entire block BEFORE that line.
+     ████████████████████████████████████████████████████████████ -->
+
+  <!-- ══ NOAA SEASONAL OUTLOOKS ════════════════════════════════ -->
+  <div class="noaa-section fade-up" id="f-noaa">
+    <div class="sec-head">
+      <div class="sec-title">🌡️ NOAA Seasonal Outlooks</div>
+      <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/" target="_blank" rel="noopener" class="sec-all">CPC Full Outlooks →</a>
+    </div>
+
+    <div class="noaa-tabs" id="noaa-tabs">
+      <button class="noaa-tab active" data-period="30" data-label="1-Month (30-Day)">1-Month</button>
+      <button class="noaa-tab" data-period="90" data-label="3-Month (90-Day)">3-Month</button>
+    </div>
+
+    <div class="noaa-grid">
+      <div class="noaa-card">
+        <div class="noaa-card-head temp">🌡️ Temperature Outlook</div>
+        <img
+          id="noaa-temp-img"
+          src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif"
+          alt="NOAA 1-month temperature outlook — above/below normal probabilities"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="noaa-img-error" style="display:none">
+          🌡️ Temp map loading…<br>
+          <a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener" style="color:var(--gold)">View on CPC →</a>
+        </div>
+      </div>
+      <div class="noaa-card">
+        <div class="noaa-card-head precip">🌧️ Precipitation Outlook</div>
+        <img
+          id="noaa-precip-img"
+          src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif"
+          alt="NOAA 1-month precipitation outlook — above/below normal probabilities"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="noaa-img-error" style="display:none">
+          🌧️ Precip map loading…<br>
+          <a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener" style="color:var(--gold)">View on CPC →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="noaa-legend">
+      <div class="noaa-legend-temp">
+        <span>Temp: <span class="noaa-swatch" style="background:#c1440e"></span>Above</span>
+        <span><span class="noaa-swatch" style="background:#ccc;border:1px solid var(--border)"></span>Equal</span>
+        <span><span class="noaa-swatch" style="background:#1a7abf"></span>Below</span>
+      </div>
+      <div class="noaa-legend-temp">
+        <span>Precip: <span class="noaa-swatch" style="background:#2d8c4e"></span>Above</span>
+        <span><span class="noaa-swatch" style="background:#ccc;border:1px solid var(--border)"></span>Equal</span>
+        <span><span class="noaa-swatch" style="background:#b07d2a"></span>Below</span>
+      </div>
+    </div>
+    <div class="noaa-note">
+      Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA Climate Prediction Center</a> ·
+      1-month issued last day of month · 3-month issued 3rd Thursday ·
+      Darker shading = higher confidence · <span id="noaa-period-label">1-Month (30-Day)</span> outlook
+    </div>
+  </div>
+
+  <script>
+  /* ── NOAA Outlook Tab Switcher ─────────────────────────────── */
+  (function(){
+    var BASE = 'https://www.cpc.ncep.noaa.gov/products/predictions/';
+    var tempImg   = document.getElementById('noaa-temp-img');
+    var precipImg = document.getElementById('noaa-precip-img');
+    var label     = document.getElementById('noaa-period-label');
+
+    document.querySelectorAll('#noaa-tabs .noaa-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('#noaa-tabs .noaa-tab').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var p  = btn.getAttribute('data-period');
+        var lbl = btn.getAttribute('data-label');
+        var bust = '?v=' + Date.now();
+        /* Reset error states */
+        [tempImg, precipImg].forEach(function(img){
+          if(img){ img.style.display=''; img.nextElementSibling.style.display='none'; }
+        });
+        if(tempImg)   tempImg.src   = BASE + p + 'day/off15_temp.gif'  + bust;
+        if(precipImg) precipImg.src = BASE + p + 'day/off15_prcp.gif'  + bust;
+        if(label) label.textContent = lbl;
+      });
+    });
+  })();
+  </script>
