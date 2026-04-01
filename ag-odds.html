@@ -529,13 +529,17 @@ function addMarkets(markets,platform,isLive){
 
     var prob=m.yes;
     if(prob==null){
-      // Parse from raw Polymarket fields
+      // Parse from raw Polymarket fields — 3 fallback layers
       var op=m.outcomePrices||m.outcome_prices;
-      if(op){try{var pr=typeof op==='string'?JSON.parse(op):op;if(Array.isArray(pr)&&pr.length)prob=Math.round(parseFloat(pr[0])*100);}catch(e){}}
+      if(op){try{var pr=typeof op==='string'?JSON.parse(op):op;if(Array.isArray(pr)&&pr.length){var v0=parseFloat(pr[0]);if(!isNaN(v0))prob=Math.round(v0<=1?v0*100:v0);}}catch(e){}}
+      // tokens[0].price — AMM/CLOB markets store probability here
+      if(prob==null&&m.tokens&&Array.isArray(m.tokens)&&m.tokens.length>0){
+        try{var tp=parseFloat(m.tokens[0].price);if(!isNaN(tp)&&tp>0)prob=Math.round(tp<=1?tp*100:tp);}catch(e){}
+      }
       if(prob==null){
-        ['yes_price','bestBid','lastTradePrice','last_trade_price'].forEach(function(f){
+        ['yes_price','bestBid','lastTradePrice','last_trade_price','price'].forEach(function(f){
           if(prob!=null)return;var v=m[f];
-          if(v!=null){var n=parseFloat(v);prob=Math.round(n<=1?n*100:n);}
+          if(v!=null){var n=parseFloat(v);if(!isNaN(n)&&n>0)prob=Math.round(n<=1?n*100:n);}
         });
       }
     }
@@ -590,39 +594,55 @@ function loadCached(){
     .catch(function(){return false;});
 }
 
-/* ── Fetch Polymarket live from browser ────────────────────── */
-var POLY_KW=['tariff','egg','grocery','food price','natural gas','crude oil','inflation','recession','interest rate','drought','hurricane','bird flu','corn','wheat','soybean','fertilizer','china trade','fed rate','trade war','food inflation'];
-var POLY_TAGS=['economics','trade','energy','environment','food','inflation','federal-reserve','commodities'];
+/* ── Fetch Polymarket live from browser (v2 — fixed) ──────────
+   q= param ignored by Polymarket API — returns group markets w/ outcomePrices:null.
+   Fix: /events endpoint + tag_slug browsing + tokens[0].price fallback.
+────────────────────────────────────────────────────────────────── */
+var POLY_TAGS=['politics','economics','trade','energy','environment','food','climate','commodities'];
+
+function gj(url){
+  return fetch(url).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+}
+function toArr(d){
+  if(!d)return[];
+  if(Array.isArray(d))return d;
+  return d.results||d.markets||d.events||d.data||[];
+}
+
+/* Flatten /events nested structure — each event has embedded binary markets */
+function addEvents(events){
+  events.forEach(function(ev){
+    var mArr=ev.markets||[];
+    if(mArr.length>0){
+      mArr.forEach(function(m){
+        if(!m.question&&(ev.title||ev.name)) m.question=ev.title||ev.name;
+        addMarkets([m],'Polymarket',true);
+      });
+    }
+  });
+}
 
 function fetchLivePoly(){
-  var promises=[];
-  POLY_KW.forEach(function(kw){
-    promises.push(
-      fetch(POLY+'/markets?active=true&closed=false&limit=20&q='+encodeURIComponent(kw))
-        .then(function(r){return r.ok?r.json():[];})
-        .then(function(d){return Array.isArray(d)?d:(d.results||d.markets||[]);})
-        .catch(function(){return[];})
-    );
-  });
+  var fetches=[
+    gj(POLY+'/events?active=true&closed=false&limit=100&order=volume&ascending=false'),
+  ];
   POLY_TAGS.forEach(function(tag){
-    promises.push(
-      fetch(POLY+'/markets?active=true&closed=false&limit=50&tag_slug='+encodeURIComponent(tag))
-        .then(function(r){return r.ok?r.json():[];})
-        .then(function(d){return Array.isArray(d)?d:(d.results||d.markets||[]);})
-        .catch(function(){return[];})
-    );
+    fetches.push(gj(POLY+'/markets?active=true&closed=false&limit=100&tag_slug='+encodeURIComponent(tag)));
   });
-  // Top by volume
-  promises.push(
-    fetch(POLY+'/markets?active=true&closed=false&limit=100&order=volume&ascending=false')
-      .then(function(r){return r.ok?r.json():[];})
-      .then(function(d){return Array.isArray(d)?d:(d.results||d.markets||[]);})
-      .catch(function(){return[];})
-  );
-  return Promise.all(promises).then(function(results){
-    var total=0;
-    results.forEach(function(items){total+=addMarkets(items,'Polymarket',true);});
-    return total;
+  fetches.push(gj(POLY+'/markets?active=true&closed=false&limit=100&order=volume&ascending=false'));
+
+  return Promise.all(fetches).then(function(results){
+    var before=allMarkets.length;
+    var evData=toArr(results[0]);
+    if(evData.length&&evData[0]&&evData[0].markets!==undefined){
+      addEvents(evData);
+    } else {
+      addMarkets(evData,'Polymarket',true);
+    }
+    for(var i=1;i<results.length;i++){
+      addMarkets(toArr(results[i]),'Polymarket',true);
+    }
+    return allMarkets.length-before;
   });
 }
 
