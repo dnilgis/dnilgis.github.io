@@ -1,6 +1,16 @@
 {
   "briefings": [
     {
+      "date": "2026-04-02",
+      "date_display": "Thursday, April 2, 2026",
+      "headline": "HOGS EXPLODE 22% AS WHEAT DROPS 22¢",
+      "teaser": "Historic hog rally meets grain weakness as planting season approaches.",
+      "market_mood": "mixed",
+      "surprise_count": 4,
+      "sections": 4,
+      "url": "/daily/2026-04-02"
+    },
+    {
       "date": "2026-04-01",
       "date_display": "Wednesday, April 1, 2026",
       "headline": "CATTLE SURGE 4.2% IGNITES BROAD RALLY",
@@ -211,6 +221,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-01T12:41:03.725844+00:00",
-  "count": 21
+  "updated": "2026-04-02T12:37:39.869472+00:00",
+  "count": 22
 }
