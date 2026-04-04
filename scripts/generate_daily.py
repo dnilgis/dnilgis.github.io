@@ -1,28 +1,39 @@
 #!/usr/bin/env python3
 """
-AGSIST Daily Briefing Generator — v3.2
+AGSIST Daily Briefing Generator — v3.4
 ═══════════════════════════════════════════════════════════════════
 Generates the daily agricultural intelligence briefing via Claude API.
-Designed to be run by GitHub Actions every morning (5:00 AM CT).
+Runs every morning at 5:45 AM CT via GitHub Actions (7 days/week).
+
+v3.4 changes (2026-04-04):
+  - WEEKEND/HOLIDAY AWARENESS: Detects closed markets and writes a
+    weekend outlook / week-ahead briefing instead of overnight recap.
+    Claude is instructed to say "as of Friday's close" on weekends and
+    lead with what to watch next week rather than what "moved overnight."
+  - US HOLIDAY DETECTION: Recognizes major CME/CBOT holidays and
+    applies the same weekend-style treatment.
+
+v3.3 changes (2026-04-04):
+  - PAST DAILY CONTEXT: Loads last 3 briefings from archive for continuity.
 
 v3.2 changes:
-  - PRICE ANCHORING: All prices passed as locked data Claude cannot invent
-  - TONE GUARDRAILS: "Surprise" language gated behind surprise_magnitude thresholds
-  - POST-VALIDATION: Reject briefings where Claude invented prices
-  - FIX: Watch list HTML no longer double-escapes <strong> tags in archive pages
-  - CALIBRATED VOICE: Removed "Be bold" instruction causing chronic over-dramatization
+  - PRICE ANCHORING: Locked price table injected verbatim.
+  - TONE GUARDRAILS: Surprise language gated behind magnitude thresholds.
+  - POST-VALIDATION: Rejects briefings with invented prices.
+  - FIX: Watch list HTML no longer double-escapes <strong> tags.
 
 Data pipeline:
-  1. Read /data/prices.json (yfinance, already fetched by fetch_prices.py)
-  2. Fetch ag RSS feeds for overnight news context
-  3. Fetch USDA calendar data
-  4. Call Claude API with enriched prompt + market data
-  5. Validate output against source prices
-  6. Write /data/daily.json
-  7. Archive: save /data/daily-archive/DATE.json + /daily/DATE.html + update index.json
+  1. Read /data/prices.json (yfinance, fetched every 30 min including weekends)
+  2. Detect weekend/holiday — adjust prompt accordingly
+  3. Load last 3 /data/daily-archive/DATE.json for continuity
+  4. Fetch ag RSS feeds
+  5. Call Claude API
+  6. Validate output against source prices
+  7. Write /data/daily.json
+  8. Archive: /data/daily-archive/DATE.json + /daily/DATE.html + index.json
 
 Env vars required:
-  ANTHROPIC_API_KEY — Claude API key
+  ANTHROPIC_API_KEY
 """
 
 import json
@@ -30,7 +41,7 @@ import os
 import sys
 import random
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 try:
@@ -55,7 +66,6 @@ OUTPUT_PATH = REPO_ROOT / "data" / "daily.json"
 ANTHROPIC_API = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-sonnet-4-20250514"
 
-# Overnight surprise thresholds (% move that's genuinely newsworthy)
 SURPRISE_THRESHOLDS = {
     "corn":      1.5,
     "corn-dec":  1.5,
@@ -111,7 +121,148 @@ AG_RSS_FEEDS = [
 ]
 
 # ═══════════════════════════════════════════════════════════════════
-# CURATED QUOTE BANK — 210 quotes
+# WEEKEND / HOLIDAY DETECTION
+# ═══════════════════════════════════════════════════════════════════
+
+def get_market_status():
+    """
+    Determine whether US commodity markets (CME/CBOT) are open or closed.
+
+    Returns a dict:
+      is_closed: bool
+      reason:    'weekend' | 'holiday' | 'open'
+      note:      string to inject into Claude prompt
+      last_trading_day: 'Friday' or day name
+    """
+    now = datetime.now()
+    weekday = now.weekday()   # 0=Mon, 6=Sun
+    month, day = now.month, now.day
+
+    # ── Weekend ────────────────────────────────────────────────────
+    if weekday == 5:   # Saturday
+        return {
+            "is_closed": True,
+            "reason": "weekend",
+            "day_name": "Saturday",
+            "note": (
+                "TODAY IS SATURDAY — commodity markets are CLOSED. "
+                "All prices below are Friday's closing values. "
+                "Write this as a WEEKEND RECAP & WEEK-AHEAD OUTLOOK — not an overnight recap. "
+                "Say 'as of Friday's close' when referencing prices. "
+                "Lead with: what happened this week, what it means going into next week. "
+                "Do NOT use language like 'overnight' or 'this morning's session.' "
+                "The farmer reading this on Saturday morning wants to know what to think about before markets open Monday."
+            ),
+        }
+    if weekday == 6:   # Sunday
+        return {
+            "is_closed": True,
+            "reason": "weekend",
+            "day_name": "Sunday",
+            "note": (
+                "TODAY IS SUNDAY — commodity markets are CLOSED. "
+                "All prices below are Friday's closing values. "
+                "Write this as a SUNDAY PREVIEW & WEEK-AHEAD OUTLOOK — not an overnight recap. "
+                "Say 'as of Friday's close' when referencing prices. "
+                "Lead with: what to watch when markets open Monday morning. "
+                "Do NOT use language like 'overnight' or 'this morning's session.' "
+                "The farmer reading this Sunday wants to be ready for Monday's open."
+            ),
+        }
+
+    # ── Major US commodity market holidays (CME/CBOT) ─────────────
+    # These are the fixed-date holidays. Floating holidays (MLK, Presidents,
+    # Memorial, Labor, Thanksgiving) are excluded for simplicity — they only
+    # affect a handful of Mondays per year and markets close early not fully.
+    fixed_holidays = {
+        (1, 1):   "New Year's Day",
+        (7, 4):   "Independence Day",
+        (12, 25): "Christmas Day",
+    }
+    # Observed shifts: if holiday falls on Saturday, observed Friday;
+    # if Sunday, observed Monday
+    for (hm, hd), hname in fixed_holidays.items():
+        if month == hm and day == hd:
+            return {
+                "is_closed": True,
+                "reason": "holiday",
+                "day_name": hname,
+                "note": (
+                    f"TODAY IS {hname.upper()} — commodity markets are CLOSED. "
+                    "All prices below are from the last trading session. "
+                    "Write this as a HOLIDAY RECAP & OUTLOOK — not an overnight recap. "
+                    "Acknowledge the holiday briefly, then cover what matters for farmers returning Monday. "
+                    "Do NOT use language like 'overnight' or 'this morning's session.'"
+                ),
+            }
+        # Observed: Saturday holiday → Friday observed
+        if weekday == 4 and month == hm and day == hd - 1:
+            return {
+                "is_closed": True,
+                "reason": "holiday",
+                "day_name": f"{hname} (observed)",
+                "note": (
+                    f"TODAY IS {hname.upper()} OBSERVED — commodity markets are CLOSED. "
+                    "All prices below are from the last trading session. "
+                    "Write as a holiday outlook. Do NOT reference overnight sessions."
+                ),
+            }
+        # Observed: Sunday holiday → Monday observed
+        if weekday == 0 and month == hm and day == hd + 1:
+            return {
+                "is_closed": True,
+                "reason": "holiday",
+                "day_name": f"{hname} (observed)",
+                "note": (
+                    f"TODAY IS {hname.upper()} OBSERVED — commodity markets are CLOSED. "
+                    "All prices below are from the last trading session. "
+                    "Write as a holiday outlook. Do NOT reference overnight sessions."
+                ),
+            }
+
+    # Good Friday (2 days before Easter) — approximate detection
+    # Easter = first Sunday after first full moon after March 21 (Butcher's algorithm)
+    y = now.year
+    a = y % 19
+    b = y // 100
+    c = y % 100
+    d = b // 4
+    e = b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i = c // 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m_val = (a + 11 * h + 22 * l) // 451
+    easter_month = (h + l - 7 * m_val + 114) // 31
+    easter_day = ((h + l - 7 * m_val + 114) % 31) + 1
+    easter = datetime(y, easter_month, easter_day)
+    good_friday = easter - timedelta(days=2)
+    if now.month == good_friday.month and now.day == good_friday.day:
+        return {
+            "is_closed": True,
+            "reason": "holiday",
+            "day_name": "Good Friday",
+            "note": (
+                "TODAY IS GOOD FRIDAY — commodity markets are CLOSED. "
+                "All prices below are from Thursday's session. "
+                "Write as a holiday outlook. Do NOT reference overnight sessions."
+            ),
+        }
+
+    # ── Markets open ───────────────────────────────────────────────
+    day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    return {
+        "is_closed": False,
+        "reason": "open",
+        "day_name": day_names[weekday],
+        "note": "",
+    }
+
+
+# ═══════════════════════════════════════════════════════════════════
+# QUOTE BANK
 # ═══════════════════════════════════════════════════════════════════
 
 QUOTE_BANK = [
@@ -253,6 +404,11 @@ QUOTE_BANK = [
     ("Whoever could make two ears of corn grow upon a spot of ground where only one grew before would deserve better of mankind than the whole race of politicians put together.", "Jonathan Swift"),
     ("Those too lazy to plow in the right season will have no food at the harvest.", "Proverbs 20:4"),
     ("Agriculture was the first occupation of man, and as it embraces the whole earth, it is the foundation of all other industries.", "Edward W. Stewart"),
+    ("The weekend is the farmer's only vacation — and he spends it working.", "Unknown"),
+    ("Markets close on weekends. Crops don't.", "Unknown"),
+    ("Saturday morning coffee and the grain markets — one of them is always open.", "Unknown"),
+    ("Use the quiet days to plan. Use the loud days to execute.", "Unknown"),
+    ("A farmer who rests on Sunday is planning Monday.", "Unknown"),
 ]
 
 
@@ -261,7 +417,6 @@ QUOTE_BANK = [
 # ═══════════════════════════════════════════════════════════════════
 
 def http_get(url, timeout=10):
-    """Simple HTTP GET that works with requests or urllib."""
     if requests:
         try:
             r = requests.get(url, timeout=timeout)
@@ -272,7 +427,7 @@ def http_get(url, timeout=10):
             return None
     else:
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "AGSIST-Daily/3.2"})
+            req = urllib.request.Request(url, headers={"User-Agent": "AGSIST-Daily/3.4"})
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.read().decode("utf-8", errors="replace")
         except Exception as e:
@@ -281,14 +436,7 @@ def http_get(url, timeout=10):
 
 
 def load_prices():
-    """
-    Load prices.json, compute overnight surprises, and build a
-    LOCKED PRICE TABLE that gets injected verbatim into the prompt.
-
-    Returns:
-        price_data dict  — contains price_block, locked_prices, fetched, quotes
-        surprises list   — moves above threshold
-    """
+    """Load prices.json and build the locked price table."""
     if not PRICES_PATH.exists():
         print("[error] prices.json not found", file=sys.stderr)
         return {}, []
@@ -300,7 +448,7 @@ def load_prices():
     fetched = data.get("fetched", "")
 
     price_lines = []
-    locked_prices = {}   # key → display_price string for validation later
+    locked_prices = {}
     surprises = []
 
     for key, label in COMMODITY_LABELS.items():
@@ -329,8 +477,7 @@ def load_prices():
         if is_grain:
             price_str = f"${close / 100:.2f}/bu"
             chg_str = f"{net / 100:+.4f} ({pct:+.1f}%)"
-            # Store the human-readable price for validation
-            locked_prices[key] = close / 100   # actual dollar value
+            locked_prices[key] = close / 100
         elif key in ("gold", "bitcoin"):
             price_str = f"${close:,.0f}"
             chg_str = f"{pct:+.1f}%"
@@ -347,7 +494,6 @@ def load_prices():
         direction = "▲" if pct > 0 else "▼" if pct < 0 else "—"
         line = f"  {label}: {price_str} ({direction} {chg_str})"
 
-        # 52-week range context
         wk52_hi = q.get("wk52_hi")
         wk52_lo = q.get("wk52_lo")
         if wk52_hi and wk52_lo:
@@ -358,7 +504,6 @@ def load_prices():
 
         price_lines.append(line)
 
-        # Overnight surprise check
         threshold = SURPRISE_THRESHOLDS.get(key, 2.0)
         if abs(pct) >= threshold:
             surprises.append({
@@ -381,10 +526,76 @@ def load_prices():
     }, surprises
 
 
+def load_past_dailies(num_days=3):
+    """Load last N briefings for narrative continuity."""
+    archive_dir = REPO_ROOT / "data" / "daily-archive"
+    index_path  = archive_dir / "index.json"
+
+    if not index_path.exists():
+        return ""
+
+    try:
+        with open(index_path) as f:
+            index = json.load(f)
+    except Exception:
+        return ""
+
+    briefings = index.get("briefings", [])
+    if not briefings:
+        return ""
+
+    today_iso = datetime.now().strftime("%Y-%m-%d")
+    past = [b for b in briefings if b.get("date") != today_iso]
+    past = sorted(past, key=lambda x: x.get("date", ""), reverse=True)[:num_days]
+
+    if not past:
+        return ""
+
+    blocks = []
+    for entry in past:
+        date_iso = entry.get("date", "")
+        json_path = archive_dir / f"{date_iso}.json"
+
+        if json_path.exists():
+            try:
+                with open(json_path) as f:
+                    b = json.load(f)
+                headline      = b.get("headline", entry.get("headline", ""))
+                mood          = b.get("meta", {}).get("market_mood", "")
+                surprises     = b.get("surprises", [])
+                surprise_names = [s.get("commodity","") + f" {s.get('pct_change',0):+.1f}%" for s in surprises[:4]]
+                tmyk_title    = b.get("the_more_you_know", {}).get("title", "")
+                section_titles = [s.get("title","") for s in b.get("sections", [])]
+                actions        = [s.get("farmer_action","") for s in b.get("sections", []) if s.get("farmer_action")]
+                block = f"  DATE: {date_iso}"
+                block += f"\n  HEADLINE: {headline}"
+                if mood:
+                    block += f"\n  MOOD: {mood}"
+                if surprise_names:
+                    block += f"\n  OVERNIGHT SURPRISES: {' · '.join(surprise_names)}"
+                if tmyk_title:
+                    block += f"\n  THE MORE YOU KNOW topic: {tmyk_title} (DO NOT repeat this topic today)"
+                if section_titles:
+                    block += f"\n  SECTIONS COVERED: {', '.join(section_titles)}"
+                if actions:
+                    block += f"\n  FARMER ACTIONS GIVEN: {' | '.join(actions[:3])}"
+            except Exception:
+                block = f"  DATE: {date_iso}\n  HEADLINE: {entry.get('headline','')}"
+        else:
+            block = f"  DATE: {date_iso}\n  HEADLINE: {entry.get('headline','')}"
+
+        blocks.append(block)
+
+    header = (
+        "═══ PAST BRIEFINGS — For narrative continuity ONLY ═══\n"
+        "Use these to reference ongoing story arcs and avoid repeating TMYK topics.\n"
+        "Do NOT use past prices — use ONLY today's LOCKED PRICE TABLE.\n\n"
+    )
+    return header + "\n\n".join(blocks)
+
+
 def fetch_ag_news():
-    """Fetch recent ag news headlines from RSS feeds."""
     if not feedparser:
-        print("  [info] feedparser not installed, skipping RSS", file=sys.stderr)
         return "No RSS feeds available — focus on price action and seasonal context."
 
     headlines = []
@@ -399,8 +610,7 @@ def fetch_ag_news():
                 pub = entry.get("published", entry.get("updated", ""))
                 if title:
                     headlines.append(f"  • {title} ({pub[:16]})")
-        except Exception as e:
-            print(f"  [warn] RSS parse failed: {feed_url} — {e}", file=sys.stderr)
+        except Exception:
             continue
 
     if not headlines:
@@ -417,30 +627,25 @@ def fetch_ag_news():
 
 
 def get_seasonal_context():
-    """Return time-of-year context for the briefing."""
-    now = datetime.now()
-    month = now.month
-
+    month = datetime.now().month
     contexts = {
-        1: "Mid-winter: Watch South American crop development (Brazil safrinha, Argentina soybeans). Cattle markets seasonally strong. Input purchasing decisions for spring. Tax planning wrapping up.",
-        2: "Late winter: USDA Ag Outlook Forum typically this month. South American harvest beginning. Final input purchasing before spring. Equipment maintenance window closing.",
-        3: "Pre-planting: USDA Prospective Plantings (end of March) is THE report. Fieldwork starting in South. Nitrogen applications beginning. Basis typically widens. Cash flow planning critical.",
+        1: "Mid-winter: Watch South American crop development (Brazil safrinha, Argentina soybeans). Cattle markets seasonally strong. Input purchasing decisions for spring.",
+        2: "Late winter: USDA Ag Outlook Forum typically this month. South American harvest beginning. Final input purchasing before spring.",
+        3: "Pre-planting: USDA Prospective Plantings (end of March) is THE report. Fieldwork starting in South. Nitrogen applications beginning.",
         4: "Planting season: Corn planting underway (April 15-May 15 optimal in Corn Belt). Every day of delay costs ~1 bu/acre. Weather dominance begins.",
-        5: "Peak planting: Soybean planting (May 1-June 5 optimal). Prevent plant deadline approaching. First crop condition ratings. Weather premium builds if delays.",
+        5: "Peak planting: Soybean planting (May 1-June 5 optimal). Prevent plant deadline approaching. First crop condition ratings.",
         6: "Growing season: Crop conditions drive markets. Pollination approaching for early-planted corn. Wheat harvest beginning in Southern Plains.",
-        7: "Critical: Corn pollination (most critical 2 weeks of the year). USDA Acreage report (June 30). Soybean bloom/pod set. Weather premium at peak if hot/dry.",
-        8: "Yield formation: Corn in dough/dent — yield largely locked in. Soybean pod fill critical. USDA Pro Farmer crop tour. Fall crop insurance pricing.",
-        9: "Early harvest: Corn harvest beginning. USDA September WASDE. Basis narrows as harvest pressure builds. Storage decisions.",
+        7: "Critical: Corn pollination (most critical 2 weeks of the year). USDA Acreage report (June 30). Soybean bloom/pod set. Weather premium at peak.",
+        8: "Yield formation: Corn in dough/dent. Soybean pod fill critical. USDA Pro Farmer crop tour. Fall crop insurance pricing.",
+        9: "Early harvest: Corn harvest beginning. USDA September WASDE. Basis narrows as harvest pressure builds.",
         10: "Harvest: Full corn/soybean harvest. Basis at seasonal lows. Storage vs. sell decisions. Fall fieldwork. Wheat planting.",
-        11: "Post-harvest: Final USDA yield estimates. South American planting. Grain storage management. Tax planning. Input purchasing beginning.",
-        12: "Year-end: Final crop production estimates. USDA supply/demand tables. Tax deadlines. South American weather watch. Budgeting for next crop year.",
+        11: "Post-harvest: Final USDA yield estimates. South American planting. Grain storage management. Tax planning.",
+        12: "Year-end: Final crop production estimates. USDA supply/demand tables. Tax deadlines. South American weather watch.",
     }
-
     return contexts.get(month, "Monitor markets and seasonal patterns.")
 
 
 def get_todays_quote():
-    """Pick a quote using day-of-year as seed for consistent daily rotation."""
     now = datetime.now()
     seed = now.timetuple().tm_yday + now.year * 1000
     random.seed(seed)
@@ -453,92 +658,114 @@ def get_todays_quote():
 # CLAUDE API CALL
 # ═══════════════════════════════════════════════════════════════════
 
-def build_system_prompt():
-    return """You are the voice of AGSIST Daily — a trusted morning agricultural intelligence briefing for corn, soybean, and grain producers in Wisconsin and Minnesota.
+def build_system_prompt(market_status):
+    weekend_instructions = ""
+    if market_status["is_closed"]:
+        day = market_status["day_name"]
+        reason = market_status["reason"]
+        if reason == "weekend" and "Saturday" in day:
+            weekend_instructions = """
+══ WEEKEND MODE: SATURDAY ══
+Markets are CLOSED. Write a WEEK-IN-REVIEW + WEEKEND OUTLOOK:
+• Lead with what defined this week in ag markets
+• Reference prices as "as of Friday's close" — not "overnight" or "this morning"
+• What should farmers think about this weekend?
+• What are the 2-3 most important things to watch when markets open Monday?
+• The section titles should reflect this: e.g. "WEEK IN REVIEW", "WHAT TO WATCH MONDAY"
+• market_mood should reflect the week's overall tone, not a single session
+• Do NOT use language implying active markets or overnight sessions"""
+        elif reason == "weekend" and "Sunday" in day:
+            weekend_instructions = """
+══ WEEKEND MODE: SUNDAY ══
+Markets are CLOSED. Write a SUNDAY PREVIEW & WEEK-AHEAD BRIEFING:
+• Lead with what to expect when markets open Monday morning
+• Reference prices as "as of Friday's close"
+• What risks and catalysts should farmers be aware of this coming week?
+• The section titles should reflect this: e.g. "WEEK AHEAD", "MONDAY WATCH LIST"
+• market_mood should reflect outlook for the coming week
+• Do NOT use language implying active markets or overnight sessions"""
+        else:
+            weekend_instructions = f"""
+══ HOLIDAY MODE: {day.upper()} ══
+Markets are CLOSED. Write a HOLIDAY OUTLOOK:
+• Briefly acknowledge the holiday
+• Reference prices as "as of the last trading session"
+• What should farmers think about before markets reopen?
+• Do NOT use overnight/session language"""
+
+    return f"""You are the voice of AGSIST Daily — a trusted morning agricultural intelligence briefing for corn, soybean, and grain producers in Wisconsin and Minnesota.
 
 YOUR VOICE:
 - You're the sharp friend who actually trades grain AND reads the WASDE. Not an academic. Not a reporter.
-- Direct, opinionated, but honest about uncertainty. When you don't know, say so.
-- Connect dots that farmers wouldn't connect on their own. "Wheat dropped 14½¢" is a data point. "Wheat dropped 14½¢ — but the real story is Black Sea competition heating up while your spring planting window opens" is a briefing.
-- Plain language. No jargon without context. "Managed money" needs a parenthetical "(hedge funds)" on first use.
-- Calibrated tone: most days are normal market days. A 1% corn move is not "dramatic." Reserve strong language for moves where surprise_magnitude ≥ 3.
+- Direct, opinionated, but honest about uncertainty.
+- Connect dots that farmers wouldn't connect on their own.
+- Plain language. "Managed money" needs a parenthetical "(hedge funds)" on first use.
+- Calibrated tone: most days are normal. A 1% corn move is not "dramatic."
+- NARRATIVE CONTINUITY: When past briefings are provided, reference ongoing story arcs naturally.
+{weekend_instructions}
 
-══ STRICT PRICE RULES — READ CAREFULLY ══
-The LOCKED PRICE TABLE in the user message contains the only real prices from today's market.
-You MUST follow these rules without exception:
-
-1. Every specific price you write must come from the LOCKED PRICE TABLE — no exceptions, no rounding to a "cleaner" number, no substitutions.
-2. If a price isn't in the table, don't mention it specifically. Say "energy costs climbed" not "diesel hit $3.80."
-3. Never invent, estimate, or recall prices from your training data. Markets change daily.
-4. The net change and percent change in the table are the only moves you should describe. If corn is down 9½¢ per the table, write "down 9½¢" — not "corn cratered" and not "corn slipped a penny."
-5. If you are uncertain whether a price is in the table, omit the specific number and describe the direction and magnitude only.
+══ STRICT PRICE RULES ══
+1. Every specific price must come from the LOCKED PRICE TABLE — no exceptions.
+2. If a price isn't in the table, don't mention it specifically.
+3. Never invent, estimate, or recall prices from training data.
+4. Describe moves exactly as shown — don't round or reframe.
 
 ══ TONE CALIBRATION ══
-Use the surprise_magnitude field to calibrate language:
-- magnitude < 1.5: "moved," "gained," "eased," "dipped" — no drama
-- magnitude 1.5–2.5: "jumped," "fell," "rallied," "slid" — modest emphasis
-- magnitude 2.5–3.5: "surged," "dropped sharply," "spiked" — significant
-- magnitude > 3.5: "exploded," "crashed," "historic move" — genuinely rare events only
-
-Never label a normal trading day as "volatile." Never call a routine move "historic." Boring days are honest — describe them accurately.
+- magnitude < 1.5: "moved," "gained," "eased," "dipped"
+- magnitude 1.5–2.5: "jumped," "fell," "rallied," "slid"
+- magnitude 2.5–3.5: "surged," "dropped sharply," "spiked"
+- magnitude > 3.5: "exploded," "crashed," "historic move" — genuinely rare only
 
 ══ OUTPUT STRUCTURE ══
-Return valid JSON with this exact schema:
-
-{
-  "headline": "ALL CAPS, 6-10 words. The single biggest real story today.",
-  "subheadline": "One sentence adding the second-biggest story or the why.",
-  "lead": "2-3 sentences. What happened, why it matters, what to watch. Must contain at least one specific price from the table.",
+Return valid JSON:
+{{
+  "headline": "ALL CAPS, 6-10 words. The single biggest story.",
+  "subheadline": "One sentence adding context.",
+  "lead": "2-3 sentences. Must contain at least one specific price from the table.",
   "teaser": "One punchy sentence for the collapsed hero bar.",
-  "one_number": {
-    "value": "The single most important number today — must be from the LOCKED PRICE TABLE.",
-    "unit": "What the number represents in 3-6 words.",
-    "context": "2-3 sentences explaining WHY this number matters. Connect to farmer decisions."
-  },
+  "one_number": {{
+    "value": "Most important number — must be from LOCKED PRICE TABLE.",
+    "unit": "3-6 words.",
+    "context": "2-3 sentences explaining why it matters."
+  }},
   "sections": [
-    {
-      "title": "Section title (3-5 words)",
+    {{
+      "title": "3-5 words",
       "icon": "Single emoji",
-      "body": "3-5 sentences of analysis, not reporting. Bold the most important phrase with <strong> tags. Reference at least 2 commodities and make 1 connection between them. All prices must be from the LOCKED PRICE TABLE.",
+      "body": "3-5 sentences. Bold key phrase with <strong> tags. All prices from LOCKED TABLE.",
       "bottom_line": "One sentence TL;DR, max 20 words.",
       "conviction_level": "low | medium | high",
       "overnight_surprise": true/false,
-      "farmer_action": "Specific and actionable. 'Consider pricing 10-15% of new-crop corn on this rally' or 'No action needed — hold current positions.'"
-    }
+      "farmer_action": "Specific and actionable."
+    }}
   ],
-  "the_more_you_know": {
-    "title": "Educational topic tied to today's market action",
-    "body": "3-4 sentences explaining a concept clearly. Smart friend over coffee, not a textbook."
-  },
+  "the_more_you_know": {{
+    "title": "Educational topic — MUST differ from past 3 TMYK topics listed",
+    "body": "3-4 sentences. Smart friend over coffee."
+  }},
   "watch_list": [
-    {
-      "time": "Time or timeframe",
-      "desc": "What to watch and why. Use <strong> tags for key items."
-    }
+    {{"time": "Time or timeframe", "desc": "What to watch. <strong> tags ok."}}
   ],
-  "daily_quote": {
-    "text": "USE THE EXACT QUOTE PROVIDED — do not modify.",
-    "attribution": "USE THE EXACT ATTRIBUTION PROVIDED — do not modify."
-  },
-  "source_summary": "Data sources, e.g., 'USDA · CME Group · Open-Meteo · Reuters'",
-  "date": "Today's date formatted like 'Monday, March 3, 2026'",
-  "meta": {
+  "daily_quote": {{
+    "text": "EXACT quote provided — do not modify.",
+    "attribution": "EXACT attribution — do not modify."
+  }},
+  "source_summary": "Data sources",
+  "date": "Full date like 'Saturday, April 4, 2026'",
+  "meta": {{
     "market_mood": "bullish | bearish | mixed | cautious | volatile",
-    "heat_section": 0-based index of section with most action today,
-    "overnight_surprises_count": number
-  }
-}
+    "heat_section": 0,
+    "overnight_surprises_count": 0
+  }}
+}}
 
-SECTIONS — always include these 4 in this order:
-1. GRAINS & OILSEEDS — corn, soybeans, wheat, oats. Core audience.
-2. LIVESTOCK & DAIRY — cattle, hogs, milk. Connect to feed costs.
-3. ENERGY & INPUTS — crude, natgas, fertilizer/diesel implications.
-4. MACRO & TRADE — dollar, rates, trade policy, exports.
+SECTIONS — weekday: Grains & Oilseeds · Livestock & Dairy · Energy & Inputs · Macro & Trade
+SECTIONS — weekend/holiday: adjust titles to reflect review/outlook framing
 
-RESPOND WITH ONLY THE JSON OBJECT. No markdown fences. No preamble."""
+RESPOND WITH ONLY THE JSON OBJECT. No markdown. No preamble."""
 
 
-def call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote):
+def call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote, past_dailies_block, market_status):
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         print("[error] ANTHROPIC_API_KEY not set", file=sys.stderr)
@@ -547,9 +774,8 @@ def call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote):
     now = datetime.now()
     date_str = now.strftime("%A, %B %-d, %Y")
 
-    # ── Surprise block ────────────────────────────────────────────
-    surprise_block = ""
-    if surprises:
+    # Surprise block
+    if surprises and not market_status["is_closed"]:
         lines = []
         for s in surprises:
             if s["surprise_magnitude"] >= 3.5:
@@ -567,28 +793,36 @@ def call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote):
         surprise_block = (
             f"⚡ OVERNIGHT SURPRISES ({len(surprises)} moves above threshold):\n"
             + "\n".join(lines)
-            + "\nFlag these in relevant sections with overnight_surprise: true. "
-            + "Use language proportional to the magnitude tier above."
+            + "\nFlag these in relevant sections with overnight_surprise: true."
+        )
+    elif market_status["is_closed"]:
+        # On weekends, "surprises" are Friday's moves vs Thursday — less meaningful
+        surprise_block = (
+            "Markets are closed — do not frame any price moves as 'overnight surprises.' "
+            "These are simply Friday's closing prices vs Thursday's."
         )
     else:
         surprise_block = (
             "No overnight surprises — all moves within normal ranges. "
-            "Write an honest, measured briefing. Not every day is dramatic. "
-            "market_mood should reflect actual conditions, not manufactured urgency."
+            "Write an honest, measured briefing."
         )
 
-    # ── Locked price table ────────────────────────────────────────
-    # This is passed separately and prominently so Claude treats it as authoritative
     locked_table = price_data.get("price_block", "Price data unavailable")
+
+    # Market status note — injected prominently
+    market_note = ""
+    if market_status["is_closed"]:
+        market_note = f"\n⚠️  MARKET STATUS: {market_status['note']}\n"
+
+    past_section = f"\n{past_dailies_block}\n" if past_dailies_block else ""
 
     user_message = f"""Generate today's AGSIST Daily briefing.
 
 DATE: {date_str}
-
+{market_note}
 ╔══ LOCKED PRICE TABLE ═══════════════════════════════════════════╗
-║ These prices come directly from yfinance and are the ONLY prices ║
-║ you may use. Do not invent, estimate, or substitute any price.   ║
-║ If a commodity isn't listed here, don't cite a specific price.   ║
+║ These are the ONLY prices you may use. Do not invent or estimate.║
+║ On weekends/holidays: these are the most recent closing prices.  ║
 ╚═════════════════════════════════════════════════════════════════╝
 {locked_table}
 
@@ -597,20 +831,20 @@ DATE: {date_str}
 
 ═══ SEASONAL CONTEXT ═══
 {seasonal_ctx}
-
-═══ AG NEWS HEADLINES (for narrative context only — use prices above) ═══
+{past_section}
+═══ AG NEWS HEADLINES (context only — use prices above) ═══
 {news_block}
 
 ═══ TODAY'S QUOTE (copy exactly, do not modify) ═══
 Text: "{todays_quote['text']}"
 Attribution: "{todays_quote['attribution']}"
 
-Your job: explain what these prices MEAN for a Wisconsin/Minnesota grain and livestock producer, what they SHOULD consider doing, and what's COMING NEXT. Connect the dots. Stay accurate. Use calibrated language proportional to actual market moves today."""
+Your job: explain what these prices MEAN for a Wisconsin/Minnesota grain and livestock producer, what they SHOULD consider doing, and what's COMING NEXT."""
 
     payload = {
         "model": MODEL,
         "max_tokens": 4000,
-        "system": build_system_prompt(),
+        "system": build_system_prompt(market_status),
         "messages": [{"role": "user", "content": user_message}],
     }
 
@@ -652,25 +886,9 @@ Your job: explain what these prices MEAN for a Wisconsin/Minnesota grain and liv
 # ═══════════════════════════════════════════════════════════════════
 
 def validate_briefing(briefing, locked_prices):
-    """
-    Scan the generated briefing for dollar amounts and check that any
-    specific prices mentioned are consistent with prices.json data.
-
-    This catches cases where Claude fabricates or misremembers a price.
-    Logs warnings — does not hard-fail, since some prices (diesel, retail)
-    are legitimately not in prices.json.
-
-    Returns: (is_clean, list_of_warnings)
-    """
     warnings = []
+    known_values = {k: v for k, v in locked_prices.items() if v and v > 0}
 
-    # Build a lookup of all known price values with tolerance
-    known_values = {}
-    for key, val in locked_prices.items():
-        if val and val > 0:
-            known_values[key] = val
-
-    # Flatten briefing text for scanning
     all_text = []
     all_text.append(briefing.get("headline", ""))
     all_text.append(briefing.get("lead", ""))
@@ -683,7 +901,6 @@ def validate_briefing(briefing, locked_prices):
     all_text.append(briefing.get("the_more_you_know", {}).get("body", ""))
     full_text = " ".join(all_text)
 
-    # Extract dollar amounts from text: $4.52, $91.27, $5,100, etc.
     dollar_pattern = re.compile(r'\$([0-9,]+(?:\.[0-9]+)?)')
     found_values = []
     for match in dollar_pattern.finditer(full_text):
@@ -693,9 +910,6 @@ def validate_briefing(briefing, locked_prices):
         except ValueError:
             pass
 
-    # Check if any found value is suspiciously different from all known prices
-    # Only flag if the value is in a range that suggests it's a commodity price
-    # (not e.g. a per-acre cost estimate)
     COMMODITY_RANGES = {
         "corn":    (2.0, 9.0),
         "beans":   (7.0, 20.0),
@@ -709,33 +923,22 @@ def validate_briefing(briefing, locked_prices):
         "milk":    (10.0, 35.0),
     }
 
-    # For each found value, see if it matches any known price within 5%
     for found_val, found_str in found_values:
-        matched = False
-        for key, known_val in known_values.items():
-            if known_val > 0:
-                tolerance = 0.05  # 5%
-                if abs(found_val - known_val) / known_val <= tolerance:
-                    matched = True
-                    break
-        # If not matched, check if it's in a commodity range — if so, warn
+        matched = any(
+            known_val > 0 and abs(found_val - known_val) / known_val <= 0.05
+            for known_val in known_values.values()
+        )
         if not matched:
             for key, (lo, hi) in COMMODITY_RANGES.items():
                 if lo <= found_val <= hi:
-                    # Could be a legitimate unlisted price (diesel, local basis)
-                    # or an invented number — log as info, not hard error
-                    warnings.append(
-                        f"Price {found_str} not found in prices.json "
-                        f"(possible {key} price — verify it's not invented)"
-                    )
+                    warnings.append(f"Price {found_str} not in prices.json (possible {key})")
                     break
 
-    is_clean = len(warnings) == 0
-    return is_clean, warnings
+    return len(warnings) == 0, warnings
 
 
 # ═══════════════════════════════════════════════════════════════════
-# ARCHIVE — Static page generation + index
+# ARCHIVE
 # ═══════════════════════════════════════════════════════════════════
 
 ARCHIVE_JSON_DIR = REPO_ROOT / "data" / "daily-archive"
@@ -743,20 +946,14 @@ ARCHIVE_HTML_DIR = REPO_ROOT / "daily"
 
 
 def html_esc(s):
-    """Minimal HTML escaping."""
     if not s:
         return ""
     return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
 def html_esc_preserve_strong(s):
-    """
-    Escape HTML but preserve <strong> and </strong> tags.
-    Used for body text and watch descriptions that may legitimately contain bold.
-    """
     if not s:
         return ""
-    # Extract strong tags first, replace with placeholders
     parts = re.split(r'(</?strong>)', s, flags=re.IGNORECASE)
     result = []
     for part in parts:
@@ -768,8 +965,6 @@ def html_esc_preserve_strong(s):
 
 
 def generate_archive_html(briefing, date_iso):
-    """Generate a fully server-rendered static HTML page for one day's briefing."""
-
     date_display = briefing.get("date", date_iso)
     headline = html_esc(briefing.get("headline", "AGSIST Daily Briefing"))
     subheadline = html_esc(briefing.get("subheadline", ""))
@@ -779,10 +974,10 @@ def generate_archive_html(briefing, date_iso):
     heat_idx = meta.get("heat_section", -1)
     surprises = briefing.get("surprises", [])
     surprise_count = meta.get("overnight_surprises_count", 0)
+    is_weekend_brief = briefing.get("market_closed", False)
 
-    # Surprise banner
     surprise_html = ""
-    if surprise_count > 0:
+    if surprise_count > 0 and not is_weekend_brief:
         names = []
         for s in surprises:
             arrow = "▲" if s.get("direction") == "up" else "▼"
@@ -792,11 +987,10 @@ def generate_archive_html(briefing, date_iso):
             f'      <span class="surprise-icon">⚡</span>\n'
             f'      <span class="surprise-text"><strong>Overnight Surprise'
             f'{"s" if surprise_count > 1 else ""}:</strong> '
-            f'{" · ".join(names) if names else f"{surprise_count} unusual move{'s' if surprise_count > 1 else ''}"}'
+            f'{" · ".join(names) if names else str(surprise_count) + " unusual move" + ("s" if surprise_count > 1 else "")}'
             f'</span>\n    </div>'
         )
 
-    # Mood badge
     mood_html = ""
     if mood:
         mood_colors = {
@@ -815,18 +1009,16 @@ def generate_archive_html(briefing, date_iso):
             f'{mi} {mood.capitalize()}</span>'
         )
 
-    # Sections
     sections_html = ""
     for i, sec in enumerate(briefing.get("sections", [])):
         cls = "dv3-sec"
-        if sec.get("overnight_surprise"):
+        if sec.get("overnight_surprise") and not is_weekend_brief:
             cls += " dv3-sec--surprise"
         if i == heat_idx:
             cls += " dv3-sec--heat"
 
         icon = html_esc(sec.get("icon", "📊"))
         title = html_esc(sec.get("title", ""))
-        # Body may contain <strong> tags — preserve them
         body = html_esc_preserve_strong(sec.get("body", ""))
         bottom_line = html_esc(sec.get("bottom_line", ""))
         farmer_action = html_esc(sec.get("farmer_action", ""))
@@ -861,7 +1053,6 @@ def generate_archive_html(briefing, date_iso):
       {action_html}
     </div>'''
 
-    # One Number
     one_num = briefing.get("one_number", {})
     one_num_html = ""
     if one_num:
@@ -874,7 +1065,6 @@ def generate_archive_html(briefing, date_iso):
             f'      </div>'
         )
 
-    # Quote
     quote = briefing.get("daily_quote", {})
     quote_html = ""
     if quote:
@@ -888,7 +1078,6 @@ def generate_archive_html(briefing, date_iso):
             f'      </div>'
         )
 
-    # TMYK
     tmyk = briefing.get("the_more_you_know", {})
     tmyk_html = ""
     if tmyk:
@@ -900,7 +1089,6 @@ def generate_archive_html(briefing, date_iso):
             f'    </div>'
         )
 
-    # Watch list — use html_esc_preserve_strong so <strong> tags render correctly
     watch = briefing.get("watch_list", [])
     watch_items = ""
     for item in watch:
@@ -922,6 +1110,20 @@ def generate_archive_html(briefing, date_iso):
 
     source = html_esc(briefing.get("source_summary", "USDA · CME Group · Open-Meteo"))
     gen_at = briefing.get("generated_at", "")
+
+    # Weekend badge for archive pages
+    weekend_badge = ""
+    if is_weekend_brief:
+        reason = briefing.get("market_status_reason", "")
+        label = "WEEKEND EDITION" if reason == "weekend" else "HOLIDAY EDITION"
+        weekend_badge = (
+            f'<span style="display:inline-flex;align-items:center;gap:.3rem;'
+            f'font-family:\'JetBrains Mono\',monospace;font-size:.58rem;font-weight:700;'
+            f'letter-spacing:.1em;text-transform:uppercase;color:var(--gold);'
+            f'background:rgba(218,165,32,.08);border:1px solid rgba(218,165,32,.22);'
+            f'border-radius:3px;padding:.18rem .55rem;margin-left:.5rem">'
+            f'📅 {label}</span>'
+        )
 
     page = f'''<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -1036,6 +1238,7 @@ def generate_archive_html(briefing, date_iso):
       <div style="display:flex;align-items:center;flex-wrap:wrap;gap:.5rem">
         <div class="dv3-eyebrow"><span class="dv3-eyebrow-dot"></span> AGSIST DAILY — ARCHIVE</div>
         {mood_html}
+        {weekend_badge}
       </div>
       <div class="dv3-date">{html_esc(date_display)}</div>
       <h1 class="dv3-headline">{headline}</h1>
@@ -1078,7 +1281,6 @@ def generate_archive_html(briefing, date_iso):
 <div id="site-footer"></div>
 <script src="/components/loader.js"></script>
 <script>
-// Load prev/next nav from archive index
 (function(){{
   fetch('/data/daily-archive/index.json',{{cache:'no-store'}})
     .then(function(r){{return r.ok?r.json():null}})
@@ -1106,8 +1308,6 @@ def generate_archive_html(briefing, date_iso):
 
 
 def update_archive_index(briefing, date_iso):
-    """Update or create the archive index.json with today's entry."""
-
     index_path = ARCHIVE_JSON_DIR / "index.json"
 
     if index_path.exists():
@@ -1117,13 +1317,11 @@ def update_archive_index(briefing, date_iso):
         index = {"briefings": [], "updated": ""}
 
     entries = index.get("briefings", [])
-
     headline = briefing.get("headline", "")
     teaser = briefing.get("teaser", "")
     if not teaser and briefing.get("lead"):
         teaser = briefing["lead"][:140] + ("…" if len(briefing.get("lead", "")) > 140 else "")
     meta = briefing.get("meta", {})
-    surprise_count = meta.get("overnight_surprises_count", 0)
 
     entry = {
         "date": date_iso,
@@ -1131,9 +1329,10 @@ def update_archive_index(briefing, date_iso):
         "headline": headline,
         "teaser": teaser,
         "market_mood": meta.get("market_mood", ""),
-        "surprise_count": surprise_count,
+        "surprise_count": meta.get("overnight_surprises_count", 0),
         "sections": len(briefing.get("sections", [])),
         "url": f"/daily/{date_iso}",
+        "market_closed": briefing.get("market_closed", False),
     }
 
     found = False
@@ -1146,7 +1345,6 @@ def update_archive_index(briefing, date_iso):
         entries.insert(0, entry)
 
     entries.sort(key=lambda x: x.get("date", ""), reverse=True)
-
     index["briefings"] = entries
     index["updated"] = datetime.now(timezone.utc).isoformat()
     index["count"] = len(entries)
@@ -1158,10 +1356,7 @@ def update_archive_index(briefing, date_iso):
 
 
 def save_archive(briefing):
-    """Save today's briefing to the archive (JSON + static HTML)."""
-
     date_iso = datetime.now().strftime("%Y-%m-%d")
-
     ARCHIVE_JSON_DIR.mkdir(parents=True, exist_ok=True)
     ARCHIVE_HTML_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -1185,31 +1380,52 @@ def save_archive(briefing):
 # ═══════════════════════════════════════════════════════════════════
 
 def main():
-    print("═══ AGSIST Daily Briefing Generator v3.2 ═══")
+    print("═══ AGSIST Daily Briefing Generator v3.4 ═══")
     print(f"  Time: {datetime.now().isoformat()}")
+
+    # ── Market status ─────────────────────────────────────────────
+    market_status = get_market_status()
+    if market_status["is_closed"]:
+        print(f"  📅 Markets CLOSED — {market_status['day_name']} ({market_status['reason']})")
+        print(f"     Writing weekend/holiday outlook instead of overnight recap")
+    else:
+        print(f"  📈 Markets OPEN — {market_status['day_name']}")
 
     print("  Loading prices.json...")
     price_data, surprises = load_prices()
-    if surprises:
+
+    # On weekends, don't treat Friday→Friday changes as "surprises"
+    if market_status["is_closed"]:
+        surprises = []
+        print("  ℹ️  Weekend/holiday — overnight surprise detection suppressed")
+    elif surprises:
         print(f"  ⚡ {len(surprises)} overnight surprise(s)!")
         for s in surprises:
             print(f"    {s['commodity']}: {s['pct_change']:+.1f}% (magnitude {s['surprise_magnitude']}x)")
     else:
         print("  No overnight surprises — normal trading day.")
 
+    print("  Loading past dailies for continuity context...")
+    past_dailies_block = load_past_dailies(num_days=3)
+    if past_dailies_block:
+        print("  ✅ Past daily context loaded (last 3 briefings)")
+    else:
+        print("  ℹ️  No past dailies found")
+
     print("  Fetching ag news RSS...")
     news_block = fetch_ag_news()
 
     seasonal_ctx = get_seasonal_context()
-    print("  Seasonal context loaded.")
-
     todays_quote = get_todays_quote()
-    print(f"  Quote: \"{todays_quote['text'][:50]}...\" — {todays_quote['attribution']}")
+    print(f"  Quote: \"{todays_quote['text'][:50]}...\"")
 
     print("  Calling Claude API...")
-    briefing = call_claude(price_data, surprises, news_block, seasonal_ctx, todays_quote)
+    briefing = call_claude(
+        price_data, surprises, news_block, seasonal_ctx,
+        todays_quote, past_dailies_block, market_status
+    )
 
-    # ── Post-generation price validation ─────────────────────────
+    # Validate prices
     locked_prices = price_data.get("locked_prices", {})
     is_clean, val_warnings = validate_briefing(briefing, locked_prices)
     if val_warnings:
@@ -1217,14 +1433,16 @@ def main():
         for w in val_warnings:
             print(f"    • {w}")
     else:
-        print("  ✅ Price validation passed — all prices traceable to prices.json")
+        print("  ✅ Price validation passed")
 
     # Inject metadata
     briefing["generated_at"] = datetime.now(timezone.utc).isoformat()
-    briefing["generator_version"] = "3.2"
+    briefing["generator_version"] = "3.4"
     briefing["surprise_count"] = len(surprises)
     briefing["surprises"] = surprises
     briefing["price_validation_clean"] = is_clean
+    briefing["market_closed"] = market_status["is_closed"]
+    briefing["market_status_reason"] = market_status["reason"]
     if "meta" not in briefing:
         briefing["meta"] = {}
     briefing["meta"]["overnight_surprises_count"] = len(surprises)
@@ -1232,16 +1450,15 @@ def main():
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w") as f:
         json.dump(briefing, f, indent=2, ensure_ascii=False)
-
     print(f"  ✅ Written to {OUTPUT_PATH}")
 
     print("  Archiving briefing...")
     save_archive(briefing)
 
     print(f"  Headline: {briefing.get('headline', 'N/A')}")
-    print(f"  Sections: {len(briefing.get('sections', []))}")
+    print(f"  Market status: {'CLOSED (' + market_status['day_name'] + ')' if market_status['is_closed'] else 'open'}")
     print(f"  Surprises: {len(surprises)}")
-    print(f"  Price validation: {'clean' if is_clean else f'{len(val_warnings)} warning(s)'}")
+    print(f"  Price validation: {'clean' if is_clean else str(len(val_warnings)) + ' warning(s)'}")
     print("═══ Done ═══")
 
 
