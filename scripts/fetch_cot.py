@@ -23,11 +23,13 @@ OUT_FILE = "data/cot.json"
 CFTC_URL = "https://www.cftc.gov/files/dea/history/fut_disagg_txt_{year}.zip"
 
 # Target commodity name fragments (matched against Market_and_Exchange_Names column)
-# These are the exact strings that appear in the CFTC file
+# Use partial matching — CFTC sometimes prefixes wheat with SRW/HRW
 TARGETS = {
-    "corn":  "CORN - CHICAGO BOARD OF TRADE",
-    "beans": "SOYBEANS - CHICAGO BOARD OF TRADE",
-    "wheat": "WHEAT - CHICAGO BOARD OF TRADE",
+    "corn":  ("CORN - CHICAGO BOARD OF TRADE",),
+    "beans": ("SOYBEANS - CHICAGO BOARD OF TRADE",),
+    "wheat": ("SRW WHEAT - CHICAGO BOARD OF TRADE",
+              "HRW WHEAT - CHICAGO BOARD OF TRADE",
+              "WHEAT - CHICAGO BOARD OF TRADE",),
 }
 
 
@@ -63,21 +65,18 @@ def parse_rows(csv_text: str) -> list[dict]:
             print(f"  CSV columns: {list(row.keys())[:10]}", flush=True)
             headers_printed = True
         market = row.get("Market_and_Exchange_Names", "").strip()
-        for key, target in TARGETS.items():
-            if target.lower() in market.lower():
+        for key, targets in TARGETS.items():
+            if any(t.lower() in market.lower() for t in targets):
                 try:
                     long_pos  = int(row.get("M_Money_Positions_Long_All",  0) or 0)
                     short_pos = int(row.get("M_Money_Positions_Short_All", 0) or 0)
                     net = long_pos - short_pos
-                    date_str = row.get("Report_Date_as_MM_DD_YYYY", "").strip()
-                    # Also try alternate column names
+                    # Prefer the clean ISO date column; fall back to YYMMDD
+                    date_str = row.get("Report_Date_as_YYYY-MM-DD", "").strip()
                     if not date_str:
-                        for col in row:
-                            if 'date' in col.lower() or 'Date' in col:
-                                date_str = row[col].strip()
-                                if date_str:
-                                    print(f"  Found date in col '{col}': '{date_str}'", flush=True)
-                                    break
+                        raw = row.get("As_of_Date_In_Form_YYMMDD", "").strip()
+                        if len(raw) == 6:
+                            date_str = f"20{raw[:2]}-{raw[2:4]}-{raw[4:]}"
                     dt = parse_date(date_str)
                     if dt is None:
                         print(f"  Skipping unparseable date: '{date_str}' for {key}", flush=True)
@@ -193,7 +192,9 @@ def main():
         json.dump(output, f, indent=2)
 
     print(f"\nWritten {OUT_FILE}")
-    if not all_ok:
+    # Only fail hard if ALL commodities are missing
+    found = [k for k in ["corn","beans","wheat"] if k in output]
+    if not found:
         sys.exit(1)
 
 
