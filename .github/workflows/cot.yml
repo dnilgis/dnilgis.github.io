@@ -1,0 +1,33 @@
+name: Fetch COT Data
+
+on:
+  schedule:
+    # Saturday 9:00 AM CT (14:00 UTC) — after Friday 3:30 PM ET CFTC release
+    - cron: '0 14 * * 6'
+  workflow_dispatch:
+
+jobs:
+  fetch-cot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch CFTC COT data
+        run: python scripts/fetch_cot.py
+
+      - name: Commit data/cot.json
+        run: |
+          git config user.name "AGSIST Bot"
+          git config user.email "bot@agsist.com"
+          git add data/cot.json
+          git diff --staged --quiet || git commit -m "chore: update COT data $(date +%F)"
+          git push
