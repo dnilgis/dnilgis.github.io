@@ -20,6 +20,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AGSIST">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="Corn Futures Prices Today — Live CBOT Chart | AGSIST">
 <meta property="og:description" content="Live CBOT corn futures prices updated every 30 minutes. Front-month and Dec harvest contract with interactive chart, 52-week range, and market context. Free for farmers.">
 <meta property="og:url" content="https://agsist.com/corn-futures-prices">
@@ -33,6 +34,9 @@
 <meta name="twitter:title" content="Corn Futures Prices Today — Live CBOT Chart | AGSIST">
 <meta name="twitter:description" content="Live CBOT corn futures updated every 30 min. Front-month + Dec harvest contract, chart, 52-week range. Free for farmers.">
 <meta name="twitter:image" content="https://agsist.com/img/og/corn-futures-prices.jpg">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
 
 <script type="application/ld+json">
 {
@@ -64,7 +68,7 @@
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "variableMeasured": [
         { "@type": "PropertyValue", "name": "Corn Front Month (ZC)", "unitCode": "USD", "description": "CBOT corn front-month futures price in cents per bushel" },
-        { "@type": "PropertyValue", "name": "Corn December (ZCZ26)", "unitCode": "USD", "description": "CBOT corn December new-crop futures price in cents per bushel" }
+        { "@type": "PropertyValue", "name": "Corn December (ZCZ)", "unitCode": "USD", "description": "CBOT corn December new-crop futures price in cents per bushel" }
       ]
     },
     {
@@ -116,6 +120,7 @@
 </script>
 
 <style>
+button,a,[role="button"]{touch-action:manipulation;}
 .fut { max-width: 1100px; margin: 0 auto; padding: 0 16px 2.5rem }
 .bc { font-size: .75rem; color: var(--text-dim); margin: 12px 0 }
 .bc a { color: var(--gold); text-decoration: none }
@@ -134,17 +139,17 @@
 .sk { color: var(--text-dim); animation: blink 1.4s ease-in-out infinite }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 .cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px; margin-bottom: 14px }
-.cc { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; transition: border-color .2s; }
+.cc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; transition: border-color .2s; }
 .cc:hover { border-color: var(--border-g) }
 .cc.hi { border-color: var(--gold); background: rgba(230,176,66,.04) }
-.cc-lbl { font-size: .6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px }
+.cc-lbl { font-size: .62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px }
 .cc-p { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text) }
-.cc-u { font-size: .6rem; color: var(--text-dim) }
+.cc-u { font-size: .62rem; color: var(--text-dim) }
 .cc-c { font-size: .72rem; font-weight: 600; margin-top: 2px }
 .cp { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 14px }
 .cp-head { padding: 9px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center }
 .cp-head h2 { margin: 0; font-size: .85rem; color: var(--gold) }
-.cp-src { font-size: .6rem; color: var(--text-muted) }
+.cp-src { font-size: .62rem; color: var(--text-muted) }
 .rng { margin-bottom: 14px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px }
 .rng-lbl { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px }
 .rng-bar { position: relative; height: 6px; background: var(--surface2); border-radius: 3px; margin-bottom: 4px }
@@ -160,7 +165,7 @@
 .xl { color: var(--text-dim) } .xv { color: var(--text); font-weight: 600 }
 .rl { font-size: .68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; margin: 14px 0 6px }
 .rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 6px }
-.ra { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-decoration: none; transition: border-color .2s; }
+.ra { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-decoration: none; transition: border-color .2s; }
 .ra:hover { border-color: var(--border-g) }
 .ra-i { font-size: 1.2rem; margin-bottom: 3px }
 .ra-n { font-size: .8rem; font-weight: 600; color: var(--text) }
@@ -170,9 +175,10 @@
 </style>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 <div id="site-header"></div>
 
-<main class="fut">
+<main id="main" class="fut">
   <nav class="bc" aria-label="Breadcrumb"><a href="/">Home</a> → Corn Futures Prices</nav>
 
   <div class="ph">
@@ -192,7 +198,7 @@
 
   <div class="cg">
     <div class="cc hi"><div class="cc-lbl">Front Month (ZC)</div><div class="cc-p sk" id="p-corn">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-corn"></div></div>
-    <div class="cc"><div class="cc-lbl">Dec '26 (ZCZ26)</div><div class="cc-p sk" id="p-corndec">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-corndec"></div></div>
+    <div class="cc"><div class="cc-lbl">Dec New Crop (ZCZ)</div><div class="cc-p sk" id="p-corndec">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-corndec"></div></div>
     <div class="cc"><div class="cc-lbl">Soybeans (ZS)</div><div class="cc-p sk" id="p-beans">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-beans"></div></div>
     <div class="cc"><div class="cc-lbl">Wheat (ZW)</div><div class="cc-p sk" id="p-wheat">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-wheat"></div></div>
     <div class="cc"><div class="cc-lbl">Crude Oil (CL)</div><div class="cc-p sk" id="p-crude">—</div><div class="cc-u">$/bbl</div><div class="cc-c" id="c-crude"></div></div>

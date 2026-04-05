@@ -36,6 +36,9 @@
   <meta name="twitter:description" content="Free break-even calculator for corn, soybean &amp; wheat. Cost per bushel, target price, profit per acre, what-if table. No login needed.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/breakeven.jpg">
 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -72,8 +75,10 @@
   <style>
     /* ══════════════════════════════════════════════════════════════
        BREAK-EVEN CALCULATOR — Embedded Styles
-       Brand alignment v8 — 2026-03-02
+       Brand alignment v9 — 2026-04-05
        ══════════════════════════════════════════════════════════════ */
+
+    button,a,[role="button"]{touch-action:manipulation;}
 
     html, body { overflow-x: hidden; width: 100%; }
     .panel { overflow: visible; }
@@ -98,7 +103,7 @@
     .hint-popup {
       display: none; margin-top: 8px;
       background: var(--surface); border: 2px solid var(--green);
-      border-radius: 4px; padding: 12px 14px;
+      border-radius: 6px; padding: 12px 14px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       animation: hintIn 0.15s ease-out;
     }
@@ -118,7 +123,7 @@
       display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
       padding: 10px 14px; margin-bottom: 16px;
       background: rgba(58,139,60,0.05); border: 2px solid rgba(58,139,60,0.20);
-      border-radius: 4px; font-size: 0.8rem;
+      border-radius: 6px; font-size: 0.8rem;
     }
     .live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
     @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
@@ -128,7 +133,7 @@
     .live-price-bar .chg-tag.dn { color: var(--red); }
     .live-price-bar button {
       background: var(--green); color: #fff; border: none; padding: 4px 12px;
-      border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .3px;
       cursor: pointer; transition: background 0.15s; margin-left: auto;
@@ -141,12 +146,12 @@
       font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase;
       letter-spacing: .08em; margin-bottom: 8px; font-weight: 700;
     }
-    .cost-bar { display: flex; height: 28px; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+    .cost-bar { display: flex; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
     .cost-bar-seg { transition: width 0.4s ease; min-width: 2px; position: relative; cursor: pointer; }
     .cost-bar-seg:hover { filter: brightness(1.2); }
     .cost-bar-seg .seg-tip {
       display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
-      background: var(--surface); border: 2px solid var(--border); border-radius: 4px;
+      background: var(--surface); border: 2px solid var(--border); border-radius: 6px;
       padding: 4px 8px; font-size: 0.7rem; white-space: nowrap; z-index: 500; pointer-events: none;
     }
     @media (hover: hover) { .cost-bar-seg:hover .seg-tip { display: block; } }
@@ -175,7 +180,7 @@
     .sens-zero { color: var(--text-dim); }
     .sens-current { background: rgba(58,139,60,0.10) !important; outline: 2px solid var(--green); }
 
-    .profit-gauge { margin-top: 16px; padding: 14px; background: var(--bg); border-radius: 4px; border: 2px solid var(--border); }
+    .profit-gauge { margin-top: 16px; padding: 14px; background: var(--bg); border-radius: 8px; border: 2px solid var(--border); }
     .profit-gauge-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; font-weight: 700; }
     .profit-gauge-bar { height: 8px; background: var(--border); border-radius: 4px; position: relative; }
     .profit-gauge-fill { height: 100%; border-radius: 4px; transition: width 0.4s, background 0.4s; }
@@ -184,17 +189,17 @@
 
     .be-highlight { font-size: 1.3rem; }
 
-    .acres-row { margin-top: 14px; padding: 12px; border-radius: 4px; background: var(--bg); border: 2px solid var(--border); }
+    .acres-row { margin-top: 14px; padding: 12px; border-radius: 6px; background: var(--bg); border: 2px solid var(--border); }
     .acres-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .acres-input-group { display: flex; align-items: center; gap: 8px; }
     .acres-label { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin: 0; white-space: nowrap; font-weight: 700; }
-    .acres-field { width: 80px; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: .85rem; background: var(--surface); border: 2px solid var(--border); border-radius: 4px; color: var(--text); }
+    .acres-field { width: 80px; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: .85rem; background: var(--surface); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
     .acres-field:focus { outline: none; border-color: var(--green); }
     .farm-total-label { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
     .farm-total-value { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700; }
 
     .action-bar { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: .3px; transition: all 0.15s; border: 2px solid var(--border); }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: .3px; transition: all 0.15s; border: 2px solid var(--border); }
     .btn-primary { background: var(--green); color: #fff; border-color: var(--green); }
     .btn-primary:hover { background: #1b4d1c; border-color: #1b4d1c; }
     .btn-secondary { background: var(--surface); color: var(--text-dim); }
@@ -255,6 +260,7 @@
 </head>
 <body>
 
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
 
   <div class="print-header">

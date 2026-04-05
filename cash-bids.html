@@ -6,15 +6,17 @@
 <link rel="stylesheet" href="/components/styles.css">
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#111a0a">
 
 <title>Cash Grain Bids Near Me — Live Elevator Prices | AGSIST</title>
 <meta name="description" content="Live cash grain bids by ZIP code. Corn, soybean, and wheat elevator prices from Alcivia, Big Gain, Kasbeer, Cooper Grain, Meyer Brothers, and more. Free.">
-<meta name="author" content="Farmers First Agri Service — AGSIST">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<link rel="canonical" href="https://agsist.com/cash-bids">
+<meta name="keywords"    content="cash grain bids near me, live grain elevator prices, corn cash price, soybean cash bids, wheat elevator price, local grain bids by ZIP, basis levels, Alcivia grain bids, Big Gain cooperative prices, AGSIST cash bids">
+<meta name="author"      content="Farmers First Agri Service — AGSIST">
+<meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical"    href="https://agsist.com/cash-bids">
 
 <meta property="og:type"         content="website">
 <meta property="og:site_name"    content="AGSIST">
@@ -126,6 +128,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{overflow-x:clip}
 body{overflow-x:clip;max-width:100%}
+button,a,[role="button"]{touch-action:manipulation;}
 
 .cb-wrap{max-width:1060px;margin:0 auto;padding:0 1rem;
   padding-left:max(1rem,env(safe-area-inset-left));
@@ -253,7 +256,7 @@ body{overflow-x:clip;max-width:100%}
   gap:.25rem .6rem;
   padding:.15rem .35rem .1rem;
   font-family:'JetBrains Mono',monospace;
-  font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
   color:var(--text-muted);opacity:.7;
 }
 .bid-row-labels span:nth-child(2),
@@ -280,7 +283,7 @@ body{overflow-x:clip;max-width:100%}
   .bid-cash{font-size:.95rem}
   .bid-basis{font-size:.72rem;min-width:46px}
   .bid-del{font-size:.7rem}
-  .bid-row-labels{font-size:.5rem;padding:.1rem .25rem .05rem}
+  .bid-row-labels{font-size:.62rem;padding:.1rem .25rem .05rem}
 }
 @media(max-width:360px){
   .cb-wrap{padding:0 .65rem}
@@ -289,6 +292,7 @@ body{overflow-x:clip;max-width:100%}
   .bid-rows{padding:0 .4rem .4rem}
   .bid-cash{font-size:.88rem}
   .bid-basis{font-size:.68rem;min-width:42px}
+  .bid-row-labels{font-size:.62rem}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -304,6 +308,7 @@ body{overflow-x:clip;max-width:100%}
 </style>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 <div id="site-header"></div>
 <main id="main" tabindex="-1">
   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> → Cash Bids</nav>

@@ -4,21 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Sources — AGSIST</title>
-  <meta name="description" content="Full transparency on every data source used by AGSIST: commodity prices, weather, geocoding, and the Farmers First Ag Index.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://agsist.com/data-sources">
-  <meta property="og:title"       content="Data Sources — AGSIST">
-  <meta property="og:description" content="Full transparency on every data source used by AGSIST: commodity prices, weather, geocoding, and the Farmers First Ag Index.">
-  <meta property="og:url"         content="https://agsist.com/data-sources">
-  <meta property="og:image"       content="https://agsist.com/img/og/data-sources.jpg">
-  <meta property="og:type"        content="website">
-  <meta property="og:site_name"   content="AGSIST">
-  <meta name="twitter:card"       content="summary_large_image">
-  <meta name="twitter:site"       content="@agsist">
+  <meta name="description" content="Full transparency on every data source used by AGSIST: commodity prices, weather, geocoding, cash bids, and the Farmers First Ag Index.">
+  <meta name="keywords"    content="AGSIST data sources, agricultural data transparency, grain price data source, farm weather data, yfinance commodity prices">
+  <meta name="author"      content="Farmers First Agri Service — AGSIST">
+  <meta name="robots"      content="index, follow">
+  <link rel="canonical"    href="https://agsist.com/data-sources">
+
+  <meta property="og:type"         content="website">
+  <meta property="og:site_name"    content="AGSIST">
+  <meta property="og:locale"       content="en_US">
+  <meta property="og:title"        content="Data Sources — AGSIST">
+  <meta property="og:description"  content="Full transparency on every data source used by AGSIST: commodity prices, weather, geocoding, cash bids, and the Farmers First Ag Index.">
+  <meta property="og:url"          content="https://agsist.com/data-sources">
+  <meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="AGSIST Data Sources — transparency on every data provider used">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@agsist">
+  <meta name="twitter:creator"     content="@agsist">
+  <meta name="twitter:title"       content="Data Sources — AGSIST">
+  <meta name="twitter:description" content="Full transparency on every data source AGSIST uses: prices, weather, geocoding, cash bids, and the FFAI.">
+  <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+
   <link rel="stylesheet"                          href="/components/styles.css">
   <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
+  <link rel="manifest"                            href="/manifest.json">
   <style>
+    button,a,[role="button"]{touch-action:manipulation;}
     .info-page{max-width:820px;margin:0 auto;padding:3rem 1.5rem 5rem;}
     .info-page h1{font-size:2rem;color:var(--gold);margin-bottom:.5rem;}
     .info-page .sub{color:var(--text-dim);font-size:1rem;margin-bottom:2.5rem;line-height:1.6;}
@@ -26,12 +45,12 @@
     .info-page p,.info-page li{color:var(--text-dim);line-height:1.8;font-size:.95rem;}
     .info-page ul{padding-left:1.5rem;margin:.5rem 0 1rem;}
     .info-page a{color:var(--gold);}
-    .info-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0;}
+    .info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin:1rem 0;}
     .info-card h3{font-size:1rem;color:var(--gold);margin-bottom:.5rem;}
   </style>
-  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
   <main id="main" tabindex="-1">
     <div class="info-page">
@@ -40,17 +59,11 @@
 
       <h2>Commodity Prices</h2>
       <div class="info-card">
-        <h3>📊 Stooq.com</h3>
-        <p><strong>Used for:</strong> Corn, soybean, wheat, live cattle, lean hog, crude oil, natural gas, gold, silver, Dollar Index, 10-yr Treasury futures.</p>
-        <p><strong>Delay:</strong> 15 minutes minimum.</p>
-        <p><strong>Update frequency:</strong> Every 5 minutes during market hours.</p>
-        <p><a href="https://stooq.com" target="_blank" rel="noopener">stooq.com</a> — free, no API key required.</p>
-      </div>
-      <div class="info-card">
-        <h3>₿ CoinGecko</h3>
-        <p><strong>Used for:</strong> Bitcoin, XRP, and Kaspa spot prices.</p>
-        <p><strong>Delay:</strong> Real-time (free tier).</p>
-        <p><a href="https://coingecko.com" target="_blank" rel="noopener">coingecko.com</a> — free public API.</p>
+        <h3>📊 Yahoo Finance (via yfinance)</h3>
+        <p><strong>Used for:</strong> Corn, soybean, wheat, live cattle, lean hog, crude oil, natural gas, gold, silver, Dollar Index, 10-yr Treasury futures, and cryptocurrency prices.</p>
+        <p><strong>Delay:</strong> 15 minutes minimum during market hours.</p>
+        <p><strong>Update frequency:</strong> Every 30 minutes via GitHub Actions during weekday trading hours.</p>
+        <p><a href="https://finance.yahoo.com" target="_blank" rel="noopener">finance.yahoo.com</a> — free market data via the yfinance Python library.</p>
       </div>
 
       <h2>Weather</h2>
@@ -71,6 +84,20 @@
         <p><a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener">droughtmonitor.unl.edu</a></p>
       </div>
 
+      <h2>Prediction Markets</h2>
+      <div class="info-card">
+        <h3>🎯 Kalshi &amp; Polymarket</h3>
+        <p><strong>Used for:</strong> Agricultural and economic event probabilities on the Ag Odds page. Data fetched server-side via GitHub Actions from Kalshi's trading API and Polymarket's Gamma API.</p>
+        <p><a href="https://kalshi.com" target="_blank" rel="noopener">kalshi.com</a> · <a href="https://polymarket.com" target="_blank" rel="noopener">polymarket.com</a></p>
+      </div>
+
+      <h2>USDA Reports</h2>
+      <div class="info-card">
+        <h3>🌾 USDA APIs</h3>
+        <p><strong>Used for:</strong> USDA report calendar (WASDE, Crop Progress, Grain Stocks, Acreage, Cattle on Feed) via the USDA Economic Research Service and NASS APIs. Report dates extended through October 2026.</p>
+        <p><a href="https://www.usda.gov" target="_blank" rel="noopener">usda.gov</a> — public APIs, no key required.</p>
+      </div>
+
       <h2>Geocoding</h2>
       <div class="info-card">
         <h3>📍 Nominatim / OpenStreetMap</h3>
@@ -80,13 +107,13 @@
       <h2>Farmers First Ag Index (FFAI)</h2>
       <div class="info-card">
         <h3>📈 Farmers First Agri Service — Proprietary</h3>
-        <p>The FFAI is a composite index calculated weekly by Farmers First Agri Service from publicly available agricultural economic data. Published every Monday at <a href="https://farmers1st.com" target="_blank" rel="noopener">farmers1st.com</a>.</p>
+        <p>The FFAI is a composite index calculated by Farmers First Agri Service from publicly available agricultural economic data. Available at <a href="https://farmers1st.com" target="_blank" rel="noopener">farmers1st.com</a>.</p>
       </div>
 
       <h2>Cash Bids</h2>
       <div class="info-card">
         <h3>🚜 Barchart OnDemand</h3>
-        <p>Local elevator cash bids are sourced from Barchart OnDemand API, proxied via a Cloudflare Worker to protect the API key. Integration requires Worker deployment — see <a href="/developer">Developer docs</a>.</p>
+        <p>Local elevator cash bids are sourced from the Barchart OnDemand API. A Cloudflare Worker proxy to protect the API key is pending deployment. See <a href="/developer">Developer docs</a> for integration details.</p>
       </div>
 
       <p>See a data issue? <a href="/contact">Contact us</a>.</p>

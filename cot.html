@@ -9,22 +9,36 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
 <link rel="preload" href="/components/styles.css" as="style">
 <link rel="stylesheet" href="/components/styles.css">
-<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-<link rel="apple-touch-icon"         href="/img/apple-touch-icon.png">
-<link rel="manifest"                 href="/manifest.json">
+<link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
+<link rel="manifest"                            href="/manifest.json">
 <meta name="theme-color" content="#111a0a">
 
 <title>CFTC Commitment of Traders — Corn, Soybean &amp; Wheat Fund Positioning | AGSIST</title>
 <meta name="description" content="Weekly CFTC Commitment of Traders data for corn, soybeans, and wheat. See managed money net long/short positioning and 52-week historical chart. Free for farmers.">
-<meta name="author"  content="Farmers First Agri Service — AGSIST">
-<meta name="robots"  content="index, follow">
-<link rel="canonical" href="https://agsist.com/cot">
-<meta property="og:type"        content="website">
-<meta property="og:site_name"   content="AGSIST">
-<meta property="og:title"       content="CFTC Commitment of Traders — Grain Fund Positioning | AGSIST">
-<meta property="og:description" content="Weekly managed money positioning for corn, soybeans, and wheat. 52-week chart. Free for farmers.">
-<meta property="og:url"         content="https://agsist.com/cot">
-<meta property="og:image"       content="https://agsist.com/img/og/agsist.jpg">
+<meta name="keywords"    content="CFTC commitment of traders, COT report corn, managed money positioning, grain fund positioning, corn futures positioning, soybean COT, wheat COT report, speculative positioning grains">
+<meta name="author"      content="Farmers First Agri Service — AGSIST">
+<meta name="robots"      content="index, follow">
+<link rel="canonical"    href="https://agsist.com/cot">
+
+<meta property="og:type"         content="website">
+<meta property="og:site_name"    content="AGSIST">
+<meta property="og:locale"       content="en_US">
+<meta property="og:title"        content="CFTC Commitment of Traders — Grain Fund Positioning | AGSIST">
+<meta property="og:description"  content="Weekly managed money positioning for corn, soybeans, and wheat. 52-week chart. Free for farmers.">
+<meta property="og:url"          content="https://agsist.com/cot">
+<meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"    content="AGSIST COT Report — CFTC managed money grain fund positioning">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@agsist">
+<meta name="twitter:creator"     content="@agsist">
+<meta name="twitter:title"       content="CFTC Commitment of Traders — Grain Fund Positioning | AGSIST">
+<meta name="twitter:description" content="Weekly CFTC COT data for corn, soybeans, and wheat. Managed money net long/short positioning with 52-week chart. Free for farmers.">
+<meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
 
 <script type="application/ld+json">
 {
@@ -45,6 +59,8 @@
 </script>
 
 <style>
+button,a,[role="button"]{touch-action:manipulation;}
+
 /* ── Page layout ── */
 .cot-page { max-width: 900px; margin: 0 auto; padding: 0 1rem 3rem; }
 
@@ -94,7 +110,7 @@
 @media (max-width: 540px) { .cot-summary-grid { grid-template-columns: 1fr; } }
 
 .cot-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
   padding: .85rem 1rem;
 }
 .cot-card-head {
@@ -103,7 +119,7 @@
 }
 .cot-card-name { font-size: .72rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: .3rem; }
 .cot-card-verdict {
-  font-size: .6rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  font-size: .62rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
   padding: .12rem .45rem; border-radius: 12px; border: 1px solid;
 }
 .cot-card-verdict.long  { color: var(--green); background: rgba(34,197,94,.08);  border-color: rgba(34,197,94,.25); }
@@ -136,7 +152,7 @@
 }
 .cot-card-range-labels {
   display: flex; justify-content: space-between;
-  font-size: .53rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
 }
 
 /* ── Chart section ── */
@@ -347,7 +363,6 @@ function fmtKShort(n) {
   return (n < 0 ? '-' : '') + (abs >= 1000 ? Math.round(abs/1000)+'k' : Math.round(abs));
 }
 
-// ── Render summary card ───────────────────────────────────────────────────
 function renderCard(key, d) {
   var net = d.net, prev = d.prev, min52 = d.min52, max52 = d.max52;
   var range = (max52 - min52) || 1;
@@ -390,7 +405,6 @@ function renderCard(key, d) {
   if (dotEl)  { dotEl.style.left = currPct.toFixed(1)+'%'; dotEl.style.background = dotClr; }
 }
 
-// ── Render verdict banner ─────────────────────────────────────────────────
 function renderVerdict(summary) {
   var keys = ['corn', 'beans', 'wheat'];
   var scores = [], netLong = 0;
@@ -426,7 +440,6 @@ function renderVerdict(summary) {
   if (date && summary.report_date) date.textContent = 'As of ' + summary.report_date + ' · CFTC Disaggregated';
 }
 
-// ── Mini canvas chart ─────────────────────────────────────────────────────
 var historyData = null;
 var activeKey   = 'corn';
 
@@ -438,7 +451,6 @@ function drawChart(key) {
   var history = historyData.history;
   var keys = key === 'all' ? ['corn', 'beans', 'wheat'] : [key];
 
-  // Collect all dates
   var allDates = [];
   keys.forEach(function(k) {
     (history[k] || []).forEach(function(r) { if (!allDates.includes(r.date)) allDates.push(r.date); });
@@ -466,7 +478,6 @@ function drawChart(key) {
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, W, H);
 
-  // Compute global min/max
   var allNets = [];
   keys.forEach(function(k) {
     (history[k] || []).forEach(function(r) { allNets.push(r.net); });
@@ -474,7 +485,6 @@ function drawChart(key) {
   if (!allNets.length) return;
   var minNet = Math.min.apply(null, allNets);
   var maxNet = Math.max.apply(null, allNets);
-  // Extend range to include zero
   minNet = Math.min(minNet, 0);
   maxNet = Math.max(maxNet, 0);
   var pad = (maxNet - minNet) * 0.1 || 5000;
@@ -488,7 +498,6 @@ function drawChart(key) {
   function xOf(i) { return PAD.left + (i / Math.max(allDates.length - 1, 1)) * cW; }
   function yOf(n) { return PAD.top + (1 - (n - minNet) / netRange) * cH; }
 
-  // Zero line
   var zeroY = yOf(0);
   ctx.strokeStyle = 'rgba(255,255,255,.12)';
   ctx.lineWidth = 1;
@@ -496,13 +505,11 @@ function drawChart(key) {
   ctx.beginPath(); ctx.moveTo(PAD.left, zeroY); ctx.lineTo(PAD.left + cW, zeroY); ctx.stroke();
   ctx.setLineDash([]);
 
-  // Zero label
   ctx.fillStyle = 'rgba(255,255,255,.25)';
   ctx.font = '10px JetBrains Mono, monospace';
   ctx.textAlign = 'right';
   ctx.fillText('0', PAD.left - 4, zeroY + 4);
 
-  // Y axis labels
   var yTicks = 4;
   ctx.fillStyle = 'rgba(255,255,255,.35)';
   ctx.font = '10px JetBrains Mono, monospace';
@@ -519,7 +526,6 @@ function drawChart(key) {
     ctx.beginPath(); ctx.moveTo(PAD.left, yy); ctx.lineTo(PAD.left + cW, yy); ctx.stroke();
   }
 
-  // X axis labels (every ~8 weeks)
   ctx.fillStyle = 'rgba(255,255,255,.3)';
   ctx.font = '9px JetBrains Mono, monospace';
   ctx.textAlign = 'center';
@@ -531,35 +537,27 @@ function drawChart(key) {
     ctx.fillText(lbl, xOf(i), H - 8);
   });
 
-  // Draw series
   keys.forEach(function(k) {
     var pts = history[k] || [];
     if (!pts.length) return;
     var color = COLORS[k];
 
-    // Fill area
     ctx.beginPath();
     pts.forEach(function(r, i) {
       var xi = allDates.indexOf(r.date);
       var x = xOf(xi), y = yOf(r.net);
       if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     });
-    // Close to zero line
     var lastIdx = allDates.indexOf(pts[pts.length-1].date);
     var firstIdx = allDates.indexOf(pts[0].date);
     ctx.lineTo(xOf(lastIdx), zeroY);
     ctx.lineTo(xOf(firstIdx), zeroY);
     ctx.closePath();
-    ctx.fillStyle = color.replace('#','') === color
-      ? color + '22'
-      : color + '22';
-    // Use a transparent version
     ctx.globalAlpha = 0.18;
     ctx.fillStyle = color;
     ctx.fill();
     ctx.globalAlpha = 1;
 
-    // Line
     ctx.beginPath();
     ctx.strokeStyle = color;
     ctx.lineWidth = keys.length === 1 ? 2 : 1.5;
@@ -571,7 +569,6 @@ function drawChart(key) {
     });
     ctx.stroke();
 
-    // Last dot
     if (pts.length) {
       var lastR = pts[pts.length - 1];
       var lxi = allDates.indexOf(lastR.date);
@@ -591,12 +588,10 @@ function setActiveTab(key) {
   drawChart(key);
 }
 
-// ── Boot ──────────────────────────────────────────────────────────────────
 document.querySelectorAll('.cot-chart-tab').forEach(function(btn) {
   btn.addEventListener('click', function() { setActiveTab(btn.dataset.key); });
 });
 
-// Load summary
 fetch('/data/cot.json')
   .then(function(r) { if (!r.ok) throw new Error('no-cot'); return r.json(); })
   .then(function(data) {
@@ -612,7 +607,6 @@ fetch('/data/cot.json')
     if (banner) banner.className = 'cot-verdict-banner mixed';
   });
 
-// Load history for chart
 fetch('/data/cot-history.json')
   .then(function(r) { if (!r.ok) throw new Error('no-hist'); return r.json(); })
   .then(function(data) {
@@ -626,7 +620,6 @@ fetch('/data/cot-history.json')
     if (canvas) canvas.style.display = 'none';
   });
 
-// Redraw on resize
 window.addEventListener('resize', function() {
   if (historyData) drawChart(activeKey);
 });
