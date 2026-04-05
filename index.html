@@ -141,7 +141,7 @@
     overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;
   }
   .mkt-summary::-webkit-scrollbar{display:none}
-  .mkt-sum-item{display:inline-flex;align-items:center;gap:.32rem;padding:.05rem .6rem;border-right:1px solid var(--border);flex-shrink:0;}
+  .mkt-sum-item{display:inline-flex;align-items:center;gap:.32rem;padding:.2rem .6rem;border-right:1px solid var(--border);flex-shrink:0;}
   .mkt-sum-item:last-child{border-right:none}
   .msi-icon{font-size:.82rem;line-height:1}
   .msi-name{font-size:.62rem;color:var(--text-muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
@@ -166,7 +166,7 @@
   }
   .ratio-widget-head{
     display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;
-    margin-bottom:.55rem;
+    margin-bottom:.6rem;
   }
   .ratio-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .ratio-body{
@@ -177,7 +177,7 @@
   .ratio-big{font-family:'Oswald',sans-serif;font-size:2.4rem;font-weight:800;line-height:1;color:var(--text);transition:color .4s;}
   .ratio-colon{font-size:1.3rem;color:var(--text-muted);vertical-align:middle;margin:0 1px}
   .ratio-one{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;color:var(--text-muted)}
-  .ratio-label{font-size:.58rem;color:var(--text-muted);font-weight:600;margin-top:.15rem;letter-spacing:.03em}
+  .ratio-label{font-size:.62rem;color:var(--text-muted);font-weight:600;margin-top:.15rem;letter-spacing:.03em}
   .ratio-right{
     flex:1;min-width:0;
     display:flex;flex-direction:column;justify-content:space-between;
@@ -195,7 +195,7 @@
   }
   .ratio-gauge-zones{
     display:flex;justify-content:space-between;
-    font-size:.54rem;color:var(--text-muted);letter-spacing:.03em;font-weight:600;
+    font-size:.6rem;color:var(--text-muted);letter-spacing:.03em;font-weight:600;
     padding:0 1px;margin-bottom:.3rem;
   }
   .ratio-verdict{
@@ -207,14 +207,14 @@
   .ratio-verdict.neutral{background:var(--surface2);color:var(--text-dim);border-color:var(--border)}
   .ratio-verdict.beans{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22)}
   .ratio-meta{
-    font-size:.63rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;
+    font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;
     display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.2rem;
   }
   .ratio-meta-sep{color:var(--border)}
   .ratio-links{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.4rem;}
   .ratio-link{
-    font-size:.63rem;font-weight:600;color:var(--text-muted);text-decoration:none;
-    padding:.16rem .45rem;border:1px solid var(--border);border-radius:5px;
+    font-size:.65rem;font-weight:600;color:var(--text-muted);text-decoration:none;
+    padding:.32rem .6rem;border:1px solid var(--border);border-radius:5px;
     transition:border-color .15s,color .15s;
   }
   .ratio-link:hover{border-color:var(--gold);color:var(--gold)}
@@ -252,27 +252,27 @@
   .cot-net{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--text)}
   .cot-chg{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700}
   .cot-chg.up{color:var(--green)} .cot-chg.dn{color:#ef4444} .cot-chg.nc{color:var(--text-muted)}
-  .cot-bar-wrap{position:relative;height:7px;border-radius:4px;background:var(--surface2);overflow:visible}
+  .cot-bar-wrap{position:relative;height:8px;border-radius:4px;background:var(--surface2);overflow:visible}
   .cot-bar-fill{position:absolute;top:0;height:100%;border-radius:4px;transition:left .5s,width .5s}
-  .cot-zero-mark{position:absolute;top:-3px;width:2px;height:13px;background:rgba(255,255,255,.18);border-radius:1px;z-index:1}
+  .cot-zero-mark{position:absolute;top:-3px;width:2px;height:14px;background:rgba(255,255,255,.2);border-radius:1px;z-index:1}
   .cot-bar-dot{
-    position:absolute;top:50%;width:11px;height:11px;border-radius:50%;
+    position:absolute;top:50%;width:13px;height:13px;border-radius:50%;
     border:2px solid var(--surface);box-shadow:0 0 0 1.5px var(--border);
     transform:translate(-50%,-50%);transition:left .5s ease,background .4s;z-index:2;
   }
   .cot-bar-labels{
     display:flex;justify-content:space-between;
-    font-size:.52rem;color:var(--text-muted);margin-top:.15rem;
+    font-size:.62rem;color:var(--text-muted);margin-top:.2rem;
     font-family:'JetBrains Mono',monospace;
   }
   .cot-footer{
     display:flex;align-items:center;justify-content:space-between;
     margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);
   }
-  .cot-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+  .cot-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
   .cot-full-link{
-    font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;
-    padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;
+    font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;
+    padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;
     transition:border-color .15s;
   }
   .cot-full-link:hover{border-color:var(--gold)}
@@ -296,7 +296,7 @@
   .tariff-status-badge.elevated{background:rgba(239,68,68,.08);color:#ef4444;border-color:rgba(239,68,68,.25);}
   .tariff-status-badge.normal{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22);}
   .tariff-status-badge.mixed{background:rgba(230,176,66,.08);color:var(--gold);border-color:rgba(230,176,66,.22);}
-  .tariff-rows{display:flex;flex-direction:column;gap:.28rem;}
+  .tariff-rows{display:flex;flex-direction:column;gap:.38rem;}
   .tariff-row{display:flex;align-items:center;gap:.5rem;padding:.32rem .5rem;border-radius:6px;background:var(--surface2);}
   .tariff-row-icon{font-size:.85rem;line-height:1;flex-shrink:0;}
   .tariff-row-comm{font-size:.72rem;font-weight:700;color:var(--text);flex:1;min-width:0;}
@@ -305,9 +305,9 @@
   .tariff-row-rate.elevated{color:#ef4444;}
   .tariff-row-rate.normal{color:var(--green);}
   .tariff-row-rate.mixed{color:var(--gold);}
-  .tariff-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--border);}
-  .tariff-footer-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .tariff-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .tariff-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
+  .tariff-footer-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .tariff-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
   .tariff-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.tariff-widget{padding:.75rem .85rem;}.tariff-row-dest{display:none;}}
 
@@ -337,11 +337,20 @@
   .noaa-card img{display:block;width:100%;height:auto;background:var(--surface2);min-height:100px}
   .noaa-legend{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.55rem;font-size:.68rem;color:var(--text-dim);}
   .noaa-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0;vertical-align:middle;margin-right:3px}
-  .noaa-note{margin-top:.5rem;font-size:.65rem;color:var(--text-muted);line-height:1.55}
+  .noaa-note{margin-top:.5rem;font-size:.68rem;color:var(--text-muted);line-height:1.55}
   .noaa-note a{color:var(--gold);text-decoration:none}
   .noaa-note a:hover{text-decoration:underline}
   .noaa-img-err{display:none;align-items:center;justify-content:center;min-height:100px;font-size:.78rem;color:var(--text-muted);text-align:center;padding:.75rem;flex-direction:column;gap:.4rem;}
   .noaa-img-err a{color:var(--gold);font-size:.72rem}
+
+  /* ── Touch & interaction ────────────────────────────────────── */
+  button,a,[role="button"]{touch-action:manipulation;}
+  /* Ensures kalshi grid holds space while loading — prevents layout shift */
+  #kalshi-grid{min-height:160px;}
+  /* Fix NOAA legend wrapping on narrow mobile */
+  .noaa-legend{flex-direction:column;gap:.3rem;}
+  @media(min-width:480px){.noaa-legend{flex-direction:row;gap:.3rem 1rem;}}
+  .noaa-legend span{margin-left:0!important;}
 
   @media(prefers-reduced-motion:reduce){
     .ticker-track{animation:none!important}
@@ -353,7 +362,7 @@
 
   /* ── Prediction market cards ──────────────────────────────── */
   .km-card{
-    background:var(--surface);border:1px solid var(--border);border-radius:9px;
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
     padding:.75rem .9rem;display:flex;flex-direction:column;gap:.38rem;
     text-decoration:none;color:inherit;cursor:pointer;
     transition:border-color .15s,transform .1s;position:relative;overflow:hidden;
@@ -370,20 +379,21 @@
   .km-card-row{display:flex;align-items:center;gap:.5rem}
   .km-card-title{font-size:.79rem;font-weight:700;color:var(--text);line-height:1.35;flex:1}
   .km-card-pct{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:800;line-height:1;flex-shrink:0}
-  .km-bar-track{height:5px;border-radius:3px;background:var(--surface2);overflow:hidden}
+  .km-bar-track{height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
   .km-bar-fill{height:100%;border-radius:3px}
-  .km-card-foot{display:flex;align-items:center;gap:.5rem;margin-top:.06rem}
-  .km-plat{font-family:'JetBrains Mono',monospace;font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.1rem .38rem;border-radius:3px;border:1px solid}
+  .km-card-foot{display:flex;align-items:center;gap:.4rem;margin-top:.06rem;flex-wrap:wrap}
+  .km-plat{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.18rem .42rem;border-radius:3px;border:1px solid}
   .km-plat.k{color:#00c7a8;border-color:rgba(0,199,168,.22);background:rgba(0,199,168,.05)}
   .km-plat.p{color:#5ba3e0;border-color:rgba(91,163,224,.22);background:rgba(91,163,224,.05)}
-  .km-tl{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--text-muted)}
-  .km-why{font-size:.68rem;color:var(--text-muted);line-height:1.45;padding:.3rem .46rem;background:rgba(255,255,255,.02);border-radius:4px;border-left:2px solid rgba(255,255,255,.07)}
+  .km-tl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted)}
+  .km-why{font-size:.69rem;color:var(--text-muted);line-height:1.5;padding:.32rem .5rem;background:rgba(255,255,255,.025);border-radius:4px;border-left:2px solid rgba(255,255,255,.12)}
 
   /* ── Crop Progress + Export Sales grid ─────────────────────── */
   .crop-export-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.4rem 0;
+    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.4rem 0 .5rem;
   }
   @media(max-width:720px){.crop-export-grid{grid-template-columns:1fr}}
+  @media(max-width:640px){.crop-export-grid{grid-template-columns:1fr}}
 
   /* ── Crop Progress Widget ───────────────────────────────────── */
   .crop-widget{
@@ -394,8 +404,8 @@
   .crop-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .crop-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .crop-week-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);padding:.15rem .4rem;border:1px solid var(--border);border-radius:4px;}
-  .crop-rows{display:flex;flex-direction:column;gap:.55rem;flex:1;}
-  .crop-row-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.22rem;}
+  .crop-rows{display:flex;flex-direction:column;gap:.5rem;flex:1;}
+  .crop-row-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.2rem;}
   .crop-comm-label{display:flex;align-items:center;gap:.3rem;}
   .crop-comm-icon{font-size:.85rem;line-height:1;}
   .crop-comm-name{font-size:.76rem;font-weight:700;color:var(--text);}
@@ -406,16 +416,16 @@
   .crop-chg-row{display:flex;gap:.55rem;margin-top:.1rem;}
   .crop-chg{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;}
   .crop-chg.up{color:var(--green);} .crop-chg.dn{color:#ef4444;} .crop-chg.nc{color:var(--text-muted);}
-  .crop-chg-lbl{font-size:.58rem;color:var(--text-muted);}
+  .crop-chg-lbl{font-size:.62rem;color:var(--text-muted);}
   .crop-plant-row{display:flex;align-items:center;gap:.35rem;margin-top:.15rem;}
   .crop-plant-pct{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);}
-  .crop-plant-lbl{font-size:.58rem;color:var(--text-muted);}
+  .crop-plant-lbl{font-size:.62rem;color:var(--text-muted);}
   .crop-plant-bar{flex:1;height:5px;border-radius:3px;background:var(--surface2);overflow:hidden;}
   .crop-plant-fill{height:100%;border-radius:3px;background:var(--green);opacity:.7;transition:width .5s;}
   .crop-offseason{display:flex;align-items:center;justify-content:center;flex:1;font-size:.78rem;color:var(--text-muted);text-align:center;padding:.5rem 0;}
   .crop-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
-  .crop-footer-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .crop-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .crop-footer-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .crop-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
   .crop-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.crop-widget{padding:.75rem .85rem;}}
 
@@ -429,7 +439,7 @@
   .export-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .export-mkt-yr{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);padding:.15rem .4rem;border:1px solid var(--border);border-radius:4px;}
   .export-rows{display:flex;flex-direction:column;gap:.5rem;flex:1;}
-  .export-row-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.18rem;}
+  .export-row-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.2rem;}
   .export-comm-label{display:flex;align-items:center;gap:.3rem;}
   .export-comm-icon{font-size:.85rem;line-height:1;}
   .export-comm-name{font-size:.76rem;font-weight:700;color:var(--text);}
@@ -445,8 +455,8 @@
   .export-pace-pct.lagging{color:var(--gold);}
   .export-pace-pct.behind{color:#ef4444;}
   .export-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
-  .export-footer-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .export-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .export-footer-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .export-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
   .export-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.export-widget{padding:.75rem .85rem;}}
 
@@ -462,16 +472,17 @@
   .fert-card{background:var(--surface2);border-radius:8px;padding:.5rem .65rem;}
   .fert-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem;}
   .fert-name{font-size:.68rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.25rem;}
-  .fert-sym{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text-muted);}
+  .fert-sym{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-muted);}
   .fert-price{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--text);line-height:1;}
   .fert-chg{display:flex;align-items:center;gap:.2rem;margin-top:.12rem;}
-  .fert-chg-val{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;}
+  .fert-chg-val{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;}
   .fert-chg-val.up{color:#ef4444;} .fert-chg-val.dn{color:var(--green);} .fert-chg-val.nc{color:var(--text-muted);}
-  .fert-loc{font-size:.55rem;color:var(--text-muted);}
-  .fert-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--border);}
-  .fert-footer-note{font-size:.58rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .fert-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .fert-loc{font-size:.62rem;color:var(--text-muted);}
+  .fert-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
+  .fert-footer-note{font-size:.62rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .fert-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
   .fert-full-link:hover{border-color:var(--gold);}
+  @media(max-width:480px){.km-card{padding:.65rem .75rem;}.km-card-pct{font-size:1.35rem;}}
   @media(max-width:480px){.fert-widget{padding:.75rem .85rem;}.fert-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
@@ -538,7 +549,7 @@
 <style>
 .dh{--dh-pad:1rem;max-width:1400px;margin:0 auto}
 .dh *{box-sizing:border-box}
-.dh-eyebrow{display:flex;align-items:center;gap:.45rem;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
+.dh-eyebrow{display:flex;align-items:center;gap:.45rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
 .dh-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
 .dh-headline{font-family:'Oswald',sans-serif;font-size:1.65rem;font-weight:800;line-height:1.15;color:var(--text);margin:0 0 .5rem;letter-spacing:-.01em;text-transform:uppercase}
 .dh-field-call{display:flex;align-items:center;gap:.5rem;padding:.5rem .9rem;margin-bottom:.85rem;border-radius:8px;font-size:.78rem;font-weight:700;letter-spacing:.03em;font-family:'JetBrains Mono',monospace;line-height:1.45}
@@ -674,11 +685,11 @@
         <div id="bids-geo-bar" style="display:flex;align-items:center;gap:.55rem;margin-bottom:.6rem;font-size:.75rem;color:var(--text-dim)">
           <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite" aria-hidden="true"></span>
           <span id="bids-geo-txt">Detecting your location…</span>
-          <button id="bids-enter-zip-btn" style="margin-left:auto;background:none;border:none;color:var(--text-muted);font-size:.7rem;cursor:pointer;text-decoration:underline">Enter ZIP</button>
+          <button id="bids-enter-zip-btn" style="margin-left:auto;background:none;border:none;color:var(--text-muted);font-size:.72rem;cursor:pointer;text-decoration:underline;padding:.4rem 0;">Enter ZIP</button>
         </div>
         <div id="bids-zip-row" style="display:none;gap:.55rem;margin-bottom:1.1rem">
-          <input type="text" id="bids-zip" placeholder="Enter your ZIP code" maxlength="5" aria-label="ZIP code for cash bids" style="flex:1;padding:.7rem .9rem;background:var(--surface2);border:1px solid var(--border);border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);outline:none;transition:border-color .15s">
-          <button id="bids-lookup-btn" style="padding:.7rem 1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s">Find Bids →</button>
+          <input type="text" id="bids-zip" placeholder="Enter your ZIP code" maxlength="5" aria-label="ZIP code for cash bids" style="flex:1;padding:.7rem .9rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);outline:none;transition:border-color .15s">
+          <button id="bids-lookup-btn" style="padding:.7rem 1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s">Find Bids →</button>
         </div>
         <div id="bids-list-area">
           <div class="bids-skeleton" aria-label="Loading cash bids"><div class="bids-skel-row"></div><div class="bids-skel-row"></div><div class="bids-skel-row"></div></div>
@@ -691,13 +702,13 @@
         <div id="wx-loading" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 0;gap:.65rem">
           <div style="font-size:1.8rem" aria-hidden="true">📍</div>
           <div style="font-size:.9rem;color:var(--text-dim);text-align:center">Getting your local weather…</div>
-          <button id="btn-allow-loc" style="padding:.55rem 1.1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-size:.82rem;font-weight:700;cursor:pointer">Allow Location</button>
-          <button id="btn-zip-instead" style="background:none;border:none;color:var(--text-muted);font-size:.78rem;cursor:pointer;text-decoration:underline">Enter ZIP instead</button>
+          <button id="btn-allow-loc" style="padding:.65rem 1.25rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-size:.85rem;font-weight:700;cursor:pointer">Allow Location</button>
+          <button id="btn-zip-instead" style="background:none;border:none;color:var(--text-muted);font-size:.78rem;cursor:pointer;text-decoration:underline;padding:.4rem 0;">Enter ZIP instead</button>
         </div>
         <div id="wx-zip-entry" style="display:none;margin-bottom:.85rem">
           <div style="display:flex;gap:.5rem">
-            <input type="text" id="wx-zip" placeholder="ZIP code" maxlength="5" aria-label="ZIP code for weather" style="flex:1;padding:.65rem .85rem;background:var(--surface2);border:1px solid var(--border);border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);outline:none;transition:border-color .15s">
-            <button id="btn-wx-go" style="padding:.65rem 1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:7px;font-size:.85rem;font-weight:700;cursor:pointer">Go</button>
+            <input type="text" id="wx-zip" placeholder="ZIP code" maxlength="5" aria-label="ZIP code for weather" style="flex:1;padding:.65rem .85rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);outline:none;transition:border-color .15s">
+            <button id="btn-wx-go" style="padding:.65rem 1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-size:.85rem;font-weight:700;cursor:pointer">Go</button>
           </div>
         </div>
         <div id="wx-data" style="display:none">
@@ -716,7 +727,7 @@
             <div class="wstat"><div class="wstat-lbl">Dew Point</div><div class="wstat-val" id="wx-dew">--</div></div>
           </div>
           <div id="wx-forecast" style="display:flex;gap:.4rem;margin-top:.85rem"></div>
-          <button id="btn-change-loc" style="margin-top:.65rem;background:none;border:none;color:var(--text-muted);font-size:.72rem;cursor:pointer;text-decoration:underline">Change location</button>
+          <button id="btn-change-loc" style="margin-top:.65rem;background:none;border:none;color:var(--text-muted);font-size:.72rem;cursor:pointer;text-decoration:underline;padding:.4rem 0;">Change location</button>
         </div>
       </div></div>
     </div>
@@ -1019,14 +1030,14 @@
   <!-- ══ FERTILIZER WIDGET ═══════════════════════════════════════ -->
   <div class="fert-widget fade-up" id="fert-widget">
     <div class="fert-widget-head">
-      <span class="fert-widget-title">🧪 Fertilizer Prices — Indicative</span>
+      <span class="fert-widget-title">🧪 Fertilizer Prices</span>
       <span class="crop-week-badge" id="fert-date">Updated —</span>
     </div>
     <div class="fert-grid" id="fert-grid">
       <div class="fert-card" style="grid-column:1/-1;text-align:center;padding:.75rem;color:var(--text-muted);font-size:.75rem">Loading…</div>
     </div>
     <div class="fert-footer">
-      <span class="fert-footer-note">Indicative prices — update data/fertilizer.json weekly</span>
+      <span class="fert-footer-note">Green Markets · Updated weekly</span>
       <a href="/fertilizer" class="fert-full-link">Price History →</a>
     </div>
   </div>
@@ -1146,7 +1157,7 @@
             <span style="font-size:.82rem;color:var(--text-dim)">Drought map loading…</span>
             <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener">View on droughtmonitor.unl.edu →</a>
           </div>
-          <div style="padding:.4rem .8rem;font-size:.65rem;color:var(--text-muted);text-align:right;border-top:1px solid var(--border)">
+          <div style="padding:.4rem .8rem;font-size:.68rem;color:var(--text-muted);text-align:right;border-top:1px solid var(--border)">
             Source: USDA NDMC · Updated Thursday · <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener" style="color:var(--gold)">Full Interactive Map →</a>
           </div>
         </div>
@@ -1709,7 +1720,7 @@ function renderMarkets() {
       + '<div class="km-bar-track"><div class="km-bar-fill" style="width:' + pct + '%;background:' + barBg(pct) + '"></div></div>'
       + '<div class="km-why">' + esc(m.why) + '</div>'
       + '<div class="km-card-foot"><span class="km-plat p">Polymarket</span>'
-      + '<span style="font-family:\'JetBrains Mono\',monospace;font-size:.55rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .38rem;border-radius:3px;border:1px solid;' + tierStyle + '">' + tierLbl + '</span>'
+      + '<span style="font-family:\'JetBrains Mono\',monospace;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.18rem .42rem;border-radius:3px;border:1px solid;' + tierStyle + '">' + tierLbl + '</span>'
       + (tl ? '<span class="km-tl">⏱ ' + esc(tl) + '</span>' : '') + '</div>';
     grid.appendChild(a);
   });
