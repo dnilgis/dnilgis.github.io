@@ -1,14 +1,9 @@
-# .github/workflows/prices.yml
-# Fetches commodity, futures, index, and crypto prices via yfinance
-# Runs every 30 minutes — 7 days/week including weekends and holidays
-# On closed markets, yfinance returns last known close (safe — script preserves old values)
 name: Fetch Prices
 
 on:
   schedule:
-    # Every 30 minutes, all day, every day
     - cron: '*/30 * * * *'
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
 
 jobs:
   fetch:
@@ -39,4 +34,5 @@ jobs:
           git config user.email "bot@agsist.com"
           git add data/prices.json
           git diff --staged --quiet || git commit -m "💹 Prices — $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
           git push

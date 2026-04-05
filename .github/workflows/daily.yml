@@ -1,14 +1,9 @@
-# .github/workflows/daily.yml
-# Generates the AGSIST Daily briefing every morning (including weekends + holidays)
-# Runs AFTER prices.yml and markets.yml so data is fresh
 name: Generate Daily Briefing
 
 on:
   schedule:
-    # 5:45am CT (11:45 UTC) — every day including weekends and holidays
-    # Prices workflow runs at 5:30am CT, markets at 5:30am CT — both fresh
     - cron: '45 11 * * *'
-  workflow_dispatch: # Manual trigger for testing
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -44,4 +39,5 @@ jobs:
           git config user.email "bot@agsist.com"
           git add data/daily.json data/daily-archive/ daily/ feed.xml
           git diff --staged --quiet || git commit -m "📰 AGSIST Daily — $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
           git push

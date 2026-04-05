@@ -2,7 +2,6 @@ name: Fetch Export Sales
 
 on:
   schedule:
-    # Thursdays 9:30 AM CT (14:30 UTC) — after 8:30 AM ET USDA FAS release
     - cron: '30 14 * * 4'
   workflow_dispatch:
 
@@ -30,4 +29,5 @@ jobs:
           git config user.email "bot@agsist.com"
           git add data/export-sales.json
           git diff --staged --quiet || git commit -m "chore: update export sales $(date +%F)"
+          git pull --rebase origin main
           git push

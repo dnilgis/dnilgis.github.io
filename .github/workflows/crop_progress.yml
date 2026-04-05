@@ -2,8 +2,6 @@ name: Fetch Crop Progress
 
 on:
   schedule:
-    # Mondays 4:30 PM CT (21:30 UTC) — after 4:00 PM ET NASS release
-    # Off-season runs write in_season:false gracefully
     - cron: '30 21 * * 1'
   workflow_dispatch:
 
@@ -33,4 +31,5 @@ jobs:
           git config user.email "bot@agsist.com"
           git add data/crop-progress.json
           git diff --staged --quiet || git commit -m "chore: update crop progress $(date +%F)"
+          git pull --rebase origin main
           git push

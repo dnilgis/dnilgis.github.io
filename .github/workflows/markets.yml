@@ -1,13 +1,9 @@
-# .github/workflows/markets.yml
-# Fetches Kalshi + Polymarket prediction markets relevant to agriculture
-# Runs once daily — 7 days/week (Kalshi/Polymarket trade 24/7)
 name: Fetch Markets
 
 on:
   schedule:
-    # 5:30am CT (11:30 UTC) — every day, before daily briefing at 5:45am CT
     - cron: '30 11 * * *'
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
 
 jobs:
   fetch:
@@ -38,4 +34,5 @@ jobs:
           git config user.email "bot@agsist.com"
           git add data/markets.json
           git diff --staged --quiet || git commit -m "🎯 Markets — $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
           git push
