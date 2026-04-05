@@ -286,11 +286,17 @@
   }
   .cot-full-link:hover{border-color:var(--gold)}
 
+  /* ── Tariff + Fertilizer side-by-side grid ─────────────────── */
+  .tariff-fert-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.5rem 0;
+  }
+  @media(max-width:720px){.tariff-fert-grid{grid-template-columns:1fr}}
+
   /* ── Tariff Widget ──────────────────────────────────────────── */
   .tariff-widget{
     background:linear-gradient(135deg,var(--surface) 0%,rgba(239,68,68,.02) 100%);
     border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;margin:.4rem 0 .6rem;
+    padding:.9rem 1.1rem;display:flex;flex-direction:column;
   }
   .tariff-widget-head{
     display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;
@@ -305,7 +311,7 @@
   .tariff-status-badge.elevated{background:rgba(239,68,68,.08);color:#ef4444;border-color:rgba(239,68,68,.25);}
   .tariff-status-badge.normal{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22);}
   .tariff-status-badge.mixed{background:rgba(230,176,66,.08);color:var(--gold);border-color:rgba(230,176,66,.22);}
-  .tariff-rows{display:flex;flex-direction:column;gap:.38rem;}
+  .tariff-rows{display:flex;flex-direction:column;gap:.38rem;flex:1;}
   .tariff-row{display:flex;align-items:center;gap:.5rem;padding:.32rem .5rem;border-radius:6px;background:var(--surface2);}
   .tariff-row-icon{font-size:.85rem;line-height:1;flex-shrink:0;}
   .tariff-row-comm{font-size:.72rem;font-weight:700;color:var(--text);flex:1;min-width:0;}
@@ -473,11 +479,11 @@
   .fert-widget{
     background:linear-gradient(135deg,var(--surface) 0%,rgba(230,176,66,.02) 100%);
     border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;margin:.4rem 0 .6rem;
+    padding:.9rem 1.1rem;display:flex;flex-direction:column;
   }
   .fert-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .fert-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
-  .fert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.4rem;}
+  .fert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.4rem;flex:1;}
   .fert-card{background:var(--surface2);border-radius:8px;padding:.5rem .65rem;}
   .fert-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem;}
   .fert-name{font-size:.68rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.25rem;}
@@ -930,20 +936,6 @@
 
     </div><!-- /ratio-cot-grid -->
 
-  <!-- ══ TARIFF TRACKER WIDGET ════════════════════════════════ -->
-  <div class="tariff-widget fade-up" id="tariff-widget">
-    <div class="tariff-widget-head">
-      <span class="tariff-widget-title">🏛️ Ag Tariff Tracker — US Export Rates</span>
-      <span class="tariff-status-badge elevated" id="tariff-badge">Loading…</span>
-    </div>
-    <div class="tariff-rows" id="tariff-rows">
-      <div class="tariff-row" style="justify-content:center;color:var(--text-muted);font-size:.75rem">Loading tariff data…</div>
-    </div>
-    <div class="tariff-footer">
-      <span class="tariff-footer-date" id="tariff-date">Updated —</span>
-      <a href="/tariffs" class="tariff-full-link">Full Tracker →</a>
-    </div>
-
   <!-- ══ CROP PROGRESS + EXPORT SALES ═══════════════════════════ -->
   <div class="crop-export-grid" id="crop-export-grid-inner">
 
@@ -1037,20 +1029,38 @@
 
   </div><!-- /crop-export-grid -->
 
-  <!-- ══ FERTILIZER WIDGET ═══════════════════════════════════════ -->
-  <div class="fert-widget fade-up" id="fert-widget">
-    <div class="fert-widget-head">
-      <span class="fert-widget-title">🧪 Fertilizer Prices</span>
-      <span class="crop-week-badge" id="fert-date">Updated —</span>
+  <!-- ══ TARIFF + FERTILIZER ══════════════════════════════════════ -->
+  <div class="tariff-fert-grid fade-up">
+
+    <div class="tariff-widget" id="tariff-widget">
+      <div class="tariff-widget-head">
+        <span class="tariff-widget-title">🏛️ Ag Tariff Tracker — US Export Rates</span>
+        <span class="tariff-status-badge elevated" id="tariff-badge">Loading…</span>
+      </div>
+      <div class="tariff-rows" id="tariff-rows">
+        <div class="tariff-row" style="justify-content:center;color:var(--text-muted);font-size:.75rem">Loading tariff data…</div>
+      </div>
+      <div class="tariff-footer">
+        <span class="tariff-footer-date" id="tariff-date">Updated —</span>
+        <a href="/tariffs" class="tariff-full-link">Full Tracker →</a>
+      </div>
     </div>
-    <div class="fert-grid" id="fert-grid">
-      <div class="fert-card" style="grid-column:1/-1;text-align:center;padding:.75rem;color:var(--text-muted);font-size:.75rem">Loading…</div>
+
+    <div class="fert-widget" id="fert-widget">
+      <div class="fert-widget-head">
+        <span class="fert-widget-title">🧪 Fertilizer Prices</span>
+        <span class="crop-week-badge" id="fert-date">Updated —</span>
+      </div>
+      <div class="fert-grid" id="fert-grid">
+        <div class="fert-card" style="grid-column:1/-1;text-align:center;padding:.75rem;color:var(--text-muted);font-size:.75rem">Loading…</div>
+      </div>
+      <div class="fert-footer">
+        <span class="fert-footer-note">Green Markets · Updated weekly</span>
+        <a href="/fertilizer" class="fert-full-link">Price History →</a>
+      </div>
     </div>
-    <div class="fert-footer">
-      <span class="fert-footer-note">Green Markets · Updated weekly</span>
-      <a href="/fertilizer" class="fert-full-link">Price History →</a>
-    </div>
-  </div>
+
+  </div><!-- /tariff-fert-grid -->
 
     <div class="pc-section-lbl">🌾 More Grains, Feed &amp; Livestock</div>
     <div class="price-cards-grid-2">
