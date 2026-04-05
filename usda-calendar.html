@@ -10,22 +10,21 @@
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
   <link rel="manifest"                            href="/manifest.json">
 
-  <title>USDA Report Calendar 2025–2026 — WASDE, Crop Progress & More | AGSIST</title>
-  <meta name="description" content="Complete USDA agricultural report calendar for 2025–2026. WASDE, Crop Progress, Prospective Plantings, Grain Stocks, Acreage Report, and World Ag Supply dates.">
-  <meta name="keywords" content="USDA report dates, WASDE calendar, crop progress dates, USDA calendar 2025, agricultural report schedule, prospective plantings date">
+  <title>USDA Report Calendar 2025–2026 — WASDE, Crop Progress &amp; More | AGSIST</title>
+  <meta name="description" content="Complete USDA agricultural report calendar for 2025–2026. WASDE, Crop Progress, Prospective Plantings, Grain Stocks, Acreage Report, and Export Sales dates.">
+  <meta name="keywords" content="USDA report dates, WASDE calendar, crop progress dates, USDA calendar 2026, agricultural report schedule, prospective plantings date, export sales report">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://agsist.com/usda-calendar">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AGSIST">
   <meta property="og:title" content="USDA Report Calendar 2025–2026 — AGSIST">
-  <meta property="og:description" content="Every USDA report date in one place. WASDE, Crop Progress, Prospective Plantings, Grain Stocks, and Acreage Report for 2025–2026.">
+  <meta property="og:description" content="Every USDA report date in one place. WASDE, Crop Progress, Prospective Plantings, Grain Stocks, Acreage Report, and Export Sales for 2025–2026.">
   <meta property="og:url" content="https://agsist.com/usda-calendar">
-  <meta property="og:image" content="https://agsist.com/img/og/usda-calendar.jpg">
+  <meta property="og:image" content="https://agsist.com/img/og/agsist.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
     main { max-width: 1200px; margin: 0 auto; padding: 16px; }
-
     .page-header {
       background: linear-gradient(135deg, var(--surface) 0%, rgba(230,176,66,0.04) 100%);
       border: 1px solid var(--border); border-radius: 12px;
@@ -34,19 +33,13 @@
     }
     .page-header h1 { font-size: 1.4rem; color: var(--text); margin: 0 0 6px 0; }
     .page-header p  { color: var(--text-dim); font-size: 0.85rem; margin: 0; }
-
-    /* Filter tabs */
-    .filter-bar {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;
-    }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
     .filter-btn {
       padding: 7px 14px; background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; color: var(--text-dim); font-family: inherit;
       font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
     }
     .filter-btn.active, .filter-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
-
-    /* Next report callout */
     .next-report {
       background: linear-gradient(135deg, var(--surface) 0%, rgba(230,176,66,0.08) 100%);
       border: 2px solid var(--gold); border-radius: 12px;
@@ -58,94 +51,45 @@
     .next-report-date  { font-size: 0.85rem; color: var(--text-dim); }
     .next-countdown    { font-size: 1.8rem; font-weight: 700; color: var(--text); margin-left: auto; }
     .next-countdown span { font-size: 0.7rem; color: var(--text-dim); display: block; text-align: right; }
-
-    /* Calendar grid */
-    .cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 768px) { .cal-grid { grid-template-columns: 1fr; } }
-
-    /* Month panel */
-    .month-panel {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-      overflow: hidden; margin-bottom: 16px;
-    }
+    .month-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
     .month-panel.has-past { opacity: 0.7; }
-    .month-head {
-      background: var(--bg); padding: 10px 14px; border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-    }
+    .month-head { background: var(--bg); padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
     .month-head h3 { font-size: 0.9rem; color: var(--text); margin: 0; }
     .month-head .year-tag { font-size: 0.7rem; color: var(--text-dim); }
-
-    /* Report row */
-    .report-row {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 10px 14px; border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
+    .report-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--border); transition: background 0.15s; }
     .report-row:last-child { border-bottom: none; }
     .report-row:hover { background: var(--bg); }
     .report-row.past { opacity: 0.55; }
     .report-row.today { background: rgba(230,176,66,0.08); border-left: 3px solid var(--gold); }
     .report-row.upcoming { border-left: 3px solid transparent; }
     .report-row.next-up  { background: rgba(230,176,66,0.06); border-left: 3px solid var(--gold); }
-
-    .report-date {
-      min-width: 48px; text-align: center;
-      background: var(--bg); border-radius: 6px; padding: 4px 6px;
-      flex-shrink: 0;
-    }
-    .report-date .day   { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1; }
-    .report-date .dow   { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; }
+    .report-date { min-width: 48px; text-align: center; background: var(--bg); border-radius: 6px; padding: 4px 6px; flex-shrink: 0; }
+    .report-date .day { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1; }
+    .report-date .dow { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; }
     .report-date.today-date { background: var(--gold); }
     .report-date.today-date .day, .report-date.today-date .dow { color: #000; }
-
     .report-info { flex: 1; min-width: 0; }
     .report-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
     .report-desc { font-size: 0.73rem; color: var(--text-dim); margin-top: 2px; line-height: 1.4; }
     .report-time { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
-
-    .report-tag {
-      flex-shrink: 0; padding: 2px 8px; border-radius: 10px;
-      font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .3px;
-    }
-
-    /* Report type colors */
-    .tag-wasde        { background: rgba(239,68,68,0.15);  color: #f87171; }
-    .tag-croprog      { background: rgba(34,197,94,0.15);  color: #4ade80; }
-    .tag-plantings    { background: rgba(230,176,66,0.15); color: var(--gold); }
-    .tag-stocks       { background: rgba(59,130,246,0.15); color: #60a5fa; }
-    .tag-census       { background: rgba(139,92,246,0.15); color: #a78bfa; }
-    .tag-supply       { background: rgba(239,68,68,0.15);  color: #f87171; }
-    .tag-outlook      { background: rgba(6,182,212,0.15);  color: #22d3ee; }
-    .tag-livestock    { background: rgba(249,115,22,0.15); color: #fb923c; }
-
-    /* Legend */
-    .legend {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
-    }
-    .legend-item {
-      display: flex; align-items: center; gap: 6px; font-size: 0.73rem;
-    }
-    .legend-dot {
-      width: 10px; height: 10px; border-radius: 2px;
-    }
-
-    /* Report detail cards */
-    .report-explainer {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px;
-      margin-bottom: 20px;
-    }
-    .explainer-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px;
-    }
+    .report-tag { flex-shrink: 0; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
+    .tag-wasde     { background: rgba(239,68,68,0.15);  color: #f87171; }
+    .tag-croprog   { background: rgba(34,197,94,0.15);  color: #4ade80; }
+    .tag-plantings { background: rgba(230,176,66,0.15); color: var(--gold); }
+    .tag-stocks    { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .tag-census    { background: rgba(139,92,246,0.15); color: #a78bfa; }
+    .tag-supply    { background: rgba(239,68,68,0.15);  color: #f87171; }
+    .tag-outlook   { background: rgba(6,182,212,0.15);  color: #22d3ee; }
+    .tag-export    { background: rgba(34,197,94,0.15);  color: #4ade80; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.73rem; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+    .report-explainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .explainer-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
     .explainer-card h4 { font-size: 0.85rem; margin: 0 0 6px 0; }
     .explainer-card p  { font-size: 0.75rem; color: var(--text-dim); margin: 0 0 6px 0; line-height: 1.4; }
     .explainer-card .market-impact { font-size: 0.7rem; color: #f87171; font-weight: 600; }
-
-    .section-label {
-      font-size: .75rem; color: var(--text-dim); text-transform: uppercase;
-      letter-spacing: .5px; font-weight: 600; margin: 20px 0 10px;
-    }
+    .section-label { font-size: .75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; margin: 20px 0 10px; }
   </style>
 </head>
 <body>
@@ -153,94 +97,96 @@
   <div id="site-header"></div>
 
   <main id="main">
-    <nav class="breadcrumb">
-      <a href="/">Home</a> → USDA Report Calendar
-    </nav>
+    <nav class="breadcrumb"><a href="/">Home</a> → USDA Report Calendar</nav>
 
     <div class="page-header">
       <div style="font-size:3rem">📅</div>
       <div>
         <h1>USDA Report Calendar 2025–2026</h1>
-        <p>All major USDA agricultural report dates. WASDE, Crop Progress, Prospective Plantings, Grain Stocks, Acreage, and more.</p>
+        <p>All major USDA agricultural report dates. WASDE, Crop Progress, Export Sales, Prospective Plantings, Grain Stocks, Acreage, and more.</p>
       </div>
     </div>
 
-    <!-- Next upcoming report callout -->
     <div class="next-report" id="next-report-banner">
       <div>
         <div class="next-report-label">Next USDA Report</div>
         <div class="next-report-name" id="next-name">—</div>
         <div class="next-report-date" id="next-date">—</div>
       </div>
-      <div class="next-countdown" id="next-countdown">
-        <span id="next-days-label"></span>
-      </div>
+      <div class="next-countdown" id="next-countdown"><span id="next-days-label"></span></div>
     </div>
 
-    <!-- Filter bar -->
     <div class="filter-bar">
       <button class="filter-btn active" onclick="filterReports('all',this)">All Reports</button>
       <button class="filter-btn" onclick="filterReports('wasde',this)">WASDE</button>
       <button class="filter-btn" onclick="filterReports('croprog',this)">Crop Progress</button>
+      <button class="filter-btn" onclick="filterReports('export',this)">Export Sales</button>
       <button class="filter-btn" onclick="filterReports('plantings',this)">Plantings</button>
       <button class="filter-btn" onclick="filterReports('stocks',this)">Grain Stocks</button>
       <button class="filter-btn" onclick="filterReports('outlook',this)">Outlook</button>
       <button class="filter-btn" id="toggle-past" onclick="togglePast(this)">Hide Past</button>
     </div>
 
-    <!-- Legend -->
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>WASDE / Supply</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>WASDE / Crop Production</div>
       <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Crop Progress</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#e6b042"></div>Plantings</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#22c55e;opacity:.6"></div>Export Sales</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e6b042"></div>Plantings / Acreage</div>
       <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Grain Stocks</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Census / Annual</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div>Forum / Outlook</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Livestock</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Annual / Census</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div>Outlook Forum</div>
     </div>
 
-    <!-- Calendar months -->
     <div id="calendar-container"></div>
 
-    <!-- Report explainer section -->
     <div class="section-label">About These Reports</div>
     <div class="report-explainer">
       <div class="explainer-card">
         <h4 style="color:#f87171">📊 WASDE Report</h4>
-        <p>World Agricultural Supply and Demand Estimates. Monthly snapshot of global supply/demand balance for major crops and livestock. Released around the 10th of each month.</p>
-        <div class="market-impact">⚡ High market impact — often moves corn/soybean futures 10–40¢ at release</div>
+        <p>World Agricultural Supply and Demand Estimates. Monthly snapshot of global supply/demand balance for major crops and livestock. Released around the 10th of each month at 12:00 PM ET.</p>
+        <div class="market-impact">⚡ High impact — frequently moves corn/soybean futures 10–40¢ at release</div>
       </div>
       <div class="explainer-card">
         <h4 style="color:#4ade80">📈 Crop Progress</h4>
-        <p>Weekly condition ratings for major crops (Excellent/Good/Fair/Poor/VP) and planting/harvest progress by state. Released Mondays at 4 PM ET during growing season (April–November).</p>
-        <div class="market-impact">⚡ Moderate impact — "Good/Excellent" ratings move corn and soybean prices</div>
+        <p>Weekly condition ratings (Excellent/Good/Fair/Poor/VP) and planting/harvest progress by state. Released Mondays at 4:00 PM ET during growing season (April–November).</p>
+        <div class="market-impact">⚡ Moderate impact — Good/Excellent % ratings move corn and soybean prices</div>
+      </div>
+      <div class="explainer-card">
+        <h4 style="color:#4ade80">📦 Export Sales</h4>
+        <p>Weekly net sales of corn, soybeans, and wheat to foreign buyers. Released Thursdays at 8:30 AM ET by USDA FAS. Shows how US export commitments are tracking vs USDA targets.</p>
+        <div class="market-impact">⚡ Moderate-high impact — large weekly sales moves futures, especially if China is buying</div>
       </div>
       <div class="explainer-card">
         <h4 style="color:#e6b042">🌱 Prospective Plantings</h4>
         <p>Farmer survey of intended spring planting acres for corn, soybeans, wheat, and other crops. Released late March. Sets the tone for the entire marketing year.</p>
-        <div class="market-impact">⚡ Very high impact — major price mover, especially if acres differ from trade expectations</div>
+        <div class="market-impact">⚡ Very high impact — major price mover if acres differ significantly from trade expectations</div>
       </div>
       <div class="explainer-card">
         <h4 style="color:#60a5fa">🏗️ Grain Stocks</h4>
         <p>Quarterly inventory of corn, soybean, wheat, sorghum, and oats on farms and in commercial facilities. Released in January, March, June, and September.</p>
-        <div class="market-impact">⚡ High impact — September stocks are especially important for carry-out estimates</div>
+        <div class="market-impact">⚡ High impact — September stocks especially critical for carry-out estimates</div>
       </div>
       <div class="explainer-card">
         <h4 style="color:#e6b042">📐 Acreage Report</h4>
         <p>Actual planted and harvested acreage for major crops based on June 1 survey. Released late June. Often the most significant report of the year for price direction.</p>
-        <div class="market-impact">⚡ Very high impact — frequently the biggest single-day price move of the year</div>
+        <div class="market-impact">⚡ Very high impact — frequently the biggest single-day price move of the crop year</div>
       </div>
       <div class="explainer-card">
         <h4 style="color:#22d3ee">🔭 USDA Ag Outlook Forum</h4>
         <p>Annual February forum with USDA's first official projections for the new crop year. Sets baseline supply/demand expectations before spring planting decisions are made.</p>
         <div class="market-impact">⚡ Moderate impact — first look at new crop year price and acreage projections</div>
       </div>
+      <div class="explainer-card">
+        <h4 style="color:#f87171">🌾 Crop Production</h4>
+        <p>Detailed crop production estimates updated monthly August through November, with the January final estimate. The August report delivers the first objective yield survey for corn and soybeans.</p>
+        <div class="market-impact">⚡ High impact — August report often the most market-moving of the year</div>
+      </div>
     </div>
 
     <div style="font-size:.75rem;color:var(--text-dim);text-align:center;padding:12px 0">
-      Release times listed are approximate. USDA may shift dates around holidays.
+      Release times are approximate. USDA may shift dates around holidays.
       Always verify at <a href="https://www.usda.gov/media/agency-reports" target="_blank" rel="noopener" style="color:var(--gold)">usda.gov</a>.
-      All times Eastern.
+      2026 dates marked "est." are estimates based on prior-year patterns. All times Eastern.
     </div>
   </main>
 
@@ -248,143 +194,212 @@
   <script src="/components/loader.js"></script>
 
   <script>
-  /* ── REPORT DATA ───────────────────────────────────────────── */
-  // USDA report schedule - 2025 confirmed, 2026 estimated
-  // Sources: usda.gov/media/agency-reports, nass.usda.gov
   const REPORTS = [
-    // ── 2025 ──────────────────────────────────────────────────
-    // January
-    {date:'2025-01-10', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates for crops and livestock'},
-    {date:'2025-01-10', name:'Crop Production Annual', type:'supply',    time:'12:00 PM ET', desc:'Final 2024 crop production estimates'},
-    {date:'2025-01-17', name:'Grain Stocks (Dec 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — corn, soybeans, wheat, sorghum'},
+    // ══ 2025 ══════════════════════════════════════════════════════
 
-    // February
-    {date:'2025-02-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
-    {date:'2025-02-20', name:'USDA Ag Outlook Forum',  type:'outlook',   time:'All Day',     desc:'USDA\'s first new-crop projections for 2025/26 marketing year'},
+    // January 2025
+    {date:'2025-01-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates for crops and livestock'},
+    {date:'2025-01-10', name:'Crop Production Annual',    type:'supply',    time:'12:00 PM ET', desc:'Final 2024 crop production estimates'},
+    {date:'2025-01-17', name:'Grain Stocks (Dec 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — corn, soybeans, wheat, sorghum'},
 
-    // March
-    {date:'2025-03-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
-    {date:'2025-03-28', name:'Prospective Plantings',  type:'plantings', time:'12:00 PM ET', desc:'Farmer survey of intended 2025 corn, soybean, and wheat acres'},
-    {date:'2025-03-28', name:'Grain Stocks (Mar 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks report'},
+    // February 2025
+    {date:'2025-02-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2025-02-20', name:'USDA Ag Outlook Forum',     type:'outlook',   time:'All Day',     desc:"USDA's first new-crop projections for 2025/26 marketing year"},
 
-    // April
-    {date:'2025-04-09', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
-    {date:'2025-04-07', name:'Crop Progress (Week 1)', type:'croprog',   time:'4:00 PM ET',  desc:'First crop progress report of the 2025 season'},
+    // March 2025
+    {date:'2025-03-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2025-03-28', name:'Prospective Plantings',     type:'plantings', time:'12:00 PM ET', desc:'Farmer survey of intended 2025 corn, soybean, and wheat acres'},
+    {date:'2025-03-28', name:'Grain Stocks (Mar 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks report'},
 
-    // May
-    {date:'2025-05-12', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'First 2025/26 new-crop supply/demand estimates'},
+    // April 2025
+    {date:'2025-04-09', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
 
-    // June
-    {date:'2025-06-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
-    {date:'2025-06-30', name:'Acreage Report',         type:'plantings', time:'12:00 PM ET', desc:'Actual planted acreage for all major crops — most market-moving report of the year'},
-    {date:'2025-06-30', name:'Grain Stocks (Jun 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks report'},
+    // May 2025
+    {date:'2025-05-12', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:"First 2025/26 new-crop supply/demand estimates"},
 
-    // July
-    {date:'2025-07-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    // June 2025
+    {date:'2025-06-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2025-06-30', name:'Acreage Report',            type:'plantings', time:'12:00 PM ET', desc:'Actual planted acreage for all major crops — most market-moving report of the year'},
+    {date:'2025-06-30', name:'Grain Stocks (Jun 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks report'},
 
-    // August
-    {date:'2025-08-12', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — first August yield estimate'},
+    // July 2025
+    {date:'2025-07-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
 
-    // September
-    {date:'2025-09-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — first corn/soy yield survey'},
-    {date:'2025-09-30', name:'Grain Stocks (Sep 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — critical for carry-out estimates'},
-    {date:'2025-09-30', name:'Small Grains Summary',   type:'supply',    time:'12:00 PM ET', desc:'Final winter wheat and oat production estimates'},
+    // August 2025
+    {date:'2025-08-12', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — first August yield estimate'},
+    {date:'2025-08-12', name:'Crop Production',           type:'supply',    time:'12:00 PM ET', desc:'First objective yield estimates for 2025 corn and soybeans'},
 
-    // October
-    {date:'2025-10-10', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — first objective corn/soy yield'},
-    {date:'2025-10-31', name:'Crop Production',        type:'supply',    time:'12:00 PM ET', desc:'October production estimates for corn and soybeans'},
+    // September 2025
+    {date:'2025-09-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2025-09-30', name:'Grain Stocks (Sep 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — critical for carry-out estimates'},
+    {date:'2025-09-30', name:'Small Grains Summary',      type:'supply',    time:'12:00 PM ET', desc:'Final winter wheat and oat production estimates'},
 
-    // November
-    {date:'2025-11-12', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    // October 2025
+    {date:'2025-10-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2025-10-10', name:'Crop Production',           type:'supply',    time:'12:00 PM ET', desc:'October production estimates — first objective corn/soy yield survey'},
 
-    // December
-    {date:'2025-12-10', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    // November 2025
+    {date:'2025-11-12', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2025-11-12', name:'Crop Production',           type:'supply',    time:'12:00 PM ET', desc:'November crop production estimates'},
 
-    // ── 2026 (estimated) ──────────────────────────────────────
-    {date:'2026-01-09', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — estimated'},
-    {date:'2026-01-09', name:'Crop Production Annual', type:'supply',    time:'12:00 PM ET', desc:'Final 2025 crop production estimates — estimated'},
-    {date:'2026-01-16', name:'Grain Stocks (Dec 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — estimated'},
-    {date:'2026-02-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — estimated'},
-    {date:'2026-02-19', name:'USDA Ag Outlook Forum',  type:'outlook',   time:'All Day',     desc:'USDA\'s first new-crop projections for 2026/27 — estimated'},
-    {date:'2026-03-11', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — estimated'},
-    {date:'2026-03-31', name:'Prospective Plantings',  type:'plantings', time:'12:00 PM ET', desc:'Farmer survey of intended 2026 corn, soybean, and wheat acres — estimated'},
-    {date:'2026-03-31', name:'Grain Stocks (Mar 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — estimated'},
-    {date:'2026-04-09', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — estimated'},
-    {date:'2026-05-12', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'First 2026/27 new-crop projections — estimated'},
-    {date:'2026-06-10', name:'WASDE Report',           type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — estimated'},
-    {date:'2026-06-30', name:'Acreage Report',         type:'plantings', time:'12:00 PM ET', desc:'Actual planted acreage for 2026 crops — estimated'},
-    {date:'2026-06-30', name:'Grain Stocks (Jun 1)',   type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — estimated'},
+    // December 2025
+    {date:'2025-12-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates'},
+
+    // ══ 2026 ══════════════════════════════════════════════════════
+
+    // January 2026
+    {date:'2026-01-09', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-01-09', name:'Crop Production Annual',    type:'supply',    time:'12:00 PM ET', desc:'Final 2025 crop production estimates — est.'},
+    {date:'2026-01-16', name:'Grain Stocks (Dec 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — est.'},
+
+    // February 2026
+    {date:'2026-02-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-02-19', name:'USDA Ag Outlook Forum',     type:'outlook',   time:'All Day',     desc:"USDA's first new-crop projections for 2026/27 marketing year — est."},
+
+    // March 2026
+    {date:'2026-03-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-03-31', name:'Prospective Plantings',     type:'plantings', time:'11:00 AM ET', desc:'Farmer survey of intended 2026 corn, soybean, and wheat acres'},
+    {date:'2026-03-31', name:'Grain Stocks (Mar 1)',      type:'stocks',    time:'11:00 AM ET', desc:'Quarterly grain stocks report'},
+
+    // April 2026
+    {date:'2026-04-09', name:'WASDE Report',              type:'wasde',     time:'11:00 AM ET', desc:'Monthly world supply/demand estimates'},
+    {date:'2026-04-09', name:'Crop Production',           type:'supply',    time:'11:00 AM ET', desc:'April crop production update'},
+
+    // May 2026
+    {date:'2026-05-12', name:'WASDE Report',              type:'wasde',     time:'11:00 AM ET', desc:"First 2026/27 new-crop supply/demand projections — est."},
+
+    // June 2026
+    {date:'2026-06-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-06-30', name:'Acreage Report',            type:'plantings', time:'12:00 PM ET', desc:'Actual planted acreage for 2026 crops — est.'},
+    {date:'2026-06-30', name:'Grain Stocks (Jun 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — est.'},
+
+    // July 2026
+    {date:'2026-07-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+
+    // August 2026
+    {date:'2026-08-12', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — first 2026 corn/soy yield survey — est.'},
+    {date:'2026-08-12', name:'Crop Production',           type:'supply',    time:'12:00 PM ET', desc:'First objective yield estimates for 2026 corn and soybeans — est.'},
+
+    // September 2026
+    {date:'2026-09-11', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-09-30', name:'Grain Stocks (Sep 1)',      type:'stocks',    time:'12:00 PM ET', desc:'Quarterly grain stocks — critical for 2026 carry-out — est.'},
+    {date:'2026-09-30', name:'Small Grains Summary',      type:'supply',    time:'12:00 PM ET', desc:'Final 2026 winter wheat and oat production — est.'},
+
+    // October 2026
+    {date:'2026-10-09', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-10-09', name:'Crop Production',           type:'supply',    time:'12:00 PM ET', desc:'October 2026 corn and soybean production estimates — est.'},
+
+    // November 2026
+    {date:'2026-11-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
+    {date:'2026-11-10', name:'Crop Production',           type:'supply',    time:'12:00 PM ET', desc:'November 2026 crop production estimates — est.'},
+
+    // December 2026
+    {date:'2026-12-10', name:'WASDE Report',              type:'wasde',     time:'12:00 PM ET', desc:'Monthly world supply/demand estimates — est.'},
   ];
 
-  /* ── BUILD CALENDAR ─────────────────────────────────────────── */
-  const today = new Date();
-  today.setHours(0,0,0,0);
+  // Weekly Export Sales — Thursdays year-round (8:30 AM ET)
+  // Add 2025 export sales Thursdays
+  (function(){
+    const start = new Date('2025-01-02');  // First Thursday 2025
+    const end   = new Date('2026-12-31');
+    let cur = new Date(start);
+    // Find first Thursday
+    while(cur.getDay() !== 4) cur.setDate(cur.getDate()+1);
+    while(cur <= end){
+      REPORTS.push({
+        date: cur.toISOString().slice(0,10),
+        name: 'Export Sales Report',
+        type: 'export',
+        time: '8:30 AM ET',
+        desc: 'Weekly net export sales for corn, soybeans, and wheat — USDA FAS'
+      });
+      cur.setDate(cur.getDate()+7);
+    }
+  })();
 
-  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  // Group by year-month
-  function groupByMonth(reports) {
-    const groups = {};
-    reports.forEach(r => {
-      const key = r.date.slice(0,7); // YYYY-MM
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(r);
+  // Weekly Crop Progress — Mondays April–November
+  (function(){
+    const seasons = [
+      {start:'2025-04-07', end:'2025-11-24'},
+      {start:'2026-04-06', end:'2026-11-23'},
+    ];
+    seasons.forEach(function(s){
+      let cur = new Date(s.start), week = 1, end = new Date(s.end);
+      const yr = cur.getFullYear();
+      while(cur <= end){
+        const iso = cur.toISOString().slice(0,10);
+        if(!REPORTS.find(r => r.date===iso && r.type==='croprog')){
+          REPORTS.push({
+            date: iso,
+            name: 'Crop Progress Report',
+            type: 'croprog',
+            time: '4:00 PM ET',
+            desc: 'Weekly crop condition ratings and planting/harvest progress by state' + (yr===2026?' — est.':'')
+          });
+        }
+        cur.setDate(cur.getDate()+7);
+        week++;
+      }
     });
-    return groups;
-  }
+  })();
+
+  // ── Calendar rendering ──────────────────────────────────────────
+  const today = new Date(); today.setHours(0,0,0,0);
+  const DOW    = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   let showPast = true;
   let activeFilter = 'all';
 
-  function renderCalendar() {
+  function groupByMonth(reports){
+    const g = {};
+    reports.forEach(r => {
+      const k = r.date.slice(0,7);
+      if(!g[k]) g[k]=[];
+      g[k].push(r);
+    });
+    return g;
+  }
+
+  function renderCalendar(){
     const container = document.getElementById('calendar-container');
-    const filtered = activeFilter === 'all' ? REPORTS : REPORTS.filter(r => r.type === activeFilter);
+    const filtered = activeFilter==='all' ? REPORTS : REPORTS.filter(r=>r.type===activeFilter);
     const groups = groupByMonth(filtered);
 
-    // Find next upcoming report
+    // Next upcoming report
+    const sorted = [...REPORTS].sort((a,b)=>a.date.localeCompare(b.date));
     let nextReport = null;
-    for (const r of REPORTS.sort((a,b) => a.date.localeCompare(b.date))) {
-      const d = new Date(r.date + 'T12:00:00');
-      if (d >= today) { nextReport = r; break; }
+    for(const r of sorted){
+      const d = new Date(r.date+'T12:00:00');
+      if(d >= today){ nextReport=r; break; }
     }
-    if (nextReport) {
-      const d = new Date(nextReport.date + 'T12:00:00');
-      const diff = Math.ceil((d - today) / 86400000);
+    if(nextReport){
+      const d = new Date(nextReport.date+'T12:00:00');
+      const diff = Math.ceil((d-today)/86400000);
       document.getElementById('next-name').textContent = nextReport.name;
-      document.getElementById('next-date').textContent = d.toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric',year:'numeric'}) + ' — ' + nextReport.time;
-      document.getElementById('next-countdown').textContent = diff === 0 ? 'TODAY' : diff + (diff === 1 ? ' day' : ' days');
-      document.getElementById('next-days-label').textContent = diff === 0 ? '' : 'away';
+      document.getElementById('next-date').textContent = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+' — '+nextReport.time;
+      document.getElementById('next-countdown').textContent = diff===0?'TODAY':diff+(diff===1?' day':' days');
+      document.getElementById('next-days-label').textContent = diff===0?'':'away';
     }
 
     let html = '';
-    const sortedKeys = Object.keys(groups).sort();
-
-    sortedKeys.forEach(key => {
-      const [yr, mo] = key.split('-').map(Number);
-      const reps = groups[key].sort((a,b) => a.date.localeCompare(b.date));
-      const monthDate = new Date(yr, mo-1, 1);
-      const isPastMonth = new Date(yr, mo, 0) < today; // last day of month < today
-
-      if (!showPast && isPastMonth) return;
+    Object.keys(groups).sort().forEach(key=>{
+      const [yr,mo] = key.split('-').map(Number);
+      const reps = groups[key].sort((a,b)=>a.date.localeCompare(b.date));
+      const isPastMonth = new Date(yr,mo,0) < today;
+      if(!showPast && isPastMonth) return;
 
       html += `<div class="month-panel ${isPastMonth?'has-past':''}" data-month="${key}">`;
-      html += `<div class="month-head"><h3>${MONTHS[mo-1]} ${yr}</h3><span class="year-tag">${isPastMonth?'Past':''}</span></div>`;
+      html += `<div class="month-head"><h3>${MONTHS[mo-1]} ${yr}</h3><span class="year-tag">${isPastMonth?'Past':yr===2026?'2026 (est.)':''}</span></div>`;
 
-      reps.forEach(r => {
-        const d = new Date(r.date + 'T12:00:00');
+      reps.forEach(r=>{
+        const d = new Date(r.date+'T12:00:00');
         const isPast = d < today;
-        const isToday = d.getTime() === today.getTime();
-        const isNext = nextReport && r.date === nextReport.date && r.name === nextReport.name;
-
-        const rowClass = isToday ? 'today' : isNext ? 'next-up' : isPast ? 'past' : 'upcoming';
-        const dateClass = isToday ? 'today-date' : '';
-        const tagClass = `tag-${r.type}`;
-        const tagLabel = {
-          wasde:'WASDE', croprog:'Crop Progress', plantings:'Plantings',
-          stocks:'Grain Stocks', census:'Census', supply:'Crop Production',
-          outlook:'Outlook', livestock:'Livestock'
-        }[r.type] || r.type;
+        const isToday = d.getTime()===today.getTime();
+        const isNext  = nextReport && r.date===nextReport.date && r.name===nextReport.name;
+        const rowClass  = isToday?'today':isNext?'next-up':isPast?'past':'upcoming';
+        const dateClass = isToday?'today-date':'';
+        const tagLabels = {wasde:'WASDE',croprog:'Crop Progress',plantings:'Plantings',stocks:'Grain Stocks',census:'Census',supply:'Crop Production',outlook:'Outlook',export:'Export Sales'};
 
         html += `<div class="report-row ${rowClass}" data-type="${r.type}">
           <div class="report-date ${dateClass}">
@@ -396,64 +411,28 @@
             <div class="report-desc">${r.desc}</div>
             <div class="report-time">🕐 ${r.time}</div>
           </div>
-          <div class="report-tag ${tagClass}">${tagLabel}</div>
+          <div class="report-tag tag-${r.type}">${tagLabels[r.type]||r.type}</div>
         </div>`;
       });
-
       html += '</div>';
     });
-
     container.innerHTML = html;
   }
 
-  function filterReports(type, btn) {
-    activeFilter = type;
-    document.querySelectorAll('.filter-btn:not(#toggle-past)').forEach(b => b.classList.remove('active'));
+  function filterReports(type,btn){
+    activeFilter=type;
+    document.querySelectorAll('.filter-btn:not(#toggle-past)').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     renderCalendar();
   }
 
-  function togglePast(btn) {
-    showPast = !showPast;
-    btn.textContent = showPast ? 'Hide Past' : 'Show Past';
-    btn.classList.toggle('active', !showPast);
+  function togglePast(btn){
+    showPast=!showPast;
+    btn.textContent=showPast?'Hide Past':'Show Past';
+    btn.classList.toggle('active',!showPast);
     renderCalendar();
   }
 
-  // Crop Progress runs weekly Mon Apr–Nov
-  function addCropProgress() {
-    // Add weekly crop progress for 2025 season (Apr 7 – Nov 24)
-    const start = new Date('2025-04-07');
-    const end   = new Date('2025-11-24');
-    let cur = new Date(start);
-    let week = 1;
-    while (cur <= end) {
-      const iso = cur.toISOString().slice(0,10);
-      if (!REPORTS.find(r => r.date === iso && r.type === 'croprog')) {
-        REPORTS.push({
-          date: iso,
-          name: `Crop Progress (Week ${week})`,
-          type: 'croprog',
-          time: '4:00 PM ET',
-          desc: 'Weekly crop condition ratings and planting/harvest progress by state'
-        });
-      }
-      cur.setDate(cur.getDate() + 7);
-      week++;
-    }
-    // 2026 season estimates
-    const start26 = new Date('2026-04-06');
-    const end26   = new Date('2026-11-23');
-    let cur26 = new Date(start26); week = 1;
-    while (cur26 <= end26) {
-      const iso = cur26.toISOString().slice(0,10);
-      REPORTS.push({ date:iso, name:`Crop Progress (Week ${week}) — est.`, type:'croprog', time:'4:00 PM ET', desc:'Weekly crop condition ratings — estimated date' });
-      cur26.setDate(cur26.getDate() + 7);
-      week++;
-    }
-  }
-
-  addCropProgress();
   renderCalendar();
   </script>
 

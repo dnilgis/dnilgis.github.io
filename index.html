@@ -276,6 +276,41 @@
     transition:border-color .15s;
   }
   .cot-full-link:hover{border-color:var(--gold)}
+
+  /* ── Tariff Widget ──────────────────────────────────────────── */
+  .tariff-widget{
+    background:linear-gradient(135deg,var(--surface) 0%,rgba(239,68,68,.02) 100%);
+    border:1px solid var(--border);border-radius:12px;
+    padding:.9rem 1.1rem;margin:.4rem 0 .6rem;
+  }
+  .tariff-widget-head{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;
+    margin-bottom:.6rem;
+  }
+  .tariff-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+  .tariff-status-badge{
+    display:inline-flex;align-items:center;gap:.3rem;
+    padding:.25rem .65rem;border-radius:20px;
+    font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;
+  }
+  .tariff-status-badge.elevated{background:rgba(239,68,68,.08);color:#ef4444;border-color:rgba(239,68,68,.25);}
+  .tariff-status-badge.normal{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22);}
+  .tariff-status-badge.mixed{background:rgba(230,176,66,.08);color:var(--gold);border-color:rgba(230,176,66,.22);}
+  .tariff-rows{display:flex;flex-direction:column;gap:.28rem;}
+  .tariff-row{display:flex;align-items:center;gap:.5rem;padding:.32rem .5rem;border-radius:6px;background:var(--surface2);}
+  .tariff-row-icon{font-size:.85rem;line-height:1;flex-shrink:0;}
+  .tariff-row-comm{font-size:.72rem;font-weight:700;color:var(--text);flex:1;min-width:0;}
+  .tariff-row-dest{font-size:.62rem;color:var(--text-muted);flex-shrink:0;}
+  .tariff-row-rate{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;flex-shrink:0;min-width:44px;text-align:right;}
+  .tariff-row-rate.elevated{color:#ef4444;}
+  .tariff-row-rate.normal{color:var(--green);}
+  .tariff-row-rate.mixed{color:var(--gold);}
+  .tariff-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--border);}
+  .tariff-footer-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .tariff-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .tariff-full-link:hover{border-color:var(--gold);}
+  @media(max-width:480px){.tariff-widget{padding:.75rem .85rem;}.tariff-row-dest{display:none;}}
+
   @media(max-width:480px){
     .cot-widget{padding:.75rem .85rem;}
     .cot-net{font-size:.72rem;}
@@ -343,6 +378,101 @@
   .km-plat.p{color:#5ba3e0;border-color:rgba(91,163,224,.22);background:rgba(91,163,224,.05)}
   .km-tl{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--text-muted)}
   .km-why{font-size:.68rem;color:var(--text-muted);line-height:1.45;padding:.3rem .46rem;background:rgba(255,255,255,.02);border-radius:4px;border-left:2px solid rgba(255,255,255,.07)}
+
+  /* ── Crop Progress + Export Sales grid ─────────────────────── */
+  .crop-export-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.4rem 0;
+  }
+  @media(max-width:720px){.crop-export-grid{grid-template-columns:1fr}}
+
+  /* ── Crop Progress Widget ───────────────────────────────────── */
+  .crop-widget{
+    background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.025) 100%);
+    border:1px solid var(--border);border-radius:12px;
+    padding:.9rem 1.1rem;display:flex;flex-direction:column;
+  }
+  .crop-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
+  .crop-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+  .crop-week-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);padding:.15rem .4rem;border:1px solid var(--border);border-radius:4px;}
+  .crop-rows{display:flex;flex-direction:column;gap:.55rem;flex:1;}
+  .crop-row-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.22rem;}
+  .crop-comm-label{display:flex;align-items:center;gap:.3rem;}
+  .crop-comm-icon{font-size:.85rem;line-height:1;}
+  .crop-comm-name{font-size:.76rem;font-weight:700;color:var(--text);}
+  .crop-ge-val{font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;}
+  .crop-ge-val.good{color:var(--green);}
+  .crop-ge-val.fair{color:var(--gold);}
+  .crop-ge-val.poor{color:#ef4444;}
+  .crop-chg-row{display:flex;gap:.55rem;margin-top:.1rem;}
+  .crop-chg{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;}
+  .crop-chg.up{color:var(--green);} .crop-chg.dn{color:#ef4444;} .crop-chg.nc{color:var(--text-muted);}
+  .crop-chg-lbl{font-size:.58rem;color:var(--text-muted);}
+  .crop-plant-row{display:flex;align-items:center;gap:.35rem;margin-top:.15rem;}
+  .crop-plant-pct{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);}
+  .crop-plant-lbl{font-size:.58rem;color:var(--text-muted);}
+  .crop-plant-bar{flex:1;height:5px;border-radius:3px;background:var(--surface2);overflow:hidden;}
+  .crop-plant-fill{height:100%;border-radius:3px;background:var(--green);opacity:.7;transition:width .5s;}
+  .crop-offseason{display:flex;align-items:center;justify-content:center;flex:1;font-size:.78rem;color:var(--text-muted);text-align:center;padding:.5rem 0;}
+  .crop-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
+  .crop-footer-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .crop-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .crop-full-link:hover{border-color:var(--gold);}
+  @media(max-width:480px){.crop-widget{padding:.75rem .85rem;}}
+
+  /* ── Export Sales Widget ────────────────────────────────────── */
+  .export-widget{
+    background:linear-gradient(135deg,var(--surface) 0%,rgba(59,130,246,.025) 100%);
+    border:1px solid var(--border);border-radius:12px;
+    padding:.9rem 1.1rem;display:flex;flex-direction:column;
+  }
+  .export-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
+  .export-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+  .export-mkt-yr{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);padding:.15rem .4rem;border:1px solid var(--border);border-radius:4px;}
+  .export-rows{display:flex;flex-direction:column;gap:.5rem;flex:1;}
+  .export-row-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.18rem;}
+  .export-comm-label{display:flex;align-items:center;gap:.3rem;}
+  .export-comm-icon{font-size:.85rem;line-height:1;}
+  .export-comm-name{font-size:.76rem;font-weight:700;color:var(--text);}
+  .export-weekly{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;color:var(--text);}
+  .export-pace-row{display:flex;align-items:center;gap:.4rem;}
+  .export-pace-bar{flex:1;height:5px;border-radius:3px;background:var(--surface2);overflow:hidden;}
+  .export-pace-fill{height:100%;border-radius:3px;transition:width .5s;}
+  .export-pace-fill.on-track{background:var(--green);}
+  .export-pace-fill.lagging{background:var(--gold);}
+  .export-pace-fill.behind{background:#ef4444;}
+  .export-pace-pct{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;flex-shrink:0;}
+  .export-pace-pct.on-track{color:var(--green);}
+  .export-pace-pct.lagging{color:var(--gold);}
+  .export-pace-pct.behind{color:#ef4444;}
+  .export-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
+  .export-footer-date{font-size:.6rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .export-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .export-full-link:hover{border-color:var(--gold);}
+  @media(max-width:480px){.export-widget{padding:.75rem .85rem;}}
+
+  /* ── Fertilizer Widget ──────────────────────────────────────── */
+  .fert-widget{
+    background:linear-gradient(135deg,var(--surface) 0%,rgba(230,176,66,.02) 100%);
+    border:1px solid var(--border);border-radius:12px;
+    padding:.9rem 1.1rem;margin:.4rem 0 .6rem;
+  }
+  .fert-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
+  .fert-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+  .fert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.4rem;}
+  .fert-card{background:var(--surface2);border-radius:8px;padding:.5rem .65rem;}
+  .fert-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem;}
+  .fert-name{font-size:.68rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.25rem;}
+  .fert-sym{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text-muted);}
+  .fert-price{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--text);line-height:1;}
+  .fert-chg{display:flex;align-items:center;gap:.2rem;margin-top:.12rem;}
+  .fert-chg-val{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;}
+  .fert-chg-val.up{color:#ef4444;} .fert-chg-val.dn{color:var(--green);} .fert-chg-val.nc{color:var(--text-muted);}
+  .fert-loc{font-size:.55rem;color:var(--text-muted);}
+  .fert-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--border);}
+  .fert-footer-note{font-size:.58rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .fert-full-link{font-size:.66rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.16rem .48rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  .fert-full-link:hover{border-color:var(--gold);}
+  @media(max-width:480px){.fert-widget{padding:.75rem .85rem;}.fert-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 
@@ -781,6 +911,135 @@
 
     </div><!-- /ratio-cot-grid -->
 
+  <!-- ══ TARIFF TRACKER WIDGET ════════════════════════════════ -->
+  <div class="tariff-widget fade-up" id="tariff-widget">
+    <div class="tariff-widget-head">
+      <span class="tariff-widget-title">🏛️ Ag Tariff Tracker — US Export Rates</span>
+      <span class="tariff-status-badge elevated" id="tariff-badge">Loading…</span>
+    </div>
+    <div class="tariff-rows" id="tariff-rows">
+      <div class="tariff-row" style="justify-content:center;color:var(--text-muted);font-size:.75rem">Loading tariff data…</div>
+    </div>
+    <div class="tariff-footer">
+      <span class="tariff-footer-date" id="tariff-date">Updated —</span>
+      <a href="/tariffs" class="tariff-full-link">Full Tracker →</a>
+    </div>
+
+  <!-- ══ CROP PROGRESS + EXPORT SALES ═══════════════════════════ -->
+  <div class="crop-export-grid">
+
+    <!-- Crop Progress -->
+    <div class="crop-widget" id="crop-widget">
+      <div class="crop-widget-head">
+        <span class="crop-widget-title">🌱 Crop Progress — G/E Rating</span>
+        <span class="crop-week-badge" id="crop-week-badge">USDA · Mon 4pm ET</span>
+      </div>
+      <div class="crop-rows" id="crop-rows">
+
+        <div>
+          <div class="crop-row-head">
+            <div class="crop-comm-label"><span class="crop-comm-icon">🌽</span><span class="crop-comm-name">Corn</span></div>
+            <span class="crop-ge-val fair" id="crop-corn-ge">--</span>
+          </div>
+          <div class="crop-chg-row">
+            <span class="crop-chg nc" id="crop-corn-wk">--</span><span class="crop-chg-lbl">wk</span>
+            <span class="crop-chg nc" id="crop-corn-yr">--</span><span class="crop-chg-lbl">vs yr ago</span>
+          </div>
+          <div class="crop-plant-row">
+            <span class="crop-plant-pct" id="crop-corn-plant">--%</span>
+            <span class="crop-plant-lbl">planted</span>
+            <div class="crop-plant-bar"><div class="crop-plant-fill" id="crop-corn-bar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="crop-row-head">
+            <div class="crop-comm-label"><span class="crop-comm-icon">🫘</span><span class="crop-comm-name">Soybeans</span></div>
+            <span class="crop-ge-val fair" id="crop-bean-ge">--</span>
+          </div>
+          <div class="crop-chg-row">
+            <span class="crop-chg nc" id="crop-bean-wk">--</span><span class="crop-chg-lbl">wk</span>
+            <span class="crop-chg nc" id="crop-bean-yr">--</span><span class="crop-chg-lbl">vs yr ago</span>
+          </div>
+          <div class="crop-plant-row">
+            <span class="crop-plant-pct" id="crop-bean-plant">--%</span>
+            <span class="crop-plant-lbl">planted</span>
+            <div class="crop-plant-bar"><div class="crop-plant-fill" id="crop-bean-bar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="crop-footer">
+        <span class="crop-footer-date" id="crop-date">USDA NASS · Weekly</span>
+        <a href="/usda-calendar" class="crop-full-link">Full Calendar →</a>
+      </div>
+    </div>
+
+    <!-- Export Sales -->
+    <div class="export-widget" id="export-widget">
+      <div class="export-widget-head">
+        <span class="export-widget-title">📦 Export Sales — Cumulative Pace</span>
+        <span class="export-mkt-yr" id="export-mkt-yr">USDA FAS · Thu 8:30am</span>
+      </div>
+      <div class="export-rows" id="export-rows">
+
+        <div>
+          <div class="export-row-head">
+            <div class="export-comm-label"><span class="export-comm-icon">🌽</span><span class="export-comm-name">Corn</span></div>
+            <span class="export-weekly" id="exp-corn-wk">--</span>
+          </div>
+          <div class="export-pace-row">
+            <div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-corn-bar" style="width:0%"></div></div>
+            <span class="export-pace-pct on-track" id="exp-corn-pct">--%</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="export-row-head">
+            <div class="export-comm-label"><span class="export-comm-icon">🫘</span><span class="export-comm-name">Soybeans</span></div>
+            <span class="export-weekly" id="exp-bean-wk">--</span>
+          </div>
+          <div class="export-pace-row">
+            <div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-bean-bar" style="width:0%"></div></div>
+            <span class="export-pace-pct on-track" id="exp-bean-pct">--%</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="export-row-head">
+            <div class="export-comm-label"><span class="export-comm-icon">🌾</span><span class="export-comm-name">Wheat</span></div>
+            <span class="export-weekly" id="exp-wheat-wk">--</span>
+          </div>
+          <div class="export-pace-row">
+            <div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-wheat-bar" style="width:0%"></div></div>
+            <span class="export-pace-pct on-track" id="exp-wheat-pct">--%</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="export-footer">
+        <span class="export-footer-date" id="exp-date">USDA FAS · Weekly</span>
+        <a href="https://apps.fas.usda.gov/export-sales/" target="_blank" rel="noopener" class="export-full-link">FAS Data →</a>
+      </div>
+    </div>
+
+  </div><!-- /crop-export-grid -->
+
+  <!-- ══ FERTILIZER WIDGET ═══════════════════════════════════════ -->
+  <div class="fert-widget fade-up" id="fert-widget">
+    <div class="fert-widget-head">
+      <span class="fert-widget-title">🧪 Fertilizer Prices — Indicative</span>
+      <span class="crop-week-badge" id="fert-date">Updated —</span>
+    </div>
+    <div class="fert-grid" id="fert-grid">
+      <div class="fert-card" style="grid-column:1/-1;text-align:center;padding:.75rem;color:var(--text-muted);font-size:.75rem">Loading…</div>
+    </div>
+    <div class="fert-footer">
+      <span class="fert-footer-note">Indicative prices — update data/fertilizer.json weekly</span>
+      <a href="/fertilizer" class="fert-full-link">Price History →</a>
+    </div>
+  </div>
+
     <div class="pc-section-lbl">🌾 More Grains, Feed &amp; Livestock</div>
     <div class="price-cards-grid-2">
       <div class="pc pc-sm" data-spark="wheat">
@@ -1173,6 +1432,248 @@
 })();
 </script>
 
+
+<!-- ── Tariff Widget ─────────────────────────────────────────── -->
+<script>
+(function(){
+'use strict';
+
+// Only show top 4 rows on homepage (China + one normal)
+var SHOW_COMMS = ['Soybeans','Corn','Wheat','Pork'];
+var SHOW_DEST  = 'China';
+
+function statusCls(s){return s==='elevated'?'elevated':s==='normal'?'normal':'mixed';}
+function statusIcon(s){return s==='elevated'?'🚨':s==='normal'?'✅':'⚠️';}
+function statusTxt(s){return s==='elevated'?'Trade War Active':s==='normal'?'Normal Trade':'Mixed';}
+
+function fmtDate(iso){
+  if(!iso)return'—';
+  try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+  catch(e){return iso;}
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+fetch('/data/tariffs.json')
+  .then(function(r){if(!r.ok)throw new Error('no-tariffs');return r.json();})
+  .then(function(data){
+
+    var badge = document.getElementById('tariff-badge');
+    var cls = statusCls(data.status);
+    if(badge){
+      badge.className = 'tariff-status-badge '+cls;
+      badge.textContent = statusIcon(data.status)+' '+statusTxt(data.status);
+    }
+
+    var dateEl = document.getElementById('tariff-date');
+    if(dateEl) dateEl.textContent = 'Updated '+fmtDate(data.updated);
+
+    // Show China rows for key commodities only
+    var rows = (data.rows||[]).filter(function(r){
+      return r.destination.indexOf('China')>=0 && SHOW_COMMS.indexOf(r.commodity)>=0;
+    }).slice(0,4);
+
+    var container = document.getElementById('tariff-rows');
+    if(container && rows.length){
+      container.innerHTML = rows.map(function(row){
+        var sc = statusCls(row.status);
+        return '<div class="tariff-row">'
+          +'<span class="tariff-row-icon">'+esc(row.icon)+'</span>'
+          +'<span class="tariff-row-comm">'+esc(row.commodity)+'</span>'
+          +'<span class="tariff-row-dest">→ '+esc(row.destination)+'</span>'
+          +'<span class="tariff-row-rate '+sc+'">'+esc(row.rate)+'</span>'
+          +'</div>';
+      }).join('');
+    }
+
+  })
+  .catch(function(){
+    var badge = document.getElementById('tariff-badge');
+    if(badge){badge.className='tariff-status-badge mixed';badge.textContent='Data unavailable';}
+  });
+})();
+</script>
+
+
+<!-- ── Crop Progress Widget ─────────────────────────────────── -->
+<script>
+(function(){
+'use strict';
+
+function fmtPct(n){ return n==null?'--':n+'%'; }
+function fmtChg(cur,prev,suffix){
+  if(cur==null||prev==null) return {txt:'--',cls:'nc'};
+  var d=cur-prev;
+  return {txt:(d>=0?'▲+':'▼')+Math.abs(d)+(suffix||''),cls:d>0?'up':d<0?'dn':'nc'};
+}
+function geClass(v){ if(v==null)return'fair'; return v>=60?'good':v>=40?'fair':'poor'; }
+
+function fmtDate(iso){
+  if(!iso)return'—';
+  try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+  catch(e){return iso;}
+}
+
+fetch('/data/crop-progress.json')
+  .then(function(r){if(!r.ok)throw new Error('no-cp');return r.json();})
+  .then(function(data){
+
+    if(data.report_date){
+      var d=document.getElementById('crop-date');
+      if(d) d.textContent='As of '+fmtDate(data.report_date)+' · NASS';
+    }
+    if(data.week){
+      var wb=document.getElementById('crop-week-badge');
+      if(wb) wb.textContent='Week '+data.week;
+    }
+
+    if(!data.in_season){
+      var rows=document.getElementById('crop-rows');
+      if(rows) rows.innerHTML='<div class="crop-offseason">🌨️ Off season — resumes April<br><span style="font-size:.65rem;margin-top:.2rem;display:block">Last season data shown when available</span></div>';
+      // Still try to show last data if available
+    }
+
+    ['corn','soybeans'].forEach(function(comm){
+      var key = comm==='soybeans'?'bean':comm;
+      var d = data[comm];
+      if(!d) return;
+
+      var geEl = document.getElementById('crop-'+key+'-ge');
+      if(geEl){
+        geEl.textContent = fmtPct(d.good_excellent);
+        geEl.className = 'crop-ge-val '+geClass(d.good_excellent);
+      }
+
+      var wkChg = fmtChg(d.good_excellent, d.good_excellent_prev_week, '%');
+      var yrChg = fmtChg(d.good_excellent, d.good_excellent_prev_year, '%');
+      var wkEl=document.getElementById('crop-'+key+'-wk');
+      var yrEl=document.getElementById('crop-'+key+'-yr');
+      if(wkEl){wkEl.textContent=wkChg.txt;wkEl.className='crop-chg '+wkChg.cls;}
+      if(yrEl){yrEl.textContent=yrChg.txt;yrEl.className='crop-chg '+yrChg.cls;}
+
+      var plantEl=document.getElementById('crop-'+key+'-plant');
+      var barEl=document.getElementById('crop-'+key+'-bar');
+      if(plantEl) plantEl.textContent=fmtPct(d.planting_pct);
+      if(barEl) barEl.style.width=Math.min(d.planting_pct||0,100)+'%';
+    });
+
+  })
+  .catch(function(){
+    var d=document.getElementById('crop-date');
+    if(d) d.textContent='Data pending · Mon 4pm ET';
+    ['corn-ge','corn-wk','corn-yr','bean-ge','bean-wk','bean-yr'].forEach(function(id){
+      var el=document.getElementById('crop-'+id);
+      if(el) el.textContent='—';
+    });
+  });
+})();
+</script>
+
+<!-- ── Export Sales Widget ───────────────────────────────────── -->
+<script>
+(function(){
+'use strict';
+
+function fmtMT(n){
+  if(n==null||isNaN(n))return'--';
+  if(Math.abs(n)>=1000000) return (n/1000000).toFixed(2)+'M MT';
+  if(Math.abs(n)>=1000)    return Math.round(n/1000)+'k MT';
+  return n+' MT';
+}
+function paceClass(pct){
+  if(pct==null)return'on-track';
+  // Expected pace = days elapsed / 365 * 100 — rough signal
+  return pct>=85?'on-track':pct>=70?'lagging':'behind';
+}
+function fmtDate(iso){
+  if(!iso)return'—';
+  try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+  catch(e){return iso;}
+}
+
+fetch('/data/export-sales.json')
+  .then(function(r){if(!r.ok)throw new Error('no-exp');return r.json();})
+  .then(function(data){
+
+    var dateEl=document.getElementById('exp-date');
+    if(dateEl) dateEl.textContent='Week of '+fmtDate(data.report_date)+' · FAS';
+
+    var mktEl=document.getElementById('export-mkt-yr');
+    if(mktEl&&data.marketing_year) mktEl.textContent=data.marketing_year+' mkt yr';
+
+    var map={'corn':'corn','soybeans':'bean','wheat':'wheat'};
+    Object.keys(map).forEach(function(comm){
+      var key=map[comm];
+      var d=data[comm];
+      if(!d) return;
+
+      var wkEl=document.getElementById('exp-'+key+'-wk');
+      if(wkEl) wkEl.textContent=d.weekly_net_mt!=null?'+'+fmtMT(d.weekly_net_mt):'pending';
+
+      var pct=d.pct_of_target;
+      var cls=paceClass(pct);
+      var barEl=document.getElementById('exp-'+key+'-bar');
+      var pctEl=document.getElementById('exp-'+key+'-pct');
+      if(barEl){barEl.style.width=Math.min(pct||0,100)+'%';barEl.className='export-pace-fill '+cls;}
+      if(pctEl){pctEl.textContent=pct!=null?pct+'%':'--';pctEl.className='export-pace-pct '+cls;}
+    });
+
+  })
+  .catch(function(){
+    var d=document.getElementById('exp-date');
+    if(d) d.textContent='Data pending · Thu 8:30am ET';
+  });
+})();
+</script>
+
+<!-- ── Fertilizer Widget ─────────────────────────────────────── -->
+<script>
+(function(){
+'use strict';
+
+function fmtDate(iso){
+  if(!iso)return'—';
+  try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+  catch(e){return iso;}
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+fetch('/data/fertilizer.json')
+  .then(function(r){if(!r.ok)throw new Error('no-fert');return r.json();})
+  .then(function(data){
+
+    var dateEl=document.getElementById('fert-date');
+    if(dateEl) dateEl.textContent='Updated '+fmtDate(data.updated);
+
+    var grid=document.getElementById('fert-grid');
+    if(!grid||!data.prices||!data.prices.length) return;
+
+    grid.innerHTML=data.prices.map(function(p){
+      var chg=p.price-p.prev;
+      var chgCls=chg>0?'up':chg<0?'dn':'nc';
+      var chgArrow=chg>0?'▲':chg<0?'▼':'—';
+      var chgStr=chgArrow+(chg!==0?'$'+Math.abs(chg):'');
+      return '<div class="fert-card">'
+        +'<div class="fert-card-head">'
+        +'<span class="fert-name">'+esc(p.icon)+' '+esc(p.name)+'</span>'
+        +'<span class="fert-sym">'+esc(p.symbol)+'</span>'
+        +'</div>'
+        +'<div class="fert-price">$'+p.price+'</div>'
+        +'<div class="fert-chg">'
+        +'<span class="fert-chg-val '+chgCls+'">'+esc(chgStr)+'</span>'
+        +'<span class="fert-loc"> · '+esc(p.location)+'</span>'
+        +'</div>'
+        +'</div>';
+    }).join('');
+
+  })
+  .catch(function(){
+    var d=document.getElementById('fert-date');
+    if(d) d.textContent='Update data/fertilizer.json';
+  });
+})();
+</script>
+
 <script src="/components/sparklines.js"></script>
 
 <!-- ── Prediction Markets ────────────────────────────────────── -->
@@ -1261,7 +1762,7 @@ Promise.all(fetches).then(function(results){var loading=document.getElementById(
   function buildUSDACalendar(){
     var strip=document.getElementById('usda-cal-strip');if(!strip)return;var now=new Date(),events=[];
     var reports=[{name:'Export Sales',weekday:4,time:'8:30am ET',note:''},{name:'Crop Progress',weekday:1,time:'4:00pm ET',note:'Growing season'},{name:'Export Inspections',weekday:1,time:'11:00am ET',note:''}];
-    var majors=[{name:'WASDE',date:'2026-04-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-04-09',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-05-12',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-06-11',time:'11:00am ET',note:'Market-moving'},{name:'Acreage Report',date:'2026-06-30',time:'11:00am ET',note:'Planted acres'},{name:'Grain Stocks',date:'2026-06-30',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-07-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-08-12',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-08-12',time:'11:00am ET',note:'First corn est.'},{name:'WASDE',date:'2026-09-11',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-09-11',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-10-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-10-09',time:'11:00am ET',note:'Final corn est.'}];
+    var majors=[{name:'WASDE',date:'2026-04-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-04-09',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-05-12',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-06-11',time:'11:00am ET',note:'Market-moving'},{name:'Acreage Report',date:'2026-06-30',time:'11:00am ET',note:'Planted acres'},{name:'Grain Stocks',date:'2026-06-30',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-07-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-08-12',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-08-12',time:'11:00am ET',note:'First corn est.'},{name:'WASDE',date:'2026-09-11',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-09-11',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-10-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-10-09',time:'11:00am ET',note:'Final corn est.'},{name:'WASDE',date:'2026-11-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-12-10',time:'11:00am ET',note:'Market-moving'}];
     for(var w=0;w<4;w++){reports.forEach(function(r){var dt=new Date(now);dt.setDate(dt.getDate()+((r.weekday-dt.getDay()+7)%7)+(w*7));if(dt<now&&w===0)dt.setDate(dt.getDate()+7);events.push({name:r.name,date:dt,time:r.time,note:r.note});});}
     majors.forEach(function(m){var dt=new Date(m.date+'T12:00:00');if(dt>=new Date(now.getFullYear(),now.getMonth(),now.getDate()))events.push({name:m.name,date:dt,time:m.time,note:m.note});});
     events.sort(function(a,b){return a.date-b.date;});var seen={},unique=[];events.forEach(function(e){var k=e.name+'-'+e.date.toDateString();if(!seen[k]){seen[k]=true;unique.push(e);}});events=unique.slice(0,10);

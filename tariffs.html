@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+<link rel="preload" href="/components/styles.css" as="style">
+<link rel="stylesheet" href="/components/styles.css">
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon"         href="/img/apple-touch-icon.png">
+<link rel="manifest"                 href="/manifest.json">
+<meta name="theme-color" content="#111a0a">
+
+<title>Ag Tariff Tracker — US Trade Policy Impact on Grain &amp; Livestock | AGSIST</title>
+<meta name="description" content="Current tariff rates on US corn, soybean, wheat, and pork exports to China, Canada, Mexico, and the EU. Updated as trade policy changes. Free for farmers.">
+<meta name="author"  content="Farmers First Agri Service — AGSIST">
+<meta name="robots"  content="index, follow">
+<link rel="canonical" href="https://agsist.com/tariffs">
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="AGSIST">
+<meta property="og:title"       content="Ag Tariff Tracker — US Trade Policy Impact on Grain &amp; Livestock | AGSIST">
+<meta property="og:description" content="Current tariff rates on US corn, soybean, wheat, and pork exports. Updated as policy changes. Free for farmers.">
+<meta property="og:url"         content="https://agsist.com/tariffs">
+<meta property="og:image"       content="https://agsist.com/img/og/agsist.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Ag Tariff Tracker — US Trade Policy Impact on Grain & Livestock",
+  "description": "Current tariff rates on US corn, soybean, wheat, and pork exports to China, Canada, Mexico, and the EU. Updated as trade policy changes.",
+  "url": "https://agsist.com/tariffs",
+  "isPartOf": { "@type": "WebSite", "url": "https://agsist.com/" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "AGSIST", "item": "https://agsist.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tariff Tracker", "item": "https://agsist.com/tariffs" }
+    ]
+  }
+}
+</script>
+
+<style>
+.tariff-page { max-width: 900px; margin: 0 auto; padding: 0 1rem 3rem; }
+
+/* Hero */
+.tariff-hero { padding: 1.4rem 0 .9rem; border-bottom: 1px solid var(--border); margin-bottom: 1.25rem; }
+.tariff-eyebrow { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: .4rem; margin-bottom: .3rem; }
+.tariff-page-title { font-family: 'Oswald', sans-serif; font-size: 1.75rem; font-weight: 800; color: var(--text); line-height: 1.1; margin: 0 0 .35rem; text-transform: uppercase; letter-spacing: -.01em; }
+.tariff-page-sub { font-size: .84rem; color: var(--text-muted); line-height: 1.55; max-width: 640px; }
+
+/* Status banner */
+.tariff-status-banner {
+  display: flex; align-items: flex-start; gap: .85rem;
+  padding: .85rem 1rem; border-radius: 10px; margin-bottom: 1.25rem; border: 1px solid;
+}
+.tariff-status-banner.elevated { background: rgba(239,68,68,.06);  border-color: rgba(239,68,68,.22); }
+.tariff-status-banner.normal   { background: rgba(34,197,94,.06);  border-color: rgba(34,197,94,.20); }
+.tariff-status-banner.mixed    { background: rgba(230,176,66,.06); border-color: rgba(230,176,66,.20); }
+.tsb-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; margin-top: .05rem; }
+.tsb-body { flex: 1; }
+.tsb-label {
+  font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; line-height: 1; margin-bottom: .2rem;
+}
+.tsb-label.elevated { color: #ef4444; }
+.tsb-label.normal   { color: var(--green); }
+.tsb-label.mixed    { color: var(--gold); }
+.tsb-note { font-size: .8rem; color: var(--text-muted); line-height: 1.55; }
+.tsb-date { font-family: 'JetBrains Mono', monospace; font-size: .6rem; color: var(--text-muted); margin-top: .35rem; }
+
+/* Rate table */
+.tariff-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.1rem; overflow: hidden; }
+.tariff-section-head {
+  padding: .65rem 1rem; border-bottom: 1px solid var(--border);
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tariff-table { width: 100%; border-collapse: collapse; }
+.tariff-table th {
+  padding: .45rem .85rem; text-align: left;
+  font-size: .58rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted);
+  border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+.tariff-table td { padding: .55rem .85rem; border-bottom: 1px solid rgba(255,255,255,.04); font-size: .8rem; color: var(--text); vertical-align: middle; }
+.tariff-table tr:last-child td { border-bottom: none; }
+.tariff-table tr:hover td { background: rgba(255,255,255,.015); }
+.tt-comm { display: flex; align-items: center; gap: .45rem; font-weight: 700; }
+.tt-icon { font-size: 1rem; line-height: 1; }
+.tt-rate {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: .88rem;
+}
+.tt-rate.elevated { color: #ef4444; }
+.tt-rate.normal   { color: var(--green); }
+.tt-rate.mixed    { color: var(--gold); }
+.tt-baseline { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-muted); }
+.tt-badge {
+  display: inline-flex; align-items: center; padding: .12rem .45rem; border-radius: 4px;
+  font-size: .58rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border: 1px solid;
+}
+.tt-badge.elevated { color: #ef4444; background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.22); }
+.tt-badge.normal   { color: var(--green); background: rgba(34,197,94,.07); border-color: rgba(34,197,94,.2); }
+.tt-badge.mixed    { color: var(--gold); background: rgba(230,176,66,.08); border-color: rgba(230,176,66,.22); }
+.tt-note { font-size: .7rem; color: var(--text-muted); }
+@media (max-width: 600px) {
+  .tt-note { display: none; }
+  .tariff-table th:nth-child(3), .tariff-table td:nth-child(3) { display: none; }
+}
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item { display: flex; gap: .85rem; padding: .75rem 1rem; border-bottom: 1px solid rgba(255,255,255,.04); }
+.tl-item:last-child { border-bottom: none; }
+.tl-date { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--text-muted); white-space: nowrap; padding-top: .1rem; min-width: 72px; }
+.tl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: .32rem; }
+.tl-dot.high   { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.15); }
+.tl-dot.medium { background: var(--gold); box-shadow: 0 0 0 3px rgba(230,176,66,.15); }
+.tl-dot.low    { background: var(--green); box-shadow: 0 0 0 3px rgba(34,197,94,.15); }
+.tl-event { font-size: .78rem; color: var(--text); line-height: 1.5; flex: 1; }
+
+/* Explainer */
+.tariff-explainer { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.25rem; }
+@media (max-width: 540px) { .tariff-explainer { grid-template-columns: 1fr; } }
+.te-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .85rem 1rem; }
+.te-card h4 { font-size: .78rem; font-weight: 700; color: var(--text); margin: 0 0 .3rem; }
+.te-card p  { font-size: .74rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+/* Source */
+.tariff-source { font-size: .64rem; color: var(--text-muted); text-align: center; padding-top: .6rem; border-top: 1px solid var(--border); }
+.tariff-source a { color: var(--gold); text-decoration: none; }
+.tariff-source a:hover { text-decoration: underline; }
+</style>
+</head>
+
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<div id="site-header"></div>
+
+<main id="main" class="main tariff-page">
+
+  <div class="tariff-hero">
+    <div class="tariff-eyebrow">🏛️ Trade Policy · Updated Manually</div>
+    <h1 class="tariff-page-title">Ag Tariff Tracker</h1>
+    <p class="tariff-page-sub">Current tariff rates on US corn, soybean, wheat, and pork exports to key markets. Updated when policy changes. These rates directly affect grain basis, export demand, and cash prices at your elevator.</p>
+  </div>
+
+  <!-- Status banner -->
+  <div class="tariff-status-banner elevated" id="tariff-status-banner">
+    <div class="tsb-icon">🚨</div>
+    <div class="tsb-body">
+      <div class="tsb-label elevated" id="tsb-label">Trade War Active</div>
+      <div class="tsb-note" id="tsb-note">Loading current status…</div>
+      <div class="tsb-date" id="tsb-date">Updated —</div>
+    </div>
+  </div>
+
+  <!-- Rate table -->
+  <div class="tariff-section">
+    <div class="tariff-section-head">
+      <span>Current Export Tariff Rates by Commodity &amp; Destination</span>
+      <span id="tariff-updated" style="font-size:.6rem;color:var(--text-muted);letter-spacing:0;text-transform:none">—</span>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="tariff-table" id="tariff-table">
+        <thead>
+          <tr>
+            <th>Commodity</th>
+            <th>Destination</th>
+            <th>Baseline</th>
+            <th>Current Rate</th>
+            <th>Status</th>
+            <th class="tt-note-col">Note</th>
+          </tr>
+        </thead>
+        <tbody id="tariff-tbody">
+          <tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.78rem">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="tariff-section">
+    <div class="tariff-section-head">Policy Timeline</div>
+    <div class="timeline" id="tariff-timeline">
+      <div class="tl-item" style="color:var(--text-muted);font-size:.78rem;justify-content:center;padding:1.2rem">Loading…</div>
+    </div>
+  </div>
+
+  <!-- Explainer -->
+  <div class="tariff-explainer">
+    <div class="te-card">
+      <h4>Why Tariffs Move Grain Prices</h4>
+      <p>When a major buyer like China imposes retaliatory tariffs, US grain becomes more expensive in that market. Buyers shift to Brazil, Argentina, or Ukraine instead. This reduces US export demand, puts pressure on basis, and ultimately flows through to lower cash prices at your elevator — even for grain that was never destined for export.</p>
+    </div>
+    <div class="te-card">
+      <h4>How to Read This Table</h4>
+      <p><strong style="color:#ef4444">Elevated</strong> means tariffs are significantly above baseline — export demand is impaired. <strong style="color:var(--gold)">Mixed</strong> means partial exemptions or uncertainty. <strong style="color:var(--green)">Normal</strong> means trade is flowing at standard rates. The baseline column shows what the rate was before the current dispute.</p>
+    </div>
+    <div class="te-card">
+      <h4>Soybeans Are Most Exposed</h4>
+      <p>China buys roughly 60% of globally traded soybeans. When US–China tariffs are elevated, Brazil and Argentina pick up US market share. This is not temporary — buyers build new supply chains. Even a "deal" may not restore prior purchase levels quickly, which keeps pressure on soybean basis longer than the tariff itself.</p>
+    </div>
+    <div class="te-card">
+      <h4>What Farmers Can Do</h4>
+      <p>Monitor export sales reports every Thursday (USDA 8:30am ET) to watch whether weekly net sales are holding up. Watch Brazil's harvest pace and currency — a cheap Brazilian real with high tariffs on US beans is a double-headwind. Consider selling into any tariff-relief rally rather than waiting for a full resolution.</p>
+    </div>
+  </div>
+
+  <div class="tariff-source">
+    Data sourced from <a href="https://ustr.gov" target="_blank" rel="noopener">USTR</a>,
+    <a href="https://www.usda.gov/topics/trade" target="_blank" rel="noopener">USDA Trade</a>, and news reports.
+    This tracker is maintained manually — rates are updated as policy changes are confirmed. ·
+    <a href="/">← AGSIST Dashboard</a>
+  </div>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="/components/loader.js"></script>
+
+<script>
+(function(){
+'use strict';
+
+function statusIcon(s){ return s==='elevated'?'🚨':s==='normal'?'✅':'⚠️'; }
+function statusCls(s){ return s==='elevated'?'elevated':s==='normal'?'normal':'mixed'; }
+function statusBadgeTxt(s){ return s==='elevated'?'Elevated':s==='normal'?'Normal':'Mixed'; }
+
+function fmtDate(iso){
+  if(!iso)return'—';
+  try{
+    var d=new Date(iso+'T12:00:00');
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  }catch(e){return iso;}
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+fetch('/data/tariffs.json')
+  .then(function(r){if(!r.ok)throw new Error('no-tariffs');return r.json();})
+  .then(function(data){
+
+    // Status banner
+    var banner = document.getElementById('tariff-status-banner');
+    var label  = document.getElementById('tsb-label');
+    var note   = document.getElementById('tsb-note');
+    var date   = document.getElementById('tsb-date');
+    var cls    = statusCls(data.status);
+    if(banner){ banner.className='tariff-status-banner '+cls; }
+    if(label){ label.textContent=statusIcon(data.status)+' '+data.status_label; label.className='tsb-label '+cls; }
+    if(note)  note.textContent = data.headline || data.status_note;
+    if(date)  date.textContent = 'Updated '+fmtDate(data.updated);
+
+    var upd = document.getElementById('tariff-updated');
+    if(upd) upd.textContent = 'As of '+fmtDate(data.updated);
+
+    // Table
+    var tbody = document.getElementById('tariff-tbody');
+    if(tbody && data.rows && data.rows.length){
+      tbody.innerHTML = data.rows.map(function(row){
+        var sc = statusCls(row.status);
+        return '<tr>'
+          +'<td><div class="tt-comm"><span class="tt-icon">'+esc(row.icon)+'</span>'+esc(row.commodity)+'</div></td>'
+          +'<td style="color:var(--text-muted)">'+esc(row.destination)+'</td>'
+          +'<td class="tt-baseline">'+esc(row.baseline)+'</td>'
+          +'<td class="tt-rate '+sc+'">'+esc(row.rate)+'</td>'
+          +'<td><span class="tt-badge '+sc+'">'+statusBadgeTxt(row.status)+'</span></td>'
+          +'<td class="tt-note">'+esc(row.note)+'</td>'
+          +'</tr>';
+      }).join('');
+    }
+
+    // Timeline
+    var tl = document.getElementById('tariff-timeline');
+    if(tl && data.timeline && data.timeline.length){
+      tl.innerHTML = data.timeline.map(function(item){
+        return '<div class="tl-item">'
+          +'<div class="tl-date">'+esc(fmtDate(item.date))+'</div>'
+          +'<div class="tl-dot '+esc(item.impact)+'"></div>'
+          +'<div class="tl-event">'+esc(item.event)+'</div>'
+          +'</div>';
+      }).join('');
+    }
+
+  })
+  .catch(function(){
+    var note = document.getElementById('tsb-note');
+    if(note) note.textContent = 'Tariff data unavailable — check back shortly.';
+  });
+
+})();
+</script>
+
+</body>
+</html>
