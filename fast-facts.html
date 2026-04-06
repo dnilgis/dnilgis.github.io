@@ -126,9 +126,9 @@ button,a,[role="button"]{touch-action:manipulation;}
 .sv-marks{display:flex;overflow-x:auto;padding-bottom:.3rem;}
 .sv-mark{flex:1;min-width:36px;display:flex;flex-direction:column;align-items:center;cursor:pointer;}
 .sv-dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--border);background:var(--surface);margin-bottom:.2rem;transition:all .2s;flex-shrink:0;}
-.sv-mark:hover .sv-dot,.sv-mark.sel .sv-dot{background:var(--gold);border-color:var(--gold);transform:scale(1.2);}
+.sv-mark:hover .sv-dot,.sv-mark.active .sv-dot{background:var(--gold);border-color:var(--gold);transform:scale(1.2);}
 .sv-mark.key .sv-dot{background:var(--green);border-color:var(--green);}
-.sv-mark.key.sel .sv-dot{background:var(--gold);border-color:var(--gold);}
+.sv-mark.key.active .sv-dot{background:var(--gold);border-color:var(--gold);}
 .sv-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;color:var(--text-dim);text-align:center;}
 .sv-gdu{font-size:.5rem;color:var(--text-muted);text-align:center;}
 .sv-detail{background:rgba(230,176,66,.07);border:1px solid rgba(230,176,66,.2);border-radius:8px;padding:.75rem 1rem;margin-top:.6rem;min-height:60px;}
@@ -272,6 +272,43 @@ button,a,[role="button"]{touch-action:manipulation;}
 .ff-print-btn:hover{border-color:var(--gold);color:var(--gold);}
 .ff-source{font-size:.65rem;color:var(--text-muted);text-align:center;margin-top:1.5rem;}
 .ff-source a{color:var(--gold);text-decoration:none;}
+/* ── Mobile & overflow fixes ─────────────────────────── */
+html,body{overflow-x:hidden;}
+.ff-page{overflow-x:clip;}
+/* Economics cost builder — stack on narrow phones */
+@media(max-width:540px){
+  .eco-cost-row{flex-direction:column;align-items:flex-start;gap:.3rem;}
+  .eco-cost-label{min-width:0;width:100%;}
+  .eco-cost-inputs{width:100%;gap:.3rem;}
+  .eco-cost-mini{width:62px;font-size:.78rem;padding:.28rem .4rem;}
+  .eco-cost-unit{font-size:.62rem;}
+  .eco-cost-result{margin-left:auto;min-width:56px;font-size:.82rem;}
+  .eco-total-bar{flex-direction:column;gap:.2rem;text-align:center;}
+  /* Price cards — 3 col on narrow avoids tall single-column stacks */
+  .eco-price-grid{grid-template-columns:repeat(3,1fr);}
+  .eco-price-val{font-size:1.05rem;}
+  /* Breakeven grid stays 2-col — already correct */
+  /* Hero */
+  .ff-hero h1{font-size:1.4rem;}
+  .ff-h2{font-size:.95rem;}
+  /* Fert pills tighter */
+  .fert-pill-price{font-size:.75rem;}
+  /* Manure value strip */
+  .mv-price-strip{gap:.35rem;}
+  .mv-pi-input{width:68px;}
+  /* Eco section padding */
+  .eco-section{padding:.9rem 1rem;}
+  /* Input calc padding */
+  .ff-calc{padding:.9rem 1rem;}
+  /* Profit bar */
+  .eco-profit-val{font-size:1.3rem;}
+}
+@media(max-width:380px){
+  .eco-price-grid{grid-template-columns:repeat(2,1fr);}
+  .eco-price-val{font-size:.95rem;}
+  .ff-tabs{gap:.2rem;}
+  .ff-tab{font-size:.6rem;padding:.35rem .6rem;}
+}
 </style>
 </head>
 <body>
@@ -286,7 +323,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 </div>
 
 <nav class="ff-tabs" role="tablist" aria-label="Fast Facts sections">
-  <button class="ff-tab active" role="tab" aria-selected="true" data-tab="nitrogen">🌽 Nitrogen</button>
+  <button class="ff-tab active" role="tab" aria-selected="true"  data-tab="nitrogen">🌽 Nitrogen</button>
   <button class="ff-tab" role="tab" aria-selected="false" data-tab="economics">💵 Economics</button>
   <button class="ff-tab" role="tab" aria-selected="false" data-tab="pk">📊 P &amp; K</button>
   <button class="ff-tab" role="tab" aria-selected="false" data-tab="removal">🌾 Crop Removal</button>
@@ -448,21 +485,21 @@ button,a,[role="button"]{touch-action:manipulation;}
 <div class="ff-panel" id="tab-economics">
 
 <div class="ff-h2">Live Market Prices
-  <span class="live-badge" id="eco-live-badge" style="display:none;margin-left:.5rem"><span class="b-dot"></span>From prices.json</span>
+  <span class="live-badge" id="eco-live-badge" style="display:none;margin-left:.5rem"><span class="b-dot"></span>Live prices</span>
 </div>
-<p class="ff-sub">Commodity futures auto-loaded from your price feed. Used across all calculators on this page.</p>
+<p class="ff-sub">Commodity futures and fertilizer prices auto-loaded from your data feed. Used across all calculators below.</p>
 
 <div class="eco-price-grid" id="eco-price-grid">
-  <div class="eco-price-card"><div class="eco-price-label">Corn</div><div class="eco-price-val" id="eco-corn-price">—</div><div class="eco-price-unit">¢/bu · CBOT</div><div class="eco-price-chg flat" id="eco-corn-chg">—</div></div>
-  <div class="eco-price-card"><div class="eco-price-label">Soybeans</div><div class="eco-price-val" id="eco-bean-price">—</div><div class="eco-price-unit">¢/bu · CBOT</div><div class="eco-price-chg flat" id="eco-bean-chg">—</div></div>
-  <div class="eco-price-card"><div class="eco-price-label">Wheat (HRW)</div><div class="eco-price-val" id="eco-wheat-price">—</div><div class="eco-price-unit">¢/bu · CBOT</div><div class="eco-price-chg flat" id="eco-wheat-chg">—</div></div>
-  <div class="eco-price-card"><div class="eco-price-label">Urea N</div><div class="eco-price-val" id="eco-urea-price">—</div><div class="eco-price-unit">$/ton · dealer</div><div class="eco-price-chg flat" id="eco-urea-src">—</div></div>
-  <div class="eco-price-card"><div class="eco-price-label">DAP (P)</div><div class="eco-price-val" id="eco-dap-price">—</div><div class="eco-price-unit">$/ton · default</div><div class="eco-price-chg flat">edit below</div></div>
-  <div class="eco-price-card"><div class="eco-price-label">MOP (K)</div><div class="eco-price-val" id="eco-mop-price">—</div><div class="eco-price-unit">$/ton · default</div><div class="eco-price-chg flat">edit below</div></div>
+  <div class="eco-price-card"><div class="eco-price-label">Corn</div><div class="eco-price-val" id="eco-corn-price">—</div><div class="eco-price-unit">$/bu · CBOT</div></div>
+  <div class="eco-price-card"><div class="eco-price-label">Soybeans</div><div class="eco-price-val" id="eco-bean-price">—</div><div class="eco-price-unit">$/bu · CBOT</div></div>
+  <div class="eco-price-card"><div class="eco-price-label">Wheat (HRW)</div><div class="eco-price-val" id="eco-wheat-price">—</div><div class="eco-price-unit">$/bu · CBOT</div></div>
+  <div class="eco-price-card"><div class="eco-price-label">Urea N</div><div class="eco-price-val" id="eco-urea-price">—</div><div class="eco-price-unit">$/ton · dealer</div></div>
+  <div class="eco-price-card"><div class="eco-price-label">DAP (P)</div><div class="eco-price-val" id="eco-dap-price">—</div><div class="eco-price-unit">$/ton</div></div>
+  <div class="eco-price-card"><div class="eco-price-label">MOP (K)</div><div class="eco-price-val" id="eco-mop-price">—</div><div class="eco-price-unit">$/ton</div></div>
 </div>
 
 <div class="ff-h2">Input Cost Builder</div>
-<p class="ff-sub">Build your projected cost per acre. N auto-fills from live fertilizer prices — enter your planned rates. P and K use market defaults (editable). Breakeven updates in real time below.</p>
+<p class="ff-sub">Build your projected cost per acre. N $/lb auto-fills from live fertilizer prices — edit to match your dealer. Breakeven updates in real time below.</p>
 
 <div class="eco-section">
   <div class="eco-section-title">🌽 Corn — Cost Per Acre</div>
@@ -543,10 +580,10 @@ button,a,[role="button"]{touch-action:manipulation;}
 </div>
 
 <div class="ff-h2">Breakeven Calculator</div>
-<p class="ff-sub">Uses total cost above. Corn futures price auto-loaded. Change yield goal to match your field expectations.</p>
+<p class="ff-sub">Uses total cost above. Market price auto-loaded from live futures. Switch crop to recalculate against soybean price.</p>
 
 <div class="eco-section">
-  <div class="eco-section-title">📊 Corn Breakeven vs. Live Market</div>
+  <div class="eco-section-title">📊 Breakeven vs. Live Market</div>
   <div class="ff-cr">
     <div class="ff-cf"><label class="ff-cl">Crop</label>
       <select class="ff-cs" id="eco-bk-crop" style="min-width:130px">
@@ -562,7 +599,7 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="eco-bk-card"><div class="eco-bk-label">Breakeven</div><div class="eco-bk-val gold" id="eco-bk-be">—</div><div style="font-size:.6rem;color:var(--text-muted)">$/bu needed</div></div>
     <div class="eco-bk-card"><div class="eco-bk-label">Current Market</div><div class="eco-bk-val" id="eco-bk-mkt">—</div><div style="font-size:.6rem;color:var(--text-muted)">$/bu futures</div></div>
     <div class="eco-bk-card"><div class="eco-bk-label">Profit / Loss</div><div class="eco-bk-val" id="eco-bk-pl">—</div><div style="font-size:.6rem;color:var(--text-muted)">$/ac</div></div>
-    <div class="eco-bk-card"><div class="eco-bk-label">Field Total</div><div class="eco-bk-val" id="eco-bk-tot">—</div><div style="font-size:.6rem;color:var(--text-muted)">total profit/loss</div></div>
+    <div class="eco-bk-card"><div class="eco-bk-label">Field Total</div><div class="eco-bk-val" id="eco-bk-tot">—</div><div style="font-size:.6rem;color:var(--text-muted)">total P/L</div></div>
   </div>
   <div class="eco-profit-bar profit" id="eco-profit-bar">
     <div class="eco-profit-label profit" id="eco-profit-label">Projected Profit</div>
@@ -571,7 +608,7 @@ button,a,[role="button"]{touch-action:manipulation;}
   </div>
 </div>
 
-<div class="ff-cn" style="margin-top:.5rem">Prices auto-sync from <code>data/prices.json</code> and <code>data/fertilizer.json</code>. DAP and MOP prices are market defaults — edit the $/lb fields above to match your dealer quotes. Cost inputs are not saved between sessions.</div>
+<div class="ff-cn" style="margin-top:.5rem">Prices sync from <code>data/prices.json</code> (grains) and <code>data/fertilizer.json</code> (inputs). DAP and MOP use market defaults — edit $/lb fields to match your dealer. Inputs not saved between sessions.</div>
 
 </div><!-- /tab-economics -->
 
@@ -606,7 +643,7 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="pk-cost-item"><div class="pk-ci-label">P₂O₅ Cost Est.</div><div class="pk-ci-val" id="pk-p-cost">—</div></div>
     <div class="pk-cost-item"><div class="pk-ci-label">K₂O Cost Est.</div><div class="pk-ci-val" id="pk-k-cost">—</div></div>
     <div class="pk-cost-item"><div class="pk-ci-label">Total P+K $/ac</div><div class="pk-ci-val" id="pk-total-cost">—</div></div>
-    <div style="font-size:.6rem;color:var(--text-muted);align-self:flex-end">Based on DAP <span id="pk-dap-ref">$0.60</span>/lb P₂O₅ · MOP <span id="pk-mop-ref">$0.33</span>/lb K₂O</div>
+    <div style="font-size:.6rem;color:var(--text-muted);align-self:flex-end">Based on live DAP/MOP prices</div>
   </div>
   <div class="ff-cn" id="st-note"></div>
 </div>
@@ -684,7 +721,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 <!-- ═══════════════════════════════════════════ CROP REMOVAL TAB -->
 <div class="ff-panel" id="tab-removal">
 <div class="ff-h2">Nutrients Removed at Harvest</div>
-<p class="ff-sub">lb P₂O₅ and K₂O removed per unit of yield. Use to estimate nutrient export and balance fertilizer programs. *N: alfalfa removes 60 lb N/ton DM; soybeans remove 4 lb N/bu.</p>
+<p class="ff-sub">lb P₂O₅ and K₂O removed per unit of yield. Use to estimate nutrient export and balance fertilizer programs.</p>
 <div class="ff-tw">
 <table class="ff-t">
 <thead><tr><th class="tl">Crop &amp; Component</th><th>Yield Unit</th><th>lb P₂O₅</th><th>lb K₂O</th></tr></thead>
@@ -694,10 +731,10 @@ button,a,[role="button"]{touch-action:manipulation;}
   <tr><td class="tl">Corn, Silage</td><td>per ton (65% moisture)</td><td>3.6</td><td>8.3</td></tr>
   <tr><td class="tl">Corn Stover</td><td>per ton DM</td><td>4.6</td><td>32</td></tr>
   <tr class="tg"><td class="tl" colspan="4">Soybean</td></tr>
-  <tr><td class="tl">Soybean, Grain*</td><td>per bu (60 lb @ 13%)</td><td class="hi">0.80</td><td>1.4</td></tr>
+  <tr><td class="tl">Soybean, Grain</td><td>per bu (60 lb @ 13%)</td><td class="hi">0.80</td><td>1.4</td></tr>
   <tr><td class="tl">Soybean Straw</td><td>per ton DM</td><td>5.4</td><td>19</td></tr>
   <tr class="tg"><td class="tl" colspan="4">Alfalfa &amp; Forage</td></tr>
-  <tr><td class="tl">Alfalfa / Red Clover*</td><td>per ton DM</td><td class="hi">13</td><td>60</td></tr>
+  <tr><td class="tl">Alfalfa / Red Clover</td><td>per ton DM</td><td class="hi">13</td><td>60</td></tr>
   <tr><td class="tl">Small Grain Silage</td><td>per ton DM</td><td>11</td><td>44</td></tr>
   <tr class="tg"><td class="tl" colspan="4">Small Grains</td></tr>
   <tr><td class="tl">Wheat, Grain</td><td>per bu (60 lb @ 13.5%)</td><td class="hi">0.50</td><td>0.35</td></tr>
@@ -791,13 +828,12 @@ button,a,[role="button"]{touch-action:manipulation;}
 </table>
 </div>
 
-<!-- ══ MANURE NUTRIENT VALUE CALCULATOR — The Star Feature ══ -->
 <div class="mv-box">
   <div class="mv-title">
     💰 Manure Nutrient Value Calculator
-    <span class="live-badge" id="mv-live-badge" style="display:none"><span class="b-dot"></span>Prices from feed</span>
+    <span class="live-badge" id="mv-live-badge" style="display:none;margin-left:.5rem"><span class="b-dot"></span>Live prices</span>
   </div>
-  <p class="ff-sub" style="margin-bottom:.75rem">What is your manure worth at today's fertilizer prices? Enter your type, timing, and rate — get dollar value per acre and total field savings. No other site does this with live prices.</p>
+  <p class="ff-sub" style="margin-bottom:.75rem">What is your manure worth at today's fertilizer prices? Enter type, timing, and rate — get dollar value per acre and total field savings.</p>
 
   <div class="mv-price-strip">
     <div class="mv-pi">
@@ -808,12 +844,12 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="mv-pi">
       <span class="mv-pi-label">$/lb P₂O₅</span>
       <input class="mv-pi-input" id="mv-p-price" type="number" value="0.60" step="0.01" min="0.10" max="3.00">
-      <span class="mv-pi-src">~$600/ton DAP</span>
+      <span class="mv-pi-src">~DAP market</span>
     </div>
     <div class="mv-pi">
       <span class="mv-pi-label">$/lb K₂O</span>
       <input class="mv-pi-input" id="mv-k-price" type="number" value="0.33" step="0.01" min="0.05" max="2.00">
-      <span class="mv-pi-src">~$420/ton MOP</span>
+      <span class="mv-pi-src">~MOP market</span>
     </div>
     <div style="font-size:.62rem;color:var(--text-muted);align-self:flex-end;padding-bottom:.3rem">Edit any price to match your dealer quote</div>
   </div>
@@ -849,7 +885,7 @@ button,a,[role="button"]{touch-action:manipulation;}
       <input class="ff-ci" id="mv-rate" type="number" value="6000" step="100" min="0">
     </div>
     <div class="ff-cf">
-      <label class="ff-cl" id="mv-rate-unit-label">gal / acre</label>
+      <label class="ff-cl">Unit</label>
       <div class="ff-ci" id="mv-rate-unit-display" style="display:flex;align-items:center;background:var(--surface);color:var(--text-muted);font-size:.8rem">gal/acre</div>
     </div>
     <div class="ff-cf">
@@ -866,24 +902,11 @@ button,a,[role="button"]{touch-action:manipulation;}
     </div>
   </div>
 
-  <!-- Results section -->
   <div id="mv-results" style="display:none">
     <div class="mv-nutrient-grid">
-      <div class="mv-nutrient">
-        <div class="mv-nut-label">Available N</div>
-        <div class="mv-nut-lbs"><span id="mv-n-lbs">—</span> <span class="mv-nut-unit">lb/ac</span></div>
-        <div class="mv-nut-val" id="mv-n-val">—</div>
-      </div>
-      <div class="mv-nutrient">
-        <div class="mv-nut-label">P₂O₅</div>
-        <div class="mv-nut-lbs"><span id="mv-p-lbs">—</span> <span class="mv-nut-unit">lb/ac</span></div>
-        <div class="mv-nut-val" id="mv-p-val">—</div>
-      </div>
-      <div class="mv-nutrient">
-        <div class="mv-nut-label">K₂O</div>
-        <div class="mv-nut-lbs"><span id="mv-k-lbs">—</span> <span class="mv-nut-unit">lb/ac</span></div>
-        <div class="mv-nut-val" id="mv-k-val">—</div>
-      </div>
+      <div class="mv-nutrient"><div class="mv-nut-label">Available N</div><div class="mv-nut-lbs"><span id="mv-n-lbs">—</span> <span class="mv-nut-unit">lb/ac</span></div><div class="mv-nut-val" id="mv-n-val">—</div></div>
+      <div class="mv-nutrient"><div class="mv-nut-label">P₂O₅</div><div class="mv-nut-lbs"><span id="mv-p-lbs">—</span> <span class="mv-nut-unit">lb/ac</span></div><div class="mv-nut-val" id="mv-p-val">—</div></div>
+      <div class="mv-nutrient"><div class="mv-nut-label">K₂O</div><div class="mv-nut-lbs"><span id="mv-k-lbs">—</span> <span class="mv-nut-unit">lb/ac</span></div><div class="mv-nut-val" id="mv-k-val">—</div></div>
     </div>
     <div class="mv-total-section">
       <div class="mv-total-row"><span class="mv-tl">N value/acre</span><span class="mv-tv" id="mv-n-tot">—</span></div>
@@ -893,23 +916,16 @@ button,a,[role="button"]{touch-action:manipulation;}
         <span class="mv-tl" style="font-weight:600;color:var(--text)">Agronomic value/acre</span>
         <span class="mv-tv big" id="mv-agro-ac">—</span>
       </div>
-      <div class="mv-total-row">
-        <span class="mv-tl">Less: application cost/acre</span>
-        <span class="mv-tv red" id="mv-app-cost-row">—</span>
-      </div>
-      <div class="mv-total-row">
-        <span class="mv-tl" style="font-weight:600;color:var(--text)">Net value/acre</span>
-        <span class="mv-tv big" id="mv-net-ac" style="color:var(--green)">—</span>
-      </div>
+      <div class="mv-total-row"><span class="mv-tl">Less: application cost/acre</span><span class="mv-tv red" id="mv-app-cost-row">—</span></div>
+      <div class="mv-total-row"><span class="mv-tl" style="font-weight:600;color:var(--text)">Net value/acre</span><span class="mv-tv big" id="mv-net-ac" style="color:var(--green)">—</span></div>
     </div>
     <div class="mv-savings-bar">
       <div class="mv-savings-label">Total Field — Commercial Fertilizer Savings</div>
       <div class="mv-savings-val" id="mv-field-total">—</div>
       <div class="mv-savings-sub" id="mv-field-sub">—</div>
     </div>
-    <div class="ff-cn" id="mv-note" style="margin-top:.5rem"></div>
   </div>
-</div><!-- /mv-box -->
+</div>
 
 <div class="ff-h2" style="margin-top:1.5rem">Manure Output by Animal</div>
 <div class="ff-tw">
@@ -941,6 +957,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 </div>
 
 </div><!-- /tab-manure -->
+
 <!-- ═══════════════════════════════════════════ SOIL HEALTH TAB -->
 <div class="ff-panel" id="tab-soilhealth">
 
@@ -965,12 +982,11 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="ff-row"><span class="ff-rl">Min rate — all other soils</span><span class="ff-rv">2 ton/ac</span></div>
     <div class="ff-row"><span class="ff-rl">Lead time before alfalfa</span><span class="ff-rv dim">6–12 months</span></div>
     <div class="ff-row"><span class="ff-rl">Equilibration time</span><span class="ff-rv dim">2–3 years</span></div>
-    <div class="ff-cn" style="margin-top:.5rem">Use the most acid-sensitive crop in your 4-year rotation to set the lime target. Don't re-apply until the last application has had 2–3 years to equilibrate.</div>
+    <div class="ff-cn" style="margin-top:.5rem">Use the most acid-sensitive crop in your 4-year rotation to set the lime target.</div>
   </div>
 </div>
 
 <div class="ff-h2">Lime Requirement Calculator</div>
-<p class="ff-sub">Uses the SMP (Shoemaker-McLean-Pratt) buffer pH method — standard for WI/MN soil testing labs. If your lab uses Mehlich buffer pH, values are similar; verify with your lab's own conversion table.</p>
 <div class="ff-calc">
   <div class="ff-calc-title">🪨 Lime Rate Estimator (SMP Buffer Method)</div>
   <div class="ff-cr">
@@ -997,20 +1013,19 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="ff-ri"><div class="ff-ril">Tons Aglime/ac</div><div class="ff-riv green" id="lime-ag">—</div></div>
     <div class="ff-ri"><div class="ff-ril">Rate Guidance</div><div class="ff-riv dim" id="lime-note">—</div></div>
   </div>
-  <div class="ff-cn">SMP buffer pH is on your soil test. If not listed, ask your lab — it's required for accurate lime rates. Assumes 6.5" plow layer.</div>
 </div>
 
 <div class="ff-h2">Micronutrient Reference — WI / MN</div>
 <div class="ff-tw">
 <table class="ff-t">
-<thead><tr><th>Nutrient</th><th class="tl">Responsive Crops</th><th>Deficient (soil)</th><th>Method</th><th>Typical Rate</th><th class="tl">Key Notes</th></tr></thead>
+<thead><tr><th>Nutrient</th><th class="tl">Responsive Crops</th><th>Deficient</th><th>Method</th><th>Typical Rate</th><th class="tl">Key Notes</th></tr></thead>
 <tbody>
-  <tr><td><strong>S</strong></td><td class="tl">Soybeans, alfalfa, small grains, canola</td><td>&lt;10 ppm</td><td>KCl extraction</td><td>10–20 lb S/ac</td><td class="tl" style="font-size:.7rem">Sandy soils, low OM, high rainfall leaching. AMS (24% S) is common source. Yellowing of new growth.</td></tr>
-  <tr><td><strong>Zn</strong></td><td class="tl">Corn, beans, soybeans</td><td>&lt;0.5 ppm DTPA</td><td>DTPA</td><td>1–2 lb Zn/ac soil; 0.5 lb foliar</td><td class="tl" style="font-size:.7rem">High pH (&gt;7.0), high P, cold wet spring. Corn "white bud." Apply every 4–5 years or foliar as needed.</td></tr>
-  <tr><td><strong>B</strong></td><td class="tl">Alfalfa, clover, sunflower, canola</td><td>&lt;0.5 ppm</td><td>Hot water</td><td>0.5–1 lb B/ac</td><td class="tl" style="font-size:.7rem">Sandy soils, low OM, drought. Corn/soybeans rarely respond in WI. Alfalfa "hollow stem." Toxic range narrow — do not over-apply.</td></tr>
-  <tr><td><strong>Mn</strong></td><td class="tl">Soybeans, oats, wheat</td><td>&lt;5 ppm DTPA</td><td>DTPA</td><td>0.5–1 lb Mn/ac foliar</td><td class="tl" style="font-size:.7rem">High pH (&gt;6.5), organic soils, poorly drained. Foliar preferred — soil Mn availability is pH-dependent.</td></tr>
-  <tr><td><strong>Fe (IDC)</strong></td><td class="tl">Soybeans — Iron Deficiency Chlorosis</td><td>pH &gt;7.3 + CaCO₃</td><td>SPAD / field</td><td>IDC-tolerant varieties</td><td class="tl" style="font-size:.7rem">Primary fix: plant IDC-resistant varieties. Interseeding oats reduces severity. Most common on calcareous soils in MN.</td></tr>
-  <tr><td><strong>Cl</strong></td><td class="tl">Wheat, corn</td><td>&lt;15 ppm</td><td>Soil extraction</td><td>15–30 lb Cl/ac</td><td class="tl" style="font-size:.7rem">Reduces take-all root rot in small grains. KCl (MOP) provides Cl. More relevant in western MN/ND wheat production.</td></tr>
+  <tr><td><strong>S</strong></td><td class="tl">Soybeans, alfalfa, small grains, canola</td><td>&lt;10 ppm</td><td>KCl</td><td>10–20 lb S/ac</td><td class="tl" style="font-size:.7rem">Sandy soils, low OM, high rainfall. AMS (24% S) is common source.</td></tr>
+  <tr><td><strong>Zn</strong></td><td class="tl">Corn, beans, soybeans</td><td>&lt;0.5 ppm DTPA</td><td>DTPA</td><td>1–2 lb Zn/ac</td><td class="tl" style="font-size:.7rem">High pH (&gt;7.0), high P, cold wet spring. Corn "white bud."</td></tr>
+  <tr><td><strong>B</strong></td><td class="tl">Alfalfa, clover, sunflower, canola</td><td>&lt;0.5 ppm</td><td>Hot water</td><td>0.5–1 lb B/ac</td><td class="tl" style="font-size:.7rem">Sandy soils, low OM, drought. Toxic range narrow — do not over-apply.</td></tr>
+  <tr><td><strong>Mn</strong></td><td class="tl">Soybeans, oats, wheat</td><td>&lt;5 ppm DTPA</td><td>DTPA</td><td>0.5–1 lb Mn/ac foliar</td><td class="tl" style="font-size:.7rem">High pH (&gt;6.5), organic soils. Foliar preferred.</td></tr>
+  <tr><td><strong>Fe (IDC)</strong></td><td class="tl">Soybeans</td><td>pH &gt;7.3 + CaCO₃</td><td>SPAD</td><td>IDC-tolerant varieties</td><td class="tl" style="font-size:.7rem">Plant IDC-resistant varieties. Most common on calcareous soils in MN.</td></tr>
+  <tr><td><strong>Cl</strong></td><td class="tl">Wheat, corn</td><td>&lt;15 ppm</td><td>Extraction</td><td>15–30 lb Cl/ac</td><td class="tl" style="font-size:.7rem">Reduces take-all root rot in small grains. KCl (MOP) provides Cl.</td></tr>
 </tbody>
 </table>
 </div>
@@ -1060,7 +1075,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 <div class="ff-h2">Growing Degree Unit Calculator</div>
 <div class="ff-calc">
-  <div class="ff-calc-title">🌡️ Daily GDU Calculator (Base 50°F) <span id="gdu-live-badge" style="display:none;font-size:.62rem;color:var(--green);font-weight:700;margin-left:.75rem;"></span></div>
+  <div class="ff-calc-title">🌡️ Daily GDU Calculator (Base 50°F)</div>
   <div class="ff-cr">
     <div class="ff-cf"><label class="ff-cl">Daily High °F</label><input class="ff-ci" id="gdu-hi" type="number" value="82" step="1" min="32" max="110"></div>
     <div class="ff-cf"><label class="ff-cl">Daily Low °F</label><input class="ff-ci" id="gdu-lo" type="number" value="58" step="1" min="32" max="90"></div>
@@ -1095,23 +1110,23 @@ button,a,[role="button"]{touch-action:manipulation;}
 <tbody>
   <tr><td><strong>VE</strong></td><td>100–120</td><td>—</td><td class="tl">Emergence. Coleoptile emerges from soil.</td></tr>
   <tr><td>V1</td><td>~170</td><td>3–4"</td><td class="tl">1 leaf collar. Growing point below ground. Seed nutrients nearly gone.</td></tr>
-  <tr><td>V2</td><td>~220</td><td>4–6"</td><td class="tl">2 collars. Nodal roots developing — the plant's future nutrient system.</td></tr>
-  <tr><td>V3</td><td>~280</td><td>6–8"</td><td class="tl">3 collars. First weed competition window. Nodal roots taking over from crown.</td></tr>
-  <tr><td class="hi">V4</td><td>~350</td><td>8–12"</td><td class="tl"><strong>Ear shoot initiated.</strong> Growing point still below ground. Hail damage regenerates well.</td></tr>
+  <tr><td>V2</td><td>~220</td><td>4–6"</td><td class="tl">2 collars. Nodal roots developing.</td></tr>
+  <tr><td>V3</td><td>~280</td><td>6–8"</td><td class="tl">3 collars. First weed competition window.</td></tr>
+  <tr><td class="hi">V4</td><td>~350</td><td>8–12"</td><td class="tl"><strong>Ear shoot initiated.</strong> Growing point still below ground.</td></tr>
   <tr><td class="hi">V5</td><td>~415</td><td>12–18"</td><td class="tl">Growing point near soil surface. Side-dress N window approaching.</td></tr>
-  <tr><td class="hi">V6</td><td>~475</td><td>18–24"</td><td class="tl"><strong>Growing point above ground.</strong> Last safe cultivation. 50% of yield potential determined. 100% dependent on nodal roots.</td></tr>
+  <tr><td class="hi">V6</td><td>~475</td><td>18–24"</td><td class="tl"><strong>Growing point above ground.</strong> Last safe cultivation. 50% of yield potential determined.</td></tr>
   <tr><td>V7</td><td>~530</td><td>24–30"</td><td class="tl">Tassel initiation begins. Rapid N uptake period starts.</td></tr>
-  <tr><td class="hi">V8</td><td>~600</td><td>30"</td><td class="tl"><strong>Last side-dress N opportunity</strong> before ground closure. 60% of seasonal N uptake is ahead.</td></tr>
+  <tr><td class="hi">V8</td><td>~600</td><td>30"</td><td class="tl"><strong>Last side-dress N opportunity.</strong> 60% of seasonal N uptake is ahead.</td></tr>
   <tr><td>V9</td><td>~670</td><td>36"</td><td class="tl">Upper ear shoots forming. Row number being determined.</td></tr>
-  <tr><td>V10</td><td>~750</td><td>40"</td><td class="tl">Kernel row number fixed. Rapid dry matter accumulation begins.</td></tr>
+  <tr><td>V10</td><td>~750</td><td>40"</td><td class="tl">Kernel row number fixed.</td></tr>
   <tr><td>V12</td><td>~900</td><td>48"</td><td class="tl">Kernel number per row being set. Stress window opens.</td></tr>
   <tr><td class="hi">VT</td><td>~1,135</td><td>Full</td><td class="tl"><strong>Tasseling.</strong> Pollen shed begins. Peak water use (0.30"+/day).</td></tr>
-  <tr><td><strong>R1</strong></td><td>~1,400</td><td>Full</td><td class="tl"><strong>Silking.</strong> Fertilization occurs. Most critical drought window. Kernel number set.</td></tr>
-  <tr><td>R2</td><td>~1,660</td><td>Full</td><td class="tl">Blister. Kernels water-filled. Starch accumulation begins.</td></tr>
+  <tr><td><strong>R1</strong></td><td>~1,400</td><td>Full</td><td class="tl"><strong>Silking.</strong> Most critical drought window. Kernel number set.</td></tr>
+  <tr><td>R2</td><td>~1,660</td><td>Full</td><td class="tl">Blister. Starch accumulation begins.</td></tr>
   <tr><td>R3</td><td>~1,925</td><td>Full</td><td class="tl">Milk stage. Kernel paste milky white.</td></tr>
-  <tr><td>R4</td><td>~2,190</td><td>Full</td><td class="tl">Dough. Starch nearly solid. ~55% dry matter.</td></tr>
+  <tr><td>R4</td><td>~2,190</td><td>Full</td><td class="tl">Dough. ~55% dry matter.</td></tr>
   <tr><td class="hi">R5</td><td>~2,450</td><td>Full</td><td class="tl"><strong>Dent.</strong> Black layer formation begins at kernel tip.</td></tr>
-  <tr><td><strong>R6</strong></td><td>~2,700</td><td>Full</td><td class="tl"><strong>Black layer / Physiological maturity.</strong> No further dry matter. Grain ~30–35% moisture.</td></tr>
+  <tr><td><strong>R6</strong></td><td>~2,700</td><td>Full</td><td class="tl"><strong>Black layer / Physiological maturity.</strong> Grain ~30–35% moisture.</td></tr>
 </tbody>
 </table>
 </div>
@@ -1121,30 +1136,6 @@ button,a,[role="button"]{touch-action:manipulation;}
   <div class="sv-track" style="background:linear-gradient(90deg,#1b3a10,#3a8b3c,#5aaa5c,#8bc34a,#e6b042,#c07020,#8b4513)"></div>
   <div class="sv-marks" id="bean-sv-marks"></div>
   <div class="sv-detail" id="bean-sv-detail"><div class="sv-detail-stage">← Select a stage</div><div class="sv-detail-desc">Click any marker to see stage details and management notes.</div></div>
-</div>
-
-<div class="ff-h2">Soybean Growth Stages — Full Reference</div>
-<div class="ff-tw">
-<table class="ff-t">
-<thead><tr><th>Stage</th><th class="tl">Description</th><th class="tl">Key Management Notes</th></tr></thead>
-<tbody>
-  <tr class="tg"><td class="tl" colspan="3">Vegetative Stages</td></tr>
-  <tr><td>VE</td><td class="tl">Emergence — cotyledons above soil</td><td class="tl" style="font-size:.71rem">Crust-breaking may be needed on silty soils</td></tr>
-  <tr><td>VC</td><td class="tl">Unifoliate leaves unrolled</td><td class="tl" style="font-size:.71rem">Cotyledon-stage herbicide window for most residual programs</td></tr>
-  <tr><td>V1</td><td class="tl">1st trifoliate fully unrolled</td><td class="tl" style="font-size:.71rem">POST herbicide window opens. SCN root colonization starts.</td></tr>
-  <tr><td>V2–V3</td><td class="tl">2nd–3rd trifoliates unrolled</td><td class="tl" style="font-size:.71rem">Optimal post-emerge herbicide window for most programs</td></tr>
-  <tr><td>V4–V5</td><td class="tl">4th–5th trifoliates</td><td class="tl" style="font-size:.71rem">Last effective POST for most systemic herbicides. Canopy closing.</td></tr>
-  <tr class="tg"><td class="tl" colspan="3">Reproductive Stages</td></tr>
-  <tr><td class="hi">R1</td><td class="tl"><strong>Beginning bloom</strong> — one open flower on any node</td><td class="tl" style="font-size:.71rem">Fungicide timing window opens. Aphid scouting intensifies.</td></tr>
-  <tr><td>R2</td><td class="tl">Full bloom — open flower on one of two uppermost nodes</td><td class="tl" style="font-size:.71rem">White mold infection period if wet. Primary fungicide application window.</td></tr>
-  <tr><td class="hi">R3</td><td class="tl"><strong>Beginning pod</strong> — 3/16" pod on one of four uppermost nodes</td><td class="tl" style="font-size:.71rem"><strong>Tissue sampling stage.</strong> BLB defoliation threshold drops to 15%. Aphid ET still active to R5.</td></tr>
-  <tr><td>R4</td><td class="tl">Full pod — 3/4" pod on one of four uppermost nodes</td><td class="tl" style="font-size:.71rem">Critical drought stress period.</td></tr>
-  <tr><td class="hi">R5</td><td class="tl"><strong>Beginning seed</strong> — seed visible in pod on upper nodes</td><td class="tl" style="font-size:.71rem"><strong>Last effective aphicide timing.</strong> Soybean aphid ET ends at R5. Critical water demand period.</td></tr>
-  <tr><td>R6</td><td class="tl">Full seed — pod contains a green seed filling the cavity</td><td class="tl" style="font-size:.71rem">Yield nearly determined. Pod shatter risk increases after R6.5.</td></tr>
-  <tr><td>R7</td><td class="tl">Beginning maturity — one normal pod with mature brown color</td><td class="tl" style="font-size:.71rem">Harvest aid timing window. Pre-harvest interval begins.</td></tr>
-  <tr><td>R8</td><td class="tl">Full maturity — 95% of pods are mature brown</td><td class="tl" style="font-size:.71rem">Harvest at ~13% moisture. Pod shatter risk increases rapidly with delay.</td></tr>
-</tbody>
-</table>
 </div>
 
 <div class="ff-h2">GDU Requirements by Corn Relative Maturity</div>
@@ -1197,24 +1188,24 @@ button,a,[role="button"]{touch-action:manipulation;}
 <tbody>
   <tr class="tg"><td class="tl" colspan="5">Soybean Insects</td></tr>
   <tr><td class="tl"><strong>Soybean Aphid</strong><br><span style="font-size:.68rem;color:var(--text-muted)">Aphis glycines</span></td><td>Soybean</td><td>V2–R5</td>
-    <td class="tl"><strong>250 aphids/plant</strong> on ≥80% of plants with an <em>increasing</em> population. Population must be actively building.</td><td><span class="sev-high">High</span></td></tr>
+    <td class="tl"><strong>250 aphids/plant</strong> on ≥80% of plants with an <em>increasing</em> population.</td><td><span class="sev-high">High</span></td></tr>
   <tr><td class="tl"><strong>Bean Leaf Beetle</strong></td><td>Soybean</td><td>Veg/Rep</td>
-    <td class="tl"><strong>30% defoliation</strong> before R1; <strong>15%</strong> after R1. Scout upper canopy.</td><td><span class="sev-med">Med</span></td></tr>
+    <td class="tl"><strong>30% defoliation</strong> before R1; <strong>15%</strong> after R1.</td><td><span class="sev-med">Med</span></td></tr>
   <tr><td class="tl"><strong>Spider Mites</strong></td><td>Soybean</td><td>R1–R5</td>
     <td class="tl">Treat when stippling reaches middle canopy AND population is actively increasing. Drought accelerates explosions.</td><td><span class="sev-high">High</span></td></tr>
-  <tr><td class="tl"><strong>Soybean Defoliation (general)</strong></td><td>Soybean</td><td>Any</td>
-    <td class="tl"><strong>30%</strong> defoliation before flowering; <strong>20%</strong> during and after flowering (R1–R6). Measure at mid-canopy.</td><td><span class="sev-med">Med</span></td></tr>
+  <tr><td class="tl"><strong>Soybean Defoliation</strong></td><td>Soybean</td><td>Any</td>
+    <td class="tl"><strong>30%</strong> before flowering; <strong>20%</strong> during and after R1–R6.</td><td><span class="sev-med">Med</span></td></tr>
   <tr class="tg"><td class="tl" colspan="5">Corn Insects</td></tr>
   <tr><td class="tl"><strong>Corn Rootworm</strong><br><span style="font-size:.68rem;color:var(--text-muted)">Diabrotica spp.</span></td><td>Corn</td><td>Silking</td>
     <td class="tl"><strong>0.75 WCR/plant</strong> or <strong>1.5 NCR/plant</strong> during silking. Silk clipping to &lt;½" with active pollination also triggers.</td><td><span class="sev-high">High</span></td></tr>
   <tr><td class="tl"><strong>European Corn Borer (ECB)</strong></td><td>Corn</td><td>V6–R1</td>
-    <td class="tl">1st gen: <strong>1 larva/plant</strong> on ≥50% of plants with fresh leaf feeding. Bt hybrids eliminate this concern.</td><td><span class="sev-med">Med</span></td></tr>
-  <tr><td class="tl"><strong>Western Bean Cutworm (WBC)</strong></td><td>Corn</td><td>V14–VT</td>
-    <td class="tl"><strong>8% of plants</strong> with egg masses or small larvae, OR pheromone trap average &gt;300 moths/week. Treat before larvae enter ear.</td><td><span class="sev-high">High</span></td></tr>
+    <td class="tl">1st gen: <strong>1 larva/plant</strong> on ≥50% of plants. Bt hybrids eliminate this concern.</td><td><span class="sev-med">Med</span></td></tr>
+  <tr><td class="tl"><strong>Western Bean Cutworm</strong></td><td>Corn</td><td>V14–VT</td>
+    <td class="tl"><strong>8% of plants</strong> with egg masses or small larvae. Treat before larvae enter ear.</td><td><span class="sev-high">High</span></td></tr>
   <tr><td class="tl"><strong>True Armyworm</strong></td><td>Corn</td><td>V2–V6</td>
-    <td class="tl"><strong>25% of plants</strong> with feeding and larvae still small (&lt;1¼"). Larger larvae are hard to kill.</td><td><span class="sev-med">Med</span></td></tr>
+    <td class="tl"><strong>25% of plants</strong> with feeding and larvae still small (&lt;1¼").</td><td><span class="sev-med">Med</span></td></tr>
   <tr><td class="tl"><strong>SCN</strong><br><span style="font-size:.68rem;color:var(--text-muted)">Heterodera glycines</span></td><td>Soybean</td><td>Pre-plant</td>
-    <td class="tl"><strong>&gt;2,000 eggs/100 cc soil</strong> = economically significant. HG Type test for variety selection. Monitor low-yield mystery areas.</td><td><span class="sev-high">High</span></td></tr>
+    <td class="tl"><strong>&gt;2,000 eggs/100 cc soil</strong> = economically significant. HG Type test for variety selection.</td><td><span class="sev-high">High</span></td></tr>
 </tbody>
 </table>
 </div>
@@ -1225,16 +1216,16 @@ button,a,[role="button"]{touch-action:manipulation;}
 <table class="ff-t">
 <thead><tr><th>Group</th><th class="tl">MOA / Site of Action</th><th class="tl">Key Products</th><th class="tl">Common Weeds Controlled</th><th>Res. Risk</th></tr></thead>
 <tbody>
-  <tr><td><span class="moa-badge moa-1">1 (A)</span></td><td class="tl">ACCase inhibitors (grasses only)</td><td class="tl" style="font-size:.71rem">Quizalofop, sethoxydim (Poast), clethodim (Select Max)</td><td class="tl" style="font-size:.71rem">Annual grasses: foxtail, crabgrass, barnyardgrass. No broadleaf control.</td><td><span class="sev-high">High</span></td></tr>
+  <tr><td><span class="moa-badge moa-1">1 (A)</span></td><td class="tl">ACCase inhibitors (grasses only)</td><td class="tl" style="font-size:.71rem">Quizalofop, sethoxydim (Poast), clethodim (Select Max)</td><td class="tl" style="font-size:.71rem">Annual grasses. No broadleaf control.</td><td><span class="sev-high">High</span></td></tr>
   <tr><td><span class="moa-badge moa-2">2 (B)</span></td><td class="tl">ALS inhibitors</td><td class="tl" style="font-size:.71rem">Imazethapyr (Pursuit), chlorimuron (Classic), FirstRate, Harmony</td><td class="tl" style="font-size:.71rem">Broad spectrum. Waterhemp &amp; giant ragweed widely resistant.</td><td><span class="sev-high">Very High</span></td></tr>
   <tr><td><span class="moa-badge moa-3">3 (K1)</span></td><td class="tl">Microtubule inhibitors (dinitroanilines)</td><td class="tl" style="font-size:.71rem">Trifluralin (Treflan), pendimethalin (Prowl)</td><td class="tl" style="font-size:.71rem">PRE annual grasses and small-seeded broadleaves.</td><td><span class="sev-low">Low</span></td></tr>
   <tr><td><span class="moa-badge moa-4">4 (O)</span></td><td class="tl">Synthetic auxins</td><td class="tl" style="font-size:.71rem">2,4-D, dicamba (XtendiMax, Engenia), MCPA, clopyralid</td><td class="tl" style="font-size:.71rem">Broadleaf weeds. Dicamba: certified applicator required in Xtend systems.</td><td><span class="sev-low">Low</span></td></tr>
-  <tr><td><span class="moa-badge moa-5">5 (C1)</span></td><td class="tl">PSII inhibitors — triazines</td><td class="tl" style="font-size:.71rem">Atrazine, metribuzin (Sencor), simazine</td><td class="tl" style="font-size:.71rem">Broad spectrum. Waterhemp resistant in many fields. Corn rotations only for atrazine.</td><td><span class="sev-med">Moderate</span></td></tr>
+  <tr><td><span class="moa-badge moa-5">5 (C1)</span></td><td class="tl">PSII inhibitors — triazines</td><td class="tl" style="font-size:.71rem">Atrazine, metribuzin (Sencor), simazine</td><td class="tl" style="font-size:.71rem">Broad spectrum. Waterhemp resistant in many fields.</td><td><span class="sev-med">Moderate</span></td></tr>
   <tr><td><span class="moa-badge moa-9">9 (G)</span></td><td class="tl">EPSP synthase inhibitors</td><td class="tl" style="font-size:.71rem">Glyphosate (Roundup, many generics)</td><td class="tl" style="font-size:.71rem">Broad spectrum. Tank mix with a different group — never use alone POST.</td><td><span class="sev-high">Very High</span></td></tr>
   <tr><td><span class="moa-badge moa-other">10 (H)</span></td><td class="tl">Glutamine synthetase inhibitors</td><td class="tl" style="font-size:.71rem">Glufosinate (Liberty, Interline)</td><td class="tl" style="font-size:.71rem">LibertyLink system. Contact — needs good coverage on small weeds.</td><td><span class="sev-low">Low</span></td></tr>
   <tr><td><span class="moa-badge moa-14">14 (E)</span></td><td class="tl">PPO inhibitors</td><td class="tl" style="font-size:.71rem">Lactofen (Cobra), fomesafen (Flexstar), flumioxazin (Valor), saflufenacil (Sharpen)</td><td class="tl" style="font-size:.71rem">Waterhemp, pigweed, ragweed. Excellent residual PRE. Resistance growing.</td><td><span class="sev-med">Moderate</span></td></tr>
-  <tr><td><span class="moa-badge moa-other">15 (K3)</span></td><td class="tl">VLCFA inhibitors (chloroacetamides)</td><td class="tl" style="font-size:.71rem">Acetochlor (Harness), S-metolachlor (Dual Magnum), dimethenamid (Outlook)</td><td class="tl" style="font-size:.71rem">PRE annual grasses + small-seeded broadleaves. Essential in resistance mgmt program.</td><td><span class="sev-low">Low</span></td></tr>
-  <tr><td><span class="moa-badge moa-other">27 (F2)</span></td><td class="tl">HPPD inhibitors</td><td class="tl" style="font-size:.71rem">Mesotrione (Callisto), tembotrione (Laudis), isoxaflutole (Balance)</td><td class="tl" style="font-size:.71rem">Corn-selective. Bleaching new growth. Good waterhemp control — tank mix required.</td><td><span class="sev-med">Moderate</span></td></tr>
+  <tr><td><span class="moa-badge moa-other">15 (K3)</span></td><td class="tl">VLCFA inhibitors (chloroacetamides)</td><td class="tl" style="font-size:.71rem">Acetochlor (Harness), S-metolachlor (Dual Magnum), dimethenamid (Outlook)</td><td class="tl" style="font-size:.71rem">PRE annual grasses + small-seeded broadleaves. Essential in resistance mgmt.</td><td><span class="sev-low">Low</span></td></tr>
+  <tr><td><span class="moa-badge moa-other">27 (F2)</span></td><td class="tl">HPPD inhibitors</td><td class="tl" style="font-size:.71rem">Mesotrione (Callisto), tembotrione (Laudis), isoxaflutole (Balance)</td><td class="tl" style="font-size:.71rem">Corn-selective. Good waterhemp control — tank mix required.</td><td><span class="sev-med">Moderate</span></td></tr>
 </tbody>
 </table>
 </div>
@@ -1408,7 +1399,6 @@ button,a,[role="button"]{touch-action:manipulation;}
 <script>
 // ═══════════════════════════════════════════════════════════════════════
 // AGSIST fast-facts.js — complete interactive layer
-// Single clean script block — no premature closes
 // ═══════════════════════════════════════════════════════════════════════
 
 // ── Global live price state ───────────────────────────────────────────
@@ -1418,9 +1408,9 @@ var G = {
 };
 
 function computeFertLbPrices() {
-  G.fert.n_lb  = G.fert.urea_ton  / (2000 * 0.46);   // Urea 46% N
-  G.fert.p_lb  = G.fert.dap_ton   / (2000 * (G.fert.p_pct ? G.fert.p_pct / 100 : 0.46));   // DAP/MAP P2O5
-  G.fert.k_lb  = G.fert.mop_ton   / (2000 * 0.62);   // MOP 62% K2O
+  G.fert.n_lb = G.fert.urea_ton / (2000 * 0.46);
+  G.fert.p_lb = G.fert.dap_ton  / (2000 * (G.fert.p_pct ? G.fert.p_pct / 100 : 0.46));
+  G.fert.k_lb = G.fert.mop_ton  / (2000 * 0.62);
 }
 computeFertLbPrices();
 
@@ -1437,32 +1427,37 @@ document.querySelectorAll('.ff-tab').forEach(function(btn) {
 });
 
 // ── Price loader — prices.json ────────────────────────────────────────
+// FIX: use .close (not .price); grains in cents → divide by 100 for $/bu
 function loadPrices() {
   fetch('/data/prices.json').then(function(r) { return r.json(); }).then(function(d) {
-    var q = (d.data && d.data.quotes) ? d.data.quotes : {};
-    G.corn  = q.corn      ? parseFloat(q.corn.price)      : null;
-    G.beans = q.soybeans  ? parseFloat(q.soybeans.price)  : null;
-    G.wheat = q.wheat     ? parseFloat(q.wheat.price)     : null;
-    // Auto-populate N:Corn corn price field
+    var q = d.quotes || {};
+    G.corn  = q.corn  && q.corn.close  ? parseFloat(q.corn.close)  / 100 : null;
+    G.beans = q.beans && q.beans.close ? parseFloat(q.beans.close) / 100 : null;
+    G.wheat = q.wheat && q.wheat.close ? parseFloat(q.wheat.close) / 100 : null;
+
+    // N:Corn tab — auto-populate corn price
     if (G.corn) {
       var nc = document.getElementById('nc-corn');
       if (nc && !nc._edited) { nc.value = G.corn.toFixed(2); calcNC(); }
       var badge = document.getElementById('nc-live-badge');
-      if (badge) { badge.textContent = '📡 Live: $' + G.corn.toFixed(2) + '/bu'; badge.style.display = 'inline'; }
+      if (badge) { badge.style.display = 'inline-flex'; }
     }
-    // Update Economics tab
     updateEconPriceGrid();
   }).catch(function() {});
 }
 
 // ── Fertilizer loader — fertilizer.json ──────────────────────────────
-var FERT_N_MAP = { 'urea': { dd: '46', pct: 46 }, 'ams': { dd: '21', pct: 21 }, 'ammonium sulfate': { dd: '21', pct: 21 }, 'amm. sulfate': { dd: '21', pct: 21 } };
+var FERT_N_MAP = {
+  'urea': { dd: '46', pct: 46 },
+  'ams':  { dd: '21', pct: 21 },
+  'ammonium sulfate': { dd: '21', pct: 21 },
+  'amm. sulfate':     { dd: '21', pct: 21 }
+};
 
 function loadFertPrices() {
   fetch('/data/fertilizer.json').then(function(r) { return r.json(); }).then(function(d) {
-    var pills = document.getElementById('fert-pills');
+    var pills  = document.getElementById('fert-pills');
     var dateEl = document.getElementById('fert-date');
-    var autofill = document.getElementById('fert-autofill');
     if (!pills) return;
     if (dateEl && d.updated) {
       var dt = new Date(d.updated);
@@ -1473,15 +1468,22 @@ function loadFertPrices() {
     (d.prices || []).forEach(function(p) {
       var pill = document.createElement('div');
       pill.className = 'fert-pill';
-      pill.innerHTML = '<span class="fert-pill-icon">' + p.icon + '</span>' +
+      pill.innerHTML =
+        '<span class="fert-pill-icon">' + p.icon + '</span>' +
         '<div class="fert-pill-body"><span class="fert-pill-name">' + p.name + '</span>' +
         '<span class="fert-pill-sym">' + p.symbol + '</span></div>' +
         '<span class="fert-pill-price">$' + p.price.toLocaleString() + '</span>';
+
       var nameKey = p.name.toLowerCase();
-      // Update G.fert from JSON
       if (nameKey === 'urea') G.fert.urea_ton = p.price;
-      if (nameKey.includes('dap') || nameKey.includes('diammonium') || nameKey.includes('map')) { G.fert.dap_ton = p.price; if (nameKey.includes('map') && !nameKey.includes('dap')) G.fert.p_pct = 40; }
-      if (nameKey.includes('mop') || nameKey.includes('potash') || nameKey === 'potassium chloride' || nameKey === 'potash') G.fert.mop_ton = p.price;
+      if (nameKey.includes('dap') || nameKey.includes('diammonium') || nameKey.includes('map')) {
+        G.fert.dap_ton = p.price;
+        if (nameKey.includes('map') && !nameKey.includes('dap')) G.fert.p_pct = 40;
+      }
+      if (nameKey.includes('mop') || nameKey.includes('potash') || nameKey === 'potassium chloride') {
+        G.fert.mop_ton = p.price;
+      }
+
       var mapping = FERT_N_MAP[nameKey];
       if (mapping) {
         pill.title = 'Click to populate N:Corn calculator';
@@ -1503,7 +1505,6 @@ function loadFertPrices() {
         if (nameKey === 'urea' && !autoPopped) {
           var fertPrice = document.getElementById('nc-fertprice');
           if (fertPrice) { fertPrice.value = p.price; autoPopped = true; pill.classList.add('active'); }
-          if (autofill) autofill.style.display = '';
           calcNC();
         }
       }
@@ -1512,7 +1513,6 @@ function loadFertPrices() {
     computeFertLbPrices();
     updateManureFertPriceInputs();
     updateEconFertPrices();
-    if (!autoPopped && autofill) autofill.style.display = 'none';
   }).catch(function() {
     var pills = document.getElementById('fert-pills');
     var dateEl = document.getElementById('fert-date');
@@ -1541,21 +1541,21 @@ function calcNC() {
     : ratio <= 0.18 ? 'N is expensive — lean toward mid-low'
     : 'N very expensive — use low end of range';
   document.getElementById('nc-interp').textContent = interp;
-  document.getElementById('nc-highlight-note').textContent = 'Your ratio: ' + ratio.toFixed(3) + ' → use the ' + closest.toFixed(2) + ' column below.';
-  // Highlight table column
+  document.getElementById('nc-highlight-note').textContent =
+    'Your ratio: ' + ratio.toFixed(3) + ' → use the ' + closest.toFixed(2) + ' column below.';
   var colIdx = NC_COLS.indexOf(closest) + 1;
   document.querySelectorAll('#nc-table tbody tr').forEach(function(row) {
+    row.querySelectorAll('td').forEach(function(c) { c.classList.remove('act'); });
     var cells = row.querySelectorAll('td');
-    cells.forEach(function(c) { c.classList.remove('act'); });
     if (cells.length > 1 && !row.classList.contains('tg') && cells[colIdx]) cells[colIdx].classList.add('act');
   });
-  ['nth-05', 'nth-10', 'nth-15', 'nth-20'].forEach(function(id) { var e = document.getElementById(id); if (e) e.classList.remove('act'); });
-  var hdrIds = ['nth-05', 'nth-10', 'nth-15', 'nth-20'];
-  var colMap = { 0.05: 0, 0.10: 1, 0.15: 2, 0.20: 3 };
+  ['nth-05','nth-10','nth-15','nth-20'].forEach(function(id) { var e = document.getElementById(id); if (e) e.classList.remove('act'); });
+  var hdrIds = ['nth-05','nth-10','nth-15','nth-20'];
+  var colMap = { 0.05:0, 0.10:1, 0.15:2, 0.20:3 };
   var hEl = document.getElementById(hdrIds[colMap[closest]]);
   if (hEl) hEl.classList.add('act');
 }
-['nc-corn', 'nc-fertprice', 'nc-custom-pct'].forEach(function(id) {
+['nc-corn','nc-fertprice','nc-custom-pct'].forEach(function(id) {
   var el = document.getElementById(id);
   if (el) el.addEventListener('input', function() { el._edited = true; calcNC(); });
 });
@@ -1566,588 +1566,520 @@ if (ncFert) ncFert.addEventListener('change', function() {
 });
 calcNC();
 
-// ── Economics Tab ─────────────────────────────────────────────────────
+// ── Economics Tab — FIXED: all IDs corrected ─────────────────────────
 function updateEconPriceGrid() {
-  var prices = { 'econ-price-corn': G.corn, 'econ-price-beans': G.beans, 'econ-price-wheat': G.wheat };
-  Object.keys(prices).forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el && prices[id]) el.textContent = '$' + prices[id].toFixed(2);
-  });
-  // Auto-fill breakeven corn price
-  var beEl = document.getElementById('be-corn');
-  if (beEl && G.corn && !beEl._edited) beEl.value = G.corn.toFixed(2);
+  var badge = document.getElementById('eco-live-badge');
+  if (badge && (G.corn || G.beans)) badge.style.display = 'inline-flex';
+
+  // FIX: IDs are eco-corn-price, not econ-price-corn
+  var cornEl  = document.getElementById('eco-corn-price');
+  var beanEl  = document.getElementById('eco-bean-price');
+  var wheatEl = document.getElementById('eco-wheat-price');
+  if (cornEl  && G.corn)  cornEl.textContent  = '$' + G.corn.toFixed(2);
+  if (beanEl  && G.beans) beanEl.textContent  = '$' + G.beans.toFixed(2);
+  if (wheatEl && G.wheat) wheatEl.textContent = '$' + G.wheat.toFixed(2);
+
   calcInputCost();
+  calcBreakeven();
 }
 
 function updateEconFertPrices() {
-  // Update econ fert price displays
-  var maps = {
-    'econ-price-urea': G.fert.urea_ton,
-    'econ-price-dap':  G.fert.dap_ton,
-    'econ-price-mop':  G.fert.mop_ton
-  };
-  Object.keys(maps).forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el && maps[id]) el.textContent = '$' + maps[id].toLocaleString();
-  });
-  // Set default N/P/K prices in input cost builder
-  var nEl = document.getElementById('ic-n-price'), pEl = document.getElementById('ic-p-price'), kEl = document.getElementById('ic-k-price');
-  if (nEl && !nEl._edited && G.fert.n_lb) nEl.value = G.fert.n_lb.toFixed(3);
-  if (pEl && !pEl._edited && G.fert.p_lb) pEl.value = G.fert.p_lb.toFixed(3);
-  if (kEl && !kEl._edited && G.fert.k_lb) kEl.value = G.fert.k_lb.toFixed(3);
+  // FIX: IDs are eco-urea-price etc., not econ-price-urea
+  var ureaEl = document.getElementById('eco-urea-price');
+  var dapEl  = document.getElementById('eco-dap-price');
+  var mopEl  = document.getElementById('eco-mop-price');
+  if (ureaEl) ureaEl.textContent = '$' + G.fert.urea_ton.toLocaleString();
+  if (dapEl)  dapEl.textContent  = '$' + G.fert.dap_ton.toLocaleString();
+  if (mopEl)  mopEl.textContent  = '$' + G.fert.mop_ton.toLocaleString();
+
+  // FIX: auto-fill $/lb N into eco-n-pplb (was ic-n-price)
+  var nPplb = document.getElementById('eco-n-pplb');
+  var pPplb = document.getElementById('eco-p-pplb');
+  var kPplb = document.getElementById('eco-k-pplb');
+  if (nPplb && !nPplb._edited && G.fert.n_lb) nPplb.value = G.fert.n_lb.toFixed(3);
+  if (pPplb && !pPplb._edited && G.fert.p_lb) pPplb.value = G.fert.p_lb.toFixed(3);
+  if (kPplb && !kPplb._edited && G.fert.k_lb) kPplb.value = G.fert.k_lb.toFixed(3);
+
   calcInputCost();
 }
 
 function calcInputCost() {
-  var nRate  = parseFloat(document.getElementById('ic-n-rate').value)  || 0;
-  var nPrice = parseFloat(document.getElementById('ic-n-price').value) || 0;
-  var pRate  = parseFloat(document.getElementById('ic-p-rate').value)  || 0;
-  var pPrice = parseFloat(document.getElementById('ic-p-price').value) || 0;
-  var kRate  = parseFloat(document.getElementById('ic-k-rate').value)  || 0;
-  var kPrice = parseFloat(document.getElementById('ic-k-price').value) || 0;
-  var seed   = parseFloat(document.getElementById('ic-seed').value)    || 0;
-  var chem   = parseFloat(document.getElementById('ic-chem').value)    || 0;
-  var land   = parseFloat(document.getElementById('ic-land').value)    || 0;
-  var other  = parseFloat(document.getElementById('ic-other').value)   || 0;
-  var nCost = nRate * nPrice, pCost = pRate * pPrice, kCost = kRate * kPrice;
-  var fertTotal = nCost + pCost + kCost;
-  var total = fertTotal + seed + chem + land + other;
-  var fmt = function(v) { return '$' + v.toFixed(2); };
+  var g = function(id) { var e = document.getElementById(id); return e ? parseFloat(e.value) || 0 : 0; };
   var el = function(id) { return document.getElementById(id); };
-  if (el('ic-n-cost'))    el('ic-n-cost').textContent    = fmt(nCost);
-  if (el('ic-p-cost'))    el('ic-p-cost').textContent    = fmt(pCost);
-  if (el('ic-k-cost'))    el('ic-k-cost').textContent    = fmt(kCost);
-  if (el('ic-fert-cost')) el('ic-fert-cost').textContent = fmt(fertTotal);
-  if (el('ic-total'))     el('ic-total').textContent     = fmt(total);
-  // Pass to breakeven
-  var beTotal = document.getElementById('be-total');
-  if (beTotal && !beTotal._edited) beTotal.value = total.toFixed(2);
+
+  // FIX: all IDs corrected to match HTML
+  var nRate  = g('eco-n-rate');   var nPrice = g('eco-n-pplb');
+  var pRate  = g('eco-p-rate');   var pPrice = g('eco-p-pplb');
+  var kRate  = g('eco-k-rate');   var kPrice = g('eco-k-pplb');
+  var seed   = g('eco-seed');
+  var chem   = g('eco-chem');
+  var land   = g('eco-rent');
+  var other  = g('eco-other');
+
+  var nCost = nRate * nPrice;
+  var pCost = pRate * pPrice;
+  var kCost = kRate * kPrice;
+  var total = nCost + pCost + kCost + seed + chem + land + other;
+
+  var fmt = function(v) { return '$' + v.toFixed(2); };
+
+  // FIX: IDs are eco-n-cost, eco-seed-echo, etc.
+  if (el('eco-n-cost'))     el('eco-n-cost').textContent     = fmt(nCost);
+  if (el('eco-p-cost'))     el('eco-p-cost').textContent     = fmt(pCost);
+  if (el('eco-k-cost'))     el('eco-k-cost').textContent     = fmt(kCost);
+  if (el('eco-seed-echo'))  el('eco-seed-echo').textContent  = fmt(seed);
+  if (el('eco-chem-echo'))  el('eco-chem-echo').textContent  = fmt(chem);
+  if (el('eco-rent-echo'))  el('eco-rent-echo').textContent  = fmt(land);
+  if (el('eco-other-echo')) el('eco-other-echo').textContent = fmt(other);
+  if (el('eco-total'))      el('eco-total').textContent      = fmt(total);
+
+  // Push to breakeven cost field (eco-bk-cost, not be-total)
+  var bkCost = el('eco-bk-cost');
+  if (bkCost && !bkCost._edited) bkCost.value = total.toFixed(2);
+
   calcBreakeven();
 }
 
 function calcBreakeven() {
-  var total  = parseFloat(document.getElementById('be-total').value)  || 0;
-  var yield_ = parseFloat(document.getElementById('be-yield').value)  || 1;
-  var corn   = parseFloat(document.getElementById('be-corn').value)   || 0;
-  var acres  = parseFloat(document.getElementById('be-acres').value)  || 0;
-  var be = total / yield_;
-  var profit = (corn - be) * yield_;
-  var fieldProfit = profit * acres;
-  var fmt = function(v, d) { return (v >= 0 ? '+$' : '-$') + Math.abs(v).toFixed(d || 2); };
   var el = function(id) { return document.getElementById(id); };
-  if (el('be-result')) el('be-result').textContent = '$' + be.toFixed(2) + '/bu';
-  if (el('be-margin')) {
-    el('be-margin').textContent = fmt(profit) + '/ac';
-    el('be-margin').className = 'ff-riv ' + (profit >= 0 ? 'green' : 'red');
+  var g  = function(id) { var e = el(id); return e ? parseFloat(e.value) || 0 : 0; };
+
+  // FIX: all IDs corrected; market price comes directly from G.corn/G.beans
+  var crop   = el('eco-bk-crop') ? el('eco-bk-crop').value : 'corn';
+  var total  = g('eco-bk-cost');
+  var yield_ = g('eco-bk-yield') || 1;
+  var acres  = g('eco-bk-acres');
+  var mkt    = crop === 'beans' ? G.beans : G.corn;
+
+  var be          = total / yield_;
+  var profitAc    = mkt ? (mkt - be) * yield_ : null;
+  var profitField = (profitAc !== null && acres) ? profitAc * acres : null;
+
+  // FIX: IDs are eco-bk-be, eco-bk-mkt, eco-bk-pl, eco-bk-tot
+  if (el('eco-bk-be'))  el('eco-bk-be').textContent  = '$' + be.toFixed(2);
+  if (el('eco-bk-mkt')) el('eco-bk-mkt').textContent = mkt ? '$' + mkt.toFixed(2) : '—';
+
+  if (el('eco-bk-pl') && profitAc !== null) {
+    el('eco-bk-pl').textContent = (profitAc >= 0 ? '+$' : '-$') + Math.abs(profitAc).toFixed(2);
+    el('eco-bk-pl').className   = 'eco-bk-val ' + (profitAc >= 0 ? 'green' : 'red');
   }
-  if (el('be-field') && acres > 0) {
-    el('be-field').textContent = fmt(fieldProfit, 0) + ' total';
-    el('be-field').className = 'ff-riv ' + (fieldProfit >= 0 ? 'green' : 'red');
+  if (el('eco-bk-tot') && profitField !== null) {
+    el('eco-bk-tot').textContent = (profitField >= 0 ? '+$' : '-$') + Math.abs(Math.round(profitField)).toLocaleString();
+    el('eco-bk-tot').className   = 'eco-bk-val ' + (profitField >= 0 ? 'green' : 'red');
   }
-  if (el('be-vs')) {
-    var vs = corn > 0 ? (corn > be ? '✅ Profitable at current price' : '⚠️ Below breakeven at current price') : '—';
-    el('be-vs').textContent = vs;
+
+  // Update profit bar
+  var bar   = el('eco-profit-bar');
+  var label = el('eco-profit-label');
+  var val   = el('eco-profit-val');
+  var sub   = el('eco-profit-sub');
+  if (bar && profitAc !== null) {
+    var isP = profitAc >= 0;
+    bar.className   = 'eco-profit-bar '   + (isP ? 'profit' : 'loss');
+    if (label) { label.className = 'eco-profit-label ' + (isP ? 'profit' : 'loss'); label.textContent = isP ? 'Projected Profit' : 'Projected Loss'; }
+    if (val)   { val.className   = 'eco-profit-val '   + (isP ? 'profit' : 'loss'); val.textContent   = (isP ? '+$' : '-$') + Math.abs(profitAc).toFixed(2) + '/ac'; }
+    if (sub)   { sub.textContent = (mkt ? crop.charAt(0).toUpperCase() + crop.slice(1) + ' @ $' + mkt.toFixed(2) + '/bu — ' : '') + 'Breakeven: $' + be.toFixed(2) + '/bu — Cost: $' + total.toFixed(2) + '/ac'; }
   }
 }
 
-// Wire economics inputs
-['ic-n-rate','ic-n-price','ic-p-rate','ic-p-price','ic-k-rate','ic-k-price','ic-seed','ic-chem','ic-land','ic-other'].forEach(function(id) {
+// FIX: wire event listeners to correct HTML IDs
+['eco-n-rate','eco-n-pplb','eco-p-rate','eco-p-pplb','eco-k-rate','eco-k-pplb',
+ 'eco-seed','eco-chem','eco-rent','eco-other'].forEach(function(id) {
   var el = document.getElementById(id);
   if (el) el.addEventListener('input', function() { el._edited = true; calcInputCost(); });
 });
-['be-total','be-yield','be-corn','be-acres'].forEach(function(id) {
+['eco-bk-cost','eco-bk-yield','eco-bk-acres'].forEach(function(id) {
   var el = document.getElementById(id);
   if (el) el.addEventListener('input', function() { el._edited = true; calcBreakeven(); });
 });
+var bkCrop = document.getElementById('eco-bk-crop');
+if (bkCrop) bkCrop.addEventListener('change', calcBreakeven);
 calcInputCost();
 
+
 // ── Soil Test Calculator ──────────────────────────────────────────────
-var P_BREAKS = [10, 15, 25, 50, 75];
-var K_BREAKS = [60, 90, 130, 200, 300];
-var P_CATS = ['Very Low', 'Low', 'Optimum', 'High', 'Very High', 'Ex. High'];
-var K_CATS = ['Very Low', 'Low', 'Optimum', 'High', 'Very High', 'Ex. High'];
+var P_BREAKS = [10,15,25,50,75];
+var K_BREAKS = [60,90,130,200,300];
+var P_CATS = ['Very Low','Low','Optimum','High','Very High','Ex. High'];
+var K_CATS = ['Very Low','Low','Optimum','High','Very High','Ex. High'];
 var CORN_P = [[80,70,40,20,0,0],[85,75,45,25,0,0],[95,85,55,30,0,0],[100,90,60,30,0,0],[110,100,70,35,0,0],[115,105,75,40,0,0],[125,115,85,45,0,0],[130,120,90,45,0,0],[140,130,100,50,0,0]];
 var CORN_K = [[75,60,30,15,10,0],[80,65,35,20,10,0],[85,70,40,20,10,0],[90,75,45,25,10,0],[95,80,50,25,15,0],[105,90,60,30,15,0],[110,95,65,35,15,0],[115,100,70,35,20,0],[120,105,75,40,20,0]];
 var CORN_BINS = [[91,110],[111,130],[131,150],[151,170],[171,190],[191,210],[211,230],[231,250],[251,270]];
-var SOY_P = [[65,55,25,15,0,0],[70,60,30,15,0,0],[80,70,40,20,0,0],[90,80,50,25,0,0],[95,85,55,30,0,0],[105,95,65,35,0,0],[110,100,70,35,0,0],[120,110,80,40,0,0]];
-var SOY_K = [[85,70,40,20,10,0],[100,85,55,30,15,0],[115,100,70,35,20,0],[130,115,85,45,20,0],[145,130,100,50,25,0],[155,140,110,55,30,0],[170,155,125,65,30,0],[185,170,140,70,35,0]];
+var SOY_P  = [[65,55,25,15,0,0],[70,60,30,15,0,0],[80,70,40,20,0,0],[90,80,50,25,0,0],[95,85,55,30,0,0],[105,95,65,35,0,0],[110,100,70,35,0,0],[120,110,80,40,0,0]];
+var SOY_K  = [[85,70,40,20,10,0],[100,85,55,30,15,0],[115,100,70,35,20,0],[130,115,85,45,20,0],[145,130,100,50,25,0],[155,140,110,55,30,0],[170,155,125,65,30,0],[185,170,140,70,35,0]];
 var SOY_BINS = [[26,35],[36,45],[46,55],[56,65],[66,75],[76,85],[86,95],[96,105]];
-var ALF_P = [[65,55,25,15,0,0],[80,70,40,20,0,0],[90,80,50,25,0,0],[105,95,65,35,0,0],[120,110,80,40,0,0],[130,120,90,45,0,0],[145,135,105,55,0,0],[155,145,115,60,0,0]];
-var ALF_K = [[160,145,105,55,25,0],[235,220,180,90,45,0],[295,280,240,120,60,0],[355,340,300,150,75,0],[415,400,360,180,90,0],[475,460,420,210,105,0],[535,520,480,240,120,0],[595,580,540,270,135,0]];
+var ALF_P  = [[65,55,25,15,0,0],[80,70,40,20,0,0],[90,80,50,25,0,0],[105,95,65,35,0,0],[120,110,80,40,0,0],[130,120,90,45,0,0],[145,135,105,55,0,0],[155,145,115,60,0,0]];
+var ALF_K  = [[160,145,105,55,25,0],[235,220,180,90,45,0],[295,280,240,120,60,0],[355,340,300,150,75,0],[415,400,360,180,90,0],[475,460,420,210,105,0],[535,520,480,240,120,0],[595,580,540,270,135,0]];
 var ALF_BINS = [[1.5,2.5],[2.6,3.5],[3.6,4.5],[4.6,5.5],[5.6,6.5],[6.6,7.5],[7.6,8.5],[8.6,9.5]];
 var CSIL_P = [[105,95,65,35,0,0],[120,110,80,40,0,0],[140,130,100,50,0,0],[155,145,115,60,0,0],[175,165,135,70,0,0]];
 var CSIL_K = [[200,185,145,75,35,0],[240,225,185,95,45,0],[285,270,230,115,60,0],[325,310,270,135,70,0],[365,350,310,155,80,0]];
 var CSIL_BINS = [[15,20],[20,25],[25,30],[30,35],[35,40]];
 
-function getSoilCat(ppm, breaks) { for (var i = 0; i < breaks.length; i++) { if (ppm <= breaks[i]) return i; } return 5; }
-function getYieldBin(y, bins) { for (var i = 0; i < bins.length; i++) { if (y >= bins[i][0] && y <= bins[i][1]) return i; } return y < bins[0][0] ? 0 : bins.length - 1; }
+function getSoilCat(ppm,breaks){for(var i=0;i<breaks.length;i++){if(ppm<=breaks[i])return i;}return 5;}
+function getYieldBin(y,bins){for(var i=0;i<bins.length;i++){if(y>=bins[i][0]&&y<=bins[i][1])return i;}return y<bins[0][0]?0:bins.length-1;}
 
-function calcST() {
-  var crop = document.getElementById('st-crop').value;
-  var yield_ = parseFloat(document.getElementById('st-yield').value) || 0;
-  var pPpm = parseFloat(document.getElementById('st-p').value) || 0;
-  var kPpm = parseFloat(document.getElementById('st-k').value) || 0;
-  var pCat = getSoilCat(pPpm, P_BREAKS), kCat = getSoilCat(kPpm, K_BREAKS);
-  var catCls = ['red','gold','green','','dim','dim'];
-  var pEl = document.getElementById('st-pcat'), kEl = document.getElementById('st-kcat');
-  if (pEl) { pEl.textContent = P_CATS[pCat]; pEl.className = 'ff-riv ' + catCls[pCat]; }
-  if (kEl) { kEl.textContent = K_CATS[kCat]; kEl.className = 'ff-riv ' + catCls[kCat]; }
-  var bins, pT, kT;
-  if (crop === 'corn') { bins = CORN_BINS; pT = CORN_P; kT = CORN_K; }
-  else if (crop === 'corn_silage') { bins = CSIL_BINS; pT = CSIL_P; kT = CSIL_K; }
-  else if (crop === 'soybean') { bins = SOY_BINS; pT = SOY_P; kT = SOY_K; }
-  else { bins = ALF_BINS; pT = ALF_P; kT = ALF_K; }
-  var bin = getYieldBin(yield_, bins);
-  var pRec = pT[bin][pCat], kRec = kT[bin][kCat];
-  var prEl = document.getElementById('st-prec'), krEl = document.getElementById('st-krec');
-  if (prEl) prEl.textContent = pRec === 0 ? '0 — No application needed' : pRec + ' lb/ac';
-  if (krEl) krEl.textContent = kRec === 0 ? '0 — No application needed' : kRec + ' lb/ac';
-  var note = [];
-  if (pCat >= 4) note.push('P is very high — do not apply. Draw levels down over time.');
-  if (kCat >= 4) note.push('K is very high — do not apply.');
-  if (pCat === 0 || kCat === 0) note.push('Very low levels — consider starter for early availability.');
-  if (crop === 'alfalfa') note.push('Multi-year alfalfa: increase K₂O by 20 lb/ac if stand maintained 3+ years.');
-  var units = { corn: 'bu/ac', corn_silage: 'tons/ac', soybean: 'bu/ac', alfalfa: 'tons/ac DM' };
-  var uEl = document.getElementById('st-yield-unit');
-  if (uEl) uEl.textContent = units[crop] || 'bu/ac';
-  var nEl = document.getElementById('st-note');
-  if (nEl) nEl.textContent = note.join(' ');
-  // Show P+K cost estimate
-  if (G.fert.p_lb && G.fert.k_lb) {
-    var pCost = pRec * G.fert.p_lb, kCost = kRec * G.fert.k_lb;
-    var pkEl = document.getElementById('st-pk-cost');
-    if (pkEl) pkEl.textContent = 'Est. fert cost: $' + pCost.toFixed(0) + ' P₂O₅ + $' + kCost.toFixed(0) + ' K₂O = $' + (pCost + kCost).toFixed(0) + '/ac at current market prices';
+function calcST(){
+  var crop=document.getElementById('st-crop').value;
+  var yield_=parseFloat(document.getElementById('st-yield').value)||0;
+  var pPpm=parseFloat(document.getElementById('st-p').value)||0;
+  var kPpm=parseFloat(document.getElementById('st-k').value)||0;
+  var pCat=getSoilCat(pPpm,P_BREAKS),kCat=getSoilCat(kPpm,K_BREAKS);
+  var catCls=['red','gold','green','','dim','dim'];
+  var pEl=document.getElementById('st-pcat'),kEl=document.getElementById('st-kcat');
+  if(pEl){pEl.textContent=P_CATS[pCat];pEl.className='ff-riv '+catCls[pCat];}
+  if(kEl){kEl.textContent=K_CATS[kCat];kEl.className='ff-riv '+catCls[kCat];}
+  var bins,pT,kT;
+  if(crop==='corn'){bins=CORN_BINS;pT=CORN_P;kT=CORN_K;}
+  else if(crop==='corn_silage'){bins=CSIL_BINS;pT=CSIL_P;kT=CSIL_K;}
+  else if(crop==='soybean'){bins=SOY_BINS;pT=SOY_P;kT=SOY_K;}
+  else{bins=ALF_BINS;pT=ALF_P;kT=ALF_K;}
+  var bin=getYieldBin(yield_,bins);
+  var pRec=pT[bin][pCat],kRec=kT[bin][kCat];
+  var prEl=document.getElementById('st-prec'),krEl=document.getElementById('st-krec');
+  if(prEl)prEl.textContent=pRec===0?'0 — No application needed':pRec+' lb/ac';
+  if(krEl)krEl.textContent=kRec===0?'0 — No application needed':kRec+' lb/ac';
+  var note=[];
+  if(pCat>=4)note.push('P is very high — do not apply.');
+  if(kCat>=4)note.push('K is very high — do not apply.');
+  if(pCat===0||kCat===0)note.push('Very low — consider starter.');
+  if(crop==='alfalfa')note.push('Multi-year alfalfa: increase K₂O 20 lb/ac if stand 3+ years.');
+  var nEl=document.getElementById('st-note');if(nEl)nEl.textContent=note.join(' ');
+  if(G.fert.p_lb&&G.fert.k_lb){
+    var pCost=pRec*G.fert.p_lb,kCost=kRec*G.fert.k_lb;
+    var pkEl=document.getElementById('pk-p-cost'),kkEl=document.getElementById('pk-k-cost'),totEl=document.getElementById('pk-total-cost');
+    if(pkEl)pkEl.textContent='$'+(pCost).toFixed(0)+'/ac';
+    if(kkEl)kkEl.textContent='$'+(kCost).toFixed(0)+'/ac';
+    if(totEl)totEl.textContent='$'+(pCost+kCost).toFixed(0)+'/ac';
+    var costBar=document.getElementById('pk-cost-out');if(costBar)costBar.style.display='';
   }
 }
-['st-crop','st-yield','st-p','st-k'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('input', calcST);
-});
+['st-crop','st-yield','st-p','st-k'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcST);});
 calcST();
 
 // ── Crop Removal Calculator ───────────────────────────────────────────
-function calcRem() {
-  var parts = document.getElementById('rem-crop').value.split(':');
-  var pR = parseFloat(parts[1]) || 0, kR = parseFloat(parts[2]) || 0;
-  var y = parseFloat(document.getElementById('rem-yield').value) || 0;
-  var ac = parseFloat(document.getElementById('rem-acres').value) || 0;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('rem-p-ac'))  el('rem-p-ac').textContent  = (pR * y).toFixed(1) + ' lb';
-  if (el('rem-k-ac'))  el('rem-k-ac').textContent  = (kR * y).toFixed(1) + ' lb';
-  if (el('rem-p-tot')) el('rem-p-tot').textContent = Math.round(pR * y * ac).toLocaleString() + ' lb';
-  if (el('rem-k-tot')) el('rem-k-tot').textContent = Math.round(kR * y * ac).toLocaleString() + ' lb';
+function calcRem(){
+  var parts=document.getElementById('rem-crop').value.split(':');
+  var pR=parseFloat(parts[1])||0,kR=parseFloat(parts[2])||0;
+  var y=parseFloat(document.getElementById('rem-yield').value)||0;
+  var ac=parseFloat(document.getElementById('rem-acres').value)||0;
+  var el=function(id){return document.getElementById(id);};
+  if(el('rem-p-ac')) el('rem-p-ac').textContent=(pR*y).toFixed(1)+' lb';
+  if(el('rem-k-ac')) el('rem-k-ac').textContent=(kR*y).toFixed(1)+' lb';
+  if(el('rem-p-tot'))el('rem-p-tot').textContent=Math.round(pR*y*ac).toLocaleString()+' lb';
+  if(el('rem-k-tot'))el('rem-k-tot').textContent=Math.round(kR*y*ac).toLocaleString()+' lb';
 }
-['rem-crop','rem-yield','rem-acres'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcRem); });
+['rem-crop','rem-yield','rem-acres'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcRem);});
 calcRem();
 
-// ── Corn Bu/Acre (Crop Removal tab) ──────────────────────────────────
-function calcCornBu() {
-  var lbs = parseFloat(document.getElementById('corn-lbs').value) || 0;
-  var m   = parseFloat(document.getElementById('corn-moist').value) || 0;
-  var ac  = parseFloat(document.getElementById('corn-acres').value) || 1;
-  var bu  = (lbs * (1 - m / 100)) / 47.32;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('corn-bu'))   el('corn-bu').textContent   = Math.round(bu).toLocaleString() + ' bu';
-  if (el('corn-buac')) el('corn-buac').textContent = Math.round(bu / ac).toLocaleString() + ' bu/ac';
+function calcCornBu(){
+  var lbs=parseFloat(document.getElementById('corn-lbs').value)||0;
+  var m=parseFloat(document.getElementById('corn-moist').value)||0;
+  var ac=parseFloat(document.getElementById('corn-acres').value)||1;
+  var bu=(lbs*(1-m/100))/47.32;
+  var el=function(id){return document.getElementById(id);};
+  if(el('corn-bu'))   el('corn-bu').textContent=Math.round(bu).toLocaleString()+' bu';
+  if(el('corn-buac')) el('corn-buac').textContent=Math.round(bu/ac).toLocaleString()+' bu/ac';
 }
-['corn-lbs','corn-moist','corn-acres'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcCornBu); });
+['corn-lbs','corn-moist','corn-acres'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcCornBu);});
 calcCornBu();
 
 // ── Manure Rate Calculator ────────────────────────────────────────────
-function calcMan() {
-  var loads = parseFloat(document.getElementById('man-loads').value) || 0;
-  var sz    = parseFloat(document.getElementById('man-size').value)  || 0;
-  var ac    = parseFloat(document.getElementById('man-acres').value) || 1;
-  var u     = document.getElementById('man-units').value;
-  var tot   = loads * sz;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('man-total')) el('man-total').textContent = tot.toLocaleString() + ' ' + (u === 'tons' ? 'tons' : 'gal');
-  if (el('man-rate'))  el('man-rate').textContent  = (tot / ac).toFixed(1) + ' ' + (u === 'tons' ? 'tons/ac' : 'gal/ac');
+function calcMan(){
+  var loads=parseFloat(document.getElementById('man-loads').value)||0;
+  var sz=parseFloat(document.getElementById('man-size').value)||0;
+  var ac=parseFloat(document.getElementById('man-acres').value)||1;
+  var u=document.getElementById('man-units').value;
+  var tot=loads*sz;
+  var el=function(id){return document.getElementById(id);};
+  if(el('man-total'))el('man-total').textContent=tot.toLocaleString()+' '+(u==='tons'?'tons':'gal');
+  if(el('man-rate')) el('man-rate').textContent=(tot/ac).toFixed(1)+' '+(u==='tons'?'tons/ac':'gal/ac');
 }
-['man-loads','man-size','man-acres','man-units'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcMan); });
+['man-loads','man-size','man-acres','man-units'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcMan);});
 calcMan();
 
-// ── MANURE NUTRIENT VALUE CALCULATOR ─────────────────────────────────
-// The feature nobody else has with live prices
-// N/P/K content from UW-Extension A2809. Per stated unit.
-// Liquid types: values are per 1,000 gallons in source; rate entered in gal/ac
-var MAN_TYPES = {
-  dairy_liq_hi:  { label: 'Dairy Liquid — 4–11% DM',         unit: 'gal', per: 1000, n_lt1: 12, n_1to3: 10, n_gt3: 7,  p: 6,  k: 17 },
-  dairy_liq_lo:  { label: 'Dairy Liquid — <4% DM',            unit: 'gal', per: 1000, n_lt1: 7,  n_1to3: 6,  n_gt3: 4,  p: 3,  k: 11 },
-  dairy_sol_hi:  { label: 'Dairy Solid — >20% DM',            unit: 'ton', per: 1,    n_lt1: 3,  n_1to3: 3,  n_gt3: 2,  p: 3,  k: 6  },
-  dairy_sol_lo:  { label: 'Dairy Solid — 11–20% DM',          unit: 'ton', per: 1,    n_lt1: 3,  n_1to3: 2,  n_gt3: 2,  p: 3,  k: 5  },
-  beef_solid:    { label: 'Beef Solid',                        unit: 'ton', per: 1,    n_lt1: 5,  n_1to3: 4,  n_gt3: 3,  p: 6,  k: 10 },
-  beef_liq:      { label: 'Beef Liquid',                       unit: 'gal', per: 1000, n_lt1: 8,  n_1to3: 6,  n_gt3: 5,  p: 6,  k: 12 },
-  swine_solid:   { label: 'Swine Solid',                       unit: 'ton', per: 1,    n_lt1: 12, n_1to3: 9,  n_gt3: 7,  p: 10, k: 8  },
-  swine_liq_in:  { label: 'Swine Liquid — Finish Indoor Pit',  unit: 'gal', per: 1000, n_lt1: 28, n_1to3: 22, n_gt3: 17, p: 14, k: 22 },
-  swine_liq_out: { label: 'Swine Liquid — Finish Outdoor Pit', unit: 'gal', per: 1000, n_lt1: 12, n_1to3: 9,  n_gt3: 7,  p: 6,  k: 8  },
-  chicken:       { label: 'Chicken Solid',                     unit: 'ton', per: 1,    n_lt1: 29, n_1to3: 27, n_gt3: 24, p: 35, k: 26 },
-  turkey:        { label: 'Turkey Solid',                      unit: 'ton', per: 1,    n_lt1: 31, n_1to3: 28, n_gt3: 26, p: 35, k: 25 },
-  horse:         { label: 'Horse Solid',                       unit: 'ton', per: 1,    n_lt1: 4,  n_1to3: 3,  n_gt3: 2,  p: 5,  k: 6  }
+// ── Manure Nutrient Value Calculator ─────────────────────────────────
+var MAN_TYPES={
+  dairy_liq_4_11:{label:'Dairy Liquid 4–11% DM',    unit:'gal',per:1000,n_lt1:12,n_1to3:10,n_gt3:7, p:6, k:17},
+  dairy_liq_lt4: {label:'Dairy Liquid <4% DM',       unit:'gal',per:1000,n_lt1:7, n_1to3:6, n_gt3:4, p:3, k:11},
+  dairy_solid_gt20:  {label:'Dairy Solid >20% DM',   unit:'ton',per:1,   n_lt1:3, n_1to3:3, n_gt3:2, p:3, k:6},
+  dairy_solid_11_20: {label:'Dairy Solid 11–20% DM', unit:'ton',per:1,   n_lt1:3, n_1to3:2, n_gt3:2, p:3, k:5},
+  beef_solid:    {label:'Beef Solid',                 unit:'ton',per:1,   n_lt1:5, n_1to3:4, n_gt3:3, p:6, k:10},
+  beef_liq:      {label:'Beef Liquid',                unit:'gal',per:1000,n_lt1:8, n_1to3:6, n_gt3:5, p:6, k:12},
+  swine_solid:   {label:'Swine Solid',                unit:'ton',per:1,   n_lt1:12,n_1to3:9, n_gt3:7, p:10,k:8},
+  swine_liq_fin_in:  {label:'Swine Liquid Finish Indoor', unit:'gal',per:1000,n_lt1:28,n_1to3:22,n_gt3:17,p:14,k:22},
+  swine_liq_fin_out: {label:'Swine Liquid Finish Outdoor',unit:'gal',per:1000,n_lt1:12,n_1to3:9, n_gt3:7, p:6, k:8},
+  chicken_solid: {label:'Chicken Solid',              unit:'ton',per:1,   n_lt1:29,n_1to3:27,n_gt3:24,p:35,k:26},
+  turkey_solid:  {label:'Turkey Solid',               unit:'ton',per:1,   n_lt1:31,n_1to3:28,n_gt3:26,p:35,k:25},
+  horse_solid:   {label:'Horse Solid',                unit:'ton',per:1,   n_lt1:4, n_1to3:3, n_gt3:2, p:5, k:6}
 };
 
-function updateManureFertPriceInputs() {
-  // Populate editable price strip from current G.fert (if not edited)
-  var fields = { 'mv-n-price': G.fert.n_lb, 'mv-p-price': G.fert.p_lb, 'mv-k-price': G.fert.k_lb };
-  Object.keys(fields).forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el && !el._edited && fields[id]) el.value = fields[id].toFixed(3);
-  });
+function updateManureFertPriceInputs(){
+  var fields={'mv-n-price':G.fert.n_lb,'mv-p-price':G.fert.p_lb,'mv-k-price':G.fert.k_lb};
+  Object.keys(fields).forEach(function(id){var el=document.getElementById(id);if(el&&!el._edited&&fields[id])el.value=fields[id].toFixed(3);});
+  var badge=document.getElementById('mv-live-badge');if(badge&&G.fert.n_lb)badge.style.display='inline-flex';
   calcManureValue();
 }
 
-function calcManureValue() {
-  var typeKey   = document.getElementById('mv-type')   ? document.getElementById('mv-type').value   : '';
-  var timing    = document.getElementById('mv-timing') ? document.getElementById('mv-timing').value : 'lt1';
-  var rate      = parseFloat(document.getElementById('mv-rate').value)    || 0;
-  var acres     = parseFloat(document.getElementById('mv-acres').value)   || 0;
-  var appCost   = parseFloat(document.getElementById('mv-appcost').value) || 0;
-  var nPrice    = parseFloat(document.getElementById('mv-n-price').value) || G.fert.n_lb || 0.61;
-  var pPrice    = parseFloat(document.getElementById('mv-p-price').value) || G.fert.p_lb || 0.60;
-  var kPrice    = parseFloat(document.getElementById('mv-k-price').value) || G.fert.k_lb || 0.33;
-
-  var mt = MAN_TYPES[typeKey];
-  if (!mt || !rate) {
-    document.getElementById('mv-results').style.display = 'none';
-    return;
-  }
-
-  // Get N availability for timing
-  var nAvail_per_unit = timing === 'lt1' ? mt.n_lt1 : timing === '1to3' ? mt.n_1to3 : mt.n_gt3;
-
-  // Compute lbs/acre — liquids: content is per 1,000 gal; rate in gal/ac
-  // solids: content per ton; rate in ton/ac
-  var mult = mt.per === 1000 ? (rate / 1000) : rate;
-  var n_lbs_ac = nAvail_per_unit * mult;
-  var p_lbs_ac = mt.p * mult;
-  var k_lbs_ac = mt.k * mult;
-
-  // Dollar value per acre
-  var n_val  = n_lbs_ac * nPrice;
-  var p_val  = p_lbs_ac * pPrice;
-  var k_val  = k_lbs_ac * kPrice;
-  var gross  = n_val + p_val + k_val;
-  var net_ac = gross - appCost;
-  var field_savings = net_ac * acres;
-
-  // Update display
-  document.getElementById('mv-results').style.display = '';
-  var el = function(id) { return document.getElementById(id); };
-  var fmt = function(v) { return '$' + Math.abs(v).toFixed(2); };
-  var fmtLb = function(v) { return v.toFixed(1) + ' lb/ac'; };
-
-  if (el('mv-n-lbs'))  el('mv-n-lbs').textContent  = fmtLb(n_lbs_ac);
-  if (el('mv-p-lbs'))  el('mv-p-lbs').textContent  = fmtLb(p_lbs_ac);
-  if (el('mv-k-lbs'))  el('mv-k-lbs').textContent  = fmtLb(k_lbs_ac);
-  if (el('mv-n-val'))  el('mv-n-val').textContent   = fmt(n_val) + '/ac';
-  if (el('mv-p-val'))  el('mv-p-val').textContent   = fmt(p_val) + '/ac';
-  if (el('mv-k-val'))  el('mv-k-val').textContent   = fmt(k_val) + '/ac';
-  if (el('mv-gross'))  el('mv-gross').textContent   = fmt(gross)  + '/ac';
-  if (el('mv-appcost-show')) el('mv-appcost-show').textContent = '−$' + appCost.toFixed(2) + '/ac';
-  if (el('mv-net-ac')) {
-    el('mv-net-ac').textContent   = (net_ac >= 0 ? '+' : '') + '$' + net_ac.toFixed(2) + '/ac';
-    el('mv-net-ac').className     = 'ff-riv ' + (net_ac >= 0 ? 'green' : 'red');
-  }
-  if (el('mv-field') && acres > 0) {
-    el('mv-field').textContent    = (field_savings >= 0 ? '+' : '') + '$' + Math.abs(field_savings).toFixed(0) + ' total field';
-    el('mv-field').className      = 'ff-riv ' + (field_savings >= 0 ? 'green' : 'red');
-  }
-  // Update unit label
-  var rateUnit = document.getElementById('mv-rate-unit');
-  if (rateUnit) rateUnit.textContent = mt.unit === 'gal' ? 'gal/ac' : 'ton/ac';
+function calcManureValue(){
+  var typeKey=document.getElementById('mv-type')?document.getElementById('mv-type').value:'';
+  var timing=document.getElementById('mv-timing')?document.getElementById('mv-timing').value:'lt1hr';
+  var rate=parseFloat(document.getElementById('mv-rate').value)||0;
+  var acres=parseFloat(document.getElementById('mv-acres').value)||0;
+  var appCost=parseFloat(document.getElementById('mv-appcost').value)||0;
+  var nPrice=parseFloat(document.getElementById('mv-n-price').value)||G.fert.n_lb||0.61;
+  var pPrice=parseFloat(document.getElementById('mv-p-price').value)||G.fert.p_lb||0.60;
+  var kPrice=parseFloat(document.getElementById('mv-k-price').value)||G.fert.k_lb||0.33;
+  var mt=MAN_TYPES[typeKey];
+  if(!mt||!rate){document.getElementById('mv-results').style.display='none';return;}
+  var nAvail=timing==='lt1hr'?mt.n_lt1:timing==='1to3day'?mt.n_1to3:mt.n_gt3;
+  var mult=mt.per===1000?(rate/1000):rate;
+  var n_lbs=nAvail*mult,p_lbs=mt.p*mult,k_lbs=mt.k*mult;
+  var n_val=n_lbs*nPrice,p_val=p_lbs*pPrice,k_val=k_lbs*kPrice;
+  var gross=n_val+p_val+k_val,net_ac=gross-appCost,field=net_ac*acres;
+  document.getElementById('mv-results').style.display='';
+  var el=function(id){return document.getElementById(id);};
+  var fmt=function(v){return'$'+Math.abs(v).toFixed(2);};
+  if(el('mv-n-lbs'))el('mv-n-lbs').textContent=n_lbs.toFixed(1);
+  if(el('mv-p-lbs'))el('mv-p-lbs').textContent=p_lbs.toFixed(1);
+  if(el('mv-k-lbs'))el('mv-k-lbs').textContent=k_lbs.toFixed(1);
+  if(el('mv-n-val'))el('mv-n-val').textContent=fmt(n_val)+'/ac';
+  if(el('mv-p-val'))el('mv-p-val').textContent=fmt(p_val)+'/ac';
+  if(el('mv-k-val'))el('mv-k-val').textContent=fmt(k_val)+'/ac';
+  if(el('mv-n-tot'))el('mv-n-tot').textContent=fmt(n_val)+'/ac';
+  if(el('mv-p-tot'))el('mv-p-tot').textContent=fmt(p_val)+'/ac';
+  if(el('mv-k-tot'))el('mv-k-tot').textContent=fmt(k_val)+'/ac';
+  if(el('mv-agro-ac'))el('mv-agro-ac').textContent=(gross>=0?'+$':'-$')+Math.abs(gross).toFixed(2)+'/ac';
+  if(el('mv-app-cost-row'))el('mv-app-cost-row').textContent='−$'+appCost.toFixed(2)+'/ac';
+  if(el('mv-net-ac')){el('mv-net-ac').textContent=(net_ac>=0?'+$':'-$')+Math.abs(net_ac).toFixed(2)+'/ac';el('mv-net-ac').className='mv-tv big '+(net_ac>=0?'green':'red');}
+  if(el('mv-field-total'))el('mv-field-total').textContent=(field>=0?'+$':'-$')+Math.abs(field).toFixed(0);
+  if(el('mv-field-sub'))el('mv-field-sub').textContent=acres+' ac at '+rate+(mt.unit==='gal'?' gal/ac':' ton/ac');
+  var rateUnit=el('mv-rate-unit-display');if(rateUnit)rateUnit.textContent=mt.unit==='gal'?'gal/acre':'ton/acre';
 }
-
-// Wire manure value inputs
-['mv-type','mv-timing','mv-rate','mv-acres','mv-appcost','mv-n-price','mv-p-price','mv-k-price'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('input', function() {
-    if (['mv-n-price','mv-p-price','mv-k-price'].indexOf(id) >= 0) el._edited = true;
-    calcManureValue();
-  });
+['mv-type','mv-timing','mv-rate','mv-acres','mv-appcost','mv-n-price','mv-p-price','mv-k-price'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el)el.addEventListener('input',function(){if(['mv-n-price','mv-p-price','mv-k-price'].indexOf(id)>=0)el._edited=true;calcManureValue();});
 });
 calcManureValue();
 
 // ── Lime Requirement Calculator ───────────────────────────────────────
-function limeTons(bufpH, targetPH) {
-  if (bufpH >= targetPH + 0.5) return 0;
+function limeTons(bufpH,targetPH){
+  if(bufpH>=targetPH+0.5)return 0;
   var factor;
-  if (bufpH >= 6.8) factor = 0;
-  else if (bufpH >= 6.5) factor = 1.0;
-  else if (bufpH >= 6.2) factor = 2.2;
-  else if (bufpH >= 5.9) factor = 3.8;
-  else if (bufpH >= 5.6) factor = 5.8;
-  else if (bufpH >= 5.3) factor = 8.0;
-  else factor = 10.5;
-  var adj = (targetPH - 6.0) * 1.5;
-  return Math.min(Math.max(0, factor + adj), 12);
+  if(bufpH>=6.8)factor=0;
+  else if(bufpH>=6.5)factor=1.0;
+  else if(bufpH>=6.2)factor=2.2;
+  else if(bufpH>=5.9)factor=3.8;
+  else if(bufpH>=5.6)factor=5.8;
+  else if(bufpH>=5.3)factor=8.0;
+  else factor=10.5;
+  var adj=(targetPH-6.0)*1.5;
+  return Math.min(Math.max(0,factor+adj),12);
 }
-function calcLime() {
-  var buf    = parseFloat(document.getElementById('lime-buf').value)    || 6.5;
-  var target = parseFloat(document.getElementById('lime-target').value) || 6.8;
-  var cceVal = document.getElementById('lime-cce').value;
-  var cce    = cceVal === 'custom' ? (parseFloat(document.getElementById('lime-cce-custom').value) || 75) : parseFloat(cceVal) || 75;
-  document.getElementById('lime-cce-wrap').style.display = cceVal === 'custom' ? '' : 'none';
-  var pure = limeTons(buf, target);
-  var ag   = pure > 0 ? pure / (cce / 100) : 0;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('lime-pure')) el('lime-pure').textContent = pure.toFixed(1) + ' ton/ac';
-  if (el('lime-ag'))   el('lime-ag').textContent   = ag.toFixed(1) + ' ton/ac';
-  var note = ag <= 0 ? 'No lime needed at this buffer pH for this target'
-    : ag <= 2 ? 'Low rate — confirm with county extension'
-    : ag <= 6 ? 'Moderate application — standard aglime works well'
-    : ag <= 10 ? 'Heavy rate — consider split application over 2 years'
-    : 'Very high rate — apply max 12 ton/ac, retest in 2–3 years';
-  if (el('lime-note')) el('lime-note').textContent = note;
+function calcLime(){
+  var buf=parseFloat(document.getElementById('lime-buf').value)||6.5;
+  var target=parseFloat(document.getElementById('lime-target').value)||6.8;
+  var cceVal=document.getElementById('lime-cce').value;
+  var cce=cceVal==='custom'?(parseFloat(document.getElementById('lime-cce-custom').value)||75):parseFloat(cceVal)||75;
+  document.getElementById('lime-cce-wrap').style.display=cceVal==='custom'?'':'none';
+  var pure=limeTons(buf,target),ag=pure>0?pure/(cce/100):0;
+  var el=function(id){return document.getElementById(id);};
+  if(el('lime-pure'))el('lime-pure').textContent=pure.toFixed(1)+' ton/ac';
+  if(el('lime-ag'))  el('lime-ag').textContent=ag.toFixed(1)+' ton/ac';
+  var note=ag<=0?'No lime needed':ag<=2?'Low rate — confirm with extension':ag<=6?'Moderate — standard aglime works well':ag<=10?'Heavy rate — consider split application':'Very high rate — apply max 12 ton/ac, retest in 2–3 years';
+  if(el('lime-note'))el('lime-note').textContent=note;
 }
-['lime-buf','lime-target','lime-cce','lime-cce-custom'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcLime); });
+['lime-buf','lime-target','lime-cce','lime-cce-custom'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcLime);});
 calcLime();
 
 // ── GDU Calculator + Scout Box ────────────────────────────────────────
-var GDU_STAGES = [
-  [120,'VE'],[170,'V1'],[220,'V2'],[280,'V3'],[350,'V4'],[415,'V5'],[475,'V6'],
-  [530,'V7'],[600,'V8'],[670,'V9'],[750,'V10'],[900,'V12'],[1135,'VT'],
-  [1400,'R1'],[1660,'R2'],[1925,'R3'],[2190,'R4'],[2450,'R5'],[2700,'R6/BL']
-];
-function getCornStage(gdu) {
-  var s = 'Pre-VE (not yet emerged)';
-  for (var i = 0; i < GDU_STAGES.length; i++) { if (gdu >= GDU_STAGES[i][0]) s = GDU_STAGES[i][1]; }
-  return s;
-}
-var STAGE_SCOUTS = {
-  'VE':[], 'V1':[{icon:'🌿',text:'Stand count — calculate plants/acre.',thresh:'Target: 28,000–32,000 plants/acre'}],
+var GDU_STAGES=[[120,'VE'],[170,'V1'],[220,'V2'],[280,'V3'],[350,'V4'],[415,'V5'],[475,'V6'],[530,'V7'],[600,'V8'],[670,'V9'],[750,'V10'],[900,'V12'],[1135,'VT'],[1400,'R1'],[1660,'R2'],[1925,'R3'],[2190,'R4'],[2450,'R5'],[2700,'R6/BL']];
+function getCornStage(gdu){var s='Pre-VE';for(var i=0;i<GDU_STAGES.length;i++){if(gdu>=GDU_STAGES[i][0])s=GDU_STAGES[i][1];}return s;}
+var STAGE_SCOUTS={
+  'VE':[],
+  'V1':[{icon:'🌿',text:'Stand count — calculate plants/acre.',thresh:'Target: 28,000–32,000 plants/acre'}],
   'V2':[{icon:'🌿',text:'Check for uneven emergence and missing plants.',thresh:'Replant threshold: <16,000 plants/acre'}],
   'V3':[{icon:'🐛',text:'Black cutworm — check for leaf feeding and cut plants.',thresh:'Treat if 3%+ of plants are cut, larvae small'}],
   'V4':[{icon:'🐛',text:'Black cutworm final scouting window.',thresh:'3% of plants cut with small larvae'},{icon:'🌿',text:'Assess herbicide efficacy — rescue POST if needed.',thresh:''}],
-  'V5':[{icon:'🐛',text:'BCW last control window — larvae become too large after V5.',thresh:'3% of plants cut'},{icon:'🌿',text:'Final pre-canopy weed assessment.',thresh:''}],
-  'V6':[{icon:'💧',text:'Rootworm egg hatch beginning on history fields — assess Bt performance.',thresh:''},{icon:'🌿',text:'Last cultivation before canopy closure.',thresh:''}],
-  'V8':[{icon:'🐛',text:'European corn borer 1st gen — check for leaf feeding (window pane pattern) and frass.',thresh:'1 larva/plant on 50%+ of plants (non-Bt)'},{icon:'🌿',text:'Side-dress N last window — apply now or not at all.',thresh:''}],
-  'V10':[{icon:'🐛',text:'ECB 1st gen larvae in whorl. Check upper 2 leaves.',thresh:'1 larva/plant on 50%+ (non-Bt only)'},{icon:'🦠',text:'Gray leaf spot and NCLB — check lower leaves on humid fields.',thresh:''}],
-  'V12':[{icon:'🦠',text:'Disease assessment — GLS/NCLB on lower canopy. Fungicide decision approaching.',thresh:'Apply if disease on 50%+ plants before VT on susceptible hybrids'}],
+  'V5':[{icon:'🐛',text:'BCW last control window.',thresh:'3% of plants cut'},{icon:'🌿',text:'Final pre-canopy weed assessment.',thresh:''}],
+  'V6':[{icon:'💧',text:'Rootworm egg hatch on history fields — assess Bt performance.',thresh:''},{icon:'🌿',text:'Last cultivation before canopy closure.',thresh:''}],
+  'V8':[{icon:'🐛',text:'ECB 1st gen — check for window pane leaf feeding and frass.',thresh:'1 larva/plant on 50%+ of plants (non-Bt)'},{icon:'🌿',text:'Side-dress N last window.',thresh:''}],
+  'V10':[{icon:'🐛',text:'ECB larvae in whorl. Check upper 2 leaves.',thresh:'1 larva/plant on 50%+ (non-Bt)'},{icon:'🦠',text:'GLS and NCLB — check lower leaves.',thresh:''}],
+  'V12':[{icon:'🦠',text:'Disease assessment — GLS/NCLB on lower canopy.',thresh:'Apply fungicide if disease on 50%+ plants before VT'}],
   'VT':[{icon:'🐛',text:'Western bean cutworm egg masses — scout upper leaves.',thresh:'8% of plants with egg masses or small larvae'},{icon:'🐛',text:'Corn rootworm adults — count beetles during silking.',thresh:'0.75 WCR/plant or 1.5 NCR/plant'},{icon:'🦠',text:'Last fungicide timing for yield response.',thresh:''}],
   'R1':[{icon:'🐛',text:'Rootworm silk clipping — critical pollination window.',thresh:'Silks clipped to <0.5" with active pollination'},{icon:'🐛',text:'WBC last spray — larvae begin boring into husk.',thresh:'Larvae in husk = no control possible'}],
-  'R2':[{icon:'🐛',text:'Corn earworm — check tip silk.',thresh:'>1 larva/ear at high corn prices; 0 tolerance in sweet corn'}],
-  'R3':[], 'R4':[],
-  'R5':[{icon:'📊',text:'Stalk quality assessment — push test or pinch stalk at lower internodes.',thresh:'>15% of stalks failing push test = harvest priority'}],
-  'R6':[{icon:'📊',text:'Black layer check — cut kernel, look for black layer at tip. Check grain moisture.',thresh:'Harvest when 25–30% moisture. Stalk lodging risk accelerates after R6.'}]
+  'R2':[{icon:'🐛',text:'Corn earworm — check tip silk.',thresh:'>1 larva/ear at high corn prices'}],
+  'R3':[],'R4':[],
+  'R5':[{icon:'📊',text:'Stalk quality assessment — push test at lower internodes.',thresh:'>15% of stalks failing push test = harvest priority'}],
+  'R6':[{icon:'📊',text:'Black layer check — cut kernel. Check grain moisture.',thresh:'Harvest at 25–30% moisture. Stalk lodging risk accelerates.'}]
 };
-function getScoutKey(gdu) {
-  var s = [['VE',120],['V1',170],['V2',220],['V3',280],['V4',350],['V5',415],['V6',475],['V8',600],['V10',750],['V12',900],['VT',1135],['R1',1400],['R2',1660],['R3',1925],['R4',2190],['R5',2450],['R6',2700]];
-  var key = 'VE';
-  for (var i = 0; i < s.length; i++) { if (gdu >= s[i][1]) key = s[i][0]; }
-  return key;
+function getScoutKey(gdu){var s=[['VE',120],['V1',170],['V2',220],['V3',280],['V4',350],['V5',415],['V6',475],['V8',600],['V10',750],['V12',900],['VT',1135],['R1',1400],['R2',1660],['R3',1925],['R4',2190],['R5',2450],['R6',2700]];var key='VE';for(var i=0;i<s.length;i++){if(gdu>=s[i][1])key=s[i][0];}return key;}
+function updateScoutBox(gdu){
+  var box=document.getElementById('scout-box'),items=document.getElementById('scout-items');
+  if(!box||!items)return;
+  if(!gdu||gdu<100){box.style.display='none';return;}
+  box.style.display='';
+  var key=getScoutKey(gdu),scouts=STAGE_SCOUTS[key]||[];
+  if(scouts.length===0){items.innerHTML='<span class="scout-empty">No specific scouting flags for '+key+' ('+Math.round(gdu)+' GDU). Continue routine monitoring.</span>';}
+  else{items.innerHTML=scouts.map(function(s){return'<div class="scout-item"><span class="scout-item-icon">'+s.icon+'</span><div class="scout-item-text">'+s.text+(s.thresh?'<span class="scout-item-thresh">Threshold: '+s.thresh+'</span>':'')+'</div></div>';}).join('');}
 }
-function updateScoutBox(gdu) {
-  var box = document.getElementById('scout-box'), items = document.getElementById('scout-items');
-  if (!box || !items) return;
-  if (!gdu || gdu < 100) { box.style.display = 'none'; return; }
-  box.style.display = '';
-  var key = getScoutKey(gdu), scouts = STAGE_SCOUTS[key] || [];
-  if (scouts.length === 0) {
-    items.innerHTML = '<span class="scout-empty">No specific scouting flags for ' + key + ' (' + Math.round(gdu) + ' GDU). Continue routine monitoring.</span>';
-  } else {
-    items.innerHTML = scouts.map(function(s) {
-      return '<div class="scout-item"><span class="scout-item-icon">' + s.icon + '</span><div class="scout-item-text">' + s.text +
-        (s.thresh ? '<span class="scout-item-thresh">Threshold: ' + s.thresh + '</span>' : '') + '</div></div>';
-    }).join('');
-  }
-}
-function calcGDU() {
-  var hi   = Math.min(parseFloat(document.getElementById('gdu-hi').value)  || 0, 86);
-  var lo   = Math.max(parseFloat(document.getElementById('gdu-lo').value)  || 0, 50);
-  var days = parseFloat(document.getElementById('gdu-days').value) || 1;
-  var daily = Math.max(0, ((hi + lo) / 2) - 50);
-  var cum   = daily * days;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('gdu-today'))     el('gdu-today').textContent     = daily.toFixed(1) + ' GDU';
-  if (el('gdu-cum'))       el('gdu-cum').textContent       = Math.round(cum).toLocaleString() + ' GDU';
-  if (el('gdu-cornstage')) el('gdu-cornstage').textContent = getCornStage(cum);
+function calcGDU(){
+  var hi=Math.min(parseFloat(document.getElementById('gdu-hi').value)||0,86);
+  var lo=Math.max(parseFloat(document.getElementById('gdu-lo').value)||0,50);
+  var days=parseFloat(document.getElementById('gdu-days').value)||1;
+  var daily=Math.max(0,((hi+lo)/2)-50);
+  var cum=daily*days;
+  var el=function(id){return document.getElementById(id);};
+  if(el('gdu-today'))    el('gdu-today').textContent=daily.toFixed(1)+' GDU';
+  if(el('gdu-cum'))      el('gdu-cum').textContent=Math.round(cum).toLocaleString()+' GDU';
+  if(el('gdu-cornstage'))el('gdu-cornstage').textContent=getCornStage(cum);
   updateScoutBox(cum);
 }
-['gdu-hi','gdu-lo','gdu-days'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcGDU); });
+['gdu-hi','gdu-lo','gdu-days'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcGDU);});
 calcGDU();
 
 // ── Visual Stage Timelines ────────────────────────────────────────────
-var CORN_VIS = [
-  {id:'VE',gdu:110,key:false,desc:'Emergence. Coleoptile breaks soil surface. Seed nutrient supply transitioning to crown.',mgmt:''},
-  {id:'V1',gdu:170,key:false,desc:'1 leaf collar. Growing point well below ground. Tillage safe.',mgmt:''},
-  {id:'V3',gdu:280,key:false,desc:'3 collars. First weed competition window. Nodal roots taking over.',mgmt:'Early POST herbicide timing'},
-  {id:'V4',gdu:350,key:true,desc:'Ear shoot initiated at V4–V5. Still below ground. Hail regenerates well.',mgmt:'Ear shoot initiated — yield potential forming'},
-  {id:'V6',gdu:475,key:true,desc:'Growing point above ground. Last safe cultivation. 50% of yield potential determined. 100% dependent on nodal roots.',mgmt:'⚑ Last tillage — growing point above ground'},
+var CORN_VIS=[
+  {id:'VE',gdu:110,key:false,desc:'Emergence. Coleoptile breaks soil surface.',mgmt:''},
+  {id:'V1',gdu:170,key:false,desc:'1 leaf collar. Growing point below ground. Tillage safe.',mgmt:''},
+  {id:'V3',gdu:280,key:false,desc:'3 collars. First weed competition window.',mgmt:'Early POST herbicide timing'},
+  {id:'V4',gdu:350,key:true,desc:'Ear shoot initiated. Still below ground. Hail regenerates well.',mgmt:'Ear shoot initiated — yield potential forming'},
+  {id:'V6',gdu:475,key:true,desc:'Growing point above ground. Last safe cultivation. 50% of yield potential determined.',mgmt:'⚑ Last tillage — growing point above ground'},
   {id:'V8',gdu:600,key:true,desc:'Last effective side-dress N timing. 60% of seasonal N uptake still ahead.',mgmt:'⚑ Last side-dress N opportunity'},
-  {id:'V12',gdu:900,key:false,desc:'12 collars. Canopy nearly closed. Kernel row number nearly fixed. Disease window opening.',mgmt:''},
-  {id:'VT',gdu:1135,key:true,desc:'Tasseling. Pollen shed begins. Peak water demand (0.30"+/day).',mgmt:'⚑ Peak water demand — monitor closely'},
-  {id:'R1',gdu:1400,key:true,desc:'Silking. Fertilization occurs. Most critical drought window. Kernel number locked at end of R1.',mgmt:'⚑ Most critical yield period'},
+  {id:'V12',gdu:900,key:false,desc:'12 collars. Canopy nearly closed. Disease window opening.',mgmt:''},
+  {id:'VT',gdu:1135,key:true,desc:'Tasseling. Pollen shed begins. Peak water demand (0.30"+/day).',mgmt:'⚑ Peak water demand'},
+  {id:'R1',gdu:1400,key:true,desc:'Silking. Most critical drought window. Kernel number locked at end of R1.',mgmt:'⚑ Most critical yield period'},
   {id:'R2',gdu:1660,key:false,desc:'Blister. ~85% of final kernel weight still to accumulate.',mgmt:''},
   {id:'R4',gdu:2190,key:false,desc:'Dough. Starch nearly solid. ~70% final dry weight.',mgmt:''},
-  {id:'R5',gdu:2450,key:true,desc:'Dent. Black layer forming at kernel tip. ~90% of weight achieved.',mgmt:'⚑ Dent — kernel fill nearly complete'},
-  {id:'R6',gdu:2700,key:true,desc:'Black layer / Physiological maturity. No further dry matter. Grain 30–35% moisture.',mgmt:'⚑ Harvest after field drying'}
+  {id:'R5',gdu:2450,key:true,desc:'Dent. Black layer forming at kernel tip.',mgmt:'⚑ Kernel fill nearly complete'},
+  {id:'R6',gdu:2700,key:true,desc:'Black layer / Physiological maturity. Grain 30–35% moisture.',mgmt:'⚑ Harvest after field drying'}
 ];
-var BEAN_VIS = [
-  {id:'VE',key:false,desc:'Emergence. Cotyledons above soil. Hypocotyl hook unfurling.',mgmt:''},
+var BEAN_VIS=[
+  {id:'VE',key:false,desc:'Emergence. Cotyledons above soil.',mgmt:''},
   {id:'VC',key:false,desc:'Cotyledon stage. Unifoliate leaves unrolled.',mgmt:'PRE herbicide window closing'},
   {id:'V2',key:false,desc:'2nd trifoliate. Optimal POST herbicide timing.',mgmt:'Optimal POST window'},
   {id:'V4',key:false,desc:'Canopy filling. Last effective POST timing.',mgmt:'Last effective POST window'},
   {id:'R1',key:true,desc:'Beginning bloom. Fungicide window opens. Aphid scouting intensifies.',mgmt:'⚑ Fungicide window opens'},
   {id:'R2',key:true,desc:'Full bloom. White mold infection window. Primary fungicide timing.',mgmt:'⚑ Primary fungicide application'},
-  {id:'R3',key:true,desc:'Beginning pod. BLB threshold drops to 15% defoliation. Tissue sample stage.',mgmt:'⚑ Tissue sample here — BLB threshold drops'},
+  {id:'R3',key:true,desc:'Beginning pod. BLB threshold drops to 15%. Tissue sample stage.',mgmt:'⚑ Tissue sample here — BLB threshold drops'},
   {id:'R4',key:false,desc:'Full pod. Critical drought stress period.',mgmt:'Critical drought window'},
   {id:'R5',key:true,desc:'Beginning seed. Peak water demand. Aphicide cutoff.',mgmt:'⚑ Last aphicide timing'},
   {id:'R7',key:false,desc:'Beginning maturity. Harvest aid timing window.',mgmt:'Harvest aid timing window'},
   {id:'R8',key:true,desc:'Full maturity. Harvest at ~13% moisture. Pod shatter risk increases rapidly.',mgmt:'⚑ Harvest — target 13% moisture'}
 ];
-function buildSVTimeline(stages, markContId, detailId) {
-  var cont = document.getElementById(markContId), det = document.getElementById(detailId);
-  if (!cont || !det) return;
-  cont.innerHTML = '';
-  stages.forEach(function(s) {
-    var m = document.createElement('div');
-    m.className = 'sv-mark' + (s.key ? ' key' : '');
-    m.innerHTML = '<div class="sv-dot"></div><div class="sv-lbl">' + s.id + '</div>' + (s.gdu ? '<div class="sv-gdu">' + s.gdu + '</div>' : '');
-    m.addEventListener('click', function() {
-      document.querySelectorAll('#' + markContId + ' .sv-mark').forEach(function(x) { x.classList.remove('active'); });
+function buildSVTimeline(stages,markContId,detailId){
+  var cont=document.getElementById(markContId),det=document.getElementById(detailId);
+  if(!cont||!det)return;
+  cont.innerHTML='';
+  stages.forEach(function(s){
+    var m=document.createElement('div');m.className='sv-mark'+(s.key?' key':'');
+    m.innerHTML='<div class="sv-dot"></div><div class="sv-lbl">'+s.id+'</div>'+(s.gdu?'<div class="sv-gdu">'+s.gdu+'</div>':'');
+    m.addEventListener('click',function(){
+      document.querySelectorAll('#'+markContId+' .sv-mark').forEach(function(x){x.classList.remove('active');});
       m.classList.add('active');
-      det.innerHTML = '<div class="sv-detail-stage">' + s.id +
-        (s.gdu ? ' <span style="font-weight:400;color:var(--text-muted);font-size:.65rem">~' + s.gdu + ' GDU</span>' : '') + '</div>' +
-        (s.gdu ? '<div class="sv-detail-gdu">~' + s.gdu + ' GDU from emergence</div>' : '') +
-        '<div class="sv-detail-desc">' + s.desc + '</div>' +
-        (s.mgmt ? '<div class="sv-detail-mgmt">' + s.mgmt + '</div>' : '');
+      det.innerHTML='<div class="sv-detail-stage">'+s.id+(s.gdu?' <span style="font-weight:400;color:var(--text-muted);font-size:.65rem">~'+s.gdu+' GDU</span>':'')+  '</div>'+(s.gdu?'<div class="sv-detail-gdu">~'+s.gdu+' GDU from emergence</div>':'')+'<div class="sv-detail-desc">'+s.desc+'</div>'+(s.mgmt?'<div class="sv-detail-mgmt">'+s.mgmt+'</div>':'');
     });
     cont.appendChild(m);
   });
 }
-buildSVTimeline(CORN_VIS, 'corn-sv-marks', 'corn-sv-detail');
-buildSVTimeline(BEAN_VIS, 'bean-sv-marks', 'bean-sv-detail');
+buildSVTimeline(CORN_VIS,'corn-sv-marks','corn-sv-detail');
+buildSVTimeline(BEAN_VIS,'bean-sv-marks','bean-sv-detail');
 
 // ── Spray Advisory Widget ─────────────────────────────────────────────
-function degToCompass(d) {
-  if (d == null || isNaN(d)) return '--';
-  var dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  return dirs[Math.floor((d / 22.5) + 0.5) % 16];
-}
-function swRate(what, val, extra) {
-  if (what === 'wind')  return val < 3 ? 'poor' : val <= 10 ? 'good' : val <= 15 ? 'marginal' : 'poor';
-  if (what === 'temp')  return val < 40 ? 'poor' : val < 50 ? 'marginal' : val <= 85 ? 'good' : val <= 90 ? 'marginal' : 'poor';
-  if (what === 'humid') return val < 30 ? 'poor' : val < 40 ? 'marginal' : val <= 90 ? 'good' : 'marginal';
-  if (what === 'inv')   { var calm = val < 5, night = (extra >= 20 || extra <= 8); return (calm && night) ? 'poor' : (calm || night) ? 'marginal' : 'good'; }
-  if (what === 'dew')   return val < 3 ? 'poor' : val < 7 ? 'marginal' : 'good';
+function degToCompass(d){if(d==null||isNaN(d))return'--';var dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];return dirs[Math.floor((d/22.5)+0.5)%16];}
+function swRate(what,val,extra){
+  if(what==='wind') return val<3?'poor':val<=10?'good':val<=15?'marginal':'poor';
+  if(what==='temp') return val<40?'poor':val<50?'marginal':val<=85?'good':val<=90?'marginal':'poor';
+  if(what==='humid')return val<30?'poor':val<40?'marginal':val<=90?'good':'marginal';
+  if(what==='inv'){var calm=val<5,night=(extra>=20||extra<=8);return(calm&&night)?'poor':(calm||night)?'marginal':'good';}
+  if(what==='dew') return val<3?'poor':val<7?'marginal':'good';
   return 'marginal';
 }
-function swOverall(r) { if (r.indexOf('poor') !== -1) return 'poor'; if (r.indexOf('marginal') !== -1) return 'marginal'; return 'good'; }
-function setChip(id, rating) {
-  var labels = { good: 'Good', marginal: 'Fair', poor: 'Poor' };
-  var el = document.getElementById(id);
-  if (el) { el.textContent = labels[rating] || '—'; el.className = 'spray-factor-chip ' + rating; }
-}
-function loadSprayWidget(lat, lon) {
-  var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
-    '&current=temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m' +
-    '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto';
-  fetch(url).then(function(r) { return r.json(); }).then(function(d) {
-    var c = d.current;
-    var wind = Math.round(c.wind_speed_10m), dir = c.wind_direction_10m,
-        temp = Math.round(c.temperature_2m), humid = c.relative_humidity_2m,
-        dew = Math.round(c.dew_point_2m), hour = new Date().getHours();
-    var wR = swRate('wind', wind), tR = swRate('temp', temp), hR = swRate('humid', humid),
-        iR = swRate('inv', wind, hour), dR = swRate('dew', temp - dew);
-    var overall = swOverall([wR, tR, hR, iR, dR]);
-    var el = function(id) { return document.getElementById(id); };
-    if (el('sw-wind')) el('sw-wind').textContent = wind + ' mph'; setChip('sw-wind-chip', wR);
-    if (el('sw-dir'))  el('sw-dir').textContent  = degToCompass(dir);
-    if (el('sw-temp')) el('sw-temp').textContent = temp + '°F';   setChip('sw-temp-chip', tR);
-    if (el('sw-humid'))el('sw-humid').textContent= humid + '%';   setChip('sw-humid-chip', hR);
-    if (el('sw-inv'))  el('sw-inv').textContent  = {poor:'High',marginal:'Mod',good:'Low'}[iR]; setChip('sw-inv-chip', iR);
-    if (el('sw-dew'))  el('sw-dew').textContent  = (temp - dew) + '°F gap'; setChip('sw-dew-chip', dR);
-    var sEl = el('sw-status');
-    if (sEl) { sEl.className = 'spray-widget-status ' + overall; sEl.textContent = {good:'✅ Good Window', marginal:'⚠️ Use Caution', poor:'⛔ Do Not Spray'}[overall]; }
-    var recs = {
-      good: 'Conditions favorable. Ideal: 3–10 mph wind, temp 50–85°F, humidity 40–90%. Watch for temperature inversions (smoke flattening horizontally).',
-      marginal: 'One or more conditions borderline. Under 3 mph = inversion risk. Over 15 mph = drift risk. Hot &amp; dry = volatilization risk for dicamba/2,4-D.',
-      poor: 'Do not apply under current conditions. Significant drift, volatilization, or efficacy risk. Check 24-hour forecast for a better window.'
-    };
-    var recEl = el('sw-rec');
-    if (recEl) recEl.innerHTML = '<strong>Recommendation:</strong> ' + recs[overall];
-    try { localStorage.setItem('agsist-wx-loc', JSON.stringify({ lat: lat, lon: lon })); } catch(e) {}
-  }).catch(function() {
-    var s = document.getElementById('sw-status');
-    if (s) { s.className = 'spray-widget-status loading'; s.textContent = 'Offline'; }
-    var r = document.getElementById('sw-rec');
-    if (r) r.textContent = 'Weather data unavailable. Check connection.';
+function swOverall(r){if(r.indexOf('poor')!==-1)return'poor';if(r.indexOf('marginal')!==-1)return'marginal';return'good';}
+function setChip(id,rating){var labels={good:'Good',marginal:'Fair',poor:'Poor'};var el=document.getElementById(id);if(el){el.textContent=labels[rating]||'—';el.className='spray-factor-chip '+rating;}}
+function loadSprayWidget(lat,lon){
+  var url='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&current=temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto';
+  fetch(url).then(function(r){return r.json();}).then(function(d){
+    var c=d.current;
+    var wind=Math.round(c.wind_speed_10m),dir=c.wind_direction_10m,temp=Math.round(c.temperature_2m),humid=c.relative_humidity_2m,dew=Math.round(c.dew_point_2m),hour=new Date().getHours();
+    var wR=swRate('wind',wind),tR=swRate('temp',temp),hR=swRate('humid',humid),iR=swRate('inv',wind,hour),dR=swRate('dew',temp-dew);
+    var overall=swOverall([wR,tR,hR,iR,dR]);
+    var el=function(id){return document.getElementById(id);};
+    if(el('sw-wind'))el('sw-wind').textContent=wind+' mph';setChip('sw-wind-chip',wR);
+    if(el('sw-dir')) el('sw-dir').textContent=degToCompass(dir);
+    if(el('sw-temp'))el('sw-temp').textContent=temp+'°F';setChip('sw-temp-chip',tR);
+    if(el('sw-humid'))el('sw-humid').textContent=humid+'%';setChip('sw-humid-chip',hR);
+    if(el('sw-inv'))el('sw-inv').textContent={poor:'High',marginal:'Mod',good:'Low'}[iR];setChip('sw-inv-chip',iR);
+    if(el('sw-dew'))el('sw-dew').textContent=(temp-dew)+'°F gap';setChip('sw-dew-chip',dR);
+    var sEl=el('sw-status');
+    if(sEl){sEl.className='spray-widget-status '+overall;sEl.textContent={good:'✅ Good Window',marginal:'⚠️ Use Caution',poor:'⛔ Do Not Spray'}[overall];}
+    var recs={good:'Conditions favorable. 3–10 mph wind, 50–85°F, 40–90% humidity. Watch for inversions (smoke flattening).',marginal:'One or more conditions borderline. <3 mph = inversion risk. >15 mph = drift risk. Hot &amp; dry = volatilization risk.',poor:'Do not apply. Drift, volatilization, or efficacy risk. Check 24-hour forecast for a better window.'};
+    var recEl=el('sw-rec');if(recEl)recEl.innerHTML='<strong>Recommendation:</strong> '+recs[overall];
+    try{localStorage.setItem('agsist-wx-loc',JSON.stringify({lat:lat,lon:lon}));}catch(e){}
+  }).catch(function(){
+    var s=document.getElementById('sw-status');if(s){s.className='spray-widget-status loading';s.textContent='Offline';}
+    var r=document.getElementById('sw-rec');if(r)r.textContent='Weather data unavailable.';
   });
 }
-function swLoadZip() {
-  var zip = document.getElementById('sw-zip').value.trim();
-  if (zip.length !== 5 || isNaN(zip)) return;
-  var s = document.getElementById('sw-status');
-  if (s) { s.className = 'spray-widget-status loading'; s.textContent = 'Loading…'; }
-  fetch('https://nominatim.openstreetmap.org/search?postalcode=' + zip + '&country=US&format=json&limit=1', { headers: { 'User-Agent': 'AGSIST/1.0' } })
-    .then(function(r) { return r.json(); })
-    .then(function(res) { if (res && res.length) loadSprayWidget(parseFloat(res[0].lat), parseFloat(res[0].lon)); })
-    .catch(function() {});
+function swLoadZip(){
+  var zip=document.getElementById('sw-zip').value.trim();
+  if(zip.length!==5||isNaN(zip))return;
+  var s=document.getElementById('sw-status');if(s){s.className='spray-widget-status loading';s.textContent='Loading…';}
+  fetch('https://nominatim.openstreetmap.org/search?postalcode='+zip+'&country=US&format=json&limit=1',{headers:{'User-Agent':'AGSIST/1.0'}})
+    .then(function(r){return r.json();}).then(function(res){if(res&&res.length)loadSprayWidget(parseFloat(res[0].lat),parseFloat(res[0].lon));}).catch(function(){});
 }
-var swGo = document.getElementById('sw-go');
-if (swGo) swGo.addEventListener('click', swLoadZip);
-var swZip = document.getElementById('sw-zip');
-if (swZip) swZip.addEventListener('keydown', function(e) { if (e.key === 'Enter') swLoadZip(); });
-var swGps = document.getElementById('sw-gps');
-if (swGps) swGps.addEventListener('click', function() {
-  if (!navigator.geolocation) return;
-  var s = document.getElementById('sw-status');
-  if (s) { s.className = 'spray-widget-status loading'; s.textContent = 'Locating…'; }
-  navigator.geolocation.getCurrentPosition(function(p) { loadSprayWidget(p.coords.latitude, p.coords.longitude); }, function() {
-    var s = document.getElementById('sw-status');
-    if (s) { s.className = 'spray-widget-status loading'; s.textContent = 'Enter ZIP'; }
-  }, { timeout: 8000 });
+var swGo=document.getElementById('sw-go');if(swGo)swGo.addEventListener('click',swLoadZip);
+var swZip=document.getElementById('sw-zip');if(swZip)swZip.addEventListener('keydown',function(e){if(e.key==='Enter')swLoadZip();});
+var swGps=document.getElementById('sw-gps');
+if(swGps)swGps.addEventListener('click',function(){
+  if(!navigator.geolocation)return;
+  var s=document.getElementById('sw-status');if(s){s.className='spray-widget-status loading';s.textContent='Locating…';}
+  navigator.geolocation.getCurrentPosition(function(p){loadSprayWidget(p.coords.latitude,p.coords.longitude);},function(){var s=document.getElementById('sw-status');if(s){s.className='spray-widget-status loading';s.textContent='Enter ZIP';}},{timeout:8000});
 });
-(function() {
-  try { var saved = localStorage.getItem('agsist-wx-loc'); if (saved) { var p = JSON.parse(saved); if (p && p.lat && p.lon) { loadSprayWidget(p.lat, p.lon); return; } } } catch(e) {}
-  if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(p) { loadSprayWidget(p.coords.latitude, p.coords.longitude); }, function() {}, { timeout: 6000 });
+(function(){
+  try{var saved=localStorage.getItem('agsist-wx-loc');if(saved){var p=JSON.parse(saved);if(p&&p.lat&&p.lon){loadSprayWidget(p.lat,p.lon);return;}}}catch(e){}
+  if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(p){loadSprayWidget(p.coords.latitude,p.coords.longitude);},function(){},{timeout:6000});
 })();
 
 // ── Reference Calculators ─────────────────────────────────────────────
-function calcRef() {
-  var len  = parseFloat(document.getElementById('ref-len').value)  || 0;
-  var wid  = parseFloat(document.getElementById('ref-wid').value)  || 0;
-  var rows = parseFloat(document.getElementById('ref-rows').value) || 0;
-  var el = document.getElementById('ref-acres');
-  if (el) el.textContent = ((len * wid * rows) / 43560).toFixed(3) + ' ac';
+function calcRef(){
+  var len=parseFloat(document.getElementById('ref-len').value)||0;
+  var wid=parseFloat(document.getElementById('ref-wid').value)||0;
+  var rows=parseFloat(document.getElementById('ref-rows').value)||0;
+  var el=document.getElementById('ref-acres');if(el)el.textContent=((len*wid*rows)/43560).toFixed(3)+' ac';
 }
-['ref-len','ref-wid','ref-rows'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcRef); });
+['ref-len','ref-wid','ref-rows'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcRef);});
 calcRef();
-
-function calcSC() {
-  var lbs = parseFloat(document.getElementById('sc-lbs').value)   || 0;
-  var m   = parseFloat(document.getElementById('sc-moist').value) || 0;
-  var ac  = parseFloat(document.getElementById('sc-acres').value) || 1;
-  var bu  = (lbs * (1 - m / 100)) / 47.32;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('sc-bu'))   el('sc-bu').textContent   = Math.round(bu).toLocaleString() + ' bu';
-  if (el('sc-buac')) el('sc-buac').textContent = Math.round(bu / ac).toLocaleString() + ' bu/ac';
+function calcSC(){
+  var lbs=parseFloat(document.getElementById('sc-lbs').value)||0;
+  var m=parseFloat(document.getElementById('sc-moist').value)||0;
+  var ac=parseFloat(document.getElementById('sc-acres').value)||1;
+  var bu=(lbs*(1-m/100))/47.32;
+  var el=function(id){return document.getElementById(id);};
+  if(el('sc-bu'))  el('sc-bu').textContent=Math.round(bu).toLocaleString()+' bu';
+  if(el('sc-buac'))el('sc-buac').textContent=Math.round(bu/ac).toLocaleString()+' bu/ac';
 }
-['sc-lbs','sc-moist','sc-acres'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcSC); });
+['sc-lbs','sc-moist','sc-acres'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcSC);});
 calcSC();
-
-function calcNlb() {
-  var p   = parseFloat(document.getElementById('nlb-price').value) || 0;
-  var pct = parseFloat(document.getElementById('nlb-pct').value)   || 1;
-  var el = document.getElementById('nlb-val');
-  if (el) el.textContent = '$' + (p * (100 / pct) / 2000).toFixed(3) + '/lb N';
+function calcNlb(){
+  var p=parseFloat(document.getElementById('nlb-price').value)||0;
+  var pct=parseFloat(document.getElementById('nlb-pct').value)||1;
+  var el=document.getElementById('nlb-val');if(el)el.textContent='$'+(p*(100/pct)/2000).toFixed(3)+'/lb N';
 }
-['nlb-price','nlb-pct'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcNlb); });
+['nlb-price','nlb-pct'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcNlb);});
 calcNlb();
-
-function calcPP() {
-  var count  = parseFloat(document.getElementById('pp-count').value) || 0;
-  var rowW   = parseFloat(document.getElementById('pp-rowwidth').value) || 30;
-  var rowLen = (43560 / (rowW / 12)) / 1000;
-  var el = function(id) { return document.getElementById(id); };
-  if (el('pp-rowlen')) el('pp-rowlen').textContent = rowLen.toFixed(1) + ' ft';
-  if (el('pp-val'))    el('pp-val').textContent    = (count * 1000).toLocaleString() + ' plants/ac';
+function calcPP(){
+  var count=parseFloat(document.getElementById('pp-count').value)||0;
+  var rowW=parseFloat(document.getElementById('pp-rowwidth').value)||30;
+  var rowLen=(43560/(rowW/12))/1000;
+  var el=function(id){return document.getElementById(id);};
+  if(el('pp-rowlen'))el('pp-rowlen').textContent=rowLen.toFixed(1)+' ft';
+  if(el('pp-val'))   el('pp-val').textContent=(count*1000).toLocaleString()+' plants/ac';
 }
-['pp-count','pp-rowwidth'].forEach(function(id) { var el = document.getElementById(id); if (el) el.addEventListener('input', calcPP); });
+['pp-count','pp-rowwidth'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',calcPP);});
 calcPP();
 
 // ── State Stats ───────────────────────────────────────────────────────
-var STATE_DATA = {
+var STATE_DATA={
   IA:{name:'Iowa',region:'Corn Belt',farms:84.9,avg_size:360,counties:99,corn_rank:1,beans_rank:2,corn:{planted_mac:12.7,harv_mac:12.5,yield_buac:202,prod_mbu:2525},beans:{planted_mac:9.6,harv_mac:9.54,yield_buac:52,prod_mbu:496},wheat:{planted_mac:0.05,harv_mac:0.04,yield_buac:70,prod_mbu:3}},
   IL:{name:'Illinois',region:'Corn Belt',farms:71.5,avg_size:390,counties:102,corn_rank:2,beans_rank:1,corn:{planted_mac:11.0,harv_mac:10.8,yield_buac:214,prod_mbu:2311},beans:{planted_mac:10.2,harv_mac:10.1,yield_buac:59,prod_mbu:596},wheat:{planted_mac:0.72,harv_mac:0.65,yield_buac:70,prod_mbu:46}},
   IN:{name:'Indiana',region:'Corn Belt',farms:55.9,avg_size:283,counties:92,corn_rank:5,beans_rank:5,corn:{planted_mac:5.7,harv_mac:5.6,yield_buac:202,prod_mbu:1131},beans:{planted_mac:5.6,harv_mac:5.55,yield_buac:57,prod_mbu:316},wheat:{planted_mac:0.7,harv_mac:0.65,yield_buac:75,prod_mbu:49}},
@@ -2159,86 +2091,33 @@ var STATE_DATA = {
   SD:{name:'South Dakota',region:'Great Plains',farms:29.8,avg_size:1461,counties:66,corn_rank:7,beans_rank:10,corn:{planted_mac:6.1,harv_mac:6.0,yield_buac:168,prod_mbu:1008},beans:{planted_mac:5.2,harv_mac:5.15,yield_buac:45,prod_mbu:232},wheat:{planted_mac:1.75,harv_mac:1.55,yield_buac:48,prod_mbu:74}},
   ND:{name:'North Dakota',region:'Great Plains',farms:26.3,avg_size:1661,counties:53,beans_rank:8,wheat_rank:2,corn:{planted_mac:3.2,harv_mac:3.15,yield_buac:168,prod_mbu:529},beans:{planted_mac:7.2,harv_mac:7.15,yield_buac:42,prod_mbu:300},wheat:{planted_mac:6.65,harv_mac:5.9,yield_buac:45,prod_mbu:266}},
   MO:{name:'Missouri',region:'Corn Belt',farms:95.2,avg_size:297,counties:114,corn_rank:12,beans_rank:9,corn:{planted_mac:3.2,harv_mac:3.15,yield_buac:170,prod_mbu:536},beans:{planted_mac:5.7,harv_mac:5.65,yield_buac:49,prod_mbu:277},wheat:{planted_mac:0.7,harv_mac:0.63,yield_buac:61,prod_mbu:38}},
-  MI:{name:'Michigan',region:'Corn Belt',farms:47.6,avg_size:210,counties:83,corn_rank:13,beans_rank:12,corn:{planted_mac:2.25,harv_mac:2.2,yield_buac:175,prod_mbu:385},beans:{planted_mac:2.0,harv_mac:1.97,yield_buac:52,prod_mbu:102},wheat:{planted_mac:0.65,harv_mac:0.6,yield_buac:82,prod_mbu:49}},
-  MN2:null
+  MI:{name:'Michigan',region:'Corn Belt',farms:47.6,avg_size:210,counties:83,corn_rank:13,beans_rank:12,corn:{planted_mac:2.25,harv_mac:2.2,yield_buac:175,prod_mbu:385},beans:{planted_mac:2.0,harv_mac:1.97,yield_buac:52,prod_mbu:102},wheat:{planted_mac:0.65,harv_mac:0.6,yield_buac:82,prod_mbu:49}}
 };
-delete STATE_DATA.MN2;
-var QUICK = ['IA','IL','IN','OH','MN','WI','NE','KS','SD','ND','MO','MI'];
-function fmtN(n, d) { if (n == null) return '—'; return n.toFixed(d != null ? d : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
-function renderState(abbr) {
-  var d = STATE_DATA[abbr]; if (!d) return;
-  var el = document.getElementById('ff-content'); if (!el) return;
-  var rp = '';
-  if (d.corn_rank && d.corn_rank <= 5) rp += '<span class="rp corn">🌽 #' + d.corn_rank + ' Corn</span>';
-  if (d.beans_rank && d.beans_rank <= 5) rp += '<span class="rp beans">🫘 #' + d.beans_rank + ' Beans</span>';
-  if (d.wheat_rank && d.wheat_rank <= 5) rp += '<span class="rp wheat">🌾 #' + d.wheat_rank + ' Wheat</span>';
-  el.innerHTML =
-    '<div class="ff-shdr"><div><div class="ff-sname">' + d.name + '</div>' +
-    '<div class="ff-smeta">' + d.region + ' · ' + (d.counties || '—') + ' counties · ' + fmtN(d.farms, 1) + 'k farms · ' + fmtN(d.avg_size) + ' avg ac/farm</div></div>' + rp + '</div>' +
-    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🌽</span><span class="ff-card-title">Corn 2024</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Planted</span><span class="ff-rv gold">' + fmtN(d.corn.planted_mac, 1) + 'M ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Harvested</span><span class="ff-rv">' + fmtN(d.corn.harv_mac, 1) + 'M ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Yield</span><span class="ff-rv green">' + d.corn.yield_buac + ' bu/ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Production</span><span class="ff-rv gold">' + fmtN(d.corn.prod_mbu) + 'M bu</span></div></div>' +
-    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🫘</span><span class="ff-card-title">Soybeans 2024</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Planted</span><span class="ff-rv gold">' + fmtN(d.beans.planted_mac, 1) + 'M ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Harvested</span><span class="ff-rv">' + fmtN(d.beans.harv_mac, 1) + 'M ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Yield</span><span class="ff-rv green">' + d.beans.yield_buac + ' bu/ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Production</span><span class="ff-rv gold">' + fmtN(d.beans.prod_mbu) + 'M bu</span></div></div>' +
-    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🌾</span><span class="ff-card-title">Wheat 2024</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Planted</span><span class="ff-rv gold">' + fmtN(d.wheat.planted_mac, 1) + 'M ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Harvested</span><span class="ff-rv">' + fmtN(d.wheat.harv_mac, 1) + 'M ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Yield</span><span class="ff-rv green">' + d.wheat.yield_buac + ' bu/ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Production</span><span class="ff-rv gold">' + fmtN(d.wheat.prod_mbu) + 'M bu</span></div></div>' +
-    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🚜</span><span class="ff-card-title">State Overview</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Farm count</span><span class="ff-rv">' + fmtN(d.farms, 1) + 'k</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Avg farm size</span><span class="ff-rv">' + fmtN(d.avg_size) + ' ac</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Counties</span><span class="ff-rv">' + (d.counties || '—') + '</span></div>' +
-    '<div class="ff-row"><span class="ff-rl">Region</span><span class="ff-rv">' + d.region + '</span></div></div>';
+var QUICK=['IA','IL','IN','OH','MN','WI','NE','KS','SD','ND','MO','MI'];
+function fmtN(n,d){if(n==null)return'—';return n.toFixed(d!=null?d:0).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function renderState(abbr){
+  var d=STATE_DATA[abbr];if(!d)return;
+  var el=document.getElementById('ff-content');if(!el)return;
+  var rp='';
+  if(d.corn_rank&&d.corn_rank<=5)rp+='<span class="rp corn">🌽 #'+d.corn_rank+' Corn</span>';
+  if(d.beans_rank&&d.beans_rank<=5)rp+='<span class="rp beans">🫘 #'+d.beans_rank+' Beans</span>';
+  if(d.wheat_rank&&d.wheat_rank<=5)rp+='<span class="rp wheat">🌾 #'+d.wheat_rank+' Wheat</span>';
+  el.innerHTML=
+    '<div class="ff-shdr"><div><div class="ff-sname">'+d.name+'</div><div class="ff-smeta">'+d.region+' · '+(d.counties||'—')+' counties · '+fmtN(d.farms,1)+'k farms · '+fmtN(d.avg_size)+' avg ac/farm</div></div>'+rp+'</div>'+
+    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🌽</span><span class="ff-card-title">Corn 2024</span></div><div class="ff-row"><span class="ff-rl">Planted</span><span class="ff-rv gold">'+fmtN(d.corn.planted_mac,1)+'M ac</span></div><div class="ff-row"><span class="ff-rl">Harvested</span><span class="ff-rv">'+fmtN(d.corn.harv_mac,1)+'M ac</span></div><div class="ff-row"><span class="ff-rl">Yield</span><span class="ff-rv green">'+d.corn.yield_buac+' bu/ac</span></div><div class="ff-row"><span class="ff-rl">Production</span><span class="ff-rv gold">'+fmtN(d.corn.prod_mbu)+'M bu</span></div></div>'+
+    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🫘</span><span class="ff-card-title">Soybeans 2024</span></div><div class="ff-row"><span class="ff-rl">Planted</span><span class="ff-rv gold">'+fmtN(d.beans.planted_mac,1)+'M ac</span></div><div class="ff-row"><span class="ff-rl">Harvested</span><span class="ff-rv">'+fmtN(d.beans.harv_mac,1)+'M ac</span></div><div class="ff-row"><span class="ff-rl">Yield</span><span class="ff-rv green">'+d.beans.yield_buac+' bu/ac</span></div><div class="ff-row"><span class="ff-rl">Production</span><span class="ff-rv gold">'+fmtN(d.beans.prod_mbu)+'M bu</span></div></div>'+
+    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🌾</span><span class="ff-card-title">Wheat 2024</span></div><div class="ff-row"><span class="ff-rl">Planted</span><span class="ff-rv gold">'+fmtN(d.wheat.planted_mac,1)+'M ac</span></div><div class="ff-row"><span class="ff-rl">Harvested</span><span class="ff-rv">'+fmtN(d.wheat.harv_mac,1)+'M ac</span></div><div class="ff-row"><span class="ff-rl">Yield</span><span class="ff-rv green">'+d.wheat.yield_buac+' bu/ac</span></div><div class="ff-row"><span class="ff-rl">Production</span><span class="ff-rv gold">'+fmtN(d.wheat.prod_mbu)+'M bu</span></div></div>'+
+    '<div class="ff-card"><div class="ff-card-head"><span class="ff-card-icon">🚜</span><span class="ff-card-title">State Overview</span></div><div class="ff-row"><span class="ff-rl">Farm count</span><span class="ff-rv">'+fmtN(d.farms,1)+'k</span></div><div class="ff-row"><span class="ff-rl">Avg farm size</span><span class="ff-rv">'+fmtN(d.avg_size)+' ac</span></div><div class="ff-row"><span class="ff-rl">Counties</span><span class="ff-rv">'+(d.counties||'—')+'</span></div><div class="ff-row"><span class="ff-rl">Region</span><span class="ff-rv">'+d.region+'</span></div></div>';
 }
-var sel = document.getElementById('ff-ssel');
-var sbtns = document.getElementById('ff-sbtns');
-if (sel) {
-  Object.keys(STATE_DATA).sort().forEach(function(abbr) {
-    var o = document.createElement('option'); o.value = abbr;
-    o.textContent = STATE_DATA[abbr].name + ' (' + abbr + ')';
-    sel.appendChild(o);
-  });
-  sel.addEventListener('change', function() {
-    var abbr = sel.value;
-    document.querySelectorAll('.ff-sbtn').forEach(function(b) { b.classList.toggle('active', b.textContent === abbr); });
-    if (abbr) renderState(abbr);
-  });
-}
-if (sbtns) {
-  QUICK.forEach(function(abbr) {
-    if (!STATE_DATA[abbr]) return;
-    var b = document.createElement('button'); b.className = 'ff-sbtn'; b.textContent = abbr;
-    b.setAttribute('aria-label', STATE_DATA[abbr].name);
-    b.addEventListener('click', function() {
-      document.querySelectorAll('.ff-sbtn').forEach(function(x) { x.classList.remove('active'); });
-      b.classList.add('active');
-      if (sel) sel.value = abbr;
-      renderState(abbr);
-    });
-    sbtns.appendChild(b);
-  });
-}
-var geo = window.AGSIST_STATE;
-if (geo && geo.state) {
-  var abbr = geo.state.toUpperCase();
-  if (STATE_DATA[abbr]) {
-    if (sel) sel.value = abbr;
-    var mb = sbtns ? Array.from(sbtns.querySelectorAll('.ff-sbtn')).find(function(b) { return b.textContent === abbr; }) : null;
-    if (mb) mb.classList.add('active');
-    renderState(abbr);
-  }
-}
+var sel=document.getElementById('ff-ssel'),sbtns=document.getElementById('ff-sbtns');
+if(sel){Object.keys(STATE_DATA).sort().forEach(function(a){var o=document.createElement('option');o.value=a;o.textContent=STATE_DATA[a].name+' ('+a+')';sel.appendChild(o);});sel.addEventListener('change',function(){var a=sel.value;document.querySelectorAll('.ff-sbtn').forEach(function(b){b.classList.toggle('active',b.textContent===a);});if(a)renderState(a);});}
+if(sbtns){QUICK.forEach(function(a){if(!STATE_DATA[a])return;var b=document.createElement('button');b.className='ff-sbtn';b.textContent=a;b.setAttribute('aria-label',STATE_DATA[a].name);b.addEventListener('click',function(){document.querySelectorAll('.ff-sbtn').forEach(function(x){x.classList.remove('active');});b.classList.add('active');if(sel)sel.value=a;renderState(a);});sbtns.appendChild(b);});}
+var geo=window.AGSIST_STATE;
+if(geo&&geo.state){var abbr=geo.state.toUpperCase();if(STATE_DATA[abbr]){if(sel)sel.value=abbr;var mb=sbtns?Array.from(sbtns.querySelectorAll('.ff-sbtn')).find(function(b){return b.textContent===abbr;}):null;if(mb)mb.classList.add('active');renderState(abbr);}}
 
 // ── Kick off live data loads ──────────────────────────────────────────
 loadFertPrices();
 loadPrices();
-
 </script>
 </body>
 </html>
