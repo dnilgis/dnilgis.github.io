@@ -4,27 +4,35 @@
   <!-- ── Core Dashboard ──────────────────────────────────────────── -->
   <url>
     <loc>https://agsist.com/</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- ── Live Tools ──────────────────────────────────────────────── -->
+  <!-- ── Daily Briefing ──────────────────────────────────────────── -->
+  <url>
+    <loc>https://agsist.com/daily</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ── Live Advisory Tools ─────────────────────────────────────── -->
   <url>
     <loc>https://agsist.com/spray</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://agsist.com/urea</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://agsist.com/cash-bids</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -32,82 +40,100 @@
   <!-- ── Price Pages ─────────────────────────────────────────────── -->
   <url>
     <loc>https://agsist.com/corn-futures-prices</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://agsist.com/soybean-futures-prices</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://agsist.com/wheat-futures-prices</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://agsist.com/tariffs</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agsist.com/markets</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agsist.com/ag-odds</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
 
-  <!-- ── Calculators & Reference ─────────────────────────────────── -->
+  <!-- ── Calculators & Tools ─────────────────────────────────────── -->
   <url>
     <loc>https://agsist.com/tools</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agsist.com/breakeven</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agsist.com/grain-bin-calculator</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agsist.com/gdu-calculator</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agsist.com/fast-facts</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agsist.com/yield-estimator</loc>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ── Content & Data ──────────────────────────────────────────── -->
+  <!-- ── Weather & Data ──────────────────────────────────────────── -->
   <url>
-    <loc>https://agsist.com/daily</loc>
-    <lastmod>2026-03-24</lastmod>
+    <loc>https://agsist.com/drought-monitor</loc>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://agsist.com/usda-calendar</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://agsist.com/drought-monitor</loc>
-    <lastmod>2026-03-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://agsist.com/usda-quick-stats</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ── About & Contact ─────────────────────────────────────────── -->
+  <!-- ── Company & Info ──────────────────────────────────────────── -->
   <url>
     <loc>https://agsist.com/about</loc>
     <lastmod>2026-01-01</lastmod>
@@ -120,8 +146,12 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-
-  <!-- ── Developer ───────────────────────────────────────────────── -->
+  <url>
+    <loc>https://agsist.com/data-sources</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://agsist.com/developer</loc>
     <lastmod>2026-02-01</lastmod>
@@ -131,32 +161,14 @@
 
   <!-- ── Legal ───────────────────────────────────────────────────── -->
   <url>
-    <loc>https://agsist.com/legal/privacy</loc>
-    <lastmod>2026-01-01</lastmod>
+    <loc>https://agsist.com/privacy</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://agsist.com/legal/terms</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://agsist.com/legal/disclaimer</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://agsist.com/legal/accessibility</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://agsist.com/legal/cookies</loc>
-    <lastmod>2026-01-01</lastmod>
+    <loc>https://agsist.com/terms</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

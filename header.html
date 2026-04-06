@@ -1,0 +1,128 @@
+<!-- AGSIST Nav Header — injected by loader.js into #site-header -->
+<!-- v6: + Tariff Tracker in Prices dropdown, + AGSIST Daily in Data dropdown
+         GDU removed from Tools (was duplicate with Weather), Daily added to desktop nav -->
+<nav class="nav" id="topnav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="AGSIST Home">
+      <img src="/img/logo-agsist.jpg" alt="AGSIST">
+    </a>
+
+    <div class="nav-menu">
+      <div class="nav-dd" id="dd-prices">
+        <button class="nav-btn"><img src="/img/icon-prices.png" class="nav-icon" alt="">Prices<svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-panel">
+          <a href="/corn-futures-prices">🌽 Corn Futures</a>
+          <a href="/soybean-futures-prices">🫘 Soybean Futures</a>
+          <a href="/wheat-futures-prices">🌾 Wheat Futures</a>
+          <a href="/cash-bids">💵 Cash Bids</a>
+          <a href="/tariffs">🏛️ Tariff Tracker</a>
+          <div class="nav-panel-div"></div>
+          <a href="/markets" class="all">All Markets →</a>
+        </div>
+      </div>
+
+      <div class="nav-dd" id="dd-weather">
+        <button class="nav-btn"><img src="/img/icon-weather.png" class="nav-icon" alt="">Weather<svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-panel">
+          <a href="/spray">🌿 Spray Conditions</a>
+          <a href="/drought-monitor">🏜️ Drought Monitor</a>
+          <a href="/gdu-calculator">🌡️ GDU Tracker</a>
+        </div>
+      </div>
+
+      <div class="nav-dd" id="dd-tools">
+        <button class="nav-btn"><img src="/img/icon-tools.png" class="nav-icon" alt="">Tools<svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-panel">
+          <a href="/breakeven">📐 Break-Even Calc</a>
+          <a href="/grain-bin-calculator">🏗️ Grain Bin Calc</a>
+          <a href="/fast-facts">⚡ Fast Facts</a>
+          <a href="/yield-estimator">🌽 Yield Estimator</a>
+          <a href="/urea">🧪 Urea Risk</a>
+          <div class="nav-panel-div"></div>
+          <a href="/tools" class="all">All Tools →</a>
+        </div>
+      </div>
+
+      <div class="nav-dd" id="dd-data">
+        <button class="nav-btn"><img src="/img/icon-data.png" class="nav-icon" alt="">Data<svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-panel">
+          <a href="/daily">📰 AGSIST Daily</a>
+          <a href="/usda-calendar">📅 USDA Calendar</a>
+          <a href="/usda-quick-stats">📋 USDA Quick Stats</a>
+          <a href="/data-sources">🔗 Data Sources</a>
+          <div class="nav-panel-div"></div>
+          <a href="/developer" class="all">Developer API →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+        <div class="t-track"><div class="t-thumb"></div></div>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span class="h-bar"></span><span class="h-bar"></span><span class="h-bar"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ MOBILE DRAWER ═════════════════════════════════════════════ -->
+<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="Site navigation">
+  <div class="draw-head">
+    <img src="/img/logo-agsist.jpg" alt="AGSIST" style="height:30px;width:auto;object-fit:contain">
+    <button class="draw-close" id="draw-close" aria-label="Close menu">✕</button>
+  </div>
+  <div class="draw-sec">
+    <div class="draw-lbl"><img src="/img/icon-prices.png" class="draw-lbl-icon" alt="">Prices</div>
+    <a href="/corn-futures-prices" class="draw-item">🌽 Corn Futures</a>
+    <a href="/soybean-futures-prices" class="draw-item">🫘 Soybean Futures</a>
+    <a href="/wheat-futures-prices" class="draw-item">🌾 Wheat Futures</a>
+    <a href="/cash-bids" class="draw-item">💵 Cash Bids</a>
+    <a href="/tariffs" class="draw-item">🏛️ Tariff Tracker</a>
+  </div>
+  <div class="draw-sec">
+    <div class="draw-lbl"><img src="/img/icon-weather.png" class="draw-lbl-icon" alt="">Weather</div>
+    <a href="/spray" class="draw-item">🌿 Spray Conditions</a>
+    <a href="/drought-monitor" class="draw-item">🏜️ Drought Monitor</a>
+    <a href="/gdu-calculator" class="draw-item">🌡️ GDU Tracker</a>
+  </div>
+  <div class="draw-sec">
+    <div class="draw-lbl"><img src="/img/icon-tools.png" class="draw-lbl-icon" alt="">Tools</div>
+    <a href="/breakeven" class="draw-item">📐 Break-Even Calc</a>
+    <a href="/grain-bin-calculator" class="draw-item">🏗️ Grain Bin Calc</a>
+    <a href="/fast-facts" class="draw-item">⚡ Fast Facts</a>
+    <a href="/yield-estimator" class="draw-item">🌽 Yield Estimator</a>
+    <a href="/urea" class="draw-item">🧪 Urea Risk</a>
+  </div>
+  <div class="draw-sec">
+    <div class="draw-lbl"><img src="/img/icon-data.png" class="draw-lbl-icon" alt="">Data &amp; Daily</div>
+    <a href="/daily" class="draw-item">📰 AGSIST Daily</a>
+    <a href="/usda-calendar" class="draw-item">📅 USDA Calendar</a>
+    <a href="/usda-quick-stats" class="draw-item">📋 USDA Quick Stats</a>
+    <a href="/data-sources" class="draw-item">🔗 Data Sources</a>
+  </div>
+  <div class="draw-sec">
+    <div class="draw-lbl">Company</div>
+    <a href="/about" class="draw-item">About</a>
+    <a href="/contact" class="draw-item">Contact</a>
+    <a href="/developer" class="draw-item">Developer API</a>
+  </div>
+  <div class="draw-sec" style="border-bottom:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:.6rem 1.1rem">
+      <span style="font-size:.82rem;color:var(--text-dim)">Display mode</span>
+      <button class="theme-btn" id="theme-btn-d" aria-label="Toggle theme">
+        <span id="theme-icon-d">🌙</span>
+        <div class="t-track"><div class="t-thumb"></div></div>
+      </button>
+    </div>
+    <div style="padding:.6rem 1.1rem 1rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:.75rem">
+      <a href="https://lokedrone.com" target="_blank" rel="noopener">
+        <img src="/img/logo-loke-drone.png" alt="Loke Drone" style="height:26px;width:auto;object-fit:contain;opacity:.8">
+      </a>
+      <span style="font-size:.62rem;color:var(--text-muted)">Ag drone partner</span>
+    </div>
+  </div>
+</div>
+<div class="draw-ov" id="draw-ov" aria-hidden="true"></div>

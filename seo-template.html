@@ -1,0 +1,125 @@
+<!--
+══════════════════════════════════════════════════════════════════════════════
+AGSIST SEO BLOCK TEMPLATE — v2 (April 2026)
+Copy this entire block into <head> of every new page. Fill in ALL-CAPS fields.
+──────────────────────────────────────────────────────────────────────────────
+Fields to replace:
+  PAGE_TITLE       → e.g. "Corn Futures Prices Today" (≤52 chars before " | AGSIST")
+  PAGE_SLUG        → e.g. "corn-futures-prices"
+  META_DESCRIPTION → 150–160 chars, include primary keyword
+  OG_DESCRIPTION   → 90–120 chars, punchy
+  KEYWORDS         → 5–8 comma-separated, most specific first
+──────────────────────────────────────────────────────────────────────────────
+UNIVERSAL PAGE CHECKLIST (every page must have ALL of these):
+  ✓ GA gtag snippet (inline, before styles)
+  ✓ Skip link: <a href="#main" class="skip">Skip to content</a> after <body>
+  ✓ touch-action: manipulation on buttons/links (inline style block)
+  ✓ og:locale en_US
+  ✓ twitter:creator @agsist
+  ✓ favicon-16 PNG link
+  ✓ author meta "Farmers First Agri Service — AGSIST"
+  ✓ .62rem font floor minimum (no font-size below .62rem)
+  ✓ border-radius: 8px cards / 12px widgets / 20px pills / 6px buttons+inputs
+══════════════════════════════════════════════════════════════════════════════
+-->
+
+<!-- ── Google Analytics (inline — before styles, no loader.js dependency) ── -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+
+<!-- ── Identity ── -->
+<title>PAGE_TITLE — AGSIST</title>
+<meta name="description" content="META_DESCRIPTION">
+<meta name="keywords"    content="KEYWORDS">
+<meta name="author"      content="Farmers First Agri Service — AGSIST">
+<meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical"    href="https://agsist.com/PAGE_SLUG">
+
+<!-- ── Open Graph ── -->
+<meta property="og:type"         content="website">
+<meta property="og:site_name"    content="AGSIST">
+<meta property="og:locale"       content="en_US">
+<meta property="og:title"        content="PAGE_TITLE — AGSIST">
+<meta property="og:description"  content="OG_DESCRIPTION">
+<meta property="og:url"          content="https://agsist.com/PAGE_SLUG">
+<meta property="og:image"        content="https://agsist.com/img/og/PAGE_SLUG.jpg">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"    content="PAGE_TITLE — AGSIST">
+
+<!-- ── Twitter / X ── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@agsist">
+<meta name="twitter:creator"     content="@agsist">
+<meta name="twitter:title"       content="PAGE_TITLE — AGSIST">
+<meta name="twitter:description" content="OG_DESCRIPTION">
+<meta name="twitter:image"       content="https://agsist.com/img/og/PAGE_SLUG.jpg">
+
+<!-- ── Structured Data — choose type(s) below based on page ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+
+    /* ── WebPage — use on ALL pages ── */
+    {
+      "@type": "WebPage",
+      "@id": "https://agsist.com/PAGE_SLUG#webpage",
+      "url": "https://agsist.com/PAGE_SLUG",
+      "name": "PAGE_TITLE — AGSIST",
+      "description": "META_DESCRIPTION",
+      "isPartOf": { "@id": "https://agsist.com/#website" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://agsist.com/" },
+          { "@type": "ListItem", "position": 2, "name": "PAGE_TITLE", "item": "https://agsist.com/PAGE_SLUG" }
+        ]
+      }
+    },
+
+    /* ── SoftwareApplication — use on TOOL pages (calculators, spray, urea) ── */
+    {
+      "@type": "SoftwareApplication",
+      "name": "PAGE_TITLE",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://agsist.com/PAGE_SLUG"
+    },
+
+    /* ── Dataset — use on PRICE/DATA pages (corn, bean, wheat futures) ── */
+    {
+      "@type": "Dataset",
+      "name": "PAGE_TITLE",
+      "description": "META_DESCRIPTION",
+      "url": "https://agsist.com/PAGE_SLUG",
+      "creator": { "@id": "https://agsist.com/#organization" },
+      "temporalCoverage": "2024/..",
+      "license": "https://creativecommons.org/licenses/by/4.0/"
+    },
+
+    /* ── FAQPage — use on any page with Q&A content ── */
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "QUESTION_TEXT",
+          "acceptedAnswer": { "@type": "Answer", "text": "ANSWER_TEXT" }
+        }
+      ]
+    },
+
+    /* ── Organization — include on EVERY page ── */
+    {
+      "@type": "Organization",
+      "@id": "https://agsist.com/#organization",
+      "name": "AGSIST",
+      "url": "https://agsist.com/",
+      "logo": { "@type": "ImageObject", "url": "https://agsist.com/img/logo-agsist.jpg" },
+      "sameAs": ["https://farmers1st.com"]
+    }
+  ]
+}
+</script>

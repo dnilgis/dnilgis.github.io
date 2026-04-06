@@ -3,13 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found — AGSIST</title>
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#111a0a">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+  <link rel="preload" href="/components/styles.css" as="style">
   <link rel="stylesheet"                          href="/components/styles.css">
   <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
+  <link rel="manifest"                            href="/manifest.json">
+
+  <title>Page Not Found — AGSIST</title>
+  <meta name="description" content="The page you're looking for may have moved or been renamed. Head back to the AGSIST agricultural dashboard for live grain prices, weather, and farm tools.">
+  <meta name="author"  content="Farmers First Agri Service — AGSIST">
+  <meta name="robots"  content="noindex, nofollow">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="AGSIST">
+  <meta property="og:locale"      content="en_US">
+  <meta property="og:title"       content="Page Not Found — AGSIST">
+  <meta property="og:description" content="Head back to the AGSIST agricultural dashboard for live grain prices, weather, and farm tools.">
+  <meta property="og:url"         content="https://agsist.com/404">
+  <meta property="og:image"       content="https://agsist.com/img/og/agsist.jpg">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:site"       content="@agsist">
+  <meta name="twitter:creator"    content="@agsist">
+  <meta name="twitter:title"      content="Page Not Found — AGSIST">
+  <meta name="twitter:description" content="Head back to the AGSIST agricultural dashboard for live grain prices, weather, and farm tools.">
+  <meta name="twitter:image"      content="https://agsist.com/img/og/agsist.jpg">
+
   <style>
+    /* v5: Batch 5 audit — + GA, skip link, touch-action, full meta stack, favicon-16, author, theme-color */
+    button,a,[role="button"]{touch-action:manipulation;}
+
     .not-found{display:flex;flex-direction:column;align-items:center;justify-content:center;
       min-height:60vh;text-align:center;padding:2rem 1.5rem;}
     .not-found .code{font-family:'Oswald',sans-serif;font-size:5rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:.35rem;}
@@ -27,9 +56,9 @@
       border:1px solid var(--border);border-radius:5px;transition:color .15s,border-color .15s;}
     .nf-tools a:hover{color:var(--gold);border-color:var(--gold);}
   </style>
-  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
 
   <main id="main" tabindex="-1">
@@ -48,6 +77,8 @@
         <a href="/breakeven">Break-Even</a>
         <a href="/fast-facts">Fast Facts</a>
         <a href="/corn-futures-prices">Corn Prices</a>
+        <a href="/tariffs">Tariff Tracker</a>
+        <a href="/tools">All Tools</a>
         <a href="/developer">Developer</a>
       </div>
     </div>
