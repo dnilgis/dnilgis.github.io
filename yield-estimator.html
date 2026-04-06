@@ -4,31 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#111a0a">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+  <link rel="preload" href="/components/styles.css" as="style">
   <link rel="stylesheet" href="/components/styles.css">
-  <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
-  <link rel="manifest"                            href="/manifest.json">
+  <link rel="icon" type="image/x-icon"             href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32"  href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16"  href="/img/favicon-16.png">
+  <link rel="apple-touch-icon"                     href="/img/apple-touch-icon.png">
+  <link rel="manifest"                             href="/manifest.json">
 
-  <!-- SEO -->
-  <title>Corn & Soybean Yield Estimator — Free Field Calculator | AGSIST</title>
-  <meta name="description" content="Free corn and soybean yield estimator. Step into the field, count ears and kernels, enter 3 numbers, and get your estimated bu/acre. The yield component method made dead-simple for your phone.">
+  <title>Corn &amp; Soybean Yield Estimator — Field Calculator | AGSIST</title>
+  <meta name="description" content="Free corn and soybean yield estimator. Step into the field, count ears and kernels, enter 3 numbers, get your estimated bu/acre. The yield component method built for your phone.">
   <meta name="keywords"    content="corn yield estimator, soybean yield calculator, crop yield estimate, yield component method, kernels per ear, ears per acre, corn yield math, field scouting yield">
+  <meta name="author"      content="Farmers First Agri Service — AGSIST">
   <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"    href="https://agsist.com/yield-estimator">
 
   <meta property="og:type"         content="website">
   <meta property="og:site_name"    content="AGSIST">
-  <meta property="og:title"        content="Corn & Soybean Yield Estimator — AGSIST">
+  <meta property="og:locale"       content="en_US">
+  <meta property="og:title"        content="Corn &amp; Soybean Yield Estimator — AGSIST">
   <meta property="og:description"  content="Free yield component calculator. Count ears, kernel rows, and kernels per row — get your estimated bu/acre in seconds.">
   <meta property="og:url"          content="https://agsist.com/yield-estimator">
   <meta property="og:image"        content="https://agsist.com/img/og/yield-estimator.jpg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="AGSIST Corn and Soybean Yield Estimator — field calculator for bu/acre">
   <meta name="twitter:card"        content="summary_large_image">
-  <meta name="twitter:title"       content="Corn & Soybean Yield Estimator — AGSIST">
-  <meta name="twitter:description" content="Free yield calculator. Count ears, kernels, enter 3 numbers, get bu/acre.">
+  <meta name="twitter:site"        content="@agsist">
+  <meta name="twitter:creator"     content="@agsist">
+  <meta name="twitter:title"       content="Corn &amp; Soybean Yield Estimator — AGSIST">
+  <meta name="twitter:description" content="Free yield calculator. Count ears, kernels, enter 3 numbers, get bu/acre. Built for in-field mobile use.">
+  <meta name="twitter:image"       content="https://agsist.com/img/og/yield-estimator.jpg">
 
   <script type="application/ld+json">
   {
@@ -37,7 +47,7 @@
       {
         "@type": "SoftwareApplication",
         "name": "Corn & Soybean Yield Estimator",
-        "description": "Free crop yield component calculator. Estimate corn bu/acre from ear count, kernel rows, and kernels per row. Estimate soybean bu/acre from plant count and pods per plant. Designed for in-field mobile use.",
+        "description": "Free crop yield component calculator for corn and soybeans. Designed for in-field mobile use.",
         "url": "https://agsist.com/yield-estimator",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
@@ -46,9 +56,9 @@
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home",             "item": "https://agsist.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Fast Facts",       "item": "https://agsist.com/fast-facts" },
-          { "@type": "ListItem", "position": 3, "name": "Yield Estimator",  "item": "https://agsist.com/yield-estimator" }
+          { "@type": "ListItem", "position": 1, "name": "Home",            "item": "https://agsist.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Fast Facts",      "item": "https://agsist.com/fast-facts" },
+          { "@type": "ListItem", "position": 3, "name": "Yield Estimator", "item": "https://agsist.com/yield-estimator" }
         ]
       },
       {
@@ -57,35 +67,23 @@
           {
             "@type": "Question",
             "name": "How do I estimate corn yield in the field?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Use the yield component method: count ears in 1/1000th of an acre (17 ft 5 in of a 30-inch row), then count average kernel rows per ear and kernels per row on several representative ears. Multiply ears × rows × kernels and divide by a correction factor (typically 75-90 depending on kernel size) to get estimated bushels per acre." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Use the yield component method: count ears in 1/1000th of an acre (17 ft 5 in of a 30-inch row), then count average kernel rows per ear and kernels per row on several representative ears. Multiply ears x rows x kernels and divide by a correction factor (typically 75-90 depending on kernel size) to get estimated bushels per acre." }
           },
           {
             "@type": "Question",
             "name": "How long is 1/1000th of an acre in 30-inch rows?",
-            "acceptedAnswer": { "@type": "Answer", "text": "In 30-inch rows, 1/1000th of an acre equals 17 feet 5 inches (17.4 ft). For 36-inch rows it is 14 feet 6 inches. For 20-inch rows it is 26 feet 2 inches. The formula is 43,560 sq ft ÷ 1000 ÷ (row spacing in feet)." }
+            "acceptedAnswer": { "@type": "Answer", "text": "In 30-inch rows, 1/1000th of an acre equals 17 feet 5 inches. For 36-inch rows it is 14 feet 6 inches. For 20-inch rows it is 26 feet 2 inches." }
           },
           {
             "@type": "Question",
             "name": "What correction factor should I use for corn yield estimates?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Modern hybrids with larger, heavier kernels typically use a factor of 75-85. Older or smaller-kernel varieties use 85-90. A factor of 80 is a good starting point for most modern corn. Lower factors give higher yield estimates." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Modern hybrids with larger, heavier kernels typically use a factor of 75-85. A factor of 80 is a good starting point for most modern corn." }
           },
           {
             "@type": "Question",
             "name": "How do I estimate soybean yield before harvest?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Count plants in 1/1000th of an acre, count pods on several representative plants, then use averages of 2.5 seeds per pod and 2,500 seeds per pound. Multiply plants × pods × 2.5, divide by 2,500 to get pounds per 1/1000th acre, then multiply by 1,000 and divide by 60 to convert to bushels per acre." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Count plants in 1/1000th of an acre, count pods on several representative plants, use 2.5 seeds per pod and 2,500 seeds per pound as defaults. The calculator converts to bushels per acre automatically." }
           }
-        ]
-      },
-      {
-        "@type": "HowTo",
-        "name": "How to Estimate Corn Yield Using the Yield Component Method",
-        "description": "A step-by-step guide to estimating corn yield in the field using ear counts and kernel counts.",
-        "step": [
-          { "@type": "HowToStep", "position": 1, "name": "Measure your row length", "text": "Measure 1/1000th of an acre along one row. In 30-inch rows, this is 17 feet 5 inches." },
-          { "@type": "HowToStep", "position": 2, "name": "Count ears", "text": "Count every harvestable ear within your measured row length. Repeat in at least 5 locations across the field and average." },
-          { "@type": "HowToStep", "position": 3, "name": "Count kernel rows", "text": "On several representative ears, count the number of kernel rows around the ear. Most ears have 14-18 rows." },
-          { "@type": "HowToStep", "position": 4, "name": "Count kernels per row", "text": "Count the number of kernels in one row from butt to tip. Do not count the small tip kernels that will not fill." },
-          { "@type": "HowToStep", "position": 5, "name": "Calculate yield", "text": "Enter your three numbers into the calculator: ears, kernel rows, and kernels per row. The tool divides by a correction factor to estimate bushels per acre." }
         ]
       }
     ]
@@ -93,240 +91,89 @@
   </script>
 
   <style>
-    /* ══════════════════════════════════════════════════════════
-       YIELD ESTIMATOR — STYLES
-       Mobile-first: designed for in-field phone use
-    ══════════════════════════════════════════════════════════ */
-    :root {
-      --ye-radius: 10px;
-      --ye-radius-sm: 6px;
-      --ye-transition: 0.2s ease;
-    }
+    /* v5: Batch 5 audit — GA, skip link, touch-action, og:locale, twitter:creator, favicon-16, author; --ye-radius 10->8px */
+    :root { --ye-radius: 8px; --ye-radius-sm: 6px; --ye-transition: 0.2s ease; }
+    button,a,[role="button"]{touch-action:manipulation;}
 
-    /* ── LAYOUT ───────────────────────────────────────────── */
-    .ye-main {
-      max-width: 720px; margin: 0 auto;
-      padding: max(16px, env(safe-area-inset-left));
-    }
-
+    .ye-main { max-width: 720px; margin: 0 auto; padding: max(16px, env(safe-area-inset-left)); }
     .breadcrumb { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 12px; }
     .breadcrumb a { color: var(--text-dim); text-decoration: none; }
     .breadcrumb a:hover { color: var(--gold); }
 
-    /* ── HERO ─────────────────────────────────────────────── */
-    .ye-hero {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--ye-radius); padding: 20px 24px;
-      margin-bottom: 16px; position: relative; overflow: hidden;
-    }
-    .ye-hero::before {
-      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold), transparent 80%);
-    }
-    .ye-hero h1 {
-      font-size: 1.2rem; color: var(--text); margin: 0 0 4px 0;
-      display: flex; align-items: center; gap: 8px;
-    }
+    .ye-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--ye-radius); padding: 20px 24px; margin-bottom: 16px; position: relative; overflow: hidden; }
+    .ye-hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), transparent 80%); }
+    .ye-hero h1 { font-size: 1.2rem; color: var(--text); margin: 0 0 4px 0; display: flex; align-items: center; gap: 8px; }
     .ye-hero h1 .gold { color: var(--gold); }
     .ye-hero .subtitle { color: var(--text-dim); font-size: 0.78rem; line-height: 1.4; }
 
-    /* ── CROP TABS ────────────────────────────────────────── */
-    .crop-tabs {
-      display: flex; gap: 4px; margin-bottom: 16px;
-    }
-    .crop-tab {
-      flex: 1; padding: 12px 16px; border: 1px solid var(--border);
-      border-radius: var(--ye-radius-sm); background: var(--surface);
-      color: var(--text-dim); font-family: inherit; font-size: 0.88rem;
-      font-weight: 600; cursor: pointer; text-align: center;
-      transition: all var(--ye-transition);
-    }
+    .crop-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+    .crop-tab { flex: 1; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--ye-radius-sm); background: var(--surface); color: var(--text-dim); font-family: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer; text-align: center; transition: all var(--ye-transition); }
     .crop-tab:hover { border-color: var(--gold); }
-    .crop-tab.active {
-      background: var(--gold); color: #000; border-color: var(--gold);
-    }
+    .crop-tab.active { background: var(--gold); color: #000; border-color: var(--gold); }
     .crop-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
-    /* ── PANELS ───────────────────────────────────────────── */
-    .ye-panel {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--ye-radius); margin-bottom: 16px;
-    }
+    .ye-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--ye-radius); margin-bottom: 16px; }
     .ye-panel[hidden] { display: none; }
-    .ye-panel-head {
-      background: var(--bg); padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
-      border-radius: var(--ye-radius) var(--ye-radius) 0 0;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .ye-panel-head h2 {
-      font-size: 0.95rem; margin: 0; color: var(--text);
-    }
+    .ye-panel-head { background: var(--bg); padding: 14px 18px; border-bottom: 1px solid var(--border); border-radius: var(--ye-radius) var(--ye-radius) 0 0; display: flex; justify-content: space-between; align-items: center; }
+    .ye-panel-head h2 { font-size: 0.95rem; margin: 0; color: var(--text); }
     .ye-panel-head h2 .accent { color: var(--gold); }
-    .ye-panel-head .badge {
-      font-size: 0.68rem; padding: 3px 8px;
-      background: rgba(230,176,66,0.15); color: var(--gold);
-      border-radius: 10px; font-weight: 600;
-      border: 1px solid rgba(230,176,66,0.3);
-    }
+    .ye-panel-head .badge { font-size: 0.68rem; padding: 3px 8px; background: rgba(230,176,66,0.15); color: var(--gold); border-radius: 10px; font-weight: 600; border: 1px solid rgba(230,176,66,0.3); }
     .ye-panel-body { padding: 18px; }
 
-    /* ── STEP INDICATOR ───────────────────────────────────── */
-    .ye-steps {
-      display: flex; gap: 4px; margin-bottom: 18px;
-    }
-    .ye-step-dot {
-      flex: 1; height: 4px; border-radius: 2px;
-      background: var(--border); transition: background 0.3s;
-    }
+    .ye-steps { display: flex; gap: 4px; margin-bottom: 18px; }
+    .ye-step-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); transition: background 0.3s; }
     .ye-step-dot.filled { background: var(--gold); }
 
-    /* ── ROW LENGTH HELPER ────────────────────────────────── */
-    .row-helper {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: var(--ye-radius-sm); padding: 14px 16px;
-      margin-bottom: 18px; display: flex; align-items: center;
-      gap: 14px; flex-wrap: wrap;
-    }
-    .row-helper .measure-icon {
-      font-size: 1.5rem; flex-shrink: 0;
-    }
-    .row-helper .measure-text {
-      flex: 1; min-width: 180px;
-    }
-    .row-helper .measure-label {
-      font-size: 0.68rem; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;
-    }
-    .row-helper .measure-value {
-      font-size: 1.2rem; font-weight: 700; color: var(--gold);
-      font-variant-numeric: tabular-nums; margin-top: 2px;
-    }
-    .row-helper .measure-note {
-      font-size: 0.72rem; color: var(--text-dim); margin-top: 2px;
-    }
-    .row-helper select {
-      padding: 9px 12px; font-family: inherit; font-size: 0.85rem;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--ye-radius-sm); color: var(--text); cursor: pointer;
-    }
+    .row-helper { background: var(--bg); border: 1px solid var(--border); border-radius: var(--ye-radius-sm); padding: 14px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .row-helper .measure-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .row-helper .measure-text { flex: 1; min-width: 180px; }
+    .row-helper .measure-label { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+    .row-helper .measure-value { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; margin-top: 2px; }
+    .row-helper .measure-note { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+    .row-helper select { padding: 9px 12px; font-family: inherit; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--ye-radius-sm); color: var(--text); cursor: pointer; }
     .row-helper select:focus { outline: none; border-color: var(--gold); }
 
-    /* ── INPUT FIELDS ─────────────────────────────────────── */
     .ye-field { margin-bottom: 14px; }
-    .ye-field label {
-      display: flex; justify-content: space-between; align-items: baseline;
-      font-size: 0.72rem; color: var(--text-dim); margin-bottom: 5px;
-      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;
-    }
-    .ye-field label .hint {
-      font-size: 0.68rem; text-transform: none; letter-spacing: 0;
-      font-weight: 400; opacity: 0.7;
-    }
-    .ye-field .input-wrap {
-      position: relative; display: flex; align-items: center;
-    }
-    .ye-field input {
-      width: 100%; padding: 14px 16px; padding-right: 80px;
-      font-family: inherit; font-size: 1.1rem; font-weight: 600;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: var(--ye-radius-sm); color: var(--text);
-      box-sizing: border-box; transition: border-color var(--ye-transition);
-      /* big touch target for field use */
-      min-height: 52px;
-    }
+    .ye-field label { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.72rem; color: var(--text-dim); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+    .ye-field label .hint { font-size: 0.68rem; text-transform: none; letter-spacing: 0; font-weight: 400; opacity: 0.7; }
+    .ye-field .input-wrap { position: relative; display: flex; align-items: center; }
+    .ye-field input { width: 100%; padding: 14px 16px; padding-right: 80px; font-family: inherit; font-size: 1.1rem; font-weight: 600; background: var(--bg); border: 1px solid var(--border); border-radius: var(--ye-radius-sm); color: var(--text); box-sizing: border-box; transition: border-color var(--ye-transition); min-height: 52px; }
     .ye-field input:focus { outline: none; border-color: var(--gold); }
-    .ye-field .unit {
-      position: absolute; right: 14px; font-size: 0.78rem;
-      color: var(--text-dim); pointer-events: none; font-weight: 500;
-    }
+    .ye-field .unit { position: absolute; right: 14px; font-size: 0.78rem; color: var(--text-dim); pointer-events: none; font-weight: 500; }
 
-    /* ── RESULT BOX ───────────────────────────────────────── */
-    .ye-result {
-      background: var(--bg); border: 2px solid var(--gold);
-      border-radius: var(--ye-radius); padding: 24px 20px;
-      text-align: center; margin-top: 6px;
-    }
-    .ye-result .result-label {
-      font-size: 0.72rem; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;
-    }
-    .ye-result .result-value {
-      font-size: 2.4rem; font-weight: 800; color: var(--gold);
-      font-variant-numeric: tabular-nums; margin: 6px 0 2px;
-      line-height: 1;
-    }
-    .ye-result .result-unit {
-      font-size: 0.88rem; color: var(--text-dim); font-weight: 500;
-    }
-    .ye-result .result-detail {
-      font-size: 0.72rem; color: var(--text-dim); margin-top: 10px;
-      padding-top: 10px; border-top: 1px solid var(--border);
-      line-height: 1.5;
-    }
+    .ye-result { background: var(--bg); border: 2px solid var(--gold); border-radius: var(--ye-radius); padding: 24px 20px; text-align: center; margin-top: 6px; }
+    .ye-result .result-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+    .ye-result .result-value { font-size: 2.4rem; font-weight: 800; color: var(--gold); font-variant-numeric: tabular-nums; margin: 6px 0 2px; line-height: 1; }
+    .ye-result .result-unit { font-size: 0.88rem; color: var(--text-dim); font-weight: 500; }
+    .ye-result .result-detail { font-size: 0.72rem; color: var(--text-dim); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
 
-    /* ── ADVANCED TOGGLE ──────────────────────────────────── */
-    .adv-toggle {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 14px; cursor: pointer;
-      font-size: 0.78rem; color: var(--text-dim);
-      background: none; border: none; font-family: inherit;
-      padding: 6px 0; transition: color var(--ye-transition);
-    }
+    .adv-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; cursor: pointer; font-size: 0.78rem; color: var(--text-dim); background: none; border: none; font-family: inherit; padding: 6px 0; transition: color var(--ye-transition); }
     .adv-toggle:hover { color: var(--gold); }
     .adv-toggle .arrow { transition: transform 0.2s; display: inline-block; }
     .adv-toggle.open .arrow { transform: rotate(90deg); }
     .adv-section { display: none; }
     .adv-section.open { display: block; }
 
-    /* ── FIELD GUIDE ──────────────────────────────────────── */
-    .field-guide {
-      background: var(--bg); border-left: 3px solid var(--gold);
-      padding: 14px 16px; border-radius: 0 var(--ye-radius-sm) var(--ye-radius-sm) 0;
-      font-size: 0.82rem; line-height: 1.6; color: var(--text-dim);
-    }
+    .field-guide { background: var(--bg); border-left: 3px solid var(--gold); padding: 14px 16px; border-radius: 0 var(--ye-radius-sm) var(--ye-radius-sm) 0; font-size: 0.82rem; line-height: 1.6; color: var(--text-dim); }
     .field-guide strong { color: var(--text); }
-    .field-guide .step-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px; border-radius: 50%;
-      background: var(--gold); color: #000; font-size: 0.7rem;
-      font-weight: 700; margin-right: 6px; flex-shrink: 0;
-      vertical-align: middle;
-    }
+    .field-guide .step-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #000; font-size: 0.7rem; font-weight: 700; margin-right: 6px; flex-shrink: 0; vertical-align: middle; }
     .field-guide p { margin: 8px 0; }
     .field-guide p:first-child { margin-top: 0; }
     .field-guide p:last-child { margin-bottom: 0; }
 
-    /* ── RANGE TABLE ──────────────────────────────────────── */
-    .range-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-      font-size: 0.8rem;
-    }
+    .range-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.8rem; }
     .range-row:last-child { border: none; }
     .range-row .rl { color: var(--text-dim); }
     .range-row .rv { color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
 
-    /* ── TOOLS ROW ────────────────────────────────────────── */
-    .tools-row {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
-    }
-    .tool-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; padding: 8px 14px;
-      color: var(--text-dim); text-decoration: none;
-      font-size: 0.78rem; font-weight: 500;
-      transition: all var(--ye-transition);
-    }
+    .tools-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tool-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 8px 14px; color: var(--text-dim); text-decoration: none; font-size: 0.78rem; font-weight: 500; transition: all var(--ye-transition); }
     .tool-pill:hover { border-color: var(--gold); color: var(--text); }
 
-    /* ── NO SPINNERS ──────────────────────────────────────── */
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type="number"] { -moz-appearance: textfield; }
 
-    /* ── RESPONSIVE ───────────────────────────────────────── */
     @media (max-width: 500px) {
       .ye-main { padding: 10px; }
       .ye-hero { padding: 16px; }
@@ -334,58 +181,41 @@
       .ye-result .result-value { font-size: 2rem; }
       .row-helper { flex-direction: column; align-items: flex-start; gap: 10px; }
     }
-
-    @media print {
-      #site-header, #site-footer, .crop-tabs, .adv-toggle, .tools-row { display: none !important; }
-      .ye-panel { break-inside: avoid; border: 1px solid #ccc; }
-      body { background: #fff; color: #111; }
-      .ye-result { border-color: #333; }
-    }
   </style>
 </head>
 <body>
-
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
 
   <main class="ye-main" id="main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a> → <a href="/fast-facts">Fast Facts</a> → Yield Estimator
+      <a href="/">Home</a> &rarr; <a href="/fast-facts">Fast Facts</a> &rarr; Yield Estimator
     </nav>
 
-    <!-- ══ HERO ══════════════════════════════════════════════ -->
     <div class="ye-hero">
-      <h1>🌽 Crop <span class="gold">Yield Estimator</span></h1>
-      <div class="subtitle">
-        Step out of the truck, count ears and kernels, type 3 numbers, get your estimated bu/acre.
-      </div>
+      <h1>&#127757; Crop <span class="gold">Yield Estimator</span></h1>
+      <div class="subtitle">Step out of the truck, count ears and kernels, type 3 numbers, get your estimated bu/acre.</div>
     </div>
 
-    <!-- ══ CROP TABS ═════════════════════════════════════════ -->
     <div class="crop-tabs" role="tablist" aria-label="Select crop">
-      <button class="crop-tab active" role="tab" aria-selected="true" aria-controls="corn-panel" id="tab-corn">🌽 Corn</button>
-      <button class="crop-tab" role="tab" aria-selected="false" aria-controls="bean-panel" id="tab-bean">🫘 Soybeans</button>
+      <button class="crop-tab active" role="tab" aria-selected="true" aria-controls="corn-panel" id="tab-corn">&#127757; Corn</button>
+      <button class="crop-tab" role="tab" aria-selected="false" aria-controls="bean-panel" id="tab-bean">&#129752; Soybeans</button>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         CORN YIELD ESTIMATOR
-    ═══════════════════════════════════════════════════════ -->
+    <!-- CORN PANEL -->
     <div class="ye-panel" id="corn-panel" role="tabpanel" aria-labelledby="tab-corn">
       <div class="ye-panel-head">
         <h2>Corn <span class="accent">Yield Estimate</span></h2>
         <span class="badge">Yield Component Method</span>
       </div>
       <div class="ye-panel-body">
-
-        <!-- Step progress -->
         <div class="ye-steps" aria-hidden="true">
           <div class="ye-step-dot filled" id="cDot1"></div>
           <div class="ye-step-dot" id="cDot2"></div>
           <div class="ye-step-dot" id="cDot3"></div>
         </div>
-
-        <!-- Row length helper -->
         <div class="row-helper">
-          <div class="measure-icon" aria-hidden="true">📏</div>
+          <div class="measure-icon" aria-hidden="true">&#128207;</div>
           <div class="measure-text">
             <div class="measure-label">Measure this row length for 1/1000th acre</div>
             <div class="measure-value" id="cornRowLen">17 ft 5 in</div>
@@ -398,109 +228,74 @@
             <option value="38">38" rows</option>
           </select>
         </div>
-
-        <!-- Input: Ears -->
         <div class="ye-field">
-          <label for="cornEars">
-            <span><span class="step-num" style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--gold);color:#000;font-size:0.65rem;font-weight:700;align-items:center;justify-content:center;margin-right:4px;vertical-align:middle">1</span> Ears counted</span>
-            <span class="hint">in your 1/1000th acre</span>
-          </label>
+          <label for="cornEars"><span>&#9312; Ears counted</span><span class="hint">in your 1/1000th acre</span></label>
           <div class="input-wrap">
             <input type="number" id="cornEars" value="32" min="0" max="99" step="1" inputmode="numeric">
             <span class="unit">ears</span>
           </div>
         </div>
-
-        <!-- Input: Kernel rows -->
         <div class="ye-field">
-          <label for="cornRows">
-            <span><span class="step-num" style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--gold);color:#000;font-size:0.65rem;font-weight:700;align-items:center;justify-content:center;margin-right:4px;vertical-align:middle">2</span> Kernel rows per ear</span>
-            <span class="hint">avg of 5+ ears</span>
-          </label>
+          <label for="cornRows"><span>&#9313; Kernel rows per ear</span><span class="hint">avg of 5+ ears</span></label>
           <div class="input-wrap">
             <input type="number" id="cornRows" value="16" min="0" max="40" step="1" inputmode="numeric">
             <span class="unit">rows</span>
           </div>
         </div>
-
-        <!-- Input: Kernels per row -->
         <div class="ye-field">
-          <label for="cornKernels">
-            <span><span class="step-num" style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--gold);color:#000;font-size:0.65rem;font-weight:700;align-items:center;justify-content:center;margin-right:4px;vertical-align:middle">3</span> Kernels per row</span>
-            <span class="hint">butt to tip, skip unfilled</span>
-          </label>
+          <label for="cornKernels"><span>&#9314; Kernels per row</span><span class="hint">butt to tip, skip unfilled</span></label>
           <div class="input-wrap">
             <input type="number" id="cornKernels" value="34" min="0" max="60" step="1" inputmode="numeric">
             <span class="unit">kernels</span>
           </div>
         </div>
-
-        <!-- Advanced settings -->
         <button class="adv-toggle" id="cornAdvToggle" type="button" aria-expanded="false" aria-controls="cornAdvSection">
-          <span class="arrow">▸</span> Correction factor &amp; samples
+          <span class="arrow">&#9658;</span> Correction factor &amp; samples
         </button>
         <div class="adv-section" id="cornAdvSection">
           <div class="ye-field">
-            <label for="cornFactor">
-              <span>Correction factor</span>
-              <span class="hint">lower = larger kernels</span>
-            </label>
+            <label for="cornFactor"><span>Correction factor</span><span class="hint">lower = larger kernels</span></label>
             <div class="input-wrap">
               <input type="number" id="cornFactor" value="80" min="50" max="120" step="1" inputmode="numeric">
               <span class="unit">factor</span>
             </div>
           </div>
           <div style="background:var(--bg);border-radius:var(--ye-radius-sm);padding:12px 14px;margin-bottom:14px">
-            <div class="range-row"><span class="rl">Large kernels (modern hybrids)</span><span class="rv">75–80</span></div>
-            <div class="range-row"><span class="rl">Average kernels</span><span class="rv">80–85</span></div>
-            <div class="range-row"><span class="rl">Small / stressed kernels</span><span class="rv">85–90</span></div>
-            <div class="range-row"><span class="rl">Popcorn / specialty</span><span class="rv">90–100</span></div>
+            <div class="range-row"><span class="rl">Large kernels (modern hybrids)</span><span class="rv">75&ndash;80</span></div>
+            <div class="range-row"><span class="rl">Average kernels</span><span class="rv">80&ndash;85</span></div>
+            <div class="range-row"><span class="rl">Small / stressed kernels</span><span class="rv">85&ndash;90</span></div>
+            <div class="range-row"><span class="rl">Popcorn / specialty</span><span class="rv">90&ndash;100</span></div>
           </div>
           <div class="ye-field">
-            <label for="cornSamples">
-              <span>Number of field locations sampled</span>
-              <span class="hint">avg the ear counts</span>
-            </label>
+            <label for="cornSamples"><span>Locations sampled</span><span class="hint">avg the ear counts</span></label>
             <div class="input-wrap">
               <input type="number" id="cornSamples" value="1" min="1" max="50" step="1" inputmode="numeric">
               <span class="unit">spots</span>
             </div>
           </div>
         </div>
-
-        <!-- RESULT -->
         <div class="ye-result">
           <div class="result-label">Estimated Yield</div>
           <div class="result-value" id="cornYield">218</div>
           <div class="result-unit">bu / acre</div>
-          <div class="result-detail" id="cornDetail">
-            32 ears × 16 rows × 34 kernels = 17,408 kernels/1000th ac<br>
-            17,408 ÷ 80 = 217.6 bu/ac
-          </div>
+          <div class="result-detail" id="cornDetail">32 ears x 16 rows x 34 kernels = 17,408 kernels/1000th ac — 17,408 / 80 = 217.6 bu/ac</div>
         </div>
-
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         SOYBEAN YIELD ESTIMATOR
-    ═══════════════════════════════════════════════════════ -->
+    <!-- SOYBEAN PANEL -->
     <div class="ye-panel" id="bean-panel" role="tabpanel" aria-labelledby="tab-bean" hidden>
       <div class="ye-panel-head">
         <h2>Soybean <span class="accent">Yield Estimate</span></h2>
         <span class="badge">Pod Count Method</span>
       </div>
       <div class="ye-panel-body">
-
-        <!-- Step progress -->
         <div class="ye-steps" aria-hidden="true">
           <div class="ye-step-dot filled" id="bDot1"></div>
           <div class="ye-step-dot" id="bDot2"></div>
         </div>
-
-        <!-- Row length helper -->
         <div class="row-helper">
-          <div class="measure-icon" aria-hidden="true">📏</div>
+          <div class="measure-icon" aria-hidden="true">&#128207;</div>
           <div class="measure-text">
             <div class="measure-label">Measure this row length for 1/1000th acre</div>
             <div class="measure-value" id="beanRowLen">17 ft 5 in</div>
@@ -514,97 +309,71 @@
             <option value="30" selected>30" rows</option>
           </select>
         </div>
-
-        <!-- Input: Plants -->
         <div class="ye-field">
-          <label for="beanPlants">
-            <span><span class="step-num" style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--gold);color:#000;font-size:0.65rem;font-weight:700;align-items:center;justify-content:center;margin-right:4px;vertical-align:middle">1</span> Plants counted</span>
-            <span class="hint">in your 1/1000th acre</span>
-          </label>
+          <label for="beanPlants"><span>&#9312; Plants counted</span><span class="hint">in your 1/1000th acre</span></label>
           <div class="input-wrap">
             <input type="number" id="beanPlants" value="105" min="0" max="500" step="1" inputmode="numeric">
             <span class="unit">plants</span>
           </div>
         </div>
-
-        <!-- Input: Pods per plant -->
         <div class="ye-field">
-          <label for="beanPods">
-            <span><span class="step-num" style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--gold);color:#000;font-size:0.65rem;font-weight:700;align-items:center;justify-content:center;margin-right:4px;vertical-align:middle">2</span> Pods per plant</span>
-            <span class="hint">avg of 10+ plants</span>
-          </label>
+          <label for="beanPods"><span>&#9313; Pods per plant</span><span class="hint">avg of 10+ plants</span></label>
           <div class="input-wrap">
             <input type="number" id="beanPods" value="38" min="0" max="200" step="1" inputmode="numeric">
             <span class="unit">pods</span>
           </div>
         </div>
-
-        <!-- Advanced settings -->
         <button class="adv-toggle" id="beanAdvToggle" type="button" aria-expanded="false" aria-controls="beanAdvSection">
-          <span class="arrow">▸</span> Seeds per pod &amp; seed size
+          <span class="arrow">&#9658;</span> Seeds per pod &amp; seed size
         </button>
         <div class="adv-section" id="beanAdvSection">
           <div class="ye-field">
-            <label for="beanSeeds">
-              <span>Seeds per pod</span>
-              <span class="hint">typically 2.5</span>
-            </label>
+            <label for="beanSeeds"><span>Seeds per pod</span><span class="hint">typically 2.5</span></label>
             <div class="input-wrap">
               <input type="number" id="beanSeeds" value="2.5" min="1" max="4" step="0.1" inputmode="decimal">
               <span class="unit">seeds/pod</span>
             </div>
           </div>
           <div class="ye-field">
-            <label for="beanSeedLb">
-              <span>Seeds per pound</span>
-              <span class="hint">varies by variety</span>
-            </label>
+            <label for="beanSeedLb"><span>Seeds per pound</span><span class="hint">varies by variety</span></label>
             <div class="input-wrap">
               <input type="number" id="beanSeedLb" value="2500" min="1500" max="4000" step="50" inputmode="numeric">
               <span class="unit">seeds/lb</span>
             </div>
           </div>
           <div style="background:var(--bg);border-radius:var(--ye-radius-sm);padding:12px 14px;margin-bottom:14px">
-            <div class="range-row"><span class="rl">Large seed varieties</span><span class="rv">2,200–2,500</span></div>
-            <div class="range-row"><span class="rl">Average</span><span class="rv">2,500–2,800</span></div>
-            <div class="range-row"><span class="rl">Small seed varieties</span><span class="rv">2,800–3,200</span></div>
+            <div class="range-row"><span class="rl">Large seed varieties</span><span class="rv">2,200&ndash;2,500</span></div>
+            <div class="range-row"><span class="rl">Average</span><span class="rv">2,500&ndash;2,800</span></div>
+            <div class="range-row"><span class="rl">Small seed varieties</span><span class="rv">2,800&ndash;3,200</span></div>
           </div>
         </div>
-
-        <!-- RESULT -->
         <div class="ye-result">
           <div class="result-label">Estimated Yield</div>
           <div class="result-value" id="beanYield">66</div>
           <div class="result-unit">bu / acre</div>
-          <div class="result-detail" id="beanDetail">
-            105 plants × 38 pods × 2.5 seeds = 9,975 seeds/1000th ac<br>
-            9,975,000 seeds/ac ÷ 2,500 seeds/lb = 3,990 lb ÷ 60 = 66.5 bu/ac
-          </div>
+          <div class="result-detail" id="beanDetail">105 plants x 38 pods x 2.5 seeds = 9,975 seeds/1000th ac — 9,975,000 / 2,500 seeds/lb = 3,990 lb / 60 = 66.5 bu/ac</div>
         </div>
-
       </div>
     </div>
 
-    <!-- ══ FIELD GUIDE ═══════════════════════════════════════ -->
+    <!-- FIELD GUIDE -->
     <div class="ye-panel">
-      <div class="ye-panel-head">
-        <h2>Field <span class="accent">Scouting Guide</span></h2>
-      </div>
+      <div class="ye-panel-head"><h2>Field <span class="accent">Scouting Guide</span></h2></div>
       <div class="ye-panel-body">
         <div class="field-guide">
-          <p><span class="step-num">1</span> <strong>Pick 5+ spots</strong> across the field — avoid end rows, waterways, and obviously good or bad areas. You want an honest average.</p>
-          <p><span class="step-num">2</span> <strong>Measure your row length</strong> for 1/1000th acre (use the calculator above — it adjusts for your row spacing). A tape measure or rangefinder works, or pace it off at roughly 3 ft per stride.</p>
-          <p><span class="step-num">3</span> <strong>For corn:</strong> Count every harvestable ear in that length. Then pull 5+ representative ears and count kernel rows around the cob and kernels per row from butt to tip. Skip the tiny unfilled tip kernels.</p>
-          <p><span class="step-num">4</span> <strong>For soybeans:</strong> Count every plant in that length. Then pull 10+ representative plants and count total pods per plant. Shake out a few pods to verify seeds per pod (usually 2–3).</p>
-          <p><span class="step-num">5</span> <strong>Average your samples</strong> and enter the numbers above. Do this in multiple fields — conditions can vary widely even on the same farm.</p>
+          <p><span class="step-num">1</span> <strong>Pick 5+ spots</strong> across the field. Avoid end rows, waterways, and obviously good or bad areas.</p>
+          <p><span class="step-num">2</span> <strong>Measure your row length</strong> for 1/1000th acre using the selector above. Pace it off at roughly 3 ft per stride.</p>
+          <p><span class="step-num">3</span> <strong>For corn:</strong> Count every harvestable ear in that length. Pull 5+ representative ears and count kernel rows and kernels per row from butt to tip. Skip unfilled tip kernels.</p>
+          <p><span class="step-num">4</span> <strong>For soybeans:</strong> Count every plant in that length. Pull 10+ representative plants and count total pods per plant.</p>
+          <p><span class="step-num">5</span> <strong>Average your samples</strong> and enter the numbers above.</p>
         </div>
         <div style="background:var(--bg);border-left:3px solid #f97316;padding:12px 16px;border-radius:0 var(--ye-radius-sm) var(--ye-radius-sm) 0;margin-top:14px;font-size:0.82rem;color:var(--text-dim);line-height:1.5">
-          <strong style="color:var(--text)">These are estimates.</strong> Actual yield can differ 10–15% or more due to kernel weight variation, harvest loss, moisture, tip-back, ear droppage, and stalk quality. Use these numbers for planning and marketing decisions, not as a guarantee.
+          <strong style="color:var(--text)">These are estimates.</strong> Actual yield can differ 10&ndash;15% or more due to kernel weight, harvest loss, moisture, tip-back, and stalk quality.
         </div>
       </div>
     </div>
 
-    <!-- ══ 1/1000th ACRE REFERENCE ═══════════════════════════ -->
+    <!-- ROW LENGTH REFERENCE -->
     <div class="ye-panel">
       <div class="ye-panel-head">
         <h2>1/1000th Acre <span class="accent">Row Lengths</span></h2>
@@ -618,172 +387,78 @@
         <div class="range-row"><span class="rl">30" rows</span><span class="rv">17 ft 5 in</span></div>
         <div class="range-row"><span class="rl">36" rows</span><span class="rv">14 ft 6 in</span></div>
         <div class="range-row"><span class="rl">38" rows</span><span class="rv">13 ft 9 in</span></div>
-        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:10px">
-          Formula: 43,560 ft² ÷ 1,000 ÷ (row spacing in ft) = row length in feet
-        </div>
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:10px">Formula: 43,560 ft&sup2; &divide; 1,000 &divide; (row spacing in ft) = row length in feet</div>
       </div>
     </div>
 
-    <!-- ══ MORE TOOLS ════════════════════════════════════════ -->
     <div class="tools-row">
-      <a href="/fast-facts" class="tool-pill">⚡ Fast Facts</a>
-      <a href="/breakeven" class="tool-pill">💰 Break-Even</a>
-      <a href="/gdu-calculator" class="tool-pill">🌡️ GDU Tracker</a>
-      <a href="/spray" class="tool-pill">🌬️ Spray Advisory</a>
-      <a href="/" class="tool-pill">📊 Dashboard</a>
+      <a href="/fast-facts" class="tool-pill">&#9889; Fast Facts</a>
+      <a href="/breakeven" class="tool-pill">&#128176; Break-Even</a>
+      <a href="/gdu-calculator" class="tool-pill">&#127777;&#65039; GDU Tracker</a>
+      <a href="/spray" class="tool-pill">&#127790;&#65039; Spray Advisory</a>
+      <a href="/" class="tool-pill">&#128202; Dashboard</a>
     </div>
 
   </main>
 
   <div id="site-footer"></div>
   <script src="/components/loader.js"></script>
-
   <script>
-  /* ════════════════════════════════════════════════════════════
-     YIELD ESTIMATOR — APPLICATION LOGIC
-  ════════════════════════════════════════════════════════════ */
   (function() {
     'use strict';
-
     var $ = function(id) { return document.getElementById(id); };
     function num(id, fb) { return parseFloat($(id).value) || fb || 0; }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-
-    /* ── Row length for 1/1000th acre ──────────────────────── */
     function rowLenStr(spacingIn) {
-      // 43,560 / 1000 / (spacing / 12) = feet
       var ft = 43560 / 1000 / (spacingIn / 12);
       var whole = Math.floor(ft);
       var inches = Math.round((ft - whole) * 12);
       if (inches === 12) { whole++; inches = 0; }
       return whole + ' ft ' + inches + ' in';
     }
-
-    /* ── CORN CALC ─────────────────────────────────────────── */
     function calcCorn() {
-      var ears    = clamp(num('cornEars', 0), 0, 99);
-      var rows    = clamp(num('cornRows', 0), 0, 40);
-      var kernels = clamp(num('cornKernels', 0), 0, 60);
-      var factor  = clamp(num('cornFactor', 80), 50, 120);
-      var samples = clamp(num('cornSamples', 1), 1, 50);
-
-      var totalKernels = ears * rows * kernels;
-      var yieldBu = totalKernels / factor;
-      var rounded = Math.round(yieldBu * 10) / 10;
-
-      $('cornYield').textContent = rounded > 0 ? Math.round(rounded) : '—';
-      $('cornDetail').innerHTML =
-        ears + ' ears × ' + rows + ' rows × ' + kernels + ' kernels = ' +
-        totalKernels.toLocaleString() + ' kernels/1000th ac<br>' +
-        totalKernels.toLocaleString() + ' ÷ ' + factor + ' = ' + rounded.toFixed(1) + ' bu/ac' +
-        (samples > 1 ? '<br>Averaged across ' + samples + ' sample locations' : '');
-
-      // Step dots
-      $('cDot1').classList.toggle('filled', ears > 0);
-      $('cDot2').classList.toggle('filled', rows > 0);
-      $('cDot3').classList.toggle('filled', kernels > 0);
+      var ears = clamp(num('cornEars',0),0,99), rows = clamp(num('cornRows',0),0,40);
+      var kernels = clamp(num('cornKernels',0),0,60), factor = clamp(num('cornFactor',80),50,120);
+      var samples = clamp(num('cornSamples',1),1,50);
+      var tk = ears * rows * kernels, yb = tk / factor, r = Math.round(yb*10)/10;
+      $('cornYield').textContent = r > 0 ? Math.round(r) : '\u2014';
+      $('cornDetail').innerHTML = ears+' ears \xd7 '+rows+' rows \xd7 '+kernels+' kernels = '+tk.toLocaleString()+' kernels/1000th ac\u2014'+tk.toLocaleString()+' \xf7 '+factor+' = '+r.toFixed(1)+' bu/ac'+(samples>1?'<br>Averaged across '+samples+' sample locations':'');
+      $('cDot1').classList.toggle('filled', ears>0);
+      $('cDot2').classList.toggle('filled', rows>0);
+      $('cDot3').classList.toggle('filled', kernels>0);
     }
-
-    function updateCornRowLen() {
-      var sp = parseFloat($('cornRowSpacing').value) || 30;
-      $('cornRowLen').textContent = rowLenStr(sp);
-    }
-
-    /* ── SOYBEAN CALC ──────────────────────────────────────── */
     function calcBean() {
-      var plants    = clamp(num('beanPlants', 0), 0, 500);
-      var pods      = clamp(num('beanPods', 0), 0, 200);
-      var seedsPod  = clamp(num('beanSeeds', 2.5), 1, 4);
-      var seedsLb   = clamp(num('beanSeedLb', 2500), 1500, 4000);
-
-      // seeds in 1/1000th acre
-      var seedsSmall = plants * pods * seedsPod;
-      // scale to per-acre
-      var seedsAcre  = seedsSmall * 1000;
-      var lbs        = seedsAcre / seedsLb;
-      var bu         = lbs / 60;
-      var rounded    = Math.round(bu * 10) / 10;
-
-      $('beanYield').textContent = rounded > 0 ? Math.round(rounded) : '—';
-      $('beanDetail').innerHTML =
-        plants + ' plants × ' + pods + ' pods × ' + seedsPod + ' seeds = ' +
-        Math.round(seedsSmall).toLocaleString() + ' seeds/1000th ac<br>' +
-        Math.round(seedsAcre).toLocaleString() + ' seeds/ac ÷ ' +
-        seedsLb.toLocaleString() + ' seeds/lb = ' +
-        Math.round(lbs).toLocaleString() + ' lb ÷ 60 = ' + rounded.toFixed(1) + ' bu/ac';
-
-      // Step dots
-      $('bDot1').classList.toggle('filled', plants > 0);
-      $('bDot2').classList.toggle('filled', pods > 0);
+      var plants = clamp(num('beanPlants',0),0,500), pods = clamp(num('beanPods',0),0,200);
+      var seedsPod = clamp(num('beanSeeds',2.5),1,4), seedsLb = clamp(num('beanSeedLb',2500),1500,4000);
+      var ss = plants*pods*seedsPod, sa = ss*1000, lbs = sa/seedsLb, bu = lbs/60, r = Math.round(bu*10)/10;
+      $('beanYield').textContent = r > 0 ? Math.round(r) : '\u2014';
+      $('beanDetail').innerHTML = plants+' plants \xd7 '+pods+' pods \xd7 '+seedsPod+' seeds = '+Math.round(ss).toLocaleString()+' seeds/1000th ac\u2014'+Math.round(sa).toLocaleString()+' seeds/ac \xf7 '+seedsLb.toLocaleString()+' seeds/lb = '+Math.round(lbs).toLocaleString()+' lb \xf7 60 = '+r.toFixed(1)+' bu/ac';
+      $('bDot1').classList.toggle('filled', plants>0);
+      $('bDot2').classList.toggle('filled', pods>0);
     }
-
-    function updateBeanRowLen() {
-      var sp = parseFloat($('beanRowSpacing').value) || 30;
-      $('beanRowLen').textContent = rowLenStr(sp);
-    }
-
-    /* ── EVENT BINDINGS ────────────────────────────────────── */
-    function bind(id, ev, fn) {
-      var el = $(id); if (el) el.addEventListener(ev, fn);
-    }
-
-    // Corn
-    bind('cornEars',       'input',  calcCorn);
-    bind('cornRows',       'input',  calcCorn);
-    bind('cornKernels',    'input',  calcCorn);
-    bind('cornFactor',     'input',  calcCorn);
-    bind('cornSamples',    'input',  calcCorn);
-    bind('cornRowSpacing', 'change', function() { updateCornRowLen(); });
-
-    // Soybean
-    bind('beanPlants',     'input',  calcBean);
-    bind('beanPods',       'input',  calcBean);
-    bind('beanSeeds',      'input',  calcBean);
-    bind('beanSeedLb',     'input',  calcBean);
-    bind('beanRowSpacing', 'change', function() { updateBeanRowLen(); });
-
-    /* ── CROP TABS ─────────────────────────────────────────── */
-    var tabs  = document.querySelectorAll('.crop-tab');
-    var panels = {
-      'tab-corn': $('corn-panel'),
-      'tab-bean': $('bean-panel')
-    };
-
-    tabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        tabs.forEach(function(t) {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        Object.values(panels).forEach(function(p) { p.hidden = true; });
-
-        this.classList.add('active');
-        this.setAttribute('aria-selected', 'true');
-        panels[this.id].hidden = false;
+    function bind(id,ev,fn){ var el=$(id); if(el) el.addEventListener(ev,fn); }
+    bind('cornEars','input',calcCorn); bind('cornRows','input',calcCorn); bind('cornKernels','input',calcCorn);
+    bind('cornFactor','input',calcCorn); bind('cornSamples','input',calcCorn);
+    bind('cornRowSpacing','change',function(){ $('cornRowLen').textContent=rowLenStr(parseFloat($('cornRowSpacing').value)||30); });
+    bind('beanPlants','input',calcBean); bind('beanPods','input',calcBean);
+    bind('beanSeeds','input',calcBean); bind('beanSeedLb','input',calcBean);
+    bind('beanRowSpacing','change',function(){ $('beanRowLen').textContent=rowLenStr(parseFloat($('beanRowSpacing').value)||30); });
+    var tabs=document.querySelectorAll('.crop-tab');
+    var panels={'tab-corn':$('corn-panel'),'tab-bean':$('bean-panel')};
+    tabs.forEach(function(tab){
+      tab.addEventListener('click',function(){
+        tabs.forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});
+        Object.values(panels).forEach(function(p){p.hidden=true;});
+        this.classList.add('active'); this.setAttribute('aria-selected','true');
+        panels[this.id].hidden=false;
       });
     });
-
-    /* ── ADVANCED TOGGLES ──────────────────────────────────── */
-    function setupToggle(btnId, sectionId) {
-      var btn = $(btnId), section = $(sectionId);
-      if (!btn || !section) return;
-      btn.addEventListener('click', function() {
-        var open = section.classList.toggle('open');
-        btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
-    setupToggle('cornAdvToggle', 'cornAdvSection');
-    setupToggle('beanAdvToggle', 'beanAdvSection');
-
-    /* ── INIT ──────────────────────────────────────────────── */
-    updateCornRowLen();
-    updateBeanRowLen();
-    calcCorn();
-    calcBean();
-
+    function setupToggle(b,s){ var btn=$(b),sec=$(s); if(!btn||!sec)return; btn.addEventListener('click',function(){ var o=sec.classList.toggle('open'); btn.classList.toggle('open',o); btn.setAttribute('aria-expanded',o?'true':'false'); }); }
+    setupToggle('cornAdvToggle','cornAdvSection');
+    setupToggle('beanAdvToggle','beanAdvSection');
+    $('cornRowLen').textContent=rowLenStr(30); $('beanRowLen').textContent=rowLenStr(30);
+    calcCorn(); calcBean();
   })();
   </script>
-
 </body>
 </html>

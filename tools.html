@@ -4,16 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#111a0a">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+  <link rel="preload" href="/components/styles.css" as="style">
   <link rel="stylesheet" href="/components/styles.css">
-  <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
-  <link rel="manifest"                            href="/manifest.json">
+  <link rel="icon" type="image/x-icon"             href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32"  href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16"  href="/img/favicon-16.png">
+  <link rel="apple-touch-icon"                     href="/img/apple-touch-icon.png">
+  <link rel="manifest"                             href="/manifest.json">
 
   <title>Free Farm Tools &amp; Ag Calculators | AGSIST</title>
   <meta name="description" content="Free farm tools and agricultural calculators from AGSIST. Break-even analysis, grain bin capacity, nutrient removal, spray timing, urea risk, GDU tracker, and more.">
   <meta name="keywords"    content="farm calculators, agricultural tools, break even calculator, grain bin calculator, spray timing, urea volatilization, GDU calculator">
+  <meta name="author"      content="Farmers First Agri Service — AGSIST">
   <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"    href="https://agsist.com/tools">
 
@@ -29,6 +35,7 @@
   <meta property="og:image:alt"    content="Free Farm Tools &amp; Calculators — AGSIST">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:site"        content="@agsist">
+  <meta name="twitter:creator"     content="@agsist">
   <meta name="twitter:title"       content="Free Farm Tools &amp; Calculators — AGSIST">
   <meta name="twitter:description" content="Free agricultural tools: break-even analysis, grain bin calculator, spray timing, urea risk, and more. No login. No ads.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
@@ -54,7 +61,9 @@
           { "@type": "ListItem", "position": 3, "name": "Break-Even Calculator",     "url": "https://agsist.com/breakeven" },
           { "@type": "ListItem", "position": 4, "name": "Grain Bin Calculator",      "url": "https://agsist.com/grain-bin-calculator" },
           { "@type": "ListItem", "position": 5, "name": "Agricultural Fast Facts",   "url": "https://agsist.com/fast-facts" },
-          { "@type": "ListItem", "position": 6, "name": "GDU Tracker",               "url": "https://agsist.com/gdu-calculator" }
+          { "@type": "ListItem", "position": 6, "name": "GDU Tracker",               "url": "https://agsist.com/gdu-calculator" },
+          { "@type": "ListItem", "position": 7, "name": "USDA Report Calendar",      "url": "https://agsist.com/usda-calendar" },
+          { "@type": "ListItem", "position": 8, "name": "Crop Yield Estimator",      "url": "https://agsist.com/yield-estimator" }
         ]
       }
     ]
@@ -62,6 +71,10 @@
   </script>
 
   <style>
+    /* ── v5: Batch 5 audit — GA, skip link, touch-action, twitter:creator, favicon-16, author
+            .tool-card 12→8px; USDA Calendar coming-soon removed ── */
+    button,a,[role="button"]{touch-action:manipulation;}
+
     main { max-width: 1200px; margin: 0 auto; padding: 16px; }
 
     .page-header {
@@ -101,7 +114,7 @@
       flex-direction: column;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 20px;
       text-decoration: none;
       transition: all 0.2s;
@@ -182,11 +195,11 @@
   </style>
 </head>
 <body>
-
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
 
   <main id="main">
-    <nav class="breadcrumb">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a> → Tools
     </nav>
 
@@ -252,10 +265,17 @@
         <div class="desc">Bushel weights, nutrient removal, nitrogen guidelines, unit conversions, seeding rates, fertilizer analysis, and 6 quick calculators. State-specific USDA Census data.</div>
         <span class="tag">16 States · USDA 2022</span>
       </a>
+      <a href="/yield-estimator" class="tool-card">
+        <span class="badge-new">New</span>
+        <div class="icon">🌽</div>
+        <div class="name">Crop Yield Estimator</div>
+        <div class="desc">Count ears and kernels, enter 3 numbers, get estimated bu/acre. The yield component method built for your phone.</div>
+        <span class="tag">Corn · Soybeans</span>
+      </a>
       <a href="/data-sources" class="tool-card">
         <div class="icon">📡</div>
         <div class="name">Data Sources</div>
-        <div class="desc">Where AGSIST gets its data. Stooq, Open-Meteo, NOAA, USDA, and more — all explained.</div>
+        <div class="desc">Where AGSIST gets its data. Yahoo Finance, Open-Meteo, NOAA, USDA, and more — all explained.</div>
         <span class="tag">Transparency</span>
       </a>
     </div>
@@ -286,11 +306,17 @@
         <div class="desc">Live corn, soybean, and wheat futures. FFAI composite index. Local weather. All in one place.</div>
         <span class="tag">Live Prices + Weather</span>
       </a>
-      <a href="/usda-calendar" class="tool-card coming-soon">
+      <a href="/usda-calendar" class="tool-card">
         <div class="icon">🗓️</div>
         <div class="name">USDA Report Calendar</div>
         <div class="desc">Upcoming WASDE, Crop Progress, and Prospective Plantings report dates with market impact notes.</div>
         <span class="tag">Reports + Dates</span>
+      </a>
+      <a href="/tariffs" class="tool-card">
+        <div class="icon">🏛️</div>
+        <div class="name">Ag Tariff Tracker</div>
+        <div class="desc">Current tariff rates on US corn, soybean, wheat, and pork exports. Updated as trade policy changes.</div>
+        <span class="tag">Trade Policy</span>
       </a>
     </div>
 

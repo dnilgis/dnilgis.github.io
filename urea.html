@@ -3,36 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+<link rel="preload" href="/components/styles.css" as="style">
 <link rel="stylesheet" href="/components/styles.css">
-<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="icon" type="image/x-icon"             href="/img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32"  href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16"  href="/img/favicon-16.png">
+<link rel="apple-touch-icon"                     href="/img/apple-touch-icon.png">
 
-<title>Urea Volatilization Risk Monitor — Real-Time N-Loss Score | AGSIST</title>
+<!-- v5: Batch 5 audit — title ≤60 chars, + twitter:creator, + author, + touch-action, + preconnect, + og:locale -->
+<title>Urea Volatilization Risk — N-Loss Score | AGSIST</title>
 <meta name="description" content="Real-time urea nitrogen volatilization risk based on your local temperature, humidity, wind, and rain forecast. Temperature-gated scoring — frozen ground means zero urease activity. Know before you spread. Free for farmers.">
+<meta name="author"  content="Farmers First Agri Service — AGSIST">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="urea volatilization risk, nitrogen loss, NBPT stabilizer, surface applied urea, urease inhibitor, urea application timing, Agrotain, volatilization calculator, N loss risk">
 <link rel="canonical" href="https://agsist.com/urea">
 
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AGSIST">
-<meta property="og:title" content="Urea Volatilization Risk Monitor — Real-Time N-Loss Score | AGSIST">
-<meta property="og:description" content="Real-time N-loss risk score from local temperature, wind, humidity and rain. Temperature-gated — frozen ground = zero urease risk. Free for farmers.">
-<meta property="og:url" content="https://agsist.com/urea">
-<meta property="og:image" content="https://agsist.com/img/og/urea.jpg">
-<meta property="og:image:width" content="1200">
+<meta property="og:type"         content="website">
+<meta property="og:site_name"    content="AGSIST">
+<meta property="og:locale"       content="en_US">
+<meta property="og:title"        content="Urea Volatilization Risk Monitor — Real-Time N-Loss Score | AGSIST">
+<meta property="og:description"  content="Real-time N-loss risk score from local temperature, wind, humidity and rain. Temperature-gated — frozen ground = zero urease risk. Free for farmers.">
+<meta property="og:url"          content="https://agsist.com/urea">
+<meta property="og:image"        content="https://agsist.com/img/og/urea.jpg">
+<meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AGSIST Urea Volatilization Risk Monitor — Real-time N-loss score">
-<meta property="og:locale" content="en_US">
+<meta property="og:image:alt"    content="AGSIST Urea Volatilization Risk Monitor — Real-time N-loss score">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@agsist">
-<meta name="twitter:title" content="Urea Volatilization Risk Monitor — AGSIST">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@agsist">
+<meta name="twitter:creator"     content="@agsist">
+<meta name="twitter:title"       content="Urea Volatilization Risk — N-Loss Score | AGSIST">
 <meta name="twitter:description" content="Real-time N-loss risk score from local temp, wind, humidity and rain. Free urea volatilization tool for farmers.">
-<meta name="twitter:image" content="https://agsist.com/img/og/urea.jpg">
+<meta name="twitter:image"       content="https://agsist.com/img/og/urea.jpg">
 
 <script type="application/ld+json">
 {
@@ -52,7 +59,7 @@
       "@type": "WebPage",
       "@id": "https://agsist.com/urea#webpage",
       "url": "https://agsist.com/urea",
-      "name": "Urea Volatilization Risk Monitor — Real-Time N-Loss Score | AGSIST",
+      "name": "Urea Volatilization Risk — N-Loss Score | AGSIST",
       "description": "Real-time urea volatilization risk based on local temperature, humidity, wind and rain. Know before you spread — free for farmers.",
       "isPartOf": { "@id": "https://agsist.com/#website" },
       "breadcrumb": {
@@ -92,8 +99,11 @@
 }
 </script>
 <link rel="manifest" href="/manifest.json">
-
 <link rel="stylesheet" href="/css/urea.css">
+<style>
+/* v5: touch-action not guaranteed in external /css/urea.css — add here */
+button,a,[role="button"]{touch-action:manipulation;}
+</style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -215,16 +225,16 @@
             <span class="loss">NH₃↑</span>
             <span style="color:var(--text-muted);font-size:.82rem">(escapes to atmosphere — N lost permanently)</span>
           </div>
-          <div class="chem-note">Urease enzyme — present in soil and especially in crop residue — converts urea to ammonia. At the soil surface, that ammonia gas escapes into the air rather than converting to plant-available ammonium (NH₄⁺). The granule looks intact. The nitrogen is gone. This tool scores the conditions that drive that reaction.</div>
+          <div class="chem-note">Urease enzyme — present in soil and especially in crop residue — converts urea to ammonia. At the soil surface, that ammonia gas escapes into the air rather than converting to plant-available ammonium (NH₄⁺). The granule looks intact. The nitrogen is gone.</div>
         </div>
 
         <div class="edu-grid">
-          <div class="edu-card"><div class="edu-card-icon">🌡️</div><div class="edu-card-title">Temperature: The Primary Driver</div><div class="edu-card-text">Urease enzyme activity roughly doubles for every 18°F (10°C) increase. At 50°F you have days to incorporate. At 80°F you may have only hours before significant loss begins. The relationship is exponential — a warm spring morning can look fine at 8am and be a volatilization event by noon. Cold weather is your best friend; frozen ground means urease is essentially shut down.</div><div class="edu-card-risk" style="background:rgba(240,145,58,.12);color:var(--risk-high)">Exponential increase above 65°F</div></div>
-          <div class="edu-card"><div class="edu-card-icon">💧</div><div class="edu-card-title">Moisture: The Double-Edged Sword</div><div class="edu-card-text">Dry soil slows urea dissolution but won't stop volatilization once humidity is high. Moist (not saturated) soil puts urea in maximum contact with urease. The most dangerous scenario: 0.1–0.4 inches of rain after application — just enough to dissolve the granule and activate the enzyme, but not enough to move N below the surface.</div><div class="edu-card-risk" style="background:rgba(230,176,66,.12);color:var(--risk-mod)">¼" rain without ½" = worst case</div></div>
+          <div class="edu-card"><div class="edu-card-icon">🌡️</div><div class="edu-card-title">Temperature: The Primary Driver</div><div class="edu-card-text">Urease enzyme activity roughly doubles for every 18°F (10°C) increase. At 50°F you have days to incorporate. At 80°F you may have only hours before significant loss begins. Cold weather is your best friend; frozen ground means urease is essentially shut down.</div><div class="edu-card-risk" style="background:rgba(240,145,58,.12);color:var(--risk-high)">Exponential increase above 65°F</div></div>
+          <div class="edu-card"><div class="edu-card-icon">💧</div><div class="edu-card-title">Moisture: The Double-Edged Sword</div><div class="edu-card-text">The most dangerous scenario: 0.1–0.4 inches of rain after application — just enough to dissolve the granule and activate the enzyme, but not enough to move N below the surface.</div><div class="edu-card-risk" style="background:rgba(230,176,66,.12);color:var(--risk-mod)">¼" rain without ½" = worst case</div></div>
           <div class="edu-card"><div class="edu-card-icon">💨</div><div class="edu-card-title">Wind: The Silent Thief</div><div class="edu-card-text">Ammonia gas builds up in a thin layer above the soil surface. Wind continuously removes that layer, maintaining the concentration gradient that pulls more N from the soil into the air. Even light winds of 3–5 mph keep volatilization moving at full speed.</div><div class="edu-card-risk" style="background:rgba(240,145,58,.12);color:var(--risk-high)">Amplifies all other risk factors</div></div>
-          <div class="edu-card"><div class="edu-card-icon">🌱</div><div class="edu-card-title">Soil pH: The Invisible Multiplier</div><div class="edu-card-text">Alkaline soils (pH 7+) favor ammonia gas over the stable, plant-available ammonium ion. At pH 7.5, you may lose 30–50% of surface-applied urea in warm, moist conditions. After years of liming in the corn belt, many fields sit squarely in this danger zone.</div><div class="edu-card-risk" style="background:rgba(240,96,96,.12);color:var(--risk-extreme)">pH 7.5+ = extreme background risk</div></div>
-          <div class="edu-card"><div class="edu-card-icon">🌾</div><div class="edu-card-title">Crop Residue: Hidden Urease Factory</div><div class="edu-card-text">Corn stalks, soybean stubble, and surface residue are dense with urease enzyme. No-till and minimum-till fields can lose 2–3× more N than bare, tilled soil — because urea granules sitting on stalk fragments or leaf litter are in direct, concentrated contact with enzyme. The granule never even touches the protective soil environment.</div><div class="edu-card-risk" style="background:rgba(240,145,58,.12);color:var(--risk-high)">No-till: always assume 2× risk</div></div>
-          <div class="edu-card"><div class="edu-card-icon">📅</div><div class="edu-card-title">The 72-Hour Decision Window</div><div class="edu-card-text">Roughly 80% of volatilization loss happens in the first 72 hours after application. After 4–5 days, remaining urea has typically hydrolyzed and been incorporated by rain, dew cycles, or moved physically into soil. The decision you make at application time — conditions, product choice, timing — is the one that matters most.</div><div class="edu-card-risk" style="background:rgba(230,176,66,.12);color:var(--risk-mod)">80% of loss in first 72 hours</div></div>
+          <div class="edu-card"><div class="edu-card-icon">🌱</div><div class="edu-card-title">Soil pH: The Invisible Multiplier</div><div class="edu-card-text">Alkaline soils (pH 7+) favor ammonia gas over the stable, plant-available ammonium ion. At pH 7.5, you may lose 30–50% of surface-applied urea in warm, moist conditions.</div><div class="edu-card-risk" style="background:rgba(240,96,96,.12);color:var(--risk-extreme)">pH 7.5+ = extreme background risk</div></div>
+          <div class="edu-card"><div class="edu-card-icon">🌾</div><div class="edu-card-title">Crop Residue: Hidden Urease Factory</div><div class="edu-card-text">No-till and minimum-till fields can lose 2–3× more N than bare, tilled soil — because urea granules sitting on stalk fragments or leaf litter are in direct, concentrated contact with enzyme.</div><div class="edu-card-risk" style="background:rgba(240,145,58,.12);color:var(--risk-high)">No-till: always assume 2× risk</div></div>
+          <div class="edu-card"><div class="edu-card-icon">📅</div><div class="edu-card-title">The 72-Hour Decision Window</div><div class="edu-card-text">Roughly 80% of volatilization loss happens in the first 72 hours after application. The decision you make at application time — conditions, product choice, timing — is the one that matters most.</div><div class="edu-card-risk" style="background:rgba(230,176,66,.12);color:var(--risk-mod)">80% of loss in first 72 hours</div></div>
         </div>
 
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem">
@@ -232,18 +242,17 @@
           <div class="stab-grid">
             <div>
               <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.5rem">What NBPT Does</div>
-              <div style="font-size:.83rem;color:var(--text-dim);line-height:1.75">NBPT (N-butyl thiophosphoric triamide) — the active ingredient in Agrotain and most generic stabilizers — temporarily blocks urease enzyme activity. It doesn't stop the chemistry permanently; it buys you time. Typically 10–14 days of protection: long enough for incorporation rain or irrigation. At that point, the inhibitor breaks down and the urea proceeds normally — now safely in the soil.</div>
+              <div style="font-size:.83rem;color:var(--text-dim);line-height:1.75">NBPT (N-butyl thiophosphoric triamide) — the active ingredient in Agrotain and most generic stabilizers — temporarily blocks urease enzyme activity. It buys you 10–14 days of protection: long enough for incorporation rain or irrigation.</div>
             </div>
             <div>
               <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.5rem">The Economics</div>
-              <div style="font-size:.83rem;color:var(--text-dim);line-height:1.75">At $8–12/acre, NBPT pays for itself if it prevents more than roughly 10 lbs N/acre of loss. At any score above Moderate on this tool — or on no-till ground, high-pH soils, or when forecasts show no incorporation rain — the economics strongly favor treatment. At current nitrogen prices, even a 5–8% reduction in N loss often covers the stabilizer cost.</div>
+              <div style="font-size:.83rem;color:var(--text-dim);line-height:1.75">At $8–12/acre, NBPT pays for itself if it prevents more than roughly 10 lbs N/acre of loss. At any score above Moderate — or on no-till ground, high-pH soils, or when forecasts show no incorporation rain — the economics strongly favor treatment.</div>
             </div>
           </div>
           <div style="margin-top:1.1rem;padding:.8rem 1rem;background:rgba(62,207,110,.06);border:1px solid rgba(62,207,110,.15);border-radius:7px;font-size:.82rem;color:var(--text-dim);line-height:1.65">
             <strong style="color:var(--green)">Bottom line:</strong> Stabilizer is insurance. You don't always need it — but when you do, you really do. Use this tool to make that call objectively on every application.
           </div>
         </div>
-
       </div>
     </div>
 
@@ -266,7 +275,7 @@
           <div class="fc-day"><div class="fc-day-name">Day 4</div><div class="fc-day-icon">⏳</div><div class="fc-day-risk moderate">--</div><div class="fc-day-temp">--/--</div></div>
           <div class="fc-day"><div class="fc-day-name">Day 5</div><div class="fc-day-icon">⏳</div><div class="fc-day-risk moderate">--</div><div class="fc-day-temp">--/--</div></div>
         </div>
-        <div style="font-size:.68rem;color:var(--text-muted);margin-top:.65rem;line-height:1.6">Based on forecast temperature and rain probability. Scores are temperature-gated — cold days are capped regardless of other factors. Best application window shown in green.</div>
+        <div style="font-size:.68rem;color:var(--text-muted);margin-top:.65rem;line-height:1.6">Based on forecast temperature and rain probability. Scores are temperature-gated — cold days are capped regardless of other factors.</div>
       </div>
 
       <div class="s-card">
@@ -282,7 +291,6 @@
         </div>
       </div>
 
-      <!-- FIXED: was /pages/breakeven.html — corrected to /breakeven -->
       <div class="stabilizer-cta">
         <div class="stab-badge">💰 ROI Calculation</div>
         <div class="stab-title">Is Stabilizer Worth It Today?</div>
@@ -328,7 +336,7 @@ function updateGauge(rawScore,tempF){ var gatedScore=applyTempGate(rawScore,temp
   if(tempF<32){if(banner){banner.className='tg-banner show';}if(tgIcon) tgIcon.textContent='❄️';if(tgText) tgText.textContent='Ground is frozen ('+Math.round(tempF)+'°F) — urease enzyme is completely inactive. Volatilization score is capped at 8 regardless of other conditions. Your risk is runoff loss on slopes, not volatilization.';}else if(tempF<40){if(banner){banner.className='tg-banner show';}if(tgIcon) tgIcon.textContent='🧊';if(tgText) tgText.textContent='Very cold ('+Math.round(tempF)+'°F) — urease activity is near-zero. Score is capped at 22. Risk will increase rapidly as temperatures rise above 50°F.';}else if(tempF<50){if(banner){banner.className='tg-banner show';}if(tgIcon) tgIcon.textContent='🌡️';if(tgText) tgText.textContent='Cool conditions ('+Math.round(tempF)+'°F) — score capped at 40. Low-moderate risk at most. Monitor the forecast for warming — volatilization risk accelerates above 55°F.';}else{if(banner) banner.className='tg-banner';}
   var verdictText; if(tempF<32){verdictText='Ground is frozen — urease enzyme is inactive and urea cannot dissolve. Volatilization risk is essentially zero, but application to frozen ground risks runoff loss rather than volatilization.';}else if(tempF<40){verdictText='Very cold conditions — urease activity is near zero. Volatilization risk is minimal. Watch for soil thaw and warming temperatures; risk will climb quickly once temps exceed 50°F.';}else if(tempF<50){verdictText='Cool conditions — urease activity is low but present. Risk is manageable. NBPT is good insurance if temperatures are forecast to warm above 65°F in the coming days.';}else{var verdicts={low:'Conditions are favorable for surface urea application. Minimal nitrogen loss expected in the next 24–48 hours.',moderate:'Moderate volatilization risk. Consider stabilizer or wait for a better window. Monitor forecast closely.',high:'High N-loss risk. Do not apply without NBPT stabilizer. Look for a cooler or wetter window in the coming days.',extreme:'Extreme risk — do not apply surface urea. Losses of 30–40%+ are likely. Wait for conditions to change or use injection.'};verdictText=verdicts[level];}
   if(verdict) verdict.textContent=verdictText;
-  var rb=document.getElementById('rec-box'); var rh=document.getElementById('rec-head'); var rt=document.getElementById('rec-text'); var recHead,recText; if(tempF<32){recHead='🧊 Frozen Ground — Not an Application Window';recText='Applying urea to frozen ground risks runoff loss, especially on slopes and fields with drainage. When soil thaws and temps approach 50°F, re-check conditions — volatilization risk will rise quickly as temperatures climb.';if(rb){rb.className='rec-box low';}if(rh){rh.className='rec-head cold';rh.textContent=recHead;}}else if(tempF<40){recHead='❄️ Cold — Low Volatilization Risk';recText='Urease activity is minimal. If you need to apply now, standard urea without stabilizer is acceptable. Risk increases quickly once temperatures exceed 50°F — if a warm-up is forecast, consider stabilizer as low-cost insurance.';if(rb){rb.className='rec-box low';}if(rh){rh.className='rec-head low';rh.textContent=recHead;}}else if(tempF<50){recHead='🌡️ Cool — Manageable Risk';recText='Conditions are cool enough that volatilization risk is low but not negligible. NBPT is worthwhile if temperatures are forecast to rise above 65°F in the coming days or if no rain is expected within 48 hours.';if(rb){rb.className='rec-box low';}if(rh){rh.className='rec-head low';rh.textContent=recHead;}}else{var recHeads={low:'✅ Good Window',moderate:'⚠️ Use Caution',high:'🔶 High Risk — Use Stabilizer',extreme:'🚨 Do Not Apply'};var recs={low:'Conditions are favorable. Apply urea normally. Watch the 48-hour forecast — if temperatures rise above 65°F or light rain (under ½") is expected, reassess.',moderate:'Risk is present but manageable. Best practice: apply NBPT-coated urea or treat with Agrotain stabilizer. If forecast shows ½"+ rain within 48 hours, standard urea is acceptable.',high:'Significant nitrogen loss likely without protection. Use NBPT stabilizer. Alternatively, delay application and monitor the 5-day forecast for a lower-risk window.',extreme:'Do not surface-apply urea under current conditions. Consider injection, UAN via coulter, or delay. If application cannot wait, NBPT stabilizer is mandatory — but losses will still be elevated.'};recHead=recHeads[level];recText=recs[level];if(rb){rb.className='rec-box '+level;}if(rh){rh.className='rec-head '+level;rh.textContent=recHead;}}
+  var rb=document.getElementById('rec-box'); var rh=document.getElementById('rec-head'); var rt=document.getElementById('rec-text'); var recHead,recText; if(tempF<32){recHead='🧊 Frozen Ground — Not an Application Window';recText='Applying urea to frozen ground risks runoff loss, especially on slopes. When soil thaws and temps approach 50°F, re-check conditions.';if(rb){rb.className='rec-box low';}if(rh){rh.className='rec-head cold';rh.textContent=recHead;}}else if(tempF<40){recHead='❄️ Cold — Low Volatilization Risk';recText='Urease activity is minimal. If you need to apply now, standard urea without stabilizer is acceptable. Risk increases quickly once temperatures exceed 50°F.';if(rb){rb.className='rec-box low';}if(rh){rh.className='rec-head low';rh.textContent=recHead;}}else if(tempF<50){recHead='🌡️ Cool — Manageable Risk';recText='Conditions are cool enough that volatilization risk is low but not negligible. NBPT is worthwhile if temperatures are forecast to rise above 65°F in the coming days or if no rain is expected within 48 hours.';if(rb){rb.className='rec-box low';}if(rh){rh.className='rec-head low';rh.textContent=recHead;}}else{var recHeads={low:'✅ Good Window',moderate:'⚠️ Use Caution',high:'🔶 High Risk — Use Stabilizer',extreme:'🚨 Do Not Apply'};var recs={low:'Conditions are favorable. Apply urea normally. Watch the 48-hour forecast — if temperatures rise above 65°F or light rain (under ½") is expected, reassess.',moderate:'Risk is present but manageable. Best practice: apply NBPT-coated urea or treat with Agrotain stabilizer. If forecast shows ½"+ rain within 48 hours, standard urea is acceptable.',high:'Significant nitrogen loss likely without protection. Use NBPT stabilizer. Alternatively, delay application and monitor the 5-day forecast for a lower-risk window.',extreme:'Do not surface-apply urea under current conditions. Consider injection, UAN via coulter, or delay. If application cannot wait, NBPT stabilizer is mandatory — but losses will still be elevated.'};recHead=recHeads[level];recText=recs[level];if(rb){rb.className='rec-box '+level;}if(rh){rh.className='rec-head '+level;rh.textContent=recHead;}}
   if(rt) rt.textContent=recText; }
 
 function buildForecastStrip(dailyData){ var strip=document.getElementById('fc-strip'); if(!strip||!dailyData) return; var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; strip.innerHTML=''; for(var i=0;i<5;i++){var date=new Date(dailyData.time[i]+'T12:00:00'); var name=i===0?'Today':days[date.getDay()]; var tMax=dailyData.temperature_2m_max[i]||70; var tMin=dailyData.temperature_2m_min[i]||55; var tAvg=(tMax+tMin)/2; var pop=dailyData.precipitation_probability_max[i]||0; var code=dailyData.weather_code[i]; var tR=tempRisk(tAvg); var rR=rainRisk(pop); var dayScore=Math.round(tR*0.55+rR*0.45); var gated=applyTempGate(dayScore,tAvg); var level=scoreToLevel(gated); var el=document.createElement('div'); el.className='fc-day'; el.title=name+': '+Math.round(tMax)+'°/'+Math.round(tMin)+'°F · '+pop+'% rain · '+scoreToLabel(gated); el.innerHTML='<div class="fc-day-name">'+name+'</div><div class="fc-day-icon">'+(WX_ICONS[code]||'🌡️')+'</div><div class="fc-day-risk '+level+'">'+levelAbbr(level)+'</div><div class="fc-day-temp">'+Math.round(tMax)+'°/'+Math.round(tMin)+'°</div>'; strip.appendChild(el);} }
@@ -340,7 +348,7 @@ function loadWeather(lat,lon,label){ document.getElementById('loc-setup').style.
     setFactor('temp',tempF+'°F',tDesc,tR,tR);
     var hDesc=humid<30?'Dry air. Urea dissolution slow, but won\'t stop enzyme activity once granule wets. Watch for light rain.':humid<50?'Low-moderate humidity. Some volatilization slowing from dryness. Monitor.':humid<70?'Moderate humidity. Optimal zone for urease activity. Risk is elevated.':humid<85?'Moist surface conditions. Urease has ideal moisture. Risk is running.':'High humidity. Surface moisture present. Conditions near-ideal for rapid hydrolysis.';
     setFactor('humid',humid+'% RH',hDesc,hR,hR);
-    var wDesc=wind<3?'Light or calm. Ammonia gradient building above surface. Not dispersing — some buildup protection.':wind<5?'Light wind. Ammonia beginning to disperse from surface. Low-moderate loss rate.':wind<10?'Moderate wind. Continuously removing NH₃ from surface gradient. Volatilization rate elevated.':wind<15?'Significant wind. Rapid ammonia dispersal. Loss rate is high.':'Strong wind. Maximum ammonia dispersal from soil surface. N loss accelerated under all conditions.';
+    var wDesc=wind<3?'Light or calm. Ammonia gradient building above surface.':wind<5?'Light wind. Ammonia beginning to disperse from surface.':wind<10?'Moderate wind. Continuously removing NH₃ from surface gradient. Volatilization rate elevated.':wind<15?'Significant wind. Rapid ammonia dispersal. Loss rate is high.':'Strong wind. Maximum ammonia dispersal from soil surface. N loss accelerated under all conditions.';
     setFactor('wind',wind+' mph',wDesc,wR,wR);
     var rDesc=pop<20?'No significant rain in the forecast window. Urea exposed to full 72-hour volatilization window.':pop<40?'Some rain possible but unlikely. If less than ¼", risk of activating urea without incorporation.':pop<60?'Rain likely. Amount matters — ½"+ will incorporate; less can accelerate loss. Check totals.':'High rain probability. If forecast verifies ½"+, urea will be incorporated. Good application timing.';
     setFactor('rain',pop+'% rain',rDesc,rR,rR);
