@@ -1414,12 +1414,12 @@ button,a,[role="button"]{touch-action:manipulation;}
 // ── Global live price state ───────────────────────────────────────────
 var G = {
   corn: null, beans: null, wheat: null,
-  fert: { urea_ton: 560, dap_ton: 600, mop_ton: 420, n_lb: null, p_lb: null, k_lb: null }
+  fert: { urea_ton: 560, dap_ton: 600, mop_ton: 420, p_pct: 46, n_lb: null, p_lb: null, k_lb: null }
 };
 
 function computeFertLbPrices() {
   G.fert.n_lb  = G.fert.urea_ton  / (2000 * 0.46);   // Urea 46% N
-  G.fert.p_lb  = G.fert.dap_ton   / (2000 * 0.46);   // DAP 46% P2O5
+  G.fert.p_lb  = G.fert.dap_ton   / (2000 * (G.fert.p_pct ? G.fert.p_pct / 100 : 0.46));   // DAP/MAP P2O5
   G.fert.k_lb  = G.fert.mop_ton   / (2000 * 0.62);   // MOP 62% K2O
 }
 computeFertLbPrices();
@@ -1456,7 +1456,7 @@ function loadPrices() {
 }
 
 // ── Fertilizer loader — fertilizer.json ──────────────────────────────
-var FERT_N_MAP = { 'urea': { dd: '46', pct: 46 }, 'ams': { dd: '21', pct: 21 }, 'ammonium sulfate': { dd: '21', pct: 21 } };
+var FERT_N_MAP = { 'urea': { dd: '46', pct: 46 }, 'ams': { dd: '21', pct: 21 }, 'ammonium sulfate': { dd: '21', pct: 21 }, 'amm. sulfate': { dd: '21', pct: 21 } };
 
 function loadFertPrices() {
   fetch('/data/fertilizer.json').then(function(r) { return r.json(); }).then(function(d) {
@@ -1480,8 +1480,8 @@ function loadFertPrices() {
       var nameKey = p.name.toLowerCase();
       // Update G.fert from JSON
       if (nameKey === 'urea') G.fert.urea_ton = p.price;
-      if (nameKey.includes('dap') || nameKey.includes('diammonium')) G.fert.dap_ton = p.price;
-      if (nameKey.includes('mop') || nameKey.includes('potash') || nameKey === 'potassium chloride') G.fert.mop_ton = p.price;
+      if (nameKey.includes('dap') || nameKey.includes('diammonium') || nameKey.includes('map')) { G.fert.dap_ton = p.price; if (nameKey.includes('map') && !nameKey.includes('dap')) G.fert.p_pct = 40; }
+      if (nameKey.includes('mop') || nameKey.includes('potash') || nameKey === 'potassium chloride' || nameKey === 'potash') G.fert.mop_ton = p.price;
       var mapping = FERT_N_MAP[nameKey];
       if (mapping) {
         pill.title = 'Click to populate N:Corn calculator';
