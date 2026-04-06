@@ -38,79 +38,16 @@
 <meta name="twitter:title"       content="Corn, Soybean &amp; Wheat Prices Today — Free Farm Dashboard | AGSIST">
 <meta name="twitter:description" content="Live grain futures, farm weather, spray advisory, urea risk, cash bids &amp; USDA data. Free for farmers. Updated every 30 min.">
 <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://agsist.com/#website",
-      "url": "https://agsist.com/",
-      "name": "AGSIST",
-      "alternateName": ["AGSIST Farm Dashboard", "AGSIST Agricultural Intelligence"],
-      "description": "Free live agricultural prices, weather, and tools for working farmers.",
-      "publisher": { "@id": "https://agsist.com/#organization" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": { "@type": "EntryPoint", "urlTemplate": "https://agsist.com/cash-bids?zip={search_term_string}" },
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://agsist.com/#organization",
-      "name": "AGSIST — Farmers First Agri Service",
-      "url": "https://agsist.com/",
-      "logo": { "@type": "ImageObject", "url": "https://agsist.com/img/og/agsist.jpg", "width": 1200, "height": 630 },
-      "description": "Free agricultural market intelligence platform for working corn, soybean, and grain farmers across the US.",
-      "contactPoint": { "@type": "ContactPoint", "telephone": "+1-715-797-2428", "contactType": "customer service", "areaServed": "US", "availableLanguage": "English" },
-      "address": { "@type": "PostalAddress", "addressRegion": "WI", "addressCountry": "US" },
-      "sameAs": ["https://farmers1st.com"]
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://agsist.com/#webpage",
-      "url": "https://agsist.com/",
-      "name": "Corn, Soybean & Wheat Prices Today — Free Farm Dashboard | AGSIST",
-      "description": "Live corn, soybean, and wheat futures prices updated every 30 minutes. Free farm dashboard with local weather, spray advisory, urea volatilization risk, cash grain bids, USDA reports, and daily ag briefing.",
-      "isPartOf": { "@id": "https://agsist.com/#website" },
-      "about": { "@id": "https://agsist.com/#organization" },
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".sec-title", ".pc-price", ".pc-change"] }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "AGSIST Agricultural Dashboard",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "url": "https://agsist.com/"
-    },
-    {
-      "@type": "ItemList",
-      "name": "Free Agricultural Tools on AGSIST",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Corn Futures Prices Today",        "url": "https://agsist.com/corn-futures-prices" },
-        { "@type": "ListItem", "position": 2, "name": "Soybean Futures Prices Today",     "url": "https://agsist.com/soybean-futures-prices" },
-        { "@type": "ListItem", "position": 3, "name": "Cash Grain Bids Near Me",          "url": "https://agsist.com/cash-bids" },
-        { "@type": "ListItem", "position": 4, "name": "Spray Advisory",                   "url": "https://agsist.com/spray" },
-        { "@type": "ListItem", "position": 5, "name": "Urea Volatilization Risk Monitor", "url": "https://agsist.com/urea" },
-        { "@type": "ListItem", "position": 6, "name": "Farm Break-Even Calculator",       "url": "https://agsist.com/breakeven" },
-        { "@type": "ListItem", "position": 7, "name": "Grain Bin Calculator",             "url": "https://agsist.com/grain-bin-calculator" },
-        { "@type": "ListItem", "position": 8, "name": "AGSIST Daily Ag Briefing",         "url": "https://agsist.com/daily" },
-        { "@type": "ListItem", "position": 9, "name": "Ag Prediction Markets",            "url": "https://agsist.com/ag-odds" }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "What are corn futures prices today?", "acceptedAnswer": { "@type": "Answer", "text": "AGSIST displays live CBOT corn futures prices updated every 30 minutes via Yahoo Finance. Both the nearby front-month contract and the December new-crop harvest contract are shown with net change, percent change, and 52-week range. Prices are in dollars per bushel." } },
-        { "@type": "Question", "name": "How do I find cash grain bids near me?", "acceptedAnswer": { "@type": "Answer", "text": "Enter any US ZIP code on AGSIST's Cash Bids page at agsist.com/cash-bids to see live corn, soybean, and wheat elevator prices from every reporting grain elevator within 50 miles. Coverage includes Alcivia, Big Gain, Kasbeer, Cooper Grain, Meyer Brothers, and hundreds more. Basis is shown alongside cash price for each location." } },
-        { "@type": "Question", "name": "Is AGSIST free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AGSIST is completely free — no account, no subscription, no ads. All tools including spray advisory, urea volatilization risk monitor, break-even calculator, grain bin calculator, cash bids, and the AGSIST Daily briefing are free for all farmers." } },
-        { "@type": "Question", "name": "How often are grain prices updated on AGSIST?", "acceptedAnswer": { "@type": "Answer", "text": "Grain futures prices on AGSIST are updated every 30 minutes during trading hours Monday through Friday via GitHub Actions. The AGSIST Daily briefing is published by 6 AM CT every weekday with overnight market analysis." } },
-        { "@type": "Question", "name": "What is urea volatilization risk?", "acceptedAnswer": { "@type": "Answer", "text": "Urea volatilization is the loss of nitrogen fertilizer as ammonia gas when urea is surface-applied without incorporation. Risk is highest when soil temperatures exceed 50°F, humidity is high, and no rain is forecast within 2–4 days. AGSIST's free urea risk monitor scores your real-time local conditions from 0–100." } }
-      ]
-    }
+    {"@type":"WebSite","@id":"https://agsist.com/#website","url":"https://agsist.com/","name":"AGSIST","alternateName":["AGSIST Farm Dashboard","AGSIST Agricultural Intelligence"],"description":"Free live agricultural prices, weather, and tools for working farmers.","publisher":{"@id":"https://agsist.com/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://agsist.com/cash-bids?zip={search_term_string}"},"query-input":"required name=search_term_string"}},
+    {"@type":"Organization","@id":"https://agsist.com/#organization","name":"AGSIST \u2014 Farmers First Agri Service","url":"https://agsist.com/","logo":{"@type":"ImageObject","url":"https://agsist.com/img/og/agsist.jpg","width":1200,"height":630},"description":"Free agricultural market intelligence platform for working corn, soybean, and grain farmers across the US.","contactPoint":{"@type":"ContactPoint","telephone":"+1-715-797-2428","contactType":"customer service","areaServed":"US","availableLanguage":"English"},"address":{"@type":"PostalAddress","addressRegion":"WI","addressCountry":"US"},"sameAs":["https://farmers1st.com"]},
+    {"@type":"WebPage","@id":"https://agsist.com/#webpage","url":"https://agsist.com/","name":"Corn, Soybean & Wheat Prices Today \u2014 Free Farm Dashboard | AGSIST","description":"Live corn, soybean, and wheat futures prices updated every 30 minutes. Free farm dashboard with local weather, spray advisory, urea volatilization risk, cash grain bids, USDA reports, and daily ag briefing.","isPartOf":{"@id":"https://agsist.com/#website"},"about":{"@id":"https://agsist.com/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".sec-title",".pc-price",".pc-change"]}},
+    {"@type":"SoftwareApplication","name":"AGSIST Agricultural Dashboard","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://agsist.com/"},
+    {"@type":"ItemList","name":"Free Agricultural Tools on AGSIST","itemListElement":[{"@type":"ListItem","position":1,"name":"Corn Futures Prices Today","url":"https://agsist.com/corn-futures-prices"},{"@type":"ListItem","position":2,"name":"Soybean Futures Prices Today","url":"https://agsist.com/soybean-futures-prices"},{"@type":"ListItem","position":3,"name":"Cash Grain Bids Near Me","url":"https://agsist.com/cash-bids"},{"@type":"ListItem","position":4,"name":"Spray Advisory","url":"https://agsist.com/spray"},{"@type":"ListItem","position":5,"name":"Urea Volatilization Risk Monitor","url":"https://agsist.com/urea"},{"@type":"ListItem","position":6,"name":"Farm Break-Even Calculator","url":"https://agsist.com/breakeven"},{"@type":"ListItem","position":7,"name":"Grain Bin Calculator","url":"https://agsist.com/grain-bin-calculator"},{"@type":"ListItem","position":8,"name":"AGSIST Daily Ag Briefing","url":"https://agsist.com/daily"},{"@type":"ListItem","position":9,"name":"Ag Prediction Markets","url":"https://agsist.com/ag-odds"}]},
+    {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are corn futures prices today?","acceptedAnswer":{"@type":"Answer","text":"AGSIST displays live CBOT corn futures prices updated every 30 minutes via Yahoo Finance. Both the nearby front-month contract and the December new-crop harvest contract are shown with net change, percent change, and 52-week range. Prices are in dollars per bushel."}},{"@type":"Question","name":"How do I find cash grain bids near me?","acceptedAnswer":{"@type":"Answer","text":"Enter any US ZIP code on AGSIST's Cash Bids page at agsist.com/cash-bids to see live corn, soybean, and wheat elevator prices from every reporting grain elevator within 50 miles. Basis is shown alongside cash price for each location."}},{"@type":"Question","name":"Is AGSIST free?","acceptedAnswer":{"@type":"Answer","text":"Yes. AGSIST is completely free \u2014 no account, no subscription, no ads. All tools including spray advisory, urea volatilization risk monitor, break-even calculator, grain bin calculator, cash bids, and the AGSIST Daily briefing are free for all farmers."}},{"@type":"Question","name":"How often are grain prices updated on AGSIST?","acceptedAnswer":{"@type":"Answer","text":"Grain futures prices on AGSIST are updated every 30 minutes during trading hours Monday through Friday via GitHub Actions. The AGSIST Daily briefing is published by 6 AM CT every weekday with overnight market analysis."}},{"@type":"Question","name":"What is urea volatilization risk?","acceptedAnswer":{"@type":"Answer","text":"Urea volatilization is the loss of nitrogen fertilizer as ammonia gas when urea is surface-applied without incorporation. Risk is highest when soil temperatures exceed 50\u00b0F, humidity is high, and no rain is forecast within 2\u20134 days. AGSIST's free urea risk monitor scores your real-time local conditions from 0\u2013100."}}]}
   ]
 }
 </script>
@@ -134,12 +71,7 @@
   .pc-spark.loaded{opacity:1}
   @media(max-width:380px){.pc-spark{display:none}}
 
-  .mkt-summary{
-    display:flex;align-items:center;
-    background:var(--surface);border:1px solid var(--border);border-radius:8px;
-    padding:.4rem .65rem;margin-bottom:.85rem;
-    overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  }
+  .mkt-summary{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.4rem .65rem;margin-bottom:.85rem;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
   .mkt-summary::-webkit-scrollbar{display:none}
   .mkt-sum-item{display:inline-flex;align-items:center;gap:.32rem;padding:.2rem .6rem;border-right:1px solid var(--border);flex-shrink:0;}
   .mkt-sum-item:last-child{border-right:none}
@@ -150,108 +82,50 @@
   .msi-chg.up{color:var(--green)} .msi-chg.dn{color:#ef4444} .msi-chg.nc{color:var(--text-muted)}
   @media(max-width:480px){.msi-name{display:none}}
 
-  /* ── Ratio + COT grid ─────────────────────────────────────── */
-  .ratio-cot-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.6rem 0 .4rem;
-  }
+  .ratio-cot-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.6rem 0 .4rem;}
   .ratio-cot-grid .ratio-widget{margin:0}
   @media(max-width:720px){.ratio-cot-grid{grid-template-columns:1fr}}
 
-  /* ── Ratio Widget ───────────────────────────────────────────── */
-  .ratio-widget{
-    background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.025) 100%);
-    border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;
-    display:flex;flex-direction:column;
-  }
-  .ratio-widget-head{
-    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;
-    margin-bottom:.6rem;
-  }
+  .ratio-widget{background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.025) 100%);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;}
+  .ratio-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .ratio-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
-  .ratio-body{
-    display:flex;align-items:flex-start;gap:1rem;flex-wrap:nowrap;
-    flex:1;
-  }
+  .ratio-body{display:flex;align-items:flex-start;gap:1rem;flex-wrap:nowrap;flex:1;}
   .ratio-num-block{flex-shrink:0;text-align:center;min-width:70px;padding-top:.1rem;}
   .ratio-big{font-family:'Oswald',sans-serif;font-size:2.4rem;font-weight:800;line-height:1;color:var(--text);transition:color .4s;}
   .ratio-colon{font-size:1.3rem;color:var(--text-muted);vertical-align:middle;margin:0 1px}
   .ratio-one{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;color:var(--text-muted)}
   .ratio-label{font-size:.62rem;color:var(--text-muted);font-weight:600;margin-top:.15rem;letter-spacing:.03em}
-  .ratio-right{
-    flex:1;min-width:0;
-    display:flex;flex-direction:column;gap:.6rem;
-  }
-  .ratio-gauge-track{
-    position:relative;height:9px;border-radius:5px;margin-bottom:.3rem;
-    background:linear-gradient(90deg,rgba(230,176,66,.32) 0%,rgba(230,176,66,.32) 30%,rgba(160,160,160,.12) 30%,rgba(160,160,160,.12) 55%,rgba(34,197,94,.28) 55%,rgba(34,197,94,.28) 100%);
-    border:1px solid rgba(255,255,255,.06);
-  }
-  .ratio-gauge-dot{
-    position:absolute;top:50%;transform:translate(-50%,-50%);
-    width:15px;height:15px;border-radius:50%;
-    border:2px solid var(--surface);box-shadow:0 0 0 1.5px var(--border);
-    transition:left .5s ease,background .4s;z-index:2;
-  }
-  .ratio-gauge-zones{
-    display:flex;justify-content:space-between;
-    font-size:.6rem;color:var(--text-muted);letter-spacing:.03em;font-weight:600;
-    padding:0 1px;margin-bottom:.3rem;
-  }
-  .ratio-verdict{
-    display:inline-flex;align-items:center;gap:.35rem;
-    padding:.25rem .65rem;border-radius:20px;
-    font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;transition:all .3s;
-  }
+  .ratio-right{flex:1;min-width:0;display:flex;flex-direction:column;gap:.6rem;}
+  .ratio-gauge-track{position:relative;height:9px;border-radius:5px;margin-bottom:.3rem;background:linear-gradient(90deg,rgba(230,176,66,.32) 0%,rgba(230,176,66,.32) 30%,rgba(160,160,160,.12) 30%,rgba(160,160,160,.12) 55%,rgba(34,197,94,.28) 55%,rgba(34,197,94,.28) 100%);border:1px solid rgba(255,255,255,.06);}
+  .ratio-gauge-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1.5px var(--border);transition:left .5s ease,background .4s;z-index:2;}
+  /* PATCHED: .6rem -> .62rem */
+  .ratio-gauge-zones{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-muted);letter-spacing:.03em;font-weight:600;padding:0 1px;margin-bottom:.3rem;}
+  .ratio-verdict{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .65rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;transition:all .3s;}
   .ratio-verdict.corn{background:rgba(230,176,66,.1);color:var(--gold);border-color:rgba(230,176,66,.28)}
   .ratio-verdict.neutral{background:var(--surface2);color:var(--text-dim);border-color:var(--border)}
   .ratio-verdict.beans{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22)}
-  .ratio-meta{
-    font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;
-    display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.2rem;
-  }
+  .ratio-meta{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.2rem;}
   .ratio-meta-sep{color:var(--border)}
   .ratio-links{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.4rem;}
-  .ratio-link{
-    font-size:.65rem;font-weight:600;color:var(--text-muted);text-decoration:none;
-    padding:.32rem .6rem;border:1px solid var(--border);border-radius:5px;
-    transition:border-color .15s,color .15s;
-  }
+  /* PATCHED: border-radius 5px -> 6px */
+  .ratio-link{font-size:.65rem;font-weight:600;color:var(--text-muted);text-decoration:none;padding:.32rem .6rem;border:1px solid var(--border);border-radius:6px;transition:border-color .15s,color .15s;}
   .ratio-link:hover{border-color:var(--gold);color:var(--gold)}
   @media(max-width:720px){.ratio-body{flex-wrap:wrap;}.ratio-right{min-width:100%;}}
-  @media(max-width:480px){
-    .ratio-big{font-size:2rem;}
-    .ratio-widget{padding:.75rem .85rem;}
-  }
+  @media(max-width:480px){.ratio-big{font-size:2rem;}.ratio-widget{padding:.75rem .85rem;}}
 
-  /* ── COT Widget ─────────────────────────────────────────────── */
-  .cot-widget{
-    background:linear-gradient(135deg,var(--surface) 0%,rgba(91,163,224,.025) 100%);
-    border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;display:flex;flex-direction:column;
-  }
-  .cot-widget-head{
-    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;
-    margin-bottom:.6rem;
-  }
+  .cot-widget{background:linear-gradient(135deg,var(--surface) 0%,rgba(91,163,224,.025) 100%);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;}
+  .cot-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .cot-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .cot-caption{font-size:.65rem;color:var(--text-muted);line-height:1.4;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
-  .cot-dir{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;
-    letter-spacing:.06em;text-transform:uppercase;padding:.1rem .32rem;border-radius:3px;
-    flex-shrink:0;
-  }
+  /* PATCHED: .6rem -> .62rem */
+  .cot-dir{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .32rem;border-radius:3px;flex-shrink:0;}
   .cot-dir.long{color:var(--green);background:rgba(34,197,94,.1);}
   .cot-dir.short{color:#ef4444;background:rgba(239,68,68,.1);}
   .cot-dir.nc{color:var(--text-muted);background:var(--surface2);}
-  .cot-verdict{
-    display:inline-flex;align-items:center;gap:.3rem;
-    padding:.25rem .65rem;border-radius:20px;
-    font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;transition:all .3s;
-  }
-  .cot-verdict.long  {background:rgba(34,197,94,.08); color:var(--green); border-color:rgba(34,197,94,.22)}
-  .cot-verdict.short {background:rgba(239,68,68,.08); color:#ef4444;      border-color:rgba(239,68,68,.22)}
-  .cot-verdict.mixed {background:var(--surface2);      color:var(--text-dim); border-color:var(--border)}
+  .cot-verdict{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .65rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;transition:all .3s;}
+  .cot-verdict.long{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22)}
+  .cot-verdict.short{background:rgba(239,68,68,.08);color:#ef4444;border-color:rgba(239,68,68,.22)}
+  .cot-verdict.mixed{background:var(--surface2);color:var(--text-dim);border-color:var(--border)}
   .cot-rows{display:flex;flex-direction:column;gap:.5rem;flex:1}
   .cot-row-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.2rem}
   .cot-label{display:flex;align-items:center;gap:.3rem}
@@ -264,50 +138,21 @@
   .cot-bar-wrap{position:relative;height:8px;border-radius:4px;background:var(--surface2);overflow:visible}
   .cot-bar-fill{position:absolute;top:0;height:100%;border-radius:4px;transition:left .5s,width .5s}
   .cot-zero-mark{position:absolute;top:-3px;width:2px;height:14px;background:rgba(255,255,255,.2);border-radius:1px;z-index:1}
-  .cot-bar-dot{
-    position:absolute;top:50%;width:13px;height:13px;border-radius:50%;
-    border:2px solid var(--surface);box-shadow:0 0 0 1.5px var(--border);
-    transform:translate(-50%,-50%);transition:left .5s ease,background .4s;z-index:2;
-  }
-  .cot-bar-labels{
-    display:flex;justify-content:space-between;
-    font-size:.62rem;color:var(--text-muted);margin-top:.2rem;
-    font-family:'JetBrains Mono',monospace;
-  }
-  .cot-footer{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);
-  }
+  .cot-bar-dot{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1.5px var(--border);transform:translate(-50%,-50%);transition:left .5s ease,background .4s;z-index:2;}
+  .cot-bar-labels{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-muted);margin-top:.2rem;font-family:'JetBrains Mono',monospace;}
+  .cot-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
   .cot-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
-  .cot-full-link{
-    font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;
-    padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;
-    transition:border-color .15s;
-  }
+  /* PATCHED: border-radius 5px -> 6px */
+  .cot-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:6px;transition:border-color .15s;}
   .cot-full-link:hover{border-color:var(--gold)}
 
-  /* ── Tariff + Fertilizer side-by-side grid ─────────────────── */
-  .tariff-fert-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.5rem 0;
-  }
+  .tariff-fert-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.5rem 0;}
   @media(max-width:720px){.tariff-fert-grid{grid-template-columns:1fr}}
 
-  /* ── Tariff Widget ──────────────────────────────────────────── */
-  .tariff-widget{
-    background:linear-gradient(135deg,var(--surface) 0%,rgba(239,68,68,.02) 100%);
-    border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;display:flex;flex-direction:column;
-  }
-  .tariff-widget-head{
-    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;
-    margin-bottom:.6rem;
-  }
+  .tariff-widget{background:linear-gradient(135deg,var(--surface) 0%,rgba(239,68,68,.02) 100%);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;}
+  .tariff-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .tariff-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
-  .tariff-status-badge{
-    display:inline-flex;align-items:center;gap:.3rem;
-    padding:.25rem .65rem;border-radius:20px;
-    font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;
-  }
+  .tariff-status-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .65rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.03em;border:1px solid;}
   .tariff-status-badge.elevated{background:rgba(239,68,68,.08);color:#ef4444;border-color:rgba(239,68,68,.25);}
   .tariff-status-badge.normal{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22);}
   .tariff-status-badge.mixed{background:rgba(230,176,66,.08);color:var(--gold);border-color:rgba(230,176,66,.22);}
@@ -317,37 +162,25 @@
   .tariff-row-comm{font-size:.72rem;font-weight:700;color:var(--text);flex:1;min-width:0;}
   .tariff-row-dest{font-size:.62rem;color:var(--text-muted);flex-shrink:0;}
   .tariff-row-rate{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;flex-shrink:0;min-width:44px;text-align:right;}
-  .tariff-row-rate.elevated{color:#ef4444;}
-  .tariff-row-rate.normal{color:var(--green);}
-  .tariff-row-rate.mixed{color:var(--gold);}
+  .tariff-row-rate.elevated{color:#ef4444;} .tariff-row-rate.normal{color:var(--green);} .tariff-row-rate.mixed{color:var(--gold);}
   .tariff-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
   .tariff-footer-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .tariff-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  /* PATCHED: border-radius 5px -> 6px */
+  .tariff-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:6px;transition:border-color .15s;}
   .tariff-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.tariff-widget{padding:.75rem .85rem;}.tariff-row-dest{display:none;}}
 
-  @media(max-width:480px){
-    .cot-widget{padding:.75rem .85rem;}
-    .cot-net{font-size:.72rem;}
-    .cot-comm-name{font-size:.7rem;}
-  }
+  @media(max-width:480px){.cot-widget{padding:.75rem .85rem;}.cot-net{font-size:.72rem;}.cot-comm-name{font-size:.7rem;}}
 
-  /* ── NOAA ─────────────────────────────────────────────────── */
+  /* PATCHED: border-radius 4px -> 6px */
   .noaa-tabs{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
-  .noaa-tab{
-    padding:.38rem .9rem;border-radius:4px;border:1px solid var(--border);background:var(--surface);
-    color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;
-    cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:all .15s;
-  }
+  .noaa-tab{padding:.38rem .9rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:all .15s;}
   .noaa-tab:hover{border-color:var(--gold);color:var(--text)}
   .noaa-tab.active{background:var(--gold);color:#0a1a0a;border-color:var(--gold)}
   .noaa-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
   @media(max-width:540px){.noaa-grid{grid-template-columns:1fr}}
   .noaa-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}
-  .noaa-card-head{
-    display:flex;align-items:center;gap:.4rem;padding:.5rem .8rem;border-bottom:1px solid var(--border);
-    font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  }
+  .noaa-card-head{display:flex;align-items:center;gap:.4rem;padding:.5rem .8rem;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
   .noaa-card-head.temp{color:#f4834a} .noaa-card-head.precip{color:#5bb8f5}
   .noaa-card img{display:block;width:100%;height:auto;background:var(--surface2);min-height:100px}
   .noaa-legend{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.55rem;font-size:.68rem;color:var(--text-dim);}
@@ -358,11 +191,8 @@
   .noaa-img-err{display:none;align-items:center;justify-content:center;min-height:100px;font-size:.78rem;color:var(--text-muted);text-align:center;padding:.75rem;flex-direction:column;gap:.4rem;}
   .noaa-img-err a{color:var(--gold);font-size:.72rem}
 
-  /* ── Touch & interaction ────────────────────────────────────── */
   button,a,[role="button"]{touch-action:manipulation;}
-  /* Ensures kalshi grid holds space while loading — prevents layout shift */
   #kalshi-grid{min-height:160px;}
-  /* Fix NOAA legend wrapping on narrow mobile */
   .noaa-legend{flex-direction:column;gap:.3rem;}
   @media(min-width:480px){.noaa-legend{flex-direction:row;gap:.3rem 1rem;}}
   .noaa-legend span{margin-left:0!important;}
@@ -375,13 +205,7 @@
   }
   .noscript-banner{background:var(--gold);color:#0a1a0a;text-align:center;padding:.75rem 1rem;font-size:.88rem;font-weight:600}
 
-  /* ── Prediction market cards ──────────────────────────────── */
-  .km-card{
-    background:var(--surface);border:1px solid var(--border);border-radius:8px;
-    padding:.75rem .9rem;display:flex;flex-direction:column;gap:.38rem;
-    text-decoration:none;color:inherit;cursor:pointer;
-    transition:border-color .15s,transform .1s;position:relative;overflow:hidden;
-  }
+  .km-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem;display:flex;flex-direction:column;gap:.38rem;text-decoration:none;color:inherit;cursor:pointer;transition:border-color .15s,transform .1s;position:relative;overflow:hidden;}
   .km-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .2s}
   .km-card[data-tier="1"]::before{background:linear-gradient(90deg,var(--green),transparent)}
   .km-card[data-tier="2"]::before{background:linear-gradient(90deg,var(--gold),transparent)}
@@ -403,19 +227,11 @@
   .km-tl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted)}
   .km-why{font-size:.69rem;color:var(--text-muted);line-height:1.5;padding:.32rem .5rem;background:rgba(255,255,255,.025);border-radius:4px;border-left:2px solid rgba(255,255,255,.12)}
 
-  /* ── Crop Progress + Export Sales grid ─────────────────────── */
-  .crop-export-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.4rem 0 .5rem;
-  }
+  .crop-export-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.4rem 0 .5rem;}
   @media(max-width:720px){.crop-export-grid{grid-template-columns:1fr}}
   @media(max-width:640px){.crop-export-grid{grid-template-columns:1fr}}
 
-  /* ── Crop Progress Widget ───────────────────────────────────── */
-  .crop-widget{
-    background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.025) 100%);
-    border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;display:flex;flex-direction:column;
-  }
+  .crop-widget{background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.025) 100%);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;}
   .crop-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .crop-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .crop-week-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);padding:.15rem .4rem;border:1px solid var(--border);border-radius:4px;}
@@ -425,9 +241,7 @@
   .crop-comm-icon{font-size:.85rem;line-height:1;}
   .crop-comm-name{font-size:.76rem;font-weight:700;color:var(--text);}
   .crop-ge-val{font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;}
-  .crop-ge-val.good{color:var(--green);}
-  .crop-ge-val.fair{color:var(--gold);}
-  .crop-ge-val.poor{color:#ef4444;}
+  .crop-ge-val.good{color:var(--green);} .crop-ge-val.fair{color:var(--gold);} .crop-ge-val.poor{color:#ef4444;}
   .crop-chg-row{display:flex;gap:.55rem;margin-top:.1rem;}
   .crop-chg{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;}
   .crop-chg.up{color:var(--green);} .crop-chg.dn{color:#ef4444;} .crop-chg.nc{color:var(--text-muted);}
@@ -440,16 +254,12 @@
   .crop-offseason{display:flex;align-items:center;justify-content:center;flex:1;font-size:.78rem;color:var(--text-muted);text-align:center;padding:.5rem 0;}
   .crop-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
   .crop-footer-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .crop-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  /* PATCHED: border-radius 5px -> 6px */
+  .crop-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:6px;transition:border-color .15s;}
   .crop-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.crop-widget{padding:.75rem .85rem;}}
 
-  /* ── Export Sales Widget ────────────────────────────────────── */
-  .export-widget{
-    background:linear-gradient(135deg,var(--surface) 0%,rgba(59,130,246,.025) 100%);
-    border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;display:flex;flex-direction:column;
-  }
+  .export-widget{background:linear-gradient(135deg,var(--surface) 0%,rgba(59,130,246,.025) 100%);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;}
   .export-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .export-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .export-mkt-yr{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);padding:.15rem .4rem;border:1px solid var(--border);border-radius:4px;}
@@ -462,32 +272,25 @@
   .export-pace-row{display:flex;align-items:center;gap:.4rem;}
   .export-pace-bar{flex:1;height:5px;border-radius:3px;background:var(--surface2);overflow:hidden;}
   .export-pace-fill{height:100%;border-radius:3px;transition:width .5s;}
-  .export-pace-fill.on-track{background:var(--green);}
-  .export-pace-fill.lagging{background:var(--gold);}
-  .export-pace-fill.behind{background:#ef4444;}
+  .export-pace-fill.on-track{background:var(--green);} .export-pace-fill.lagging{background:var(--gold);} .export-pace-fill.behind{background:#ef4444;}
   .export-pace-pct{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;flex-shrink:0;}
-  .export-pace-pct.on-track{color:var(--green);}
-  .export-pace-pct.lagging{color:var(--gold);}
-  .export-pace-pct.behind{color:#ef4444;}
+  .export-pace-pct.on-track{color:var(--green);} .export-pace-pct.lagging{color:var(--gold);} .export-pace-pct.behind{color:#ef4444;}
   .export-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
   .export-footer-date{font-size:.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .export-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  /* PATCHED: border-radius 5px -> 6px */
+  .export-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:6px;transition:border-color .15s;}
   .export-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.export-widget{padding:.75rem .85rem;}}
 
-  /* ── Fertilizer Widget ──────────────────────────────────────── */
-  .fert-widget{
-    background:linear-gradient(135deg,var(--surface) 0%,rgba(230,176,66,.02) 100%);
-    border:1px solid var(--border);border-radius:12px;
-    padding:.9rem 1.1rem;display:flex;flex-direction:column;
-  }
+  .fert-widget{background:linear-gradient(135deg,var(--surface) 0%,rgba(230,176,66,.02) 100%);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;flex-direction:column;}
   .fert-widget-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;}
   .fert-widget-title{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
   .fert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.4rem;flex:1;}
   .fert-card{background:var(--surface2);border-radius:8px;padding:.5rem .65rem;}
   .fert-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem;}
   .fert-name{font-size:.68rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.25rem;}
-  .fert-sym{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-muted);}
+  /* PATCHED: .6rem -> .62rem */
+  .fert-sym{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);}
   .fert-price{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--text);line-height:1;}
   .fert-chg{display:flex;align-items:center;gap:.2rem;margin-top:.12rem;}
   .fert-chg-val{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;}
@@ -495,7 +298,8 @@
   .fert-loc{font-size:.62rem;color:var(--text-muted);}
   .fert-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem;padding-top:.55rem;border-top:1px solid var(--border);}
   .fert-footer-note{font-size:.62rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-  .fert-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:5px;transition:border-color .15s;}
+  /* PATCHED: border-radius 5px -> 6px */
+  .fert-full-link{font-size:.68rem;font-weight:600;color:var(--gold);text-decoration:none;padding:.22rem .52rem;border:1px solid rgba(230,176,66,.3);border-radius:6px;transition:border-color .15s;}
   .fert-full-link:hover{border-color:var(--gold);}
   @media(max-width:480px){.km-card{padding:.65rem .75rem;}.km-card-pct{font-size:1.35rem;}}
   @media(max-width:480px){.fert-widget{padding:.75rem .85rem;}.fert-grid{grid-template-columns:1fr 1fr;}}
@@ -507,7 +311,7 @@
 <noscript><div class="noscript-banner">AGSIST requires JavaScript for live prices and weather. Please enable JavaScript.</div></noscript>
 <div id="site-header"></div>
 
-<!-- ══ TICKER ════════════════════════════════════════════════════ -->
+<!-- TICKER -->
 <div class="prices-strip" aria-label="Live commodity prices" role="marquee">
   <div class="ticker-outer">
     <div class="ticker-live"><div class="live-dot" aria-hidden="true"></div><span>LIVE</span></div>
@@ -515,45 +319,45 @@
       <div class="ticker-track" id="ticker-track" aria-live="off">
         <div id="ticker-items-single">
           <div class="t-item" data-sym="corn"><span class="t-label">Corn (front)</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="corn-dec"><span class="t-label">Corn Dec '26</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="beans"><span class="t-label">Beans (front)</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="beans-nov"><span class="t-label">Beans Nov '26</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="wheat"><span class="t-label">Wheat (front)</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="oats"><span class="t-label">Oats</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="cattle"><span class="t-label">Live Cattle</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="feeders"><span class="t-label">Feeder Cattle</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="hogs"><span class="t-label">Lean Hogs</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="milk"><span class="t-label">Class III Milk</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="meal"><span class="t-label">Soy Meal</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="crude"><span class="t-label">Crude WTI</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="natgas"><span class="t-label">Natural Gas</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="dollar"><span class="t-label">Dollar Index</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="gold"><span class="t-label">Gold</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="silver"><span class="t-label">Silver</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="sp500"><span class="t-label">S&amp;P 500</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="bitcoin"><span class="t-label">Bitcoin</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="ripple"><span class="t-label">XRP</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="kaspa"><span class="t-label">Kaspa</span><span class="t-price">--</span><span class="t-chg nc">--</span></div>
-          <div class="t-sep" aria-hidden="true">·</div>
+          <div class="t-sep" aria-hidden="true">&middot;</div>
           <div class="t-item" data-sym="ffai"><span class="t-label">FFAI Index</span><span class="t-price" style="color:var(--blue)">--</span><span class="t-chg" style="color:var(--blue)">--</span></div>
         </div>
       </div>
@@ -574,21 +378,20 @@
 @media(min-width:700px){.dh{--dh-pad:1.75rem}.dh-headline{font-size:2.2rem}}
 @media(min-width:1000px){.dh-headline{font-size:2.6rem}}
 </style>
-
-<!-- ══ DAILY HERO ════════════════════════════════════════════════ -->
+<!-- DAILY HERO -->
 <section class="daily-hero" id="daily-hero">
   <div class="daily-teaser" id="daily-teaser" role="button" tabindex="0" aria-label="Expand AGSIST Daily briefing">
     <div class="teaser-line1">
-      <div class="teaser-left"><span class="teaser-badge" id="daily-teaser-date">📰 AGSIST Daily</span></div>
-      <span class="teaser-action">Read Today's Briefing ↓</span>
+      <div class="teaser-left"><span class="teaser-badge" id="daily-teaser-date">&#x1F4F0; AGSIST Daily</span></div>
+      <span class="teaser-action">Read Today's Briefing &#x2193;</span>
     </div>
-    <span class="teaser-preview" id="daily-teaser-text">Today's ag market briefing — click to read</span>
+    <span class="teaser-preview" id="daily-teaser-text">Today's ag market briefing &mdash; click to read</span>
   </div>
   <div class="daily-full" id="daily-full">
     <div class="daily-hero-inner">
       <div id="daily-surprise-banner" class="daily-surprise-banner" style="display:none" role="alert">
-        <span class="surprise-icon">⚡</span>
-        <span class="surprise-text"><strong>Loading...</strong></span>
+        <span class="surprise-icon">&#x26A1;</span>
+        <span class="surprise-text"><strong>Loading&hellip;</strong></span>
       </div>
       <div class="daily-grid">
         <div class="daily-left">
@@ -598,41 +401,41 @@
           </div>
           <div id="daily-date" class="daily-date"></div>
           <div id="site-greeting" class="daily-greeting">Good Morning</div>
-          <h1 id="daily-headline" class="daily-headline">Loading Today's Briefing…</h1>
+          <h1 id="daily-headline" class="daily-headline">Loading Today's Briefing&hellip;</h1>
           <p id="daily-subheadline" style="font-size:.88rem;color:var(--gold);font-weight:600;margin-bottom:.5rem;letter-spacing:.02em"></p>
           <p id="daily-lead" class="daily-lead"></p>
           <div class="daily-sections">
             <div id="daily-sec-1" class="daily-sec" style="position:relative">
-              <span id="daily-section-1-icon" class="daily-sec-icon">🌾</span>
+              <span id="daily-section-1-icon" class="daily-sec-icon">&#x1F33E;</span>
               <div>
-                <div class="daily-sec-label-row"><div id="daily-section-1-title" class="daily-sec-label">GRAINS & OILSEEDS</div><span id="daily-section-1-conviction" class="daily-sec-conviction"></span></div>
+                <div class="daily-sec-label-row"><div id="daily-section-1-title" class="daily-sec-label">GRAINS &amp; OILSEEDS</div><span id="daily-section-1-conviction" class="daily-sec-conviction"></span></div>
                 <div id="daily-section-1-body" class="daily-sec-text"></div>
                 <div id="daily-section-1-bottomline" class="daily-sec-bottomline"></div>
                 <div id="daily-section-1-action" class="daily-sec-action"></div>
               </div>
             </div>
             <div id="daily-sec-2" class="daily-sec" style="position:relative">
-              <span id="daily-section-2-icon" class="daily-sec-icon">🐄</span>
+              <span id="daily-section-2-icon" class="daily-sec-icon">&#x1F404;</span>
               <div>
-                <div class="daily-sec-label-row"><div id="daily-section-2-title" class="daily-sec-label">LIVESTOCK & DAIRY</div><span id="daily-section-2-conviction" class="daily-sec-conviction"></span></div>
+                <div class="daily-sec-label-row"><div id="daily-section-2-title" class="daily-sec-label">LIVESTOCK &amp; DAIRY</div><span id="daily-section-2-conviction" class="daily-sec-conviction"></span></div>
                 <div id="daily-section-2-body" class="daily-sec-text"></div>
                 <div id="daily-section-2-bottomline" class="daily-sec-bottomline"></div>
                 <div id="daily-section-2-action" class="daily-sec-action"></div>
               </div>
             </div>
             <div id="daily-sec-3" class="daily-sec" style="position:relative">
-              <span id="daily-section-3-icon" class="daily-sec-icon">⛽</span>
+              <span id="daily-section-3-icon" class="daily-sec-icon">&#x26FD;</span>
               <div>
-                <div class="daily-sec-label-row"><div id="daily-section-3-title" class="daily-sec-label">ENERGY & INPUTS</div><span id="daily-section-3-conviction" class="daily-sec-conviction"></span></div>
+                <div class="daily-sec-label-row"><div id="daily-section-3-title" class="daily-sec-label">ENERGY &amp; INPUTS</div><span id="daily-section-3-conviction" class="daily-sec-conviction"></span></div>
                 <div id="daily-section-3-body" class="daily-sec-text"></div>
                 <div id="daily-section-3-bottomline" class="daily-sec-bottomline"></div>
                 <div id="daily-section-3-action" class="daily-sec-action"></div>
               </div>
             </div>
             <div id="daily-sec-4" class="daily-sec" style="position:relative">
-              <span id="daily-section-4-icon" class="daily-sec-icon">🏛️</span>
+              <span id="daily-section-4-icon" class="daily-sec-icon">&#x1F3DB;&#xFE0F;</span>
               <div>
-                <div class="daily-sec-label-row"><div id="daily-section-4-title" class="daily-sec-label">MACRO & TRADE</div><span id="daily-section-4-conviction" class="daily-sec-conviction"></span></div>
+                <div class="daily-sec-label-row"><div id="daily-section-4-title" class="daily-sec-label">MACRO &amp; TRADE</div><span id="daily-section-4-conviction" class="daily-sec-conviction"></span></div>
                 <div id="daily-section-4-body" class="daily-sec-text"></div>
                 <div id="daily-section-4-bottomline" class="daily-sec-bottomline"></div>
                 <div id="daily-section-4-action" class="daily-sec-action"></div>
@@ -640,7 +443,7 @@
             </div>
           </div>
           <div class="daily-sec" style="border-color:rgba(74,143,186,.20);background:linear-gradient(135deg,var(--surface) 0%,rgba(74,143,186,.03) 100%)">
-            <span class="daily-sec-icon">🧠</span>
+            <span class="daily-sec-icon">&#x1F9E0;</span>
             <div>
               <div class="daily-sec-label" style="color:var(--blue)">THE MORE YOU KNOW</div>
               <div class="daily-sec-text">
@@ -652,26 +455,26 @@
         </div>
         <div class="hero-sidebar">
           <div class="s-card s-card--gold">
-            <div class="s-card-label">📊 THE NUMBER</div>
-            <div id="daily-number-value" class="one-num">—</div>
+            <div class="s-card-label">&#x1F4CA; THE NUMBER</div>
+            <div id="daily-number-value" class="one-num">&mdash;</div>
             <div id="daily-number-unit" class="one-num-unit"></div>
             <div id="daily-number-context" class="one-num-ctx"></div>
           </div>
           <div class="s-card">
-            <div class="s-card-label">📅 TODAY'S WATCH LIST</div>
+            <div class="s-card-label">&#x1F4C5; TODAY'S WATCH LIST</div>
             <ul id="daily-watch-list" class="watch-list" role="list">
-              <li class="watch-item"><span class="watch-time">—</span><span class="watch-desc">Loading watch list…</span></li>
+              <li class="watch-item"><span class="watch-time">&mdash;</span><span class="watch-desc">Loading watch list&hellip;</span></li>
             </ul>
           </div>
           <div class="s-card" style="border-color:rgba(218,165,32,.15)">
-            <div class="s-card-label" style="color:var(--gold)">💬 DAILY QUOTE</div>
+            <div class="s-card-label" style="color:var(--gold)">&#x1F4AC; DAILY QUOTE</div>
             <blockquote style="margin:0;padding:0">
-              <p id="daily-quote-text" style="font-size:.92rem;font-style:italic;color:var(--text-dim);line-height:1.65;margin-bottom:.4rem">"Loading…"</p>
-              <cite id="daily-quote-attr" style="font-size:.76rem;color:var(--text-muted);font-style:normal">— …</cite>
+              <p id="daily-quote-text" style="font-size:.92rem;font-style:italic;color:var(--text-dim);line-height:1.65;margin-bottom:.4rem">"Loading&hellip;"</p>
+              <cite id="daily-quote-attr" style="font-size:.76rem;color:var(--text-muted);font-style:normal">&mdash; &hellip;</cite>
             </blockquote>
           </div>
           <div style="font-size:.62rem;color:var(--text-muted);text-align:center;padding:.2rem 0">
-            <span id="daily-source">USDA · CME Group · Open-Meteo</span>
+            <span id="daily-source">USDA &middot; CME Group &middot; Open-Meteo</span>
           </div>
         </div>
       </div>
@@ -680,43 +483,45 @@
           <span style="font-size:.82rem;color:var(--text-muted)">Published every weekday by 6am CT.</span>
         </div>
         <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-          <a href="/daily#subscribe" class="btn-dismiss" style="text-decoration:none">📧 Get Daily Alerts</a>
-          <a href="/daily" class="btn-dismiss" style="text-decoration:none">📰 AGSIST Daily Page</a>
-          <button class="btn-dismiss" id="btn-dismiss-daily">↑ Hide Until Tomorrow</button>
+          <a href="/daily#subscribe" class="btn-dismiss" style="text-decoration:none">&#x1F4E7; Get Daily Alerts</a>
+          <a href="/daily" class="btn-dismiss" style="text-decoration:none">&#x1F4F0; AGSIST Daily Page</a>
+          <button class="btn-dismiss" id="btn-dismiss-daily">&#x2191; Hide Until Tomorrow</button>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <main id="main" class="main">
   <div class="dash-grid">
+    <!-- Cash Bids -->
     <div class="fade-up" id="f1">
       <div class="sec-head">
-        <div class="sec-title">💵 Cash Bids &amp; Basis</div>
-        <a href="/cash-bids" class="sec-all">Find Elevators →</a>
+        <div class="sec-title">&#x1F4B5; Cash Bids &amp; Basis</div>
+        <a href="/cash-bids" class="sec-all">Find Elevators &rarr;</a>
       </div>
       <div class="card"><div class="card-body">
         <div id="bids-geo-bar" style="display:flex;align-items:center;gap:.55rem;margin-bottom:.6rem;font-size:.75rem;color:var(--text-dim)">
           <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite" aria-hidden="true"></span>
-          <span id="bids-geo-txt">Detecting your location…</span>
+          <span id="bids-geo-txt">Detecting your location&hellip;</span>
           <button id="bids-enter-zip-btn" style="margin-left:auto;background:none;border:none;color:var(--text-muted);font-size:.72rem;cursor:pointer;text-decoration:underline;padding:.4rem 0;">Enter ZIP</button>
         </div>
         <div id="bids-zip-row" style="display:none;gap:.55rem;margin-bottom:1.1rem">
           <input type="text" id="bids-zip" placeholder="Enter your ZIP code" maxlength="5" aria-label="ZIP code for cash bids" style="flex:1;padding:.7rem .9rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);outline:none;transition:border-color .15s">
-          <button id="bids-lookup-btn" style="padding:.7rem 1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s">Find Bids →</button>
+          <button id="bids-lookup-btn" style="padding:.7rem 1rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s">Find Bids &rarr;</button>
         </div>
         <div id="bids-list-area">
           <div class="bids-skeleton" aria-label="Loading cash bids"><div class="bids-skel-row"></div><div class="bids-skel-row"></div><div class="bids-skel-row"></div></div>
         </div>
       </div></div>
     </div>
+
+    <!-- Weather -->
     <div class="fade-up" id="f2" style="transition-delay:.08s">
       <div class="sec-head"><div class="sec-title">Local Conditions</div></div>
       <div class="card"><div class="card-body">
         <div id="wx-loading" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 0;gap:.65rem">
-          <div style="font-size:1.8rem" aria-hidden="true">📍</div>
-          <div style="font-size:.9rem;color:var(--text-dim);text-align:center">Getting your local weather…</div>
+          <div style="font-size:1.8rem" aria-hidden="true">&#x1F4CD;</div>
+          <div style="font-size:.9rem;color:var(--text-dim);text-align:center">Getting your local weather&hellip;</div>
           <button id="btn-allow-loc" style="padding:.65rem 1.25rem;background:var(--gold);color:#0a1a0a;border:none;border-radius:6px;font-size:.85rem;font-weight:700;cursor:pointer">Allow Location</button>
           <button id="btn-zip-instead" style="background:none;border:none;color:var(--text-muted);font-size:.78rem;cursor:pointer;text-decoration:underline;padding:.4rem 0;">Enter ZIP instead</button>
         </div>
@@ -728,11 +533,11 @@
         </div>
         <div id="wx-data" style="display:none">
           <div class="wx-hero">
-            <div class="wx-icon" id="wx-icon" aria-hidden="true">⛅</div>
+            <div class="wx-icon" id="wx-icon" aria-hidden="true">&#x26C5;</div>
             <div>
               <div class="wx-temp"><span id="wx-temp">--</span></div>
               <div class="wx-desc" id="wx-desc">Current conditions</div>
-              <div class="wx-loc" id="wx-loc">📍 Locating...</div>
+              <div class="wx-loc" id="wx-loc">&#x1F4CD; Locating...</div>
             </div>
           </div>
           <div class="wx-grid">
@@ -746,64 +551,65 @@
         </div>
       </div></div>
     </div>
+
+    <!-- Quick Tools -->
     <div class="fade-up" id="f3" style="transition-delay:.16s">
-      <div class="sec-head"><div class="sec-title">🛠️ Quick Tools</div></div>
+      <div class="sec-head"><div class="sec-title">&#x1F6E0;&#xFE0F; Quick Tools</div></div>
       <div class="card"><div class="card-body">
         <div class="tool-list">
-          <a href="/breakeven" class="tool-btn"><span class="tool-name">📐 Break-Even Calculator</span><span class="tool-arr">→</span></a>
-          <a href="/grain-bin-calculator" class="tool-btn"><span class="tool-name">🏗️ Grain Bin Calculator</span><span class="tool-arr">→</span></a>
-          <a href="/gdu-calculator" class="tool-btn"><span class="tool-name">🌡️ GDU Calculator</span><span class="tool-arr">→</span></a>
+          <a href="/breakeven" class="tool-btn"><span class="tool-name">&#x1F4D0; Break-Even Calculator</span><span class="tool-arr">&rarr;</span></a>
+          <a href="/grain-bin-calculator" class="tool-btn"><span class="tool-name">&#x1F3D7;&#xFE0F; Grain Bin Calculator</span><span class="tool-arr">&rarr;</span></a>
+          <a href="/gdu-calculator" class="tool-btn"><span class="tool-name">&#x1F321;&#xFE0F; GDU Calculator</span><span class="tool-arr">&rarr;</span></a>
           <a href="/spray" id="wsp-spray" class="tool-widget">
             <div class="tool-widget-inner">
-              <span class="tool-widget-icon" id="wsp-spray-icon">⏳</span>
+              <span class="tool-widget-icon" id="wsp-spray-icon">&#x23F3;</span>
               <div class="tool-widget-body">
-                <span class="tool-widget-status" id="wsp-spray-status">Loading spray conditions…</span>
+                <span class="tool-widget-status" id="wsp-spray-status">Loading spray conditions&hellip;</span>
                 <span class="tool-widget-detail" id="wsp-spray-detail">Waiting for weather data</span>
               </div>
-              <span class="tool-widget-arr">→</span>
+              <span class="tool-widget-arr">&rarr;</span>
             </div>
           </a>
           <a href="/urea" class="tool-widget tool-widget--urea">
             <div class="tool-widget-inner">
               <div class="tool-widget-top">
-                <span class="tool-widget-icon">🌾</span>
+                <span class="tool-widget-icon">&#x1F33E;</span>
                 <div class="tool-widget-body"><span class="tool-widget-status">Urea Volatilization Risk</span></div>
                 <span class="tool-widget-score" id="wsp-urea-score">--</span>
-                <span class="tool-widget-arr">→</span>
+                <span class="tool-widget-arr">&rarr;</span>
               </div>
               <div class="tool-widget-bottom">
-                <span class="tool-widget-badge" id="wsp-urea-badge">Loading…</span>
+                <span class="tool-widget-badge" id="wsp-urea-badge">Loading&hellip;</span>
                 <span class="tool-widget-rec" id="wsp-urea-rec">Waiting for weather data</span>
               </div>
             </div>
           </a>
-          <a href="/ag-odds" class="tool-btn"><span class="tool-name">🎯 Ag Prediction Markets</span><span class="tool-arr">→</span></a>
-          <a href="/fast-facts" class="tool-btn"><span class="tool-name">⚡ Fast Facts</span><span class="tool-arr">→</span></a>
+          <a href="/ag-odds" class="tool-btn"><span class="tool-name">&#x1F3AF; Ag Prediction Markets</span><span class="tool-arr">&rarr;</span></a>
+          <a href="/fast-facts" class="tool-btn"><span class="tool-name">&#x26A1; Fast Facts</span><span class="tool-arr">&rarr;</span></a>
         </div>
       </div></div>
     </div>
   </div>
-
-  <!-- ══ PRICE CARDS ═══════════════════════════════════════════════ -->
+  <!-- PRICE CARDS -->
   <div class="price-cards-section fade-up" id="f-prices">
     <div class="sec-head">
-      <div class="sec-title">📈 Market Prices</div>
-      <a href="/corn-futures-prices" class="sec-all">All Charts →</a>
+      <div class="sec-title">&#x1F4C8; Market Prices</div>
+      <a href="/corn-futures-prices" class="sec-all">All Charts &rarr;</a>
     </div>
     <div class="mkt-summary" id="mkt-summary" aria-label="Market overview">
-      <div class="mkt-sum-item"><span class="msi-icon">🌽</span><span class="msi-name">Corn</span><span class="msi-price" id="ms-corn-p">--</span><span class="msi-chg nc" id="ms-corn-c">--</span></div>
-      <div class="mkt-sum-item"><span class="msi-icon">🫘</span><span class="msi-name">Beans</span><span class="msi-price" id="ms-beans-p">--</span><span class="msi-chg nc" id="ms-beans-c">--</span></div>
-      <div class="mkt-sum-item"><span class="msi-icon">🌾</span><span class="msi-name">Wheat</span><span class="msi-price" id="ms-wheat-p">--</span><span class="msi-chg nc" id="ms-wheat-c">--</span></div>
-      <div class="mkt-sum-item"><span class="msi-icon">🐄</span><span class="msi-name">Cattle</span><span class="msi-price" id="ms-cattle-p">--</span><span class="msi-chg nc" id="ms-cattle-c">--</span></div>
-      <div class="mkt-sum-item"><span class="msi-icon">🛢️</span><span class="msi-name">Crude</span><span class="msi-price" id="ms-crude-p">--</span><span class="msi-chg nc" id="ms-crude-c">--</span></div>
-      <div class="mkt-sum-item"><span class="msi-icon">🥇</span><span class="msi-name">Gold</span><span class="msi-price" id="ms-gold-p">--</span><span class="msi-chg nc" id="ms-gold-c">--</span></div>
-      <div class="mkt-sum-item"><span class="msi-icon">💵</span><span class="msi-name">Dollar</span><span class="msi-price" id="ms-dollar-p">--</span><span class="msi-chg nc" id="ms-dollar-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1F33D;</span><span class="msi-name">Corn</span><span class="msi-price" id="ms-corn-p">--</span><span class="msi-chg nc" id="ms-corn-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1FAD8;</span><span class="msi-name">Beans</span><span class="msi-price" id="ms-beans-p">--</span><span class="msi-chg nc" id="ms-beans-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1F33E;</span><span class="msi-name">Wheat</span><span class="msi-price" id="ms-wheat-p">--</span><span class="msi-chg nc" id="ms-wheat-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1F404;</span><span class="msi-name">Cattle</span><span class="msi-price" id="ms-cattle-p">--</span><span class="msi-chg nc" id="ms-cattle-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1F6E2;&#xFE0F;</span><span class="msi-name">Crude</span><span class="msi-price" id="ms-crude-p">--</span><span class="msi-chg nc" id="ms-crude-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1F947;</span><span class="msi-name">Gold</span><span class="msi-price" id="ms-gold-p">--</span><span class="msi-chg nc" id="ms-gold-c">--</span></div>
+      <div class="mkt-sum-item"><span class="msi-icon">&#x1F4B5;</span><span class="msi-name">Dollar</span><span class="msi-price" id="ms-dollar-p">--</span><span class="msi-chg nc" id="ms-dollar-c">--</span></div>
     </div>
 
-    <div class="pc-section-lbl">🌽 Grains — Key Contracts</div>
+    <div class="pc-section-lbl">&#x1F33D; Grains &mdash; Key Contracts</div>
     <div class="price-cards-grid">
       <div class="pc pc--highlight" data-spark="corn">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌽</span>Corn</span><span class="pc-contract">Front Month</span></div>
+        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-corn-near">--</div>
         <div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-near">--</span></div>
         <div class="pc-prev" id="pcprev-corn-near"></div>
@@ -811,7 +617,7 @@
         <div class="pc-range"><div class="pc-range-labels"><span>$3.90</span><span>52-Wk Range</span><span>$5.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:45%"></div><div class="pc-range-dot" style="left:45%"></div></div></div>
       </div>
       <div class="pc pc--highlight" data-spark="corn-dec">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌽</span>Corn Harvest</span><span class="pc-contract">Dec '26</span></div>
+        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn Harvest</span><span class="pc-contract">Dec '26</span></div>
         <div class="pc-price" id="pcp-corn-dec">--</div>
         <div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-dec">--</span></div>
         <div class="pc-prev" id="pcprev-corn-dec"></div>
@@ -819,7 +625,7 @@
         <div class="pc-range"><div class="pc-range-labels"><span>$3.85</span><span>52-Wk Range</span><span>$5.25</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:74%"></div><div class="pc-range-dot" style="left:74%"></div></div></div>
       </div>
       <div class="pc pc--highlight" data-spark="beans">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🫘</span>Soybeans</span><span class="pc-contract">Front Month</span></div>
+        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Soybeans</span><span class="pc-contract">Front Month</span></div>
         <div class="pc-price" id="pcp-bean-near">--</div>
         <div class="pc-change"><span class="pc-chg-val nc" id="pcc-bean-near">--</span></div>
         <div class="pc-prev" id="pcprev-bean-near"></div>
@@ -827,7 +633,7 @@
         <div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.75</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:65%"></div><div class="pc-range-dot" style="left:65%"></div></div></div>
       </div>
       <div class="pc pc--highlight" data-spark="beans-nov">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🫘</span>Beans Harvest</span><span class="pc-contract">Nov '26</span></div>
+        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Beans Harvest</span><span class="pc-contract">Nov '26</span></div>
         <div class="pc-price" id="pcp-bean-nov">--</div>
         <div class="pc-change"><span class="pc-chg-val nc" id="pcc-bean-nov">--</span></div>
         <div class="pc-prev" id="pcprev-bean-nov"></div>
@@ -836,14 +642,12 @@
       </div>
     </div>
 
-    <!-- ══ RATIO + COT ══════════════════════════════════════════ -->
+    <!-- RATIO + COT -->
     <div class="ratio-cot-grid">
-
-      <!-- Corn/Bean Ratio -->
       <div class="ratio-widget" id="ratio-widget">
         <div class="ratio-widget-head">
-          <span class="ratio-widget-title">🌽🫘 Corn/Bean Ratio — New-Crop Planting Guide</span>
-          <span class="ratio-verdict neutral" id="ratio-verdict">Loading…</span>
+          <span class="ratio-widget-title">&#x1F33D;&#x1FAD8; Corn/Bean Ratio &mdash; New-Crop Planting Guide</span>
+          <span class="ratio-verdict neutral" id="ratio-verdict">Loading&hellip;</span>
         </div>
         <div class="ratio-body">
           <div class="ratio-num-block">
@@ -851,7 +655,7 @@
             <div style="display:flex;align-items:baseline;gap:2px;justify-content:center">
               <span class="ratio-colon">:</span><span class="ratio-one">1</span>
             </div>
-            <div class="ratio-label">Nov Beans ÷ Dec Corn</div>
+            <div class="ratio-label">Nov Beans &divide; Dec Corn</div>
           </div>
           <div class="ratio-right">
             <div>
@@ -859,291 +663,196 @@
                 <div class="ratio-gauge-dot" id="ratio-gauge-dot" style="left:50%;background:var(--text-muted)"></div>
               </div>
               <div class="ratio-gauge-zones">
-                <span style="color:var(--gold)">◀ Corn favored</span>
+                <span style="color:var(--gold)">&#x25C4; Corn favored</span>
                 <span>Neutral</span>
-                <span style="color:var(--green)">Beans favored ▶</span>
+                <span style="color:var(--green)">Beans favored &#x25BA;</span>
               </div>
               <div class="ratio-meta">
                 <span>Dec Corn: <strong id="ratio-corn-price" style="color:var(--text)">--</strong></span>
-                <span class="ratio-meta-sep">·</span>
+                <span class="ratio-meta-sep">&middot;</span>
                 <span>Nov Beans: <strong id="ratio-beans-price" style="color:var(--text)">--</strong></span>
               </div>
             </div>
             <div>
               <div style="font-size:.62rem;color:var(--text-muted);line-height:1.5;margin-bottom:.3rem">
-                Historically: <strong style="color:var(--gold)">&lt;2.4</strong> favors corn · <strong style="color:var(--text-dim)">2.4–2.6</strong> neutral · <strong style="color:var(--green)">&gt;2.6</strong> favors beans
+                Historically: <strong style="color:var(--gold)">&lt;2.4</strong> favors corn &middot; <strong style="color:var(--text-dim)">2.4&ndash;2.6</strong> neutral &middot; <strong style="color:var(--green)">&gt;2.6</strong> favors beans
               </div>
               <div class="ratio-links">
-                <a href="/breakeven" class="ratio-link">📐 Break-Even</a>
-                <a href="/soybean-futures-prices" class="ratio-link">🫘 Beans</a>
-                <a href="/corn-futures-prices" class="ratio-link">🌽 Corn</a>
+                <a href="/breakeven" class="ratio-link">&#x1F4D0; Break-Even</a>
+                <a href="/soybean-futures-prices" class="ratio-link">&#x1FAD8; Beans</a>
+                <a href="/corn-futures-prices" class="ratio-link">&#x1F33D; Corn</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- CFTC COT -->
       <div class="cot-widget" id="cot-widget">
         <div class="cot-widget-head">
-          <span class="cot-widget-title">📊 CFTC COT — Fund Positioning</span>
-          <span class="cot-verdict mixed" id="cot-verdict">Loading…</span>
+          <span class="cot-widget-title">&#x1F4CA; CFTC COT &mdash; Fund Positioning</span>
+          <span class="cot-verdict mixed" id="cot-verdict">Loading&hellip;</span>
         </div>
         <div class="cot-caption">Net contracts held long vs short by large money managers. Bar shows where that position sits within the past 52 weeks.</div>
         <div class="cot-rows" id="cot-rows">
           <div>
             <div class="cot-row-top">
-              <div class="cot-label"><span class="cot-comm-icon">🌽</span><span class="cot-comm-name">Corn</span></div>
+              <div class="cot-label"><span class="cot-comm-icon">&#x1F33D;</span><span class="cot-comm-name">Corn</span></div>
               <div class="cot-right"><span class="cot-dir nc" id="cot-corn-dir">--</span><span class="cot-net" id="cot-corn-net">--</span><span class="cot-chg nc" id="cot-corn-chg">--</span></div>
             </div>
-            <div class="cot-bar-wrap">
-              <div class="cot-bar-fill" id="cot-corn-fill"></div>
-              <div class="cot-zero-mark" id="cot-corn-zero"></div>
-              <div class="cot-bar-dot" id="cot-corn-dot" style="background:var(--text-muted)"></div>
-            </div>
+            <div class="cot-bar-wrap"><div class="cot-bar-fill" id="cot-corn-fill"></div><div class="cot-zero-mark" id="cot-corn-zero"></div><div class="cot-bar-dot" id="cot-corn-dot" style="background:var(--text-muted)"></div></div>
             <div class="cot-bar-labels"><span id="cot-corn-min">--</span><span>52-wk range</span><span id="cot-corn-max">--</span></div>
           </div>
           <div>
             <div class="cot-row-top">
-              <div class="cot-label"><span class="cot-comm-icon">🫘</span><span class="cot-comm-name">Soybeans</span></div>
+              <div class="cot-label"><span class="cot-comm-icon">&#x1FAD8;</span><span class="cot-comm-name">Soybeans</span></div>
               <div class="cot-right"><span class="cot-dir nc" id="cot-beans-dir">--</span><span class="cot-net" id="cot-beans-net">--</span><span class="cot-chg nc" id="cot-beans-chg">--</span></div>
             </div>
-            <div class="cot-bar-wrap">
-              <div class="cot-bar-fill" id="cot-beans-fill"></div>
-              <div class="cot-zero-mark" id="cot-beans-zero"></div>
-              <div class="cot-bar-dot" id="cot-beans-dot" style="background:var(--text-muted)"></div>
-            </div>
+            <div class="cot-bar-wrap"><div class="cot-bar-fill" id="cot-beans-fill"></div><div class="cot-zero-mark" id="cot-beans-zero"></div><div class="cot-bar-dot" id="cot-beans-dot" style="background:var(--text-muted)"></div></div>
             <div class="cot-bar-labels"><span id="cot-beans-min">--</span><span>52-wk range</span><span id="cot-beans-max">--</span></div>
           </div>
           <div>
             <div class="cot-row-top">
-              <div class="cot-label"><span class="cot-comm-icon">🌾</span><span class="cot-comm-name">Wheat</span></div>
+              <div class="cot-label"><span class="cot-comm-icon">&#x1F33E;</span><span class="cot-comm-name">Wheat</span></div>
               <div class="cot-right"><span class="cot-dir nc" id="cot-wheat-dir">--</span><span class="cot-net" id="cot-wheat-net">--</span><span class="cot-chg nc" id="cot-wheat-chg">--</span></div>
             </div>
-            <div class="cot-bar-wrap">
-              <div class="cot-bar-fill" id="cot-wheat-fill"></div>
-              <div class="cot-zero-mark" id="cot-wheat-zero"></div>
-              <div class="cot-bar-dot" id="cot-wheat-dot" style="background:var(--text-muted)"></div>
-            </div>
+            <div class="cot-bar-wrap"><div class="cot-bar-fill" id="cot-wheat-fill"></div><div class="cot-zero-mark" id="cot-wheat-zero"></div><div class="cot-bar-dot" id="cot-wheat-dot" style="background:var(--text-muted)"></div></div>
             <div class="cot-bar-labels"><span id="cot-wheat-min">--</span><span>52-wk range</span><span id="cot-wheat-max">--</span></div>
           </div>
         </div>
         <div class="cot-footer">
-          <span class="cot-date" id="cot-date">CFTC · Updated weekly</span>
-          <a href="/cot" class="cot-full-link">Full Chart →</a>
+          <span class="cot-date" id="cot-date">CFTC &middot; Updated weekly</span>
+          <a href="/cot" class="cot-full-link">Full Chart &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <!-- CROP PROGRESS + EXPORT -->
+    <div class="crop-export-grid" id="crop-export-grid-inner">
+      <div class="crop-widget" id="crop-widget">
+        <div class="crop-widget-head">
+          <span class="crop-widget-title">&#x1F331; Crop Progress &mdash; G/E Rating</span>
+          <span class="crop-week-badge" id="crop-week-badge">USDA &middot; Mon 4pm ET</span>
+        </div>
+        <div class="crop-rows" id="crop-rows">
+          <div>
+            <div class="crop-row-head">
+              <div class="crop-comm-label"><span class="crop-comm-icon">&#x1F33D;</span><span class="crop-comm-name">Corn</span></div>
+              <span class="crop-ge-val fair" id="crop-corn-ge">--</span>
+            </div>
+            <div class="crop-chg-row">
+              <span class="crop-chg nc" id="crop-corn-wk">--</span><span class="crop-chg-lbl">wk</span>
+              <span class="crop-chg nc" id="crop-corn-yr">--</span><span class="crop-chg-lbl">vs yr ago</span>
+            </div>
+            <div class="crop-plant-row">
+              <span class="crop-plant-pct" id="crop-corn-plant">--%</span>
+              <span class="crop-plant-lbl">planted</span>
+              <div class="crop-plant-bar"><div class="crop-plant-fill" id="crop-corn-bar" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div>
+            <div class="crop-row-head">
+              <div class="crop-comm-label"><span class="crop-comm-icon">&#x1FAD8;</span><span class="crop-comm-name">Soybeans</span></div>
+              <span class="crop-ge-val fair" id="crop-bean-ge">--</span>
+            </div>
+            <div class="crop-chg-row">
+              <span class="crop-chg nc" id="crop-bean-wk">--</span><span class="crop-chg-lbl">wk</span>
+              <span class="crop-chg nc" id="crop-bean-yr">--</span><span class="crop-chg-lbl">vs yr ago</span>
+            </div>
+            <div class="crop-plant-row">
+              <span class="crop-plant-pct" id="crop-bean-plant">--%</span>
+              <span class="crop-plant-lbl">planted</span>
+              <div class="crop-plant-bar"><div class="crop-plant-fill" id="crop-bean-bar" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="crop-footer">
+          <span class="crop-footer-date" id="crop-date">USDA NASS &middot; Weekly</span>
+          <a href="/usda-calendar" class="crop-full-link">Full Calendar &rarr;</a>
         </div>
       </div>
 
-    </div><!-- /ratio-cot-grid -->
-
-  <!-- ══ CROP PROGRESS + EXPORT SALES ═══════════════════════════ -->
-  <div class="crop-export-grid" id="crop-export-grid-inner">
-
-    <!-- Crop Progress -->
-    <div class="crop-widget" id="crop-widget">
-      <div class="crop-widget-head">
-        <span class="crop-widget-title">🌱 Crop Progress — G/E Rating</span>
-        <span class="crop-week-badge" id="crop-week-badge">USDA · Mon 4pm ET</span>
-      </div>
-      <div class="crop-rows" id="crop-rows">
-        <div>
-          <div class="crop-row-head">
-            <div class="crop-comm-label"><span class="crop-comm-icon">🌽</span><span class="crop-comm-name">Corn</span></div>
-            <span class="crop-ge-val fair" id="crop-corn-ge">--</span>
+      <div class="export-widget" id="export-widget">
+        <div class="export-widget-head">
+          <span class="export-widget-title">&#x1F4E6; Export Sales &mdash; Cumulative Pace</span>
+          <span class="export-mkt-yr" id="export-mkt-yr">USDA FAS &middot; Thu 8:30am</span>
+        </div>
+        <div class="export-rows" id="export-rows">
+          <div>
+            <div class="export-row-head"><div class="export-comm-label"><span class="export-comm-icon">&#x1F33D;</span><span class="export-comm-name">Corn</span></div><span class="export-weekly" id="exp-corn-wk">--</span></div>
+            <div class="export-pace-row"><div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-corn-bar" style="width:0%"></div></div><span class="export-pace-pct on-track" id="exp-corn-pct">--%</span></div>
           </div>
-          <div class="crop-chg-row">
-            <span class="crop-chg nc" id="crop-corn-wk">--</span><span class="crop-chg-lbl">wk</span>
-            <span class="crop-chg nc" id="crop-corn-yr">--</span><span class="crop-chg-lbl">vs yr ago</span>
+          <div>
+            <div class="export-row-head"><div class="export-comm-label"><span class="export-comm-icon">&#x1FAD8;</span><span class="export-comm-name">Soybeans</span></div><span class="export-weekly" id="exp-bean-wk">--</span></div>
+            <div class="export-pace-row"><div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-bean-bar" style="width:0%"></div></div><span class="export-pace-pct on-track" id="exp-bean-pct">--%</span></div>
           </div>
-          <div class="crop-plant-row">
-            <span class="crop-plant-pct" id="crop-corn-plant">--%</span>
-            <span class="crop-plant-lbl">planted</span>
-            <div class="crop-plant-bar"><div class="crop-plant-fill" id="crop-corn-bar" style="width:0%"></div></div>
+          <div>
+            <div class="export-row-head"><div class="export-comm-label"><span class="export-comm-icon">&#x1F33E;</span><span class="export-comm-name">Wheat</span></div><span class="export-weekly" id="exp-wheat-wk">--</span></div>
+            <div class="export-pace-row"><div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-wheat-bar" style="width:0%"></div></div><span class="export-pace-pct on-track" id="exp-wheat-pct">--%</span></div>
           </div>
         </div>
-        <div>
-          <div class="crop-row-head">
-            <div class="crop-comm-label"><span class="crop-comm-icon">🫘</span><span class="crop-comm-name">Soybeans</span></div>
-            <span class="crop-ge-val fair" id="crop-bean-ge">--</span>
-          </div>
-          <div class="crop-chg-row">
-            <span class="crop-chg nc" id="crop-bean-wk">--</span><span class="crop-chg-lbl">wk</span>
-            <span class="crop-chg nc" id="crop-bean-yr">--</span><span class="crop-chg-lbl">vs yr ago</span>
-          </div>
-          <div class="crop-plant-row">
-            <span class="crop-plant-pct" id="crop-bean-plant">--%</span>
-            <span class="crop-plant-lbl">planted</span>
-            <div class="crop-plant-bar"><div class="crop-plant-fill" id="crop-bean-bar" style="width:0%"></div></div>
-          </div>
+        <div class="export-footer">
+          <span class="export-footer-date" id="exp-date">USDA FAS &middot; Weekly</span>
+          <a href="https://apps.fas.usda.gov/export-sales/" target="_blank" rel="noopener" class="export-full-link">FAS Data &rarr;</a>
         </div>
-      </div>
-      <div class="crop-footer">
-        <span class="crop-footer-date" id="crop-date">USDA NASS · Weekly</span>
-        <a href="/usda-calendar" class="crop-full-link">Full Calendar →</a>
       </div>
     </div>
 
-    <!-- Export Sales -->
-    <div class="export-widget" id="export-widget">
-      <div class="export-widget-head">
-        <span class="export-widget-title">📦 Export Sales — Cumulative Pace</span>
-        <span class="export-mkt-yr" id="export-mkt-yr">USDA FAS · Thu 8:30am</span>
-      </div>
-      <div class="export-rows" id="export-rows">
-        <div>
-          <div class="export-row-head">
-            <div class="export-comm-label"><span class="export-comm-icon">🌽</span><span class="export-comm-name">Corn</span></div>
-            <span class="export-weekly" id="exp-corn-wk">--</span>
-          </div>
-          <div class="export-pace-row">
-            <div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-corn-bar" style="width:0%"></div></div>
-            <span class="export-pace-pct on-track" id="exp-corn-pct">--%</span>
-          </div>
+    <!-- TARIFF + FERT -->
+    <div class="tariff-fert-grid fade-up">
+      <div class="tariff-widget" id="tariff-widget">
+        <div class="tariff-widget-head">
+          <span class="tariff-widget-title">&#x1F3DB;&#xFE0F; Ag Tariff Tracker &mdash; US Export Rates</span>
+          <span class="tariff-status-badge elevated" id="tariff-badge">Loading&hellip;</span>
         </div>
-        <div>
-          <div class="export-row-head">
-            <div class="export-comm-label"><span class="export-comm-icon">🫘</span><span class="export-comm-name">Soybeans</span></div>
-            <span class="export-weekly" id="exp-bean-wk">--</span>
-          </div>
-          <div class="export-pace-row">
-            <div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-bean-bar" style="width:0%"></div></div>
-            <span class="export-pace-pct on-track" id="exp-bean-pct">--%</span>
-          </div>
+        <div class="tariff-rows" id="tariff-rows">
+          <div class="tariff-row" style="justify-content:center;color:var(--text-muted);font-size:.75rem">Loading tariff data&hellip;</div>
         </div>
-        <div>
-          <div class="export-row-head">
-            <div class="export-comm-label"><span class="export-comm-icon">🌾</span><span class="export-comm-name">Wheat</span></div>
-            <span class="export-weekly" id="exp-wheat-wk">--</span>
-          </div>
-          <div class="export-pace-row">
-            <div class="export-pace-bar"><div class="export-pace-fill on-track" id="exp-wheat-bar" style="width:0%"></div></div>
-            <span class="export-pace-pct on-track" id="exp-wheat-pct">--%</span>
-          </div>
+        <div class="tariff-footer">
+          <span class="tariff-footer-date" id="tariff-date">Updated &mdash;</span>
+          <a href="/tariffs" class="tariff-full-link">Full Tracker &rarr;</a>
         </div>
       </div>
-      <div class="export-footer">
-        <span class="export-footer-date" id="exp-date">USDA FAS · Weekly</span>
-        <a href="https://apps.fas.usda.gov/export-sales/" target="_blank" rel="noopener" class="export-full-link">FAS Data →</a>
+      <div class="fert-widget" id="fert-widget">
+        <div class="fert-widget-head">
+          <span class="fert-widget-title">&#x1F9EA; Fertilizer Prices</span>
+          <span class="crop-week-badge" id="fert-date">Updated &mdash;</span>
+        </div>
+        <div class="fert-grid" id="fert-grid">
+          <div class="fert-card" style="grid-column:1/-1;text-align:center;padding:.75rem;color:var(--text-muted);font-size:.75rem">Loading&hellip;</div>
+        </div>
+        <div class="fert-footer">
+          <span class="fert-footer-note">Green Markets &middot; Updated weekly</span>
+          <a href="/fertilizer" class="fert-full-link">Price History &rarr;</a>
+        </div>
       </div>
     </div>
 
-  </div><!-- /crop-export-grid -->
-
-  <!-- ══ TARIFF + FERTILIZER ══════════════════════════════════════ -->
-  <div class="tariff-fert-grid fade-up">
-
-    <div class="tariff-widget" id="tariff-widget">
-      <div class="tariff-widget-head">
-        <span class="tariff-widget-title">🏛️ Ag Tariff Tracker — US Export Rates</span>
-        <span class="tariff-status-badge elevated" id="tariff-badge">Loading…</span>
-      </div>
-      <div class="tariff-rows" id="tariff-rows">
-        <div class="tariff-row" style="justify-content:center;color:var(--text-muted);font-size:.75rem">Loading tariff data…</div>
-      </div>
-      <div class="tariff-footer">
-        <span class="tariff-footer-date" id="tariff-date">Updated —</span>
-        <a href="/tariffs" class="tariff-full-link">Full Tracker →</a>
-      </div>
-    </div>
-
-    <div class="fert-widget" id="fert-widget">
-      <div class="fert-widget-head">
-        <span class="fert-widget-title">🧪 Fertilizer Prices</span>
-        <span class="crop-week-badge" id="fert-date">Updated —</span>
-      </div>
-      <div class="fert-grid" id="fert-grid">
-        <div class="fert-card" style="grid-column:1/-1;text-align:center;padding:.75rem;color:var(--text-muted);font-size:.75rem">Loading…</div>
-      </div>
-      <div class="fert-footer">
-        <span class="fert-footer-note">Green Markets · Updated weekly</span>
-        <a href="/fertilizer" class="fert-full-link">Price History →</a>
-      </div>
-    </div>
-
-  </div><!-- /tariff-fert-grid -->
-
-    <div class="pc-section-lbl">🌾 More Grains, Feed &amp; Livestock</div>
+    <!-- MORE GRAINS -->
+    <div class="pc-section-lbl">&#x1F33E; More Grains, Feed &amp; Livestock</div>
     <div class="price-cards-grid-2">
-      <div class="pc pc-sm" data-spark="wheat">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌾</span>Wheat</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-wheat">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-wheat">--</span></div>
-        <div class="pc-prev" id="pcprev-wheat"></div><div class="pc-spark" data-spark="wheat"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$4.88</span><span></span><span>$7.20</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:42%"></div><div class="pc-range-dot" style="left:42%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="oats">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🌾</span>Oats</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-oats">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-oats">--</span></div>
-        <div class="pc-prev" id="pcprev-oats"></div><div class="pc-spark" data-spark="oats"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$2.80</span><span></span><span>$4.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:32%"></div><div class="pc-range-dot" style="left:32%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="meal">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🫘</span>Soy Meal</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-meal">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-meal">--</span></div>
-        <div class="pc-prev" id="pcprev-meal"></div><div class="pc-spark" data-spark="meal"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$375</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:44%"></div><div class="pc-range-dot" style="left:44%"></div></div></div>
-      </div>
+      <div class="pc pc-sm" data-spark="wheat"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33E;</span>Wheat</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-wheat">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-wheat">--</span></div><div class="pc-prev" id="pcprev-wheat"></div><div class="pc-spark" data-spark="wheat"></div><div class="pc-range"><div class="pc-range-labels"><span>$4.88</span><span></span><span>$7.20</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:42%"></div><div class="pc-range-dot" style="left:42%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="oats"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33E;</span>Oats</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-oats">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-oats">--</span></div><div class="pc-prev" id="pcprev-oats"></div><div class="pc-spark" data-spark="oats"></div><div class="pc-range"><div class="pc-range-labels"><span>$2.80</span><span></span><span>$4.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:32%"></div><div class="pc-range-dot" style="left:32%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="meal"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Soy Meal</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-meal">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-meal">--</span></div><div class="pc-prev" id="pcprev-meal"></div><div class="pc-spark" data-spark="meal"></div><div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$375</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:44%"></div><div class="pc-range-dot" style="left:44%"></div></div></div></div>
     </div>
     <div class="price-cards-grid-2" style="margin-bottom:.5rem">
-      <div class="pc pc-sm" data-spark="cattle">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🐄</span>Live Cattle</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-cattle">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-cattle">--</span></div>
-        <div class="pc-prev" id="pcprev-cattle"></div><div class="pc-spark" data-spark="cattle"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$215</span><span></span><span>$265</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:29%"></div><div class="pc-range-dot" style="left:29%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="feeders">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🐄</span>Feeder Cattle</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-feeders">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-feeders">--</span></div>
-        <div class="pc-prev" id="pcprev-feeders"></div><div class="pc-spark" data-spark="feeders"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$385</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:52%"></div><div class="pc-range-dot" style="left:52%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="hogs">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🐖</span>Lean Hogs</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-hogs">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-hogs">--</span></div>
-        <div class="pc-prev" id="pcprev-hogs"></div><div class="pc-spark" data-spark="hogs"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$70</span><span></span><span>$110</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:38%"></div><div class="pc-range-dot" style="left:38%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="milk">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🥛</span>Class III Milk</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-milk">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-milk">--</span></div>
-        <div class="pc-prev" id="pcprev-milk"></div><div class="pc-spark" data-spark="milk"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$14</span><span></span><span>$21</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div>
-      </div>
+      <div class="pc pc-sm" data-spark="cattle"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F404;</span>Live Cattle</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-cattle">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-cattle">--</span></div><div class="pc-prev" id="pcprev-cattle"></div><div class="pc-spark" data-spark="cattle"></div><div class="pc-range"><div class="pc-range-labels"><span>$215</span><span></span><span>$265</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:29%"></div><div class="pc-range-dot" style="left:29%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="feeders"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F404;</span>Feeder Cattle</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-feeders">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-feeders">--</span></div><div class="pc-prev" id="pcprev-feeders"></div><div class="pc-spark" data-spark="feeders"></div><div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$385</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:52%"></div><div class="pc-range-dot" style="left:52%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="hogs"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F416;</span>Lean Hogs</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-hogs">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-hogs">--</span></div><div class="pc-prev" id="pcprev-hogs"></div><div class="pc-spark" data-spark="hogs"></div><div class="pc-range"><div class="pc-range-labels"><span>$70</span><span></span><span>$110</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:38%"></div><div class="pc-range-dot" style="left:38%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="milk"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F95B;</span>Class III Milk</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-milk">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-milk">--</span></div><div class="pc-prev" id="pcprev-milk"></div><div class="pc-spark" data-spark="milk"></div><div class="pc-range"><div class="pc-range-labels"><span>$14</span><span></span><span>$21</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div></div>
     </div>
 
-    <div class="pc-section-lbl">⚡ Energy &amp; Outside Markets</div>
+    <div class="pc-section-lbl">&#x26A1; Energy &amp; Outside Markets</div>
     <div class="price-cards-grid-2">
-      <div class="pc pc-sm" data-spark="crude">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🛢️</span>Crude Oil WTI</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-crude">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-crude">--</span></div>
-        <div class="pc-prev" id="pcprev-crude"></div><div class="pc-spark" data-spark="crude"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$62</span><span></span><span>$106</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:68%"></div><div class="pc-range-dot" style="left:68%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="natgas">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🔥</span>Natural Gas</span><span class="pc-contract">Front Month</span></div>
-        <div class="pc-price" id="pcp-natgas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-natgas">--</span></div>
-        <div class="pc-prev" id="pcprev-natgas"></div><div class="pc-spark" data-spark="natgas"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$1.56</span><span></span><span>$4.88</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:40%"></div><div class="pc-range-dot" style="left:40%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="dollar">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">💵</span>Dollar Index</span><span class="pc-contract">Spot</span></div>
-        <div class="pc-price" id="pcp-dollar">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-dollar">--</span></div>
-        <div class="pc-prev" id="pcprev-dollar"></div><div class="pc-spark" data-spark="dollar"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$95.55</span><span></span><span>$107.66</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="sp500">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">📈</span>S&amp;P 500</span><span class="pc-contract">Spot</span></div>
-        <div class="pc-price" id="pcp-sp500">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-sp500">--</span></div>
-        <div class="pc-prev" id="pcprev-sp500"></div><div class="pc-spark" data-spark="sp500"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>4,900</span><span></span><span>6,700</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:92%"></div><div class="pc-range-dot" style="left:92%"></div></div></div>
-      </div>
+      <div class="pc pc-sm" data-spark="crude"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F6E2;&#xFE0F;</span>Crude Oil WTI</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-crude">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-crude">--</span></div><div class="pc-prev" id="pcprev-crude"></div><div class="pc-spark" data-spark="crude"></div><div class="pc-range"><div class="pc-range-labels"><span>$62</span><span></span><span>$106</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:68%"></div><div class="pc-range-dot" style="left:68%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="natgas"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F525;</span>Natural Gas</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-natgas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-natgas">--</span></div><div class="pc-prev" id="pcprev-natgas"></div><div class="pc-spark" data-spark="natgas"></div><div class="pc-range"><div class="pc-range-labels"><span>$1.56</span><span></span><span>$4.88</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:40%"></div><div class="pc-range-dot" style="left:40%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="dollar"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4B5;</span>Dollar Index</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-dollar">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-dollar">--</span></div><div class="pc-prev" id="pcprev-dollar"></div><div class="pc-spark" data-spark="dollar"></div><div class="pc-range"><div class="pc-range-labels"><span>$95.55</span><span></span><span>$107.66</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="sp500"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4C8;</span>S&amp;P 500</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-sp500">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-sp500">--</span></div><div class="pc-prev" id="pcprev-sp500"></div><div class="pc-spark" data-spark="sp500"></div><div class="pc-range"><div class="pc-range-labels"><span>4,900</span><span></span><span>6,700</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:92%"></div><div class="pc-range-dot" style="left:92%"></div></div></div></div>
     </div>
   </div>
-
-  <!-- ══ RADAR ═════════════════════════════════════════════════════ -->
+  <!-- RADAR -->
   <div class="radar-section fade-up" id="f-radar">
     <div class="sec-head">
-      <div class="sec-title">🗺️ Radar, Forecast &amp; Drought</div>
-      <a href="/drought-monitor" class="sec-all">Drought Monitor →</a>
+      <div class="sec-title">&#x1F5FA;&#xFE0F; Radar, Forecast &amp; Drought</div>
+      <a href="/drought-monitor" class="sec-all">Drought Monitor &rarr;</a>
     </div>
     <div class="radar-grid">
       <div class="radar-card">
@@ -1151,45 +860,45 @@
           <span style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)"><span class="live-dot" style="display:inline-block" aria-hidden="true"></span> Live Radar</span>
           <span style="font-size:.68rem;color:var(--text-muted)">Powered by Windy</span>
         </div>
-        <iframe id="windy-frame" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=in&metricTemp=%C2%B0F&metricWind=mph&zoom=6&overlay=radar&product=radar&level=surface&lat=44.5&lon=-93.0&detailLat=44.5&detailLon=-93.0&detail=false&pressure=false&menu=false&message=false&marker=false&calendar=now&thunder=false" width="100%" style="border:none;display:block;min-height:320px;height:100%;aspect-ratio:unset" loading="lazy" title="Live Radar — Windy" allow="geolocation; fullscreen" allowfullscreen></iframe>
+        <iframe id="windy-frame" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=in&metricTemp=%C2%B0F&metricWind=mph&zoom=6&overlay=radar&product=radar&level=surface&lat=44.5&lon=-93.0&detailLat=44.5&detailLon=-93.0&detail=false&pressure=false&menu=false&message=false&marker=false&calendar=now&thunder=false" width="100%" style="border:none;display:block;min-height:320px;height:100%;aspect-ratio:unset" loading="lazy" title="Live Radar &mdash; Windy" allow="geolocation; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="radar-sidebar">
         <div class="wx-summary-card">
-          <div class="wx-summary-title">📅 4-Day Forecast</div>
+          <div class="wx-summary-title">&#x1F4C5; 4-Day Forecast</div>
           <div id="wx-forecast-full" class="wx-forecast-row">
-            <div class="wx-day"><div class="wx-day-name">Today</div><div class="wx-day-icon">⛅</div><div class="wx-day-hi">--°</div><div class="wx-day-lo">--°</div></div>
-            <div class="wx-day"><div class="wx-day-name">—</div><div class="wx-day-icon">🌧️</div><div class="wx-day-hi">--°</div><div class="wx-day-lo">--°</div></div>
-            <div class="wx-day"><div class="wx-day-name">—</div><div class="wx-day-icon">☁️</div><div class="wx-day-hi">--°</div><div class="wx-day-lo">--°</div></div>
-            <div class="wx-day"><div class="wx-day-name">—</div><div class="wx-day-icon">🌤️</div><div class="wx-day-hi">--°</div><div class="wx-day-lo">--°</div></div>
+            <div class="wx-day"><div class="wx-day-name">Today</div><div class="wx-day-icon">&#x26C5;</div><div class="wx-day-hi">--&deg;</div><div class="wx-day-lo">--&deg;</div></div>
+            <div class="wx-day"><div class="wx-day-name">&mdash;</div><div class="wx-day-icon">&#x1F327;&#xFE0F;</div><div class="wx-day-hi">--&deg;</div><div class="wx-day-lo">--&deg;</div></div>
+            <div class="wx-day"><div class="wx-day-name">&mdash;</div><div class="wx-day-icon">&#x2601;&#xFE0F;</div><div class="wx-day-hi">--&deg;</div><div class="wx-day-lo">--&deg;</div></div>
+            <div class="wx-day"><div class="wx-day-name">&mdash;</div><div class="wx-day-icon">&#x1F324;&#xFE0F;</div><div class="wx-day-hi">--&deg;</div><div class="wx-day-lo">--&deg;</div></div>
           </div>
-          <div style="margin-top:.85rem;font-size:.72rem;color:var(--text-muted);text-align:center">📍 <span id="wx-loc-label">Set location in weather card above</span></div>
+          <div style="margin-top:.85rem;font-size:.72rem;color:var(--text-muted);text-align:center">&#x1F4CD; <span id="wx-loc-label">Set location in weather card above</span></div>
         </div>
         <div class="drought-embed">
           <div style="padding:.6rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
             <span style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)">Drought Monitor</span>
-            <a href="/drought-monitor" style="font-size:.68rem;color:var(--text-muted)">Full Map →</a>
+            <a href="/drought-monitor" style="font-size:.68rem;color:var(--text-muted)">Full Map &rarr;</a>
           </div>
           <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener" title="View full interactive drought map">
-            <img id="drought-img" src="" alt="US Drought Monitor — current week" style="display:block;width:100%;height:auto" loading="lazy">
+            <img id="drought-img" src="" alt="US Drought Monitor &mdash; current week" style="display:block;width:100%;height:auto" loading="lazy">
           </a>
           <div id="drought-fallback" class="drought-fallback" style="display:none">
-            <span style="font-size:1.5rem">🏜️</span>
-            <span style="font-size:.82rem;color:var(--text-dim)">Drought map loading…</span>
-            <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener">View on droughtmonitor.unl.edu →</a>
+            <span style="font-size:1.5rem">&#x1F3DC;&#xFE0F;</span>
+            <span style="font-size:.82rem;color:var(--text-dim)">Drought map loading&hellip;</span>
+            <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener">View on droughtmonitor.unl.edu &rarr;</a>
           </div>
           <div style="padding:.4rem .8rem;font-size:.68rem;color:var(--text-muted);text-align:right;border-top:1px solid var(--border)">
-            Source: USDA NDMC · Updated Thursday · <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener" style="color:var(--gold)">Full Interactive Map →</a>
+            Source: USDA NDMC &middot; Updated Thursday &middot; <a href="https://droughtmonitor.unl.edu" target="_blank" rel="noopener" style="color:var(--gold)">Full Interactive Map &rarr;</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ NOAA ═══════════════════════════════════════════════════════ -->
+  <!-- NOAA -->
   <div class="fade-up" id="f-noaa">
     <div class="sec-head">
-      <div class="sec-title">🌡️ NOAA Seasonal Outlooks</div>
-      <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/" target="_blank" rel="noopener" class="sec-all">CPC Full Outlooks →</a>
+      <div class="sec-title">&#x1F321;&#xFE0F; NOAA Seasonal Outlooks</div>
+      <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/" target="_blank" rel="noopener" class="sec-all">CPC Full Outlooks &rarr;</a>
     </div>
     <div class="noaa-tabs" id="noaa-tabs">
       <button class="noaa-tab active" data-period="30" data-label="1-Month (30-Day)">1-Month</button>
@@ -1197,14 +906,14 @@
     </div>
     <div class="noaa-grid">
       <div class="noaa-card">
-        <div class="noaa-card-head temp">🌡️ Temperature Outlook</div>
+        <div class="noaa-card-head temp">&#x1F321;&#xFE0F; Temperature Outlook</div>
         <img id="noaa-temp-img" src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif" alt="NOAA 1-month temperature outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="noaa-img-err"><span>🌡️ Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC →</a></div>
+        <div class="noaa-img-err"><span>&#x1F321;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div>
       </div>
       <div class="noaa-card">
-        <div class="noaa-card-head precip">🌧️ Precipitation Outlook</div>
+        <div class="noaa-card-head precip">&#x1F327;&#xFE0F; Precipitation Outlook</div>
         <img id="noaa-precip-img" src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif" alt="NOAA 1-month precipitation outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="noaa-img-err"><span>🌧️ Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC →</a></div>
+        <div class="noaa-img-err"><span>&#x1F327;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div>
       </div>
     </div>
     <div class="noaa-legend">
@@ -1212,131 +921,105 @@
       <span style="margin-left:.5rem">Precip: <span class="noaa-swatch" style="background:#2d8c4e"></span>Above normal &nbsp;<span class="noaa-swatch" style="background:#888;opacity:.5"></span>Equal chances &nbsp;<span class="noaa-swatch" style="background:#b07d2a"></span>Below normal</span>
     </div>
     <div class="noaa-note">
-      Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA Climate Prediction Center</a> ·
-      1-Month issued last day of month · 3-Month issued 3rd Thursday ·
-      Darker shading = higher confidence · Currently showing: <span id="noaa-period-label">1-Month (30-Day)</span>
+      Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA Climate Prediction Center</a> &middot;
+      1-Month issued last day of month &middot; 3-Month issued 3rd Thursday &middot;
+      Darker shading = higher confidence &middot; Currently showing: <span id="noaa-period-label">1-Month (30-Day)</span>
     </div>
   </div>
 
-  <!-- ══ USDA CALENDAR ══════════════════════════════════════════════ -->
+  <!-- USDA CALENDAR -->
   <div class="fade-up" id="f5">
     <div class="sec-head">
-      <div class="sec-title">📅 Upcoming USDA Reports</div>
-      <a href="/usda-calendar" class="sec-all">Full Calendar →</a>
+      <div class="sec-title">&#x1F4C5; Upcoming USDA Reports</div>
+      <a href="/usda-calendar" class="sec-all">Full Calendar &rarr;</a>
     </div>
     <div class="cal-strip" id="usda-cal-strip" role="list" aria-label="Upcoming USDA report dates"></div>
   </div>
 
-  <!-- ══ METALS & DIGITAL ═══════════════════════════════════════════ -->
+  <!-- METALS & CRYPTO -->
   <div class="fade-up" id="f-crypto">
-    <div class="pc-section-lbl">🥇 Metals &amp; Digital Assets</div>
+    <div class="pc-section-lbl">&#x1F947; Metals &amp; Digital Assets</div>
     <div class="price-cards-grid-2" style="margin-bottom:1rem">
-      <div class="pc pc-sm" data-spark="gold">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🥇</span>Gold</span><span class="pc-contract">Spot</span></div>
-        <div class="pc-price" id="pcp-gold">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-gold">--</span></div>
-        <div class="pc-prev" id="pcprev-gold"></div><div class="pc-spark" data-spark="gold"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$2,800</span><span></span><span>$5,400</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:61%"></div><div class="pc-range-dot" style="left:61%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="silver">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">🥈</span>Silver</span><span class="pc-contract">Spot</span></div>
-        <div class="pc-price" id="pcp-silver">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-silver">--</span></div>
-        <div class="pc-prev" id="pcprev-silver"></div><div class="pc-spark" data-spark="silver"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$55</span><span></span><span>$100</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="bitcoin">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">₿</span>Bitcoin</span><span class="pc-contract">USD</span></div>
-        <div class="pc-price" id="pc-btc">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-btc">--</span></div>
-        <div class="pc-prev" id="pcprev-btc"></div><div class="pc-spark" data-spark="bitcoin"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$49,000</span><span></span><span>$106,000</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div>
-      </div>
-      <div class="pc pc-sm" data-spark="ripple">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">◎</span>XRP</span><span class="pc-contract">USD</span></div>
-        <div class="pc-price" id="pc-xrp">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-xrp">--</span></div>
-        <div class="pc-prev" id="pcprev-xrp"></div><div class="pc-spark" data-spark="ripple"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$0.40</span><span></span><span>$3.40</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:34%"></div><div class="pc-range-dot" style="left:34%"></div></div></div>
-      </div>
+      <div class="pc pc-sm" data-spark="gold"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F947;</span>Gold</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-gold">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-gold">--</span></div><div class="pc-prev" id="pcprev-gold"></div><div class="pc-spark" data-spark="gold"></div><div class="pc-range"><div class="pc-range-labels"><span>$2,800</span><span></span><span>$5,400</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:61%"></div><div class="pc-range-dot" style="left:61%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="silver"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F948;</span>Silver</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-silver">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-silver">--</span></div><div class="pc-prev" id="pcprev-silver"></div><div class="pc-spark" data-spark="silver"></div><div class="pc-range"><div class="pc-range-labels"><span>$55</span><span></span><span>$100</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="bitcoin"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x20BF;</span>Bitcoin</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-btc">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-btc">--</span></div><div class="pc-prev" id="pcprev-btc"></div><div class="pc-spark" data-spark="bitcoin"></div><div class="pc-range"><div class="pc-range-labels"><span>$49,000</span><span></span><span>$106,000</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="ripple"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x25CE;</span>XRP</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-xrp">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-xrp">--</span></div><div class="pc-prev" id="pcprev-xrp"></div><div class="pc-spark" data-spark="ripple"></div><div class="pc-range"><div class="pc-range-labels"><span>$0.40</span><span></span><span>$3.40</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:34%"></div><div class="pc-range-dot" style="left:34%"></div></div></div></div>
     </div>
     <div class="price-cards-grid-2" style="margin-bottom:2rem">
-      <div class="pc pc-sm" data-spark="kaspa">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">💎</span>Kaspa</span><span class="pc-contract">USD</span></div>
-        <div class="pc-price" id="pc-kas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-kas">--</span></div>
-        <div class="pc-prev" id="pcprev-kas"></div><div class="pc-spark" data-spark="kaspa"></div>
-        <div class="pc-range"><div class="pc-range-labels"><span>$0.025</span><span></span><span>$0.210</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:7%"></div><div class="pc-range-dot" style="left:7%"></div></div></div>
-      </div>
+      <div class="pc pc-sm" data-spark="kaspa"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F48E;</span>Kaspa</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-kas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-kas">--</span></div><div class="pc-prev" id="pcprev-kas"></div><div class="pc-spark" data-spark="kaspa"></div><div class="pc-range"><div class="pc-range-labels"><span>$0.025</span><span></span><span>$0.210</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:7%"></div><div class="pc-range-dot" style="left:7%"></div></div></div></div>
       <a href="https://farmers1st.com" target="_blank" rel="noopener" class="pc pc-sm" style="display:flex;flex-direction:column;text-decoration:none;color:inherit;cursor:pointer;border-color:rgba(91,163,224,.25);background:linear-gradient(135deg,var(--surface) 0%,rgba(91,163,224,.04) 100%);transition:border-color .15s,transform .1s" onmouseenter="this.style.borderColor='var(--blue)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(91,163,224,.25)';this.style.transform='none'">
-        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">📊</span>FFAI Index</span><span class="pc-contract" style="color:var(--blue)">Farmers First</span></div>
+        <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4CA;</span>FFAI Index</span><span class="pc-contract" style="color:var(--blue)">Farmers First</span></div>
         <div style="display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .15rem">
           <span id="ffai-score-compact" style="font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:800;color:var(--blue);line-height:1">--</span>
           <span style="font-size:.72rem;color:var(--text-muted);font-weight:600">/ 100</span>
         </div>
-        <div style="font-size:.68rem;color:var(--text-dim);line-height:1.5;margin-bottom:.3rem">Composite agricultural market health score — commodities, inputs, trade &amp; weather factors.</div>
+        <div style="font-size:.68rem;color:var(--text-dim);line-height:1.5;margin-bottom:.3rem">Composite agricultural market health score &mdash; commodities, inputs, trade &amp; weather factors.</div>
         <div style="margin-top:auto;padding-top:.45rem;border-top:1px solid rgba(91,163,224,.15);display:flex;align-items:center;justify-content:space-between">
           <span style="font-size:.62rem;color:var(--text-muted)">Updated quarterly</span>
-          <span style="font-size:.68rem;color:var(--blue);font-weight:600">View Methodology →</span>
+          <span style="font-size:.68rem;color:var(--blue);font-weight:600">View Methodology &rarr;</span>
         </div>
       </a>
     </div>
   </div>
 
-  <!-- ══ PREDICTION MARKETS ═══════════════════════════════════════ -->
+  <!-- PREDICTION MARKETS -->
   <div class="fade-up" id="f-kalshi">
-    <div class="sec-head"><div class="sec-title">🎯 What's Moving Agriculture</div><a href="/ag-odds" class="sec-all">All Markets →</a></div>
+    <div class="sec-head"><div class="sec-title">&#x1F3AF; What's Moving Agriculture</div><a href="/ag-odds" class="sec-all">All Markets &rarr;</a></div>
     <div id="kalshi-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:.65rem;margin-bottom:.5rem">
-      <div id="kalshi-loading" style="grid-column:1/-1;text-align:center;padding:1.2rem;font-size:.8rem;color:var(--text-muted)">⏳ Loading markets…</div>
+      <div id="kalshi-loading" style="grid-column:1/-1;text-align:center;padding:1.2rem;font-size:.8rem;color:var(--text-muted)">&#x23F3; Loading markets&hellip;</div>
     </div>
     <div id="kalshi-footer" style="display:none;padding:.25rem 0 .15rem;text-align:right">
-      <a href="/ag-odds" style="font-size:.72rem;color:var(--gold);text-decoration:none;font-weight:600">View all ag prediction markets →</a>
+      <a href="/ag-odds" style="font-size:.72rem;color:var(--gold);text-decoration:none;font-weight:600">View all ag prediction markets &rarr;</a>
     </div>
   </div>
 
-  <!-- ══ SIGNUP ════════════════════════════════════════════════════ -->
+  <!-- SIGNUP -->
   <div class="signup fade-up" id="signup-full" style="display:none">
     <div class="signup-inner">
-      <div class="signup-icon" aria-hidden="true">🌾</div>
-      <span class="signup-eyebrow">AGSIST Daily — Free Delivery Every Weekday</span>
+      <div class="signup-icon" aria-hidden="true">&#x1F33E;</div>
+      <span class="signup-eyebrow">AGSIST Daily &mdash; Free Delivery Every Weekday</span>
       <h2 class="signup-headline">Start every day knowing<br>what moves your markets.</h2>
-      <p class="signup-sub">Get the AGSIST Daily briefing by 6am CT — overnight markets, what to watch, one number to know, and farm weather. <strong style="color:var(--text)">No ads. No fluff. Just the signal.</strong></p>
+      <p class="signup-sub">Get the AGSIST Daily briefing by 6am CT &mdash; overnight markets, what to watch, one number to know, and farm weather. <strong style="color:var(--text)">No ads. No fluff. Just the signal.</strong></p>
       <div class="signup-tabs" role="tablist">
-        <button class="signup-tab active" id="tab-email" role="tab" aria-selected="true" aria-controls="form-email">📧 Email</button>
-        <button class="signup-tab" id="tab-sms" role="tab" aria-selected="false" aria-controls="form-sms">📱 Text / SMS</button>
+        <button class="signup-tab active" id="tab-email" role="tab" aria-selected="true" aria-controls="form-email">&#x1F4E7; Email</button>
+        <button class="signup-tab" id="tab-sms" role="tab" aria-selected="false" aria-controls="form-sms">&#x1F4F1; Text / SMS</button>
       </div>
       <div class="signup-form" id="form-email" role="tabpanel">
         <div class="signup-row">
           <input type="text" class="signup-input" placeholder="First name" autocomplete="given-name" aria-label="First name">
           <input type="email" class="signup-input" placeholder="your@email.com" autocomplete="email" aria-label="Email address" required>
-          <button class="signup-submit" id="btn-email-signup">Subscribe →</button>
+          <button class="signup-submit" id="btn-email-signup">Subscribe &rarr;</button>
         </div>
         <div class="signup-disc">Free forever. Unsubscribe any time. We never sell your data. <a href="/legal/privacy">Privacy Policy</a>.</div>
       </div>
       <div class="signup-form" id="form-sms" style="display:none" role="tabpanel">
         <div class="signup-row">
           <input type="tel" class="signup-input" placeholder="(555) 555-5555" autocomplete="tel" aria-label="Phone number" required>
-          <button class="signup-submit" id="btn-sms-signup">Text Me Daily →</button>
+          <button class="signup-submit" id="btn-sms-signup">Text Me Daily &rarr;</button>
         </div>
         <div class="sms-note">
-          <span style="font-size:1.1rem;flex-shrink:0" aria-hidden="true">📄</span>
+          <span style="font-size:1.1rem;flex-shrink:0" aria-hidden="true">&#x1F4C4;</span>
           <span>Each morning you'll receive a text with a link to today's PDF briefing. Standard messaging rates apply. Text STOP anytime.</span>
         </div>
-        <div class="signup-disc" style="margin-top:.4rem"><a href="/legal/privacy">Privacy Policy</a> · <a href="/legal/terms">Terms</a></div>
+        <div class="signup-disc" style="margin-top:.4rem"><a href="/legal/privacy">Privacy Policy</a> &middot; <a href="/legal/terms">Terms</a></div>
       </div>
     </div>
   </div>
   <div class="signup--compact fade-up" id="signup-compact" style="display:none">
-    <span class="scu-eyebrow">📰 AGSIST Daily</span>
-    <span class="scu-text"><strong>Free weekday briefing</strong> — markets, weather, one number to know by 6am CT.</span>
+    <span class="scu-eyebrow">&#x1F4F0; AGSIST Daily</span>
+    <span class="scu-text"><strong>Free weekday briefing</strong> &mdash; markets, weather, one number to know by 6am CT.</span>
     <div class="scu-form">
       <input type="email" class="scu-input" id="compact-email" placeholder="your@email.com" autocomplete="email" aria-label="Email for daily briefing">
-      <button class="scu-btn" id="btn-compact-signup">Subscribe Free →</button>
+      <button class="scu-btn" id="btn-compact-signup">Subscribe Free &rarr;</button>
     </div>
-    <button class="scu-dismiss" id="btn-compact-dismiss" aria-label="Dismiss signup">✕ No thanks</button>
+    <button class="scu-dismiss" id="btn-compact-dismiss" aria-label="Dismiss signup">&#x2715; No thanks</button>
   </div>
   <div class="signup--slim fade-up" id="signup-slim" style="display:none">
-    <span class="scs-text">Get the free AGSIST Daily briefing every weekday by 6am CT — markets, weather, one number to know.</span>
-    <a href="/daily">Subscribe free →</a>
-    <button id="btn-slim-dismiss" aria-label="Dismiss" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;padding:0 0 0 .5rem;line-height:1">✕</button>
+    <span class="scs-text">Get the free AGSIST Daily briefing every weekday by 6am CT &mdash; markets, weather, one number to know.</span>
+    <a href="/daily">Subscribe free &rarr;</a>
+    <button id="btn-slim-dismiss" aria-label="Dismiss" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;padding:0 0 0 .5rem;line-height:1">&#x2715;</button>
   </div>
 </main>
-
 <div id="site-footer"></div>
 <script src="/components/loader.js"></script>
 <script src="/components/geo.js"></script>
@@ -1347,7 +1030,7 @@
   'use strict';
   function g(v,cents){if(v==null||isNaN(+v))return'--';return cents?'$'+(+v/100).toFixed(2):'$'+(+v).toFixed(2);}
   function chgCls(n){return n>0?'up':n<0?'dn':'nc';}
-  function chgStr(n,pct){if(n==null)return'--';var a=n>0?'▲':n<0?'▼':'—';return a+(n>=0?'+':'')+(+pct).toFixed(2)+'%';}
+  function chgStr(n,pct){if(n==null)return'--';var a=n>0?'\u25b2':n<0?'\u25bc':'\u2014';return a+(n>=0?'+':'')+(+pct).toFixed(2)+'%';}
   function setMsi(pidEl,cidEl,price,chg,pct,cents){
     var pe=document.getElementById(pidEl),ce=document.getElementById(cidEl);
     if(pe&&price!=null)pe.textContent=g(price,cents);
@@ -1368,9 +1051,9 @@
     var cornPrice=cornDec.close/100,beansPrice=beansNov.close/100;
     var ratio=beansPrice/cornPrice,ratioStr=ratio.toFixed(2);
     var verdictCls,verdictTxt;
-    if(ratio<2.4){verdictCls='corn';verdictTxt='🌽 Favors Corn';}
-    else if(ratio>2.6){verdictCls='beans';verdictTxt='🫘 Favors Beans';}
-    else{verdictCls='neutral';verdictTxt='↔ Neutral';}
+    if(ratio<2.4){verdictCls='corn';verdictTxt='\u{1f33d} Favors Corn';}
+    else if(ratio>2.6){verdictCls='beans';verdictTxt='\u{1fad8} Favors Beans';}
+    else{verdictCls='neutral';verdictTxt='\u2194 Neutral';}
     var gaugeMin=2.0,gaugeMax=3.0;
     var gaugePct=Math.min(100,Math.max(0,((ratio-gaugeMin)/(gaugeMax-gaugeMin))*100));
     var dotColor=verdictCls==='corn'?'var(--gold)':verdictCls==='beans'?'var(--green)':'var(--text-dim)';
@@ -1390,7 +1073,6 @@
 })();
 </script>
 
-<!-- ── COT Widget ────────────────────────────────────────────── -->
 <script>
 (function(){
   'use strict';
@@ -1405,7 +1087,7 @@
     var isLong=net>=0;
     if(netEl){netEl.textContent=fmtK(net);netEl.style.color=isLong?'var(--green)':'#ef4444';}
     if(dirEl){dirEl.textContent=isLong?'LONG':'SHORT';dirEl.className='cot-dir '+(isLong?'long':'short');}
-    if(chgEl&&prev!=null){var chg=net-prev;chgEl.textContent=(chg>=0?'▲':'▼')+fmtK(Math.abs(chg)).replace(/^[+-]/,'');chgEl.className='cot-chg '+(chg>0?'up':chg<0?'dn':'nc');}
+    if(chgEl&&prev!=null){var chg=net-prev;chgEl.textContent=(chg>=0?'\u25b2':'\u25bc')+fmtK(Math.abs(chg)).replace(/^[+-]/,'');chgEl.className='cot-chg '+(chg>0?'up':chg<0?'dn':'nc');}
     if(minEl)minEl.textContent=fmtKShort(min52);if(maxEl)maxEl.textContent=fmtKShort(max52);
     var zeroPct=Math.max(0,Math.min(100,((0-min52)/range)*100));
     var currPct=Math.max(0,Math.min(100,((net-min52)/range)*100));
@@ -1422,23 +1104,22 @@
     var netLong=keys.filter(function(k){return data[k]&&data[k].net>0;}).length;
     var verdict=document.getElementById('cot-verdict');
     if(verdict){
-      if(avg>0.62&&netLong>=2){verdict.className='cot-verdict long';verdict.textContent='📈 Funds Long';}
-      else if(avg<0.38||netLong===0){verdict.className='cot-verdict short';verdict.textContent='📉 Funds Short';}
-      else{verdict.className='cot-verdict mixed';verdict.textContent='↔ Mixed';}
+      if(avg>0.62&&netLong>=2){verdict.className='cot-verdict long';verdict.textContent='\u{1f4c8} Funds Long';}
+      else if(avg<0.38||netLong===0){verdict.className='cot-verdict short';verdict.textContent='\u{1f4c9} Funds Short';}
+      else{verdict.className='cot-verdict mixed';verdict.textContent='\u2194 Mixed';}
     }
-    var dateEl=document.getElementById('cot-date');if(dateEl&&data.report_date)dateEl.textContent='As of '+data.report_date+' · CFTC';
+    var dateEl=document.getElementById('cot-date');if(dateEl&&data.report_date)dateEl.textContent='As of '+data.report_date+' \u00b7 CFTC';
   }
   fetch('/data/cot.json').then(function(r){if(!r.ok)throw new Error('no-cot');return r.json();}).then(renderCOT).catch(function(){
-    var verdict=document.getElementById('cot-verdict');if(verdict){verdict.className='cot-verdict mixed';verdict.textContent='Updating…';}
+    var verdict=document.getElementById('cot-verdict');if(verdict){verdict.className='cot-verdict mixed';verdict.textContent='Updating\u2026';}
     ['corn','beans','wheat'].forEach(function(k){
-      var n=document.getElementById('cot-'+k+'-net');if(n)n.textContent='—';
+      var n=document.getElementById('cot-'+k+'-net');if(n)n.textContent='\u2014';
       var c=document.getElementById('cot-'+k+'-chg');if(c){c.textContent='pending';c.className='cot-chg nc';}
     });
   });
 })();
 </script>
 
-<!-- ── NOAA Tab Switcher ─────────────────────────────────────── -->
 <script>
 (function(){
   var BASE='https://www.cpc.ncep.noaa.gov/products/predictions/';
@@ -1457,15 +1138,14 @@
 })();
 </script>
 
-<!-- ── Tariff Widget ─────────────────────────────────────────── -->
 <script>
 (function(){
 'use strict';
-var SHOW_COMMS = ['Soybeans','Corn','Wheat','Pork'];
+var SHOW_COMMS=['Soybeans','Corn','Wheat','Pork'];
 function statusCls(s){return s==='elevated'?'elevated':s==='normal'?'normal':'mixed';}
-function statusIcon(s){return s==='elevated'?'🚨':s==='normal'?'✅':'⚠️';}
+function statusIcon(s){return s==='elevated'?'\u{1f6a8}':s==='normal'?'\u2705':'\u26a0\ufe0f';}
 function statusTxt(s){return s==='elevated'?'Trade War Active':s==='normal'?'Normal Trade':'Mixed';}
-function fmtDate(iso){if(!iso)return'—';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return iso;}}
+function fmtDate(iso){if(!iso)return'\u2014';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return iso;}}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 fetch('/data/tariffs.json')
   .then(function(r){if(!r.ok)throw new Error('no-tariffs');return r.json();})
@@ -1474,13 +1154,13 @@ fetch('/data/tariffs.json')
     var cls=statusCls(data.status);
     if(badge){badge.className='tariff-status-badge '+cls;badge.textContent=statusIcon(data.status)+' '+statusTxt(data.status);}
     var dateEl=document.getElementById('tariff-date');
-    if(dateEl) dateEl.textContent='Updated '+fmtDate(data.updated);
+    if(dateEl)dateEl.textContent='Updated '+fmtDate(data.updated);
     var rows=(data.rows||[]).filter(function(r){return r.destination.indexOf('China')>=0&&SHOW_COMMS.indexOf(r.commodity)>=0;}).slice(0,4);
     var container=document.getElementById('tariff-rows');
     if(container&&rows.length){
       container.innerHTML=rows.map(function(row){
         var sc=statusCls(row.status);
-        return '<div class="tariff-row"><span class="tariff-row-icon">'+esc(row.icon)+'</span><span class="tariff-row-comm">'+esc(row.commodity)+'</span><span class="tariff-row-dest">→ '+esc(row.destination)+'</span><span class="tariff-row-rate '+sc+'">'+esc(row.rate)+'</span></div>';
+        return '<div class="tariff-row"><span class="tariff-row-icon">'+esc(row.icon)+'</span><span class="tariff-row-comm">'+esc(row.commodity)+'</span><span class="tariff-row-dest">\u2192 '+esc(row.destination)+'</span><span class="tariff-row-rate '+sc+'">'+esc(row.rate)+'</span></div>';
       }).join('');
     }
   })
@@ -1488,90 +1168,70 @@ fetch('/data/tariffs.json')
 })();
 </script>
 
-<!-- ── Crop Progress Widget ─────────────────────────────────── -->
 <script>
 (function(){
 'use strict';
 function fmtPct(n){return n==null?'--':n+'%';}
-function fmtChg(cur,prev,suffix){if(cur==null||prev==null)return{txt:'--',cls:'nc'};var d=cur-prev;return{txt:(d>=0?'▲+':'▼')+Math.abs(d)+(suffix||''),cls:d>0?'up':d<0?'dn':'nc'};}
+function fmtChg(cur,prev,suffix){if(cur==null||prev==null)return{txt:'--',cls:'nc'};var d=cur-prev;return{txt:(d>=0?'\u25b2+':'\u25bc')+Math.abs(d)+(suffix||''),cls:d>0?'up':d<0?'dn':'nc'};}
 function geClass(v){if(v==null)return'fair';return v>=60?'good':v>=40?'fair':'poor';}
-function fmtDate(iso){if(!iso)return'—';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return iso;}}
+function fmtDate(iso){if(!iso)return'\u2014';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return iso;}}
 fetch('/data/crop-progress.json')
   .then(function(r){if(!r.ok)throw new Error('no-cp');return r.json();})
   .then(function(data){
-    if(data.report_date){var d=document.getElementById('crop-date');if(d)d.textContent='As of '+fmtDate(data.report_date)+' · NASS';}
+    if(data.report_date){var d=document.getElementById('crop-date');if(d)d.textContent='As of '+fmtDate(data.report_date)+' \u00b7 NASS';}
     if(data.week){var wb=document.getElementById('crop-week-badge');if(wb)wb.textContent='Week '+data.week;}
-    if(!data.in_season){var rows=document.getElementById('crop-rows');if(rows)rows.innerHTML='<div class="crop-offseason">🌨️ Off season — resumes April<br><span style="font-size:.65rem;margin-top:.2rem;display:block">Last season data shown when available</span></div>';}
+    if(!data.in_season){var rows=document.getElementById('crop-rows');if(rows)rows.innerHTML='<div class="crop-offseason">\u2744\ufe0f Off season \u2014 resumes April<br><span style="font-size:.65rem;margin-top:.2rem;display:block">Last season data shown when available</span></div>';}
     var allNull=true;
     ['corn','soybeans'].forEach(function(comm){
       var key=comm==='soybeans'?'bean':comm;
       var d=data[comm];if(!d)return;
       var geEl=document.getElementById('crop-'+key+'-ge');
-      if(geEl){
-        if(d.good_excellent!=null){geEl.textContent=fmtPct(d.good_excellent);geEl.className='crop-ge-val '+geClass(d.good_excellent);allNull=false;}
-        else{geEl.textContent='—';geEl.className='crop-ge-val fair';}
-      }
+      if(geEl){if(d.good_excellent!=null){geEl.textContent=fmtPct(d.good_excellent);geEl.className='crop-ge-val '+geClass(d.good_excellent);allNull=false;}else{geEl.textContent='\u2014';geEl.className='crop-ge-val fair';}}
       var wkChg=fmtChg(d.good_excellent,d.good_excellent_prev_week,'%');
       var yrChg=fmtChg(d.good_excellent,d.good_excellent_prev_year,'%');
-      var wkEl=document.getElementById('crop-'+key+'-wk');var yrEl=document.getElementById('crop-'+key+'-yr');
+      var wkEl=document.getElementById('crop-'+key+'-wk'),yrEl=document.getElementById('crop-'+key+'-yr');
       if(wkEl){wkEl.textContent=wkChg.txt;wkEl.className='crop-chg '+wkChg.cls;}
       if(yrEl){yrEl.textContent=yrChg.txt;yrEl.className='crop-chg '+yrChg.cls;}
-      var plantEl=document.getElementById('crop-'+key+'-plant');var barEl=document.getElementById('crop-'+key+'-bar');
-      if(plantEl)plantEl.textContent=d.planting_pct!=null?fmtPct(d.planting_pct):'—';
+      var plantEl=document.getElementById('crop-'+key+'-plant'),barEl=document.getElementById('crop-'+key+'-bar');
+      if(plantEl)plantEl.textContent=d.planting_pct!=null?fmtPct(d.planting_pct):'\u2014';
       if(barEl)barEl.style.width=Math.min(d.planting_pct||0,100)+'%';
       if(d.planting_pct!=null)allNull=false;
     });
-    if(allNull&&data.in_season!==false){
-      var rows=document.getElementById('crop-rows');
-      if(rows)rows.innerHTML='<div class="crop-offseason">🌱 Season starting — ratings begin once planting gets underway.<br><span style="font-size:.65rem;margin-top:.25rem;display:block">Typically mid-April for WI &amp; MN</span></div>';
-    }
+    if(allNull&&data.in_season!==false){var rows=document.getElementById('crop-rows');if(rows)rows.innerHTML='<div class="crop-offseason">\U0001f331 Season starting \u2014 ratings begin once planting gets underway.<br><span style="font-size:.65rem;margin-top:.25rem;display:block">Typically mid-April for WI &amp; MN</span></div>';}
   })
-  .catch(function(){
-    var d=document.getElementById('crop-date');if(d)d.textContent='Data pending · Mon 4pm ET';
-    ['corn-ge','corn-wk','corn-yr','bean-ge','bean-wk','bean-yr'].forEach(function(id){var el=document.getElementById('crop-'+id);if(el)el.textContent='—';});
-  });
+  .catch(function(){var d=document.getElementById('crop-date');if(d)d.textContent='Data pending \u00b7 Mon 4pm ET';['corn-ge','corn-wk','corn-yr','bean-ge','bean-wk','bean-yr'].forEach(function(id){var el=document.getElementById('crop-'+id);if(el)el.textContent='\u2014';});});
 })();
 </script>
 
-<!-- ── Export Sales Widget ───────────────────────────────────── -->
 <script>
 (function(){
 'use strict';
 function fmtMT(n){if(n==null||isNaN(n))return'--';if(Math.abs(n)>=1000000)return(n/1000000).toFixed(2)+'M MT';if(Math.abs(n)>=1000)return Math.round(n/1000)+'k MT';return n+' MT';}
 function paceClass(pct){if(pct==null)return'on-track';return pct>=85?'on-track':pct>=70?'lagging':'behind';}
-function fmtDate(iso){if(!iso)return'—';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}catch(e){return iso;}}
+function fmtDate(iso){if(!iso)return'\u2014';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}catch(e){return iso;}}
 fetch('/data/export-sales.json')
   .then(function(r){if(!r.ok)throw new Error('no-exp');return r.json();})
   .then(function(data){
-    var dateEl=document.getElementById('exp-date');if(dateEl)dateEl.textContent='Week of '+fmtDate(data.report_date)+' · FAS';
+    var dateEl=document.getElementById('exp-date');if(dateEl)dateEl.textContent='Week of '+fmtDate(data.report_date)+' \u00b7 FAS';
     var mktEl=document.getElementById('export-mkt-yr');if(mktEl&&data.marketing_year)mktEl.textContent=data.marketing_year+' mkt yr';
     var map={'corn':'corn','soybeans':'bean','wheat':'wheat'};
     Object.keys(map).forEach(function(comm){
-      var key=map[comm];var d=data[comm];if(!d)return;
+      var key=map[comm],d=data[comm];if(!d)return;
       var wkEl=document.getElementById('exp-'+key+'-wk');if(wkEl)wkEl.textContent=d.weekly_net_mt!=null?'+'+fmtMT(d.weekly_net_mt):'pending';
-      var pct=d.pct_of_target;var cls=paceClass(pct);
-      var barEl=document.getElementById('exp-'+key+'-bar');var pctEl=document.getElementById('exp-'+key+'-pct');
+      var pct=d.pct_of_target,cls=paceClass(pct);
+      var barEl=document.getElementById('exp-'+key+'-bar'),pctEl=document.getElementById('exp-'+key+'-pct');
       if(barEl){barEl.style.width=Math.min(pct||0,100)+'%';barEl.className='export-pace-fill '+cls;}
       if(pctEl){pctEl.textContent=pct!=null?pct+'%':'--';pctEl.className='export-pace-pct '+cls;}
     });
   })
-  .catch(function(){
-    // No export-sales.json — hide widget and expand crop progress to full width
-    var w=document.getElementById('export-widget');
-    if(w)w.style.display='none';
-    var grid=document.getElementById('crop-export-grid-inner');
-    if(grid)grid.style.gridTemplateColumns='1fr';
-    var cw=document.getElementById('crop-widget');
-    if(cw)cw.style.maxWidth='520px';
-  });
+  .catch(function(){var w=document.getElementById('export-widget');if(w)w.style.display='none';var grid=document.getElementById('crop-export-grid-inner');if(grid)grid.style.gridTemplateColumns='1fr';var cw=document.getElementById('crop-widget');if(cw)cw.style.maxWidth='520px';});
 })();
 </script>
 
-<!-- ── Fertilizer Widget ─────────────────────────────────────── -->
 <script>
 (function(){
 'use strict';
-function fmtDate(iso){if(!iso)return'—';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return iso;}}
+function fmtDate(iso){if(!iso)return'\u2014';try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return iso;}}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 fetch('/data/fertilizer.json')
   .then(function(r){if(!r.ok)throw new Error('no-fert');return r.json();})
@@ -1582,12 +1242,10 @@ fetch('/data/fertilizer.json')
       var hasPrice=p.price!=null;
       var chg=hasPrice&&p.prev!=null?p.price-p.prev:null;
       var chgCls=chg==null?'nc':chg>0?'up':chg<0?'dn':'nc';
-      var chgArrow=chg==null?'':chg>0?'▲':chg<0?'▼':'—';
-      var chgStr=chg!=null&&chg!==0?chgArrow+'$'+Math.abs(chg):chg===0?'—':'';
+      var chgArrow=chg==null?'':chg>0?'\u25b2':chg<0?'\u25bc':'\u2014';
+      var chgStr=chg!=null&&chg!==0?chgArrow+'$'+Math.abs(chg):chg===0?'\u2014':'';
       var priceDisplay=hasPrice?'$'+p.price:'Call';
-      return '<div class="fert-card"><div class="fert-card-head"><span class="fert-name">'+esc(p.icon)+' '+esc(p.name)+'</span><span class="fert-sym">'+esc(p.symbol)+'</span></div>'
-        +'<div class="fert-price"'+(hasPrice?'':' style="font-size:.85rem;color:var(--text-muted)"')+'>'+priceDisplay+'</div>'
-        +'<div class="fert-chg">'+(chgStr?'<span class="fert-chg-val '+chgCls+'">'+esc(chgStr)+'</span>':'')+'<span class="fert-loc">'+(chgStr?' · ':'')+esc(p.location)+'</span></div></div>';
+      return '<div class="fert-card"><div class="fert-card-head"><span class="fert-name">'+esc(p.icon)+' '+esc(p.name)+'</span><span class="fert-sym">'+esc(p.symbol)+'</span></div><div class="fert-price"'+(hasPrice?'':' style="font-size:.85rem;color:var(--text-muted)"')+'>'+priceDisplay+'</div><div class="fert-chg">'+(chgStr?'<span class="fert-chg-val '+chgCls+'">'+esc(chgStr)+'</span>':'')+'<span class="fert-loc">'+(chgStr?' \u00b7 ':'')+esc(p.location)+'</span></div></div>';
     }).join('');
   })
   .catch(function(){var d=document.getElementById('fert-date');if(d)d.textContent='Price data unavailable';});
@@ -1595,212 +1253,65 @@ fetch('/data/fertilizer.json')
 </script>
 
 <script src="/components/sparklines.js"></script>
-
-<!-- ── Prediction Markets ────────────────────────────────────── -->
 <script>
 (function(){
 'use strict';
-
-var POLY = 'https://gamma-api.polymarket.com';
-var MAX_CARDS = 4;
-
-function hasKw(text, kw) {
-  var i = text.indexOf(kw);
-  while (i >= 0) {
-    var before = i === 0 || /[^a-z0-9]/.test(text[i - 1]);
-    var after  = i + kw.length >= text.length || /[^a-z0-9]/.test(text[i + kw.length]);
-    if (before && after) return true;
-    i = text.indexOf(kw, i + 1);
-  }
-  return false;
-}
-
-var T1 = ['corn','soybeans','soybean','wheat','grain','grains','oat','oats',
-  'barley','cotton','sugar','rice','cattle','hogs','hog','pig','livestock',
-  'pork','beef','dairy','milk','poultry','chicken','egg','eggs','ethanol',
-  'crop','harvest','planting','acreage','fertilizer','urea','nitrogen',
-  'potash','phosphate','usda','wasde','crop insurance','food price',
-  'food inflation','grocery','bushel','yield','feedlot'];
-var T2 = ['tariff','tariffs','trade war','trade deal','china trade',
-  'china import','china export','brazil','argentina','ukraine',
-  'black sea grain','usmca','wto','trade dispute','export ban',
-  'retaliatory tariff','crude oil','natural gas','diesel','gasoline',
-  'oil price','opec','pipeline','biofuel','supply chain','rail strike',
-  'railroad','bird flu','avian influenza','farm labor'];
-var T3 = ['interest rate','rate cut','rate hike','fed funds','fomc',
-  'powell','inflation','cpi','recession','gdp','unemployment',
-  'dollar index','drought','hurricane','flood','el nino','la nina',
-  'heat wave','frost','freeze'];
-
-var SKIP = [
-  'nfl','nba','mlb','nhl','mls','wnba','ncaa','march madness','super bowl',
-  'world series','stanley cup','playoff','playoffs','championship game',
-  'all-star','premier league','la liga','champions league','world cup',
-  'olympics','lakers','celtics','warriors','chiefs','eagles','cowboys',
-  'yankees','dodgers','mvp award','rushing yards','batting',
-  'oscar','grammy','emmy','golden globe','eurovision','box office',
-  'netflix','disney','celebrity','kardashian','beyonce','album',
-  'spotify','tiktok','instagram','youtube','viral','dogecoin',
-  'shiba','nft','movie','marvel','dc comics','reality tv',
-  'presidential election','parliamentary election','senate race',
-  'congressional race','prime minister race','governor race',
-  'mayor race','republican primary','democratic primary',
-];
-
-function scoreM(t) {
-  var s = t.toLowerCase();
-  for (var h = 0; h < SKIP.length; h++) { if (s.indexOf(SKIP[h]) >= 0) return null; }
-  for (var a = 0; a < T1.length; a++) { if (hasKw(s, T1[a])) return { score: 100, tier: 1 }; }
-  for (var b = 0; b < T2.length; b++) { if (s.indexOf(T2[b]) >= 0) return { score: 70, tier: 2 }; }
-  for (var c = 0; c < T3.length; c++) { if (s.indexOf(T3[c]) >= 0) return { score: 40, tier: 3 }; }
-  return null;
-}
-
-var WHY = [
-  ['egg','Egg prices signal avian flu pressure and poultry feed demand.'],
-  ['grocery','Grocery prices reflect the entire ag supply chain from field to shelf.'],
-  ['food price','Food price changes affect consumer ag demand from farm to shelf.'],
-  ['food inflation','Food inflation erodes purchasing power and shifts protein demand.'],
-  ['corn','Corn price moves affect feed costs, ethanol margins, and farm revenue.'],
-  ['soybean','Soybeans drive export revenue — any policy shift moves US ag exports.'],
-  ['wheat','Wheat prices set global food costs and compete for acres with corn.'],
-  ['cattle','Cattle prices reflect packer demand and feed efficiency for feedlots.'],
-  ['tariff','Tariffs directly impact US grain export demand — moves basis fast.'],
-  ['trade','Trade policy shifts can redirect global grain flows overnight.'],
-  ['china','China is the world\'s largest soybean buyer — policy shifts move markets.'],
-  ['crude oil','Oil prices drive diesel and fertilizer costs — every $10/bbl hits your budget.'],
-  ['oil','Energy costs flow through to planting, spraying, drying, and hauling.'],
-  ['natural gas','Natural gas is the primary input for nitrogen fertilizer — spikes raise urea.'],
-  ['fertilizer','Fertilizer is the largest variable input cost — price moves squeeze margins.'],
-  ['interest rate','Rate changes affect land values, operating loans, and grain storage carry.'],
-  ['fed','Fed policy drives the dollar, which affects grain export competitiveness.'],
-  ['inflation','Inflation erodes margins when input costs rise faster than commodity prices.'],
-  ['recession','Slowdowns reduce ethanol demand and can weaken feed grain consumption.'],
-  ['drought','Drought is the single biggest yield risk — moves corn and bean prices fast.'],
-  ['hurricane','Hurricanes disrupt Gulf exports and can damage late-season crops.'],
-  ['bird flu','Bird flu outbreaks spike egg prices and cut poultry feed demand.'],
-  ['brazil','Brazil\'s soybean crop competes directly with US exports for global buyers.'],
-  ['ukraine','Black Sea grain disruptions affect global wheat and corn supply.'],
-];
-function getWhy(t) {
-  var s = t.toLowerCase();
-  for (var i = 0; i < WHY.length; i++) { if (s.indexOf(WHY[i][0]) >= 0) return WHY[i][1]; }
-  return 'Affects agricultural commodity prices, input costs, or farm policy.';
-}
-
-function pc(n) { return n >= 70 ? 'var(--green)' : n >= 50 ? 'var(--gold)' : n >= 30 ? 'var(--text-dim)' : '#ef4444'; }
-function barBg(n) { var rgb = n >= 70 ? '34,197,94' : n >= 50 ? '230,176,66' : n >= 30 ? '140,140,130' : '239,68,68'; return 'linear-gradient(90deg,rgba(' + rgb + ',.9),rgba(' + rgb + ',.3))'; }
-function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function tLeft(iso) {
-  if (!iso) return '';
-  try { var d = (new Date(iso).getTime() - Date.now()) / 86400000; if (d < 0) return ''; if (d < 1) return 'Today'; if (d < 2) return 'Tomorrow'; if (d <= 30) return Math.round(d) + 'd left'; return '~' + Math.round(d / 30) + 'mo'; } catch(e) { return ''; }
-}
-
-var TIER_LABELS = { 1: 'DIRECT AG', 2: 'TRADE / ENERGY', 3: 'MACRO' };
-var TIER_COLORS = {
-  1: 'color:var(--green);border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.06)',
-  2: 'color:var(--gold);border-color:rgba(230,176,66,.25);background:rgba(230,176,66,.06)',
-  3: 'color:var(--blue);border-color:rgba(91,163,224,.25);background:rgba(91,163,224,.06)',
-};
-
-var seenM = {}, markets = [];
-
-function parseProb(m) {
-  var prob = null;
-  var op = m.outcomePrices || m.outcome_prices;
-  if (op) { try { var pr = typeof op === 'string' ? JSON.parse(op) : op; if (Array.isArray(pr) && pr.length) { var v = parseFloat(pr[0]); if (!isNaN(v)) prob = Math.round(v <= 1 ? v * 100 : v); } } catch(e) {} }
-  if (prob == null && m.tokens && Array.isArray(m.tokens) && m.tokens.length > 0) { try { var tp = parseFloat(m.tokens[0].price); if (!isNaN(tp) && tp > 0) prob = Math.round(tp <= 1 ? tp * 100 : tp); } catch(e) {} }
-  if (prob == null) { ['yes_price','bestBid','lastTradePrice','last_trade_price','price'].forEach(function(f) { if (prob != null) return; var v = m[f]; if (v != null) { try { var n = parseFloat(v); if (!isNaN(n) && n > 0) prob = Math.round(n <= 1 ? n * 100 : n); } catch(e) {} } }); }
-  return (prob != null && prob > 0 && prob < 100) ? prob : null;
-}
-
-function addItems(items) {
-  items.forEach(function(m) {
-    var title = (m.question || m.title || m.name || '').trim();
-    if (!title) return;
-    var id = String(m.id || m.condition_id || m.conditionId || title).slice(0, 30);
-    if (seenM[id]) return;
-    var rel = scoreM(title); if (!rel) return;
-    var prob = parseProb(m); if (prob == null) return;
-    var vol = 0; ['volume','volume24hr','volume_num','volumeNum','liquidityNum'].forEach(function(f) { if (!vol && m[f]) try { vol = parseFloat(m[f]); } catch(e) {} });
-    var slug = m.slug || m.eventSlug || '';
-    var url = slug ? 'https://polymarket.com/event/' + slug : (m.url || 'https://polymarket.com');
-    var ed = m.endDate || m.end_date_iso || m.endDateIso || '';
-    if (ed) { try { if (new Date(ed) < new Date()) return; } catch(e) {} }
-    seenM[id] = true;
-    markets.push({ title: title.slice(0, 100), yes: prob, url: url, tier: rel.tier, score: rel.score, vol: vol, ed: ed, why: getWhy(title) });
-  });
-}
-
-function addEvents(events) {
-  events.forEach(function(ev) {
-    var evTitle = (ev.title || ev.name || '').trim();
-    var mArr = ev.markets || [];
-    if (mArr.length > 0) { mArr.forEach(function(m) { if (!m.question && evTitle) m.question = evTitle; addItems([m]); }); }
-  });
-}
-
-function renderMarkets() {
-  markets.sort(function(a, b) { return (b.score * 1.5 + Math.log10(Math.max(b.vol, 1)) * 10) - (a.score * 1.5 + Math.log10(Math.max(a.vol, 1)) * 10); });
-  var deduped = [], nt = {};
-  markets.forEach(function(m) { var k = m.title.toLowerCase().replace(/[^a-z0-9]/g, ''); if (!nt[k]) { nt[k] = true; deduped.push(m); } });
-  markets = deduped.slice(0, MAX_CARDS);
-
-  var grid = document.getElementById('kalshi-grid');
-  var footer = document.getElementById('kalshi-footer');
-  if (!grid) return;
-
-  if (!markets.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:1rem;font-size:.78rem;color:var(--text-muted)">No ag-relevant markets found today · <a href="/ag-odds" style="color:var(--gold)">Browse Ag Odds →</a></div>';
-    return;
-  }
-
-  grid.innerHTML = '';
-  markets.forEach(function(m) {
-    var pct = m.yes, tl = tLeft(m.ed);
-    var tierLbl = TIER_LABELS[m.tier] || 'MACRO';
-    var tierStyle = TIER_COLORS[m.tier] || TIER_COLORS[3];
-    var a = document.createElement('a');
-    a.className = 'km-card'; a.href = m.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.dataset.tier = String(m.tier);
-    a.innerHTML =
-      '<div class="km-card-row"><div class="km-card-title">' + esc(m.title) + '</div><div class="km-card-pct" style="color:' + pc(pct) + '">' + pct + '%</div></div>'
-      + '<div class="km-bar-track"><div class="km-bar-fill" style="width:' + pct + '%;background:' + barBg(pct) + '"></div></div>'
-      + '<div class="km-why">' + esc(m.why) + '</div>'
-      + '<div class="km-card-foot"><span class="km-plat p">Polymarket</span>'
-      + '<span style="font-family:\'JetBrains Mono\',monospace;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.18rem .42rem;border-radius:3px;border:1px solid;' + tierStyle + '">' + tierLbl + '</span>'
-      + (tl ? '<span class="km-tl">⏱ ' + esc(tl) + '</span>' : '') + '</div>';
+var POLY='https://gamma-api.polymarket.com';
+var MAX_CARDS=4;
+function hasKw(text,kw){var i=text.indexOf(kw);while(i>=0){var before=i===0||/[^a-z0-9]/.test(text[i-1]);var after=i+kw.length>=text.length||/[^a-z0-9]/.test(text[i+kw.length]);if(before&&after)return true;i=text.indexOf(kw,i+1);}return false;}
+var T1=['corn','soybeans','soybean','wheat','grain','grains','oat','oats','barley','cotton','sugar','rice','cattle','hogs','hog','pig','livestock','pork','beef','dairy','milk','poultry','chicken','egg','eggs','ethanol','crop','harvest','planting','acreage','fertilizer','urea','nitrogen','potash','phosphate','usda','wasde','crop insurance','food price','food inflation','grocery','bushel','yield','feedlot'];
+var T2=['tariff','tariffs','trade war','trade deal','china trade','china import','china export','brazil','argentina','ukraine','black sea grain','usmca','wto','trade dispute','export ban','retaliatory tariff','crude oil','natural gas','diesel','gasoline','oil price','opec','pipeline','biofuel','supply chain','rail strike','railroad','bird flu','avian influenza','farm labor'];
+var T3=['interest rate','rate cut','rate hike','fed funds','fomc','powell','inflation','cpi','recession','gdp','unemployment','dollar index','drought','hurricane','flood','el nino','la nina','heat wave','frost','freeze'];
+var SKIP=['nfl','nba','mlb','nhl','mls','wnba','ncaa','march madness','super bowl','world series','stanley cup','playoff','playoffs','championship game','all-star','premier league','la liga','champions league','world cup','olympics','lakers','celtics','warriors','chiefs','eagles','cowboys','yankees','dodgers','mvp award','rushing yards','batting','oscar','grammy','emmy','golden globe','eurovision','box office','netflix','disney','celebrity','kardashian','beyonce','album','spotify','tiktok','instagram','youtube','viral','dogecoin','shiba','nft','movie','marvel','dc comics','reality tv','presidential election','parliamentary election','senate race','congressional race','prime minister race','governor race','mayor race','republican primary','democratic primary'];
+function scoreM(t){var s=t.toLowerCase();for(var h=0;h<SKIP.length;h++){if(s.indexOf(SKIP[h])>=0)return null;}for(var a=0;a<T1.length;a++){if(hasKw(s,T1[a]))return{score:100,tier:1};}for(var b=0;b<T2.length;b++){if(s.indexOf(T2[b])>=0)return{score:70,tier:2};}for(var c=0;c<T3.length;c++){if(s.indexOf(T3[c])>=0)return{score:40,tier:3};}return null;}
+var WHY=[['egg','Egg prices signal avian flu pressure and poultry feed demand.'],['grocery','Grocery prices reflect the entire ag supply chain from field to shelf.'],['food price','Food price changes affect consumer ag demand from farm to shelf.'],['food inflation','Food inflation erodes purchasing power and shifts protein demand.'],['corn','Corn price moves affect feed costs, ethanol margins, and farm revenue.'],['soybean','Soybeans drive export revenue \u2014 any policy shift moves US ag exports.'],['wheat','Wheat prices set global food costs and compete for acres with corn.'],['cattle','Cattle prices reflect packer demand and feed efficiency for feedlots.'],['tariff','Tariffs directly impact US grain export demand \u2014 moves basis fast.'],['trade','Trade policy shifts can redirect global grain flows overnight.'],['china','China is the world\'s largest soybean buyer \u2014 policy shifts move markets.'],['crude oil','Oil prices drive diesel and fertilizer costs \u2014 every $10/bbl hits your budget.'],['oil','Energy costs flow through to planting, spraying, drying, and hauling.'],['natural gas','Natural gas is the primary input for nitrogen fertilizer \u2014 spikes raise urea.'],['fertilizer','Fertilizer is the largest variable input cost \u2014 price moves squeeze margins.'],['interest rate','Rate changes affect land values, operating loans, and grain storage carry.'],['fed','Fed policy drives the dollar, which affects grain export competitiveness.'],['inflation','Inflation erodes margins when input costs rise faster than commodity prices.'],['recession','Slowdowns reduce ethanol demand and can weaken feed grain consumption.'],['drought','Drought is the single biggest yield risk \u2014 moves corn and bean prices fast.'],['hurricane','Hurricanes disrupt Gulf exports and can damage late-season crops.'],['bird flu','Bird flu outbreaks spike egg prices and cut poultry feed demand.'],['brazil','Brazil\'s soybean crop competes directly with US exports for global buyers.'],['ukraine','Black Sea grain disruptions affect global wheat and corn supply.']];
+function getWhy(t){var s=t.toLowerCase();for(var i=0;i<WHY.length;i++){if(s.indexOf(WHY[i][0])>=0)return WHY[i][1];}return'Affects agricultural commodity prices, input costs, or farm policy.';}
+function pc(n){return n>=70?'var(--green)':n>=50?'var(--gold)':n>=30?'var(--text-dim)':'#ef4444';}
+function barBg(n){var rgb=n>=70?'34,197,94':n>=50?'230,176,66':n>=30?'140,140,130':'239,68,68';return'linear-gradient(90deg,rgba('+rgb+',.9),rgba('+rgb+',.3))';}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function tLeft(iso){if(!iso)return'';try{var d=(new Date(iso).getTime()-Date.now())/86400000;if(d<0)return'';if(d<1)return'Today';if(d<2)return'Tomorrow';if(d<=30)return Math.round(d)+'d left';return'~'+Math.round(d/30)+'mo';}catch(e){return'';}}
+var TIER_LABELS={1:'DIRECT AG',2:'TRADE / ENERGY',3:'MACRO'};
+var TIER_COLORS={1:'color:var(--green);border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.06)',2:'color:var(--gold);border-color:rgba(230,176,66,.25);background:rgba(230,176,66,.06)',3:'color:var(--blue);border-color:rgba(91,163,224,.25);background:rgba(91,163,224,.06)'};
+var seenM={},markets=[];
+function parseProb(m){var prob=null;var op=m.outcomePrices||m.outcome_prices;if(op){try{var pr=typeof op==='string'?JSON.parse(op):op;if(Array.isArray(pr)&&pr.length){var v=parseFloat(pr[0]);if(!isNaN(v))prob=Math.round(v<=1?v*100:v);}}catch(e){}}if(prob==null&&m.tokens&&Array.isArray(m.tokens)&&m.tokens.length>0){try{var tp=parseFloat(m.tokens[0].price);if(!isNaN(tp)&&tp>0)prob=Math.round(tp<=1?tp*100:tp);}catch(e){}}if(prob==null){['yes_price','bestBid','lastTradePrice','last_trade_price','price'].forEach(function(f){if(prob!=null)return;var v=m[f];if(v!=null){try{var n=parseFloat(v);if(!isNaN(n)&&n>0)prob=Math.round(n<=1?n*100:n);}catch(e){}}});}return(prob!=null&&prob>0&&prob<100)?prob:null;}
+function addItems(items){items.forEach(function(m){var title=(m.question||m.title||m.name||'').trim();if(!title)return;var id=String(m.id||m.condition_id||m.conditionId||title).slice(0,30);if(seenM[id])return;var rel=scoreM(title);if(!rel)return;var prob=parseProb(m);if(prob==null)return;var vol=0;['volume','volume24hr','volume_num','volumeNum','liquidityNum'].forEach(function(f){if(!vol&&m[f])try{vol=parseFloat(m[f]);}catch(e){}});var slug=m.slug||m.eventSlug||'';var url=slug?'https://polymarket.com/event/'+slug:(m.url||'https://polymarket.com');var ed=m.endDate||m.end_date_iso||m.endDateIso||'';if(ed){try{if(new Date(ed)<new Date())return;}catch(e){}}seenM[id]=true;markets.push({title:title.slice(0,100),yes:prob,url:url,tier:rel.tier,score:rel.score,vol:vol,ed:ed,why:getWhy(title)});});}
+function addEvents(events){events.forEach(function(ev){var evTitle=(ev.title||ev.name||'').trim();var mArr=ev.markets||[];if(mArr.length>0){mArr.forEach(function(m){if(!m.question&&evTitle)m.question=evTitle;addItems([m]);});}});}
+function renderMarkets(){
+  markets.sort(function(a,b){return(b.score*1.5+Math.log10(Math.max(b.vol,1))*10)-(a.score*1.5+Math.log10(Math.max(a.vol,1))*10);});
+  var deduped=[],nt={};
+  markets.forEach(function(m){var k=m.title.toLowerCase().replace(/[^a-z0-9]/g,'');if(!nt[k]){nt[k]=true;deduped.push(m);}});
+  markets=deduped.slice(0,MAX_CARDS);
+  var grid=document.getElementById('kalshi-grid'),footer=document.getElementById('kalshi-footer');
+  if(!grid)return;
+  if(!markets.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:1rem;font-size:.78rem;color:var(--text-muted)">No ag-relevant markets found today &middot; <a href="/ag-odds" style="color:var(--gold)">Browse Ag Odds &rarr;</a></div>';return;}
+  grid.innerHTML='';
+  markets.forEach(function(m){
+    var pct=m.yes,tl=tLeft(m.ed),tierLbl=TIER_LABELS[m.tier]||'MACRO',tierStyle=TIER_COLORS[m.tier]||TIER_COLORS[3];
+    var a=document.createElement('a');a.className='km-card';a.href=m.url;a.target='_blank';a.rel='noopener noreferrer';a.dataset.tier=String(m.tier);
+    a.innerHTML='<div class="km-card-row"><div class="km-card-title">'+esc(m.title)+'</div><div class="km-card-pct" style="color:'+pc(pct)+'">'+pct+'%</div></div>'+'<div class="km-bar-track"><div class="km-bar-fill" style="width:'+pct+'%;background:'+barBg(pct)+'"></div></div>'+'<div class="km-why">'+esc(m.why)+'</div>'+'<div class="km-card-foot"><span class="km-plat p">Polymarket</span><span style="font-family:\'JetBrains Mono\',monospace;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.18rem .42rem;border-radius:3px;border:1px solid;'+tierStyle+'">'+tierLbl+'</span>'+(tl?'<span class="km-tl">\u23f1 '+esc(tl)+'</span>':'')+'</div>';
     grid.appendChild(a);
   });
-  if (footer) footer.style.display = 'block';
+  if(footer)footer.style.display='block';
 }
-
-function gj(url) { return fetch(url).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }); }
-function toArr(d) { if (!d) return []; if (Array.isArray(d)) return d; return d.results || d.markets || d.events || d.data || []; }
-
-var fetches = [
-  gj(POLY + '/events?active=true&closed=false&limit=100&order=volume&ascending=false'),
-  gj(POLY + '/markets?active=true&closed=false&limit=100&tag_slug=economics'),
-  gj(POLY + '/markets?active=true&closed=false&limit=100&tag_slug=trade'),
-  gj(POLY + '/markets?active=true&closed=false&limit=100&tag_slug=energy'),
-  gj(POLY + '/markets?active=true&closed=false&limit=100&tag_slug=commodities'),
-  gj(POLY + '/markets?active=true&closed=false&limit=100&order=volume&ascending=false'),
+function gj(url){return fetch(url).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});}
+function toArr(d){if(!d)return[];if(Array.isArray(d))return d;return d.results||d.markets||d.events||d.data||[];}
+var fetches=[
+  gj(POLY+'/events?active=true&closed=false&limit=100&order=volume&ascending=false'),
+  gj(POLY+'/markets?active=true&closed=false&limit=100&tag_slug=economics'),
+  gj(POLY+'/markets?active=true&closed=false&limit=100&tag_slug=trade'),
+  gj(POLY+'/markets?active=true&closed=false&limit=100&tag_slug=energy'),
+  gj(POLY+'/markets?active=true&closed=false&limit=100&tag_slug=commodities'),
+  gj(POLY+'/markets?active=true&closed=false&limit=100&order=volume&ascending=false'),
 ];
-
-Promise.all(fetches).then(function(results) {
-  var loading = document.getElementById('kalshi-loading');
-  if (loading) loading.style.display = 'none';
-  var evData = toArr(results[0]);
-  if (evData.length && evData[0] && evData[0].markets !== undefined) { addEvents(evData); } else { addItems(evData); }
-  for (var i = 1; i < results.length; i++) { addItems(toArr(results[i])); }
+Promise.all(fetches).then(function(results){
+  var loading=document.getElementById('kalshi-loading');if(loading)loading.style.display='none';
+  var evData=toArr(results[0]);
+  if(evData.length&&evData[0]&&evData[0].markets!==undefined){addEvents(evData);}else{addItems(evData);}
+  for(var i=1;i<results.length;i++){addItems(toArr(results[i]));}
   renderMarkets();
-}).catch(function() {
-  var loading = document.getElementById('kalshi-loading');
-  if (loading) loading.innerHTML = '<a href="/ag-odds" style="color:var(--gold)">View ag prediction markets →</a>';
-});
-
+}).catch(function(){var loading=document.getElementById('kalshi-loading');if(loading)loading.innerHTML='<a href="/ag-odds" style="color:var(--gold)">View ag prediction markets &rarr;</a>';});
 })();
 </script>
-
 <script>
 (function() {
   'use strict';
@@ -1854,7 +1365,7 @@ Promise.all(fetches).then(function(results) {
     majors.forEach(function(m){var dt=new Date(m.date+'T12:00:00');if(dt>=new Date(now.getFullYear(),now.getMonth(),now.getDate()))events.push({name:m.name,date:dt,time:m.time,note:m.note});});
     events.sort(function(a,b){return a.date-b.date;});var seen={},unique=[];events.forEach(function(e){var k=e.name+'-'+e.date.toDateString();if(!seen[k]){seen[k]=true;unique.push(e);}});events=unique.slice(0,10);
     var todayStr=now.toDateString(),months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];strip.innerHTML='';
-    events.forEach(function(ev){var card=document.createElement('div'),isToday=ev.date.toDateString()===todayStr;card.className='cal-card'+(isToday?' today':'');card.setAttribute('role','listitem');var dateStr=months[ev.date.getMonth()]+' '+ev.date.getDate(),timeStr=ev.time+(ev.note?' · '+ev.note:'');card.innerHTML=(isToday?'<div class="cal-today-badge">Today</div>':'<div class="cal-date">'+dateStr+'</div>')+'<div class="cal-name">'+ev.name+'</div>'+'<div class="cal-time">'+timeStr+(isToday?' · '+dateStr:'')+'</div>';strip.appendChild(card);});
+    events.forEach(function(ev){var card=document.createElement('div'),isToday=ev.date.toDateString()===todayStr;card.className='cal-card'+(isToday?' today':'');card.setAttribute('role','listitem');var dateStr=months[ev.date.getMonth()]+' '+ev.date.getDate(),timeStr=ev.time+(ev.note?' \u00b7 '+ev.note:'');card.innerHTML=(isToday?'<div class="cal-today-badge">Today</div>':'<div class="cal-date">'+dateStr+'</div>')+'<div class="cal-name">'+ev.name+'</div>'+'<div class="cal-time">'+timeStr+(isToday?' \u00b7 '+dateStr:'')+'</div>';strip.appendChild(card);});
   }
   buildUSDACalendar();
 
@@ -1877,13 +1388,13 @@ Promise.all(fetches).then(function(results) {
   function showSignupSuccess(formId,icon,headline,sub){var formEl=document.getElementById(formId);if(!formEl)return;formEl.innerHTML='<div style="text-align:center;padding:.9rem 0"><div style="font-size:2rem;margin-bottom:.4rem">'+icon+'</div><div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.25rem">'+headline+'</div><div style="font-size:.82rem;color:var(--text-muted);line-height:1.5">'+sub+'</div></div>';formEl.style.display='block';}
 
   var btnEmailSignup=document.getElementById('btn-email-signup');
-  if(btnEmailSignup){btnEmailSignup.addEventListener('click',function(e){e.preventDefault();var name=(document.querySelector('#form-email input[type="text"]')||{}).value||'';var email=(document.querySelector('#form-email input[type="email"]')||{}).value||'';if(!email.includes('@'))return;setSignedUp();showSignupSuccess('form-email','✅',"You're subscribed!",'AGSIST Daily arrives by 6am CT on weekdays. Check your spam folder once.');var tabs=document.querySelector('#signup-full .signup-tabs');if(tabs)tabs.style.display='none';fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:JSON.stringify({name:name,email:email,source:'homepage-email'}),headers:{'Content-Type':'application/json','Accept':'application/json'}}).catch(function(){});});}
+  if(btnEmailSignup){btnEmailSignup.addEventListener('click',function(e){e.preventDefault();var name=(document.querySelector('#form-email input[type="text"]')||{}).value||'';var email=(document.querySelector('#form-email input[type="email"]')||{}).value||'';if(!email.includes('@'))return;setSignedUp();showSignupSuccess('form-email','\u2705',"You're subscribed!",'AGSIST Daily arrives by 6am CT on weekdays. Check your spam folder once.');var tabs=document.querySelector('#signup-full .signup-tabs');if(tabs)tabs.style.display='none';fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:JSON.stringify({name:name,email:email,source:'homepage-email'}),headers:{'Content-Type':'application/json','Accept':'application/json'}}).catch(function(){});});}
 
   var btnSmsSignup=document.getElementById('btn-sms-signup');
-  if(btnSmsSignup){btnSmsSignup.addEventListener('click',function(e){e.preventDefault();var phone=(document.querySelector('#form-sms input[type="tel"]')||{}).value||'';if(phone.replace(/\D/g,'').length<10)return;setSignedUp();showSignupSuccess('form-sms','📱',"You're on the list!","Each morning you'll get a text link to the daily PDF briefing. Reply STOP anytime.");var tabs=document.querySelector('#signup-full .signup-tabs');if(tabs)tabs.style.display='none';fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:JSON.stringify({phone:phone,source:'homepage-sms'}),headers:{'Content-Type':'application/json','Accept':'application/json'}}).catch(function(){});});}
+  if(btnSmsSignup){btnSmsSignup.addEventListener('click',function(e){e.preventDefault();var phone=(document.querySelector('#form-sms input[type="tel"]')||{}).value||'';if(phone.replace(/\D/g,'').length<10)return;setSignedUp();showSignupSuccess('form-sms','\U0001f4f1',"You're on the list!","Each morning you'll get a text link to the daily PDF briefing. Reply STOP anytime.");var tabs=document.querySelector('#signup-full .signup-tabs');if(tabs)tabs.style.display='none';fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:JSON.stringify({phone:phone,source:'homepage-sms'}),headers:{'Content-Type':'application/json','Accept':'application/json'}}).catch(function(){});});}
 
   var btnCompactSignup=document.getElementById('btn-compact-signup'),compactEmail=document.getElementById('compact-email');
-  if(btnCompactSignup){btnCompactSignup.addEventListener('click',function(e){e.preventDefault();var email=compactEmail?compactEmail.value.trim():'';if(!email.includes('@'))return;setSignedUp();var bar=document.getElementById('signup-compact');if(bar)bar.innerHTML='<span style="font-size:.88rem;color:var(--green);padding:.1rem 0">✅ Subscribed! AGSIST Daily arrives by 6am CT on weekdays.</span>';fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:JSON.stringify({email:email,source:'homepage-compact'}),headers:{'Content-Type':'application/json','Accept':'application/json'}}).catch(function(){});});}
+  if(btnCompactSignup){btnCompactSignup.addEventListener('click',function(e){e.preventDefault();var email=compactEmail?compactEmail.value.trim():'';if(!email.includes('@'))return;setSignedUp();var bar=document.getElementById('signup-compact');if(bar)bar.innerHTML='<span style="font-size:.88rem;color:var(--green);padding:.1rem 0">\u2705 Subscribed! AGSIST Daily arrives by 6am CT on weekdays.</span>';fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:JSON.stringify({email:email,source:'homepage-compact'}),headers:{'Content-Type':'application/json','Accept':'application/json'}}).catch(function(){});});}
   if(compactEmail)compactEmail.addEventListener('keydown',function(e){if(e.key==='Enter'&&btnCompactSignup)btnCompactSignup.click();});
 })();
 </script>
@@ -1896,19 +1407,19 @@ window.hydrateDaily=(function(){
   function hydrate(d){
     if(hydrated)return;hydrated=true;
     txt('daily-headline',d.headline);txt('daily-subheadline',d.subheadline);txt('daily-lead',d.lead);txt('daily-date',d.date);
-    if(d.date){var parts=d.date.split(',');txt('daily-teaser-date','\u{1F4F0} AGSIST Daily \u00B7 '+(parts.length>1?parts[1].trim():d.date));}
+    if(d.date){var parts=d.date.split(',');txt('daily-teaser-date','\U0001f4f0 AGSIST Daily \u00b7 '+(parts.length>1?parts[1].trim():d.date));}
     txt('daily-teaser-text',d.teaser||d.subheadline);
     var moodEl=$('daily-mood');
-    if(moodEl&&d.meta&&d.meta.market_mood){var mood=d.meta.market_mood;var mc={bullish:{color:'var(--green)',bg:'rgba(58,139,60,.08)',border:'rgba(58,139,60,.22)'},bearish:{color:'var(--red)',bg:'rgba(240,96,96,.08)',border:'rgba(240,96,96,.22)'},mixed:{color:'var(--gold)',bg:'rgba(218,165,32,.08)',border:'rgba(218,165,32,.22)'},cautious:{color:'var(--gold)',bg:'rgba(218,165,32,.08)',border:'rgba(218,165,32,.22)'},volatile:{color:'var(--orange)',bg:'rgba(200,122,40,.08)',border:'rgba(200,122,40,.22)'}}[mood]||{color:'var(--gold)',bg:'rgba(218,165,32,.08)',border:'rgba(218,165,32,.22)'};var mi={bullish:'\u{1F4C8}',bearish:'\u{1F4C9}',mixed:'\u2194\uFE0F',cautious:'\u26A0\uFE0F',volatile:'\u{1F525}'}[mood]||'\u2194\uFE0F';moodEl.textContent=mi+' '+mood.charAt(0).toUpperCase()+mood.slice(1);moodEl.style.color=mc.color;moodEl.style.background=mc.bg;moodEl.style.border='1px solid '+mc.border;moodEl.style.display='inline-flex';}
+    if(moodEl&&d.meta&&d.meta.market_mood){var mood=d.meta.market_mood;var mc={bullish:{color:'var(--green)',bg:'rgba(58,139,60,.08)',border:'rgba(58,139,60,.22)'},bearish:{color:'var(--red)',bg:'rgba(240,96,96,.08)',border:'rgba(240,96,96,.22)'},mixed:{color:'var(--gold)',bg:'rgba(218,165,32,.08)',border:'rgba(218,165,32,.22)'},cautious:{color:'var(--gold)',bg:'rgba(218,165,32,.08)',border:'rgba(218,165,32,.22)'},volatile:{color:'var(--orange)',bg:'rgba(200,122,40,.08)',border:'rgba(200,122,40,.22)'}}[mood]||{color:'var(--gold)',bg:'rgba(218,165,32,.08)',border:'rgba(218,165,32,.22)'};var mi={bullish:'\U0001f4c8',bearish:'\U0001f4c9',mixed:'\u2194\ufe0f',cautious:'\u26a0\ufe0f',volatile:'\U0001f525'}[mood]||'\u2194\ufe0f';moodEl.textContent=mi+' '+mood.charAt(0).toUpperCase()+mood.slice(1);moodEl.style.color=mc.color;moodEl.style.background=mc.bg;moodEl.style.border='1px solid '+mc.border;moodEl.style.display='inline-flex';}
     var surpriseBanner=$('daily-surprise-banner');
-    if(surpriseBanner){var surprises=(d.surprises&&d.surprises.length)?d.surprises:((d.meta&&d.meta.overnight_surprises)||[]);if(surprises.length>0){var names=surprises.map(function(s){return s.commodity+' '+(s.direction==='up'?'\u25B2':'\u25BC')+Math.abs(s.pct_change).toFixed(1)+'%';});var stEl=surpriseBanner.querySelector('.surprise-text');if(stEl)stEl.innerHTML='<strong>Overnight Surprise'+(surprises.length>1?'s':'')+':</strong> '+names.join(' \u00B7 ');surpriseBanner.style.display='flex';}else{surpriseBanner.style.display='none';}}
+    if(surpriseBanner){var surprises=(d.surprises&&d.surprises.length)?d.surprises:((d.meta&&d.meta.overnight_surprises)||[]);if(surprises.length>0){var names=surprises.map(function(s){return s.commodity+' '+(s.direction==='up'?'\u25b2':'\u25bc')+Math.abs(s.pct_change).toFixed(1)+'%';});var stEl=surpriseBanner.querySelector('.surprise-text');if(stEl)stEl.innerHTML='<strong>Overnight Surprise'+(surprises.length>1?'s':'')+':</strong> '+names.join(' \u00b7 ');surpriseBanner.style.display='flex';}else{surpriseBanner.style.display='none';}}
     var heatIdx=(d.meta&&d.meta.heat_section!=null)?d.meta.heat_section:-1;
-    if(d.sections&&Array.isArray(d.sections)){d.sections.forEach(function(sec,i){var n=i+1;txt('daily-section-'+n+'-title',sec.title);var iconEl=$('daily-section-'+n+'-icon');if(iconEl&&sec.icon)iconEl.textContent=sec.icon;var bodyEl=$('daily-section-'+n+'-body');if(bodyEl){if(sec.body)bodyEl.innerHTML=sec.body;else if(sec.bullets)bodyEl.innerHTML=sec.bullets.map(function(b){return'<span>\u2022 '+b+'</span>';}).join('');}var blEl=$('daily-section-'+n+'-bottomline');if(blEl&&sec.bottom_line){blEl.textContent=sec.bottom_line;blEl.style.display='block';}var cvEl=$('daily-section-'+n+'-conviction');if(cvEl&&sec.conviction_level){var cv={high:{color:'var(--green)',bg:'rgba(58,139,60,.10)',border:'rgba(58,139,60,.25)'},medium:{color:'var(--gold)',bg:'rgba(218,165,32,.10)',border:'rgba(218,165,32,.25)'},low:{color:'var(--text-muted)',bg:'var(--surface2)',border:'var(--border)'}}[sec.conviction_level]||{color:'var(--gold)',bg:'rgba(218,165,32,.10)',border:'rgba(218,165,32,.25)'};cvEl.textContent=sec.conviction_level.toUpperCase()+' CONVICTION';cvEl.style.color=cv.color;cvEl.style.background=cv.bg;cvEl.style.border='1px solid '+cv.border;cvEl.style.display='inline-block';}var actionEl=$('daily-section-'+n+'-action');if(actionEl&&sec.farmer_action){actionEl.textContent='\u{1F3AF} '+sec.farmer_action;actionEl.style.display='block';}var secEl=$('daily-sec-'+n);if(secEl){if(sec.overnight_surprise)secEl.classList.add('daily-sec--surprise');if(i===heatIdx)secEl.classList.add('daily-sec--heat');}});}
+    if(d.sections&&Array.isArray(d.sections)){d.sections.forEach(function(sec,i){var n=i+1;txt('daily-section-'+n+'-title',sec.title);var iconEl=$('daily-section-'+n+'-icon');if(iconEl&&sec.icon)iconEl.textContent=sec.icon;var bodyEl=$('daily-section-'+n+'-body');if(bodyEl){if(sec.body)bodyEl.innerHTML=sec.body;else if(sec.bullets)bodyEl.innerHTML=sec.bullets.map(function(b){return'<span>\u2022 '+b+'</span>';}).join('');}var blEl=$('daily-section-'+n+'-bottomline');if(blEl&&sec.bottom_line){blEl.textContent=sec.bottom_line;blEl.style.display='block';}var cvEl=$('daily-section-'+n+'-conviction');if(cvEl&&sec.conviction_level){var cv={high:{color:'var(--green)',bg:'rgba(58,139,60,.10)',border:'rgba(58,139,60,.25)'},medium:{color:'var(--gold)',bg:'rgba(218,165,32,.10)',border:'rgba(218,165,32,.25)'},low:{color:'var(--text-muted)',bg:'var(--surface2)',border:'var(--border)'}}[sec.conviction_level]||{color:'var(--gold)',bg:'rgba(218,165,32,.10)',border:'rgba(218,165,32,.25)'};cvEl.textContent=sec.conviction_level.toUpperCase()+' CONVICTION';cvEl.style.color=cv.color;cvEl.style.background=cv.bg;cvEl.style.border='1px solid '+cv.border;cvEl.style.display='inline-block';}var actionEl=$('daily-section-'+n+'-action');if(actionEl&&sec.farmer_action){actionEl.textContent='\U0001f3af '+sec.farmer_action;actionEl.style.display='block';}var secEl=$('daily-sec-'+n);if(secEl){if(sec.overnight_surprise)secEl.classList.add('daily-sec--surprise');if(i===heatIdx)secEl.classList.add('daily-sec--heat');}});}
     if(d.one_number){txt('daily-number-value',d.one_number.value);txt('daily-number-unit',d.one_number.unit);txt('daily-number-context',d.one_number.context||d.one_number.why);}
     if(d.the_more_you_know){txt('daily-tmyk-title',d.the_more_you_know.title);txt('daily-tmyk-body',d.the_more_you_know.body);}
     if(d.daily_quote){var qEl=$('daily-quote-text');if(qEl&&d.daily_quote.text){var qt=d.daily_quote.text.replace(/^[\u201c""\u201d]|[\u201c""\u201d]$/g,'');qEl.textContent='\u201c'+qt+'\u201d';}var aEl=$('daily-quote-attr');if(aEl&&d.daily_quote.attribution){aEl.textContent='\u2014 '+d.daily_quote.attribution.replace(/^[\u2014\u2013-]\s*/,'');}}
     var wl=$('daily-watch-list');if(wl&&d.watch_list&&d.watch_list.length){wl.innerHTML='';d.watch_list.forEach(function(item){var li=document.createElement('li');li.className='watch-item';li.innerHTML='<span class="watch-time">'+(item.time||item.label||'')+'</span><span class="watch-desc">'+(item.desc||item.item||'')+'</span>';wl.appendChild(li);});}
-    txt('daily-source',d.source_summary||d.source||'USDA \u00B7 CME Group \u00B7 Open-Meteo');
+    txt('daily-source',d.source_summary||d.source||'USDA \u00b7 CME Group \u00b7 Open-Meteo');
   }
   return hydrate;
 })();

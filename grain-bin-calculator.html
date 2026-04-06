@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0e0e0c">
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
   <link rel="stylesheet" href="/components/styles.css">
   <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
   <link rel="manifest"                            href="/manifest.json">
-
   <title>Grain Bin Calculator — Free Bushel Capacity &amp; Moisture Shrink Tool | AGSIST</title>
   <meta name="description" content="Free grain bin calculator for farmers. Calculate bushel capacity with peaked, level, or draw cone surfaces. Moisture shrink, storage volume, and market value for corn, soybeans, wheat, and more.">
   <meta name="keywords"    content="grain bin calculator, bushel capacity calculator, moisture shrink, grain storage calculator, bin volume, cone grain bin">
+  <meta name="author"      content="Farmers First Agri Service — AGSIST">
   <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"    href="https://agsist.com/grain-bin-calculator">
-
   <meta property="og:type"         content="website">
   <meta property="og:site_name"    content="AGSIST">
   <meta property="og:locale"       content="en_US">
@@ -29,202 +30,75 @@
   <meta property="og:image:alt"    content="Grain Bin Calculator — AGSIST">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:site"        content="@agsist">
+  <meta name="twitter:creator"     content="@agsist">
   <meta name="twitter:title"       content="Grain Bin Calculator — AGSIST">
   <meta name="twitter:description" content="Free grain bin calculator. Bushel capacity and moisture shrink for any bin.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/grain-bin-calculator.jpg">
-
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "Grain Bin Calculator",
-        "description": "Free grain bin storage calculator for bushel capacity, moisture shrink, and market value with peaked/level/draw grain surface profiles.",
-        "url": "https://agsist.com/grain-bin-calculator",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home",                 "item": "https://agsist.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Tools",                "item": "https://agsist.com/tools" },
-          { "@type": "ListItem", "position": 3, "name": "Grain Bin Calculator", "item": "https://agsist.com/grain-bin-calculator" }
-        ]
-      }
-    ]
-  }
+  {"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Grain Bin Calculator","description":"Free grain bin storage calculator for bushel capacity, moisture shrink, and market value.","url":"https://agsist.com/grain-bin-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agsist.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://agsist.com/tools"},{"@type":"ListItem","position":3,"name":"Grain Bin Calculator","item":"https://agsist.com/grain-bin-calculator"}]}]}
   </script>
-
   <style>
+    button,a,[role="button"]{touch-action:manipulation;}
     html, body { overflow-x: hidden; width: 100%; }
-    .panel { overflow: visible; }
-    .panel-body { overflow-x: hidden; }
+    .panel { overflow: visible; } .panel-body { overflow-x: hidden; }
     .grid-2 { max-width: 1100px; margin: 0 auto; }
-
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type="number"] { -moz-appearance: textfield; }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; font-weight: 700; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
-    }
-
-    .pill-group {
-      display: flex; gap: 0; border: 2px solid var(--border);
-      border-radius: 4px; overflow: hidden; margin-bottom: 16px;
-    }
-    .pill-group label {
-      flex: 1; padding: 8px 6px; text-align: center; cursor: pointer;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: .03em;
-      color: var(--text-dim); background: var(--surface);
-      border-right: 1px solid var(--border);
-      transition: all 0.15s; user-select: none;
-    }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .pill-group { display: flex; gap: 0; border: 2px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+    .pill-group label { flex: 1; padding: 8px 6px; text-align: center; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: .03em; color: var(--text-dim); background: var(--surface); border-right: 1px solid var(--border); transition: all 0.15s; user-select: none; }
     .pill-group label:last-child { border-right: none; }
     .pill-group input { display: none; }
     .pill-group input:checked + label { background: var(--green); color: #fff; }
-
     .input-grid { display: grid; gap: 12px; margin-bottom: 16px; }
     .input-grid.cols-2 { grid-template-columns: 1fr 1fr; }
     .input-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .input-grid label {
-      font-size: 0.72rem; color: var(--text-dim); margin-bottom: 2px; display: block;
-    }
-    .input-grid input, .input-grid select {
-      width: 100%; padding: 8px 10px;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-      background: var(--surface); border: 2px solid var(--border);
-      border-radius: 4px; color: var(--text);
-    }
+    .input-grid label { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 2px; display: block; }
+    .input-grid input, .input-grid select { width: 100%; padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; background: var(--surface); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
     .input-grid input:focus, .input-grid select:focus { outline: none; border-color: var(--green); }
-
-    .crop-select {
-      width: 100%; padding: 8px 10px; margin-bottom: 16px;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
-      background: var(--surface); border: 2px solid var(--border);
-      border-radius: 4px; color: var(--text);
-    }
+    .crop-select { width: 100%; padding: 8px 10px; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; background: var(--surface); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
     .crop-select:focus { outline: none; border-color: var(--green); }
-
-    .depth-row {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px; padding: 10px 12px;
-      background: var(--bg); border: 2px solid var(--border); border-radius: 4px;
-    }
-    .depth-row label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem; font-weight: 700; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .08em;
-      white-space: nowrap; min-width: 80px;
-    }
+    .depth-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 10px 12px; background: var(--bg); border: 2px solid var(--border); border-radius: 6px; }
+    .depth-row label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; min-width: 80px; }
     .depth-row input[type="range"] { flex: 1; accent-color: var(--green); cursor: pointer; }
-    .depth-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem; font-weight: 700; color: var(--gold);
-      min-width: 52px; text-align: right;
-    }
-
-    .bin-viz-wrap {
-      padding: 16px 8px 8px; margin-top: 8px;
-      background: var(--bg); border: 2px solid var(--border); border-radius: 4px;
-      text-align: center;
-    }
+    .depth-val { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--gold); min-width: 52px; text-align: right; }
+    .bin-viz-wrap { padding: 16px 8px 8px; margin-top: 8px; background: var(--bg); border: 2px solid var(--border); border-radius: 8px; text-align: center; }
     .bin-viz-wrap svg { max-width: 280px; width: 100%; height: auto; }
-    .bin-viz-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem; font-weight: 700; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px;
-    }
-
+    .bin-viz-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
     .result-value { font-family: 'JetBrains Mono', monospace; }
-
-    .value-box {
-      margin-top: 16px; padding: 14px;
-      background: var(--bg); border-radius: 4px; border: 2px solid var(--border);
-    }
+    .value-box { margin-top: 16px; padding: 14px; background: var(--bg); border-radius: 8px; border: 2px solid var(--border); }
     .value-box .result-row { margin: 0; padding: 5px 0; }
-    .value-price-row {
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;
-    }
-    .value-price-row label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem; font-weight: 700; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .08em; margin: 0; white-space: nowrap;
-    }
-    .value-price-row input {
-      width: 90px; padding: 6px 10px;
-      font-family: 'JetBrains Mono', monospace; font-size: .85rem;
-      background: var(--surface); border: 2px solid var(--border);
-      border-radius: 4px; color: var(--text);
-    }
+    .value-price-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .value-price-row label { font-family: 'JetBrains Mono', monospace; font-size: .62rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin: 0; white-space: nowrap; }
+    .value-price-row input { width: 90px; padding: 6px 10px; font-family: 'JetBrains Mono', monospace; font-size: .85rem; background: var(--surface); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
     .value-price-row input:focus { outline: none; border-color: var(--green); }
-
     .moist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-    .moist-card { background: var(--bg); padding: 10px; border-radius: 4px; border: 2px solid var(--border); }
+    .moist-card { background: var(--bg); padding: 10px; border-radius: 8px; border: 2px solid var(--border); }
     .moist-card-label { font-size: .68rem; color: var(--text-dim); }
-    .moist-card-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.05rem; font-weight: 700; color: var(--gold);
-    }
-
-    .formula-note {
-      margin-top: 16px; padding: 12px;
-      background: var(--bg); border-radius: 4px; border-left: 3px solid var(--green);
-      font-size: .78rem; color: var(--text-dim);
-    }
+    .moist-card-val { font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; color: var(--gold); }
+    .formula-note { margin-top: 16px; padding: 12px; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--green); font-size: .78rem; color: var(--text-dim); }
     .formula-note strong { color: var(--text); }
-    .formula-note code {
-      font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--gold);
-    }
-
-    .ref-table {
-      width: 100%; border-collapse: collapse;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
-    }
-    .ref-table th {
-      background: var(--bg); padding: 7px 8px; text-align: center;
-      color: var(--text-dim); font-size: 0.62rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .05em; border: 1px solid var(--border);
-    }
+    .formula-note code { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--gold); }
+    .ref-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; }
+    .ref-table th { background: var(--bg); padding: 7px 8px; text-align: center; color: var(--text-dim); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; border: 1px solid var(--border); }
     .ref-table td { padding: 7px 8px; text-align: center; border: 1px solid var(--border); }
     .ref-table tr:hover td { background: rgba(58,139,60,0.04); }
     .ref-table .hl { color: var(--gold); font-weight: 700; }
-
-    @media (max-width: 768px) {
-      .grid-2 { display: block !important; }
-      .grid-2 > .panel { margin-bottom: 12px; }
-    }
-    @media (max-width: 500px) {
-      .input-grid.cols-2, .input-grid.cols-3 { grid-template-columns: 1fr !important; }
-      .pill-group label { font-size: 0.6rem; padding: 7px 4px; }
-      .moist-grid { grid-template-columns: 1fr; }
-      .depth-row { flex-wrap: wrap; }
-      .depth-row input[type="range"] { width: 100%; }
-    }
+    @media (max-width: 768px) { .grid-2 { display: block !important; } .grid-2 > .panel { margin-bottom: 12px; } }
+    @media (max-width: 500px) { .input-grid.cols-2, .input-grid.cols-3 { grid-template-columns: 1fr !important; } .pill-group label { font-size: 0.6rem; padding: 7px 4px; } .moist-grid { grid-template-columns: 1fr; } .depth-row { flex-wrap: wrap; } .depth-row input[type="range"] { width: 100%; } }
   </style>
 </head>
 <body>
-
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
-
   <main id="main">
-    <nav class="breadcrumb">
-      <a href="/">Home</a> → <a href="/tools">Tools</a> → Grain Bin Calculator
-    </nav>
-
+    <nav class="breadcrumb"><a href="/">Home</a> → <a href="/tools">Tools</a> → Grain Bin Calculator</nav>
     <div class="grid-2">
-
-      <!-- ═══ INPUT PANEL ═════════════════════════════════════════ -->
+      <!-- INPUT PANEL -->
       <div class="panel">
         <div class="panel-head"><h1>🌾 GRAIN BIN CALCULATOR</h1></div>
         <div class="panel-body">
-
           <div class="section-label">Crop Type</div>
           <select id="crop" class="crop-select" onchange="calc()">
             <option value="corn">Corn (56 lb/bu — 15.5% std)</option>
@@ -234,7 +108,6 @@
             <option value="oats">Oats (32 lb/bu — 14.0% std)</option>
             <option value="sorghum">Sorghum (56 lb/bu — 14.0% std)</option>
           </select>
-
           <div class="section-label">Bin Shape</div>
           <div class="pill-group">
             <input type="radio" name="shape" id="s-round" value="round" checked onchange="toggleShape();calc()">
@@ -242,7 +115,6 @@
             <input type="radio" name="shape" id="s-rect" value="rect" onchange="toggleShape();calc()">
             <label for="s-rect">▬ Rectangular</label>
           </div>
-
           <div id="round-inputs">
             <div class="input-grid cols-2">
               <div><label>Diameter (ft)</label><input type="number" id="diameter" value="30" inputmode="numeric" oninput="calc()"></div>
@@ -256,7 +128,6 @@
               <div><label>Depth (ft)</label><input type="number" id="rheight" value="10" inputmode="numeric" oninput="calc()"></div>
             </div>
           </div>
-
           <div class="section-label" id="surface-label">Grain Surface</div>
           <div class="pill-group" id="surface-pills">
             <input type="radio" name="surface" id="sf-peaked" value="peaked" checked onchange="calc()">
@@ -266,20 +137,16 @@
             <input type="radio" name="surface" id="sf-draw" value="draw" onchange="calc()">
             <label for="sf-draw">▼ Draw</label>
           </div>
-
           <div class="depth-row">
             <label>Grain Depth</label>
             <input type="range" id="grain-depth" min="0" max="100" value="100" oninput="onDepth()">
             <span class="depth-val" id="depth-val">24.0 ft</span>
           </div>
-
           <div class="section-label">Moisture &amp; Packing</div>
           <div class="input-grid cols-2">
             <div><label>Moisture In (%)</label><input type="number" id="moistIn" value="15.5" step="0.1" inputmode="decimal" oninput="calc()"></div>
             <div><label>Pack Factor (%)</label><input type="number" id="pack" value="0" step="0.5" inputmode="decimal" oninput="calc()"></div>
-          </div>
-
-          <!-- SVG Bin Visualization -->
+          </div>          <!-- SVG Bin Visualization -->
           <div class="bin-viz-wrap">
             <div class="bin-viz-label">Cross-Section View</div>
             <svg id="bin-svg" viewBox="0 0 280 310" xmlns="http://www.w3.org/2000/svg">
@@ -293,14 +160,11 @@
                   <ellipse cx="1" cy="8" rx="1.3" ry="0.9" fill="#8c6818" opacity="0.22" transform="rotate(8,1,8)"/>
                 </pattern>
                 <linearGradient id="wall-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#5a5a54"/>
-                  <stop offset="30%" stop-color="#7a7a72"/>
-                  <stop offset="70%" stop-color="#7a7a72"/>
-                  <stop offset="100%" stop-color="#5a5a54"/>
+                  <stop offset="0%" stop-color="#5a5a54"/><stop offset="30%" stop-color="#7a7a72"/>
+                  <stop offset="70%" stop-color="#7a7a72"/><stop offset="100%" stop-color="#5a5a54"/>
                 </linearGradient>
                 <linearGradient id="roof-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#6a6a62"/>
-                  <stop offset="100%" stop-color="#4a4a44"/>
+                  <stop offset="0%" stop-color="#6a6a62"/><stop offset="100%" stop-color="#4a4a44"/>
                 </linearGradient>
               </defs>
               <path id="svg-roof" d="" fill="url(#roof-grad)" stroke="#8a8a82" stroke-width="1.5" stroke-linejoin="round"/>
@@ -327,7 +191,6 @@
               <text id="cap-unit" x="140" y="216" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" font-weight="700" fill="#daa520" opacity="0.7">BUSHELS</text>
             </svg>
           </div>
-
           <div style="margin-top:16px">
             <div class="section-label">Common Round Bin Capacities (Level Fill)</div>
             <div style="overflow-x:auto">
@@ -342,45 +205,38 @@
                 </tbody>
               </table>
             </div>
-            <div style="font-size:0.58rem;color:var(--text-dim);margin-top:4px;font-family:'JetBrains Mono',monospace">
+            <div style="font-size:0.62rem;color:var(--text-dim);margin-top:4px;font-family:'JetBrains Mono',monospace">
               Bushels at standard moisture, no pack. Rows = diameter, cols = eave height.
             </div>
           </div>
-
         </div>
       </div>
-
-      <!-- ═══ RESULTS PANEL ═══════════════════════════════════════ -->
+      <!-- RESULTS PANEL -->
       <div class="panel">
         <div class="panel-head"><h2>RESULTS</h2></div>
         <div class="panel-body">
-
           <div class="section-label">Storage Volume</div>
-          <div class="result-row"><span class="result-label">Cylinder Volume</span>      <span class="result-value" id="rCylVol">--</span></div>
+          <div class="result-row"><span class="result-label">Cylinder Volume</span><span class="result-value" id="rCylVol">--</span></div>
           <div class="result-row"><span class="result-label" id="rAdjLabel">Peaked Cone</span><span class="result-value" id="rAdjVol">--</span></div>
-          <div class="result-row"><span class="result-label">Total Volume</span>         <span class="result-value" id="rTotVol">--</span></div>
-
+          <div class="result-row"><span class="result-label">Total Volume</span><span class="result-value" id="rTotVol">--</span></div>
           <div style="height:12px"></div>
           <div class="section-label">Bushels &amp; Weight</div>
-          <div class="result-row"><span class="result-label">Total Bushels</span>        <span class="result-value highlight" id="rTotBu" style="font-size:1.2rem">--</span></div>
-          <div class="result-row"><span class="result-label">Weight</span>               <span class="result-value" id="rWeight">--</span></div>
-
+          <div class="result-row"><span class="result-label">Total Bushels</span><span class="result-value highlight" id="rTotBu" style="font-size:1.2rem">--</span></div>
+          <div class="result-row"><span class="result-label">Weight</span><span class="result-value" id="rWeight">--</span></div>
           <div style="height:12px"></div>
           <div class="section-label">Moisture Shrink</div>
-          <div class="result-row"><span class="result-label">Shrink Factor</span>        <span class="result-value" id="rShrink">--</span></div>
-          <div class="result-row"><span class="result-label">Dry Bushels</span>          <span class="result-value" id="rDryBu">--</span></div>
-          <div class="result-row"><span class="result-label">Bushels Lost</span>         <span class="result-value negative" id="rLost">--</span></div>
-
+          <div class="result-row"><span class="result-label">Shrink Factor</span><span class="result-value" id="rShrink">--</span></div>
+          <div class="result-row"><span class="result-label">Dry Bushels</span><span class="result-value" id="rDryBu">--</span></div>
+          <div class="result-row"><span class="result-label">Bushels Lost</span><span class="result-value negative" id="rLost">--</span></div>
           <div class="value-box">
             <div class="value-price-row">
               <label>Market Price ($/bu)</label>
               <input type="number" id="mktPrice" value="4.50" step="0.01" inputmode="decimal" oninput="calc()">
             </div>
-            <div class="result-row"><span class="result-label">Gross Value (wet)</span>   <span class="result-value" id="rGrossVal">--</span></div>
-            <div class="result-row"><span class="result-label">Value After Shrink</span>  <span class="result-value positive" id="rDryVal">--</span></div>
+            <div class="result-row"><span class="result-label">Gross Value (wet)</span><span class="result-value" id="rGrossVal">--</span></div>
+            <div class="result-row"><span class="result-label">Value After Shrink</span><span class="result-value positive" id="rDryVal">--</span></div>
             <div class="result-row" style="border:none"><span class="result-label">Shrink Cost</span><span class="result-value negative" id="rShrinkCost">--</span></div>
           </div>
-
           <div style="margin-top:20px">
             <div class="section-label">Safe Storage Moisture Targets</div>
             <div class="moist-grid">
@@ -390,200 +246,120 @@
               <div class="moist-card"><div class="moist-card-label">Wheat</div><div class="moist-card-val">13.5%</div></div>
             </div>
           </div>
-
           <div class="formula-note">
             <strong>Formulas Used</strong><br>
             <code>Cylinder = π × r² × h</code><br>
             <code>Cone = ⅓ × π × r² × (r × tan 25°)</code><br>
             <code>Shrink % = (Moist In − Std) × 1.3</code><br>
             <code>Dry Bu = Wet Bu × (1 − Shrink%)</code><br>
-            <span style="font-size:.68rem;margin-top:4px;display:inline-block">
-              Angle of repose ≈ 25° for most grains (tan 25° ≈ 0.466).
-              Pack factor accounts for grain settling over time.
-            </span>
+            <span style="font-size:.68rem;margin-top:4px;display:inline-block">Angle of repose ≈ 25° for most grains (tan 25° ≈ 0.466). Pack factor accounts for grain settling over time.</span>
           </div>
-
         </div>
       </div>
-
     </div>
   </main>
-
   <div id="site-footer"></div>
   <script src="/components/loader.js"></script>
-
   <script>
-  var CROPS = {
-    corn:     { lb: 56, std: 15.5 },
-    soybeans: { lb: 60, std: 13.0 },
-    wheat:    { lb: 60, std: 13.5 },
-    barley:   { lb: 48, std: 14.5 },
-    oats:     { lb: 32, std: 14.0 },
-    sorghum:  { lb: 56, std: 14.0 }
-  };
-  var BU_PER_CUFT = 0.8036;
-  var TAN_25      = 0.4663;
-
-  function $(id)   { return document.getElementById(id); }
-  function fN(n)   { return Math.round(n).toLocaleString(); }
-  function shape()  { return document.querySelector('input[name="shape"]:checked').value; }
-  function surface(){ return document.querySelector('input[name="surface"]:checked').value; }
-
-  function toggleShape() {
-    var round = shape() === 'round';
-    $('round-inputs').style.display = round ? 'block' : 'none';
-    $('rect-inputs').style.display  = round ? 'none'  : 'block';
-    $('surface-label').style.opacity       = round ? '1' : '0.35';
-    $('surface-pills').style.opacity       = round ? '1' : '0.35';
-    $('surface-pills').style.pointerEvents = round ? 'auto' : 'none';
+  var CROPS={corn:{lb:56,std:15.5},soybeans:{lb:60,std:13.0},wheat:{lb:60,std:13.5},barley:{lb:48,std:14.5},oats:{lb:32,std:14.0},sorghum:{lb:56,std:14.0}};
+  var BU_PER_CUFT=0.8036,TAN_25=0.4663;
+  function $(id){return document.getElementById(id);}
+  function fN(n){return Math.round(n).toLocaleString();}
+  function shape(){return document.querySelector('input[name="shape"]:checked').value;}
+  function surface(){return document.querySelector('input[name="surface"]:checked').value;}
+  function toggleShape(){
+    var round=shape()==='round';
+    $('round-inputs').style.display=round?'block':'none';
+    $('rect-inputs').style.display=round?'none':'block';
+    $('surface-label').style.opacity=round?'1':'0.35';
+    $('surface-pills').style.opacity=round?'1':'0.35';
+    $('surface-pills').style.pointerEvents=round?'auto':'none';
     syncDepth();
   }
-
-  function syncDepth() {
-    var maxH = shape() === 'round'
-      ? (parseFloat($('height').value) || 24)
-      : (parseFloat($('rheight').value) || 10);
-    $('grain-depth').dataset.maxH = maxH;
-    showDepth();
+  function syncDepth(){
+    var maxH=shape()==='round'?(parseFloat($('height').value)||24):(parseFloat($('rheight').value)||10);
+    $('grain-depth').dataset.maxH=maxH;showDepth();
   }
-  function onDepth() { showDepth(); calc(); }
-  function showDepth() {
-    var pct = parseFloat($('grain-depth').value);
-    var maxH = parseFloat($('grain-depth').dataset.maxH) || 24;
-    $('depth-val').textContent = (pct / 100 * maxH).toFixed(1) + ' ft';
+  function onDepth(){showDepth();calc();}
+  function showDepth(){
+    var pct=parseFloat($('grain-depth').value),maxH=parseFloat($('grain-depth').dataset.maxH)||24;
+    $('depth-val').textContent=(pct/100*maxH).toFixed(1)+' ft';
   }
-  function grainFt() {
-    var pct = parseFloat($('grain-depth').value) || 100;
-    var maxH = parseFloat($('grain-depth').dataset.maxH) || 24;
-    return pct / 100 * maxH;
-  }
-
-  function calc() {
+  function grainFt(){var pct=parseFloat($('grain-depth').value)||100,maxH=parseFloat($('grain-depth').dataset.maxH)||24;return pct/100*maxH;}
+  function calc(){
     syncDepth();
-    var crop     = $('crop').value;
-    var sh       = shape();
-    var sf       = surface();
-    var cr       = CROPS[crop];
-    var moistIn  = parseFloat($('moistIn').value) || cr.std;
-    var pack     = parseFloat($('pack').value) || 0;
-    var mktP     = parseFloat($('mktPrice').value) || 0;
-    var gH       = grainFt();
-
-    var cylVol = 0, adjVol = 0, adjLbl = 'Surface Adj.', r = 0, eaveH = 0;
-
-    if (sh === 'round') {
-      var d = parseFloat($('diameter').value) || 0;
-      eaveH = parseFloat($('height').value)   || 0;
-      r     = d / 2;
-      cylVol = Math.PI * r * r * gH;
-      var coneH   = r * TAN_25;
-      var coneVol = (1/3) * Math.PI * r * r * coneH;
-      if (sf === 'peaked') { adjVol = coneVol;  adjLbl = 'Peaked Cone (+)'; }
-      else if (sf === 'draw') { adjVol = -coneVol; adjLbl = 'Draw Cone (−)'; }
-      else { adjVol = 0; adjLbl = 'Surface Adj.'; }
-    } else {
-      var l = parseFloat($('rlength').value) || 0;
-      var w = parseFloat($('rwidth').value)  || 0;
-      eaveH = parseFloat($('rheight').value) || 0;
-      cylVol = l * w * gH;
-      adjVol = 0; adjLbl = 'Surface Adj.';
+    var crop=$('crop').value,sh=shape(),sf=surface(),cr=CROPS[crop];
+    var moistIn=parseFloat($('moistIn').value)||cr.std,pack=parseFloat($('pack').value)||0;
+    var mktP=parseFloat($('mktPrice').value)||0,gH=grainFt();
+    var cylVol=0,adjVol=0,adjLbl='Surface Adj.',r=0,eaveH=0;
+    if(sh==='round'){
+      var d=parseFloat($('diameter').value)||0;eaveH=parseFloat($('height').value)||0;r=d/2;
+      cylVol=Math.PI*r*r*gH;
+      var coneH=r*TAN_25,coneVol=(1/3)*Math.PI*r*r*coneH;
+      if(sf==='peaked'){adjVol=coneVol;adjLbl='Peaked Cone (+)';}
+      else if(sf==='draw'){adjVol=-coneVol;adjLbl='Draw Cone (−)';}
+      else{adjVol=0;adjLbl='Surface Adj.';}
+    }else{
+      var l=parseFloat($('rlength').value)||0,w=parseFloat($('rwidth').value)||0;
+      eaveH=parseFloat($('rheight').value)||0;cylVol=l*w*gH;adjVol=0;adjLbl='Surface Adj.';
     }
-
-    var totVol    = Math.max(0, cylVol + adjVol);
-    var rawBu     = totVol * BU_PER_CUFT;
-    var packedBu  = rawBu * (1 + pack / 100);
-    var shrinkPct = Math.max(0, (moistIn - cr.std) * 1.3);
-    var dryBu     = packedBu * (1 - shrinkPct / 100);
-    var lostBu    = packedBu - dryBu;
-    var weightT   = packedBu * cr.lb / 2000;
-
-    $('rCylVol').textContent   = fN(cylVol) + ' ft³';
-    $('rAdjLabel').textContent = adjLbl;
-    $('rAdjVol').textContent   = (adjVol >= 0 ? '+' : '−') + fN(Math.abs(adjVol)) + ' ft³';
-    $('rAdjVol').className     = 'result-value ' + (adjVol > 0 ? 'positive' : adjVol < 0 ? 'negative' : '');
-    $('rTotVol').textContent   = fN(totVol) + ' ft³';
-    $('rTotBu').textContent    = fN(packedBu) + ' bu';
-    $('rWeight').textContent   = weightT.toFixed(1) + ' tons (' + fN(packedBu * cr.lb) + ' lb)';
-    $('rShrink').textContent   = shrinkPct.toFixed(2) + '%';
-    $('rDryBu').textContent    = fN(dryBu) + ' bu';
-    $('rLost').textContent     = shrinkPct > 0 ? '−' + fN(lostBu) + ' bu' : '0 bu';
-
-    if (mktP > 0) {
-      $('rGrossVal').textContent   = '$' + fN(packedBu * mktP);
-      $('rDryVal').textContent     = '$' + fN(dryBu * mktP);
-      $('rShrinkCost').textContent = shrinkPct > 0 ? '−$' + fN(lostBu * mktP) : '$0';
-    } else {
-      $('rGrossVal').textContent = $('rDryVal').textContent = $('rShrinkCost').textContent = '--';
-    }
-
-    drawBin(sh, sf, gH, eaveH, r, packedBu);
+    var totVol=Math.max(0,cylVol+adjVol),rawBu=totVol*BU_PER_CUFT;
+    var packedBu=rawBu*(1+pack/100),shrinkPct=Math.max(0,(moistIn-cr.std)*1.3);
+    var dryBu=packedBu*(1-shrinkPct/100),lostBu=packedBu-dryBu;
+    var weightT=packedBu*cr.lb/2000;
+    $('rCylVol').textContent=fN(cylVol)+' ft³';
+    $('rAdjLabel').textContent=adjLbl;
+    $('rAdjVol').textContent=(adjVol>=0?'+':'−')+fN(Math.abs(adjVol))+' ft³';
+    $('rAdjVol').className='result-value '+(adjVol>0?'positive':adjVol<0?'negative':'');
+    $('rTotVol').textContent=fN(totVol)+' ft³';
+    $('rTotBu').textContent=fN(packedBu)+' bu';
+    $('rWeight').textContent=weightT.toFixed(1)+' tons ('+fN(packedBu*cr.lb)+' lb)';
+    $('rShrink').textContent=shrinkPct.toFixed(2)+'%';
+    $('rDryBu').textContent=fN(dryBu)+' bu';
+    $('rLost').textContent=shrinkPct>0?'−'+fN(lostBu)+' bu':'0 bu';
+    if(mktP>0){
+      $('rGrossVal').textContent='$'+fN(packedBu*mktP);
+      $('rDryVal').textContent='$'+fN(dryBu*mktP);
+      $('rShrinkCost').textContent=shrinkPct>0?'−$'+fN(lostBu*mktP):'$0';
+    }else{$('rGrossVal').textContent=$('rDryVal').textContent=$('rShrinkCost').textContent='--';}
+    drawBin(sh,sf,gH,eaveH,r,packedBu);
   }
-
-  var BL = 55, BR = 225, BM = 140, BT = 65, BB = 245;
-  var BH = BB - BT;
-
-  function drawBin(sh, sf, gH, eaveH, r, bu) {
-    var diam = parseFloat($('diameter').value) || 30;
-    if (sh === 'round') {
-      $('svg-roof').setAttribute('d','M '+BL+' '+BT+' L '+BM+' '+(BT-30)+' L '+BR+' '+BT+' Z');
-    } else {
-      $('svg-roof').setAttribute('d','M '+(BL-5)+' '+BT+' L '+BM+' '+(BT-15)+' L '+(BR+5)+' '+BT+' Z');
-    }
-    var rings = '';
-    if (sh === 'round') {
-      var n = Math.min(8, Math.max(3, Math.round(eaveH / 4)));
-      for (var i = 1; i < n; i++) {
-        var ry = BT + (BH * i / n);
-        rings += '<line x1="'+BL+'" y1="'+ry+'" x2="'+BR+'" y2="'+ry+'"/>';
+  var BL=55,BR=225,BM=140,BT=65,BB=245,BH=180;
+  function drawBin(sh,sf,gH,eaveH,r,bu){
+    var diam=parseFloat($('diameter').value)||30;
+    if(sh==='round'){$('svg-roof').setAttribute('d','M '+BL+' '+BT+' L '+BM+' '+(BT-30)+' L '+BR+' '+BT+' Z');}
+    else{$('svg-roof').setAttribute('d','M '+(BL-5)+' '+BT+' L '+BM+' '+(BT-15)+' L '+(BR+5)+' '+BT+' Z');}
+    var rings='';
+    if(sh==='round'){var n=Math.min(8,Math.max(3,Math.round(eaveH/4)));for(var i=1;i<n;i++){var ry=BT+(BH*i/n);rings+='<line x1="'+BL+'" y1="'+ry+'" x2="'+BR+'" y2="'+ry+'"/>';}}
+    $('svg-rings').innerHTML=rings;
+    var fillR=eaveH>0?Math.min(1,gH/eaveH):0,grainY=BB-(fillR*BH),coneSvg=0;
+    if(sh==='round'&&eaveH>0){coneSvg=(r*TAN_25/eaveH)*BH;coneSvg=Math.min(coneSvg,55);}
+    var gPath='',sPath='',aPath='',aLine='';
+    if(fillR>0){
+      gPath='M '+BL+' '+BB+' L '+BL+' '+grainY+' L '+BR+' '+grainY+' L '+BR+' '+BB+' Z';
+      sPath='M '+BL+' '+grainY+' L '+BR+' '+grainY;
+      if(sh==='round'&&sf==='draw'&&fillR>0.08){
+        var drawY=Math.min(BB-4,grainY+coneSvg);
+        gPath='M '+BL+' '+BB+' L '+BL+' '+grainY+' L '+BM+' '+drawY+' L '+BR+' '+grainY+' L '+BR+' '+BB+' Z';
+        sPath='M '+BL+' '+grainY+' L '+BM+' '+drawY+' L '+BR+' '+grainY;
+      }
+      if(sh==='round'&&sf==='peaked'){
+        var peakY=grainY-coneSvg;
+        aPath='M '+BL+' '+grainY+' L '+BM+' '+peakY+' L '+BR+' '+grainY+' Z';
+        aLine='M '+BL+' '+grainY+' L '+BM+' '+peakY+' L '+BR+' '+grainY;
       }
     }
-    $('svg-rings').innerHTML = rings;
-    var fillR = eaveH > 0 ? Math.min(1, gH / eaveH) : 0;
-    var grainY = BB - (fillR * BH);
-    var coneSvg = 0;
-    if (sh === 'round' && eaveH > 0) {
-      coneSvg = (r * TAN_25 / eaveH) * BH;
-      coneSvg = Math.min(coneSvg, 55);
-    }
-    var gPath = '', sPath = '', aPath = '', aLine = '';
-    if (fillR > 0) {
-      gPath = 'M '+BL+' '+BB+' L '+BL+' '+grainY+' L '+BR+' '+grainY+' L '+BR+' '+BB+' Z';
-      sPath = 'M '+BL+' '+grainY+' L '+BR+' '+grainY;
-      if (sh === 'round' && sf === 'draw' && fillR > 0.08) {
-        var drawY = Math.min(BB - 4, grainY + coneSvg);
-        gPath = 'M '+BL+' '+BB+' L '+BL+' '+grainY+' L '+BM+' '+drawY+' L '+BR+' '+grainY+' L '+BR+' '+BB+' Z';
-        sPath = 'M '+BL+' '+grainY+' L '+BM+' '+drawY+' L '+BR+' '+grainY;
-      }
-      if (sh === 'round' && sf === 'peaked') {
-        var peakY = grainY - coneSvg;
-        aPath = 'M '+BL+' '+grainY+' L '+BM+' '+peakY+' L '+BR+' '+grainY+' Z';
-        aLine = 'M '+BL+' '+grainY+' L '+BM+' '+peakY+' L '+BR+' '+grainY;
-      }
-    }
-    $('svg-grain').setAttribute('d', gPath);
-    $('svg-surface').setAttribute('d', sPath);
-    $('svg-above').setAttribute('d', aPath);
-    $('svg-above-line').setAttribute('d', aLine);
-    if (sh === 'round') {
-      $('dim-d').textContent = diam + ' ft ⌀';
-      $('dim-h').textContent = eaveH + ' ft';
-    } else {
-      var l = parseFloat($('rlength').value) || 40;
-      var w = parseFloat($('rwidth').value)  || 20;
-      $('dim-d').textContent = l + ' × ' + w + ' ft';
-      $('dim-h').textContent = (parseFloat($('rheight').value) || 10) + ' ft';
-    }
-    var tY = fillR > 0.25 ? (grainY + BB) / 2 : BB - 20;
-    $('cap-num').setAttribute('y', tY);
-    $('cap-unit').setAttribute('y', tY + 17);
-    $('cap-num').textContent = bu > 0 ? fN(bu) : '--';
-    $('cap-num').setAttribute('opacity', fillR > 0.12 ? '0.9' : '0.35');
-    $('cap-unit').setAttribute('opacity', fillR > 0.12 ? '0.7' : '0.25');
+    $('svg-grain').setAttribute('d',gPath);$('svg-surface').setAttribute('d',sPath);
+    $('svg-above').setAttribute('d',aPath);$('svg-above-line').setAttribute('d',aLine);
+    if(sh==='round'){$('dim-d').textContent=diam+' ft ⌀';$('dim-h').textContent=eaveH+' ft';}
+    else{var l=parseFloat($('rlength').value)||40,w=parseFloat($('rwidth').value)||20;$('dim-d').textContent=l+' × '+w+' ft';$('dim-h').textContent=(parseFloat($('rheight').value)||10)+' ft';}
+    var tY=fillR>0.25?(grainY+BB)/2:BB-20;
+    $('cap-num').setAttribute('y',tY);$('cap-unit').setAttribute('y',tY+17);
+    $('cap-num').textContent=bu>0?fN(bu):'--';
+    $('cap-num').setAttribute('opacity',fillR>0.12?'0.9':'0.35');
+    $('cap-unit').setAttribute('opacity',fillR>0.12?'0.7':'0.25');
   }
-
-  toggleShape();
-  calc();
+  toggleShape();calc();
   </script>
-
 </body>
 </html>

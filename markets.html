@@ -3,26 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/components/styles.css">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<title>All Markets — Grain, Livestock &amp; Commodity Prices — AGSIST</title>
-<meta name="description" content="Live commodity prices for grain farmers. Corn, soybeans, wheat, live cattle, lean hogs, crude oil, natural gas, gold — 15-min delayed, free.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://agsist.com/markets">
-<meta property="og:title" content="All Markets — AGSIST">
-<meta property="og:description" content="Corn, soybeans, wheat, cattle, hogs, energy, metals — live commodity prices for farmers.">
-<meta property="og:url" content="https://agsist.com/markets">
-<meta property="og:image" content="https://agsist.com/img/og/agsist.jpg">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AGSIST">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="manifest" href="/manifest.json">
-<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+<link rel="stylesheet" href="/components/styles.css">
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<title>All Markets — Grain, Livestock &amp; Commodity Prices | AGSIST</title>
+<meta name="description" content="Live commodity prices for grain farmers. Corn, soybeans, wheat, live cattle, lean hogs, crude oil, natural gas, gold — updated every 30 min, free.">
+<meta name="author" content="Farmers First Agri Service — AGSIST">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agsist.com/markets">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AGSIST">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="All Markets — Grain, Livestock &amp; Commodity Prices | AGSIST">
+<meta property="og:description" content="Corn, soybeans, wheat, cattle, hogs, energy, metals — live commodity prices for farmers, updated every 30 min. Free.">
+<meta property="og:url" content="https://agsist.com/markets">
+<meta property="og:image" content="https://agsist.com/img/og/agsist.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@agsist">
+<meta name="twitter:creator" content="@agsist">
+<meta name="twitter:title" content="All Markets — AGSIST">
+<meta name="twitter:description" content="Live commodity prices for farmers. Corn, soybeans, wheat, cattle, crude oil, gold — updated every 30 min. Free.">
+<meta name="twitter:image" content="https://agsist.com/img/og/agsist.jpg">
+<style>button,a,[role="button"]{touch-action:manipulation;}</style>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 <div id="site-header"></div>
 <main id="main" tabindex="-1">
 
@@ -37,47 +47,40 @@
         <span id="price-data-status" style="font-size:.72rem;color:var(--text-muted)"></span>
       </div>
 
-      <!-- Grain Futures -->
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;margin-top:.25rem">Grain Futures</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem">
-        <!-- Corn Near -->
         <div class="pc">
           <div class="pc-label">🌽 Corn <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
           <div id="pcp-corn-near" class="pc-price">—</div>
           <div id="pcc-corn-near" class="pc-chg nc">—</div>
-          <div class="pc-range-labels"><span>—</span><span>52-wk</span><span>—</span></div>
-          <div class="pc-range-bar"><div class="pc-range-fill" id="pcf-corn-near"></div><div class="pc-range-dot"></div></div>
+          <div class="pc-range-labels"><span id="rlo-corn">—</span><span>52-wk</span><span id="rhi-corn">—</span></div>
+          <div class="pc-range-bar"><div class="pc-range-fill" id="pcf-corn-near" style="width:0%"></div><div class="pc-range-dot" id="pcd-corn-near" style="left:0%"></div></div>
           <div><a href="/corn-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart →</a></div>
         </div>
-        <!-- Corn Dec -->
         <div class="pc">
           <div class="pc-label">🌽 Corn Dec '26</div>
           <div id="pcp-corn-dec" class="pc-price">—</div>
           <div id="pcc-corn-dec" class="pc-chg nc">—</div>
         </div>
-        <!-- Beans Near -->
         <div class="pc">
           <div class="pc-label">🫘 Soybeans <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
           <div id="pcp-bean-near" class="pc-price">—</div>
           <div id="pcc-bean-near" class="pc-chg nc">—</div>
-          <div class="pc-range-labels"><span>—</span><span>52-wk</span><span>—</span></div>
-          <div class="pc-range-bar"><div class="pc-range-fill" id="pcf-bean-near"></div><div class="pc-range-dot"></div></div>
+          <div class="pc-range-labels"><span id="rlo-beans">—</span><span>52-wk</span><span id="rhi-beans">—</span></div>
+          <div class="pc-range-bar"><div class="pc-range-fill" id="pcf-bean-near" style="width:0%"></div><div class="pc-range-dot" id="pcd-bean-near" style="left:0%"></div></div>
           <div><a href="/soybean-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart →</a></div>
         </div>
-        <!-- Beans Nov -->
         <div class="pc">
           <div class="pc-label">🫘 Beans Nov '26</div>
           <div id="pcp-bean-nov" class="pc-price">—</div>
           <div id="pcc-bean-nov" class="pc-chg nc">—</div>
         </div>
-        <!-- Wheat -->
         <div class="pc">
           <div class="pc-label">🌾 Wheat <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
           <div id="pcp-wheat" class="pc-price">—</div>
           <div id="pcc-wheat" class="pc-chg nc">—</div>
           <div><a href="/wheat-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart →</a></div>
         </div>
-        <!-- Cash Bids -->
         <div class="pc" style="border:1px dashed var(--border-g)">
           <div class="pc-label">💵 Cash Bids</div>
           <div style="font-size:.8rem;color:var(--text-muted);margin:.3rem 0 .6rem;line-height:1.5">Local elevator prices near you</div>
@@ -85,7 +88,6 @@
         </div>
       </div>
 
-      <!-- Livestock -->
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem">Livestock</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem">
         <div class="pc"><div class="pc-label">🐄 Live Cattle</div><div id="pcp-cattle" class="pc-price">—</div><div id="pcc-cattle" class="pc-chg nc">—</div></div>
@@ -93,7 +95,6 @@
         <div class="pc"><div class="pc-label">🐷 Lean Hogs</div><div id="pcp-hogs" class="pc-price">—</div><div id="pcc-hogs" class="pc-chg nc">—</div></div>
       </div>
 
-      <!-- Inputs & Energy -->
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem">Energy &amp; Inputs</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem">
         <div class="pc"><div class="pc-label">🛢️ Crude WTI</div><div id="pcp-crude" class="pc-price">—</div><div id="pcc-crude" class="pc-chg nc">—</div></div>
@@ -102,53 +103,82 @@
         <div class="pc"><div class="pc-label">Soybean Oil</div><div id="pcp-oil" class="pc-price">—</div><div id="pcc-oil" class="pc-chg nc">—</div></div>
       </div>
 
-      <!-- Macro -->
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem">Metals &amp; Macro</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:.5rem">
         <div class="pc"><div class="pc-label">🥇 Gold</div><div id="pc-gold" class="pc-price">—</div><div id="pcc-gold" class="pc-chg nc">—</div></div>
         <div class="pc"><div class="pc-label">Silver</div><div id="pc-silver" class="pc-price">—</div><div id="pcc-silver" class="pc-chg nc">—</div></div>
         <div class="pc"><div class="pc-label">Dollar Index</div><div id="pcp-dxy" class="pc-price">—</div><div id="pcc-dxy" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">📈 10-Yr Treasury</div><div id="pcp-tnx" class="pc-price">—</div><div id="pcc-tnx" class="pc-chg nc">—</div></div>
+        <div class="pc"><div class="pc-label">📈 S&amp;P 500</div><div id="pcp-sp500" class="pc-price">—</div><div id="pcc-sp500" class="pc-chg nc">—</div></div>
       </div>
 
-      <div style="margin-top:.75rem;font-size:.7rem;color:var(--text-muted)">
-        15-min delayed · Source: Stooq.com · <a href="/data-sources" style="color:var(--gold)">Data sources →</a>
+      <div style="margin-top:.75rem;font-size:.72rem;color:var(--text-muted)">
+        Updated every 30 min · Source: Yahoo Finance (yfinance) · <a href="/data-sources" style="color:var(--gold)">Data sources →</a>
       </div>
 
     </div>
   </section>
 </main>
 <div id="site-footer"></div>
-<script src="/components/geo.js"></script>
 <script src="/components/loader.js"></script>
 <script>
-// Wire up the additional price IDs to Stooq quotes
-// geo.js STOOQ_QUOTES array uses priceEl/chgEl that must match DOM IDs
-// The markets page has extra IDs — extend the mapping here
-document.addEventListener('DOMContentLoaded', function() {
-  // Map Stooq symbols to the extra elements on this page
-  var extras = {
-    'zw.f': { priceEl: 'pcp-wheat',  chgEl: 'pcc-wheat'  },
-    'le.f': { priceEl: 'pcp-cattle', chgEl: 'pcc-cattle' },
-    'gf.f': { priceEl: 'pcp-feeder', chgEl: 'pcc-feeder' },
-    'he.f': { priceEl: 'pcp-hogs',   chgEl: 'pcc-hogs'   },
-    'cl.f': { priceEl: 'pcp-crude',  chgEl: 'pcc-crude'  },
-    'ng.f': { priceEl: 'pcp-natgas', chgEl: 'pcc-natgas' },
-    'zm.f': { priceEl: 'pcp-meal',   chgEl: 'pcc-meal'   },
-    'zl.f': { priceEl: 'pcp-oil',    chgEl: 'pcc-oil'    },
-    'dx.f': { priceEl: 'pcp-dxy',    chgEl: 'pcc-dxy'    },
-    '%5etnx':{ priceEl:'pcp-tnx',    chgEl: 'pcc-tnx'    }
-  };
-  // Patch STOOQ_QUOTES to include these IDs when running on this page
-  if (typeof STOOQ_QUOTES !== 'undefined') {
-    STOOQ_QUOTES.forEach(function(q) {
-      if (extras[q.sym]) {
-        if (!q.priceEl) q.priceEl = extras[q.sym].priceEl;
-        if (!q.chgEl)   q.chgEl   = extras[q.sym].chgEl;
-      }
-    });
+(function(){
+  'use strict';
+  function grain$(v){ return v!=null ? '$'+(+v/100).toFixed(2) : '—'; }
+  function dollar$(v,d){ return v!=null ? '$'+(+v).toFixed(d||2) : '—'; }
+  function chgStr(net,pct){ if(net==null) return '—'; var a=net>0?'▲':net<0?'▼':'—'; var s=net>=0?'+':''; return a+' '+s+(+pct).toFixed(2)+'%'; }
+  function chgCls(net){ return net>0?'up':net<0?'dn':'nc'; }
+  function setEl(pEl,cEl,val,isGrain,net,pct){
+    var pe=document.getElementById(pEl),ce=document.getElementById(cEl);
+    if(pe&&val!=null) pe.textContent=isGrain?grain$(val):dollar$(val);
+    if(ce&&net!=null){ce.textContent=chgStr(net,pct);ce.className='pc-chg '+chgCls(net);}
   }
-});
+  function setRange(sym,key,q){
+    var d=q[sym]; if(!d||d.close==null||d.wk52_lo==null) return;
+    var lo=d.wk52_lo,hi=d.wk52_hi,cur=d.close;
+    var pct=Math.min(100,Math.max(0,((cur-lo)/(hi-lo))*100));
+    var fill=document.getElementById('pcf-'+key),dot=document.getElementById('pcd-'+key);
+    var rlo=document.getElementById('rlo-'+sym),rhi=document.getElementById('rhi-'+sym);
+    if(fill) fill.style.width=pct.toFixed(1)+'%';
+    if(dot) dot.style.left=pct.toFixed(1)+'%';
+    if(rlo) rlo.textContent=grain$(lo);
+    if(rhi) rhi.textContent=grain$(hi);
+  }
+  fetch('/data/prices.json').then(function(r){return r.json();}).then(function(data){
+    var q=data.quotes||{};
+    var map=[
+      {key:'corn',      p:'pcp-corn-near',c:'pcc-corn-near',grain:true },
+      {key:'corn-dec',  p:'pcp-corn-dec', c:'pcc-corn-dec', grain:true },
+      {key:'beans',     p:'pcp-bean-near',c:'pcc-bean-near',grain:true },
+      {key:'beans-nov', p:'pcp-bean-nov', c:'pcc-bean-nov', grain:true },
+      {key:'wheat',     p:'pcp-wheat',    c:'pcc-wheat',    grain:true },
+      {key:'cattle',    p:'pcp-cattle',   c:'pcc-cattle',   grain:false},
+      {key:'feeders',   p:'pcp-feeder',   c:'pcc-feeder',   grain:false},
+      {key:'hogs',      p:'pcp-hogs',     c:'pcc-hogs',     grain:false},
+      {key:'crude',     p:'pcp-crude',    c:'pcc-crude',    grain:false},
+      {key:'natgas',    p:'pcp-natgas',   c:'pcc-natgas',   grain:false},
+      {key:'meal',      p:'pcp-meal',     c:'pcc-meal',     grain:false},
+      {key:'soyoil',    p:'pcp-oil',      c:'pcc-oil',      grain:false},
+      {key:'gold',      p:'pc-gold',      c:'pcc-gold',     grain:false},
+      {key:'silver',    p:'pc-silver',    c:'pcc-silver',   grain:false},
+      {key:'dollar',    p:'pcp-dxy',      c:'pcc-dxy',      grain:false},
+      {key:'sp500',     p:'pcp-sp500',    c:'pcc-sp500',    grain:false},
+    ];
+    map.forEach(function(m){
+      var d=q[m.key]; if(!d||d.close==null) return;
+      setEl(m.p,m.c,d.close,m.grain,d.netChange,d.pctChange);
+    });
+    setRange('corn','corn-near',q);
+    setRange('beans','bean-near',q);
+    var status=document.getElementById('price-data-status');
+    if(status&&data.fetched){
+      var mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
+      status.textContent=mins<2?'Just updated':mins<60?mins+' min ago':Math.round(mins/60)+'h ago';
+    }
+  }).catch(function(){
+    var s=document.getElementById('price-data-status');
+    if(s) s.textContent='Prices unavailable — market may be closed';
+  });
+})();
 </script>
 </body>
 </html>

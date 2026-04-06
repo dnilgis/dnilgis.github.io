@@ -4,167 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#111a0a">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
   <link rel="stylesheet" href="/components/styles.css">
   <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
   <link rel="manifest"                            href="/manifest.json">
-
-  <title>GDU Calculator — Growing Degree Units for Corn & Soybeans | AGSIST</title>
+  <title>GDU Calculator — Growing Degree Units for Corn &amp; Soybeans | AGSIST</title>
   <meta name="description" content="Free growing degree unit (GDU) calculator for corn and soybeans. Track accumulated heat units from planting date, estimate crop stage, and project maturity date.">
   <meta name="keywords" content="growing degree units, GDU calculator, GDD calculator, corn growing degree units, soybean GDU, crop stage calculator, heat unit calculator">
+  <meta name="author" content="Farmers First Agri Service — AGSIST">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://agsist.com/gdu-calculator">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AGSIST">
-  <meta property="og:title" content="GDU Calculator — Corn & Soybean Growing Degree Units | AGSIST">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="GDU Calculator — Corn &amp; Soybean Growing Degree Units | AGSIST">
   <meta property="og:description" content="Free GDU calculator. Track accumulated heat units from planting, estimate crop growth stage, and project maturity date for corn and soybeans.">
   <meta property="og:url" content="https://agsist.com/gdu-calculator">
   <meta property="og:image" content="https://agsist.com/img/og/gdu-calculator.jpg">
   <meta name="twitter:card" content="summary_large_image">
-
+  <meta name="twitter:site" content="@agsist">
+  <meta name="twitter:creator" content="@agsist">
+  <meta name="twitter:title" content="GDU Calculator — Corn &amp; Soybean Growing Degree Units | AGSIST">
+  <meta name="twitter:description" content="Free GDU calculator for corn and soybeans. Track heat unit accumulation from planting, estimate crop stage, project maturity date.">
+  <meta name="twitter:image" content="https://agsist.com/img/og/gdu-calculator.jpg">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "GDU Calculator",
-    "description": "Growing degree unit calculator for corn and soybeans. Track heat unit accumulation from planting date.",
-    "url": "https://agsist.com/gdu-calculator",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-  }
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"GDU Calculator","description":"Growing degree unit calculator for corn and soybeans. Track heat unit accumulation from planting date.","url":"https://agsist.com/gdu-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
-
   <style>
+    button,a,[role="button"]{touch-action:manipulation;}
     main { max-width: 1100px; margin: 0 auto; padding: 16px; }
-
-    /* No spinners */
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type="number"] { -moz-appearance: textfield; }
-
-    /* ── GDU GAUGE ─────────────────────────────────────────────── */
-    .gdu-gauge-wrap {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; margin-bottom: 20px;
-    }
-    .gdu-arc-container {
-      display: flex; flex-direction: column; align-items: center; margin-bottom: 16px;
-    }
-    .gdu-arc {
-      position: relative; width: 220px; height: 120px; overflow: hidden;
-    }
+    .gdu-gauge-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .gdu-arc-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 16px; }
+    .gdu-arc { position: relative; width: 220px; height: 120px; overflow: hidden; }
     .gdu-arc svg { width: 100%; height: 100%; }
-    .gdu-center-val {
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      text-align: center;
-    }
-    .gdu-num  { font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1; }
+    .gdu-center-val { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); text-align: center; }
+    .gdu-num { font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1; }
     .gdu-unit { font-size: 0.7rem; color: var(--text-dim); }
-    .gdu-stage-badge {
-      display: inline-block; margin-top: 8px; padding: 4px 14px;
-      background: rgba(230,176,66,0.15); border: 1px solid var(--gold);
-      border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--gold);
-    }
-
-    /* ── PROGRESS TRACK ────────────────────────────────────────── */
-    .stage-track {
-      position: relative; height: 8px; background: var(--border);
-      border-radius: 4px; margin: 16px 0 8px;
-    }
-    .stage-track-fill {
-      height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--green) 0%, var(--gold) 60%, var(--red) 100%);
-      transition: width 0.6s ease;
-    }
-    .stage-track-marker {
-      position: absolute; top: -5px; width: 4px; height: 18px;
-      background: #fff; border-radius: 2px; transition: left 0.6s ease;
-    }
-    .stage-track-labels {
-      display: flex; justify-content: space-between;
-      font-size: 0.65rem; color: var(--text-dim); margin-top: 4px;
-    }
-
-    /* ── MILESTONES ────────────────────────────────────────────── */
-    .milestones {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px;
-      margin-top: 16px;
-    }
-    .milestone {
-      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
-      padding: 10px 12px; text-align: center; transition: border-color 0.2s;
-    }
+    .gdu-stage-badge { display: inline-block; margin-top: 8px; padding: 4px 14px; background: rgba(230,176,66,0.15); border: 1px solid var(--gold); border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--gold); }
+    .stage-track { position: relative; height: 8px; background: var(--border); border-radius: 4px; margin: 16px 0 8px; }
+    .stage-track-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--green) 0%, var(--gold) 60%, var(--red) 100%); transition: width 0.6s ease; }
+    .stage-track-marker { position: absolute; top: -5px; width: 4px; height: 18px; background: #fff; border-radius: 2px; transition: left 0.6s ease; }
+    .stage-track-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); margin-top: 4px; }
+    .milestones { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-top: 16px; }
+    .milestone { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; text-align: center; transition: border-color 0.2s; }
     .milestone.reached { border-color: var(--green); background: rgba(34,197,94,0.06); }
     .milestone.current { border-color: var(--gold); background: rgba(230,176,66,0.08); }
     .milestone .m-stage { font-size: 0.75rem; font-weight: 700; color: var(--text); }
     .milestone .m-gdu   { font-size: 0.7rem; color: var(--text-dim); margin: 2px 0; }
     .milestone .m-desc  { font-size: 0.65rem; color: var(--text-dim); line-height: 1.3; }
     .milestone .m-check { font-size: 0.8rem; }
-
-    /* ── LAYOUT ────────────────────────────────────────────────── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
     @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
-
-    /* ── TABLE ─────────────────────────────────────────────────── */
     .gdu-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    .gdu-table th {
-      background: var(--bg); padding: 8px 10px; text-align: left;
-      font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;
-      border-bottom: 2px solid var(--border); white-space: nowrap;
-    }
+    .gdu-table th { background: var(--bg); padding: 8px 10px; text-align: left; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; border-bottom: 2px solid var(--border); white-space: nowrap; }
     .gdu-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
     .gdu-table tr:hover td { background: var(--bg); }
     .gdu-table tr.highlight td { background: rgba(230,176,66,0.08); font-weight: 600; }
     .gdu-table tr.past-row td { color: var(--text-dim); }
     .hl { color: var(--gold); font-weight: 700; }
     .gr { color: var(--green); font-weight: 700; }
-
-    /* ── INFO BOX ──────────────────────────────────────────────── */
-    .info-box {
-      background: var(--bg); border-left: 4px solid var(--gold);
-      padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0;
-      font-size: 0.82rem; line-height: 1.5;
-    }
+    .info-box { background: var(--bg); border-left: 4px solid var(--gold); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.82rem; line-height: 1.5; }
     .info-box.tip  { border-color: var(--green); }
     .info-box.warn { border-color: #f97316; }
-
-    /* ── DATE ESTIMATE ─────────────────────────────────────────── */
-    .date-estimate {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px;
-    }
-    .date-box {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; padding: 12px; text-align: center;
-    }
+    .date-estimate { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .date-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
     .date-box .d-label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .4px; }
     .date-box .d-val   { font-size: 1rem; font-weight: 700; color: var(--gold); margin-top: 4px; }
     .date-box .d-sub   { font-size: 0.65rem; color: var(--text-dim); margin-top: 2px; }
-
-    @media (max-width: 480px) {
-      .date-estimate { grid-template-columns: 1fr 1fr; }
-      .milestones    { grid-template-columns: 1fr 1fr; }
-    }
+    @media (max-width: 480px) { .date-estimate { grid-template-columns: 1fr 1fr; } .milestones { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
-
+  <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
-
   <main id="main">
-    <nav class="breadcrumb">
-      <a href="/">Home</a> → <a href="/tools">Tools</a> → GDU Calculator
-    </nav>
-
+    <nav class="breadcrumb"><a href="/">Home</a> → <a href="/tools">Tools</a> → GDU Calculator</nav>
     <div class="two-col">
-
-      <!-- ── LEFT: INPUTS ──────────────────────────────────────── -->
+      <!-- LEFT: INPUTS -->
       <div>
         <div class="panel">
           <div class="panel-head"><h1>🌡️ GDU CALCULATOR</h1></div>
           <div class="panel-body">
-
-            <!-- Crop -->
             <div style="margin-bottom:16px">
               <label>Crop</label>
               <select id="crop" onchange="onCropChange()">
@@ -172,31 +99,21 @@
                 <option value="soybeans">Soybeans</option>
               </select>
             </div>
-
-            <!-- Relative maturity -->
             <div style="margin-bottom:16px" id="rm-wrap">
-              <label>Relative Maturity (days)</label>
+              <label for="rm" id="rm-label">Relative Maturity (days)</label>
               <input type="number" id="rm" value="108" min="80" max="130" oninput="calcGDU()">
-              <div style="font-size:.7rem;color:var(--text-dim);margin-top:4px">
+              <div id="rm-hint" style="font-size:.7rem;color:var(--text-dim);margin-top:4px">
                 Corn: 80–130 RM. GDU to maturity ≈ RM × 9 + 375 (Rule of thumb)
               </div>
             </div>
-
-            <!-- Plant date -->
             <div style="margin-bottom:16px">
               <label>Planting Date</label>
-              <input type="date" id="plantDate" oninput="calcGDU()"
-                style="width:100%;padding:10px 12px;font-family:inherit;font-size:.9rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+              <input type="date" id="plantDate" oninput="calcGDU()" style="width:100%;padding:10px 12px;font-family:inherit;font-size:.9rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text)">
             </div>
-
-            <!-- Today's date (editable) -->
             <div style="margin-bottom:16px">
               <label>Today's Date</label>
-              <input type="date" id="todayDate" oninput="calcGDU()"
-                style="width:100%;padding:10px 12px;font-family:inherit;font-size:.9rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+              <input type="date" id="todayDate" oninput="calcGDU()" style="width:100%;padding:10px 12px;font-family:inherit;font-size:.9rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text)">
             </div>
-
-            <!-- Daily temp entry OR cumulative -->
             <div style="margin-bottom:16px">
               <label>GDU Entry Method</label>
               <select id="entryMethod" onchange="toggleEntry()">
@@ -205,52 +122,26 @@
                 <option value="historical">Use 30-Year Avg (Wisconsin)</option>
               </select>
             </div>
-
-            <!-- Avg daily temps -->
             <div id="avg-inputs">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-                <div>
-                  <label>Avg Daily High (°F)</label>
-                  <input type="number" id="avgHi" value="82" oninput="calcGDU()">
-                </div>
-                <div>
-                  <label>Avg Daily Low (°F)</label>
-                  <input type="number" id="avgLo" value="58" oninput="calcGDU()">
-                </div>
+                <div><label>Avg Daily High (°F)</label><input type="number" id="avgHi" value="82" oninput="calcGDU()"></div>
+                <div><label>Avg Daily Low (°F)</label><input type="number" id="avgLo" value="58" oninput="calcGDU()"></div>
               </div>
               <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:16px">
                 GDU/day = ((min(Hi,86) + max(Lo,50)) ÷ 2) − 50. Caps: Hi=86°F, Lo=50°F.
               </div>
             </div>
-
-            <!-- Cumulative entry -->
             <div id="cumulative-inputs" style="display:none;margin-bottom:16px">
               <label>Accumulated GDUs to Date</label>
               <input type="number" id="cumGDU" value="800" oninput="calcGDU()">
             </div>
-
-            <!-- Historical note -->
             <div id="historical-note" style="display:none;margin-bottom:16px">
-              <div class="info-box tip">
-                Using Wisconsin 30-year average GDU accumulation from May 1 planting.
-                Approximately <strong>19–22 GDU/day</strong> in June–July.
-              </div>
+              <div class="info-box tip">Using Wisconsin 30-year average GDU accumulation from May 1 planting. Approximately <strong>19–22 GDU/day</strong> in June–July.</div>
             </div>
-
-            <!-- Days since planting -->
-            <div class="result-row">
-              <span class="result-label">Days Since Planting</span>
-              <span class="result-value" id="r-days">—</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">GDUs / Day</span>
-              <span class="result-value" id="r-gdu-day">—</span>
-            </div>
-
+            <div class="result-row"><span class="result-label">Days Since Planting</span><span class="result-value" id="r-days">—</span></div>
+            <div class="result-row"><span class="result-label">GDUs / Day</span><span class="result-value" id="r-gdu-day">—</span></div>
           </div>
         </div>
-
-        <!-- GDU reference for manual entry -->
         <div class="panel" style="margin-top:16px">
           <div class="panel-head"><h2>📊 DAILY GDU BY MONTH (WI Avg)</h2></div>
           <div class="panel-body" style="padding:12px 16px">
@@ -264,30 +155,19 @@
                 <tr><td>September</td><td>70°F</td><td>50°F</td><td class="hl">10.0</td><td>300</td></tr>
               </tbody>
             </table>
-            <div style="font-size:.65rem;color:var(--text-dim);margin-top:6px">
-              Wisconsin 30-year normals (NOAA). Southern WI runs ~5–8% higher; northern WI lower.
-            </div>
+            <div style="font-size:.65rem;color:var(--text-dim);margin-top:6px">Wisconsin 30-year normals (NOAA). Southern WI runs ~5–8% higher; northern WI lower.</div>
           </div>
         </div>
       </div>
 
-      <!-- ── RIGHT: RESULTS ─────────────────────────────────────── -->
+      <!-- RIGHT: RESULTS -->
       <div>
-
-        <!-- GDU Gauge -->
         <div class="gdu-gauge-wrap">
-          <!-- Arc gauge -->
           <div class="gdu-arc-container">
             <div class="gdu-arc">
               <svg viewBox="0 0 220 120">
-                <!-- Background arc -->
-                <path id="arc-bg" d="M 20 110 A 90 90 0 0 1 200 110"
-                  fill="none" stroke="var(--border)" stroke-width="14" stroke-linecap="round"/>
-                <!-- Progress arc -->
-                <path id="arc-fill" d="M 20 110 A 90 90 0 0 1 200 110"
-                  fill="none" stroke="var(--gold)" stroke-width="14" stroke-linecap="round"
-                  stroke-dasharray="283" stroke-dashoffset="283"
-                  style="transition: stroke-dashoffset 0.6s ease, stroke 0.4s"/>
+                <path id="arc-bg" d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="var(--border)" stroke-width="14" stroke-linecap="round"/>
+                <path id="arc-fill" d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="var(--gold)" stroke-width="14" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" style="transition: stroke-dashoffset 0.6s ease, stroke 0.4s"/>
               </svg>
               <div class="gdu-center-val">
                 <div class="gdu-num" id="r-gdu-total">—</div>
@@ -296,337 +176,216 @@
             </div>
             <div class="gdu-stage-badge" id="r-stage-badge">—</div>
           </div>
-
-          <!-- Stage progress track -->
           <div class="stage-track">
             <div class="stage-track-fill" id="track-fill" style="width:0%"></div>
             <div class="stage-track-marker" id="track-marker" style="left:0%"></div>
           </div>
-          <div class="stage-track-labels">
-            <span>VE</span><span>V6</span><span>V10</span><span>VT</span><span>R3</span><span>Black Layer</span>
-          </div>
+          <div class="stage-track-labels"><span>VE</span><span>V6</span><span>V10</span><span>VT</span><span>R3</span><span>Black Layer</span></div>
         </div>
 
-        <!-- Date estimates -->
         <div class="panel" style="margin-bottom:16px">
           <div class="panel-head"><h2>MATURITY ESTIMATES</h2></div>
           <div class="panel-body">
             <div class="date-estimate">
-              <div class="date-box">
-                <div class="d-label">GDU Target</div>
-                <div class="d-val" id="r-gdu-target">—</div>
-                <div class="d-sub">to maturity</div>
-              </div>
-              <div class="date-box">
-                <div class="d-label">GDUs Left</div>
-                <div class="d-val" id="r-gdu-remaining">—</div>
-                <div class="d-sub">remaining</div>
-              </div>
-              <div class="date-box">
-                <div class="d-label">Days Left</div>
-                <div class="d-val" id="r-days-left">—</div>
-                <div class="d-sub">est. to maturity</div>
-              </div>
+              <div class="date-box"><div class="d-label">GDU Target</div><div class="d-val" id="r-gdu-target">—</div><div class="d-sub">to maturity</div></div>
+              <div class="date-box"><div class="d-label">GDUs Left</div><div class="d-val" id="r-gdu-remaining">—</div><div class="d-sub">remaining</div></div>
+              <div class="date-box"><div class="d-label">Days Left</div><div class="d-val" id="r-days-left">—</div><div class="d-sub">est. to maturity</div></div>
             </div>
-            <div class="result-row" style="margin-top:12px">
-              <span class="result-label">Est. Maturity Date</span>
-              <span class="result-value highlight" id="r-maturity-date">—</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">Progress to Maturity</span>
-              <span class="result-value positive" id="r-pct-done">—</span>
-            </div>
+            <div class="result-row" style="margin-top:12px"><span class="result-label">Est. Maturity Date</span><span class="result-value highlight" id="r-maturity-date">—</span></div>
+            <div class="result-row"><span class="result-label">Progress to Maturity</span><span class="result-value positive" id="r-pct-done">—</span></div>
           </div>
         </div>
 
-        <!-- Crop stage milestones -->
         <div class="panel">
-          <div class="panel-head"><h2 id="milestones-title">CORN GROWTH STAGE MILESTONES</h2></div>
+          <div class="panel-head"><h2 id="milestones-title">🌽 CORN GROWTH STAGE MILESTONES</h2></div>
           <div class="panel-body" style="padding:12px 16px">
             <div class="milestones" id="milestones-grid"></div>
-            <div style="font-size:.65rem;color:var(--text-dim);margin-top:10px">
-              GDU requirements vary by hybrid/variety. Values shown are typical averages.
-            </div>
+            <div style="font-size:.65rem;color:var(--text-dim);margin-top:10px">GDU requirements vary by hybrid/variety. Values shown are typical averages.</div>
           </div>
         </div>
-
       </div>
-    </div><!-- /two-col -->
-
-    <!-- Full crop stage reference tables -->
+    </div>
+    <!-- Reference tables -->
     <div class="two-col" style="margin-top:16px">
-
-      <!-- Corn stages -->
       <div class="panel">
         <div class="panel-head"><h2>🌽 CORN STAGE REFERENCE</h2></div>
-        <div class="panel-body" style="padding:0">
-          <div style="overflow-x:auto">
-            <table class="gdu-table" id="corn-table">
-              <thead><tr><th>Stage</th><th>GDUs from Planting</th><th>Key Events</th><th>Management Notes</th></tr></thead>
-              <tbody>
-                <tr><td class="hl">VE</td><td>~100</td><td>Emergence</td><td>Assess stand; begin pest scouting</td></tr>
-                <tr><td class="hl">V3</td><td>~200</td><td>Growing point below soil</td><td>Side-dress N window opens V3–V6</td></tr>
-                <tr><td class="hl">V5</td><td>~350</td><td>Ear shoots initiated</td><td>Final row count per ear set here</td></tr>
-                <tr><td class="hl">V6</td><td>~475</td><td>Growing point above soil</td><td>Last pass for pre-emerge herbicide</td></tr>
-                <tr><td class="hl">V8</td><td>~700</td><td>Kernel rows determined</td><td>Sulfur and micronutrient uptake peaks</td></tr>
-                <tr><td class="hl">V10</td><td>~900</td><td>Ear size potential being set</td><td>Tassel is fully formed inside stalk</td></tr>
-                <tr><td class="hl">VT</td><td>~1135</td><td>Tasseling — shedding pollen</td><td>Critical drought window begins; fungicide timing</td></tr>
-                <tr><td class="hl">R1</td><td>~1400</td><td>Silking</td><td>Most drought-sensitive stage — protect with water if possible</td></tr>
-                <tr><td class="hl">R2</td><td>~1560</td><td>Blister</td><td>Kernel number locked in</td></tr>
-                <tr><td class="hl">R3</td><td>~1750</td><td>Milk stage</td><td>Grain fill accelerating; leaf diseases reduce yield</td></tr>
-                <tr><td class="hl">R4</td><td>~1925</td><td>Dough stage</td><td>Silage harvest window opens R4–R5</td></tr>
-                <tr><td class="hl">R5</td><td>~2190</td><td>Dent stage</td><td>Stalk integrity issues appear; watch for stalk rot</td></tr>
-                <tr><td class="hl">R6</td><td>~2700</td><td>Black layer / physiological maturity</td><td>Moisture at R6 ≈28–32%; harvest when &lt;25%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel-body" style="padding:0"><div style="overflow-x:auto">
+          <table class="gdu-table" id="corn-table">
+            <thead><tr><th>Stage</th><th>GDUs from Planting</th><th>Key Events</th><th>Management Notes</th></tr></thead>
+            <tbody>
+              <tr><td class="hl">VE</td><td>~100</td><td>Emergence</td><td>Assess stand; begin pest scouting</td></tr>
+              <tr><td class="hl">V3</td><td>~200</td><td>Growing point below soil</td><td>Side-dress N window opens V3–V6</td></tr>
+              <tr><td class="hl">V5</td><td>~350</td><td>Ear shoots initiated</td><td>Final row count per ear set here</td></tr>
+              <tr><td class="hl">V6</td><td>~475</td><td>Growing point above soil</td><td>Last pass for pre-emerge herbicide</td></tr>
+              <tr><td class="hl">V8</td><td>~700</td><td>Kernel rows determined</td><td>Sulfur and micronutrient uptake peaks</td></tr>
+              <tr><td class="hl">V10</td><td>~900</td><td>Ear size potential being set</td><td>Tassel is fully formed inside stalk</td></tr>
+              <tr><td class="hl">VT</td><td>~1135</td><td>Tasseling — shedding pollen</td><td>Critical drought window begins; fungicide timing</td></tr>
+              <tr><td class="hl">R1</td><td>~1400</td><td>Silking</td><td>Most drought-sensitive stage — protect with water if possible</td></tr>
+              <tr><td class="hl">R2</td><td>~1560</td><td>Blister</td><td>Kernel number locked in</td></tr>
+              <tr><td class="hl">R3</td><td>~1750</td><td>Milk stage</td><td>Grain fill accelerating; leaf diseases reduce yield</td></tr>
+              <tr><td class="hl">R4</td><td>~1925</td><td>Dough stage</td><td>Silage harvest window opens R4–R5</td></tr>
+              <tr><td class="hl">R5</td><td>~2190</td><td>Dent stage</td><td>Stalk integrity issues appear; watch for stalk rot</td></tr>
+              <tr><td class="hl">R6</td><td>~2700</td><td>Black layer / physiological maturity</td><td>Moisture at R6 ≈28–32%; harvest when &lt;25%</td></tr>
+            </tbody>
+          </table>
+        </div></div>
       </div>
-
-      <!-- Soybean stages -->
       <div class="panel">
         <div class="panel-head"><h2>🫘 SOYBEAN STAGE REFERENCE</h2></div>
-        <div class="panel-body" style="padding:0">
-          <div style="overflow-x:auto">
-            <table class="gdu-table" id="soy-table">
-              <thead><tr><th>Stage</th><th>GDUs from Planting</th><th>Key Events</th><th>Management Notes</th></tr></thead>
-              <tbody>
-                <tr><td class="hl">VE</td>  <td>~130</td>  <td>Emergence</td>                       <td>Assess stand; 100,000 plants/ac minimum</td></tr>
-                <tr><td class="hl">V1</td>  <td>~200</td>  <td>First trifoliate</td>                <td>Post-emerge herbicide window</td></tr>
-                <tr><td class="hl">V3</td>  <td>~400</td>  <td>Third trifoliate</td>               <td>Last effective post herbicide application</td></tr>
-                <tr><td class="hl">V5</td>  <td>~600</td>  <td>Fifth trifoliate</td>               <td>Branching initiated; canopy closure begins</td></tr>
-                <tr><td class="hl">R1</td>  <td>~800</td>  <td>First flower</td>                    <td>Fungicide timing — frogeye &amp; white mold risk begins</td></tr>
-                <tr><td class="hl">R2</td>  <td>~1000</td> <td>Full bloom</td>                      <td>Primary fungicide window; N fixation peak</td></tr>
-                <tr><td class="hl">R3</td>  <td>~1200</td> <td>Beginning pod set</td>               <td>Drought most damaging here through R6</td></tr>
-                <tr><td class="hl">R4</td>  <td>~1400</td> <td>Full pod (pods &gt;¾" on 4 nodes)</td><td>Irrigation highest priority; pod abortion risk</td></tr>
-                <tr><td class="hl">R5</td>  <td>~1600</td> <td>Beginning seed fill</td>             <td>Seed size and oil/protein content determined</td></tr>
-                <tr><td class="hl">R6</td>  <td>~1750</td> <td>Full seed</td>                       <td>Harvest timing decisions begin</td></tr>
-                <tr><td class="hl">R7</td>  <td>~1900</td> <td>Beginning maturity</td>              <td>50% of pods show mature color</td></tr>
-                <tr><td class="hl">R8</td>  <td>~2000</td> <td>Full maturity</td>                   <td>95% of pods tan/brown; harvest when &lt;15% moisture</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel-body" style="padding:0"><div style="overflow-x:auto">
+          <table class="gdu-table" id="soy-table">
+            <thead><tr><th>Stage</th><th>GDUs from Planting</th><th>Key Events</th><th>Management Notes</th></tr></thead>
+            <tbody>
+              <tr><td class="hl">VE</td><td>~130</td><td>Emergence</td><td>Assess stand; 100,000 plants/ac minimum</td></tr>
+              <tr><td class="hl">V1</td><td>~200</td><td>First trifoliate</td><td>Post-emerge herbicide window</td></tr>
+              <tr><td class="hl">V3</td><td>~400</td><td>Third trifoliate</td><td>Last effective post herbicide application</td></tr>
+              <tr><td class="hl">V5</td><td>~600</td><td>Fifth trifoliate</td><td>Branching initiated; canopy closure begins</td></tr>
+              <tr><td class="hl">R1</td><td>~800</td><td>First flower</td><td>Fungicide timing — frogeye &amp; white mold risk begins</td></tr>
+              <tr><td class="hl">R2</td><td>~1000</td><td>Full bloom</td><td>Primary fungicide window; N fixation peak</td></tr>
+              <tr><td class="hl">R3</td><td>~1200</td><td>Beginning pod set</td><td>Drought most damaging here through R6</td></tr>
+              <tr><td class="hl">R4</td><td>~1400</td><td>Full pod (pods &gt;¾" on 4 nodes)</td><td>Irrigation highest priority; pod abortion risk</td></tr>
+              <tr><td class="hl">R5</td><td>~1600</td><td>Beginning seed fill</td><td>Seed size and oil/protein content determined</td></tr>
+              <tr><td class="hl">R6</td><td>~1750</td><td>Full seed</td><td>Harvest timing decisions begin</td></tr>
+              <tr><td class="hl">R7</td><td>~1900</td><td>Beginning maturity</td><td>50% of pods show mature color</td></tr>
+              <tr><td class="hl">R8</td><td>~2000</td><td>Full maturity</td><td>95% of pods tan/brown; harvest when &lt;15% moisture</td></tr>
+            </tbody>
+          </table>
+        </div></div>
       </div>
-
     </div>
-
     <!-- Formula explanation -->
     <div class="panel" style="margin-top:16px">
-      <div class="panel-head"><h2>📐 GDU FORMULA & METHODOLOGY</h2></div>
+      <div class="panel-head"><h2>📐 GDU FORMULA &amp; METHODOLOGY</h2></div>
       <div class="panel-body">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
           <div>
             <div style="font-size:.8rem;font-weight:700;color:var(--gold);margin-bottom:8px">Corn GDU Formula</div>
-            <div class="info-box">
-              GDU/day = ((min(Hi, 86°F) + max(Lo, 50°F)) ÷ 2) − 50<br><br>
-              <strong>Temperature caps:</strong><br>
-              • Max daily high capped at <strong>86°F</strong> (above this, corn growth doesn't increase)<br>
-              • Min daily low floored at <strong>50°F</strong> (below this, no heat accumulation)
-            </div>
+            <div class="info-box">GDU/day = ((min(Hi, 86°F) + max(Lo, 50°F)) ÷ 2) − 50<br><br><strong>Temperature caps:</strong><br>• Max daily high capped at <strong>86°F</strong> (above this, corn growth doesn't increase)<br>• Min daily low floored at <strong>50°F</strong> (below this, no heat accumulation)</div>
           </div>
           <div>
             <div style="font-size:.8rem;font-weight:700;color:var(--gold);margin-bottom:8px">Soybean GDU Formula</div>
-            <div class="info-box tip">
-              Soybeans use the same base formula but are photoperiod-sensitive — flowering is triggered by day length (short-day plant), not GDUs alone.<br><br>
-              GDU to R1 varies by maturity group. MG 2.0–4.0 typical in Midwest = ~800–1200 GDUs to first flower.
-            </div>
+            <div class="info-box tip">Soybeans use the same base formula but are photoperiod-sensitive — flowering is triggered by day length (short-day plant), not GDUs alone.<br><br>GDU to R1 varies by maturity group. MG 2.0–4.0 typical in Midwest = ~800–1200 GDUs to first flower.</div>
           </div>
           <div>
             <div style="font-size:.8rem;font-weight:700;color:var(--gold);margin-bottom:8px">RM × GDU Rule of Thumb</div>
-            <div class="info-box warn">
-              <strong>Corn:</strong> GDUs to black layer ≈ (RM × 9) + 375<br>
-              Example: 108-day hybrid ≈ (108 × 9) + 375 = <strong>1,347 GDUs</strong> to black layer<br><br>
-              Always verify with the seed company's published GDU requirements for your specific hybrid.
-            </div>
+            <div class="info-box warn"><strong>Corn:</strong> GDUs to black layer ≈ (RM × 9) + 375<br>Example: 108-day hybrid ≈ (108 × 9) + 375 = <strong>1,347 GDUs</strong> to black layer<br><br>Always verify with the seed company's published GDU requirements for your specific hybrid.</div>
           </div>
           <div>
             <div style="font-size:.8rem;font-weight:700;color:var(--gold);margin-bottom:8px">Limitations</div>
-            <div class="info-box">
-              • GDUs are a guide, not a guarantee<br>
-              • Soil temp at planting affects early accumulation<br>
-              • Cold snaps can reset or delay stage progress<br>
-              • Hybrid differences of ±100–200 GDUs are common<br>
-              • Use NOAA or your local extension office for actual daily GDU data
-            </div>
+            <div class="info-box">• GDUs are a guide, not a guarantee<br>• Soil temp at planting affects early accumulation<br>• Cold snaps can reset or delay stage progress<br>• Hybrid differences of ±100–200 GDUs are common<br>• Use NOAA or your local extension office for actual daily GDU data</div>
           </div>
         </div>
       </div>
     </div>
-
   </main>
-
   <div id="site-footer"></div>
   <script src="/components/loader.js"></script>
-
   <script>
-  /* ── CROP STAGE DATA ─────────────────────────────────────────── */
-  const CORN_STAGES = [
-    { stage:'VE',  gdu:100,  desc:'Emergence',            key:true },
-    { stage:'V3',  gdu:200,  desc:'Growing point in soil' },
-    { stage:'V5',  gdu:350,  desc:'Ear shoots initiated',  key:true },
-    { stage:'V6',  gdu:475,  desc:'Growing point above soil' },
-    { stage:'V8',  gdu:700,  desc:'Kernel rows determined', key:true },
-    { stage:'VT',  gdu:1135, desc:'Tasseling',              key:true },
-    { stage:'R1',  gdu:1400, desc:'Silking',                key:true },
-    { stage:'R3',  gdu:1750, desc:'Milk stage',             key:true },
-    { stage:'R5',  gdu:2190, desc:'Dent',                   key:true },
-    { stage:'R6',  gdu:2700, desc:'Black layer',            key:true },
+  var CORN_STAGES=[
+    {stage:'VE', gdu:100,  desc:'Emergence',            key:true},
+    {stage:'V3', gdu:200,  desc:'Growing point in soil'},
+    {stage:'V5', gdu:350,  desc:'Ear shoots initiated',  key:true},
+    {stage:'V6', gdu:475,  desc:'Growing point above soil'},
+    {stage:'V8', gdu:700,  desc:'Kernel rows determined', key:true},
+    {stage:'VT', gdu:1135, desc:'Tasseling',              key:true},
+    {stage:'R1', gdu:1400, desc:'Silking',                key:true},
+    {stage:'R3', gdu:1750, desc:'Milk stage',             key:true},
+    {stage:'R5', gdu:2190, desc:'Dent',                   key:true},
+    {stage:'R6', gdu:2700, desc:'Black layer',            key:true},
   ];
-  const SOY_STAGES = [
-    { stage:'VE',  gdu:130,  desc:'Emergence',             key:true },
-    { stage:'V1',  gdu:200,  desc:'First trifoliate' },
-    { stage:'V3',  gdu:400,  desc:'Third trifoliate',      key:true },
-    { stage:'R1',  gdu:800,  desc:'First flower',          key:true },
-    { stage:'R2',  gdu:1000, desc:'Full bloom',            key:true },
-    { stage:'R3',  gdu:1200, desc:'Pod set',               key:true },
-    { stage:'R5',  gdu:1600, desc:'Seed fill',             key:true },
-    { stage:'R7',  gdu:1900, desc:'Beginning maturity',    key:true },
-    { stage:'R8',  gdu:2000, desc:'Full maturity',         key:true },
+  var SOY_STAGES=[
+    {stage:'VE', gdu:130,  desc:'Emergence',             key:true},
+    {stage:'V1', gdu:200,  desc:'First trifoliate'},
+    {stage:'V3', gdu:400,  desc:'Third trifoliate',      key:true},
+    {stage:'R1', gdu:800,  desc:'First flower',          key:true},
+    {stage:'R2', gdu:1000, desc:'Full bloom',            key:true},
+    {stage:'R3', gdu:1200, desc:'Pod set',               key:true},
+    {stage:'R5', gdu:1600, desc:'Seed fill',             key:true},
+    {stage:'R7', gdu:1900, desc:'Beginning maturity',    key:true},
+    {stage:'R8', gdu:2000, desc:'Full maturity',         key:true},
   ];
-
-  /* ── INIT DATES ──────────────────────────────────────────────── */
-  (function initDates() {
-    const today = new Date();
-    const plantDefault = new Date(today.getFullYear(), 4, 1); // May 1
-    document.getElementById('todayDate').value  = today.toISOString().slice(0,10);
-    document.getElementById('plantDate').value  = plantDefault.toISOString().slice(0,10);
+  (function initDates(){
+    var today=new Date(),plantDefault=new Date(today.getFullYear(),4,1);
+    document.getElementById('todayDate').value=today.toISOString().slice(0,10);
+    document.getElementById('plantDate').value=plantDefault.toISOString().slice(0,10);
   })();
-
-  /* ── TOGGLE ENTRY ─────────────────────────────────────────────── */
-  function toggleEntry() {
-    const method = document.getElementById('entryMethod').value;
-    document.getElementById('avg-inputs').style.display        = method === 'avg'         ? 'block' : 'none';
-    document.getElementById('cumulative-inputs').style.display = method === 'cumulative'  ? 'block' : 'none';
-    document.getElementById('historical-note').style.display   = method === 'historical'  ? 'block' : 'none';
+  function toggleEntry(){
+    var method=document.getElementById('entryMethod').value;
+    document.getElementById('avg-inputs').style.display=method==='avg'?'block':'none';
+    document.getElementById('cumulative-inputs').style.display=method==='cumulative'?'block':'none';
+    document.getElementById('historical-note').style.display=method==='historical'?'block':'none';
     calcGDU();
   }
-
-  /* ── CROP CHANGE ──────────────────────────────────────────────── */
-  function onCropChange() {
-    const isCorn = document.getElementById('crop').value === 'corn';
-    document.getElementById('rm-wrap').style.display = isCorn ? 'block' : 'block';
-    document.getElementById('rm').value = isCorn ? 108 : 3; // RM for soy is MG
-    document.querySelector('label[for="rm"], label + input#rm').textContent = isCorn ? 'Relative Maturity (days)' : 'Maturity Group (e.g. 3.0)';
+  function onCropChange(){
+    var isCorn=document.getElementById('crop').value==='corn';
+    document.getElementById('rm').value=isCorn?108:3;
+    var lbl=document.getElementById('rm-label');
+    if(lbl) lbl.textContent=isCorn?'Relative Maturity (days)':'Maturity Group (e.g. 3.0)';
+    var hint=document.getElementById('rm-hint');
+    if(hint) hint.textContent=isCorn?'Corn: 80–130 RM. GDU to maturity ≈ RM × 9 + 375 (Rule of thumb)':'Soybeans: Enter your maturity group (e.g. 2.5, 3.0, 3.5).';
     calcGDU();
   }
-
-  /* ── MAIN CALC ────────────────────────────────────────────────── */
-  function calcGDU() {
-    const crop      = document.getElementById('crop').value;
-    const method    = document.getElementById('entryMethod').value;
-    const plantStr  = document.getElementById('plantDate').value;
-    const todayStr  = document.getElementById('todayDate').value;
-    if (!plantStr || !todayStr) return;
-
-    const plantDate = new Date(plantStr + 'T00:00:00');
-    const todayDate = new Date(todayStr  + 'T00:00:00');
-    const daysSincePlant = Math.max(0, Math.round((todayDate - plantDate) / 86400000));
-
-    // ── Compute accumulated GDUs ──
-    let accumGDU = 0;
-    let gduPerDay = 0;
-
-    if (method === 'cumulative') {
-      accumGDU = parseFloat(document.getElementById('cumGDU').value) || 0;
-      gduPerDay = daysSincePlant > 0 ? accumGDU / daysSincePlant : 0;
-
-    } else if (method === 'historical') {
-      // WI 30-yr avg GDU/day by month (May–Sep)
-      const WI_AVG = [7.5, 15.5, 21.5, 19.5, 10.0]; // May Jun Jul Aug Sep
-      let d = new Date(plantDate);
-      while (d <= todayDate) {
-        const mo = d.getMonth(); // 0=Jan
-        const moIdx = mo - 4;   // 4=May → 0
-        const rate = (moIdx >= 0 && moIdx < 5) ? WI_AVG[moIdx] : 0;
-        accumGDU += rate;
-        d.setDate(d.getDate() + 1);
-      }
-      gduPerDay = daysSincePlant > 0 ? accumGDU / daysSincePlant : 0;
-
-    } else {
-      // Average daily temps
-      const hi  = Math.min(parseFloat(document.getElementById('avgHi').value) || 0, 86);
-      const lo  = Math.max(parseFloat(document.getElementById('avgLo').value) || 0, 50);
-      gduPerDay = Math.max(0, (hi + lo) / 2 - 50);
-      accumGDU  = gduPerDay * daysSincePlant;
+  function calcGDU(){
+    var crop=document.getElementById('crop').value;
+    var method=document.getElementById('entryMethod').value;
+    var plantStr=document.getElementById('plantDate').value;
+    var todayStr=document.getElementById('todayDate').value;
+    if(!plantStr||!todayStr) return;
+    var plantDate=new Date(plantStr+'T00:00:00'),todayDate=new Date(todayStr+'T00:00:00');
+    var daysSincePlant=Math.max(0,Math.round((todayDate-plantDate)/86400000));
+    var accumGDU=0,gduPerDay=0;
+    if(method==='cumulative'){
+      accumGDU=parseFloat(document.getElementById('cumGDU').value)||0;
+      gduPerDay=daysSincePlant>0?accumGDU/daysSincePlant:0;
+    }else if(method==='historical'){
+      var WI_AVG=[7.5,15.5,21.5,19.5,10.0];
+      var d=new Date(plantDate);
+      while(d<=todayDate){var mo=d.getMonth(),moIdx=mo-4;var rate=(moIdx>=0&&moIdx<5)?WI_AVG[moIdx]:0;accumGDU+=rate;d.setDate(d.getDate()+1);}
+      gduPerDay=daysSincePlant>0?accumGDU/daysSincePlant:0;
+    }else{
+      var hi=Math.min(parseFloat(document.getElementById('avgHi').value)||0,86);
+      var lo=Math.max(parseFloat(document.getElementById('avgLo').value)||0,50);
+      gduPerDay=Math.max(0,(hi+lo)/2-50);accumGDU=gduPerDay*daysSincePlant;
     }
-
-    // ── GDU target to maturity ──
-    const rm = parseFloat(document.getElementById('rm').value) || 108;
-    let gduTarget;
-    if (crop === 'corn') {
-      gduTarget = Math.round(rm * 9 + 375);
-    } else {
-      // Soybeans: MG × ~500 + 800 rough estimate
-      gduTarget = Math.round(rm * 500 + 800);
-      gduTarget = Math.min(Math.max(gduTarget, 1600), 2400);
-    }
-
-    const gduRemaining = Math.max(0, gduTarget - accumGDU);
-    const pctDone      = Math.min(100, (accumGDU / gduTarget) * 100);
-    const daysLeft     = gduPerDay > 0 ? Math.round(gduRemaining / gduPerDay) : null;
-    const maturityDate = daysLeft !== null ? new Date(todayDate.getTime() + daysLeft * 86400000) : null;
-
-    // ── Current stage ──
-    const stages = crop === 'corn' ? CORN_STAGES : SOY_STAGES;
-    let currentStage = stages[0].stage;
-    for (const s of stages) {
-      if (accumGDU >= s.gdu) currentStage = s.stage;
-    }
-
-    // ── Update UI ──
-    document.getElementById('r-days').textContent        = daysSincePlant + ' days';
-    document.getElementById('r-gdu-day').textContent     = gduPerDay.toFixed(1) + ' GDU/day';
-    document.getElementById('r-gdu-total').textContent   = Math.round(accumGDU).toLocaleString();
-    document.getElementById('r-stage-badge').textContent = 'Current Stage: ' + currentStage;
-    document.getElementById('r-gdu-target').textContent  = gduTarget.toLocaleString();
-    document.getElementById('r-gdu-remaining').textContent = Math.round(gduRemaining).toLocaleString();
-    document.getElementById('r-days-left').textContent   = daysLeft !== null ? daysLeft + ' days' : '—';
-    document.getElementById('r-pct-done').textContent    = pctDone.toFixed(1) + '% complete';
-    document.getElementById('r-maturity-date').textContent = maturityDate
-      ? maturityDate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})
-      : '—';
-
-    // ── Arc gauge ──
-    const ARC_LEN = 283;
-    const offset  = ARC_LEN * (1 - Math.min(1, pctDone / 100));
-    const arcFill = document.getElementById('arc-fill');
-    arcFill.style.strokeDashoffset = offset;
-    arcFill.style.stroke = pctDone >= 100 ? 'var(--green)' : pctDone > 70 ? 'var(--gold)' : 'var(--gold)';
-
-    // ── Track progress bar ──
-    document.getElementById('track-fill').style.width   = pctDone.toFixed(1) + '%';
-    document.getElementById('track-marker').style.left  = Math.min(98, pctDone).toFixed(1) + '%';
-
-    // ── Milestones ──
-    renderMilestones(stages, accumGDU, currentStage);
+    var rm=parseFloat(document.getElementById('rm').value)||108,gduTarget;
+    if(crop==='corn'){gduTarget=Math.round(rm*9+375);}
+    else{gduTarget=Math.round(rm*500+800);gduTarget=Math.min(Math.max(gduTarget,1600),2400);}
+    var gduRemaining=Math.max(0,gduTarget-accumGDU),pctDone=Math.min(100,(accumGDU/gduTarget)*100);
+    var daysLeft=gduPerDay>0?Math.round(gduRemaining/gduPerDay):null;
+    var maturityDate=daysLeft!==null?new Date(todayDate.getTime()+daysLeft*86400000):null;
+    var stages=crop==='corn'?CORN_STAGES:SOY_STAGES;
+    var currentStage=stages[0].stage;
+    for(var s of stages){if(accumGDU>=s.gdu)currentStage=s.stage;}
+    document.getElementById('r-days').textContent=daysSincePlant+' days';
+    document.getElementById('r-gdu-day').textContent=gduPerDay.toFixed(1)+' GDU/day';
+    document.getElementById('r-gdu-total').textContent=Math.round(accumGDU).toLocaleString();
+    document.getElementById('r-stage-badge').textContent='Current Stage: '+currentStage;
+    document.getElementById('r-gdu-target').textContent=gduTarget.toLocaleString();
+    document.getElementById('r-gdu-remaining').textContent=Math.round(gduRemaining).toLocaleString();
+    document.getElementById('r-days-left').textContent=daysLeft!==null?daysLeft+' days':'—';
+    document.getElementById('r-pct-done').textContent=pctDone.toFixed(1)+'% complete';
+    document.getElementById('r-maturity-date').textContent=maturityDate?maturityDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):'—';
+    var ARC_LEN=283,offset=ARC_LEN*(1-Math.min(1,pctDone/100));
+    var arcFill=document.getElementById('arc-fill');
+    arcFill.style.strokeDashoffset=offset;
+    arcFill.style.stroke=pctDone>=100?'var(--green)':'var(--gold)';
+    document.getElementById('track-fill').style.width=pctDone.toFixed(1)+'%';
+    document.getElementById('track-marker').style.left=Math.min(98,pctDone).toFixed(1)+'%';
+    renderMilestones(stages,accumGDU,currentStage);
   }
-
-  function renderMilestones(stages, accumGDU, currentStage) {
-    const keyStages = stages.filter(s => s.key);
-    const crop = document.getElementById('crop').value;
-    document.getElementById('milestones-title').textContent =
-      (crop === 'corn' ? '🌽' : '🫘') + ' KEY GROWTH STAGE MILESTONES';
-
-    const html = keyStages.map(s => {
-      const reached  = accumGDU >= s.gdu;
-      const isCurrent = s.stage === currentStage;
-      const cls = isCurrent ? 'milestone current' : reached ? 'milestone reached' : 'milestone';
-      const check = reached ? '✅' : '⬜';
-      return `<div class="${cls}">
-        <div class="m-check">${check}</div>
-        <div class="m-stage">${s.stage}</div>
-        <div class="m-gdu">${s.gdu.toLocaleString()} GDU</div>
-        <div class="m-desc">${s.desc}</div>
-      </div>`;
+  function renderMilestones(stages,accumGDU,currentStage){
+    var keyStages=stages.filter(function(s){return s.key;});
+    var crop=document.getElementById('crop').value;
+    document.getElementById('milestones-title').textContent=(crop==='corn'?'🌽':'🫘')+' KEY GROWTH STAGE MILESTONES';
+    var html=keyStages.map(function(s){
+      var reached=accumGDU>=s.gdu,isCurrent=s.stage===currentStage;
+      var cls=isCurrent?'milestone current':reached?'milestone reached':'milestone';
+      var check=reached?'✅':'⬜';
+      return '<div class="'+cls+'"><div class="m-check">'+check+'</div><div class="m-stage">'+s.stage+'</div><div class="m-gdu">'+s.gdu.toLocaleString()+' GDU</div><div class="m-desc">'+s.desc+'</div></div>';
     }).join('');
-    document.getElementById('milestones-grid').innerHTML = html;
+    document.getElementById('milestones-grid').innerHTML=html;
   }
-
-  // Init
   calcGDU();
   </script>
-
 </body>
 </html>
