@@ -4,141 +4,127 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111a0a">
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
-<link rel="preload" href="/components/styles.css" as="style">
 <link rel="stylesheet" href="/components/styles.css">
-<link rel="icon" type="image/x-icon"             href="/img/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32"  href="/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16"  href="/img/favicon-16.png">
-<link rel="apple-touch-icon"                     href="/img/apple-touch-icon.png">
-<link rel="manifest"                             href="/manifest.json">
-
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
 <title>Wheat Futures Prices Today — Live CBOT Chart | AGSIST</title>
-<meta name="description" content="Live wheat futures prices from CBOT updated every 30 minutes. SRW front-month contract, interactive TradingView chart, 52-week range, corn and soybean comparison, and contract specs. Free for farmers. No login required.">
-<meta name="keywords" content="wheat futures prices today, wheat futures price, CBOT wheat futures, ZW futures, wheat futures chart, wheat price today, SRW wheat futures, HRW wheat futures, wheat market data, wheat price per bushel, grain futures today, winter wheat price">
-<meta name="author" content="Farmers First Agri Service — AGSIST">
+<meta name="description" content="Live CBOT wheat futures every 30 min. Front-month ZW, corn/wheat feed spread, price vs breakeven tiers, daily market read, seasonal chart. Free for farmers.">
+<meta name="keywords" content="wheat futures prices today, wheat futures price, CBOT wheat futures, ZW futures, wheat futures chart, wheat price today, SRW wheat futures, corn wheat spread, feed wheat, wheat market data, wheat price per bushel, grain futures today">
+<meta name="author" content="AGSIST — Farmers First Agri Service">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://agsist.com/wheat-futures-prices">
-
-<meta property="og:type"         content="website">
-<meta property="og:site_name"    content="AGSIST">
-<meta property="og:locale"       content="en_US">
-<meta property="og:title"        content="Wheat Futures Prices Today — Live CBOT Chart | AGSIST">
-<meta property="og:description"  content="Live CBOT wheat futures prices updated every 30 minutes. SRW front-month contract with interactive chart, 52-week range, corn/wheat spread, and market context. Free for farmers.">
-<meta property="og:url"          content="https://agsist.com/wheat-futures-prices">
-<meta property="og:image"        content="https://agsist.com/img/og/wheat-futures-prices.jpg">
-<meta property="og:image:width"  content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt"    content="AGSIST Wheat Futures Prices Today — Live CBOT chart and market data">
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:site"        content="@agsist">
-<meta name="twitter:creator"     content="@agsist">
-<meta name="twitter:title"       content="Wheat Futures Prices Today — Live CBOT Chart | AGSIST">
-<meta name="twitter:description" content="Live CBOT wheat futures updated every 30 min. SRW front-month, chart, 52-week range, corn/wheat spread. Free for farmers.">
-<meta name="twitter:image"       content="https://agsist.com/img/og/wheat-futures-prices.jpg">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://agsist.com/wheat-futures-prices#webpage",
-      "url": "https://agsist.com/wheat-futures-prices",
-      "name": "Wheat Futures Prices Today — Live CBOT Chart | AGSIST",
-      "description": "Live wheat futures prices from CBOT updated every 30 minutes. SRW front-month contract with interactive chart, 52-week range, contract specs, and market context including corn/wheat spread.",
-      "isPartOf": { "@id": "https://agsist.com/#website" },
-      "about": { "@id": "https://agsist.com/#organization" },
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agsist.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Wheat Futures Prices", "item": "https://agsist.com/wheat-futures-prices" }
-        ]
-      }
-    },
-    {
-      "@type": "Dataset",
-      "name": "CBOT Wheat Futures Prices — Live & Historical",
-      "description": "Live CBOT soft red winter wheat futures prices (ZW) updated every 30 minutes via GitHub Actions. Includes front-month contract, net change, percent change, and 52-week high/low range.",
-      "url": "https://agsist.com/wheat-futures-prices",
-      "creator": { "@id": "https://agsist.com/#organization" },
-      "temporalCoverage": "2024/..",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is the wheat futures price today?",
-          "acceptedAnswer": { "@type": "Answer", "text": "AGSIST displays live CBOT soft red winter wheat (SRW) futures prices updated every 30 minutes Monday through Friday during trading hours. The front-month contract is shown with net change, percent change, and 52-week range. Prices are in cents per bushel — divide by 100 for dollars per bushel." }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the difference between SRW and HRW wheat futures?",
-          "acceptedAnswer": { "@type": "Answer", "text": "SRW (soft red winter) wheat trades on CBOT as the ZW contract and is grown primarily in the eastern Midwest. HRW (hard red winter) wheat trades on the Kansas City Board of Trade as the KE contract and is the dominant class grown in Kansas, Oklahoma, and Texas. HRW commands a premium for higher protein content used in bread flour. AGSIST displays the CBOT SRW contract." }
-        },
-        {
-          "@type": "Question",
-          "name": "What moves wheat futures prices?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Wheat futures prices are primarily driven by: global supply from Russia, Ukraine, and Australia (the three largest exporters), USDA WASDE monthly supply and demand estimates, winter wheat crop condition and harvest progress, drought or excess moisture in the Great Plains, export competition from Black Sea origins, and the US Dollar Index which affects export competitiveness." }
-        },
-        {
-          "@type": "Question",
-          "name": "How does the corn/wheat price spread affect farming decisions?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The corn/wheat spread determines whether wheat is economically competitive as a feed grain versus corn. When wheat trades at a significant discount to corn on a per-bushel basis, wheat becomes attractive for livestock feeders as a corn substitute, supporting wheat demand and prices. When corn trades at a similar or lower price than wheat, feeders switch to corn, removing feed demand support from wheat." }
-        }
-      ]
-    }
-  ]
-}
-</script>
-
+<meta property="og:type" content="website"><meta property="og:site_name" content="AGSIST"><meta property="og:locale" content="en_US">
+<meta property="og:title" content="Wheat Futures Prices Today — Live CBOT Chart | AGSIST">
+<meta property="og:description" content="Live CBOT wheat futures every 30 min. Front-month ZW, corn/wheat feed spread, breakeven tiers, daily market read. Free for farmers.">
+<meta property="og:url" content="https://agsist.com/wheat-futures-prices">
+<meta property="og:image" content="https://agsist.com/img/og/wheat-futures-prices.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="AGSIST Wheat Futures Prices Today — Live CBOT chart">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@agsist"><meta name="twitter:creator" content="@agsist">
+<meta name="twitter:title" content="Wheat Futures Prices Today — Live CBOT Chart | AGSIST">
+<meta name="twitter:description" content="Live CBOT wheat futures every 30 min. ZW front-month, corn/wheat feed spread, breakeven tiers, daily market read. Free.">
+<meta name="twitter:image" content="https://agsist.com/img/og/wheat-futures-prices.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://agsist.com/wheat-futures-prices#webpage","url":"https://agsist.com/wheat-futures-prices","name":"Wheat Futures Prices Today — Live CBOT Chart & Market Data | AGSIST","description":"Live CBOT wheat futures updated every 30 minutes. Front-month ZW, corn/wheat feed spread, price vs breakeven tiers, synthesized daily market read, 52-week range, and seasonal tendencies.","isPartOf":{"@id":"https://agsist.com/#website"},"about":{"@id":"https://agsist.com/#organization"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agsist.com/"},{"@type":"ListItem","position":2,"name":"Wheat Futures Prices","item":"https://agsist.com/wheat-futures-prices"}]}},{"@type":"Organization","@id":"https://agsist.com/#organization","name":"AGSIST","url":"https://agsist.com/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the wheat futures price today?","acceptedAnswer":{"@type":"Answer","text":"AGSIST displays live CBOT soft red winter wheat futures (ZW) updated every 30 minutes Monday through Friday. The synthesized Market Read block contextualizes price position, the corn/wheat feed spread, price vs typical breakeven, and seasonal tendencies — all derived from live prices."}},{"@type":"Question","name":"What is the corn/wheat feed spread and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"The corn/wheat spread compares CBOT wheat vs corn prices in dollars per bushel. When wheat trades within $0.25–0.50 of corn, feedlots substitute wheat for corn — creating a demand floor. A spread above $1.50 means feeders are using corn, and wheat loses that demand support. AGSIST calculates this spread live."}},{"@type":"Question","name":"What is a typical wheat breakeven price?","acceptedAnswer":{"@type":"Answer","text":"Typical full cost of production for winter wheat ranges $5.00–7.00 per bushel depending on land costs, inputs, and yield. Below $5.00 most operations lose money. Above $6.00, most well-run operations are profitable. Above $7.00, strong forward selling opportunities exist. AGSIST's breakeven calculator lets you use your specific costs."}},{"@type":"Question","name":"What is CBOT soft red winter wheat?","acceptedAnswer":{"@type":"Answer","text":"CBOT ZW futures represent soft red winter wheat (SRW), the dominant US futures benchmark. SRW wheat is primarily grown in the Eastern corn belt and Mid-South. Hard red winter wheat (HRW) trades on KCBT as KE futures. Hard red spring wheat (HRS) trades on MGE as MWE futures. AGSIST displays CBOT ZW as the primary wheat futures benchmark."}},{"@type":"Question","name":"What moves wheat futures prices?","acceptedAnswer":{"@type":"Answer","text":"Key drivers: Black Sea supply from Russia and Ukraine, USDA WASDE monthly reports, weather during winter wheat dormancy and spring green-up, the US Dollar Index affecting export competitiveness, global food security policy, and the corn/wheat feed spread which creates a demand floor when prices approach parity."}},{"@type":"Question","name":"How does Black Sea production affect US wheat prices?","acceptedAnswer":{"@type":"Answer","text":"Russia is the world's largest wheat exporter, and Russia/Ukraine combined supply roughly 30% of global wheat exports. Geopolitical disruptions, drought in the Black Sea region, or Russian export restrictions can sharply support global wheat prices. US soft red winter wheat is directly competed against Black Sea supplies in export markets."}},{"@type":"Question","name":"When is wheat typically cheapest — and most expensive?","acceptedAnswer":{"@type":"Answer","text":"CBOT wheat typically hits its seasonal low in June–July during Northern Hemisphere harvest when supply peaks globally. Prices tend to recover into fall and peak around April–May as Southern Hemisphere harvest uncertainty builds and before Northern Hemisphere new-crop certainty arrives. The seasonal chart above shows historical tendencies by month."}},{"@type":"Question","name":"When is CBOT wheat open for trading?","acceptedAnswer":{"@type":"Answer","text":"CBOT wheat futures trade electronically Sunday through Friday — overnight session 7:00 PM to 7:45 AM CT, day session 8:30 AM to 1:20 PM CT. AGSIST refreshes prices every 30 minutes on weekdays. Overnight moves often reflect Black Sea news or Southern Hemisphere weather released outside US hours."}}]}]}</script>
 <style>
-/* ── v5: Batch 5 audit — GA, skip link, touch-action, og:locale
-        font floor .6→.62rem; border-radii 10→8px ── */
 button,a,[role="button"]{touch-action:manipulation;}
-
-.fut { max-width: 1100px; margin: 0 auto; padding: 0 16px 2.5rem }
-.bc { font-size: .75rem; color: var(--text-dim); margin: 12px 0 } .bc a { color: var(--gold); text-decoration: none }
-.ph { background: linear-gradient(135deg, var(--surface) 0%, rgba(230,176,66,.05) 100%); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.4rem; margin-bottom: 8px; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap }
-.ph-icon { font-size: 2.6rem; flex-shrink: 0 } .ph-info h1 { font-size: 1.05rem; color: var(--text); margin: 0 0 2px 0 } .ph-exch { font-size: .7rem; color: var(--text-dim) }
-.ph-price { margin-left: auto; text-align: right } .ph-val { font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1 } .ph-unit { font-size: .72rem; color: var(--text-dim) } .ph-chg { font-size: .88rem; font-weight: 700; margin-top: 2px }
-.up { color: var(--green) } .dn { color: var(--red) }
-.ps { display: flex; align-items: center; gap: 6px; font-size: .7rem; color: var(--text-dim); margin-bottom: 12px } .ps-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite } @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-.sk { color: var(--text-dim); animation: blink 1.4s ease-in-out infinite } @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-.cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px; margin-bottom: 14px }
-/* border-radius 10→8px on price cards */
-.cc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; transition: border-color .2s } .cc:hover { border-color: var(--border-g) } .cc.hi { border-color: var(--gold); background: rgba(230,176,66,.04) }
-/* font floor .62rem (was .6rem) */
-.cc-lbl { font-size: .62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px } .cc-p { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text) } .cc-u { font-size: .62rem; color: var(--text-dim) } .cc-c { font-size: .72rem; font-weight: 600; margin-top: 2px }
-/* border-radius 12→8px on chart panel */
-.cp { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 14px } .cp-head { padding: 9px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center } .cp-head h2 { margin: 0; font-size: .85rem; color: var(--gold) } .cp-src { font-size: .62rem; color: var(--text-muted) }
-/* border-radius 10→8px on range panel */
-.rng { margin-bottom: 14px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px } .rng-lbl { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px } .rng-bar { position: relative; height: 6px; background: var(--surface2); border-radius: 3px; margin-bottom: 4px } .rng-fill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 3px; background: var(--gold); transition: width .5s } .rng-dot { position: absolute; top: -3px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); border: 2px solid var(--surface); transition: left .5s } .rng-labels { display: flex; justify-content: space-between; font-size: .7rem } .rng-lo,.rng-hi { color: var(--text-dim) } .rng-cur { color: var(--gold); font-weight: 700 }
-/* border-radius 10→8px on spec/related cards */
-.xg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 14px } .xc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 11px } .xc h4 { font-size: .8rem; color: var(--gold); margin: 0 0 6px 0 } .xr { display: flex; justify-content: space-between; font-size: .74rem; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,.03) } .xr:last-child { border: none } .xl { color: var(--text-dim) } .xv { color: var(--text); font-weight: 600 }
-.rl { font-size: .68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; margin: 14px 0 6px } .rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 6px } .ra { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-decoration: none; transition: border-color .2s } .ra:hover { border-color: var(--border-g) } .ra-i { font-size: 1.2rem; margin-bottom: 3px } .ra-n { font-size: .8rem; font-weight: 600; color: var(--text) } .ra-d { font-size: .65rem; color: var(--text-dim); margin-top: 1px }
-.disc { font-size: .68rem; color: var(--text-dim); text-align: center; padding: 8px; border-top: 1px solid var(--border); margin-top: 14px }
-@media (max-width: 520px) { .ph { padding: .9rem } .ph-icon { font-size: 2rem } .ph-val { font-size: 1.7rem } .cg { grid-template-columns: repeat(2, 1fr) } }
+.fut{max-width:1100px;margin:0 auto;padding:0 16px 2.5rem}
+.bc{font-size:.75rem;color:var(--text-dim);margin:12px 0}.bc a{color:var(--gold);text-decoration:none}
+.ph{background:linear-gradient(135deg,var(--surface) 0%,rgba(230,176,66,.05) 100%);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:8px;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.ph-icon{font-size:2.6rem;flex-shrink:0}.ph-info h1{font-size:1.05rem;color:var(--text);margin:0 0 2px 0}.ph-exch{font-size:.7rem;color:var(--text-dim)}
+.ph-price{margin-left:auto;text-align:right}.ph-val{font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--text);line-height:1}.ph-unit{font-size:.72rem;color:var(--text-dim)}.ph-chg{font-size:.88rem;font-weight:700;margin-top:2px}
+.up{color:var(--green)}.dn{color:var(--red)}
+.ps{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--text-dim);margin-bottom:10px}
+.ps-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sk{color:var(--text-dim);animation:blink 1.4s ease-in-out infinite}
+.snap-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(58,139,60,.03) 100%);border:1px solid var(--border-g);border-left:3px solid var(--green);border-radius:12px;padding:13px 16px;margin-bottom:14px}
+.snap-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px}
+.snap-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green)}
+.snap-age{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted)}
+.snap-body{font-size:.82rem;line-height:1.72;color:var(--text-dim);margin:0 0 10px}
+.snap-body strong{color:var(--text);font-weight:700}
+.snap-ft{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border);gap:8px;flex-wrap:wrap}
+.snap-cat{font-size:.7rem;color:var(--text-dim)}.snap-cat strong{color:var(--gold)}
+.snap-link{font-size:.65rem;color:var(--green);text-decoration:none;white-space:nowrap}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:14px}
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;transition:border-color .2s}.cc:hover{border-color:var(--border-g)}.cc.hi{border-color:var(--gold);background:rgba(230,176,66,.04)}
+.cc-lbl{font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}.cc-p{font-family:'Oswald',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text)}.cc-u{font-size:.62rem;color:var(--text-dim)}.cc-c{font-size:.72rem;font-weight:600;margin-top:2px}
+.rng{margin-bottom:14px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rng-lbl{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.rng-bar{position:relative;height:6px;background:var(--surface2);border-radius:3px;margin-bottom:4px}
+.rng-fill{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:var(--gold);transition:width .5s}
+.rng-dot{position:absolute;top:-3px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--surface);transition:left .5s}
+.rng-labels{display:flex;justify-content:space-between;font-size:.7rem}.rng-lo,.rng-hi{color:var(--text-dim)}.rng-cur{color:var(--gold);font-weight:700}
+.rat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.rat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px}
+.rat-lbl{font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px}
+.rat-val{font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;color:var(--text);line-height:1;margin-bottom:10px}
+.rat-gauge-bar{position:relative;height:8px;background:linear-gradient(to right,#5a9b3c 0%,var(--gold) 35%,var(--gold) 65%,var(--red) 100%);border-radius:4px;margin-bottom:5px}
+.rat-gauge-dot{position:absolute;top:-4px;width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid #fff;transition:left .5s;box-shadow:0 0 0 2px var(--gold)}
+.rat-gauge-labels{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-dim);line-height:1.3;margin-bottom:8px}
+.rat-gauge-labels em{font-style:normal;opacity:.7;font-size:.9em}
+.rat-interp{font-size:.75rem;color:var(--text-dim);min-height:1.1em;margin-bottom:6px}
+.rat-note{font-size:.62rem;color:var(--text-dim);margin-top:8px;border-top:1px solid var(--border);padding-top:7px}.rat-note a{color:var(--gold);text-decoration:none}
+.be-zones{display:flex;flex-direction:column;gap:3px;margin:8px 0}
+.be-zone{font-size:.68rem;color:var(--text-dim);padding:4px 8px;border-radius:4px;border:1px solid transparent;transition:all .3s}.be-zone.active{font-weight:700}
+.be-zone.z0.active{background:rgba(200,50,50,.15);border-color:var(--red);color:var(--red)}
+.be-zone.z1.active{background:rgba(200,150,0,.15);border-color:var(--gold);color:var(--gold)}
+.be-zone.z2.active{background:rgba(58,139,60,.15);border-color:var(--green);color:var(--green)}
+.be-zone.z3.active{background:rgba(58,139,60,.2);border-color:var(--green);color:var(--green)}
+.cp{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.cp-head{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cp-head h2{margin:0;font-size:.85rem;color:var(--gold)}.cp-src{font-size:.62rem;color:var(--text-muted)}
+.seas-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:14px}
+.seas-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px}
+.seas-title{font-size:.78rem;font-weight:700;color:var(--gold)}.seas-note{font-size:.62rem;color:var(--text-dim)}
+.seas-chart{display:flex;align-items:flex-end;gap:3px;height:70px;margin-bottom:4px;overflow:hidden}
+.seas-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;cursor:default}
+.seas-bar{width:100%;border-radius:2px 2px 0 0;background:rgba(58,139,60,.4);transition:opacity .2s}
+.seas-col.cur .seas-bar{background:var(--gold)}.seas-col:hover .seas-bar{opacity:.6}
+.seas-mo{font-size:.52rem;color:var(--text-dim);margin-top:3px;text-align:center}
+.seas-col.cur .seas-mo{color:var(--gold);font-weight:700}
+.seas-caption{font-size:.65rem;color:var(--text-dim);margin-top:6px;line-height:1.5}
+.xg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-bottom:14px}
+.xc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px}
+.xc h4{font-size:.8rem;color:var(--gold);margin:0 0 6px 0}
+.xr{display:flex;justify-content:space-between;font-size:.74rem;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.03)}.xr:last-child{border:none}
+.xl{color:var(--text-dim)}.xv{color:var(--text);font-weight:600}
+.edu-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px}
+.edu-wrap h3{font-size:.85rem;color:var(--gold);margin:0 0 12px 0}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.edu-block h4{font-size:.78rem;color:var(--text);margin:0 0 5px 0;font-weight:700}
+.edu-block p{font-size:.75rem;color:var(--text-dim);line-height:1.68;margin:0}
+.faq-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.faq-head{padding:10px 14px;border-bottom:1px solid var(--border);font-size:.78rem;font-weight:700;color:var(--gold)}
+.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--text);gap:8px;user-select:none;line-height:1.4}
+.faq-q::after{content:'+';color:var(--gold);font-size:1.1rem;flex-shrink:0;width:16px;text-align:center}
+.faq-item.open .faq-q::after{content:'−'}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:500px}
+.faq-a-inner{padding:0 14px 12px;font-size:.78rem;color:var(--text-dim);line-height:1.68}
+.rl{font-size:.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin:14px 0 6px}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:6px}
+.ra{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-decoration:none;transition:border-color .2s}
+.ra:hover{border-color:var(--border-g)}.ra-i{font-size:1.2rem;margin-bottom:3px}.ra-n{font-size:.8rem;font-weight:600;color:var(--text)}.ra-d{font-size:.65rem;color:var(--text-dim);margin-top:1px}
+.disc{font-size:.68rem;color:var(--text-dim);text-align:center;padding:8px;border-top:1px solid var(--border);margin-top:14px}
+@media(max-width:520px){.ph{padding:.9rem}.ph-icon{font-size:2rem}.ph-val{font-size:1.7rem}.cg{grid-template-columns:repeat(2,1fr)}.rat-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 <div id="site-header"></div>
-
-<main class="fut" id="main">
+<main id="main" class="fut">
   <nav class="bc" aria-label="Breadcrumb"><a href="/">Home</a> → Wheat Futures Prices</nav>
 
   <div class="ph">
     <div class="ph-icon">🌾</div>
     <div class="ph-info">
       <h1>Wheat Futures Prices Today</h1>
-      <div class="ph-exch">CBOT · CME Group · ZW=F (SRW) · Updated every 30 min</div>
+      <div class="ph-exch">CBOT SRW · CME Group · ZW=F · Updated every 30 min</div>
     </div>
     <div class="ph-price">
       <div class="ph-val sk" id="hero-price">—</div>
@@ -149,8 +135,20 @@ button,a,[role="button"]{touch-action:manipulation;}
 
   <div class="ps"><span class="ps-dot" aria-hidden="true"></span><span id="status">Loading prices…</span></div>
 
+  <div class="snap-card">
+    <div class="snap-hd">
+      <span class="snap-lbl">🧭 Today's Market Read</span>
+      <span class="snap-age" id="snap-age"></span>
+    </div>
+    <p class="snap-body" id="snap-body">Analyzing current prices…</p>
+    <div class="snap-ft">
+      <span class="snap-cat">📅 Next WASDE: <strong id="snap-wasde">—</strong></span>
+      <a href="/usda-calendar" class="snap-link">Full USDA Calendar →</a>
+    </div>
+  </div>
+
   <div class="cg">
-    <div class="cc hi"><div class="cc-lbl">Front Month (ZW)</div><div class="cc-p sk" id="p-wheat">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-wheat"></div></div>
+    <div class="cc hi"><div class="cc-lbl">SRW Wheat (ZW)</div><div class="cc-p sk" id="p-wheat">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-wheat"></div></div>
     <div class="cc"><div class="cc-lbl">Corn (ZC)</div><div class="cc-p sk" id="p-corn">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-corn"></div></div>
     <div class="cc"><div class="cc-lbl">Soybeans (ZS)</div><div class="cc-p sk" id="p-beans">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-beans"></div></div>
     <div class="cc"><div class="cc-lbl">Oats (ZO)</div><div class="cc-p sk" id="p-oats">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-oats"></div></div>
@@ -164,53 +162,142 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="rng-labels"><span class="rng-lo" id="rng-lo">—</span><span class="rng-cur" id="rng-cur">—</span><span class="rng-hi" id="rng-hi">—</span></div>
   </div>
 
+  <div class="rat-row">
+    <div class="rat-card">
+      <div class="rat-lbl">🌾/🌽 Wheat·Corn Feed Spread</div>
+      <div class="rat-val sk" id="wc-spread">—</div>
+      <div class="rat-gauge-bar"><div class="rat-gauge-dot" id="wc-dot"></div></div>
+      <div class="rat-gauge-labels">
+        <span>← Wheat in feed<br><em>parity</em></span>
+        <span style="text-align:center">Normal<br><em>$0.75–$1.50</em></span>
+        <span style="text-align:right">Corn in feed<br><em>&gt;$1.50</em></span>
+      </div>
+      <div class="rat-interp" id="wc-interp">Wheat minus corn · $/bu · live from futures</div>
+      <div class="rat-note">Feed substitution signal · spread narrows = wheat demand floor activates</div>
+    </div>
+    <div class="rat-card">
+      <div class="rat-lbl">💰 Wheat Price vs. Typical Breakeven</div>
+      <div class="rat-val sk" id="be-price">—</div>
+      <div class="be-zones">
+        <div class="be-zone z3" id="bz3">Above $7.00 · Strong margins · evaluate forward sales</div>
+        <div class="be-zone z2" id="bz2">$6.00–$7.00 · Profitable for most operations</div>
+        <div class="be-zone z1" id="bz1">$5.00–$6.00 · Marginal; variable costs covered, thin overhead</div>
+        <div class="be-zone z0" id="bz0">Below $5.00 · Below full cost for most producers</div>
+      </div>
+      <div class="rat-note">Typical range only · <a href="/breakeven">Use your actual costs →</a></div>
+    </div>
+  </div>
+
   <div class="cp">
     <div class="cp-head"><h2>📈 Wheat Front Month — Interactive Chart</h2><span class="cp-src">Chart by TradingView</span></div>
     <div id="tv-chart" style="height:480px"></div>
   </div>
 
+  <div class="seas-wrap">
+    <div class="seas-head">
+      <span class="seas-title">📅 Wheat Seasonal Price Tendency</span>
+      <span class="seas-note">Historical pattern · current month highlighted · hover for context</span>
+    </div>
+    <div id="seas-chart" class="seas-chart"></div>
+    <div class="seas-caption">Wheat prices typically hit seasonal lows in June–July (Northern Hemisphere harvest pressure) and tend to recover into fall and peak around April–May as pre-harvest uncertainty builds. Black Sea supply and weather events can significantly override these tendencies.</div>
+  </div>
+
   <div class="xg">
     <div class="xc">
-      <h4>📋 Contract Specs</h4>
+      <h4>📋 Contract Specs (SRW)</h4>
       <div class="xr"><span class="xl">Exchange</span><span class="xv">CBOT / CME Group</span></div>
       <div class="xr"><span class="xl">Contract Size</span><span class="xv">5,000 bushels</span></div>
-      <div class="xr"><span class="xl">Tick Size</span><span class="xv">¼¢/bu ($12.50)</span></div>
-      <div class="xr"><span class="xl">Symbol</span><span class="xv">ZW (SRW) · KE (HRW)</span></div>
-      <div class="xr"><span class="xl">Months</span><span class="xv">Mar, May, Jul, Sep, Dec</span></div>
+      <div class="xr"><span class="xl">Tick Size</span><span class="xv">¼¢/bu ($12.50/contract)</span></div>
+      <div class="xr"><span class="xl">Symbol</span><span class="xv">ZW (SRW)</span></div>
+      <div class="xr"><span class="xl">Active Months</span><span class="xv">Mar, May, Jul, Sep, Dec</span></div>
     </div>
     <div class="xc">
       <h4>📅 Key Reports</h4>
-      <div class="xr"><span class="xl">WASDE</span><span class="xv">Monthly (~10th)</span></div>
+      <div class="xr"><span class="xl">WASDE</span><span class="xv">Monthly (~10th) · highest impact</span></div>
+      <div class="xr"><span class="xl">Crop Progress</span><span class="xv">Weekly Mon 4pm (Apr–Nov)</span></div>
       <div class="xr"><span class="xl">Winter Wheat Seedings</span><span class="xv">January</span></div>
-      <div class="xr"><span class="xl">Crop Progress</span><span class="xv">Weekly Mon (Apr–Nov)</span></div>
-      <div class="xr"><span class="xl">Black Sea supply</span><span class="xv">Major price driver</span></div>
+      <div class="xr"><span class="xl">Export Sales</span><span class="xv">Thu 7:30am CT</span></div>
+      <div class="xr"><span class="xl">Black Sea updates</span><span class="xv">Watch daily</span></div>
     </div>
     <div class="xc">
-      <h4>💡 Using These Prices</h4>
-      <div class="xr"><span class="xl">Class premiums</span><span class="xv">HRW vs SRW spread</span></div>
-      <div class="xr"><span class="xl">Break-even</span><span class="xv">~$5.50–7.00/bu avg</span></div>
-      <div class="xr"><span class="xl">New crop Jul</span><span class="xv">Winter wheat harvest benchmark</span></div>
-      <div class="xr"><span class="xl">Corn/wheat spread</span><span class="xv">Affects feed wheat demand</span></div>
+      <h4>💡 Key Price Signals</h4>
+      <div class="xr"><span class="xl">Feed spread</span><span class="xv">Wheat minus corn $/bu</span></div>
+      <div class="xr"><span class="xl">Parity range</span><span class="xv">&lt;$0.25 activates feed demand</span></div>
+      <div class="xr"><span class="xl">Three classes</span><span class="xv">SRW (CBOT), HRW (KC), HRS (MGE)</span></div>
+      <div class="xr"><span class="xl">Typical breakeven</span><span class="xv">$5.00–$7.00/bu avg</span></div>
     </div>
     <div class="xc">
-      <h4>🌍 Demand Drivers</h4>
-      <div class="xr"><span class="xl">Food/milling</span><span class="xv">~67% of US wheat</span></div>
-      <div class="xr"><span class="xl">Feed/residual</span><span class="xv">~18% of US wheat</span></div>
-      <div class="xr"><span class="xl">Exports</span><span class="xv">~15% of US wheat</span></div>
-      <div class="xr"><span class="xl">Russia</span><span class="xv">World's largest exporter</span></div>
+      <h4>🌍 Global Wheat Context</h4>
+      <div class="xr"><span class="xl">#1 exporter</span><span class="xv">Russia</span></div>
+      <div class="xr"><span class="xl">Black Sea share</span><span class="xv">~30% of global exports</span></div>
+      <div class="xr"><span class="xl">Top importers</span><span class="xv">Egypt, Indonesia, Turkey</span></div>
+      <div class="xr"><span class="xl">US export rank</span><span class="xv">~4th globally</span></div>
+    </div>
+  </div>
+
+  <div class="edu-wrap">
+    <h3>📚 Understanding Wheat Futures</h3>
+    <div class="edu-grid">
+      <div class="edu-block">
+        <h4>Three Wheats — Knowing the Difference</h4>
+        <p>The US trades three major wheat classes. CBOT soft red winter (SRW, ZW) is the global price benchmark and primarily grown in the Eastern corn belt and Mid-South. Kansas City HRW (KW) is the hard red winter used for most bread flour, grown in the Southern Plains. Minneapolis HRS (MWE) is the high-protein spring wheat grown in the northern plains and Minnesota/Wisconsin border region. Understanding which class you produce or buy matters — basis and price behavior can diverge significantly across the three classes.</p>
+      </div>
+      <div class="edu-block">
+        <h4>The Corn/Wheat Feed Spread</h4>
+        <p>When CBOT wheat trades within $0.25–$0.50/bu of CBOT corn, feedlots and poultry producers begin substituting wheat for corn — creating a hard demand floor under wheat prices. This spread, shown live above, is one of the most reliable support signals in the wheat market. A spread above $1.50 means corn is the clear feed choice and wheat loses that demand support. Watch for the spread to narrow sharply during harvest pressure periods — it often signals the seasonal low.</p>
+      </div>
+      <div class="edu-block">
+        <h4>Black Sea Supply &amp; Global Competition</h4>
+        <p>Russia alone supplies roughly 20–25% of global wheat exports, and Russia plus Ukraine combined account for about 30%. US soft red winter wheat competes directly against Black Sea origins in export markets. Russian export restrictions, seasonal tariffs, or Black Sea weather disruptions can add $0.50–2.00/bu to global wheat benchmarks almost overnight. This global supply sensitivity makes wheat more geopolitically volatile than corn or soybeans — a unique characteristic serious wheat producers track daily alongside weather.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-wrap">
+    <div class="faq-head">❓ Wheat Futures — Common Questions</div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What is the wheat futures price today?</div>
+      <div class="faq-a"><div class="faq-a-inner">The live price above shows CBOT front-month soft red winter wheat (ZW), refreshed every 30 minutes. The "Today's Market Read" block synthesizes price position, the corn/wheat feed spread signal, price vs breakeven tier, and seasonal context — updated with every price refresh. The live feed spread calculation is a unique feature not commonly available on free grain pages.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What is the corn/wheat feed spread and why does it matter?</div>
+      <div class="faq-a"><div class="faq-a-inner">The corn/wheat spread is the price difference in $/bu between CBOT wheat and corn. When wheat trades within $0.25–0.50 of corn, feedlots, poultry producers, and cattle operations begin substituting wheat for corn in rations, creating a natural demand floor under wheat. A spread above $1.50 means corn is the feed of choice and wheat loses that demand support. The feed spread widget above updates live with every price refresh and shows which zone you're currently in.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What is CBOT soft red winter wheat vs hard red winter or hard red spring?</div>
+      <div class="faq-a"><div class="faq-a-inner">CBOT ZW is soft red winter (SRW) wheat — lower protein, used for crackers, pastry, and flat breads, primarily grown in the Eastern corn belt. Kansas City KW is hard red winter (HRW) — higher protein, most bread flour, grown in Kansas, Oklahoma, Texas. Minneapolis MWE is hard red spring (HRS) — highest protein, specialty milling, grown in the Northern Plains and upper Midwest. Basis and price behavior can diverge significantly across classes depending on class-specific supply and demand conditions.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What is a typical wheat production breakeven?</div>
+      <div class="faq-a"><div class="faq-a-inner">Full cost of production for winter wheat typically ranges $5.00–7.00/bu depending on land costs, input costs, and expected yield. Below $5.00, most operations lose money on a full-cost basis. $5.00–$6.00 covers variable costs but is thin on land rent and fixed overhead. $6.00–$7.00 supports profitable production for most well-run operations. Above $7.00, strong forward selling opportunities typically exist. Use AGSIST's breakeven calculator to input your specific costs and yield expectations.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">How does Black Sea production affect US wheat prices?</div>
+      <div class="faq-a"><div class="faq-a-inner">Russia is the world's largest wheat exporter, and Russia plus Ukraine together supply roughly 30% of globally traded wheat. US soft red winter wheat competes directly against Black Sea origins in Egyptian and other import tenders. Geopolitical disruptions, Russian export restrictions or tariffs, or drought in Black Sea growing regions can add $0.50–$2.00/bu to CBOT wheat almost immediately. This geopolitical sensitivity is wheat's key distinguishing characteristic compared to corn or soybeans, and warrants daily monitoring.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">When is the best seasonal window to sell wheat?</div>
+      <div class="faq-a"><div class="faq-a-inner">CBOT wheat historically makes its seasonal low in June–July when Northern Hemisphere harvest peaks globally and supply is greatest. Prices tend to recover into fall and winter as old-crop stocks tighten, then peak around April–May as pre-harvest uncertainty about the coming crop builds a risk premium. The seasonal chart above illustrates these tendencies by month. Black Sea supply surprises, geopolitical events, and export policy decisions routinely override seasonal patterns in any given year — wheat is more news-sensitive than corn or soybeans.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What USDA reports move wheat prices the most?</div>
+      <div class="faq-a"><div class="faq-a-inner">The USDA WASDE (World Agricultural Supply and Demand Estimates), released monthly around the 10th, is the primary report for wheat — particularly global ending stocks and the US export pace. Weekly Export Sales and Inspections (Thursday 7:30am CT) track US competitiveness against Black Sea origins. The January Winter Wheat Seedings report establishes the new crop area estimate. Weekly Crop Progress (Monday 4pm CT, April–November) tracks winter wheat dormancy, green-up, and harvest progress. See AGSIST's USDA Calendar for all upcoming dates.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">When is CBOT wheat open for trading?</div>
+      <div class="faq-a"><div class="faq-a-inner">CBOT wheat futures trade electronically Sunday through Friday — overnight session 7:00 PM to 7:45 AM CT, day session 8:30 AM to 1:20 PM CT. AGSIST refreshes prices every 30 minutes on weekdays. Significant overnight moves are common in wheat — Black Sea geopolitical news and Southern Hemisphere weather reports frequently release outside US business hours, making early-morning price checks valuable for wheat producers.</div></div>
     </div>
   </div>
 
   <div class="rl">Related Tools</div>
   <div class="rg">
-    <a href="/corn-futures-prices" class="ra"><div class="ra-i">🌽</div><div class="ra-n">Corn Futures</div><div class="ra-d">Feed grain spread</div></a>
-    <a href="/soybean-futures-prices" class="ra"><div class="ra-i">🫘</div><div class="ra-n">Soybean Futures</div><div class="ra-d">Grain complex</div></a>
+    <a href="/corn-futures-prices" class="ra"><div class="ra-i">🌽</div><div class="ra-n">Corn Futures</div><div class="ra-d">Grain complex</div></a>
+    <a href="/soybean-futures-prices" class="ra"><div class="ra-i">🫘</div><div class="ra-n">Soybean Futures</div><div class="ra-d">Corn/bean ratio</div></a>
     <a href="/cash-bids" class="ra"><div class="ra-i">💵</div><div class="ra-n">Cash Bids Near Me</div><div class="ra-d">Local elevator prices</div></a>
     <a href="/breakeven" class="ra"><div class="ra-i">📐</div><div class="ra-n">Break-Even Calc</div><div class="ra-d">Is this profitable?</div></a>
     <a href="/usda-calendar" class="ra"><div class="ra-i">📅</div><div class="ra-n">USDA Calendar</div><div class="ra-d">Next report date</div></a>
-    <a href="/" class="ra"><div class="ra-i">🏠</div><div class="ra-n">Dashboard</div><div class="ra-d">Full market view</div></a>
+    <a href="/fast-facts" class="ra"><div class="ra-i">⚡</div><div class="ra-n">Fast Facts</div><div class="ra-d">N rates, P&K, GDU</div></a>
   </div>
-
   <div class="disc">Prices from Yahoo Finance via GitHub Actions (delayed ~15 min). Not financial advice. Verify with your elevator or broker before making marketing decisions.</div>
 </main>
 
@@ -218,52 +305,81 @@ button,a,[role="button"]{touch-action:manipulation;}
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script src="/components/loader.js"></script>
 <script>
-function grain$(v) { return '$' + (v / 100).toFixed(2); }
-function raw$(v, d) { return v.toFixed(d || 2); }
-function chgTxt(net, pct) { if (net == null) return { t:'', c:'' }; var a = net >= 0 ? '▲' : '▼'; var s = net >= 0 ? '+' : ''; return { t: a+' '+s+pct.toFixed(2)+'%', c: net >= 0 ? 'up' : 'dn' }; }
-function setEl(id, txt, cls) { var el = document.getElementById(id); if (!el) return; el.textContent = txt; el.classList.remove('sk'); if (cls) { el.classList.remove('up','dn'); el.classList.add(cls); } }
+function grain$(v){return '$'+(v/100).toFixed(2);}
+function raw$(v,d){return v.toFixed(d||2);}
+function chgTxt(net,pct){if(net==null)return{t:'',c:''};var a=net>=0?'▲':'▼';var s=net>=0?'+':'';return{t:a+' '+s+pct.toFixed(2)+'%',c:net>=0?'up':'dn'};}
+function setEl(id,txt,cls){var el=document.getElementById(id);if(!el)return;el.textContent=txt;el.classList.remove('sk');if(cls){el.classList.remove('up','dn');el.classList.add(cls);}}
 
-fetch('/data/prices.json', { cache: 'no-store' })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    var q = data.quotes || {};
-    var map = [
-      { key:'wheat',  p:'p-wheat',  c:'c-wheat',  grain:true  },
-      { key:'corn',   p:'p-corn',   c:'c-corn',   grain:true  },
-      { key:'beans',  p:'p-beans',  c:'c-beans',  grain:true  },
-      { key:'oats',   p:'p-oats',   c:'c-oats',   grain:true  },
-      { key:'crude',  p:'p-crude',  c:'c-crude',  grain:false },
-      { key:'dollar', p:'p-dollar', c:'c-dollar', grain:false },
-    ];
-    map.forEach(function(m) {
-      var d = q[m.key]; if (!d || d.close == null) return;
-      setEl(m.p, m.grain ? grain$(d.close) : raw$(d.close));
-      var ch = chgTxt(d.netChange, d.pctChange); setEl(m.c, ch.t, ch.c);
-    });
-    var wheat = q.wheat;
-    if (wheat && wheat.close != null) {
-      setEl('hero-price', grain$(wheat.close));
-      var hc = chgTxt(wheat.netChange, wheat.pctChange); setEl('hero-chg', hc.t, hc.c);
-      if (wheat.wk52_lo != null && wheat.wk52_hi != null) {
-        var lo = wheat.wk52_lo, hi = wheat.wk52_hi, cur = wheat.close;
-        var pct = Math.min(100, Math.max(0, ((cur - lo) / (hi - lo)) * 100));
-        document.getElementById('rng-lo').textContent = grain$(lo);
-        document.getElementById('rng-hi').textContent = grain$(hi);
-        document.getElementById('rng-cur').textContent = grain$(cur);
-        document.getElementById('rng-fill').style.width = pct + '%';
-        document.getElementById('rng-dot').style.left = pct + '%';
+fetch('/data/prices.json',{cache:'no-store'})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var q=data.quotes||{};
+    [{key:'wheat',p:'p-wheat',c:'c-wheat',g:true},{key:'corn',p:'p-corn',c:'c-corn',g:true},{key:'beans',p:'p-beans',c:'c-beans',g:true},{key:'oats',p:'p-oats',c:'c-oats',g:true},{key:'crude',p:'p-crude',c:'c-crude',g:false},{key:'dollar',p:'p-dollar',c:'c-dollar',g:false}].forEach(function(m){var d=q[m.key];if(!d||d.close==null)return;setEl(m.p,m.g?grain$(d.close):raw$(d.close));var ch=chgTxt(d.netChange,d.pctChange);setEl(m.c,ch.t,ch.c);});
+
+    var wheat=q.wheat,corn=q.corn;
+    if(wheat&&wheat.close!=null){
+      setEl('hero-price',grain$(wheat.close));
+      var hc=chgTxt(wheat.netChange,wheat.pctChange);setEl('hero-chg',hc.t,hc.c);
+      if(wheat.wk52_lo!=null&&wheat.wk52_hi!=null){
+        var lo=wheat.wk52_lo,hi=wheat.wk52_hi,cu=wheat.close,rp=Math.min(100,Math.max(0,(cu-lo)/(hi-lo)*100));
+        document.getElementById('rng-lo').textContent=grain$(lo);
+        document.getElementById('rng-hi').textContent=grain$(hi);
+        document.getElementById('rng-cur').textContent=grain$(cu);
+        document.getElementById('rng-fill').style.width=rp+'%';
+        document.getElementById('rng-dot').style.left='calc('+rp+'% - 6px)';
       }
+      var whBu=wheat.close/100;
+      setEl('be-price','$'+whBu.toFixed(2)+'/bu');
+      var bz=document.getElementById('bz'+(whBu<5?0:whBu<6?1:whBu<7?2:3));
+      if(bz)bz.classList.add('active');
     }
-    var mins = Math.round((Date.now() - new Date(data.fetched).getTime()) / 60000);
-    var age = mins < 2 ? 'Just updated' : mins < 60 ? mins + ' min ago' : Math.round(mins/60) + 'h ago';
-    document.getElementById('status').textContent = 'Prices updated · ' + age;
-  })
-  .catch(function() { document.getElementById('status').textContent = 'Price data unavailable — market may be closed'; });
 
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof TradingView !== 'undefined') {
-    new TradingView.widget({ container_id:'tv-chart', autosize:true, symbol:'CBOT:ZW1!', interval:'D', timezone:'America/Chicago', theme:'dark', style:'1', locale:'en', toolbar_bg:'#1a2410', enable_publishing:false, hide_top_toolbar:false, hide_legend:false, save_image:false, backgroundColor:'#1a2410', gridColor:'rgba(255,255,255,0.04)', allow_symbol_change:true });
-  }
+    if(wheat&&corn&&wheat.close&&corn.close){
+      var spread=(wheat.close-corn.close)/100;
+      setEl('wc-spread',(spread>=0?'+':'')+'$'+spread.toFixed(2)+'/bu');
+      var gp=Math.min(100,Math.max(0,(spread/2)*100));
+      document.getElementById('wc-dot').style.left='calc('+gp+'% - 8px)';
+      var it=spread<0.25?'🌾 Parity — feed wheat demand is activated, price floor in effect':spread<0.75?'🌾 Narrowing — feed buyers starting to substitute wheat for corn':spread<1.5?'⚖️ Normal premium — standard market structure':'🌽 Wide spread — feeders are using corn; wheat feed demand absent';
+      setEl('wc-interp',it);
+    }
+
+    // ── Market Snapshot ──────────────────────────────────────────
+    var sp=[];
+    if(wheat&&wheat.wk52_lo!=null&&wheat.wk52_hi!=null){
+      var pct=Math.round(Math.min(100,Math.max(0,(wheat.close-wheat.wk52_lo)/(wheat.wk52_hi-wheat.wk52_lo)*100)));
+      var zone=pct<25?'lower quartile — historically a weak pricing window':pct<50?'lower half of its 52-week range':pct<75?'upper half of its range':'upper quartile — near recent highs';
+      sp.push('<strong>Wheat at '+grain$(wheat.close)+'</strong> sits in the <strong>'+pct+'th percentile</strong> of its 52-week range ('+zone+')');
+    }
+    if(wheat&&corn&&wheat.close&&corn.close){
+      var sprd=(wheat.close-corn.close)/100;
+      sp.push(sprd<0.25?'the <strong>wheat/corn spread at $'+sprd.toFixed(2)+'/bu</strong> is at parity — feed wheat demand is active, providing a price floor':sprd<0.75?'the <strong>wheat/corn spread at $'+sprd.toFixed(2)+'/bu</strong> is narrow — feed buyers are beginning to substitute wheat for corn':sprd<1.5?'the <strong>wheat/corn spread at $'+sprd.toFixed(2)+'/bu</strong> is in normal range':'the <strong>wheat/corn spread at $'+sprd.toFixed(2)+'/bu</strong> is wide — feeders are using corn and wheat loses that demand support');
+    }
+    if(wheat&&wheat.close){
+      var whBu2=wheat.close/100;
+      sp.push(whBu2<5?'at <strong>$'+whBu2.toFixed(2)+'/bu</strong> prices are below full cost of production for most winter wheat farms':whBu2<6?'at <strong>$'+whBu2.toFixed(2)+'/bu</strong> prices cover variable costs but are tight on land and overhead for most operations':whBu2<7?'at <strong>$'+whBu2.toFixed(2)+'/bu</strong> prices support profitable production for most well-run operations':'at <strong>$'+whBu2.toFixed(2)+'/bu</strong> prices are generating strong margins — a forward selling opportunity worth evaluating');
+    }
+    var mo=new Date().getMonth();
+    sp.push(['January is typically a recovery month — winter wheat is dormant, Southern Hemisphere harvest provides supply context','February winter wheat is beginning to break dormancy; cold stress risk and potential spring rally building','March historically brings a spring wheat rally as global supply uncertainty peaks before Northern Hemisphere planting','April frost risk premium can add volatility as winter wheat breaks dormancy and heads out','May is pre-harvest season — wheat is heading, quality risk keeps buyers attentive','June harvest pressure arrives — SRW harvest begins, historically the weakest pricing period of the year','July is peak harvest pressure — the seasonal low is typically set this month as combines roll globally','August is the post-harvest recovery window — old crop clears and new positions begin building','September fall demand typically builds as global buyers restock after Northern Hemisphere harvest','October winter wheat planting season — establishment conditions and early crop reports set the tone','November pre-dormancy positioning — the global supply picture is clarifying for the year ahead','December Southern Hemisphere harvest updates and year-end fund positioning drive market direction'][mo]);
+    var dol=q.dollar;
+    if(dol&&dol.close){if(dol.close>104)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is a headwind for US wheat export competitiveness against Black Sea origins');else if(dol.close<100)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is improving US wheat export competitiveness on global tenders');}
+    var snapEl=document.getElementById('snap-body');
+    if(snapEl&&sp.length)snapEl.innerHTML=sp.join('; ')+'.';
+    var ageEl=document.getElementById('snap-age');
+    if(ageEl){var am=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);ageEl.textContent=am<2?'live':am+'m old';}
+    var wEl=document.getElementById('snap-wasde');
+    if(wEl){var sn=new Date(),sw=new Date(sn.getFullYear(),sn.getMonth(),10,11,0,0);if(sn>=sw)sw=new Date(sn.getFullYear(),sn.getMonth()+1,10,11,0,0);var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dd=Math.ceil((sw-sn)/86400000);wEl.textContent=MN[sw.getMonth()]+' '+sw.getDate()+' · '+(dd<=0?'today':dd===1?'tomorrow':'in '+dd+' days');}
+    // ────────────────────────────────────────────────────────────
+
+    var mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
+    document.getElementById('status').textContent='Prices updated · '+(mins<2?'Just updated':mins<60?mins+' min ago':Math.round(mins/60)+'h ago');
+  })
+  .catch(function(){document.getElementById('status').textContent='Price data unavailable — market may be closed';});
+
+document.addEventListener('DOMContentLoaded',function(){
+  if(typeof TradingView!=='undefined'){new TradingView.widget({container_id:'tv-chart',autosize:true,symbol:'CBOT:ZW1!',interval:'D',timezone:'America/Chicago',theme:'dark',style:'1',locale:'en',toolbar_bg:'#1a2410',enable_publishing:false,hide_top_toolbar:false,hide_legend:false,save_image:false,backgroundColor:'#1a2410',gridColor:'rgba(255,255,255,0.04)',allow_symbol_change:false});}
+  var SEAS=[70,75,80,85,90,45,10,35,62,75,82,72],TIPS=['Recovery month — dormant wheat, SH harvest','Breaking dormancy; spring rally potential','Spring rally; global supply uncertainty peaks','Pre-harvest; frost risk and heading concerns','Pre-harvest quality risk; buyers attentive','Harvest begins; weakest pricing period starts','Peak harvest pressure; seasonal low','Post-harvest recovery; old crop clears','Fall demand builds; buyers restocking','Winter wheat planting; establishment key','Pre-dormancy; global supply clarifying','Southern Hemisphere harvest; year-end positioning'],MOS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],cm=new Date().getMonth(),ch=document.getElementById('seas-chart');
+  if(ch)SEAS.forEach(function(v,i){var c=document.createElement('div');c.className='seas-col'+(i===cm?' cur':'');c.title=MOS[i]+': '+TIPS[i];c.innerHTML='<div style="flex:1"></div><div class="seas-bar" style="height:'+Math.max(4,v*.5)+'px"></div><div class="seas-mo">'+MOS[i]+'</div>';ch.appendChild(c);});
+  document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){var it=this.closest('.faq-item'),op=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!op)it.classList.add('open');});});
 });
 </script>
 </body>

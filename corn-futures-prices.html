@@ -4,180 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111a0a">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
 <link rel="stylesheet" href="/components/styles.css">
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-
-<title>Corn Futures Prices Today — Live CBOT Chart &amp; Market Data | AGSIST</title>
-<meta name="description" content="Live corn futures prices from CBOT updated every 30 minutes. Front-month and Dec harvest contract, interactive TradingView chart, 52-week range, contract specs, and market context. Free for farmers. No login required.">
-<meta name="keywords" content="corn futures prices today, corn futures price, CBOT corn futures, ZC futures, corn futures chart, corn price today, corn harvest price, December corn futures, corn market data, corn price per bushel, grain futures today">
+<title>Corn Futures Prices Today — Live CBOT Chart | AGSIST</title>
+<meta name="description" content="Live CBOT corn futures every 30 min. Front-month ZC + December harvest contract, corn/bean ratio, daily market read, seasonal chart. Free for farmers.">
+<meta name="keywords" content="corn futures prices today, corn futures price, CBOT corn futures, ZC futures, corn futures chart, corn price today, corn harvest price, December corn futures, corn bean ratio, corn market data, corn price per bushel, grain futures today">
 <meta name="author" content="AGSIST — Farmers First Agri Service">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://agsist.com/corn-futures-prices">
-
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AGSIST">
-<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website"><meta property="og:site_name" content="AGSIST"><meta property="og:locale" content="en_US">
 <meta property="og:title" content="Corn Futures Prices Today — Live CBOT Chart | AGSIST">
-<meta property="og:description" content="Live CBOT corn futures prices updated every 30 minutes. Front-month and Dec harvest contract with interactive chart, 52-week range, and market context. Free for farmers.">
+<meta property="og:description" content="Live CBOT corn futures every 30 min. Front-month + Dec harvest, corn/bean ratio, daily market read, interactive chart. Free for farmers.">
 <meta property="og:url" content="https://agsist.com/corn-futures-prices">
-<meta property="og:image" content="https://agsist.com/img/og/corn-futures-prices.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AGSIST Corn Futures Prices Today — Live CBOT chart and market data">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@agsist">
-<meta name="twitter:creator" content="@agsist">
+<meta property="og:image" content="https://agsist.com/img/og/corn-futures-prices.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="AGSIST Corn Futures Prices Today — Live CBOT chart">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@agsist"><meta name="twitter:creator" content="@agsist">
 <meta name="twitter:title" content="Corn Futures Prices Today — Live CBOT Chart | AGSIST">
-<meta name="twitter:description" content="Live CBOT corn futures updated every 30 min. Front-month + Dec harvest contract, chart, 52-week range. Free for farmers.">
+<meta name="twitter:description" content="Live CBOT corn futures every 30 min. Front-month + Dec harvest, corn/bean ratio, daily market read. Free for farmers.">
 <meta name="twitter:image" content="https://agsist.com/img/og/corn-futures-prices.jpg">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://agsist.com/corn-futures-prices#webpage",
-      "url": "https://agsist.com/corn-futures-prices",
-      "name": "Corn Futures Prices Today — Live CBOT Chart & Market Data | AGSIST",
-      "description": "Live corn futures prices from CBOT updated every 30 minutes. Front-month and December harvest contract with interactive chart, 52-week range, contract specs, and market context.",
-      "isPartOf": { "@id": "https://agsist.com/#website" },
-      "about": { "@id": "https://agsist.com/#organization" },
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agsist.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Corn Futures Prices", "item": "https://agsist.com/corn-futures-prices" }
-        ]
-      }
-    },
-    {
-      "@type": "Dataset",
-      "name": "CBOT Corn Futures Prices — Live & Historical",
-      "description": "Live CBOT corn futures prices (ZC) updated every 30 minutes via GitHub Actions. Includes front-month and December new-crop contracts, net change, percent change, and 52-week high/low range.",
-      "url": "https://agsist.com/corn-futures-prices",
-      "creator": { "@id": "https://agsist.com/#organization" },
-      "temporalCoverage": "2024/..",
-      "license": "https://creativecommons.org/licenses/by/4.0/",
-      "variableMeasured": [
-        { "@type": "PropertyValue", "name": "Corn Front Month (ZC)", "unitCode": "USD", "description": "CBOT corn front-month futures price in cents per bushel" },
-        { "@type": "PropertyValue", "name": "Corn December (ZCZ)", "unitCode": "USD", "description": "CBOT corn December new-crop futures price in cents per bushel" }
-      ]
-    },
-    {
-      "@type": "FinancialProduct",
-      "name": "CBOT Corn Futures (ZC)",
-      "description": "Chicago Board of Trade corn futures contract — 5,000 bushels per contract. The benchmark pricing mechanism for US corn, used for hedging and price discovery.",
-      "url": "https://agsist.com/corn-futures-prices",
-      "provider": { "@type": "Organization", "name": "CME Group / CBOT", "url": "https://www.cmegroup.com" }
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://agsist.com/#organization",
-      "name": "AGSIST",
-      "url": "https://agsist.com/",
-      "logo": { "@type": "ImageObject", "url": "https://agsist.com/img/og/agsist.jpg" }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is the corn futures price today?",
-          "acceptedAnswer": { "@type": "Answer", "text": "AGSIST displays live CBOT corn futures prices updated every 30 minutes Monday through Friday during trading hours. Both the front-month nearby contract and the December new-crop harvest contract are shown with net change, percent change, and 52-week range. Prices are in cents per bushel — divide by 100 for dollars per bushel." }
-        },
-        {
-          "@type": "Question",
-          "name": "What does December corn futures price mean?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The December corn futures contract (ZCZ) is the new-crop harvest benchmark. It represents the expected price at harvest time in late fall. Farmers and hedgers use December corn to lock in forward prices for grain not yet in the bin. A premium to front-month corn indicates a carry market; an inverse means nearby corn is in greater demand." }
-        },
-        {
-          "@type": "Question",
-          "name": "How is corn cash price different from corn futures price?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Cash corn price at your local elevator equals the CBOT futures price plus or minus local basis. Basis reflects local supply and demand, transportation costs, and elevator margins. Use AGSIST's Cash Bids page to find your local elevator's posted cash price, which applies the local basis for you." }
-        },
-        {
-          "@type": "Question",
-          "name": "What moves corn futures prices?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Corn futures prices are primarily driven by: USDA WASDE reports (monthly supply and demand estimates), crop condition and progress reports (weekly during growing season), weather during planting and pollination, ethanol demand, export sales and inspections, and the US Dollar Index. Brazil and Argentina crop estimates also affect world corn trade flows and US prices." }
-        },
-        {
-          "@type": "Question",
-          "name": "When is the CBOT corn futures market open?",
-          "acceptedAnswer": { "@type": "Answer", "text": "CBOT corn futures trade electronically Sunday through Friday, 7:00 PM to 7:45 AM CT (overnight session) and 8:30 AM to 1:20 PM CT (day session). AGSIST updates corn prices every 30 minutes during weekday trading hours via automated data pipeline." }
-        }
-      ]
-    }
-  ]
-}
-</script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://agsist.com/corn-futures-prices#webpage","url":"https://agsist.com/corn-futures-prices","name":"Corn Futures Prices Today — Live CBOT Chart & Market Data | AGSIST","description":"Live corn futures from CBOT updated every 30 minutes. Front-month and December harvest contract, corn/bean ratio, daily market read, 52-week range, and seasonal tendencies.","isPartOf":{"@id":"https://agsist.com/#website"},"about":{"@id":"https://agsist.com/#organization"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agsist.com/"},{"@type":"ListItem","position":2,"name":"Corn Futures Prices","item":"https://agsist.com/corn-futures-prices"}]}},{"@type":"Organization","@id":"https://agsist.com/#organization","name":"AGSIST","url":"https://agsist.com/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the corn futures price today?","acceptedAnswer":{"@type":"Answer","text":"AGSIST displays live CBOT corn futures updated every 30 minutes Monday through Friday. Both the front-month and December new-crop contracts are shown with net change, percent change, and 52-week range. The synthesized Market Read block contextualizes price position, the corn/bean ratio signal, and seasonal tendencies."}},{"@type":"Question","name":"What does December corn futures mean for farmers?","acceptedAnswer":{"@type":"Answer","text":"December corn (ZCZ) is the new-crop harvest benchmark — the market's estimate of fall delivery value. Producers use December corn to forward price new-crop grain before planting and throughout the growing season."}},{"@type":"Question","name":"What is the corn/soybean ratio and how does it affect planting decisions?","acceptedAnswer":{"@type":"Answer","text":"The corn/bean ratio — November bean futures divided by December corn futures — compares per-acre profitability between the two crops. Below 2.4:1 historically favors corn; above 2.6:1 favors beans; 2.4–2.6 is neutral. AGSIST calculates this live from real-time prices."}},{"@type":"Question","name":"How is corn cash price different from futures?","acceptedAnswer":{"@type":"Answer","text":"Cash corn equals CBOT futures plus or minus local basis. Basis reflects transportation costs, local supply/demand, and elevator margins. Use AGSIST Cash Bids to see your elevator's posted price including local basis."}},{"@type":"Question","name":"What moves corn futures prices?","acceptedAnswer":{"@type":"Answer","text":"Primary drivers: USDA WASDE monthly supply/demand reports, weather during planting and pollination, ethanol demand and RFS policy, export sales and inspections, and the US Dollar Index. South American crop estimates also affect global corn flows."}},{"@type":"Question","name":"How does ethanol demand affect corn prices?","acceptedAnswer":{"@type":"Answer","text":"Ethanol production consumes about 38% of the US corn crop annually. Strong ethanol plant margins drive aggressive bidding for corn. The EPA's Renewable Fuel Standard creates baseline blending demand that directly supports corn prices."}},{"@type":"Question","name":"When is corn typically cheapest and most expensive?","acceptedAnswer":{"@type":"Answer","text":"Corn historically bottoms in October–November at peak harvest supply. Prices tend to rally late winter through June as old-crop stocks tighten and weather uncertainty builds new-crop premium. Major events override seasonal tendencies in any given year."}},{"@type":"Question","name":"When is CBOT corn open for trading?","acceptedAnswer":{"@type":"Answer","text":"CBOT corn trades electronically Sunday through Friday — overnight session 7:00 PM to 7:45 AM CT, day session 8:30 AM to 1:20 PM CT. AGSIST refreshes prices every 30 minutes on weekdays."}}]}]}</script>
 <style>
 button,a,[role="button"]{touch-action:manipulation;}
-.fut { max-width: 1100px; margin: 0 auto; padding: 0 16px 2.5rem }
-.bc { font-size: .75rem; color: var(--text-dim); margin: 12px 0 }
-.bc a { color: var(--gold); text-decoration: none }
-.ph { background: linear-gradient(135deg, var(--surface) 0%, rgba(230,176,66,.05) 100%); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 8px; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
-.ph-icon { font-size: 2.6rem; flex-shrink: 0 }
-.ph-info h1 { font-size: 1.05rem; color: var(--text); margin: 0 0 2px 0 }
-.ph-exch { font-size: .7rem; color: var(--text-dim) }
-.ph-price { margin-left: auto; text-align: right }
-.ph-val { font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1 }
-.ph-unit { font-size: .72rem; color: var(--text-dim) }
-.ph-chg { font-size: .88rem; font-weight: 700; margin-top: 2px }
-.up { color: var(--green) } .dn { color: var(--red) }
-.ps { display: flex; align-items: center; gap: 6px; font-size: .7rem; color: var(--text-dim); margin-bottom: 12px }
-.ps-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-.sk { color: var(--text-dim); animation: blink 1.4s ease-in-out infinite }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-.cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px; margin-bottom: 14px }
-.cc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; transition: border-color .2s; }
-.cc:hover { border-color: var(--border-g) }
-.cc.hi { border-color: var(--gold); background: rgba(230,176,66,.04) }
-.cc-lbl { font-size: .62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px }
-.cc-p { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text) }
-.cc-u { font-size: .62rem; color: var(--text-dim) }
-.cc-c { font-size: .72rem; font-weight: 600; margin-top: 2px }
-.cp { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 14px }
-.cp-head { padding: 9px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center }
-.cp-head h2 { margin: 0; font-size: .85rem; color: var(--gold) }
-.cp-src { font-size: .62rem; color: var(--text-muted) }
-.rng { margin-bottom: 14px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px }
-.rng-lbl { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px }
-.rng-bar { position: relative; height: 6px; background: var(--surface2); border-radius: 3px; margin-bottom: 4px }
-.rng-fill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 3px; background: var(--gold); transition: width .5s }
-.rng-dot { position: absolute; top: -3px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); border: 2px solid var(--surface); transition: left .5s }
-.rng-labels { display: flex; justify-content: space-between; font-size: .7rem }
-.rng-lo { color: var(--text-dim) } .rng-hi { color: var(--text-dim) } .rng-cur { color: var(--gold); font-weight: 700 }
-.xg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 14px }
-.xc { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 11px }
-.xc h4 { font-size: .8rem; color: var(--gold); margin: 0 0 6px 0 }
-.xr { display: flex; justify-content: space-between; font-size: .74rem; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,.03) }
-.xr:last-child { border: none }
-.xl { color: var(--text-dim) } .xv { color: var(--text); font-weight: 600 }
-.rl { font-size: .68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; margin: 14px 0 6px }
-.rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 6px }
-.ra { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-decoration: none; transition: border-color .2s; }
-.ra:hover { border-color: var(--border-g) }
-.ra-i { font-size: 1.2rem; margin-bottom: 3px }
-.ra-n { font-size: .8rem; font-weight: 600; color: var(--text) }
-.ra-d { font-size: .65rem; color: var(--text-dim); margin-top: 1px }
-.disc { font-size: .68rem; color: var(--text-dim); text-align: center; padding: 8px; border-top: 1px solid var(--border); margin-top: 14px }
-@media (max-width: 520px) { .ph { padding: .9rem } .ph-icon { font-size: 2rem } .ph-val { font-size: 1.7rem } .cg { grid-template-columns: repeat(2, 1fr) } }
+.fut{max-width:1100px;margin:0 auto;padding:0 16px 2.5rem}
+.bc{font-size:.75rem;color:var(--text-dim);margin:12px 0}.bc a{color:var(--gold);text-decoration:none}
+.ph{background:linear-gradient(135deg,var(--surface) 0%,rgba(230,176,66,.05) 100%);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:8px;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.ph-icon{font-size:2.6rem;flex-shrink:0}.ph-info h1{font-size:1.05rem;color:var(--text);margin:0 0 2px 0}.ph-exch{font-size:.7rem;color:var(--text-dim)}
+.ph-price{margin-left:auto;text-align:right}.ph-val{font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--text);line-height:1}.ph-unit{font-size:.72rem;color:var(--text-dim)}.ph-chg{font-size:.88rem;font-weight:700;margin-top:2px}
+.up{color:var(--green)}.dn{color:var(--red)}
+.ps{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--text-dim);margin-bottom:10px}
+.ps-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sk{color:var(--text-dim);animation:blink 1.4s ease-in-out infinite}
+/* Market Snapshot */
+.snap-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(58,139,60,.03) 100%);border:1px solid var(--border-g);border-left:3px solid var(--green);border-radius:12px;padding:13px 16px;margin-bottom:14px}
+.snap-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px}
+.snap-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green)}
+.snap-age{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted)}
+.snap-body{font-size:.82rem;line-height:1.72;color:var(--text-dim);margin:0 0 10px}
+.snap-body strong{color:var(--text);font-weight:700}
+.snap-ft{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border);gap:8px;flex-wrap:wrap}
+.snap-cat{font-size:.7rem;color:var(--text-dim)}.snap-cat strong{color:var(--gold)}
+.snap-link{font-size:.65rem;color:var(--green);text-decoration:none;white-space:nowrap}
+/* Price cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:14px}
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;transition:border-color .2s}.cc:hover{border-color:var(--border-g)}.cc.hi{border-color:var(--gold);background:rgba(230,176,66,.04)}
+.cc-lbl{font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}.cc-p{font-family:'Oswald',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text)}.cc-u{font-size:.62rem;color:var(--text-dim)}.cc-c{font-size:.72rem;font-weight:600;margin-top:2px}
+/* Range */
+.rng{margin-bottom:14px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rng-lbl{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.rng-bar{position:relative;height:6px;background:var(--surface2);border-radius:3px;margin-bottom:4px}
+.rng-fill{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:var(--gold);transition:width .5s}
+.rng-dot{position:absolute;top:-3px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--surface);transition:left .5s}
+.rng-labels{display:flex;justify-content:space-between;font-size:.7rem}.rng-lo,.rng-hi{color:var(--text-dim)}.rng-cur{color:var(--gold);font-weight:700}
+/* Ratio widgets */
+.rat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.rat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px}
+.rat-lbl{font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px}
+.rat-val{font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;color:var(--text);line-height:1;margin-bottom:10px}
+.rat-gauge-bar{position:relative;height:8px;background:linear-gradient(to right,var(--green) 0%,var(--gold) 40%,var(--gold) 60%,#5a9b3c 100%);border-radius:4px;margin-bottom:5px}
+.rat-gauge-dot{position:absolute;top:-4px;width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid #fff;transition:left .5s;box-shadow:0 0 0 2px var(--gold)}
+.rat-gauge-labels{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-dim);line-height:1.3;margin-bottom:8px}
+.rat-gauge-labels em{font-style:normal;opacity:.7;font-size:.9em}
+.rat-interp{font-size:.75rem;color:var(--text-dim);min-height:1.1em;margin-bottom:6px}
+.rat-note{font-size:.62rem;color:var(--text-dim);margin-top:8px;border-top:1px solid var(--border);padding-top:7px}.rat-note a{color:var(--gold);text-decoration:none}
+.be-zones{display:flex;flex-direction:column;gap:3px;margin:8px 0}
+.be-zone{font-size:.68rem;color:var(--text-dim);padding:4px 8px;border-radius:4px;border:1px solid transparent;transition:all .3s}.be-zone.active{font-weight:700}
+.be-zone.z0.active{background:rgba(200,50,50,.15);border-color:var(--red);color:var(--red)}
+.be-zone.z1.active{background:rgba(200,150,0,.15);border-color:var(--gold);color:var(--gold)}
+.be-zone.z2.active{background:rgba(58,139,60,.15);border-color:var(--green);color:var(--green)}
+.be-zone.z3.active{background:rgba(58,139,60,.2);border-color:var(--green);color:var(--green)}
+/* Chart */
+.cp{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.cp-head{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cp-head h2{margin:0;font-size:.85rem;color:var(--gold)}.cp-src{font-size:.62rem;color:var(--text-muted)}
+/* Seasonal */
+.seas-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:14px}
+.seas-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:4px}
+.seas-title{font-size:.78rem;font-weight:700;color:var(--gold)}.seas-note{font-size:.62rem;color:var(--text-dim)}
+.seas-chart{display:flex;align-items:flex-end;gap:3px;height:70px;margin-bottom:4px;overflow:hidden}
+.seas-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;cursor:default}
+.seas-bar{width:100%;border-radius:2px 2px 0 0;background:rgba(58,139,60,.4);transition:opacity .2s}
+.seas-col.cur .seas-bar{background:var(--gold)}.seas-col:hover .seas-bar{opacity:.6}
+.seas-mo{font-size:.52rem;color:var(--text-dim);margin-top:3px;text-align:center}
+.seas-col.cur .seas-mo{color:var(--gold);font-weight:700}
+.seas-caption{font-size:.65rem;color:var(--text-dim);margin-top:6px;line-height:1.5}
+/* Spec cards */
+.xg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-bottom:14px}
+.xc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px}
+.xc h4{font-size:.8rem;color:var(--gold);margin:0 0 6px 0}
+.xr{display:flex;justify-content:space-between;font-size:.74rem;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.03)}.xr:last-child{border:none}
+.xl{color:var(--text-dim)}.xv{color:var(--text);font-weight:600}
+/* Education */
+.edu-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px}
+.edu-wrap h3{font-size:.85rem;color:var(--gold);margin:0 0 12px 0}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.edu-block h4{font-size:.78rem;color:var(--text);margin:0 0 5px 0;font-weight:700}
+.edu-block p{font-size:.75rem;color:var(--text-dim);line-height:1.68;margin:0}
+/* FAQ */
+.faq-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.faq-head{padding:10px 14px;border-bottom:1px solid var(--border);font-size:.78rem;font-weight:700;color:var(--gold)}
+.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--text);gap:8px;user-select:none;line-height:1.4}
+.faq-q::after{content:'+';color:var(--gold);font-size:1.1rem;flex-shrink:0;width:16px;text-align:center}
+.faq-item.open .faq-q::after{content:'−'}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:500px}
+.faq-a-inner{padding:0 14px 12px;font-size:.78rem;color:var(--text-dim);line-height:1.68}
+/* Related */
+.rl{font-size:.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin:14px 0 6px}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:6px}
+.ra{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-decoration:none;transition:border-color .2s}
+.ra:hover{border-color:var(--border-g)}.ra-i{font-size:1.2rem;margin-bottom:3px}.ra-n{font-size:.8rem;font-weight:600;color:var(--text)}.ra-d{font-size:.65rem;color:var(--text-dim);margin-top:1px}
+.disc{font-size:.68rem;color:var(--text-dim);text-align:center;padding:8px;border-top:1px solid var(--border);margin-top:14px}
+@media(max-width:520px){.ph{padding:.9rem}.ph-icon{font-size:2rem}.ph-val{font-size:1.7rem}.cg{grid-template-columns:repeat(2,1fr)}.rat-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 <div id="site-header"></div>
-
 <main id="main" class="fut">
   <nav class="bc" aria-label="Breadcrumb"><a href="/">Home</a> → Corn Futures Prices</nav>
 
@@ -196,6 +145,18 @@ button,a,[role="button"]{touch-action:manipulation;}
 
   <div class="ps"><span class="ps-dot" aria-hidden="true"></span><span id="status">Loading prices…</span></div>
 
+  <div class="snap-card">
+    <div class="snap-hd">
+      <span class="snap-lbl">🧭 Today's Market Read</span>
+      <span class="snap-age" id="snap-age"></span>
+    </div>
+    <p class="snap-body" id="snap-body">Analyzing current prices…</p>
+    <div class="snap-ft">
+      <span class="snap-cat">📅 Next WASDE: <strong id="snap-wasde">—</strong></span>
+      <a href="/usda-calendar" class="snap-link">Full USDA Calendar →</a>
+    </div>
+  </div>
+
   <div class="cg">
     <div class="cc hi"><div class="cc-lbl">Front Month (ZC)</div><div class="cc-p sk" id="p-corn">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-corn"></div></div>
     <div class="cc"><div class="cc-lbl">Dec New Crop (ZCZ)</div><div class="cc-p sk" id="p-corndec">—</div><div class="cc-u">$/bu</div><div class="cc-c" id="c-corndec"></div></div>
@@ -205,10 +166,36 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div class="cc"><div class="cc-lbl">Dollar Index (DX)</div><div class="cc-p sk" id="p-dollar">—</div><div class="cc-u">DXY</div><div class="cc-c" id="c-dollar"></div></div>
   </div>
 
-  <div class="rng" id="range-block">
+  <div class="rng">
     <div class="rng-lbl">52-Week Range — Corn Front Month</div>
     <div class="rng-bar"><div class="rng-fill" id="rng-fill"></div><div class="rng-dot" id="rng-dot"></div></div>
     <div class="rng-labels"><span class="rng-lo" id="rng-lo">—</span><span class="rng-cur" id="rng-cur">—</span><span class="rng-hi" id="rng-hi">—</span></div>
+  </div>
+
+  <div class="rat-row">
+    <div class="rat-card">
+      <div class="rat-lbl">🌽/🫘 Corn·Bean Planting Ratio</div>
+      <div class="rat-val sk" id="cb-ratio">—</div>
+      <div class="rat-gauge-bar"><div class="rat-gauge-dot" id="cb-dot"></div></div>
+      <div class="rat-gauge-labels">
+        <span>← Corn<br><em>&lt;2.4:1</em></span>
+        <span style="text-align:center">Neutral<br><em>2.4–2.6</em></span>
+        <span style="text-align:right">Beans<br><em>&gt;2.6:1</em></span>
+      </div>
+      <div class="rat-interp" id="cb-interp">Nov Beans ÷ Dec Corn · live from futures</div>
+      <div class="rat-note">Planting mix signal · <a href="/breakeven">Build your full breakeven →</a></div>
+    </div>
+    <div class="rat-card">
+      <div class="rat-lbl">💰 Corn Price vs. Typical Breakeven</div>
+      <div class="rat-val sk" id="pc-price">—</div>
+      <div class="be-zones">
+        <div class="be-zone z3" id="bz3">Above $5.50 · Strong margins for most</div>
+        <div class="be-zone z2" id="bz2">$4.75–$5.50 · Profitable for most operations</div>
+        <div class="be-zone z1" id="bz1">$4.00–$4.75 · Marginal; tight on land &amp; fixed costs</div>
+        <div class="be-zone z0" id="bz0">Below $4.00 · Below full cost for most</div>
+      </div>
+      <div class="rat-note">Typical range only · <a href="/breakeven">Use your actual costs →</a></div>
+    </div>
   </div>
 
   <div class="cp">
@@ -216,35 +203,98 @@ button,a,[role="button"]{touch-action:manipulation;}
     <div id="tv-chart" style="height:480px"></div>
   </div>
 
+  <div class="seas-wrap">
+    <div class="seas-head">
+      <span class="seas-title">📅 Corn Seasonal Price Tendency</span>
+      <span class="seas-note">Historical pattern · current month highlighted · hover for context</span>
+    </div>
+    <div id="seas-chart" class="seas-chart"></div>
+    <div class="seas-caption">Corn prices typically peak May–Jun (weather &amp; pollination risk premium) and bottom in Oct (harvest pressure). Seasonal tendencies are guides — major USDA reports and weather events override them in any given year.</div>
+  </div>
+
   <div class="xg">
     <div class="xc">
       <h4>📋 Contract Specs</h4>
       <div class="xr"><span class="xl">Exchange</span><span class="xv">CBOT / CME Group</span></div>
       <div class="xr"><span class="xl">Contract Size</span><span class="xv">5,000 bushels</span></div>
-      <div class="xr"><span class="xl">Tick Size</span><span class="xv">¼¢/bu ($12.50)</span></div>
+      <div class="xr"><span class="xl">Tick Size</span><span class="xv">¼¢/bu ($12.50/contract)</span></div>
       <div class="xr"><span class="xl">Symbol</span><span class="xv">ZC</span></div>
-      <div class="xr"><span class="xl">Months</span><span class="xv">Mar, May, Jul, Sep, Dec</span></div>
+      <div class="xr"><span class="xl">Active Months</span><span class="xv">Mar, May, Jul, Sep, Dec</span></div>
     </div>
     <div class="xc">
       <h4>📅 Key Reports</h4>
-      <div class="xr"><span class="xl">WASDE</span><span class="xv">Monthly (~10th)</span></div>
-      <div class="xr"><span class="xl">Crop Progress</span><span class="xv">Weekly Mon (Apr–Nov)</span></div>
-      <div class="xr"><span class="xl">Acreage Report</span><span class="xv">Late June</span></div>
-      <div class="xr"><span class="xl">Grain Stocks</span><span class="xv">Quarterly</span></div>
+      <div class="xr"><span class="xl">WASDE</span><span class="xv">Monthly (~10th) · highest impact</span></div>
+      <div class="xr"><span class="xl">Crop Progress</span><span class="xv">Weekly Mon 4pm (Apr–Nov)</span></div>
+      <div class="xr"><span class="xl">Prospective Plantings</span><span class="xv">Late March</span></div>
+      <div class="xr"><span class="xl">Export Sales</span><span class="xv">Thu 7:30am CT</span></div>
     </div>
     <div class="xc">
       <h4>💡 Using These Prices</h4>
       <div class="xr"><span class="xl">Cash price</span><span class="xv">Futures + local basis</span></div>
-      <div class="xr"><span class="xl">Break-even</span><span class="xv">~$4.00–5.50/bu avg</span></div>
+      <div class="xr"><span class="xl">Corn/bean ratio</span><span class="xv">Nov beans ÷ Dec corn</span></div>
       <div class="xr"><span class="xl">New crop</span><span class="xv">Dec = harvest benchmark</span></div>
-      <div class="xr"><span class="xl">Old crop</span><span class="xv">Jul = current mkt year</span></div>
+      <div class="xr"><span class="xl">Typical breakeven</span><span class="xv">$4.00–$5.50/bu avg</span></div>
     </div>
     <div class="xc">
-      <h4>🌍 Demand Drivers</h4>
-      <div class="xr"><span class="xl">Ethanol</span><span class="xv">~38% of US corn</span></div>
-      <div class="xr"><span class="xl">Feed/residual</span><span class="xv">~36% of US corn</span></div>
-      <div class="xr"><span class="xl">Exports</span><span class="xv">~14% of US corn</span></div>
-      <div class="xr"><span class="xl">Food/starch</span><span class="xv">~12% of US corn</span></div>
+      <h4>🌍 US Corn Use</h4>
+      <div class="xr"><span class="xl">Ethanol</span><span class="xv">~38% of crop</span></div>
+      <div class="xr"><span class="xl">Feed &amp; residual</span><span class="xv">~36% of crop</span></div>
+      <div class="xr"><span class="xl">Exports</span><span class="xv">~14% of crop</span></div>
+      <div class="xr"><span class="xl">Top buyers</span><span class="xv">Mexico, Japan, China</span></div>
+    </div>
+  </div>
+
+  <div class="edu-wrap">
+    <h3>📚 Understanding Corn Futures</h3>
+    <div class="edu-grid">
+      <div class="edu-block">
+        <h4>How CBOT Corn Futures Work</h4>
+        <p>CBOT corn futures (ZC) represent 5,000 bushels of No. 2 Yellow corn. Each one-cent price move equals $50 per contract. Farmers use futures to hedge production risk — locking in prices before the crop is in the bin. The December contract is the new-crop harvest benchmark and the primary tool for forward pricing during winter and spring planning. Nearby contracts reflect current old-crop market value.</p>
+      </div>
+      <div class="edu-block">
+        <h4>Reading the Corn/Bean Planting Ratio</h4>
+        <p>The corn/soybean ratio — November bean futures divided by December corn futures — is the row crop producer's planting decision compass. Below 2.4:1 signals corn pays better per acre; above 2.6:1 shifts the math toward soybeans. USDA tracks this ratio when forecasting spring planted acres in the March Prospective Plantings report. Always pair it with your local breakeven and rotation requirements — the ratio is a directional guide, not the full story.</p>
+      </div>
+      <div class="edu-block">
+        <h4>Five Forces That Move Corn Prices</h4>
+        <p>Corn futures move on: (1) <strong>USDA WASDE reports</strong> — monthly supply/demand estimates that can move markets 20+ cents on a surprise; (2) <strong>weather</strong> — drought or delayed planting builds substantial risk premium; (3) <strong>ethanol demand</strong> — ~38% of the crop, tied to energy and RFS policy; (4) <strong>export sales</strong> — weekly USDA data tracks flows to Mexico, Japan, and China; and (5) <strong>US Dollar Index</strong> — a stronger dollar makes US corn more expensive on world markets and directly pressures export competitiveness.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-wrap">
+    <div class="faq-head">❓ Corn Futures — Common Questions</div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What is the corn futures price today?</div>
+      <div class="faq-a"><div class="faq-a-inner">The live price above shows the CBOT front-month corn futures contract (ZC), refreshed every 30 minutes. The "Today's Market Read" block synthesizes price position, the corn/bean ratio signal, seasonal context, and dollar impact into a single oriented paragraph — updated with every price refresh. No other free page does this.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What does December corn futures mean and why does it matter?</div>
+      <div class="faq-a"><div class="faq-a-inner">December corn (ZCZ) is the new-crop harvest benchmark — the market's best estimate of what corn will be worth when it comes off the combine. Row crop producers use December corn to forward price grain before planting and throughout the growing season. A December corn price above your full cost of production is a forward-selling opportunity; below it means current prices don't cover this year's expenses at expected yields.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What is the corn/soybean ratio and how do I use it for planting?</div>
+      <div class="faq-a"><div class="faq-a-inner">The corn/bean ratio — November bean futures divided by December corn futures — compares relative revenue per acre between the two crops. Below 2.4:1 historically favors corn; above 2.6:1 favors beans; 2.4–2.6 is neutral. The live ratio is in the Key Ratios widget above. Always pair it with your local breakeven and rotation requirements — the ratio is a starting point, not the final decision.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">How is cash corn price different from CBOT futures?</div>
+      <div class="faq-a"><div class="faq-a-inner">Cash corn at your local elevator equals CBOT futures plus or minus local basis. Basis reflects transportation costs to export terminals, local supply and demand, and elevator margins. It's typically negative (cash below futures) in the upper Midwest due to freight. Use AGSIST's Cash Bids page to see your elevator's posted price — local basis already included.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">How does ethanol demand affect corn prices?</div>
+      <div class="faq-a"><div class="faq-a-inner">Ethanol production consumes roughly 38% of the US corn crop annually — the single largest domestic use category. When ethanol margins are strong, processors bid aggressively for corn, supporting nearby futures. The EPA's Renewable Fuel Standard creates baseline blending demand. Policy changes — waiver volumes, small refinery exemptions — directly ripple into corn price direction and belong on every corn producer's radar.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">When is corn typically cheapest — and most expensive?</div>
+      <div class="faq-a"><div class="faq-a-inner">Corn historically bottoms at and after harvest (October–November) when supply is greatest. Prices tend to rally from late winter through June as old-crop stocks tighten and new-crop weather uncertainty builds a risk premium. The seasonal chart above illustrates these historical tendencies with the current month highlighted in gold. Major events — drought, WASDE surprise, trade policy — override seasonal norms in any given year.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">What USDA reports move corn prices the most?</div>
+      <div class="faq-a"><div class="faq-a-inner">The USDA WASDE (World Agricultural Supply and Demand Estimates), released monthly around the 10th, is the single most market-moving report for corn. Surprise changes to ending stocks can move corn 15–25 cents in minutes. The March Prospective Plantings and June Acreage reports also routinely surprise markets. Weekly Crop Progress (Monday 4pm CT) and Export Sales (Thursday 7:30am CT) provide ongoing signals through the season. See AGSIST's USDA Calendar for all upcoming dates.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" role="button" tabindex="0">When is CBOT corn open for trading?</div>
+      <div class="faq-a"><div class="faq-a-inner">CBOT corn trades electronically Sunday through Friday — overnight session 7:00 PM to 7:45 AM CT, day session 8:30 AM to 1:20 PM CT. AGSIST refreshes prices every 30 minutes on weekdays. Weekend prices reflect the last published Friday settlement until Monday trading resumes.</div></div>
     </div>
   </div>
 
@@ -255,9 +305,8 @@ button,a,[role="button"]{touch-action:manipulation;}
     <a href="/cash-bids" class="ra"><div class="ra-i">💵</div><div class="ra-n">Cash Bids Near Me</div><div class="ra-d">Local elevator prices</div></a>
     <a href="/breakeven" class="ra"><div class="ra-i">📐</div><div class="ra-n">Break-Even Calc</div><div class="ra-d">Is this profitable?</div></a>
     <a href="/usda-calendar" class="ra"><div class="ra-i">📅</div><div class="ra-n">USDA Calendar</div><div class="ra-d">Next report date</div></a>
-    <a href="/" class="ra"><div class="ra-i">🏠</div><div class="ra-n">Dashboard</div><div class="ra-d">Full market view</div></a>
+    <a href="/fast-facts" class="ra"><div class="ra-i">⚡</div><div class="ra-n">Fast Facts</div><div class="ra-d">N rates, P&K, GDU</div></a>
   </div>
-
   <div class="disc">Prices from Yahoo Finance via GitHub Actions (delayed ~15 min). Not financial advice. Verify with your elevator or broker before making marketing decisions.</div>
 </main>
 
@@ -265,52 +314,78 @@ button,a,[role="button"]{touch-action:manipulation;}
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script src="/components/loader.js"></script>
 <script>
-function grain$(v) { return '$' + (v / 100).toFixed(2); }
-function raw$(v, d) { return v.toFixed(d || 2); }
-function chgTxt(net, pct) { if (net == null) return { t: '', c: '' }; var s = net >= 0 ? '+' : ''; var a = net >= 0 ? '▲' : '▼'; return { t: a + ' ' + s + pct.toFixed(2) + '%', c: net >= 0 ? 'up' : 'dn' }; }
-function setEl(id, txt, cls) { var el = document.getElementById(id); if (!el) return; el.textContent = txt; el.classList.remove('sk'); if (cls) { el.classList.remove('up','dn'); el.classList.add(cls); } }
+function grain$(v){return '$'+(v/100).toFixed(2);}
+function raw$(v,d){return v.toFixed(d||2);}
+function chgTxt(net,pct){if(net==null)return{t:'',c:''};var a=net>=0?'▲':'▼';var s=net>=0?'+':'';return{t:a+' '+s+pct.toFixed(2)+'%',c:net>=0?'up':'dn'};}
+function setEl(id,txt,cls){var el=document.getElementById(id);if(!el)return;el.textContent=txt;el.classList.remove('sk');if(cls){el.classList.remove('up','dn');el.classList.add(cls);}}
 
-fetch('/data/prices.json', { cache: 'no-store' })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    var q = data.quotes || {};
-    var map = [
-      { key:'corn',     p:'p-corn',    c:'c-corn',    grain:true  },
-      { key:'corn-dec', p:'p-corndec', c:'c-corndec', grain:true  },
-      { key:'beans',    p:'p-beans',   c:'c-beans',   grain:true  },
-      { key:'wheat',    p:'p-wheat',   c:'c-wheat',   grain:true  },
-      { key:'crude',    p:'p-crude',   c:'c-crude',   grain:false },
-      { key:'dollar',   p:'p-dollar',  c:'c-dollar',  grain:false },
-    ];
-    map.forEach(function(m) {
-      var d = q[m.key]; if (!d || d.close == null) return;
-      setEl(m.p, m.grain ? grain$(d.close) : raw$(d.close));
-      var ch = chgTxt(d.netChange, d.pctChange); setEl(m.c, ch.t, ch.c);
-    });
-    var corn = q.corn;
-    if (corn && corn.close != null) {
-      setEl('hero-price', grain$(corn.close));
-      var hc = chgTxt(corn.netChange, corn.pctChange); setEl('hero-chg', hc.t, hc.c);
-      if (corn.wk52_lo != null && corn.wk52_hi != null) {
-        var lo = corn.wk52_lo, hi = corn.wk52_hi, cur = corn.close;
-        var pct = Math.min(100, Math.max(0, ((cur - lo) / (hi - lo)) * 100));
-        document.getElementById('rng-lo').textContent = grain$(lo);
-        document.getElementById('rng-hi').textContent = grain$(hi);
-        document.getElementById('rng-cur').textContent = grain$(cur);
-        document.getElementById('rng-fill').style.width = pct + '%';
-        document.getElementById('rng-dot').style.left = pct + '%';
+fetch('/data/prices.json',{cache:'no-store'})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var q=data.quotes||{};
+    [{key:'corn',p:'p-corn',c:'c-corn',g:true},{key:'corn-dec',p:'p-corndec',c:'c-corndec',g:true},{key:'beans',p:'p-beans',c:'c-beans',g:true},{key:'wheat',p:'p-wheat',c:'c-wheat',g:true},{key:'crude',p:'p-crude',c:'c-crude',g:false},{key:'dollar',p:'p-dollar',c:'c-dollar',g:false}].forEach(function(m){var d=q[m.key];if(!d||d.close==null)return;setEl(m.p,m.g?grain$(d.close):raw$(d.close));var ch=chgTxt(d.netChange,d.pctChange);setEl(m.c,ch.t,ch.c);});
+
+    var corn=q.corn;
+    if(corn&&corn.close!=null){
+      setEl('hero-price',grain$(corn.close));
+      var hc=chgTxt(corn.netChange,corn.pctChange);setEl('hero-chg',hc.t,hc.c);
+      if(corn.wk52_lo!=null&&corn.wk52_hi!=null){
+        var lo=corn.wk52_lo,hi=corn.wk52_hi,cu=corn.close,rp=Math.min(100,Math.max(0,(cu-lo)/(hi-lo)*100));
+        document.getElementById('rng-lo').textContent=grain$(lo);
+        document.getElementById('rng-hi').textContent=grain$(hi);
+        document.getElementById('rng-cur').textContent=grain$(cu);
+        document.getElementById('rng-fill').style.width=rp+'%';
+        document.getElementById('rng-dot').style.left='calc('+rp+'% - 6px)';
       }
+      var cornBu=corn.close/100;
+      setEl('pc-price','$'+cornBu.toFixed(2)+'/bu');
+      var bz=document.getElementById('bz'+(cornBu<4?0:cornBu<4.75?1:cornBu<5.5?2:3));
+      if(bz)bz.classList.add('active');
     }
-    var mins = Math.round((Date.now() - new Date(data.fetched).getTime()) / 60000);
-    var age = mins < 2 ? 'Just updated' : mins < 60 ? mins + ' min ago' : Math.round(mins/60) + 'h ago';
-    document.getElementById('status').textContent = 'Prices updated · ' + age;
-  })
-  .catch(function() { document.getElementById('status').textContent = 'Price data unavailable — market may be closed'; });
 
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof TradingView !== 'undefined') {
-    new TradingView.widget({ container_id: 'tv-chart', autosize: true, symbol: 'CBOT:ZC1!', interval: 'D', timezone: 'America/Chicago', theme: 'dark', style: '1', locale: 'en', toolbar_bg: '#1a2410', enable_publishing: false, hide_top_toolbar: false, hide_legend: false, save_image: false, backgroundColor: '#1a2410', gridColor: 'rgba(255,255,255,0.04)', allow_symbol_change: true });
-  }
+    var cornDec=q['corn-dec'],beansNov=q['beans-nov'];
+    if(cornDec&&beansNov&&cornDec.close&&beansNov.close){
+      var ratio=beansNov.close/cornDec.close;
+      setEl('cb-ratio',ratio.toFixed(2)+':1');
+      var gp=Math.min(100,Math.max(0,(ratio-2)/1*100));
+      document.getElementById('cb-dot').style.left='calc('+gp+'% - 8px)';
+      var it=ratio<2.4?'🌽 Corn favored — historically the stronger per-acre plant':ratio<2.6?'⚖️ Neutral zone — local costs and rotation should decide':'🫘 Beans favored — soybeans historically pay more per acre';
+      setEl('cb-interp',it);
+    }
+
+    // ── Market Snapshot ──────────────────────────────────────────
+    var sp=[];
+    if(corn&&corn.wk52_lo!=null&&corn.wk52_hi!=null){
+      var pct=Math.round(Math.min(100,Math.max(0,(corn.close-corn.wk52_lo)/(corn.wk52_hi-corn.wk52_lo)*100)));
+      var zone=pct<25?'lower quartile — historically a weak pricing window':pct<50?'lower half of its 52-week range':pct<75?'upper half of its range':'upper quartile — near recent highs';
+      sp.push('<strong>Front-month corn at '+grain$(corn.close)+'</strong> is in the <strong>'+pct+'th percentile</strong> of its 52-week range ('+zone+')');
+    }
+    if(cornDec&&beansNov&&cornDec.close&&beansNov.close){
+      var r2=beansNov.close/cornDec.close;
+      sp.push(r2<2.4?'the <strong>corn/bean ratio at '+r2.toFixed(2)+':1</strong> historically favors corn in most rotation budgets':r2<2.6?'the <strong>corn/bean ratio at '+r2.toFixed(2)+':1</strong> sits in neutral territory — local costs and rotation should decide acreage':'the <strong>corn/bean ratio at '+r2.toFixed(2)+':1</strong> gives soybeans the historical edge for flexible acres');
+    }
+    var mo=new Date().getMonth();
+    sp.push(['January is a carry market — commercials are in control of basis while producers watch the ratio','February planting-season discussion is underway — the corn/bean ratio is the primary compass right now','March has historically brought a planting intentions rally as acreage decisions begin to crystallize','April typically builds a weather uncertainty premium as planting season approaches','May is peak weather market territory — expect volatility around every forecast update','June pollination risk keeps markets sensitive to temperature and moisture outlooks','July crop condition scores increasingly determine the price range for the rest of the season','August is early harvest pressure season as combines begin rolling in the South','September harvest pressure typically pulls prices toward their seasonal low','October is historically corn\'s weakest month — peak harvest supply pressure','November post-harvest recovery often begins as old-crop commercial stocks tighten','December is a quieter positioning month; year-end basis can firm as commercials reduce inventory risk'][mo]);
+    var dol=q.dollar;
+    if(dol&&dol.close){if(dol.close>104)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is a headwind for US corn export competitiveness');else if(dol.close<100)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is providing a tailwind for US corn export demand');}
+    var snapEl=document.getElementById('snap-body');
+    if(snapEl&&sp.length)snapEl.innerHTML=sp.join('; ')+'.';
+    var ageEl=document.getElementById('snap-age');
+    if(ageEl){var am=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);ageEl.textContent=am<2?'live':am+'m old';}
+    var wEl=document.getElementById('snap-wasde');
+    if(wEl){var sn=new Date(),sw=new Date(sn.getFullYear(),sn.getMonth(),10,11,0,0);if(sn>=sw)sw=new Date(sn.getFullYear(),sn.getMonth()+1,10,11,0,0);var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dd=Math.ceil((sw-sn)/86400000);wEl.textContent=MN[sw.getMonth()]+' '+sw.getDate()+' · '+(dd<=0?'today':dd===1?'tomorrow':'in '+dd+' days');}
+    // ────────────────────────────────────────────────────────────
+
+    var mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
+    document.getElementById('status').textContent='Prices updated · '+(mins<2?'Just updated':mins<60?mins+' min ago':Math.round(mins/60)+'h ago');
+  })
+  .catch(function(){document.getElementById('status').textContent='Price data unavailable — market may be closed';});
+
+document.addEventListener('DOMContentLoaded',function(){
+  if(typeof TradingView!=='undefined'){new TradingView.widget({container_id:'tv-chart',autosize:true,symbol:'CBOT:ZC1!',interval:'D',timezone:'America/Chicago',theme:'dark',style:'1',locale:'en',toolbar_bg:'#1a2410',enable_publishing:false,hide_top_toolbar:false,hide_legend:false,save_image:false,backgroundColor:'#1a2410',gridColor:'rgba(255,255,255,0.04)',allow_symbol_change:false});}
+  var SEAS=[55,62,72,82,100,95,70,45,22,10,35,52],TIPS=['Carry market — commercials control basis','Pre-planting talk — ratio is the compass','Planting intentions rally often materializes','Weather uncertainty premium builds','Peak weather market — expect volatility','Pollination risk — markets reactive','Crop condition certainty increasing','Early harvest pressure begins','Harvest pressure toward seasonal low','Peak harvest pressure — historically weakest','Post-harvest recovery begins','Year-end positioning — quieter market'],MOS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],cm=new Date().getMonth(),ch=document.getElementById('seas-chart');
+  if(ch)SEAS.forEach(function(v,i){var c=document.createElement('div');c.className='seas-col'+(i===cm?' cur':'');c.title=MOS[i]+': '+TIPS[i];c.innerHTML='<div style="flex:1"></div><div class="seas-bar" style="height:'+Math.max(4,v*.5)+'px"></div><div class="seas-mo">'+MOS[i]+'</div>';ch.appendChild(c);});
+  document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){var it=this.closest('.faq-item'),op=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!op)it.classList.add('open');});});
 });
 </script>
 </body>
