@@ -17,8 +17,8 @@
   <link rel="manifest"                             href="/manifest.json">
 
   <title>Corn &amp; Soybean Yield Estimator — Field Calculator | AGSIST</title>
-  <meta name="description" content="Free corn and soybean yield estimator. Step into the field, count ears and kernels, enter 3 numbers, get your estimated bu/acre. The yield component method built for your phone.">
-  <meta name="keywords"    content="corn yield estimator, soybean yield calculator, crop yield estimate, yield component method, kernels per ear, ears per acre, corn yield math, field scouting yield">
+  <meta name="description" content="Free corn & soybean yield estimator for the field. Count ears and kernels, get bu/acre in seconds. Includes manure value calculator. Built for WI & MN.">
+  <meta name="keywords"    content="corn yield estimator, soybean yield calculator, crop yield estimate, yield component method, kernels per ear, ears per acre, manure value calculator, corn yield math">
   <meta name="author"      content="Farmers First Agri Service — AGSIST">
   <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"    href="https://agsist.com/yield-estimator">
@@ -27,7 +27,7 @@
   <meta property="og:site_name"    content="AGSIST">
   <meta property="og:locale"       content="en_US">
   <meta property="og:title"        content="Corn &amp; Soybean Yield Estimator — AGSIST">
-  <meta property="og:description"  content="Free yield component calculator. Count ears, kernel rows, and kernels per row — get your estimated bu/acre in seconds.">
+  <meta property="og:description"  content="Free yield component calculator. Count ears, kernel rows, and kernels per row — get estimated bu/acre in seconds.">
   <meta property="og:url"          content="https://agsist.com/yield-estimator">
   <meta property="og:image"        content="https://agsist.com/img/og/yield-estimator.jpg">
   <meta property="og:image:width"  content="1200">
@@ -37,7 +37,7 @@
   <meta name="twitter:site"        content="@agsist">
   <meta name="twitter:creator"     content="@agsist">
   <meta name="twitter:title"       content="Corn &amp; Soybean Yield Estimator — AGSIST">
-  <meta name="twitter:description" content="Free yield calculator. Count ears, kernels, enter 3 numbers, get bu/acre. Built for in-field mobile use.">
+  <meta name="twitter:description" content="Free yield calculator. Count ears, kernels, enter 3 numbers, get bu/acre. Plus manure nutrient value by type.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/yield-estimator.jpg">
 
   <script type="application/ld+json">
@@ -47,19 +47,29 @@
       {
         "@type": "SoftwareApplication",
         "name": "Corn & Soybean Yield Estimator",
-        "description": "Free crop yield component calculator for corn and soybeans. Designed for in-field mobile use.",
+        "description": "Free crop yield component calculator for corn and soybeans. Includes manure nutrient value calculator. Designed for in-field mobile use.",
         "url": "https://agsist.com/yield-estimator",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@id": "https://agsist.com/#website" }
       },
       {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home",            "item": "https://agsist.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Fast Facts",      "item": "https://agsist.com/fast-facts" },
-          { "@type": "ListItem", "position": 3, "name": "Yield Estimator", "item": "https://agsist.com/yield-estimator" }
-        ]
+        "@type": "WebPage",
+        "@id": "https://agsist.com/yield-estimator#webpage",
+        "url": "https://agsist.com/yield-estimator",
+        "name": "Corn & Soybean Yield Estimator — Field Calculator | AGSIST",
+        "description": "Free corn and soybean yield estimator for the field. Count ears and kernels, get bu/acre in seconds. Includes manure value calculator.",
+        "dateModified": "2026-04-07",
+        "isPartOf": { "@id": "https://agsist.com/#website" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home",            "item": "https://agsist.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Fast Facts",      "item": "https://agsist.com/fast-facts" },
+            { "@type": "ListItem", "position": 3, "name": "Yield Estimator", "item": "https://agsist.com/yield-estimator" }
+          ]
+        }
       },
       {
         "@type": "FAQPage",
@@ -67,22 +77,42 @@
           {
             "@type": "Question",
             "name": "How do I estimate corn yield in the field?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Use the yield component method: count ears in 1/1000th of an acre (17 ft 5 in of a 30-inch row), then count average kernel rows per ear and kernels per row on several representative ears. Multiply ears x rows x kernels and divide by a correction factor (typically 75-90 depending on kernel size) to get estimated bushels per acre." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Use the yield component method: count ears in 1/1000th of an acre (17 ft 5 in of a 30-inch row), then count average kernel rows per ear and kernels per row on several representative ears. Multiply ears x rows x kernels and divide by a correction factor (typically 75–90 depending on kernel size) to get estimated bushels per acre." }
           },
           {
             "@type": "Question",
             "name": "How long is 1/1000th of an acre in 30-inch rows?",
-            "acceptedAnswer": { "@type": "Answer", "text": "In 30-inch rows, 1/1000th of an acre equals 17 feet 5 inches. For 36-inch rows it is 14 feet 6 inches. For 20-inch rows it is 26 feet 2 inches." }
+            "acceptedAnswer": { "@type": "Answer", "text": "In 30-inch rows, 1/1000th of an acre equals 17 feet 5 inches. For 36-inch rows it is 14 feet 6 inches. For 20-inch rows it is 26 feet 2 inches. Formula: 43,560 sq ft divided by 1,000 divided by row width in feet equals row length in feet." }
           },
           {
             "@type": "Question",
             "name": "What correction factor should I use for corn yield estimates?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Modern hybrids with larger, heavier kernels typically use a factor of 75-85. A factor of 80 is a good starting point for most modern corn." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Modern hybrids with larger, heavier kernels typically use a factor of 75–85. A factor of 80 is a good starting point for most modern corn. Use 85–90 for smaller or stress-affected kernels, and 75–80 for large-kerneled varieties with ideal growing conditions." }
           },
           {
             "@type": "Question",
             "name": "How do I estimate soybean yield before harvest?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Count plants in 1/1000th of an acre, count pods on several representative plants, use 2.5 seeds per pod and 2,500 seeds per pound as defaults. The calculator converts to bushels per acre automatically." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Count plants in 1/1000th of an acre, count pods on several representative plants, use 2.5 seeds per pod and 2,500 seeds per pound as defaults. Multiply plants x pods x seeds per pod x 1,000 to get seeds per acre, divide by seeds per pound to get pounds, then divide by 60 for bushels per acre." }
+          },
+          {
+            "@type": "Question",
+            "name": "When is the best time to estimate corn yield?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The best time is at the R4 (dough) to R5 (dent) stage, typically late July to mid-August in Wisconsin and Minnesota. At this point kernel rows and kernels per row are set and mostly filled. Estimates before R4 will tend to be too high because tip kernels may not yet be fully set." }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is the corn yield component method?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The yield component method typically estimates within 10–20% of final harvested yield under normal conditions. It tends to overestimate when significant tip-back, stalk rot, or harvest losses occur. Taking samples at 5 or more representative locations significantly improves accuracy. Avoid end rows, waterways, and obviously high or low spots." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is manure worth per 1,000 gallons?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The nutrient value of manure depends on current fertilizer prices and manure type. Liquid hog finishing slurry typically contains about 25 lbs of total N, 18 lbs of P2O5, and 17 lbs of K2O per 1,000 gallons. At average fertilizer prices that represents roughly $20–30 per 1,000 gallons in nutrient credits. Use the AGSIST manure value calculator on this page for a current-price estimate based on live fertilizer data." }
+          },
+          {
+            "@type": "Question",
+            "name": "What causes ear tip-back in corn and how does it affect yield estimates?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Tip-back occurs when kernels at the ear tip fail to develop, usually from drought stress during silking (R1 stage), excessive plant population, or nutrient stress. Tip kernels are the last pollinated and first to abort. When counting kernels per row, skip unfilled tip kernels to avoid overestimating yield. Severe tip-back can reduce actual yield 10–20% below your estimate." }
           }
         ]
       }
@@ -91,9 +121,11 @@
   </script>
 
   <style>
-    /* v5: Batch 5 audit — GA, skip link, touch-action, og:locale, twitter:creator, favicon-16, author; --ye-radius 10->8px */
+    /* yield-estimator v6 — audit fixes: WebPage JSON-LD, meta desc, aria-live, h3 additions, manure calc, quick-fill, FAQ accordion, benchmarks, copy button */
     :root { --ye-radius: 8px; --ye-radius-sm: 6px; --ye-transition: 0.2s ease; }
     button,a,[role="button"]{touch-action:manipulation;}
+    /* Semantic resets so h2/h3 sharing panel-head classes don't blow up layout */
+    h2.ye-panel-head-h,h3.ye-panel-head-h{margin:0;font-size:inherit;font-weight:inherit;line-height:inherit;}
 
     .ye-main { max-width: 720px; margin: 0 auto; padding: max(16px, env(safe-area-inset-left)); }
     .breadcrumb { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 12px; }
@@ -117,12 +149,22 @@
     .ye-panel-head { background: var(--bg); padding: 14px 18px; border-bottom: 1px solid var(--border); border-radius: var(--ye-radius) var(--ye-radius) 0 0; display: flex; justify-content: space-between; align-items: center; }
     .ye-panel-head h2 { font-size: 0.95rem; margin: 0; color: var(--text); }
     .ye-panel-head h2 .accent { color: var(--gold); }
-    .ye-panel-head .badge { font-size: 0.68rem; padding: 3px 8px; background: rgba(230,176,66,0.15); color: var(--gold); border-radius: 10px; font-weight: 600; border: 1px solid rgba(230,176,66,0.3); }
+    .ye-panel-head .badge { font-size: 0.68rem; padding: 3px 8px; background: rgba(230,176,66,0.15); color: var(--gold); border-radius: 10px; font-weight: 600; border: 1px solid rgba(230,176,66,0.3); white-space: nowrap; }
     .ye-panel-body { padding: 18px; }
 
     .ye-steps { display: flex; gap: 4px; margin-bottom: 18px; }
     .ye-step-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); transition: background 0.3s; }
     .ye-step-dot.filled { background: var(--gold); }
+
+    /* Quick-fill scenarios */
+    .qfill-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+    .qfill-label { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; width: 100%; margin-bottom: 2px; }
+    .qfill-btn { flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--ye-radius-sm); background: var(--bg); color: var(--text-dim); font-family: inherit; font-size: 0.72rem; font-weight: 600; cursor: pointer; text-align: center; transition: all var(--ye-transition); white-space: nowrap; }
+    .qfill-btn:hover { border-color: var(--gold); color: var(--text); }
+    .qfill-btn.hi { border-color: rgba(58,139,60,0.5); color: #6dcf72; }
+    .qfill-btn.hi:hover { border-color: #6dcf72; background: rgba(58,139,60,0.1); }
+    .qfill-btn.lo { border-color: rgba(239,83,80,0.4); color: #ef5350; }
+    .qfill-btn.lo:hover { border-color: #ef5350; background: rgba(239,83,80,0.08); }
 
     .row-helper { background: var(--bg); border: 1px solid var(--border); border-radius: var(--ye-radius-sm); padding: 14px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .row-helper .measure-icon { font-size: 1.5rem; flex-shrink: 0; }
@@ -146,6 +188,9 @@
     .ye-result .result-value { font-size: 2.4rem; font-weight: 800; color: var(--gold); font-variant-numeric: tabular-nums; margin: 6px 0 2px; line-height: 1; }
     .ye-result .result-unit { font-size: 0.88rem; color: var(--text-dim); font-weight: 500; }
     .ye-result .result-detail { font-size: 0.72rem; color: var(--text-dim); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
+    .copy-btn { margin-top: 12px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-dim); font-family: inherit; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all var(--ye-transition); }
+    .copy-btn:hover { border-color: var(--gold); color: var(--text); }
+    .copy-btn.copied { border-color: #6dcf72; color: #6dcf72; }
 
     .adv-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; cursor: pointer; font-size: 0.78rem; color: var(--text-dim); background: none; border: none; font-family: inherit; padding: 6px 0; transition: color var(--ye-transition); }
     .adv-toggle:hover { color: var(--gold); }
@@ -154,6 +199,34 @@
     .adv-section { display: none; }
     .adv-section.open { display: block; }
 
+    /* Manure calculator */
+    .mn-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    .mn-type-btn { padding: 10px 8px; border: 1px solid var(--border); border-radius: var(--ye-radius-sm); background: var(--bg); color: var(--text-dim); font-family: inherit; font-size: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; transition: all var(--ye-transition); line-height: 1.3; }
+    .mn-type-btn:hover { border-color: var(--gold); }
+    .mn-type-btn.active { border-color: var(--gold); background: rgba(230,176,66,0.08); color: var(--text); }
+    .mn-type-btn .mn-unit-tag { display: inline-block; font-size: 0.62rem; font-weight: 500; color: var(--text-dim); margin-top: 3px; }
+    .mn-type-btn.active .mn-unit-tag { color: var(--gold); }
+    .mn-npk-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .mn-npk-cell { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: var(--ye-radius-sm); padding: 10px 12px; text-align: center; }
+    .mn-npk-label { font-size: 0.62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+    .mn-npk-value { font-size: 1.05rem; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; margin-top: 2px; }
+    .mn-npk-unit { font-size: 0.62rem; color: var(--text-dim); }
+    .mn-result-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .mn-credit-cell { text-align: center; }
+    .mn-credit-label { font-size: 0.65rem; color: var(--text-dim); font-weight: 500; }
+    .mn-credit-value { font-size: 0.95rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; margin-top: 2px; }
+    .mn-total-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .mn-total-label { font-size: 0.78rem; color: var(--text-dim); font-weight: 500; }
+    .mn-total-value { font-size: 1.6rem; font-weight: 800; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .mn-per-acre { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; text-align: right; }
+    .price-src { display: inline-flex; align-items: center; gap: 5px; font-size: 0.65rem; color: var(--text-dim); margin-bottom: 14px; }
+    .price-src .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); display: inline-block; }
+    .price-src.live .dot { background: #6dcf72; }
+    .price-src.live { color: #6dcf72; }
+    .mn-inline-inputs { display: flex; gap: 8px; }
+    .mn-inline-inputs .ye-field { flex: 1; }
+
+    /* Field guide */
     .field-guide { background: var(--bg); border-left: 3px solid var(--gold); padding: 14px 16px; border-radius: 0 var(--ye-radius-sm) var(--ye-radius-sm) 0; font-size: 0.82rem; line-height: 1.6; color: var(--text-dim); }
     .field-guide strong { color: var(--text); }
     .field-guide .step-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #000; font-size: 0.7rem; font-weight: 700; margin-right: 6px; flex-shrink: 0; vertical-align: middle; }
@@ -161,11 +234,33 @@
     .field-guide p:first-child { margin-top: 0; }
     .field-guide p:last-child { margin-bottom: 0; }
 
+    /* Range rows / reference tables */
     .range-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.8rem; }
     .range-row:last-child { border: none; }
     .range-row .rl { color: var(--text-dim); }
     .range-row .rv { color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .range-row .rv.dim { color: var(--text-dim); font-weight: 400; }
 
+    /* Benchmark section */
+    .bm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .bm-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--ye-radius-sm); padding: 12px 14px; }
+    .bm-state { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; margin-bottom: 8px; }
+    .bm-row { display: flex; justify-content: space-between; font-size: 0.78rem; padding: 3px 0; }
+    .bm-crop { color: var(--text-dim); }
+    .bm-val { color: var(--gold); font-weight: 600; }
+
+    /* FAQ accordion */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 14px 18px; font-family: inherit; font-size: 0.85rem; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 600; transition: color var(--ye-transition); }
+    .faq-q:hover { color: var(--gold); }
+    .faq-q:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .faq-icon { font-size: 1.2rem; color: var(--gold); flex-shrink: 0; transition: transform 0.2s; line-height: 1; }
+    .faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+    .faq-a { padding: 0 18px 16px; font-size: 0.82rem; color: var(--text-dim); line-height: 1.65; display: none; }
+    .faq-a.open { display: block; }
+
+    /* Tools pills */
     .tools-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .tool-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 8px 14px; color: var(--text-dim); text-decoration: none; font-size: 0.78rem; font-weight: 500; transition: all var(--ye-transition); }
     .tool-pill:hover { border-color: var(--gold); color: var(--text); }
@@ -173,6 +268,9 @@
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type="number"] { -moz-appearance: textfield; }
+    /* iOS zoom prevention */
+    input[type="text"],input[type="number"]{font-size:1rem;}
+    .ye-field input{font-size:1.1rem;}
 
     @media (max-width: 500px) {
       .ye-main { padding: 10px; }
@@ -180,6 +278,9 @@
       .ye-hero h1 { font-size: 1.05rem; }
       .ye-result .result-value { font-size: 2rem; }
       .row-helper { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .mn-type-grid { grid-template-columns: 1fr 1fr; }
+      .bm-grid { grid-template-columns: 1fr; }
+      .mn-inline-inputs { flex-direction: column; }
     }
   </style>
 </head>
@@ -193,29 +294,37 @@
     </nav>
 
     <div class="ye-hero">
-      <h1>&#127757; Crop <span class="gold">Yield Estimator</span></h1>
-      <div class="subtitle">Step out of the truck, count ears and kernels, type 3 numbers, get your estimated bu/acre.</div>
+      <h1><span aria-hidden="true">🌽</span> Crop <span class="gold">Yield Estimator</span></h1>
+      <div class="subtitle">Step out of the truck, count ears and kernels, type 3 numbers, get your estimated bu/acre. Includes manure nutrient value by type.</div>
     </div>
 
     <div class="crop-tabs" role="tablist" aria-label="Select crop">
-      <button class="crop-tab active" role="tab" aria-selected="true" aria-controls="corn-panel" id="tab-corn">&#127757; Corn</button>
-      <button class="crop-tab" role="tab" aria-selected="false" aria-controls="bean-panel" id="tab-bean">&#129752; Soybeans</button>
+      <button class="crop-tab active" role="tab" aria-selected="true"  aria-controls="corn-panel" id="tab-corn"><span aria-hidden="true">🌽</span> Corn</button>
+      <button class="crop-tab"        role="tab" aria-selected="false" aria-controls="bean-panel" id="tab-bean"><span aria-hidden="true">🫘</span> Soybeans</button>
     </div>
 
-    <!-- CORN PANEL -->
+    <!-- ── CORN PANEL ────────────────────────────────────────────── -->
     <div class="ye-panel" id="corn-panel" role="tabpanel" aria-labelledby="tab-corn">
       <div class="ye-panel-head">
         <h2>Corn <span class="accent">Yield Estimate</span></h2>
         <span class="badge">Yield Component Method</span>
       </div>
       <div class="ye-panel-body">
+
+        <div class="qfill-row">
+          <span class="qfill-label">Quick-fill scenario</span>
+          <button class="qfill-btn hi" onclick="cornFill(34,16,36,78)" type="button">🔼 High (~220 bu)</button>
+          <button class="qfill-btn"    onclick="cornFill(32,16,34,80)" type="button">⬛ Average (~180 bu)</button>
+          <button class="qfill-btn lo" onclick="cornFill(26,14,30,85)" type="button">🔽 Low (~130 bu)</button>
+        </div>
+
         <div class="ye-steps" aria-hidden="true">
           <div class="ye-step-dot filled" id="cDot1"></div>
           <div class="ye-step-dot" id="cDot2"></div>
           <div class="ye-step-dot" id="cDot3"></div>
         </div>
         <div class="row-helper">
-          <div class="measure-icon" aria-hidden="true">&#128207;</div>
+          <div class="measure-icon" aria-hidden="true">📏</div>
           <div class="measure-text">
             <div class="measure-label">Measure this row length for 1/1000th acre</div>
             <div class="measure-value" id="cornRowLen">17 ft 5 in</div>
@@ -229,21 +338,21 @@
           </select>
         </div>
         <div class="ye-field">
-          <label for="cornEars"><span>&#9312; Ears counted</span><span class="hint">in your 1/1000th acre</span></label>
+          <label for="cornEars"><span>① Ears counted</span><span class="hint">in your 1/1000th acre</span></label>
           <div class="input-wrap">
             <input type="number" id="cornEars" value="32" min="0" max="99" step="1" inputmode="numeric">
             <span class="unit">ears</span>
           </div>
         </div>
         <div class="ye-field">
-          <label for="cornRows"><span>&#9313; Kernel rows per ear</span><span class="hint">avg of 5+ ears</span></label>
+          <label for="cornRows"><span>② Kernel rows per ear</span><span class="hint">avg of 5+ ears</span></label>
           <div class="input-wrap">
             <input type="number" id="cornRows" value="16" min="0" max="40" step="1" inputmode="numeric">
             <span class="unit">rows</span>
           </div>
         </div>
         <div class="ye-field">
-          <label for="cornKernels"><span>&#9314; Kernels per row</span><span class="hint">butt to tip, skip unfilled</span></label>
+          <label for="cornKernels"><span>③ Kernels per row</span><span class="hint">butt to tip, skip unfilled</span></label>
           <div class="input-wrap">
             <input type="number" id="cornKernels" value="34" min="0" max="60" step="1" inputmode="numeric">
             <span class="unit">kernels</span>
@@ -261,10 +370,10 @@
             </div>
           </div>
           <div style="background:var(--bg);border-radius:var(--ye-radius-sm);padding:12px 14px;margin-bottom:14px">
-            <div class="range-row"><span class="rl">Large kernels (modern hybrids)</span><span class="rv">75&ndash;80</span></div>
-            <div class="range-row"><span class="rl">Average kernels</span><span class="rv">80&ndash;85</span></div>
-            <div class="range-row"><span class="rl">Small / stressed kernels</span><span class="rv">85&ndash;90</span></div>
-            <div class="range-row"><span class="rl">Popcorn / specialty</span><span class="rv">90&ndash;100</span></div>
+            <div class="range-row"><span class="rl">Large kernels — modern hybrids, ideal conditions</span><span class="rv">75–80</span></div>
+            <div class="range-row"><span class="rl">Average kernels — typical season</span><span class="rv">80–85</span></div>
+            <div class="range-row"><span class="rl">Small / stressed kernels</span><span class="rv">85–90</span></div>
+            <div class="range-row"><span class="rl">Popcorn / specialty</span><span class="rv">90–100</span></div>
           </div>
           <div class="ye-field">
             <label for="cornSamples"><span>Locations sampled</span><span class="hint">avg the ear counts</span></label>
@@ -274,28 +383,38 @@
             </div>
           </div>
         </div>
-        <div class="ye-result">
+
+        <div class="ye-result" aria-live="polite" role="status">
           <div class="result-label">Estimated Yield</div>
           <div class="result-value" id="cornYield">218</div>
           <div class="result-unit">bu / acre</div>
-          <div class="result-detail" id="cornDetail">32 ears x 16 rows x 34 kernels = 17,408 kernels/1000th ac — 17,408 / 80 = 217.6 bu/ac</div>
+          <div class="result-detail" id="cornDetail">32 ears × 16 rows × 34 kernels = 17,408 kernels/1000th ac — 17,408 ÷ 80 = 217.6 bu/ac</div>
+          <button class="copy-btn" id="cornCopyBtn" type="button" onclick="copyEstimate('corn')" aria-label="Copy corn yield estimate to clipboard">📋 Copy estimate</button>
         </div>
       </div>
     </div>
 
-    <!-- SOYBEAN PANEL -->
+    <!-- ── SOYBEAN PANEL ──────────────────────────────────────────── -->
     <div class="ye-panel" id="bean-panel" role="tabpanel" aria-labelledby="tab-bean" hidden>
       <div class="ye-panel-head">
         <h2>Soybean <span class="accent">Yield Estimate</span></h2>
         <span class="badge">Pod Count Method</span>
       </div>
       <div class="ye-panel-body">
+
+        <div class="qfill-row">
+          <span class="qfill-label">Quick-fill scenario</span>
+          <button class="qfill-btn hi" onclick="beanFill(115,42)" type="button">🔼 High (~60 bu)</button>
+          <button class="qfill-btn"    onclick="beanFill(100,35)" type="button">⬛ Average (~48 bu)</button>
+          <button class="qfill-btn lo" onclick="beanFill(82,26)"  type="button">🔽 Low (~36 bu)</button>
+        </div>
+
         <div class="ye-steps" aria-hidden="true">
           <div class="ye-step-dot filled" id="bDot1"></div>
           <div class="ye-step-dot" id="bDot2"></div>
         </div>
         <div class="row-helper">
-          <div class="measure-icon" aria-hidden="true">&#128207;</div>
+          <div class="measure-icon" aria-hidden="true">📏</div>
           <div class="measure-text">
             <div class="measure-label">Measure this row length for 1/1000th acre</div>
             <div class="measure-value" id="beanRowLen">17 ft 5 in</div>
@@ -310,14 +429,14 @@
           </select>
         </div>
         <div class="ye-field">
-          <label for="beanPlants"><span>&#9312; Plants counted</span><span class="hint">in your 1/1000th acre</span></label>
+          <label for="beanPlants"><span>① Plants counted</span><span class="hint">in your 1/1000th acre</span></label>
           <div class="input-wrap">
             <input type="number" id="beanPlants" value="105" min="0" max="500" step="1" inputmode="numeric">
             <span class="unit">plants</span>
           </div>
         </div>
         <div class="ye-field">
-          <label for="beanPods"><span>&#9313; Pods per plant</span><span class="hint">avg of 10+ plants</span></label>
+          <label for="beanPods"><span>② Pods per plant</span><span class="hint">avg of 10+ plants</span></label>
           <div class="input-wrap">
             <input type="number" id="beanPods" value="38" min="0" max="200" step="1" inputmode="numeric">
             <span class="unit">pods</span>
@@ -342,21 +461,111 @@
             </div>
           </div>
           <div style="background:var(--bg);border-radius:var(--ye-radius-sm);padding:12px 14px;margin-bottom:14px">
-            <div class="range-row"><span class="rl">Large seed varieties</span><span class="rv">2,200&ndash;2,500</span></div>
-            <div class="range-row"><span class="rl">Average</span><span class="rv">2,500&ndash;2,800</span></div>
-            <div class="range-row"><span class="rl">Small seed varieties</span><span class="rv">2,800&ndash;3,200</span></div>
+            <div class="range-row"><span class="rl">Large seed varieties</span><span class="rv">2,200–2,500</span></div>
+            <div class="range-row"><span class="rl">Average</span><span class="rv">2,500–2,800</span></div>
+            <div class="range-row"><span class="rl">Small seed varieties</span><span class="rv">2,800–3,200</span></div>
           </div>
         </div>
-        <div class="ye-result">
+
+        <div class="ye-result" aria-live="polite" role="status">
           <div class="result-label">Estimated Yield</div>
           <div class="result-value" id="beanYield">66</div>
           <div class="result-unit">bu / acre</div>
-          <div class="result-detail" id="beanDetail">105 plants x 38 pods x 2.5 seeds = 9,975 seeds/1000th ac — 9,975,000 / 2,500 seeds/lb = 3,990 lb / 60 = 66.5 bu/ac</div>
+          <div class="result-detail" id="beanDetail">105 plants × 38 pods × 2.5 seeds = 9,975 seeds/1000th ac — 9,975,000 ÷ 2,500 seeds/lb = 3,990 lb ÷ 60 = 66.5 bu/ac</div>
+          <button class="copy-btn" id="beanCopyBtn" type="button" onclick="copyEstimate('bean')" aria-label="Copy soybean yield estimate to clipboard">📋 Copy estimate</button>
         </div>
       </div>
     </div>
 
-    <!-- FIELD GUIDE -->
+    <!-- ── MANURE VALUE CALCULATOR ────────────────────────────────── -->
+    <div class="ye-panel" id="manure-panel">
+      <div class="ye-panel-head">
+        <h2>Manure <span class="accent">Nutrient Value</span></h2>
+        <span class="badge" id="priceSrcBadge">Reference Prices</span>
+      </div>
+      <div class="ye-panel-body">
+
+        <div class="price-src" id="priceSrcRow">
+          <span class="dot"></span>
+          <span id="priceSrcText">Using reference fertilizer prices — live prices load automatically</span>
+        </div>
+
+        <h3 style="font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;margin:0 0 8px 0;">Select manure type</h3>
+        <div class="mn-type-grid" role="group" aria-label="Manure type">
+          <button class="mn-type-btn active" id="mn-hog-liquid"   onclick="setManureType('hog-liquid')"   type="button">Hog Finishing Slurry<br><span class="mn-unit-tag">per 1,000 gal</span></button>
+          <button class="mn-type-btn"        id="mn-dairy-liquid" onclick="setManureType('dairy-liquid')" type="button">Dairy Slurry<br><span class="mn-unit-tag">per 1,000 gal</span></button>
+          <button class="mn-type-btn"        id="mn-beef-liquid"  onclick="setManureType('beef-liquid')"  type="button">Beef Feedlot Slurry<br><span class="mn-unit-tag">per 1,000 gal</span></button>
+          <button class="mn-type-btn"        id="mn-beef-solid"   onclick="setManureType('beef-solid')"   type="button">Beef Cattle (solid)<br><span class="mn-unit-tag">per ton</span></button>
+          <button class="mn-type-btn"        id="mn-dairy-solid"  onclick="setManureType('dairy-solid')"  type="button">Dairy (solid)<br><span class="mn-unit-tag">per ton</span></button>
+          <button class="mn-type-btn"        id="mn-hog-solid"    onclick="setManureType('hog-solid')"    type="button">Hog (solid)<br><span class="mn-unit-tag">per ton</span></button>
+          <button class="mn-type-btn"        id="mn-poultry"      onclick="setManureType('poultry')"      type="button">Poultry / Broiler<br><span class="mn-unit-tag">per ton</span></button>
+          <button class="mn-type-btn"        id="mn-turkey"       onclick="setManureType('turkey')"       type="button">Turkey<br><span class="mn-unit-tag">per ton</span></button>
+        </div>
+
+        <!-- Nutrient content display for selected type -->
+        <h3 style="font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;margin:0 0 8px 0;">Typical nutrient content <span id="mnUnitLabel">(per 1,000 gal)</span></h3>
+        <div class="mn-npk-row">
+          <div class="mn-npk-cell"><div class="mn-npk-label">Total N</div><div class="mn-npk-value" id="mnN">25</div><div class="mn-npk-unit">lbs</div></div>
+          <div class="mn-npk-cell"><div class="mn-npk-label">P₂O₅</div><div class="mn-npk-value" id="mnP">18</div><div class="mn-npk-unit">lbs</div></div>
+          <div class="mn-npk-cell"><div class="mn-npk-label">K₂O</div><div class="mn-npk-value" id="mnK">17</div><div class="mn-npk-unit">lbs</div></div>
+          <div class="mn-npk-cell"><div class="mn-npk-label">Avail N yr 1</div><div class="mn-npk-value" id="mnNAvailPct">75%</div><div class="mn-npk-unit">of total</div></div>
+        </div>
+
+        <!-- Inputs: quantity and acres -->
+        <div class="mn-inline-inputs">
+          <div class="ye-field">
+            <label for="mnQty"><span>Volume / weight applied</span><span class="hint" id="mnQtyHint">total gallons</span></label>
+            <div class="input-wrap">
+              <input type="number" id="mnQty" value="50000" min="0" step="1000" inputmode="numeric" oninput="calcManure()">
+              <span class="unit" id="mnQtyUnit">gal</span>
+            </div>
+          </div>
+          <div class="ye-field">
+            <label for="mnAcres"><span>Acres receiving manure</span><span class="hint">for per-acre calc</span></label>
+            <div class="input-wrap">
+              <input type="number" id="mnAcres" value="40" min="0.1" step="1" inputmode="numeric" oninput="calcManure()">
+              <span class="unit">acres</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- N availability override -->
+        <div class="ye-field">
+          <label for="mnNAvail"><span>Available N (%)</span><span class="hint">first-year availability — auto-set by type</span></label>
+          <div class="input-wrap">
+            <input type="number" id="mnNAvail" value="75" min="10" max="100" step="5" inputmode="numeric" oninput="calcManure()">
+            <span class="unit">%</span>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="ye-result" aria-live="polite" role="status" style="text-align:left;padding:18px 20px;">
+          <div class="result-label">Total Nutrient Credit Value</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;margin-top:6px;">
+            <div>
+              <div class="result-value" id="mnTotal" style="font-size:2rem;">—</div>
+              <div class="result-unit">total applied</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:1.2rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;" id="mnPerAcre">—</div>
+              <div class="result-unit">per acre</div>
+            </div>
+          </div>
+          <div class="mn-result-grid">
+            <div class="mn-credit-cell"><div class="mn-credit-label">N credit</div><div class="mn-credit-value" id="mnNVal">—</div></div>
+            <div class="mn-credit-cell"><div class="mn-credit-label">P₂O₅ credit</div><div class="mn-credit-value" id="mnPVal">—</div></div>
+            <div class="mn-credit-cell"><div class="mn-credit-label">K₂O credit</div><div class="mn-credit-value" id="mnKVal">—</div></div>
+          </div>
+          <div class="result-detail" id="mnDetail" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">Select a manure type and enter quantity to see nutrient credit value.</div>
+        </div>
+
+        <div style="background:var(--bg);border-left:3px solid rgba(230,176,66,0.4);padding:10px 14px;border-radius:0 var(--ye-radius-sm) var(--ye-radius-sm) 0;margin-top:12px;font-size:0.75rem;color:var(--text-dim);line-height:1.5">
+          Nutrient content from UW Extension averages. Actual values vary — test your manure for accurate planning. N availability reflects typical first-year plant-available fraction.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FIELD SCOUTING GUIDE ───────────────────────────────────── -->
     <div class="ye-panel">
       <div class="ye-panel-head"><h2>Field <span class="accent">Scouting Guide</span></h2></div>
       <div class="ye-panel-body">
@@ -365,15 +574,15 @@
           <p><span class="step-num">2</span> <strong>Measure your row length</strong> for 1/1000th acre using the selector above. Pace it off at roughly 3 ft per stride.</p>
           <p><span class="step-num">3</span> <strong>For corn:</strong> Count every harvestable ear in that length. Pull 5+ representative ears and count kernel rows and kernels per row from butt to tip. Skip unfilled tip kernels.</p>
           <p><span class="step-num">4</span> <strong>For soybeans:</strong> Count every plant in that length. Pull 10+ representative plants and count total pods per plant.</p>
-          <p><span class="step-num">5</span> <strong>Average your samples</strong> and enter the numbers above.</p>
+          <p><span class="step-num">5</span> <strong>Average your samples</strong> and enter the numbers above. Best done at R4–R5 (corn) or R6 (soybeans).</p>
         </div>
         <div style="background:var(--bg);border-left:3px solid #f97316;padding:12px 16px;border-radius:0 var(--ye-radius-sm) var(--ye-radius-sm) 0;margin-top:14px;font-size:0.82rem;color:var(--text-dim);line-height:1.5">
-          <strong style="color:var(--text)">These are estimates.</strong> Actual yield can differ 10&ndash;15% or more due to kernel weight, harvest loss, moisture, tip-back, and stalk quality.
+          <strong style="color:var(--text)">These are estimates.</strong> Actual yield can differ 10–20% due to kernel weight, harvest loss, moisture, tip-back, and stalk quality. More sample locations = better accuracy.
         </div>
       </div>
     </div>
 
-    <!-- ROW LENGTH REFERENCE -->
+    <!-- ── ROW LENGTH REFERENCE ───────────────────────────────────── -->
     <div class="ye-panel">
       <div class="ye-panel-head">
         <h2>1/1000th Acre <span class="accent">Row Lengths</span></h2>
@@ -387,16 +596,120 @@
         <div class="range-row"><span class="rl">30" rows</span><span class="rv">17 ft 5 in</span></div>
         <div class="range-row"><span class="rl">36" rows</span><span class="rv">14 ft 6 in</span></div>
         <div class="range-row"><span class="rl">38" rows</span><span class="rv">13 ft 9 in</span></div>
-        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:10px">Formula: 43,560 ft&sup2; &divide; 1,000 &divide; (row spacing in ft) = row length in feet</div>
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:10px">Formula: 43,560 ft² ÷ 1,000 ÷ (row spacing in ft) = row length in feet</div>
       </div>
     </div>
 
+    <!-- ── WI / MN STATE YIELD BENCHMARKS ────────────────────────── -->
+    <div class="ye-panel">
+      <div class="ye-panel-head">
+        <h2>WI &amp; MN <span class="accent">State Yield Benchmarks</span></h2>
+        <span class="badge">USDA NASS 5-yr Avg</span>
+      </div>
+      <div class="ye-panel-body" style="padding:14px 18px">
+        <div class="bm-grid">
+          <div class="bm-card">
+            <div class="bm-state">🌾 Wisconsin</div>
+            <div class="bm-row"><span class="bm-crop">Corn</span><span class="bm-val">~155–170 bu/ac</span></div>
+            <div class="bm-row"><span class="bm-crop">Soybeans</span><span class="bm-val">~45–50 bu/ac</span></div>
+          </div>
+          <div class="bm-card">
+            <div class="bm-state">🌾 Minnesota</div>
+            <div class="bm-row"><span class="bm-crop">Corn</span><span class="bm-val">~185–200 bu/ac</span></div>
+            <div class="bm-row"><span class="bm-crop">Soybeans</span><span class="bm-val">~48–52 bu/ac</span></div>
+          </div>
+        </div>
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:10px">Source: USDA NASS. 5-year state average. Use as a sanity check — field averages vary widely from the state mean.</div>
+      </div>
+    </div>
+
+    <!-- ── FAQ ACCORDION ──────────────────────────────────────────── -->
+    <div class="ye-panel" id="section-faq">
+      <div class="ye-panel-head">
+        <h2>Frequently Asked <span class="accent">Questions</span></h2>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1" onclick="toggleFaq(this,'faq-a-1')">
+          How do I estimate corn yield in the field? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+          Use the yield component method: count ears in 1/1000th of an acre (17 ft 5 in of a 30-inch row), then count average kernel rows per ear and kernels per row on 5+ representative ears. Multiply ears × rows × kernels and divide by a correction factor (typically 75–90 depending on kernel size) to get estimated bushels per acre. Enter those three numbers in the Corn calculator above.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2" onclick="toggleFaq(this,'faq-a-2')">
+          How long is 1/1000th of an acre in 30-inch rows? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+          In 30-inch rows, 1/1000th of an acre is <strong>17 feet 5 inches</strong>. For 36-inch rows it's 14 ft 6 in. For 20-inch rows it's 26 ft 2 in. The row-length selector in the calculator updates automatically. Formula: 43,560 sq ft ÷ 1,000 ÷ row width in feet = length in feet.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3" onclick="toggleFaq(this,'faq-a-3')">
+          What correction factor should I use? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+          Start with <strong>80</strong> for most modern corn. Use 75–80 for large-kerneled, high-yield hybrids in a good year. Use 85–90 for small or stress-affected kernels. The correction factor accounts for how many kernels it takes to fill a 56-lb bushel — larger, heavier kernels mean a lower factor.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4" onclick="toggleFaq(this,'faq-a-4')">
+          When is the best time to estimate corn yield? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+          The best time is <strong>R4 (dough) to R5 (dent) stage</strong> — typically late July to mid-August in Wisconsin and Minnesota. Kernel rows and kernels per row are fully set, and fill is mostly complete. Estimates made before R4 tend to run high because tip kernels haven't fully set and may yet abort.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5" onclick="toggleFaq(this,'faq-a-5')">
+          How accurate is the yield component method? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+          Expect <strong>10–20% variance</strong> from harvested yield under normal conditions. The method tends to overestimate when significant tip-back, stalk rot, harvest losses, or late-season stress reduces kernel weight. Sampling 5 or more representative spots across a field dramatically improves accuracy vs. a single sample. Avoid end rows and obvious high/low spots.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6" id="faq-q-6" onclick="toggleFaq(this,'faq-a-6')">
+          How do I estimate soybean yield before harvest? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
+          Count plants in 1/1000th of an acre. Pull 10+ representative plants and count their pods. Use 2.5 seeds per pod and 2,500 seeds per pound as starting defaults. Math: plants × pods × 2.5 × 1,000 = seeds per acre. Divide by seeds/lb to get pounds per acre, then divide by 60 for bushels. Sample at R6 (full seed) for best accuracy.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-7" id="faq-q-7" onclick="toggleFaq(this,'faq-a-7')">
+          What is manure worth per 1,000 gallons? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-7" role="region" aria-labelledby="faq-q-7">
+          It depends on manure type and current fertilizer prices. <strong>Liquid hog finishing slurry</strong> typically contains ~25 lbs total N, 18 lbs P₂O₅, and 17 lbs K₂O per 1,000 gallons. <strong>Dairy slurry</strong> runs about 19/8/19. At typical fertilizer prices, liquid hog slurry represents roughly $20–30 per 1,000 gallons in nutrient credits. Use the Manure Nutrient Value calculator above for a real-time estimate using current fertilizer prices.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-8" id="faq-q-8" onclick="toggleFaq(this,'faq-a-8')">
+          What causes ear tip-back and how does it affect my estimate? <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-8" role="region" aria-labelledby="faq-q-8">
+          Tip-back occurs when kernels at the ear tip fail to develop — usually from <strong>drought stress at silking</strong> (R1), excessive plant population, or nutrient stress. Tip kernels are the last to be pollinated and first to abort under stress. When you count kernels per row in the field, <strong>skip any unfilled tip kernels</strong> to avoid overestimating. Severe tip-back can reduce actual yield 10–20% below your calculator estimate.
+        </div>
+      </div>
+
+    </div><!-- /FAQ -->
+
     <div class="tools-row">
-      <a href="/fast-facts" class="tool-pill">&#9889; Fast Facts</a>
-      <a href="/breakeven" class="tool-pill">&#128176; Break-Even</a>
-      <a href="/gdu-calculator" class="tool-pill">&#127777;&#65039; GDU Tracker</a>
-      <a href="/spray" class="tool-pill">&#127790;&#65039; Spray Advisory</a>
-      <a href="/" class="tool-pill">&#128202; Dashboard</a>
+      <a href="/fast-facts" class="tool-pill">⚡ Fast Facts</a>
+      <a href="/breakeven" class="tool-pill">💵 Break-Even</a>
+      <a href="/gdu-calculator" class="tool-pill">🌡️ GDU Tracker</a>
+      <a href="/spray" class="tool-pill">🌿 Spray Advisory</a>
+      <a href="/urea" class="tool-pill">💧 Urea Risk</a>
+      <a href="/" class="tool-pill">📊 Dashboard</a>
     </div>
 
   </main>
@@ -406,9 +719,15 @@
   <script>
   (function() {
     'use strict';
+
+    /* ── Utilities ─────────────────────────────────────── */
     var $ = function(id) { return document.getElementById(id); };
     function num(id, fb) { return parseFloat($(id).value) || fb || 0; }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function fmt(n) { return n.toLocaleString('en-US', {maximumFractionDigits:0}); }
+    function fmtDec(n,d) { return n.toLocaleString('en-US', {minimumFractionDigits:d,maximumFractionDigits:d}); }
+    function fmtDollar(n) { return '$' + fmtDec(n,2); }
+
     function rowLenStr(spacingIn) {
       var ft = 43560 / 1000 / (spacingIn / 12);
       var whole = Math.floor(ft);
@@ -416,48 +735,275 @@
       if (inches === 12) { whole++; inches = 0; }
       return whole + ' ft ' + inches + ' in';
     }
+
+    /* ── Corn calculator ───────────────────────────────── */
     function calcCorn() {
-      var ears = clamp(num('cornEars',0),0,99), rows = clamp(num('cornRows',0),0,40);
-      var kernels = clamp(num('cornKernels',0),0,60), factor = clamp(num('cornFactor',80),50,120);
-      var samples = clamp(num('cornSamples',1),1,50);
-      var tk = ears * rows * kernels, yb = tk / factor, r = Math.round(yb*10)/10;
+      var ears    = clamp(num('cornEars',0),   0, 99);
+      var rows    = clamp(num('cornRows',0),   0, 40);
+      var kernels = clamp(num('cornKernels',0),0, 60);
+      var factor  = clamp(num('cornFactor',80),50,120);
+      var samples = clamp(num('cornSamples',1),1, 50);
+      var tk = ears * rows * kernels;
+      var yb = tk / factor;
+      var r  = Math.round(yb * 10) / 10;
       $('cornYield').textContent = r > 0 ? Math.round(r) : '\u2014';
-      $('cornDetail').innerHTML = ears+' ears \xd7 '+rows+' rows \xd7 '+kernels+' kernels = '+tk.toLocaleString()+' kernels/1000th ac\u2014'+tk.toLocaleString()+' \xf7 '+factor+' = '+r.toFixed(1)+' bu/ac'+(samples>1?'<br>Averaged across '+samples+' sample locations':'');
-      $('cDot1').classList.toggle('filled', ears>0);
-      $('cDot2').classList.toggle('filled', rows>0);
-      $('cDot3').classList.toggle('filled', kernels>0);
+      $('cornDetail').innerHTML  =
+        ears + ' ears \xd7 ' + rows + ' rows \xd7 ' + kernels + ' kernels = ' +
+        fmt(tk) + ' kernels/1000th ac\u2014' + fmt(tk) + ' \xf7 ' + factor + ' = ' +
+        fmtDec(r,1) + ' bu/ac' +
+        (samples > 1 ? '<br>Averaged across ' + samples + ' sample locations' : '');
+      $('cDot1').classList.toggle('filled', ears    > 0);
+      $('cDot2').classList.toggle('filled', rows    > 0);
+      $('cDot3').classList.toggle('filled', kernels > 0);
     }
+
+    window.cornFill = function(ears, rows, kernels, factor) {
+      $('cornEars').value    = ears;
+      $('cornRows').value    = rows;
+      $('cornKernels').value = kernels;
+      $('cornFactor').value  = factor;
+      calcCorn();
+    };
+
+    /* ── Soybean calculator ────────────────────────────── */
     function calcBean() {
-      var plants = clamp(num('beanPlants',0),0,500), pods = clamp(num('beanPods',0),0,200);
-      var seedsPod = clamp(num('beanSeeds',2.5),1,4), seedsLb = clamp(num('beanSeedLb',2500),1500,4000);
-      var ss = plants*pods*seedsPod, sa = ss*1000, lbs = sa/seedsLb, bu = lbs/60, r = Math.round(bu*10)/10;
+      var plants   = clamp(num('beanPlants',0), 0, 500);
+      var pods     = clamp(num('beanPods',0),   0, 200);
+      var seedsPod = clamp(num('beanSeeds',2.5),1,   4);
+      var seedsLb  = clamp(num('beanSeedLb',2500),1500,4000);
+      var ss = plants * pods * seedsPod;
+      var sa = ss * 1000;
+      var lbs = sa / seedsLb;
+      var bu  = lbs / 60;
+      var r   = Math.round(bu * 10) / 10;
       $('beanYield').textContent = r > 0 ? Math.round(r) : '\u2014';
-      $('beanDetail').innerHTML = plants+' plants \xd7 '+pods+' pods \xd7 '+seedsPod+' seeds = '+Math.round(ss).toLocaleString()+' seeds/1000th ac\u2014'+Math.round(sa).toLocaleString()+' seeds/ac \xf7 '+seedsLb.toLocaleString()+' seeds/lb = '+Math.round(lbs).toLocaleString()+' lb \xf7 60 = '+r.toFixed(1)+' bu/ac';
-      $('bDot1').classList.toggle('filled', plants>0);
-      $('bDot2').classList.toggle('filled', pods>0);
+      $('beanDetail').innerHTML  =
+        plants + ' plants \xd7 ' + pods + ' pods \xd7 ' + seedsPod + ' seeds = ' +
+        fmt(Math.round(ss)) + ' seeds/1000th ac\u2014' +
+        fmt(Math.round(sa)) + ' seeds/ac \xf7 ' + fmt(seedsLb) + ' seeds/lb = ' +
+        fmt(Math.round(lbs)) + ' lb \xf7 60 = ' + fmtDec(r,1) + ' bu/ac';
+      $('bDot1').classList.toggle('filled', plants > 0);
+      $('bDot2').classList.toggle('filled', pods   > 0);
     }
-    function bind(id,ev,fn){ var el=$(id); if(el) el.addEventListener(ev,fn); }
-    bind('cornEars','input',calcCorn); bind('cornRows','input',calcCorn); bind('cornKernels','input',calcCorn);
-    bind('cornFactor','input',calcCorn); bind('cornSamples','input',calcCorn);
-    bind('cornRowSpacing','change',function(){ $('cornRowLen').textContent=rowLenStr(parseFloat($('cornRowSpacing').value)||30); });
+
+    window.beanFill = function(plants, pods) {
+      $('beanPlants').value = plants;
+      $('beanPods').value   = pods;
+      calcBean();
+    };
+
+    /* ── Bind yield inputs ─────────────────────────────── */
+    function bind(id, ev, fn) { var el=$(id); if(el) el.addEventListener(ev, fn); }
+    bind('cornEars','input',calcCorn); bind('cornRows','input',calcCorn);
+    bind('cornKernels','input',calcCorn); bind('cornFactor','input',calcCorn); bind('cornSamples','input',calcCorn);
+    bind('cornRowSpacing','change',function(){ $('cornRowLen').textContent = rowLenStr(parseFloat($('cornRowSpacing').value)||30); });
     bind('beanPlants','input',calcBean); bind('beanPods','input',calcBean);
     bind('beanSeeds','input',calcBean); bind('beanSeedLb','input',calcBean);
-    bind('beanRowSpacing','change',function(){ $('beanRowLen').textContent=rowLenStr(parseFloat($('beanRowSpacing').value)||30); });
-    var tabs=document.querySelectorAll('.crop-tab');
-    var panels={'tab-corn':$('corn-panel'),'tab-bean':$('bean-panel')};
-    tabs.forEach(function(tab){
-      tab.addEventListener('click',function(){
-        tabs.forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});
-        Object.values(panels).forEach(function(p){p.hidden=true;});
-        this.classList.add('active'); this.setAttribute('aria-selected','true');
-        panels[this.id].hidden=false;
+    bind('beanRowSpacing','change',function(){ $('beanRowLen').textContent = rowLenStr(parseFloat($('beanRowSpacing').value)||30); });
+
+    /* ── Tabs ──────────────────────────────────────────── */
+    var tabs   = document.querySelectorAll('.crop-tab');
+    var panels = { 'tab-corn': $('corn-panel'), 'tab-bean': $('bean-panel') };
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+        Object.values(panels).forEach(function(p) { p.hidden = true; });
+        this.classList.add('active');
+        this.setAttribute('aria-selected','true');
+        panels[this.id].hidden = false;
       });
     });
-    function setupToggle(b,s){ var btn=$(b),sec=$(s); if(!btn||!sec)return; btn.addEventListener('click',function(){ var o=sec.classList.toggle('open'); btn.classList.toggle('open',o); btn.setAttribute('aria-expanded',o?'true':'false'); }); }
+
+    /* ── Adv toggles ───────────────────────────────────── */
+    function setupToggle(b, s) {
+      var btn=$(b), sec=$(s);
+      if(!btn||!sec) return;
+      btn.addEventListener('click', function() {
+        var o = sec.classList.toggle('open');
+        btn.classList.toggle('open', o);
+        btn.setAttribute('aria-expanded', o ? 'true' : 'false');
+      });
+    }
     setupToggle('cornAdvToggle','cornAdvSection');
     setupToggle('beanAdvToggle','beanAdvSection');
-    $('cornRowLen').textContent=rowLenStr(30); $('beanRowLen').textContent=rowLenStr(30);
+
+    /* ── Init row lengths + calcs ──────────────────────── */
+    $('cornRowLen').textContent = rowLenStr(30);
+    $('beanRowLen').textContent = rowLenStr(30);
     calcCorn(); calcBean();
+
+    /* ── Copy estimate ─────────────────────────────────── */
+    window.copyEstimate = function(crop) {
+      var date = new Date().toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+      var text;
+      if (crop === 'corn') {
+        var ears=$('cornEars').value, rows=$('cornRows').value, kernels=$('cornKernels').value;
+        var yld=$('cornYield').textContent;
+        text = 'AGSIST Corn Yield Estimate — '+date+'\nEars: '+ears+' | Rows: '+rows+' | Kernels/row: '+kernels+'\nEstimated Yield: '+yld+' bu/acre\nagsist.com/yield-estimator';
+      } else {
+        var plants=$('beanPlants').value, pods=$('beanPods').value;
+        var yld=$('beanYield').textContent;
+        text = 'AGSIST Soybean Yield Estimate — '+date+'\nPlants: '+plants+' | Pods/plant: '+pods+'\nEstimated Yield: '+yld+' bu/acre\nagsist.com/yield-estimator';
+      }
+      var btnId = crop === 'corn' ? 'cornCopyBtn' : 'beanCopyBtn';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          var btn=$(btnId); btn.textContent='✅ Copied!'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='📋 Copy estimate'; btn.classList.remove('copied'); }, 2000);
+        });
+      } else {
+        // Fallback
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch(e){}
+        document.body.removeChild(ta);
+        var btn=$(btnId); btn.textContent='✅ Copied!'; btn.classList.add('copied');
+        setTimeout(function(){ btn.textContent='📋 Copy estimate'; btn.classList.remove('copied'); }, 2000);
+      }
+    };
+
+    /* ── FAQ accordion ─────────────────────────────────── */
+    window.toggleFaq = function(btn, answerId) {
+      var ans  = $(answerId);
+      var open = ans.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+  })();
+  </script>
+
+  <script>
+  /* ── Manure value calculator ────────────────────────────────────── */
+  (function() {
+    'use strict';
+    var $ = function(id) { return document.getElementById(id); };
+    function fmt2(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    function fmt0(n) { return '$' + n.toLocaleString('en-US',{maximumFractionDigits:0}); }
+
+    /* Nutrient content per unit (per 1,000 gal for liquid; per ton for solid)
+       Source: UW Extension — typical values, as-is basis */
+    var MANURE = {
+      'hog-liquid':   { label:'Hog Finishing Slurry',   liquid:true,  n:25, p:18, k:17, navail:75 },
+      'dairy-liquid': { label:'Dairy Slurry',           liquid:true,  n:19, p:8,  k:19, navail:70 },
+      'beef-liquid':  { label:'Beef Feedlot Slurry',    liquid:true,  n:20, p:12, k:20, navail:65 },
+      'beef-solid':   { label:'Beef Cattle (solid)',    liquid:false, n:11, p:7,  k:10, navail:45 },
+      'dairy-solid':  { label:'Dairy (solid)',          liquid:false, n:9,  p:5,  k:9,  navail:40 },
+      'hog-solid':    { label:'Hog (solid)',            liquid:false, n:10, p:9,  k:8,  navail:50 },
+      'poultry':      { label:'Poultry / Broiler',      liquid:false, n:33, p:24, k:21, navail:60 },
+      'turkey':       { label:'Turkey',                 liquid:false, n:28, p:21, k:18, navail:60 }
+    };
+
+    /* Default fertilizer prices ($/lb of nutrient) — overridden by live fetch */
+    /* Derived from: urea $500/ton ÷ 2000 ÷ 0.46; DAP $640/ton ÷ 2000 ÷ 0.46; potash $380/ton ÷ 2000 ÷ 0.60 */
+    var PRICE_N    = 0.543;   /* $/lb N    */
+    var PRICE_P    = 0.696;   /* $/lb P2O5 */
+    var PRICE_K    = 0.317;   /* $/lb K2O  */
+    var priceIsLive = false;
+
+    var currentType = 'hog-liquid';
+
+    /* Try to fetch live fertilizer prices */
+    fetch('/data/fertilizer.json').then(function(r){ return r.json(); }).then(function(d) {
+      var changed = false;
+      /* Try several common key structures */
+      var urea   = extractPrice(d, ['urea','Urea','UREA']);
+      var dap    = extractPrice(d, ['dap','DAP','dap_18_46','map','MAP']);
+      var potash = extractPrice(d, ['potash','Potash','POTASH','muriate','k2o']);
+      if (urea   > 0) { PRICE_N = urea   / 2000 / 0.46; changed = true; }
+      if (dap    > 0) { PRICE_P = dap    / 2000 / 0.46; changed = true; }
+      if (potash > 0) { PRICE_K = potash / 2000 / 0.60; changed = true; }
+      if (changed) {
+        priceIsLive = true;
+        $('priceSrcBadge').textContent = '📡 Live Prices';
+        $('priceSrcRow').classList.add('live');
+        $('priceSrcText').textContent = 'Nutrient prices from live AGSIST fertilizer data';
+        calcManure();
+      }
+    }).catch(function(){/* use defaults silently */});
+
+    function extractPrice(obj, keys) {
+      for (var i = 0; i < keys.length; i++) {
+        var v = obj[keys[i]];
+        if (v === undefined || v === null) continue;
+        if (typeof v === 'number' && v > 50) return v;
+        if (typeof v === 'object') {
+          var sub = v.price || v.value || v.amount || v.last || v.close;
+          if (typeof sub === 'number' && sub > 50) return sub;
+        }
+      }
+      return 0;
+    }
+
+    window.setManureType = function(type) {
+      currentType = type;
+      /* Update button states */
+      Object.keys(MANURE).forEach(function(k) {
+        var btn = $('mn-' + k);
+        if (btn) btn.classList.toggle('active', k === type);
+      });
+      var m = MANURE[type];
+      /* Update nutrient display */
+      $('mnN').textContent          = m.n;
+      $('mnP').textContent          = m.p;
+      $('mnK').textContent          = m.k;
+      $('mnNAvailPct').textContent   = m.navail + '%';
+      /* Update unit labels */
+      var unitLabel = m.liquid ? '(per 1,000 gal)' : '(per ton)';
+      $('mnUnitLabel').textContent   = unitLabel;
+      $('mnQtyHint').textContent     = m.liquid ? 'total gallons' : 'total tons';
+      $('mnQtyUnit').textContent     = m.liquid ? 'gal' : 'tons';
+      /* Auto-fill N availability */
+      $('mnNAvail').value = m.navail;
+      /* Set sensible default quantity */
+      $('mnQty').value = m.liquid ? 50000 : 200;
+      calcManure();
+    };
+
+    window.calcManure = function() {
+      var m        = MANURE[currentType];
+      var rawQty   = parseFloat($('mnQty').value)    || 0;
+      var acres    = parseFloat($('mnAcres').value)   || 1;
+      var nAvail   = parseFloat($('mnNAvail').value)  || m.navail;
+
+      /* Units: liquid = gallons (data is per 1000 gal), solid = tons */
+      var units = m.liquid ? rawQty / 1000 : rawQty;
+
+      /* Total nutrients in applied batch */
+      var totalN  = units * m.n * (nAvail / 100);  /* available N */
+      var totalP  = units * m.p;                    /* all P avail */
+      var totalK  = units * m.k;                    /* all K avail */
+
+      /* Dollar values */
+      var nVal = totalN * PRICE_N;
+      var pVal = totalP * PRICE_P;
+      var kVal = totalK * PRICE_K;
+      var total = nVal + pVal + kVal;
+      var perAcre = acres > 0 ? total / acres : 0;
+
+      /* Render */
+      $('mnTotal').textContent  = fmt0(total);
+      $('mnPerAcre').textContent = fmt2(perAcre);
+      $('mnNVal').textContent   = fmt0(nVal);
+      $('mnPVal').textContent   = fmt0(pVal);
+      $('mnKVal').textContent   = fmt0(kVal);
+
+      var qtyStr = m.liquid
+        ? rawQty.toLocaleString('en-US') + ' gal (' + (rawQty/1000).toLocaleString('en-US',{maximumFractionDigits:1}) + ' × 1,000)'
+        : rawQty.toLocaleString('en-US') + ' tons';
+      var nPriceStr = '$' + PRICE_N.toFixed(3) + '/lb N';
+      var pPriceStr = '$' + PRICE_P.toFixed(3) + '/lb P₂O₅';
+      var kPriceStr = '$' + PRICE_K.toFixed(3) + '/lb K₂O';
+
+      $('mnDetail').innerHTML =
+        m.label + ' — ' + qtyStr + ' applied across ' + acres + ' ac<br>' +
+        'Avail N: ' + totalN.toLocaleString('en-US',{maximumFractionDigits:0}) + ' lbs @ ' + nPriceStr + ' = ' + fmt0(nVal) + '<br>' +
+        'P₂O₅: '  + totalP.toLocaleString('en-US',{maximumFractionDigits:0}) + ' lbs @ ' + pPriceStr + ' = ' + fmt0(pVal) + '<br>' +
+        'K₂O: '   + totalK.toLocaleString('en-US',{maximumFractionDigits:0}) + ' lbs @ ' + kPriceStr + ' = ' + fmt0(kVal);
+    };
+
+    /* Init */
+    calcManure();
   })();
   </script>
 </body>
