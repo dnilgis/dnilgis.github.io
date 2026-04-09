@@ -4,13 +4,54 @@
    Shared base: /components/styles.css (already loaded first)
 
    Brand alignment v8 — 2026-03-02
-   Palette: forest green, warm gold, muted red/orange, institutional borders
+
+   v9 FIXES (2026-04-09 mobile audit):
+   FIX v9-1: body max-width:100vw → 100% — 100vw includes scrollbar width,
+             causing 1–15px horizontal overflow on iOS
+   FIX v9-2: html/body overflow:hidden → clip progressive enhancement —
+             matches the pattern in spray.css v11 and styles.css April 9 fix
+   FIX v9-3: Added overscroll-behavior-x:none — prevents horizontal rubber-band bounce
+   FIX v9-4: .main missing box-sizing, width:100%, overflow-x:clip — content
+             inside was blowing out silently with no containment
+   FIX v9-5: .hero missing box-sizing, max-width:100%, safe area insets —
+             notched iPhones had padding blowout in landscape
+   FIX v9-6: .hero-inner grid 1fr → minmax(0,1fr) — bare 1fr has auto minimum,
+             text content was pushing column wider than viewport
+   FIX v9-7: .risk-panel overflow:hidden REMOVED — creates BFC, kills any
+             future scrollable child; border-radius doesn't require it
+   FIX v9-8: .page-grid grid 1fr 300px → minmax(0,1fr) 300px — same 1fr issue
+   FIX v9-9: .factors-grid, .edu-grid, .stab-grid all 1fr 1fr → minmax(0,1fr)
+   FIX v9-10: min-width:0 added to .factor, .edu-card, .s-card, .sidebar —
+              grid children still have min-width:auto by default; long words
+              and fixed-width tables push them past column bounds
+   FIX v9-11: .soil-air-grid in urea.html inline CSS needs same treatment
+              (fixed in urea.html inline <style> block, not here)
    ==================================================================== */
 
 /* ── Prevent horizontal blowout ───────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
-html { overflow-x: hidden; }
-body  { overflow-x: hidden; max-width: 100vw; }
+html {
+  overflow-x: hidden;           /* fallback: iOS <16 */
+  overflow-x: clip;             /* progressive: iOS 16+ — no BFC side-effect */
+  overscroll-behavior-x: none;  /* FIX v9-3: prevent horizontal rubber-band */
+}
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;              /* FIX v9-1: was 100vw — includes scrollbar, causes overflow */
+  width: 100%;
+}
+
+/* FIX v9-4: .main containment — was missing entirely from this file */
+.main {
+  overflow-x: hidden;
+  overflow-x: clip;             /* no BFC — sticky children preserved */
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  box-sizing: border-box;
+}
 
 /* ── Risk-level CSS variables ────────────────────────────────────── */
 :root {
@@ -30,10 +71,18 @@ body  { overflow-x: hidden; max-width: 100vw; }
   background: linear-gradient(160deg, var(--bg2) 0%, var(--surface) 100%);
   border-bottom: 2px solid var(--border);
   padding: 3rem 1.5rem 2.5rem;
+  /* FIX v9-5: safe area insets + containment */
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .hero-inner {
   max-width: 1400px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; align-items: center;
+  display: grid;
+  /* FIX v9-6: minmax(0,1fr) — bare 1fr has auto minimum, causes blowout */
+  grid-template-columns: minmax(0,1fr) 380px;
+  gap: 2.5rem; align-items: center;
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: .45rem;
@@ -57,12 +106,16 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .risk-panel {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.5rem; text-align: center;
-  position: relative; overflow: hidden;
+  position: relative;
+  /* FIX v9-7: overflow:hidden REMOVED — created BFC, would block future
+     scrollable children; border-radius does not require overflow:hidden */
   transition: border-color .2s;
+  min-width: 0;
 }
 .risk-panel::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: var(--risk-mod); transition: background .4s;
+  border-radius: var(--r-md, 6px) var(--r-md, 6px) 0 0;
 }
 .risk-panel.low::before      { background: var(--risk-low); }
 .risk-panel.moderate::before { background: var(--risk-mod); }
@@ -95,7 +148,7 @@ body  { overflow-x: hidden; max-width: 100vw; }
   font-family: 'Oswald', sans-serif; font-size: 2.4rem; font-weight: 700; line-height: 1;
   transition: color .3s;
 }
-.gauge-unit { font-size: .72rem; color: var(--text-muted); margin-top: -.1rem; }
+.gauge-unit { font-size: .62rem; color: var(--text-muted); margin-top: -.1rem; }
 
 .risk-badge {
   display: inline-flex; align-items: center; gap: .35rem;
@@ -148,6 +201,7 @@ body  { overflow-x: hidden; max-width: 100vw; }
   font-size: .85rem; font-weight: 700; cursor: pointer;
   text-transform: uppercase; letter-spacing: .5px;
   transition: background .15s;
+  min-height: 44px;
 }
 .btn-primary:hover { background: #1b4d1c; }
 .btn-secondary {
@@ -158,6 +212,7 @@ body  { overflow-x: hidden; max-width: 100vw; }
   color: var(--text-dim); cursor: pointer;
   text-transform: uppercase; letter-spacing: .5px;
   transition: border-color .15s, color .15s;
+  min-height: 44px;
 }
 .btn-secondary:hover { border-color: var(--green); color: var(--green); }
 .zip-row {
@@ -168,27 +223,32 @@ body  { overflow-x: hidden; max-width: 100vw; }
   padding: .75rem 1rem; background: var(--surface2); border: 2px solid var(--border);
   border-radius: var(--r-sm, 4px); font-family: 'JetBrains Mono', monospace; font-size: .88rem;
   color: var(--text); width: 160px; outline: none; transition: border-color .15s;
+  min-height: 44px;
 }
 .zip-input:focus { border-color: var(--green); }
 
 /* ── Page Grid ───────────────────────────────────────────────────── */
-.main {
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
-}
+/* FIX v9-8: minmax(0,1fr) — bare 1fr has auto minimum */
 .page-grid {
-  display: grid; grid-template-columns: 1fr 300px; gap: 1.75rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 300px;
+  gap: 1.75rem;
   align-items: start;
 }
 
 /* ── Factor Cards ────────────────────────────────────────────────── */
+/* FIX v9-9: minmax(0,1fr) on both columns */
 .factors-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: .85rem; margin-bottom: 1.5rem;
 }
+/* FIX v9-10: min-width:0 — grid children default to min-width:auto */
 .factor {
   background: var(--surface); border: 2px solid var(--border);
-  border-radius: var(--r-md, 6px); padding: 1rem 1.1rem; transition: border-color .2s;
+  border-radius: var(--r-md, 6px); padding: 1rem 1.1rem;
+  transition: border-color .2s;
+  min-width: 0;
 }
 .factor:hover { border-color: var(--border-g); }
 .factor-head {
@@ -198,12 +258,13 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .factor-title {
   display: flex; align-items: center; gap: .4rem;
   font-size: .82rem; font-weight: 700; color: var(--text);
+  min-width: 0;
 }
-.factor-icon { font-size: 1rem; }
+.factor-icon { font-size: 1rem; flex-shrink: 0; }
 .factor-score {
   font-family: 'JetBrains Mono', monospace;
   font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  padding: .17rem .48rem; border-radius: 3px; white-space: nowrap;
+  padding: .17rem .48rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
 }
 .factor-score.low  { background: rgba(58,139,60,.10);  color: var(--risk-low); }
 .factor-score.mod  { background: rgba(218,165,32,.10); color: var(--risk-mod); }
@@ -213,9 +274,11 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .factor-val {
   font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700;
   color: var(--text); line-height: 1; margin-bottom: .4rem;
+  overflow-wrap: break-word;
 }
 .factor-desc {
   font-size: .77rem; color: var(--text-dim); line-height: 1.6; margin-bottom: .65rem;
+  overflow-wrap: break-word;
 }
 .factor-bar {
   height: 4px; background: var(--surface3); border-radius: 2px; overflow: hidden;
@@ -232,17 +295,22 @@ body  { overflow-x: hidden; max-width: 100vw; }
   font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
   color: var(--text-muted); margin-bottom: 1.1rem;
 }
+/* FIX v9-9: minmax(0,1fr) */
 .edu-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin-bottom: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: .85rem; margin-bottom: 1.25rem;
 }
+/* FIX v9-10: min-width:0 */
 .edu-card {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.1rem;
+  min-width: 0;
 }
 .edu-card:hover { border-color: var(--border-g); }
 .edu-card-icon  { font-size: 1.4rem; margin-bottom: .5rem; }
 .edu-card-title { font-size: .85rem; font-weight: 700; color: var(--text); margin-bottom: .4rem; }
-.edu-card-text  { font-size: .8rem; color: var(--text-dim); line-height: 1.7; margin-bottom: .65rem; }
+.edu-card-text  { font-size: .8rem; color: var(--text-dim); line-height: 1.7; margin-bottom: .65rem; overflow-wrap: break-word; }
 .edu-card-risk  {
   font-family: 'JetBrains Mono', monospace;
   font-size: .68rem; font-weight: 700; padding: .3rem .7rem;
@@ -253,6 +321,7 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .chem-box {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.3rem; margin-bottom: 1.25rem;
+  min-width: 0;
 }
 .chem-eq {
   display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
@@ -274,19 +343,29 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .chem-note {
   font-size: .8rem; color: var(--text-dim); line-height: 1.7;
   margin-top: .85rem; padding-top: .75rem; border-top: 1px solid var(--border);
+  overflow-wrap: break-word;
 }
 
 /* ── Stabilizer section ──────────────────────────────────────────── */
+/* FIX v9-9: minmax(0,1fr) */
 .stab-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 1.5rem;
 }
 
 /* ── Sidebar ─────────────────────────────────────────────────────── */
-.sidebar { display: flex; flex-direction: column; gap: 1rem; }
+/* FIX v9-10: min-width:0 on sidebar itself */
+.sidebar {
+  display: flex; flex-direction: column; gap: 1rem;
+  min-width: 0;
+}
+/* FIX v9-10: min-width:0 on sidebar cards */
 .s-card {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.1rem;
   transition: border-color .2s;
+  min-width: 0;
 }
 .s-card:hover { border-color: var(--border-g); }
 .s-card-title {
@@ -312,9 +391,13 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .rec-text { font-size: .8rem; color: var(--text-dim); line-height: 1.65; }
 
 /* ── 5-Day Forecast Strip ────────────────────────────────────────── */
-.forecast-strip { display: flex; gap: .4rem; }
+.forecast-strip {
+  display: flex; gap: .4rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.forecast-strip::-webkit-scrollbar { display: none; }
 .fc-day {
-  flex: 1; text-align: center;
+  flex: 1; flex-shrink: 0; min-width: 48px; text-align: center;
   background: var(--surface2); border: 2px solid var(--border);
   border-radius: var(--r-sm, 4px); padding: .5rem .2rem;
 }
@@ -322,29 +405,30 @@ body  { overflow-x: hidden; max-width: 100vw; }
 .fc-day-icon { font-size: 1rem; margin-bottom: .2rem; }
 .fc-day-risk {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .55rem; font-weight: 700; padding: .15rem .3rem;
+  font-size: .62rem; font-weight: 700; padding: .15rem .3rem;
   border-radius: 3px; margin-bottom: .2rem;
 }
 .fc-day-risk.low      { background: rgba(58,139,60,.12); color: var(--risk-low); }
 .fc-day-risk.moderate { background: rgba(218,165,32,.12); color: var(--risk-mod); }
 .fc-day-risk.high     { background: rgba(200,122,40,.12); color: var(--risk-high); }
 .fc-day-risk.extreme  { background: rgba(184,76,42,.12); color: var(--risk-extreme); }
-.fc-day-temp { font-size: .6rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+.fc-day-temp { font-size: .62rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
 
 /* ── Stabilizer CTA ──────────────────────────────────────────────── */
 .stabilizer-cta {
   background: linear-gradient(135deg, rgba(200,122,40,.06) 0%, var(--surface) 100%);
   border: 2px solid rgba(200,122,40,.20); border-radius: var(--r-md, 6px); padding: 1.1rem;
+  min-width: 0;
 }
 .stab-badge {
   display: inline-block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .58rem; font-weight: 700; letter-spacing: .12em;
+  font-size: .62rem; font-weight: 700; letter-spacing: .12em;
   text-transform: uppercase; color: var(--orange); background: rgba(200,122,40,.08);
   padding: .2rem .6rem; border-radius: 3px; margin-bottom: .6rem;
 }
 .stab-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: .4rem; }
-.stab-text  { font-size: .78rem; color: var(--text-dim); line-height: 1.65; margin-bottom: .85rem; }
+.stab-text  { font-size: .78rem; color: var(--text-dim); line-height: 1.65; margin-bottom: .85rem; overflow-wrap: break-word; }
 
 /* ── Cross-link ──────────────────────────────────────────────────── */
 .cross-link {
@@ -352,11 +436,12 @@ body  { overflow-x: hidden; max-width: 100vw; }
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1rem; text-decoration: none; color: inherit;
   transition: border-color .15s, background .15s;
+  min-width: 0;
 }
 .cross-link:hover { border-color: var(--green); background: var(--surface2); }
 .cross-link-icon  { font-size: 1.5rem; flex-shrink: 0; }
 .cross-link-title { font-size: .82rem; font-weight: 700; color: var(--green); margin-bottom: .2rem; }
-.cross-link-text  { font-size: .75rem; color: var(--text-dim); line-height: 1.5; }
+.cross-link-text  { font-size: .75rem; color: var(--text-dim); line-height: 1.5; overflow-wrap: break-word; }
 .cross-link-arrow { font-size: 1rem; color: var(--text-muted); margin-left: auto; flex-shrink: 0; transition: transform .15s, color .15s; }
 .cross-link:hover .cross-link-arrow { transform: translateX(3px); color: var(--green); }
 
@@ -379,23 +464,31 @@ body  { overflow-x: hidden; max-width: 100vw; }
    RESPONSIVE
 ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 860px) {
-  .page-grid { grid-template-columns: 1fr; }
+  .page-grid { grid-template-columns: minmax(0,1fr); }
   .sidebar { order: -1; }
 }
 @media (max-width: 720px) {
-  .hero-inner { grid-template-columns: 1fr; }
+  .hero-inner { grid-template-columns: minmax(0,1fr); }
   .risk-panel { max-width: 400px; }
 }
 @media (max-width: 700px) {
-  .hero { padding: 2rem 1rem 1.5rem; }
-  .factors-grid { grid-template-columns: 1fr; }
-  .edu-grid     { grid-template-columns: 1fr; }
+  .hero {
+    padding: 2rem 1rem 1.5rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  .factors-grid { grid-template-columns: minmax(0,1fr); }
+  .edu-grid     { grid-template-columns: minmax(0,1fr); }
   .main         { padding: 1.5rem 1rem 3rem; }
   .forecast-strip { gap: .25rem; }
-  .stab-grid    { grid-template-columns: 1fr; }
+  .stab-grid    { grid-template-columns: minmax(0,1fr); }
 }
 @media (max-width: 520px) {
-  .hero { padding: 1.5rem .85rem 1.25rem; }
+  .hero {
+    padding: 1.5rem .85rem 1.25rem;
+    padding-left: max(.85rem, env(safe-area-inset-left));
+    padding-right: max(.85rem, env(safe-area-inset-right));
+  }
   .hero-sub { font-size: .88rem; }
   .hero-title { margin-bottom: .6rem; }
   .risk-panel { padding: 1.1rem .85rem; }
@@ -414,16 +507,20 @@ body  { overflow-x: hidden; max-width: 100vw; }
   .chem-eq { gap: .35rem; }
   .molecule { font-size: .82rem; padding: .15rem .4rem; }
   .fc-day { padding: .45rem .15rem; }
-  .fc-day-name { font-size: .55rem; }
-  .fc-day-risk { font-size: .52rem; padding: .08rem .22rem; }
+  .fc-day-name { font-size: .62rem; }
+  .fc-day-risk { font-size: .62rem; padding: .08rem .22rem; }
 }
 @media (max-width: 380px) {
-  .hero { padding: 1.25rem .65rem 1rem; }
+  .hero {
+    padding: 1.25rem .65rem 1rem;
+    padding-left: max(.65rem, env(safe-area-inset-left));
+    padding-right: max(.65rem, env(safe-area-inset-right));
+  }
   .hero-sub { font-size: .82rem; }
   .risk-panel { padding: .85rem .65rem; }
   .gauge-svg { width: 140px; height: 80px; }
   .gauge-num { font-size: 1.7rem; }
-  .gauge-unit { font-size: .6rem; }
+  .gauge-unit { font-size: .62rem; }
   .risk-badge { font-size: .7rem; }
   .risk-verdict { font-size: .75rem; }
   .factor { padding: .7rem; }

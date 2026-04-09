@@ -4,7 +4,17 @@
    Shared base: /components/styles.css (already loaded first)
 
    Brand alignment v10 — 2026-03-04
-   Palette: forest green, warm gold, muted red, institutional borders
+
+   v12 FIXES (2026-04-09):
+   FIX v12-1: .main overflow-x:hidden → clip — hidden creates a BFC which
+              breaks position:sticky children (ticker strip, nav). Matches
+              the same fix applied to styles.css globally in the April 9 session.
+   FIX v12-2: .sc overflow:hidden REMOVED — killed iOS touch scroll on .day-strip
+              child inside sidebar card (same iOS BFC pattern as .window-wrap v11-1)
+   FIX v12-3: Font floor enforcement — .hr-badge (.6→.62rem), .nt-badge (.58→.62rem),
+              .day-name/.day-rating/.day-wind at 380px (.55/.55/.58→.62rem)
+   FIX v12-4: .day-strip overflow-x:auto + .day-item min-width:48px — 5-day strip
+              now scrolls on narrow phones instead of wrapping/collapsing
 
    v11 FIXES (iOS Safari scroll / grid blowout):
    FIX v11-1: .window-wrap overflow:hidden REMOVED — killed iOS touch scroll on .hourly-scroll
@@ -33,15 +43,6 @@
    FIX M7: Status panel text sizing at 380px
    FIX M8: Mix step numbers smaller at 380px
    FIX M9: Checklist checkbox sizing for mobile
-
-   v9 FIXES (2026-03-04 audit):
-   FIX v9-1: prefers-reduced-motion media query
-   FIX v9-2: Print CSS shows checklist sidebar card
-   FIX v9-3: Nozzle table scroll indicator cleaned up
-   FIX v9-4: Extracted inline styles to classes
-   FIX v9-5: Additional mobile touch-target and spacing polish
-   FIX v9-6: aria-live status region styling
-   FIX v9-7: Precipitation card styles
    ==================================================================== */
 
 /* ── Fallback vars (in case styles.css doesn't define them) ───── */
@@ -54,26 +55,29 @@
 }
 
 /* ── CRITICAL: Prevent horizontal blowout ────────────────────────── */
-/* FIX M1: overflow:clip is the iOS-safe replacement for overflow-x:hidden. */
 *, *::before, *::after { box-sizing: border-box; }
 html {
-  overflow-x: hidden;  /* v10: fallback for iOS <16 where clip isn't supported */
+  overflow-x: hidden;  /* fallback for iOS <16 where clip isn't supported */
   overflow-x: clip;    /* progressive enhancement: iOS 16+ */
-  overscroll-behavior-x: none; /* v10: prevent horizontal bounce on iOS */
+  overscroll-behavior-x: none;
 }
 body {
   overflow-x: hidden;
   overflow-x: clip;
   max-width: 100%;
-  width: 100%;         /* v10: explicit constraint */
+  width: 100%;
 }
 
-/* FIX M2: .main wrapper gets overflow control */
+/* FIX M2 + v12-1: .main — overflow-x:clip (NOT hidden)
+   overflow-x:hidden creates a Block Formatting Context which breaks
+   position:sticky children (ticker strip, site nav).
+   overflow-x:clip does not create a BFC. */
 .main {
-  overflow-x: hidden;
+  overflow-x: hidden;  /* fallback iOS <16 */
+  overflow-x: clip;    /* v12: no BFC — sticky children work correctly */
   width: 100%;
   max-width: 100%;
-  box-sizing: border-box; /* v10 */
+  box-sizing: border-box;
 }
 
 /* ── Hero ─────────────────────────────────────────────────────────── */
@@ -84,14 +88,14 @@ body {
   padding-left: max(1.5rem, env(safe-area-inset-left));
   padding-right: max(1.5rem, env(safe-area-inset-right));
   overflow: hidden;
-  max-width: 100%;     /* v10: prevent blowout */
+  max-width: 100%;
   box-sizing: border-box;
 }
 .hero-inner {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: minmax(0,1fr) 340px;
   gap: 2.5rem;
   align-items: center;
 }
@@ -138,10 +142,8 @@ body {
 .status-main.frozen  { color: var(--blue); }
 .status-sub  { font-size: .88rem; color: var(--text-dim); line-height: 1.5; margin-bottom: .5rem; }
 .status-loc  { font-size: .75rem; color: var(--text-muted); }
-/* FIX v9-4: data freshness timestamp */
 .status-ts   { font-size: .65rem; color: var(--text-muted); margin-top: .4rem; font-family: 'JetBrains Mono', monospace; }
 
-/* Status panel border color per rating */
 .status-panel.good     { border-color: rgba(58,139,60,.30); }
 .status-panel.marginal { border-color: rgba(218,165,32,.30); }
 .status-panel.poor     { border-color: rgba(184,76,42,.30); }
@@ -195,7 +197,7 @@ body {
 .jump-nav {
   display: flex; gap: .5rem; flex-wrap: nowrap;
   margin-bottom: 1.5rem;
-  max-width: 100%;     /* v10: was 1200px — prevents blowout on mobile */
+  max-width: 100%;
   margin-left: auto; margin-right: auto;
   padding: 0 1.5rem;
   padding-left: max(1.5rem, env(safe-area-inset-left));
@@ -203,10 +205,9 @@ body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  box-sizing: border-box; /* v10 */
+  box-sizing: border-box;
 }
 .jump-nav::-webkit-scrollbar { display: none; }
-/* v10: scroll fade hint — shows there's more content to scroll */
 .jump-nav::after {
   content: '';
   position: sticky;
@@ -234,22 +235,17 @@ body {
 /* ── Page Grid (two-column layout) ───────────────────────────────── */
 .pg {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0,1fr) 320px;
   gap: 1.5rem;
   align-items: start;
-  max-width: 100%;     /* v10: 100% prevents blowout; inner content maxes at 1200px naturally */
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   padding-left: max(1.5rem, env(safe-area-inset-left));
   padding-right: max(1.5rem, env(safe-area-inset-right));
-  box-sizing: border-box; /* v10 */
+  box-sizing: border-box;
 }
-
-/* FIX v11-5: anonymous grid children need min-width:0 or their content
-   (e.g. nozzle table min-width:520px) can push the column wider than viewport */
-.pg > div {
-  min-width: 0;
-}
+.pg > div { min-width: 0; }
 
 /* ── Section Header Bar ──────────────────────────────────────────── */
 .section-bar {
@@ -271,7 +267,7 @@ body {
 /* ── Factor Cards ────────────────────────────────────────────────── */
 .factors {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap: .9rem;
   margin-bottom: 1.5rem;
 }
@@ -312,7 +308,7 @@ body {
 .fcard-desc {
   font-size: .78rem; color: var(--text-dim); line-height: 1.6;
   margin-bottom: .65rem;
-  overflow-wrap: break-word; /* v10 */
+  overflow-wrap: break-word;
 }
 .fcard-bar {
   height: 5px; background: var(--surface3); border-radius: 3px; overflow: hidden;
@@ -323,17 +319,11 @@ body {
 }
 
 /* ── Hourly Spray Window ─────────────────────────────────────────── */
-/*
-  FIX v11-1: overflow:hidden REMOVED from .window-wrap
-  This was killing iOS Safari touch scrolling on the .hourly-scroll child.
-  On iOS, overflow:hidden on a parent prevents -webkit-overflow-scrolling:touch
-  from working on children. The hourly strip was stuck/unscrollable on iPhone.
-  Border-radius does NOT need overflow:hidden in modern browsers.
-*/
 .window-wrap {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.1rem;
   margin-bottom: 1.5rem;
+  /* overflow:hidden intentionally OMITTED — kills iOS touch scroll on .hourly-scroll child */
 }
 .window-head {
   font-family: 'JetBrains Mono', monospace;
@@ -363,7 +353,7 @@ body {
 .hr-wind  { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--text-dim); font-weight: 600; }
 .hr-badge {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .6rem; font-weight: 700; letter-spacing: .04em;
+  font-size: .62rem; font-weight: 700; letter-spacing: .04em;
   padding: .1rem .3rem; border-radius: 3px;
 }
 .hr-badge.good     { background: rgba(58,139,60,.12); color: var(--green); }
@@ -387,7 +377,7 @@ body {
 }
 .edu-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap: .85rem;
   margin-bottom: 1.25rem;
 }
@@ -421,7 +411,7 @@ body {
 }
 .inv-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap: 1.5rem;
 }
 .inv-intro {
@@ -467,17 +457,10 @@ body {
    TANK MIX ORDER GUIDE
 ═══════════════════════════════════════════════════════════════════ */
 .mix-section { margin-top: 2.5rem; min-width: 0; }
-/*
-  FIX v11-2: overflow:hidden REMOVED from .mix-card
-  Same iOS Safari issue as .window-wrap — the overflow:hidden was preventing
-  the nozzle-table-wrap (overflow-x:auto) inside from being touch-scrollable
-  on iPhone. Also: the nozzle table's min-width:520px was pushing .mix-card
-  wider than the viewport because overflow:hidden doesn't establish a new
-  scrollable context — it just clips visually while the layout still expands.
-*/
 .mix-card {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.5rem;
+  /* overflow:hidden intentionally OMITTED — kills iOS touch scroll on .nozzle-table-wrap child */
 }
 .mix-intro {
   font-size: .85rem; color: var(--text-dim); line-height: 1.75;
@@ -488,7 +471,7 @@ body {
 }
 .mix-step {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
+  grid-template-columns: 44px minmax(0,1fr);
   gap: .85rem; align-items: start;
   padding: .85rem; background: var(--surface2);
   border: 2px solid var(--border); border-radius: var(--r-md, 6px);
@@ -518,7 +501,7 @@ body {
 
 .mix-tips {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap: .75rem;
 }
 .mix-tip {
@@ -543,7 +526,7 @@ body {
 .tips-section { margin-top: 2.5rem; min-width: 0; }
 .tips-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap: .85rem; margin-bottom: 1rem;
 }
 .tip-card {
@@ -564,15 +547,10 @@ body {
 .tip-card-detail strong { color: var(--text-dim); }
 
 /* ── Nozzle Comparison Table ─────────────────────────────────────── */
-/*
-  FIX v11-4: max-width:100% added to .nozzle-table-wrap
-  Without this, the table's min-width:520px was the intrinsic width of the wrap,
-  which then pushed .mix-card wider than the viewport on mobile.
-*/
 .nozzle-table-wrap {
   overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0;
   position: relative;
-  max-width: 100%; /* FIX v11-4: prevent table from expanding parent beyond viewport */
+  max-width: 100%;
 }
 .nozzle-table-wrap::after {
   content: '';
@@ -602,7 +580,7 @@ body {
 .nt-badge {
   display: inline-block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .58rem; font-weight: 700;
+  font-size: .62rem; font-weight: 700;
   padding: .15rem .4rem; border-radius: 3px; white-space: nowrap;
 }
 .nt-badge.low  { background: rgba(58,139,60,.10); color: var(--green); }
@@ -626,7 +604,9 @@ body {
 .sc {
   background: var(--surface); border: 2px solid var(--border);
   border-radius: var(--r-md, 6px); padding: 1.1rem 1.2rem;
-  min-width: 0; overflow: hidden;
+  min-width: 0;
+  /* overflow:hidden intentionally OMITTED — kills iOS touch scroll on .day-strip child.
+     border-radius does not require overflow:hidden in modern browsers. */
 }
 .sc-title {
   font-family: 'JetBrains Mono', monospace;
@@ -651,12 +631,17 @@ body {
 .rec-t { font-size: .82rem; color: var(--text-dim); line-height: 1.65; }
 
 /* ── 5-Day Strip ─────────────────────────────────────────────────── */
-.day-strip { display: flex; gap: .45rem; margin-top: .3rem; }
+.day-strip {
+  display: flex; gap: .45rem; margin-top: .3rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.day-strip::-webkit-scrollbar { display: none; }
 .day-item {
-  flex: 1; display: flex; flex-direction: column; align-items: center;
+  flex: 1; flex-shrink: 0; min-width: 48px;
+  display: flex; flex-direction: column; align-items: center;
   gap: .2rem; padding: .65rem .3rem;
   background: var(--surface2); border: 2px solid var(--border);
-  border-radius: var(--r-sm, 4px); text-align: center; min-width: 0;
+  border-radius: var(--r-sm, 4px); text-align: center;
 }
 .day-name   { font-family: 'JetBrains Mono', monospace; font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
 .day-icon   { font-size: 1.2rem; line-height: 1; }
@@ -685,7 +670,6 @@ body {
 .checklist-item span { color: var(--text-dim); }
 
 /* ── Quick Mix Order Sidebar ─────────────────────────────────────── */
-/* FIX v9-4: extracted from inline styles */
 .qmix-list {
   display: flex; flex-direction: column; gap: .35rem; font-size: .78rem;
 }
@@ -734,54 +718,24 @@ body {
 .fade-up.vis { opacity: 1; transform: none; }
 
 /* ═══════════════════════════════════════════════════════════════════
-   FIX v9-1: PREFERS-REDUCED-MOTION
-   Disable animations for users who prefer reduced motion
+   PREFERS-REDUCED-MOTION
 ═══════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
-  .fade-up {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .live-dot {
-    animation: none;
-    opacity: 1;
-  }
-  .fcard-bar-fill {
-    transition: none;
-  }
-  .fcard,
-  .tip-card,
-  .mix-step,
-  .cross-link,
-  .status-panel,
-  .hr-item,
-  .jump-link,
-  .btn-g,
-  .btn-q {
-    transition: none;
-  }
+  .fade-up { opacity: 1; transform: none; transition: none; }
+  .live-dot { animation: none; opacity: 1; }
+  .fcard-bar-fill { transition: none; }
+  .fcard, .tip-card, .mix-step, .cross-link, .status-panel,
+  .hr-item, .jump-link, .btn-g, .btn-q { transition: none; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════════════════ */
-
-/* Tablet: single column, sidebar stays BELOW content */
-/*
-  FIX v11-3: grid-template-columns: minmax(0, 1fr) instead of 1fr
-  CSS grid's 1fr has a minimum size of auto — meaning if content is wider
-  than available space, the column expands. minmax(0, 1fr) forces the
-  minimum to 0, allowing content to be clipped/scrolled internally instead
-  of blowing out the grid track and the page.
-*/
 @media (max-width: 1100px) {
-  .hero-inner { grid-template-columns: 1fr; }
+  .hero-inner { grid-template-columns: minmax(0,1fr); }
   .status-panel { max-width: 400px; }
-  .pg { grid-template-columns: minmax(0, 1fr); }
+  .pg { grid-template-columns: minmax(0,1fr); }
 }
-
-/* Mid-size phones / small tablets */
 @media (max-width: 768px) {
   .hero {
     padding: 2rem 1rem 1.5rem;
@@ -798,21 +752,19 @@ body {
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
   }
-  .inv-grid { grid-template-columns: 1fr; }
-  .mix-tips { grid-template-columns: 1fr; }
+  .inv-grid { grid-template-columns: minmax(0,1fr); }
+  .mix-tips { grid-template-columns: minmax(0,1fr); }
   .mix-card { padding: 1.1rem; }
-  .mix-step { grid-template-columns: 36px minmax(0, 1fr); gap: .65rem; padding: .75rem; }
+  .mix-step { grid-template-columns: 36px minmax(0,1fr); gap: .65rem; padding: .75rem; }
   .mix-num  { width: 36px; height: 36px; font-size: .85rem; }
   .status-main { font-size: 1.3rem; }
   .status-icon { font-size: 2.5rem; }
   .status-panel { max-width: none; }
-  .edu-grid { grid-template-columns: 1fr; }
+  .edu-grid { grid-template-columns: minmax(0,1fr); }
 }
-
-/* Phones */
 @media (max-width: 580px) {
-  .factors { grid-template-columns: 1fr; }
-  .tips-grid { grid-template-columns: 1fr; }
+  .factors { grid-template-columns: minmax(0,1fr); }
+  .tips-grid { grid-template-columns: minmax(0,1fr); }
   .inv-arrow { display: none; }
   .inv-layer-meta { margin-left: 0; }
   .inv-layer-label { font-size: .65rem; }
@@ -820,11 +772,8 @@ body {
   .cross-link { gap: .6rem; padding: .85rem; }
   .cross-link-text { font-size: .72rem; }
   .nozzle-table-wrap::after { width: 20px; }
-  /* v9-5: ensure hourly items don't get too tight */
   .hr-item { min-width: 54px; padding: .5rem .35rem; }
 }
-
-/* Small phones (375px and below) */
 @media (max-width: 380px) {
   .hero {
     padding: 1.5rem .75rem 1.25rem;
@@ -854,7 +803,7 @@ body {
   .mix-step-name { font-size: .78rem; }
   .mix-step-what { font-size: .72rem; }
   .mix-step-why { font-size: .66rem; }
-  .mix-step { grid-template-columns: 30px minmax(0, 1fr); gap: .5rem; padding: .65rem; }
+  .mix-step { grid-template-columns: 30px minmax(0,1fr); gap: .5rem; padding: .65rem; }
   .mix-num { width: 30px; height: 30px; font-size: .75rem; border-radius: var(--r-sm, 4px); }
   .tip-card { padding: .85rem; }
   .tip-card-title { font-size: .78rem; }
@@ -867,20 +816,18 @@ body {
   .inv-detect-item { font-size: .72rem; }
   .inv-warning { font-size: .72rem; padding: .5rem .65rem; }
   .day-item { padding: .5rem .2rem; }
-  .day-name { font-size: .55rem; }
-  .day-rating { font-size: .55rem; padding: .1rem .2rem; }
-  .day-wind { font-size: .58rem; }
+  .day-name { font-size: .62rem; }
+  .day-rating { font-size: .62rem; padding: .1rem .2rem; }
+  .day-wind { font-size: .62rem; }
 }
 
 /* ── Print ───────────────────────────────────────────────────────── */
-/* FIX v9-2: show checklist in print — farmers print this to take to the field */
 @media print {
   .hero, .status-panel, #site-header, #site-footer, .jump-nav,
   .loc-setup, .cross-link, .window-wrap, #factor-section { display: none !important; }
   .pg { grid-template-columns: 1fr; }
   .sidebar { display: block; }
   .sc { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ccc; margin-bottom: .75rem; }
-  /* Hide non-essential sidebar cards, keep checklist + quick mix order */
   .sc:has(.rec) { display: none; }
   .sc:has(.day-strip) { display: none; }
   body { color: #000; background: #fff; }
