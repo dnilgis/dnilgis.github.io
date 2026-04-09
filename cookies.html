@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111a0a">
   <title>Cookie Policy — AGSIST</title>
-  <meta name="description" content="Cookie Policy for AGSIST — what minimal browser storage we use, what we don't, and how to clear it.">
+  <meta name="description" content="Cookie Policy for AGSIST — what minimal browser storage is used, what isn't, and how to clear it.">
   <meta name="keywords"    content="AGSIST cookie policy, agriculture website cookies, farm data privacy">
-  <meta name="author"      content="Farmers First Agri Service — AGSIST">
+  <meta name="author"      content="Sigurd Lindquist — Farmers First Agri Service">
   <meta name="robots"      content="index, follow">
-  <link rel="canonical"    href="https://agsist.com/legal/cookies">
+  <link rel="canonical"    href="https://agsist.com/cookies">
 
   <meta property="og:type"         content="website">
   <meta property="og:site_name"    content="AGSIST">
   <meta property="og:locale"       content="en_US">
   <meta property="og:title"        content="Cookie Policy — AGSIST">
-  <meta property="og:description"  content="Cookie Policy for AGSIST — what minimal browser storage we use, what we don't, and how to clear it.">
-  <meta property="og:url"          content="https://agsist.com/legal/cookies">
+  <meta property="og:description"  content="Cookie Policy for AGSIST — what minimal browser storage is used, what isn't, and how to clear it.">
+  <meta property="og:url"          content="https://agsist.com/cookies">
   <meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
@@ -24,12 +25,13 @@
   <meta name="twitter:site"        content="@agsist">
   <meta name="twitter:creator"     content="@agsist">
   <meta name="twitter:title"       content="Cookie Policy — AGSIST">
-  <meta name="twitter:description" content="Cookie Policy for AGSIST — what minimal browser storage we use, what we don't, and how to clear it.">
+  <meta name="twitter:description" content="Cookie Policy for AGSIST — minimal browser storage, no advertising cookies, no cross-site tracking.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
 
+  <link rel="preload" href="/components/styles.css" as="style">
   <link rel="stylesheet"                          href="/components/styles.css">
   <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
@@ -37,14 +39,25 @@
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
   <link rel="manifest"                            href="/manifest.json">
   <style>
+    /* v2: theme-color, preload, author meta, contact line */
     button,a,[role="button"]{touch-action:manipulation;}
     .legal-page{max-width:780px;margin:0 auto;padding:3rem 1.5rem 5rem;}
-    .legal-page h1{font-size:1.8rem;color:var(--gold);margin-bottom:.5rem;}
-    .legal-page .updated{color:var(--text-dim);font-size:.85rem;margin-bottom:2.5rem;}
-    .legal-page h2{font-size:1.1rem;color:var(--text);margin:2rem 0 .75rem;font-weight:700;}
-    .legal-page p,.legal-page li{color:var(--text-dim);line-height:1.8;font-size:.95rem;}
+    .legal-page h1{font-family:'Oswald',sans-serif;font-size:clamp(1.6rem,3.5vw,2rem);font-weight:700;color:var(--gold);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.02em;}
+    .legal-page .updated{color:var(--text-muted);font-size:.78rem;margin-bottom:2rem;}
+    .legal-page h2{font-size:.95rem;color:var(--text);margin:1.75rem 0 .5rem;font-weight:700;padding-bottom:.3rem;border-bottom:1px solid var(--border);}
+    .legal-page p,.legal-page li{color:var(--text-dim);line-height:1.8;font-size:.88rem;}
+    .legal-page p+p{margin-top:.6rem}
     .legal-page ul{padding-left:1.5rem;margin:.5rem 0 1rem;}
+    .legal-page li{margin-bottom:.3rem}
     .legal-page a{color:var(--gold);}
+    .legal-page code{font-size:.82rem;background:var(--surface2);padding:.1rem .35rem;border-radius:3px;color:var(--text);}
+    .contact-line{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.85rem;color:var(--text-dim);}
+    @media(max-width:520px){
+      .legal-page{padding:1.5rem .9rem 3rem}
+      .legal-page h1{font-size:1.4rem}
+      .legal-page h2{font-size:.88rem}
+      .legal-page p,.legal-page li{font-size:.82rem}
+    }
   </style>
 </head>
 <body>
@@ -55,25 +68,32 @@
       <h1>Cookie Policy</h1>
       <p class="updated">Last updated: February 2026</p>
 
-<h2>What We Use</h2>
-<p>AGSIST uses minimal browser storage. We do not use advertising cookies or cross-site tracking.</p>
-<h2>localStorage (Not Cookies)</h2>
-<p>We store one item in your browser's localStorage:</p>
-<ul>
-  <li><code>agsist-theme</code> — stores your dark/light mode preference ("dark" or "light"). This never leaves your browser and contains no personal information.</li>
-</ul>
-<h2>Google Analytics Cookies</h2>
-<p>Google Analytics 4 sets cookies to distinguish users and sessions for anonymous usage reporting. These cookies are:</p>
-<ul>
-  <li><code>_ga</code> — expires 2 years, distinguishes users</li>
-  <li><code>_ga_XXXXXXXX</code> — expires 2 years, session persistence</li>
-</ul>
-<p>No personally identifiable information is included. You can opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
-<h2>No Advertising Cookies</h2>
-<p>AGSIST does not use advertising networks, retargeting pixels, or social media tracking cookies.</p>
-<h2>Managing Cookies</h2>
-<p>You can clear all cookies and localStorage through your browser settings at any time. This will reset your theme preference to dark mode.</p>
+      <h2>What This Site Uses</h2>
+      <p>AGSIST uses minimal browser storage. No advertising cookies, no cross-site tracking, no retargeting pixels.</p>
 
+      <h2>localStorage (Not Cookies)</h2>
+      <p>One item is stored in your browser's localStorage:</p>
+      <ul>
+        <li><code>agsist-theme</code> — stores your dark/light mode preference ("dark" or "light"). This never leaves your browser and contains no personal information.</li>
+      </ul>
+
+      <h2>Google Analytics Cookies</h2>
+      <p>Google Analytics 4 sets cookies to distinguish users and sessions for anonymous usage reporting. These cookies are:</p>
+      <ul>
+        <li><code>_ga</code> — expires 2 years, distinguishes users</li>
+        <li><code>_ga_XXXXXXXX</code> — expires 2 years, session persistence</li>
+      </ul>
+      <p>No personally identifiable information is included. You can opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
+
+      <h2>No Advertising Cookies</h2>
+      <p>AGSIST does not use advertising networks, retargeting pixels, or social media tracking cookies of any kind.</p>
+
+      <h2>Managing Cookies</h2>
+      <p>You can clear all cookies and localStorage through your browser settings at any time. Clearing localStorage will reset your theme preference to dark mode.</p>
+
+      <div class="contact-line">
+        Questions? <strong style="color:var(--text)">Sigurd Lindquist</strong> — <a href="tel:+17157972428">715-797-2428</a> · <a href="mailto:sig@farmers1st.com">sig@farmers1st.com</a>
+      </div>
     </div>
   </main>
   <div id="site-footer"></div>
