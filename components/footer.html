@@ -9,31 +9,39 @@
           <span class="footer-built">Built for farmers, everywhere</span>
         </div>
       </div>
-      <div class="footer-status"><span class="status-dot"></span><span>Data updating every 15 min</span></div>
+      <!-- FIX: was "every 15 min" — fetch_prices.py runs every 30 min via GitHub Actions -->
+      <div class="footer-status"><span class="status-dot"></span><span>Data updating every 30 min</span></div>
     </div>
     <div class="footer-cols">
       <div class="footer-col">
         <h4>Prices</h4>
-        <a href="/corn-futures-prices">Corn Futures</a>
-        <a href="/soybean-futures-prices">Soybean Futures</a>
-        <a href="/wheat-futures-prices">Wheat Futures</a>
-        <a href="/cash-bids">Cash Bids</a>
+        <a href="/corn-futures-prices">🌽 Corn Futures</a>
+        <a href="/soybean-futures-prices">🫘 Soybean Futures</a>
+        <a href="/wheat-futures-prices">🌾 Wheat Futures</a>
+        <a href="/cash-bids">💵 Cash Bids</a>
       </div>
       <div class="footer-col">
         <h4>Weather &amp; Data</h4>
-        <a href="/spray">Spray Conditions</a>
-        <a href="/drought-monitor">Drought Monitor</a>
-        <a href="/gdu-calculator">GDU Tracker</a>
-        <a href="/usda-calendar">USDA Calendar</a>
+        <a href="/spray">🌿 Spray Conditions</a>
+        <a href="/drought-monitor">🏜️ Drought Monitor</a>
+        <a href="/gdu-calculator">🌡️ GDU Tracker</a>
+        <a href="/usda-calendar">📅 USDA Calendar</a>
       </div>
       <div class="footer-col">
         <h4>Tools</h4>
-        <a href="/breakeven">Break-Even Calc</a>
-        <a href="/grain-bin-calculator">Grain Bin Calc</a>
-        <a href="/fast-facts">Fast Facts</a>
-        <a href="/yield-estimator">Yield Estimator</a>
+        <a href="/breakeven">📐 Break-Even Calc</a>
+        <a href="/grain-bin-calculator">🏗️ Grain Bin Calc</a>
+        <a href="/fast-facts">⚡ Fast Facts</a>
+        <a href="/yield-estimator">🌾 Yield Estimator</a>
       </div>
-
+      <!-- FIX: 4th column added — CSS was repeat(4,1fr) but only 3 cols existed, leaving empty gap -->
+      <div class="footer-col">
+        <h4>Daily &amp; Markets</h4>
+        <a href="/daily">📰 AGSIST Daily</a>
+        <a href="/ag-odds">🎯 Ag Prediction Markets</a>
+        <a href="/cot">📊 COT Report</a>
+        <a href="/markets">📈 All Markets</a>
+      </div>
     </div>
     <div class="footer-net">
       <span class="footer-net-lbl">Farmers First Network</span>

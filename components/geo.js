@@ -8,13 +8,16 @@
  *   3. Open-Meteo         — weather
  *   4. Nominatim OSM      — reverse geocoding
  *
- * AUDIT v11 — 2026-03-04
+ * AUDIT v12 — 2026-04-09
+ *   FIX: fetchKalshiMarkets() in boot() now checks for data-markets-handled="true"
+ *   on #kalshi-grid before running. Pages that manage their own market display
+ *   (e.g. index.html, ag-odds.html) must set this attribute to prevent geo.js
+ *   from overwriting their rendering with the full markets.json category view.
+ *
+ * v11 — 2026-03-04
  *   Added prefix:'$' to cattle, feeders, hogs, milk, meal, crude, natgas.
  *   (v10: Calls window.loadHomepageBids() after ZIP resolves in propagateLocation())
  *   (v9: Daily Briefing v3 — overnight surprises, conviction, market mood)
- *   (v8 fixes preserved: crypto prev-close, bids-geo-txt update)
- *   (v6 fixes preserved: crypto to yfinance, removed CoinGecko/corsproxy)
- *   (v5 fixes preserved: urea temp gate, spray frozen, prediction markets v2)
  */
 
 // ─────────────────────────────────────────────────────────────────
@@ -254,7 +257,7 @@ function propagateLocation(lat, lon, label) {
         window.AGSIST_GEO.zip = zip;
       }
 
-      // ── v10: Trigger homepage bids with resolved ZIP ──
+      // Trigger homepage bids with resolved ZIP
       if (typeof window.loadHomepageBids === 'function' && zip) {
         window.loadHomepageBids(lat, lon, name, zip);
       }
@@ -265,7 +268,7 @@ function propagateLocation(lat, lon, label) {
       var radarLbl = document.getElementById('wx-loc-label');
       if (radarLbl && name) radarLbl.textContent = name;
 
-      // Update bids geo bar with resolved location name
+      // Update bids geo bar
       var bidsGeoTxt = document.getElementById('bids-geo-txt');
       if (bidsGeoTxt && name) {
         var cur = bidsGeoTxt.textContent || '';
@@ -383,7 +386,7 @@ function renderForecast(lat, lon) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// CASH BIDS — no longer writes placeholder (bids-homepage.js handles it)
+// CASH BIDS — handled by bids-homepage.js
 // ─────────────────────────────────────────────────────────────────
 function lookupBids() {
   var zip = (document.getElementById('bids-zip') || {}).value;
@@ -561,7 +564,7 @@ function fetchAllPrices() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// FFAI INDEX — Farmers First Agri Service
+// FFAI INDEX
 // ─────────────────────────────────────────────────────────────────
 function fetchFFAILive() {
   fetch('https://farmers1st.com/api/v3/current.json')
@@ -614,7 +617,9 @@ function rebuildTickerLoop() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PREDICTION MARKETS v2
+// PREDICTION MARKETS v2 — used by ag-odds.html and other dedicated
+// market pages. NOT called on pages with data-markets-handled="true"
+// on their #kalshi-grid element (e.g. homepage).
 // ─────────────────────────────────────────────────────────────────
 
 var MARKET_CATEGORIES = {
@@ -977,7 +982,18 @@ function loadDailyBriefing() {
     fetchAllPrices();
     fetchFFAILive();
     if (document.getElementById('dv3-headline') || document.getElementById('daily-headline')) loadDailyBriefing();
-    if (document.getElementById('kalshi-grid'))    fetchKalshiMarkets();
+
+    // ── FIX v12: Only call fetchKalshiMarkets() on pages that have NOT set
+    // data-markets-handled="true" on their #kalshi-grid element.
+    // The homepage (index.html) and ag-odds.html manage their own market display,
+    // so they set this attribute to prevent geo.js from overwriting with the
+    // full markets.json category view (25 markets). Pages like /markets that
+    // want the full category rendering should NOT set this attribute.
+    var _kg = document.getElementById('kalshi-grid');
+    if (_kg && _kg.getAttribute('data-markets-handled') !== 'true') {
+      fetchKalshiMarkets();
+    }
+
     setInterval(function() {
       fetchAllPrices();
       fetchFFAILive();
