@@ -561,7 +561,7 @@ body {
   background: linear-gradient(to left, var(--surface, #0e0e0c), transparent);
 }
 .nozzle-table {
-  width: 100%; min-width: 520px; border-collapse: collapse; font-size: .78rem;
+  width: 100%; border-collapse: collapse; font-size: .78rem;
 }
 .nozzle-table th {
   text-align: left;
