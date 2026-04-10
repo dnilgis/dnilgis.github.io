@@ -1,5 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
-   AGSIST — Shared Stylesheet v9 — 2026-03-04
+   AGSIST — Shared Stylesheet v9.1 — 2026-04-10
+   Change from v9: lifted --text-dim (.72→.82), --text-muted (.36→.52),
+   --border (.08→.10) for improved readability across all pages.
    ═══════════════════════════════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap');
 
@@ -18,11 +20,11 @@
   --surface:  #181816;
   --surface2: #1e1e1a;
   --surface3: #26261f;
-  --border:   rgba(255,255,255,0.08);
+  --border:   rgba(255,255,255,0.10);
   --border-g: rgba(218,165,32,0.30);
   --text:     #f0ebe0;
-  --text-dim: rgba(240,235,224,0.72);
-  --text-muted:rgba(240,235,224,0.36);
+  --text-dim: rgba(240,235,224,0.82);
+  --text-muted:rgba(240,235,224,0.52);
   --cream:    #f5f1e8;
   --glow-gold:  0 0 20px rgba(218,165,32,.08);
   --glow-card:  0 2px 12px rgba(0,0,0,.30), 0 1px 3px rgba(0,0,0,.15);
