@@ -3,39 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<meta name="theme-color" content="#111a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
-<link rel="preload" href="/components/styles.css" as="style">
-<link rel="stylesheet" href="/components/styles.css">
+<link rel="preload" href="/components/styles.css?v=10" as="style">
+<link rel="stylesheet" href="/components/styles.css?v=10">
 <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
 <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
 <link rel="manifest"                            href="/manifest.json">
-<meta name="theme-color" content="#111a0a">
 
-<title>Fertilizer Prices Today — Urea, Anhydrous, DAP &amp; Potash | AGSIST</title>
+<title>Fertilizer Prices Today &#8212; Urea, Anhydrous, DAP &amp; Potash | AGSIST</title>
 <meta name="description" content="Current fertilizer prices for urea, anhydrous ammonia, DAP, UAN-32, and potash. Weekly benchmarks for corn and soybean farmers in Wisconsin and Minnesota.">
 <meta name="keywords" content="fertilizer prices today, urea price per ton, anhydrous ammonia price, DAP fertilizer price, potash price, UAN-32 price, nitrogen fertilizer cost, farm input prices Midwest, Wisconsin fertilizer prices, Minnesota fertilizer prices">
-<meta name="author"  content="Sigurd Lindquist — Farmers First Agri Service">
-<meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="Sigurd Lindquist">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://agsist.com/fertilizer">
 <meta property="og:type"         content="website">
 <meta property="og:site_name"    content="AGSIST">
 <meta property="og:locale"       content="en_US">
-<meta property="og:title"        content="Fertilizer Prices Today — Urea, Anhydrous, DAP &amp; Potash | AGSIST">
+<meta property="og:title"        content="Fertilizer Prices Today &#8212; Urea, Anhydrous, DAP &amp; Potash | AGSIST">
 <meta property="og:description"  content="Weekly fertilizer prices for urea, anhydrous, DAP, UAN-32, and potash. For grain farmers in Wisconsin and Minnesota.">
 <meta property="og:url"          content="https://agsist.com/fertilizer">
 <meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt"    content="AGSIST — Fertilizer prices for corn and soybean farmers">
+<meta property="og:image:alt"    content="AGSIST &#8212; Fertilizer prices for corn and soybean farmers">
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:site"        content="@agsist">
 <meta name="twitter:creator"     content="@agsist">
-<meta name="twitter:title"       content="Fertilizer Prices Today — Urea, Anhydrous, DAP &amp; Potash | AGSIST">
+<meta name="twitter:title"       content="Fertilizer Prices Today &#8212; Urea, Anhydrous, DAP &amp; Potash | AGSIST">
 <meta name="twitter:description" content="Weekly urea, anhydrous, DAP, UAN-32, and potash prices for corn and soybean farmers. Updated on AGSIST.">
 <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
 
@@ -46,7 +46,7 @@
     {
       "@type":"WebPage",
       "url":"https://agsist.com/fertilizer",
-      "name":"Fertilizer Prices Today — Urea, Anhydrous, DAP & Potash | AGSIST",
+      "name":"Fertilizer Prices Today \u2014 Urea, Anhydrous, DAP & Potash | AGSIST",
       "description":"Current fertilizer prices for urea, anhydrous ammonia, DAP, UAN-32, and potash. Updated weekly for corn and soybean farmers.",
       "isPartOf":{"@type":"WebSite","url":"https://agsist.com/"},
       "breadcrumb":{
@@ -78,7 +78,7 @@
         {
           "@type":"Question",
           "name":"When is the best time to buy fertilizer for corn?",
-          "acceptedAnswer":{"@type":"Answer","text":"Historically, fall and early winter (October-December) have offered lower anhydrous and urea prices ahead of spring planting demand. However, price timing is difficult — natural gas price direction, global supply disruptions, and tariff policy can override seasonal patterns. Locking in a portion of needs in fall while leaving flexibility for spring is a common approach."}
+          "acceptedAnswer":{"@type":"Answer","text":"Historically, fall and early winter (October-December) have offered lower anhydrous and urea prices ahead of spring planting demand. However, price timing is difficult \u2014 natural gas price direction, global supply disruptions, and tariff policy can override seasonal patterns. Locking in a portion of needs in fall while leaving flexibility for spring is a common approach."}
         }
       ]
     }
@@ -87,6 +87,10 @@
 </script>
 
 <style>
+/* FIX: two-line overflow-x pattern \u2014 iOS 15 reads hidden, iOS 16+ reads clip */
+html { overflow-x: hidden; overflow-x: clip; width: 100%; }
+body { overflow-x: hidden; overflow-x: clip; width: 100%; }
+
 button,a,[role="button"]{touch-action:manipulation;}
 
 .fert-page{max-width:900px;margin:0 auto;padding:0 1rem 3rem}
@@ -94,7 +98,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 .fert-hero{padding:1.4rem 0 .9rem;border-bottom:1px solid var(--border);margin-bottom:1.25rem}
 .fert-eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem}
 .fert-page-title{font-family:'Oswald',sans-serif;font-size:1.75rem;font-weight:800;color:var(--text);line-height:1.1;margin:0 0 .35rem;text-transform:uppercase;letter-spacing:-.01em}
-.fert-page-sub{font-size:.84rem;color:var(--text-muted);line-height:1.55;max-width:640px}
+.fert-page-sub{font-size:.84rem;color:var(--text-dim);line-height:1.55;max-width:640px}
 
 .fert-updated-bar{
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
@@ -143,21 +147,27 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 /* Explainer grid */
 .fert-explainer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.75rem;margin-bottom:1.25rem}
+.fert-explainer-title{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:.5rem;margin:0 0 .75rem;grid-column:1/-1}
+
+/* FIX: fert-related uses minmax(0,1fr) to prevent iOS Safari overflow */
+.fert-related{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin-bottom:1.25rem}
+.fert-related-title{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:.5rem;margin:0 0 .75rem}
+
 @media(max-width:560px){
   .fert-explainer{grid-template-columns:1fr}
   .fert-cards{grid-template-columns:1fr 1fr}
+  .fert-related{grid-template-columns:1fr}
 }
 .fe-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem}
-.fe-card h4{font-size:.8rem;font-weight:700;color:var(--text);margin:0 0 .3rem}
+/* FIX: heading hierarchy \u2014 h3 used inside .fe-card (correct level under page h1) */
+.fe-card h3{font-size:.8rem;font-weight:700;color:var(--text);margin:0 0 .3rem;font-family:inherit;text-transform:none;letter-spacing:0}
 .fe-card p{font-size:.76rem;color:var(--text-muted);line-height:1.62;margin:0}
 
-/* Related tools */
-.fert-related{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.55rem;margin-bottom:1.25rem}
-@media(max-width:560px){.fert-related{grid-template-columns:1fr}}
 .fr-link{
   background:var(--surface);border:1px solid var(--border);border-radius:8px;
   padding:.7rem .85rem;text-decoration:none;display:flex;align-items:center;gap:.5rem;
   font-size:.76rem;font-weight:600;color:var(--text);transition:border-color .15s,color .15s;
+  min-height:44px;
 }
 .fr-link:hover{border-color:var(--gold);color:var(--gold)}
 .fr-link-icon{font-size:1rem;flex-shrink:0}
@@ -174,80 +184,82 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 <main id="main" tabindex="-1" class="main fert-page">
 
-  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> → Fertilizer Prices</nav>
+  <!-- FIX: aria-label on breadcrumb nav -->
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &rarr; Fertilizer Prices</nav>
 
   <div class="fert-hero">
-    <div class="fert-eyebrow">🧪 Input Costs · Updated Weekly</div>
+    <div class="fert-eyebrow">&#x1F9EA; Input Costs &middot; Updated Weekly</div>
     <h1 class="fert-page-title">Fertilizer Prices</h1>
-    <p class="fert-page-sub">Current prices for urea, anhydrous ammonia, DAP, UAN-32, and potash — the five fertilizers that matter most for corn and soybean farmers in Wisconsin and Minnesota. Updated weekly from NOLA barge and Midwest dealer benchmarks.</p>
+    <p class="fert-page-sub">Current prices for urea, anhydrous ammonia, DAP, UAN-32, and potash &#8212; the five fertilizers that matter most for corn and soybean farmers in Wisconsin and Minnesota. Updated weekly from NOLA barge and Midwest dealer benchmarks.</p>
   </div>
 
   <div class="fert-updated-bar">
-    <div>As of <strong id="fert-updated-date">—</strong> · <span id="fert-source-lbl">Green Markets / USDA AMS</span></div>
+    <div>As of <strong id="fert-updated-date">&#8212;</strong> &middot; <span id="fert-source-lbl">Green Markets / USDA AMS</span></div>
   </div>
 
   <div class="fert-disclaimer">
-    📋 Benchmark reference prices — not quotes. Verify current prices with your local dealer or co-op before purchasing.
+    &#x1F4CB; Benchmark reference prices &#8212; not quotes. Verify current prices with your local dealer or co-op before purchasing.
   </div>
 
-  <!-- Price cards -->
   <div class="fert-cards" id="fert-price-cards">
-    <div style="grid-column:1/-1;text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.78rem">Loading prices…</div>
+    <div style="grid-column:1/-1;text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.78rem">Loading prices&hellip;</div>
   </div>
 
-  <!-- Natural gas watch -->
   <div class="natgas-card">
-    <div class="ngc-icon">🔥</div>
+    <div class="ngc-icon">&#x1F525;</div>
     <div class="ngc-body">
-      <div class="ngc-label">Watch: Natural Gas → Nitrogen Cost Signal</div>
+      <div class="ngc-label">Watch: Natural Gas &rarr; Nitrogen Cost Signal</div>
       <div class="ngc-val">
         <span class="ngc-price" id="natgas-price">--</span>
         <span class="ngc-unit">$/MMBtu Henry Hub</span>
       </div>
-      <div class="ngc-note">Natural gas is the primary feedstock for urea, anhydrous, and UAN-32. A <strong>$1/MMBtu increase</strong> typically adds <strong>$20–$30/ton</strong> to nitrogen fertilizer prices within 60–90 days. Watch gas prices now to anticipate next season's input costs.</div>
+      <div class="ngc-note">Natural gas is the primary feedstock for urea, anhydrous, and UAN-32. A <strong>$1/MMBtu increase</strong> typically adds <strong>$20&#x2013;$30/ton</strong> to nitrogen fertilizer prices within 60&#x2013;90 days. Watch gas prices now to anticipate next season&#x2019;s input costs.</div>
     </div>
   </div>
 
-  <!-- Explainer -->
+  <h2 class="fert-explainer-title" style="font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:.5rem;margin:0 0 .75rem">Why Prices Move</h2>
+  <!-- FIX: explainer cards now use h3 (correct hierarchy under page h1 + section h2) -->
   <div class="fert-explainer">
     <div class="fe-card">
-      <h4>Why Fertilizer Prices Move</h4>
-      <p>Natural gas drives nitrogen costs (urea, anhydrous, UAN). Phosphate (DAP) prices follow global mining supply, with Morocco and China as dominant producers. Potash is dominated by Canada and Russia — any export disruption moves prices fast. Seasonal demand spikes before spring and fall applications regardless of global fundamentals.</p>
+      <h3>Why Fertilizer Prices Move</h3>
+      <p>Natural gas drives nitrogen costs (urea, anhydrous, UAN). Phosphate (DAP) prices follow global mining supply, with Morocco and China as dominant producers. Potash is dominated by Canada and Russia &#8212; any export disruption moves prices fast. Seasonal demand spikes before spring and fall applications regardless of global fundamentals.</p>
     </div>
     <div class="fe-card">
-      <h4>What NOLA Barge Price Means</h4>
-      <p>NOLA barge prices are traded at New Orleans river terminals — the wholesale benchmark for US fertilizer markets. To estimate your delivered cost, add freight: typically $30–$60/ton from NOLA to the upper Midwest by rail, plus dealer handling margin. Midwest prices shown here already include estimated freight.</p>
+      <h3>What NOLA Barge Price Means</h3>
+      <p>NOLA barge prices are traded at New Orleans river terminals &#8212; the wholesale benchmark for US fertilizer markets. To estimate your delivered cost, add freight: typically $30&#x2013;$60/ton from NOLA to the upper Midwest by rail, plus dealer handling margin. Midwest prices shown here already include estimated freight.</p>
     </div>
     <div class="fe-card">
-      <h4>Timing Fertilizer Purchases</h4>
-      <p>Historically, fall and early winter offer softer anhydrous and urea prices before spring demand builds. But natural gas direction, global supply, and tariffs can override seasonal patterns. A common approach: lock in 50–60% of needs in fall at a price you can live with, leave the rest flexible for spring.</p>
+      <h3>Timing Fertilizer Purchases</h3>
+      <p>Historically, fall and early winter offer softer anhydrous and urea prices before spring demand builds. But natural gas direction, global supply, and tariffs can override seasonal patterns. A common approach: lock in 50&#x2013;60% of needs in fall at a price you can live with, leave the rest flexible for spring.</p>
     </div>
     <div class="fe-card">
-      <h4>How These Prices Affect Break-Evens</h4>
-      <p>For corn at 180 bu/acre applying 160 lbs actual N as urea: a $100/ton price increase adds roughly $17/acre to input costs, or about $0.09/bu to your break-even. At 180 bu and $4.50 corn that's meaningful — fertilizer price direction matters as much as corn price direction for your margin.</p>
+      <h3>How These Prices Affect Break-Evens</h3>
+      <p>For corn at 180 bu/acre applying 160 lbs actual N as urea: a $100/ton price increase adds roughly $17/acre to input costs, or about $0.09/bu to your break-even. At 180 bu and $4.50 corn that&#x2019;s meaningful &#8212; fertilizer price direction matters as much as corn price direction for your margin.</p>
     </div>
   </div>
 
-  <!-- Related tools -->
+  <h2 class="fert-related-title">Related Tools</h2>
+  <!-- FIX: minmax(0,1fr) applied via .fert-related class; min-height:44px on links -->
   <div class="fert-related">
-    <a href="/tariffs" class="fr-link"><span class="fr-link-icon">🏛️</span>Tariff Tracker</a>
-    <a href="/cot" class="fr-link"><span class="fr-link-icon">📊</span>Fund Positioning</a>
-    <a href="/ag-odds" class="fr-link"><span class="fr-link-icon">🎯</span>Market Odds</a>
+    <a href="/tariffs" class="fr-link"><span class="fr-link-icon">&#x1F3DB;&#xFE0F;</span>Tariff Tracker</a>
+    <a href="/cot"     class="fr-link"><span class="fr-link-icon">&#x1F4CA;</span>Fund Positioning</a>
+    <a href="/ag-odds" class="fr-link"><span class="fr-link-icon">&#x1F3AF;</span>Market Odds</a>
   </div>
 
   <div class="fert-source">
     Prices sourced from <a href="https://dtn.com" target="_blank" rel="noopener">DTN</a> and
     <a href="https://www.ams.usda.gov/market-news/fertilizers" target="_blank" rel="noopener">USDA AMS</a> weekly reports.
-    Not a quote — verify with your dealer before purchasing. ·
-    <a href="/">← AGSIST Dashboard</a> ·
-    Built by <a href="/about">Sigurd Lindquist</a> · <a href="tel:+17157972428">715-797-2428</a>
+    Not a quote &#8212; verify with your dealer before purchasing. &middot;
+    <a href="/">&#x2190; AGSIST Dashboard</a> &middot;
+    Built by <a href="/about">Sigurd Lindquist</a> &middot; <a href="tel:+17157972428">715-797-2428</a>
   </div>
 
 </main>
 
 <div id="site-footer"></div>
-<script src="/components/loader.js"></script>
-<script src="/components/geo.js"></script>
+<!-- FIX: defer on all bottom scripts -->
+<script src="/components/loader.js" defer></script>
+<script src="/components/geo.js" defer></script>
 
 <script>
 (function(){
@@ -256,7 +268,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function fmtDate(iso){
-  if(!iso)return'—';
+  if(!iso)return'\u2014';
   try{var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
   catch(e){return iso;}
 }
@@ -269,7 +281,7 @@ fetch('/data/fertilizer.json')
     if(upd) upd.textContent=fmtDate(data.updated);
 
     var src=document.getElementById('fert-source-lbl');
-    if(src&&data.source) src.textContent=data.source.split('—')[0].trim();
+    if(src&&data.source) src.textContent=data.source.split('\u2014')[0].trim();
 
     var cards=document.getElementById('fert-price-cards');
     if(!cards||!data.prices||!data.prices.length) return;
@@ -278,9 +290,9 @@ fetch('/data/fertilizer.json')
       var hasPrice = p.price != null;
       var chg = hasPrice && p.prev != null ? p.price - p.prev : null;
       var chgCls = chg == null ? 'nc' : chg > 0 ? 'up' : chg < 0 ? 'dn' : 'nc';
-      var arrow = chg == null ? '' : chg > 0 ? '▲' : chg < 0 ? '▼' : '';
+      var arrow = chg == null ? '' : chg > 0 ? '\u25b2' : chg < 0 ? '\u25bc' : '';
       var chgStr = chg != null && chg !== 0 ? '$'+Math.abs(chg).toFixed(0)+'/ton vs last wk' : 'No change';
-      var chgTxt = chg != null && chg !== 0 ? arrow+' $'+Math.abs(chg).toFixed(0) : (chg === 0 ? '—' : '');
+      var chgTxt = chg != null && chg !== 0 ? arrow+' $'+Math.abs(chg).toFixed(0) : (chg === 0 ? '\u2014' : '');
       var priceDisplay = hasPrice ? '$'+p.price : 'Call';
       var priceColor = hasPrice ? '' : 'color:var(--text-muted);font-size:1.2rem';
       return '<div class="fert-price-card">'
@@ -298,10 +310,10 @@ fetch('/data/fertilizer.json')
   })
   .catch(function(){
     var cards=document.getElementById('fert-price-cards');
-    if(cards) cards.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.78rem">Price data unavailable — check back shortly.</div>';
+    if(cards) cards.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:1.5rem;color:var(--text-muted);font-size:.78rem">Price data unavailable \u2014 check back shortly.</div>';
   });
 
-// Pull nat gas from prices.json using correct data.quotes.natgas path
+/* Nat gas from prices.json using correct data.quotes.natgas path */
 fetch('/data/prices.json')
   .then(function(r){return r.ok?r.json():null;})
   .then(function(data){
