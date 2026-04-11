@@ -2,23 +2,23 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0e0e0c">
-
-  <link rel="stylesheet" href="/components/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/components/styles.css?v=10" as="style">
+  <link rel="stylesheet" href="/components/styles.css?v=10">
   <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
   <link rel="manifest"                            href="/manifest.json">
-
   <title>Break-Even Calculator — Corn, Soybean &amp; Wheat | AGSIST</title>
   <meta name="description" content="Free break-even calculator for corn, soybeans, and wheat. Enter costs and yield to get cost per bushel, target price, and profit per acre. No login.">
-  <meta name="author" content="Farmers First Agri Service — AGSIST">
+  <meta name="author" content="Sigurd Lindquist">
   <meta name="keywords"    content="farm break even calculator, farmer corn break even calculator, soybean break even price, cost per bushel calculator, crop profit calculator, farm cost analysis, break-even price corn">
   <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"    href="https://agsist.com/breakeven">
-
   <meta property="og:type"         content="website">
   <meta property="og:site_name"    content="AGSIST">
   <meta property="og:locale"       content="en_US">
@@ -35,264 +35,143 @@
   <meta name="twitter:title"       content="Break-Even Calculator — Corn, Soybean &amp; Wheat | AGSIST">
   <meta name="twitter:description" content="Free break-even calculator for corn, soybean &amp; wheat. Cost per bushel, target price, profit per acre, what-if table. No login needed.">
   <meta name="twitter:image"       content="https://agsist.com/img/og/breakeven.jpg">
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "Farm Break-Even Calculator",
-        "description": "Calculate break-even price and profit margins for corn, soybeans, and wheat. Enter input costs and expected yield to find cost per bushel, target price, and farm-total profit or loss.",
-        "url": "https://agsist.com/breakeven",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          { "@type": "Question", "name": "How do I calculate break-even price per bushel?", "acceptedAnswer": { "@type": "Answer", "text": "Divide your total cost per acre by your expected yield in bushels. For example, $850 per acre ÷ 200 bu/ac = $4.25 break-even price per bushel for corn." } },
-          { "@type": "Question", "name": "What is a realistic corn cost per acre?", "acceptedAnswer": { "@type": "Answer", "text": "Total corn production costs typically range from $650–$950 per acre depending on land rent, fertilizer, seed, chemicals, machinery, and crop insurance. Cash rent is often the single largest variable." } },
-          { "@type": "Question", "name": "How do I calculate profit or loss per acre?", "acceptedAnswer": { "@type": "Answer", "text": "Profit per acre = (Expected yield × commodity price) − total cost per acre. If corn yields 200 bu/ac at $4.50/bu = $900 revenue. Subtract $850 in costs = $50 profit per acre." } },
-          { "@type": "Question", "name": "What costs should I include in a farm break-even calculation?", "acceptedAnswer": { "@type": "Answer", "text": "Include all direct costs: seed, fertilizer (N, P, K), herbicide, fungicide, insecticide, crop insurance, drying, trucking, and storage. Then add overhead: land rent or ownership cost, machinery depreciation, fuel, labor, and interest." } }
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agsist.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Break-Even Calculator", "item": "https://agsist.com/breakeven" }
-        ]
-      }
-    ]
-  }
-  </script>
-
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Farm Break-Even Calculator","description":"Calculate break-even price and profit margins for corn, soybeans, and wheat.","url":"https://agsist.com/breakeven","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate break-even price per bushel?","acceptedAnswer":{"@type":"Answer","text":"Divide your total cost per acre by your expected yield in bushels. For example, $850 per acre divided by 200 bu/ac = $4.25 break-even price per bushel for corn."}},{"@type":"Question","name":"What is a realistic corn cost per acre?","acceptedAnswer":{"@type":"Answer","text":"Total corn production costs typically range from $650–$950 per acre depending on land rent, fertilizer, seed, chemicals, machinery, and crop insurance. Cash rent is often the single largest variable."}},{"@type":"Question","name":"How do I calculate profit or loss per acre?","acceptedAnswer":{"@type":"Answer","text":"Profit per acre = (Expected yield x commodity price) minus total cost per acre. If corn yields 200 bu/ac at $4.50/bu = $900 revenue. Subtract $850 in costs = $50 profit per acre."}},{"@type":"Question","name":"What costs should I include in a farm break-even calculation?","acceptedAnswer":{"@type":"Answer","text":"Include all direct costs: seed, fertilizer (N, P, K), herbicide, fungicide, insecticide, crop insurance, drying, trucking, and storage. Then add overhead: land rent or ownership cost, machinery depreciation, fuel, labor, and interest."}},{"@type":"Question","name":"How does cash rent affect my break-even price?","acceptedAnswer":{"@type":"Answer","text":"Cash rent is typically the single largest per-acre cost for tenant farmers, often $150–$350/acre. Every $50/acre increase in rent raises your corn break-even by roughly $0.25–$0.28/bu at typical yields."}},{"@type":"Question","name":"What is a what-if sensitivity table?","acceptedAnswer":{"@type":"Answer","text":"A sensitivity table shows profit or loss per acre across a range of price and yield combinations simultaneously. The break-even calculator builds a grid showing yield scenarios against price scenarios, with your current inputs highlighted so you can instantly see your risk exposure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agsist.com/"},{"@type":"ListItem","position":2,"name":"Break-Even Calculator","item":"https://agsist.com/breakeven"}]}]}</script>
   <style>
-    /* ══════════════════════════════════════════════════════════════
-       BREAK-EVEN CALCULATOR — Embedded Styles
-       Brand alignment v9 — 2026-04-05
-       ══════════════════════════════════════════════════════════════ */
-
     button,a,[role="button"]{touch-action:manipulation;}
-
-    html, body { overflow-x: hidden; width: 100%; }
-    .panel { overflow: visible; }
-    .panel-body { overflow-x: hidden; }
-    .grid-2 { max-width: 1100px; margin: 0 auto; }
-
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type="number"] { -moz-appearance: textfield; }
-
-    .input-wrap { position: relative; }
-    .input-wrap label { display: flex; align-items: center; gap: 6px; }
-    .hint-icon {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--border); color: var(--text-dim);
-      font-size: 0.65rem; font-weight: 700; cursor: pointer;
-      transition: all 0.2s; flex-shrink: 0;
-      user-select: none; -webkit-tap-highlight-color: transparent;
-    }
-    .hint-icon:hover, .hint-icon.active { background: var(--green); color: #fff; }
-    .hint-popup {
-      display: none; margin-top: 8px;
-      background: var(--surface); border: 2px solid var(--green);
-      border-radius: 6px; padding: 12px 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: hintIn 0.15s ease-out;
-    }
-    .hint-popup.hint-open { display: block; }
-    @keyframes hintIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-    .hint-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; font-weight: 700; color: var(--green);
-      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px;
-    }
-    .hint-list { list-style: none; padding: 0; margin: 0; }
-    .hint-list li { font-size: 0.75rem; color: var(--text); padding: 2px 0; line-height: 1.5; }
-    .hint-list li::before { content: '☐ '; color: var(--text-dim); }
-    .hint-note { font-size: 0.7rem; color: var(--text-dim); margin-top: 6px; font-style: italic; border-top: 1px solid var(--border); padding-top: 6px; }
-
-    .live-price-bar {
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      padding: 10px 14px; margin-bottom: 16px;
-      background: rgba(58,139,60,0.05); border: 2px solid rgba(58,139,60,0.20);
-      border-radius: 6px; font-size: 0.8rem;
-    }
-    .live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-    .live-price-bar .price-tag { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--gold); }
-    .live-price-bar .chg-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; }
-    .live-price-bar .chg-tag.up { color: var(--green); }
-    .live-price-bar .chg-tag.dn { color: var(--red); }
-    .live-price-bar button {
-      background: var(--green); color: #fff; border: none; padding: 4px 12px;
-      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .3px;
-      cursor: pointer; transition: background 0.15s; margin-left: auto;
-    }
-    .live-price-bar button:hover { background: #1b4d1c; }
-
-    .cost-breakdown { margin-top: 16px; }
-    .cost-breakdown-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase;
-      letter-spacing: .08em; margin-bottom: 8px; font-weight: 700;
-    }
-    .cost-bar { display: flex; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
-    .cost-bar-seg { transition: width 0.4s ease; min-width: 2px; position: relative; cursor: pointer; }
-    .cost-bar-seg:hover { filter: brightness(1.2); }
-    .cost-bar-seg .seg-tip {
-      display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
-      background: var(--surface); border: 2px solid var(--border); border-radius: 6px;
-      padding: 4px 8px; font-size: 0.7rem; white-space: nowrap; z-index: 500; pointer-events: none;
-    }
-    @media (hover: hover) { .cost-bar-seg:hover .seg-tip { display: block; } }
-    .seg-tip.seg-open { display: block !important; }
-    .cost-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; }
-    .cost-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--text-dim); }
-    .cost-legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-
-    .sensitivity { margin-top: 20px; }
-    .sensitivity-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase;
-      letter-spacing: .08em; margin-bottom: 10px; font-weight: 700;
-    }
-    .sens-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-    .sens-table th {
-      background: var(--surface); color: var(--text-dim); padding: 6px 8px;
-      font-family: 'JetBrains Mono', monospace; font-size: .65rem; font-weight: 700; text-align: center;
-      border: 1px solid var(--border);
-    }
-    .sens-table td { font-family: 'JetBrains Mono', monospace; padding: 6px 8px; text-align: center; border: 1px solid var(--border); font-weight: 600; }
-    .sens-table .corner { background: var(--bg); color: var(--text-dim); font-size: 0.62rem; }
-    .sens-table .row-head { background: var(--surface); color: var(--text-dim); font-weight: 600; text-align: right; padding-right: 10px; }
-    .sens-positive { color: var(--green); }
-    .sens-negative { color: var(--red); }
-    .sens-zero { color: var(--text-dim); }
-    .sens-current { background: rgba(58,139,60,0.10) !important; outline: 2px solid var(--green); }
-
-    .profit-gauge { margin-top: 16px; padding: 14px; background: var(--bg); border-radius: 8px; border: 2px solid var(--border); }
-    .profit-gauge-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; font-weight: 700; }
-    .profit-gauge-bar { height: 8px; background: var(--border); border-radius: 4px; position: relative; }
-    .profit-gauge-fill { height: 100%; border-radius: 4px; transition: width 0.4s, background 0.4s; }
-    .profit-gauge-marker { position: absolute; top: -4px; width: 3px; height: 16px; background: var(--text); border-radius: 2px; transition: left 0.4s; }
-    .profit-gauge-labels { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-dim); margin-top: 4px; }
-
-    .be-highlight { font-size: 1.3rem; }
-
-    .acres-row { margin-top: 14px; padding: 12px; border-radius: 6px; background: var(--bg); border: 2px solid var(--border); }
-    .acres-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .acres-input-group { display: flex; align-items: center; gap: 8px; }
-    .acres-label { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin: 0; white-space: nowrap; font-weight: 700; }
-    .acres-field { width: 80px; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: .85rem; background: var(--surface); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
-    .acres-field:focus { outline: none; border-color: var(--green); }
-    .farm-total-label { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
-    .farm-total-value { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700; }
-
-    .action-bar { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: .3px; transition: all 0.15s; border: 2px solid var(--border); }
-    .btn-primary { background: var(--green); color: #fff; border-color: var(--green); }
-    .btn-primary:hover { background: #1b4d1c; border-color: #1b4d1c; }
-    .btn-secondary { background: var(--surface); color: var(--text-dim); }
-    .btn-secondary:hover { color: var(--text); border-color: var(--green); }
-
-    @media (max-width: 768px) { .grid-2 { display: block !important; } .grid-2 > .panel { margin-bottom: 12px; } }
-    @media (max-width: 500px) { .input-grid-2 { grid-template-columns: 1fr !important; } .sens-table { font-size: 0.63rem; } .sens-table th, .sens-table td { padding: 3px 4px; } .live-price-bar { gap: 6px; font-size: 0.75rem; padding: 8px 10px; } .live-price-bar button { margin-left: 0; width: 100%; text-align: center; padding: 8px; } .acres-inner { flex-direction: column; align-items: stretch; text-align: center; } .acres-input-group { justify-content: center; } }
-
-    @media not print { .print-header, .print-footer, .print-summary { display: none; } }
-    @media print {
-      @page { size: letter landscape; margin: 0.4in 0.5in; }
-      body { color: #000 !important; font-size: 8.5pt !important; background: #fff !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      #site-header, #site-footer, .nav, .prices-strip, .footer, .drawer, .draw-ov, .breadcrumb, .action-bar, .hint-popup, .hint-icon, .live-price-bar, .profit-gauge, .cost-bar, .skip, .ws-toast, .noscript-banner { display: none !important; visibility: hidden !important; height: 0 !important; max-height: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; border: none !important; line-height: 0 !important; font-size: 0 !important; }
-      #site-header *, #site-footer * { display: none !important; visibility: hidden !important; }
-      .print-header { display: flex !important; justify-content: space-between; align-items: flex-end; border-bottom: 2.5pt solid #000; margin-bottom: 10px; padding-bottom: 8px; }
-      .print-footer { display: block !important; text-align: center; margin-top: 10px; padding-top: 6px; border-top: 1pt solid #999; font-size: 6.5pt; color: #888 !important; }
-      .print-summary { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; page-break-inside: avoid; }
-      .print-stat { text-align: center; padding: 6px 4px; border: 1pt solid #ccc; border-radius: 4px; }
-      .print-stat-label { font-size: 6pt; text-transform: uppercase; letter-spacing: 0.5px; color: #666; margin-bottom: 2px; }
-      .print-stat-value { font-size: 12pt; font-weight: 700; }
-      .print-stat-value.pos { color: #1a7a1a !important; }
-      .print-stat-value.neg { color: #c41a1a !important; }
-      main { max-width: 100% !important; padding: 0 !important; }
-      .grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-      .panel { border: 1.5pt solid #000 !important; border-radius: 0 !important; background: #fff !important; box-shadow: none !important; }
-      .panel-head { background: #f0f0f0 !important; border-bottom: 1pt solid #000 !important; padding: 4px 8px !important; }
-      .panel-head h1, .panel-head h2 { font-size: 9pt !important; color: #000 !important; margin: 0 !important; }
-      .panel-body { padding: 8px !important; }
-      input, select { background: #fff !important; color: #000 !important; border: 1pt solid #999 !important; border-radius: 2px !important; font-size: 8pt !important; padding: 2px 4px !important; }
-      label { color: #333 !important; font-size: 7pt !important; }
-      .result-row { border-bottom: 0.5pt solid #ddd !important; padding: 3px 0 !important; }
-      .result-label { color: #333 !important; font-size: 7.5pt !important; }
-      .result-value { color: #000 !important; font-size: 8pt !important; }
-      .result-value.positive { color: #1a7a1a !important; }
-      .result-value.negative { color: #c41a1a !important; }
-      .be-highlight { font-size: 11pt !important; }
-      .acres-row { background: #f8f8f8 !important; border: 1pt solid #ccc !important; }
-      .acres-label { color: #333 !important; }
-      .farm-total-label { color: #666 !important; }
-      .farm-total-value { font-size: 10pt !important; }
-      .cost-breakdown { margin-top: 8px !important; }
-      .cost-breakdown-title { color: #333 !important; font-size: 7pt !important; }
-      .cost-legend { gap: 4px 10px !important; }
-      .cost-legend-item { color: #333 !important; font-size: 6.5pt !important; }
-      .cost-legend-dot { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      .sensitivity { page-break-inside: avoid; margin-top: 8px !important; }
-      .sensitivity-title { color: #333 !important; font-size: 7pt !important; }
-      .sens-table { font-size: 7pt !important; }
-      .sens-table th { background: #f0f0f0 !important; color: #333 !important; border-color: #999 !important; padding: 3px 5px !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      .sens-table td { border-color: #ccc !important; padding: 3px 5px !important; color: #000 !important; }
-      .sens-table .row-head { background: #f0f0f0 !important; color: #333 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      .sens-positive { color: #1a7a1a !important; }
-      .sens-negative { color: #c41a1a !important; }
-      .sens-zero { color: #666 !important; }
-      .sens-current { background: #eef6ee !important; outline: 1.5pt solid #2d6a2e !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    html { overflow-x: hidden; overflow-x: clip; width: 100%; }
+    body { overflow-x: hidden; overflow-x: clip; width: 100%; }
+    .panel{overflow:visible;}.panel-body{overflow-x:hidden;}.grid-2{max-width:1100px;margin:0 auto;}
+    input[type="number"],select{font-size:1rem;min-height:44px;}
+    input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+    input[type="number"]{-moz-appearance:textfield;}
+    .input-wrap{position:relative;}.input-wrap label{display:flex;align-items:center;gap:6px;}
+    .hint-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--border);color:var(--text-dim);font-size:0.65rem;font-weight:700;cursor:pointer;transition:all 0.2s;flex-shrink:0;user-select:none;-webkit-tap-highlight-color:transparent;}
+    .hint-icon:hover,.hint-icon.active{background:var(--green);color:#fff;}
+    .hint-popup{display:none;margin-top:8px;background:var(--surface);border:2px solid var(--green);border-radius:6px;padding:12px 14px;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:hintIn 0.15s ease-out;}
+    .hint-popup.hint-open{display:block;}
+    @keyframes hintIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+    .hint-title{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+    .hint-list{list-style:none;padding:0;margin:0;}.hint-list li{font-size:0.75rem;color:var(--text);padding:2px 0;line-height:1.5;}.hint-list li::before{content:'☐ ';color:var(--text-dim);}
+    .hint-note{font-size:0.7rem;color:var(--text-dim);margin-top:6px;font-style:italic;border-top:1px solid var(--border);padding-top:6px;}
+    .live-price-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;margin-bottom:16px;background:rgba(58,139,60,0.05);border:2px solid rgba(58,139,60,0.20);border-radius:6px;font-size:0.8rem;}
+    .live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .live-price-bar .price-tag{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--gold);}
+    .live-price-bar .chg-tag{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;}
+    .live-price-bar .chg-tag.up{color:var(--green);}.live-price-bar .chg-tag.dn{color:var(--red);}
+    .live-price-bar button{background:var(--green);color:#fff;border:none;padding:4px 12px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;text-transform:uppercase;cursor:pointer;transition:background 0.15s;margin-left:auto;min-height:44px;}
+    .live-price-bar button:hover{background:#1b4d1c;}
+    .cost-breakdown{margin-top:16px;}
+    .cost-breakdown-title{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:700;}
+    .cost-bar{display:flex;height:28px;border-radius:6px;overflow:hidden;margin-bottom:8px;}
+    .cost-bar-seg{transition:width 0.4s ease;min-width:2px;position:relative;cursor:pointer;}
+    .cost-bar-seg:hover{filter:brightness(1.2);}
+    .cost-bar-seg .seg-tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--surface);border:2px solid var(--border);border-radius:6px;padding:4px 8px;font-size:0.7rem;white-space:nowrap;z-index:500;pointer-events:none;}
+    @media(hover:hover){.cost-bar-seg:hover .seg-tip{display:block;}}
+    .seg-tip.seg-open{display:block!important;}
+    .cost-legend{display:flex;flex-wrap:wrap;gap:6px 14px;}
+    .cost-legend-item{display:flex;align-items:center;gap:5px;font-size:0.7rem;color:var(--text-dim);}
+    .cost-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+    .sensitivity{margin-top:20px;}
+    .sensitivity-title{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-weight:700;}
+    .sens-table{width:100%;border-collapse:collapse;font-size:0.75rem;}
+    .sens-table th{background:var(--surface);color:var(--text-dim);padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;text-align:center;border:1px solid var(--border);}
+    .sens-table td{font-family:'JetBrains Mono',monospace;padding:6px 8px;text-align:center;border:1px solid var(--border);font-weight:600;}
+    .sens-table .corner{background:var(--bg);color:var(--text-dim);font-size:0.62rem;}
+    .sens-table .row-head{background:var(--surface);color:var(--text-dim);font-weight:600;text-align:right;padding-right:10px;}
+    .sens-positive{color:var(--green);}.sens-negative{color:var(--red);}.sens-zero{color:var(--text-dim);}
+    .sens-current{background:rgba(58,139,60,0.10)!important;outline:2px solid var(--green);}
+    .profit-gauge{margin-top:16px;padding:14px;background:var(--bg);border-radius:8px;border:2px solid var(--border);}
+    .profit-gauge-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700;}
+    .profit-gauge-bar{height:8px;background:var(--border);border-radius:4px;position:relative;}
+    .profit-gauge-fill{height:100%;border-radius:4px;transition:width 0.4s,background 0.4s;}
+    .profit-gauge-marker{position:absolute;top:-4px;width:3px;height:16px;background:var(--text);border-radius:2px;transition:left 0.4s;}
+    .profit-gauge-labels{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:4px;}
+    .be-highlight{font-size:1.3rem;}
+    .acres-row{margin-top:14px;padding:12px;border-radius:6px;background:var(--bg);border:2px solid var(--border);}
+    .acres-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .acres-input-group{display:flex;align-items:center;gap:8px;}
+    .acres-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin:0;white-space:nowrap;font-weight:700;}
+    .acres-field{width:80px;padding:4px 8px;font-family:'JetBrains Mono',monospace;font-size:.85rem;background:var(--surface);border:2px solid var(--border);border-radius:6px;color:var(--text);min-height:44px;}
+    .acres-field:focus{outline:none;border-color:var(--green);}
+    .farm-total-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;font-weight:700;}
+    .farm-total-value{font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:700;}
+    .action-bar{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.3px;transition:all 0.15s;border:2px solid var(--border);min-height:44px;}
+    .btn-primary{background:var(--green);color:#fff;border-color:var(--green);}
+    .btn-primary:hover{background:#1b4d1c;border-color:#1b4d1c;}
+    .btn-secondary{background:var(--surface);color:var(--text-dim);}
+    .btn-secondary:hover{color:var(--text);border-color:var(--green);}
+    .be-faq{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:1.5rem auto;max-width:1100px;}
+    .be-faq-hd{padding:10px 16px;border-bottom:1px solid var(--border);font-size:.78rem;font-weight:700;color:var(--gold);}
+    .be-faq-item{border-bottom:1px solid var(--border);}.be-faq-item:last-child{border-bottom:none;}
+    .be-faq-q{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--text);gap:8px;user-select:none;line-height:1.4;min-height:44px;}
+    .be-faq-q::after{content:'+';color:var(--gold);font-size:1.1rem;flex-shrink:0;width:16px;text-align:center;}
+    .be-faq-item.open .be-faq-q::after{content:'−';}
+    .be-faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .be-faq-item.open .be-faq-a{max-height:500px;}
+    .be-faq-ai{padding:0 16px 13px;font-size:.78rem;color:var(--text-dim);line-height:1.68;}
+    @media(max-width:768px){.grid-2{display:block!important;}.grid-2>.panel{margin-bottom:12px;}}
+    @media(max-width:500px){.input-grid-2{grid-template-columns:1fr!important;}.sens-table{font-size:0.63rem;}.sens-table th,.sens-table td{padding:3px 4px;}.live-price-bar{gap:6px;font-size:0.75rem;padding:8px 10px;}.live-price-bar button{margin-left:0;width:100%;text-align:center;}.acres-inner{flex-direction:column;align-items:stretch;text-align:center;}.acres-input-group{justify-content:center;}}
+    @media not print{.print-header,.print-footer,.print-summary{display:none;}}
+    @media print{
+      @page{size:letter landscape;margin:0.4in 0.5in;}
+      body{color:#000!important;font-size:8.5pt!important;background:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+      #site-header,#site-footer,.nav,.prices-strip,.footer,.drawer,.draw-ov,.breadcrumb,.action-bar,.hint-popup,.hint-icon,.live-price-bar,.profit-gauge,.cost-bar,.skip,.ws-toast,.noscript-banner,.be-faq{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:none!important;line-height:0!important;font-size:0!important;}
+      .print-header{display:flex!important;justify-content:space-between;align-items:flex-end;border-bottom:2.5pt solid #000;margin-bottom:10px;padding-bottom:8px;}
+      .print-footer{display:block!important;text-align:center;margin-top:10px;padding-top:6px;border-top:1pt solid #999;font-size:6.5pt;color:#888!important;}
+      .print-summary{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;page-break-inside:avoid;}
+      .print-stat{text-align:center;padding:6px 4px;border:1pt solid #ccc;border-radius:4px;}
+      .print-stat-label{font-size:6pt;text-transform:uppercase;letter-spacing:0.5px;color:#666;margin-bottom:2px;}
+      .print-stat-value{font-size:12pt;font-weight:700;}.print-stat-value.pos{color:#1a7a1a!important;}.print-stat-value.neg{color:#c41a1a!important;}
+      main{max-width:100%!important;padding:0!important;}
+      .grid-2{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+      .panel{border:1.5pt solid #000!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;}
+      .panel-head{background:#f0f0f0!important;border-bottom:1pt solid #000!important;padding:4px 8px!important;}
+      .panel-head h1,.panel-head h2{font-size:9pt!important;color:#000!important;margin:0!important;}
+      .panel-body{padding:8px!important;}
+      input,select{background:#fff!important;color:#000!important;border:1pt solid #999!important;border-radius:2px!important;font-size:8pt!important;padding:2px 4px!important;}
+      label{color:#333!important;font-size:7pt!important;}
+      .result-row{border-bottom:0.5pt solid #ddd!important;padding:3px 0!important;}
+      .result-label{color:#333!important;font-size:7.5pt!important;}.result-value{color:#000!important;font-size:8pt!important;}
+      .result-value.positive{color:#1a7a1a!important;}.result-value.negative{color:#c41a1a!important;}
+      .be-highlight{font-size:11pt!important;}
+      .acres-row{background:#f8f8f8!important;border:1pt solid #ccc!important;}
+      .acres-label{color:#333!important;}.farm-total-label{color:#666!important;}.farm-total-value{font-size:10pt!important;}
+      .cost-breakdown{margin-top:8px!important;}.cost-breakdown-title{color:#333!important;font-size:7pt!important;}
+      .cost-legend{gap:4px 10px!important;}.cost-legend-item{color:#333!important;font-size:6.5pt!important;}
+      .cost-legend-dot{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+      .sensitivity{page-break-inside:avoid;margin-top:8px!important;}.sensitivity-title{color:#333!important;font-size:7pt!important;}
+      .sens-table{font-size:7pt!important;}
+      .sens-table th{background:#f0f0f0!important;color:#333!important;border-color:#999!important;padding:3px 5px!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+      .sens-table td{border-color:#ccc!important;padding:3px 5px!important;color:#000!important;}
+      .sens-table .row-head{background:#f0f0f0!important;color:#333!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+      .sens-positive{color:#1a7a1a!important;}.sens-negative{color:#c41a1a!important;}.sens-zero{color:#666!important;}
+      .sens-current{background:#eef6ee!important;outline:1.5pt solid #2d6a2e!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
     }
   </style>
 </head>
 <body>
-
   <a href="#main" class="skip">Skip to content</a>
   <div id="site-header"></div>
-
   <div class="print-header">
-    <div>
-      <div style="font-size:18pt;font-weight:700;letter-spacing:1px">AGSIST</div>
-      <div style="font-size:8pt;color:#666">Break-Even Analysis Report</div>
-    </div>
-    <div style="text-align:right">
-      <div style="font-size:9pt;font-weight:700" id="print-crop">Corn</div>
-      <div id="print-date" style="font-size:7.5pt;color:#666"></div>
-      <div style="font-size:6.5pt;color:#999">agsist.com</div>
-    </div>
+    <div><div style="font-size:18pt;font-weight:700;letter-spacing:1px">AGSIST</div><div style="font-size:8pt;color:#666">Break-Even Analysis Report</div></div>
+    <div style="text-align:right"><div style="font-size:9pt;font-weight:700" id="print-crop">Corn</div><div id="print-date" style="font-size:7.5pt;color:#666"></div><div style="font-size:6.5pt;color:#999">agsist.com</div></div>
   </div>
-
   <div class="print-summary" id="print-summary">
     <div class="print-stat"><div class="print-stat-label">Break-Even</div><div class="print-stat-value" id="ps-breakeven">--</div></div>
     <div class="print-stat"><div class="print-stat-label">Market Price</div><div class="print-stat-value" id="ps-price">--</div></div>
     <div class="print-stat"><div class="print-stat-label">Profit/Acre</div><div class="print-stat-value" id="ps-profit">--</div></div>
     <div class="print-stat"><div class="print-stat-label">Farm Total (<span id="ps-acres-label">500</span> ac)</div><div class="print-stat-value" id="ps-farm">--</div></div>
   </div>
-
-  <main id="main">
-    <nav class="breadcrumb">
-      <a href="/">Home</a> → Break-Even Calculator
-    </nav>
-
+  <main id="main" tabindex="-1">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &rarr; Break-Even Calculator</nav>
     <div class="grid-2">
-
       <div class="panel">
-        <div class="panel-head"><h1>💰 BREAK-EVEN CALCULATOR</h1></div>
+        <div class="panel-head"><h1>&#128176; BREAK-EVEN CALCULATOR</h1></div>
         <div class="panel-body">
-
           <div class="live-price-bar" id="live-bar" style="display:none">
             <span class="live-dot"></span>
             <span>Live <span id="live-crop-name">Corn</span>:</span>
@@ -300,343 +179,151 @@
             <span class="chg-tag" id="live-chg-val"></span>
             <button onclick="useLivePrice()">Use this price</button>
           </div>
-
           <div style="margin-bottom:20px">
             <label>CROP &amp; YIELD</label>
-            <div class="input-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Crop</label>
-                <select id="crop" onchange="onCropChange()">
-                  <option value="corn">Corn</option>
-                  <option value="soybeans">Soybeans</option>
-                  <option value="wheat">Wheat</option>
-                </select>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Expected Yield (bu/ac) <span class="hint-icon">?</span></label>
-                <input type="number" id="yield" value="180" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert>
-                  <div class="hint-title">⚡ Yield Checklist</div>
-                  <ul class="hint-list">
-                    <li>Your APH (Actual Production History)</li>
-                    <li>County average vs. your field history</li>
-                    <li>Trend-adjusted yield for this year</li>
-                    <li>Soil type &amp; drainage quality</li>
-                    <li>Planting date impact on potential</li>
-                  </ul>
-                  <div class="hint-note">Conservative estimates protect your plan.</div>
-                </div>
-              </div>
+            <div class="input-grid-2" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px">
+              <div class="input-wrap"><label style="font-size:.75rem">Crop</label><select id="crop" onchange="onCropChange()"><option value="corn">Corn</option><option value="soybeans">Soybeans</option><option value="wheat">Wheat</option></select></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Expected Yield (bu/ac) <span class="hint-icon">?</span></label><input type="number" id="yield" value="180" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Yield Checklist</div><ul class="hint-list"><li>Your APH (Actual Production History)</li><li>County average vs. your field history</li><li>Trend-adjusted yield for this year</li><li>Soil type &amp; drainage quality</li><li>Planting date impact on potential</li></ul><div class="hint-note">Conservative estimates protect your plan.</div></div></div>
             </div>
-            <div class="input-wrap">
-              <label style="font-size:.75rem">Market Price ($/bu) <span class="hint-icon">?</span></label>
-              <input type="number" id="price" value="4.50" step="0.01" inputmode="decimal" oninput="calcBreakeven()">
-              <div class="hint-popup" inert>
-                <div class="hint-title">💲 Price Considerations</div>
-                <ul class="hint-list">
-                  <li>Current futures contract price</li>
-                  <li>Local basis adjustment (+/- from futures)</li>
-                  <li>Forward contract commitments</li>
-                  <li>Harvest vs. spring delivery basis</li>
-                  <li>On-farm storage premium potential</li>
-                </ul>
-                <div class="hint-note">Use the live price above if available.</div>
-              </div>
-            </div>
+            <div class="input-wrap"><label style="font-size:.75rem">Market Price ($/bu) <span class="hint-icon">?</span></label><input type="number" id="price" value="4.50" step="0.01" inputmode="decimal" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Price Considerations</div><ul class="hint-list"><li>Current futures contract price</li><li>Local basis adjustment (+/- from futures)</li><li>Forward contract commitments</li><li>Harvest vs. spring delivery basis</li><li>On-farm storage premium potential</li></ul><div class="hint-note">Use the live price above if available.</div></div></div>
           </div>
-
           <div style="margin-bottom:20px">
             <label>INPUT COSTS ($/ac)</label>
-            <div class="input-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Seed <span class="hint-icon">?</span></label>
-                <input type="number" id="seed" value="125" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">🌱 Don't Forget</div><ul class="hint-list"><li>Base seed cost per bag</li><li>Seed treatment</li><li>Technology / trait fees</li><li>Replant seed reserve</li><li>Inoculant (soybeans)</li></ul></div>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Fertilizer <span class="hint-icon">?</span></label>
-                <input type="number" id="fertilizer" value="175" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">🧪 Don't Forget</div><ul class="hint-list"><li>Nitrogen (anhydrous, urea, UAN)</li><li>Phosphorus (MAP/DAP)</li><li>Potash (K₂O)</li><li>Lime (amortized)</li><li>Sulfur &amp; micros</li><li>Application fees</li></ul><div class="hint-note">Soil test recommendations should drive rates.</div></div>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Chemicals <span class="hint-icon">?</span></label>
-                <input type="number" id="chemicals" value="65" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">🧴 Don't Forget</div><ul class="hint-list"><li>Pre-emerge herbicides</li><li>Post-emerge herbicides</li><li>Fungicide</li><li>Insecticide</li><li>Adjuvants &amp; surfactants</li><li>Custom application fees</li></ul></div>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Crop Insurance <span class="hint-icon">?</span></label>
-                <input type="number" id="insurance" value="35" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">🛡️ Don't Forget</div><ul class="hint-list"><li>Net premium (after subsidy)</li><li>Hail / wind endorsement</li><li>Replant provision</li><li>SCO or ECO add-on</li><li>Private hail policy</li></ul><div class="hint-note">Ask your agent about ECO — heavily subsidized.</div></div>
-              </div>
+            <div class="input-grid-2" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+              <div class="input-wrap"><label style="font-size:.75rem">Seed <span class="hint-icon">?</span></label><input type="number" id="seed" value="125" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Base seed cost per bag</li><li>Seed treatment</li><li>Technology / trait fees</li><li>Replant seed reserve</li><li>Inoculant (soybeans)</li></ul></div></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Fertilizer <span class="hint-icon">?</span></label><input type="number" id="fertilizer" value="175" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Nitrogen (anhydrous, urea, UAN)</li><li>Phosphorus (MAP/DAP)</li><li>Potash (K2O)</li><li>Lime (amortized)</li><li>Sulfur &amp; micros</li><li>Application fees</li></ul><div class="hint-note">Soil test recommendations should drive rates.</div></div></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Chemicals <span class="hint-icon">?</span></label><input type="number" id="chemicals" value="65" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Pre-emerge herbicides</li><li>Post-emerge herbicides</li><li>Fungicide</li><li>Insecticide</li><li>Adjuvants &amp; surfactants</li><li>Custom application fees</li></ul></div></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Crop Insurance <span class="hint-icon">?</span></label><input type="number" id="insurance" value="35" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Net premium (after subsidy)</li><li>Hail / wind endorsement</li><li>Replant provision</li><li>SCO or ECO add-on</li><li>Private hail policy</li></ul><div class="hint-note">Ask your agent about ECO &mdash; heavily subsidized.</div></div></div>
             </div>
           </div>
-
           <div style="margin-bottom:20px">
             <label>OPERATING COSTS ($/ac)</label>
-            <div class="input-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Machinery <span class="hint-icon">?</span></label>
-                <input type="number" id="machinery" value="85" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">🚜 Don't Forget</div><ul class="hint-list"><li>Fuel &amp; lube</li><li>Repairs &amp; maintenance</li><li>Depreciation</li><li>Custom hire</li><li>Hauling / trucking</li></ul></div>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Labor <span class="hint-icon">?</span></label>
-                <input type="number" id="labor" value="35" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">👷 Don't Forget</div><ul class="hint-list"><li>Hired labor</li><li>Owner/operator time value</li><li>Seasonal help</li><li>Benefits &amp; payroll taxes</li></ul></div>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Land Rent/Cost <span class="hint-icon">?</span></label>
-                <input type="number" id="land" value="250" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">🏡 Don't Forget</div><ul class="hint-list"><li>Cash rent (or flex rent)</li><li>Property tax (if owned)</li><li>Drainage tile payments</li><li>Opportunity cost of owned land</li></ul><div class="hint-note">USDA NASS publishes county-level cash rent averages.</div></div>
-              </div>
-              <div class="input-wrap">
-                <label style="font-size:.75rem">Overhead <span class="hint-icon">?</span></label>
-                <input type="number" id="overhead" value="38" inputmode="numeric" oninput="calcBreakeven()">
-                <div class="hint-popup" inert><div class="hint-title">📋 Don't Forget</div><ul class="hint-list"><li>Interest on operating loan</li><li>Crop drying</li><li>Storage / bin costs</li><li>Marketing &amp; basis fees</li><li>Farm liability insurance</li><li>Accounting &amp; legal</li></ul></div>
-              </div>
+            <div class="input-grid-2" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+              <div class="input-wrap"><label style="font-size:.75rem">Machinery <span class="hint-icon">?</span></label><input type="number" id="machinery" value="85" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Fuel &amp; lube</li><li>Repairs &amp; maintenance</li><li>Depreciation</li><li>Custom hire</li><li>Hauling / trucking</li></ul></div></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Labor <span class="hint-icon">?</span></label><input type="number" id="labor" value="35" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Hired labor</li><li>Owner/operator time value</li><li>Seasonal help</li><li>Benefits &amp; payroll taxes</li></ul></div></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Land Rent/Cost <span class="hint-icon">?</span></label><input type="number" id="land" value="250" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Cash rent (or flex rent)</li><li>Property tax (if owned)</li><li>Drainage tile payments</li><li>Opportunity cost of owned land</li></ul><div class="hint-note">USDA NASS publishes county-level cash rent averages.</div></div></div>
+              <div class="input-wrap"><label style="font-size:.75rem">Overhead <span class="hint-icon">?</span></label><input type="number" id="overhead" value="38" inputmode="numeric" oninput="calcBreakeven()"><div class="hint-popup" inert><div class="hint-title">Don't Forget</div><ul class="hint-list"><li>Interest on operating loan</li><li>Crop drying</li><li>Storage / bin costs</li><li>Marketing &amp; basis fees</li><li>Farm liability insurance</li><li>Accounting &amp; legal</li></ul></div></div>
             </div>
           </div>
-
-          <div class="cost-breakdown">
-            <div class="cost-breakdown-title">Cost Breakdown</div>
-            <div class="cost-bar" id="cost-bar"></div>
-            <div class="cost-legend" id="cost-legend"></div>
-          </div>
+          <div class="cost-breakdown"><div class="cost-breakdown-title">Cost Breakdown</div><div class="cost-bar" id="cost-bar"></div><div class="cost-legend" id="cost-legend"></div></div>
         </div>
       </div>
-
       <div class="panel">
         <div class="panel-head"><h2>RESULTS</h2></div>
         <div class="panel-body">
-          <div class="result-row"><span class="result-label">Total Cost/Acre</span>     <span class="result-value" id="totalCost">$808/ac</span></div>
-          <div class="result-row"><span class="result-label">Cost/Bushel</span>          <span class="result-value" id="costPerBu">$4.49/bu</span></div>
-          <div class="result-row"><span class="result-label">Break-Even Price</span>     <span class="result-value highlight be-highlight" id="breakeven">$4.49/bu</span></div>
-          <div class="result-row"><span class="result-label">Gross Revenue/Acre</span>   <span class="result-value" id="revenue">$810/ac</span></div>
-          <div class="result-row"><span class="result-label">Net Profit/Loss</span>      <span class="result-value" id="profit">+$2/ac</span></div>
-          <div class="result-row"><span class="result-label">Return on Investment</span> <span class="result-value" id="roi">0.2%</span></div>
+          <div class="result-row"><span class="result-label">Total Cost/Acre</span><span class="result-value" id="totalCost">$808/ac</span></div>
+          <div class="result-row"><span class="result-label">Cost/Bushel</span><span class="result-value" id="costPerBu">$4.49/bu</span></div>
+          <div class="result-row"><span class="result-label">Break-Even Price</span><span class="result-value highlight be-highlight" id="breakeven">$4.49/bu</span></div>
+          <div class="result-row"><span class="result-label">Gross Revenue/Acre</span><span class="result-value" id="revenue">$810/ac</span></div>
+          <div class="result-row"><span class="result-label">Net Profit/Loss</span><span class="result-value" id="profit">+$2/ac</span></div>
+          <div class="result-row"><span class="result-label">Return on Investment</span><span class="result-value" id="roi">0.2%</span></div>
           <div class="result-row"><span class="result-label">Yield Needed @ Market</span><span class="result-value" id="yieldNeeded">180 bu/ac</span></div>
-
           <div class="acres-row">
             <div class="acres-inner">
-              <div class="acres-input-group">
-                <label class="acres-label">Total Acres</label>
-                <input type="number" id="acres" value="500" inputmode="numeric" oninput="calcBreakeven()" class="acres-field">
-              </div>
-              <div style="text-align:right">
-                <div class="farm-total-label">Farm Total Profit/Loss</div>
-                <div class="farm-total-value" id="farmTotal">--</div>
-              </div>
+              <div class="acres-input-group"><label class="acres-label">Total Acres</label><input type="number" id="acres" value="500" inputmode="numeric" oninput="calcBreakeven()" class="acres-field"></div>
+              <div style="text-align:right"><div class="farm-total-label">Farm Total Profit/Loss</div><div class="farm-total-value" id="farmTotal">--</div></div>
             </div>
           </div>
-
           <div class="profit-gauge">
             <div class="profit-gauge-label">Margin Indicator</div>
-            <div class="profit-gauge-bar">
-              <div class="profit-gauge-fill" id="gauge-fill" style="width:50%;background:var(--text-dim)"></div>
-              <div class="profit-gauge-marker" id="gauge-marker" style="left:50%"></div>
-            </div>
+            <div class="profit-gauge-bar"><div class="profit-gauge-fill" id="gauge-fill" style="width:50%;background:var(--text-dim)"></div><div class="profit-gauge-marker" id="gauge-marker" style="left:50%"></div></div>
             <div class="profit-gauge-labels"><span>-$200/ac</span><span style="color:var(--text)">Break-Even</span><span>+$200/ac</span></div>
           </div>
-
           <div class="sensitivity">
             <div class="sensitivity-title">What-If: Profit/Loss per Acre</div>
-            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-              <table class="sens-table" id="sens-table"></table>
-            </div>
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="sens-table" id="sens-table" aria-label="Sensitivity table showing profit or loss across yield and price scenarios"></table></div>
           </div>
-
           <div class="action-bar">
-            <button class="btn btn-primary"   onclick="printReport()">🖨️ Print Report</button>
-            <button class="btn btn-secondary" onclick="resetDefaults()">↺ Reset</button>
+            <button class="btn btn-primary" onclick="printReport()">&#128424;&#65039; Print Report</button>
+            <button class="btn btn-secondary" onclick="resetDefaults()">&#8634; Reset</button>
           </div>
         </div>
       </div>
-
     </div>
   </main>
 
-  <div class="print-footer">
-    Generated by AGSIST — agsist.com — Free Agricultural Dashboard · For informational purposes only. Not financial advice. Verify all inputs with your local data.
+  <div class="be-faq">
+    <div class="be-faq-hd">&#10067; Break-Even Calculator — Common Questions</div>
+    <div class="be-faq-item">
+      <div class="be-faq-q" role="button" tabindex="0" aria-expanded="false">How do I calculate break-even price per bushel?</div>
+      <div class="be-faq-a"><div class="be-faq-ai">Divide your total cost per acre by your expected yield in bushels. For example: $850 per acre total cost &divide; 200 bu/ac expected yield = $4.25/bu break-even price for corn. This is the minimum futures price (before basis) at which you cover all expenses. The calculator above does this automatically as you enter your costs &mdash; the Break-Even Price result updates instantly. To stay profitable, your market price (futures + basis) needs to exceed this number.</div></div>
+    </div>
+    <div class="be-faq-item">
+      <div class="be-faq-q" role="button" tabindex="0" aria-expanded="false">What is a realistic corn production cost per acre in Wisconsin or Minnesota?</div>
+      <div class="be-faq-a"><div class="be-faq-ai">Total corn production costs in Wisconsin and Minnesota typically range from $700&ndash;$950 per acre for tenant farmers, or $550&ndash;$800 per acre for land-owners (without cash rent). The biggest variable is land cost &mdash; cash rent in prime WI/MN cropland ranges $150&ndash;$350/acre. Fertilizer (especially nitrogen) is typically the second-largest cost at $120&ndash;$200/acre. Seed runs $100&ndash;$160/acre for traited hybrids. The defaults in this calculator reflect a representative Upper Midwest tenant operation &mdash; adjust each line for your actual costs to get your true break-even.</div></div>
+    </div>
+    <div class="be-faq-item">
+      <div class="be-faq-q" role="button" tabindex="0" aria-expanded="false">How does cash rent affect my corn or soybean break-even price?</div>
+      <div class="be-faq-a"><div class="be-faq-ai">Cash rent is typically the single largest per-acre variable cost for tenant farmers, and it moves your break-even directly. Every $50/acre increase in land rent raises your corn break-even by roughly $0.25&ndash;$0.28/bu at 180 bu/ac yields. At 200 bu/ac, it's $0.25/bu per $50 rent increase. For soybeans at 55 bu/ac, every $50/acre rent increase adds about $0.91/bu to your break-even. This is why land rent negotiation is one of the highest-value conversations in farm management &mdash; the math is direct and permanent.</div></div>
+    </div>
+    <div class="be-faq-item">
+      <div class="be-faq-q" role="button" tabindex="0" aria-expanded="false">What costs should I include in a full farm break-even calculation?</div>
+      <div class="be-faq-a"><div class="be-faq-ai">A complete break-even includes two layers. Direct inputs: seed, fertilizer (N, P, K, lime, sulfur), herbicides (pre and post-emerge), fungicide, insecticide, crop insurance premium (net of subsidy), drying, and trucking. Overhead costs: land rent or property tax/ownership cost, machinery depreciation, fuel and lube, repairs and maintenance, labor (including your own time at a market wage), operating loan interest, and general farm overhead. Many producers undercount labor and depreciation &mdash; including your own time at $20&ndash;30/hr and machinery depreciation can add $50&ndash;120/acre to your true break-even.</div></div>
+    </div>
+    <div class="be-faq-item">
+      <div class="be-faq-q" role="button" tabindex="0" aria-expanded="false">What is the what-if sensitivity table and how do I use it?</div>
+      <div class="be-faq-a"><div class="be-faq-ai">The sensitivity table shows profit or loss per acre across 36 different combinations of yield and price simultaneously. Your current inputs are highlighted in green so you can immediately see where you stand. The rows show different yield scenarios (above and below your estimate) and the columns show different price scenarios. Red numbers are losses; green numbers are profitable outcomes. This lets you answer questions like: "If yields come in 10% below plan AND prices drop $0.30, what's my loss per acre?" &mdash; without running the calculator multiple times. It's most useful for evaluating crop insurance coverage levels and forward pricing decisions.</div></div>
+    </div>
   </div>
 
+  <div class="print-footer">Generated by AGSIST — agsist.com — Free Agricultural Dashboard &middot; For informational purposes only. Not financial advice. Verify all inputs with your local data.</div>
   <div id="site-footer"></div>
-  <script src="/components/loader.js"></script>
-
+  <script src="/components/loader.js" defer></script>
   <script>
-  var CROP_DEFAULTS = {
-    corn:     { yield:180, price:4.50, seed:125, fertilizer:175, chemicals:65,  insurance:35, machinery:85, labor:35, land:250, overhead:38 },
-    soybeans: { yield:55,  price:10.50,seed:75,  fertilizer:45,  chemicals:55,  insurance:30, machinery:65, labor:30, land:250, overhead:32 },
-    wheat:    { yield:70,  price:5.50, seed:40,  fertilizer:110, chemicals:50,  insurance:25, machinery:70, labor:30, land:200, overhead:30 }
-  };
-  var CROP_PRICE_KEY = { corn:'corn', soybeans:'beans', wheat:'wheat' };
-  var CROP_NAMES     = { corn:'Corn', soybeans:'Soybeans', wheat:'Wheat' };
-  var COST_COLORS = { seed:'#3a8b3c', fertilizer:'#4a8fba', chemicals:'#7a6fad', insurance:'#daa520', machinery:'#b84c2a', labor:'#c87a28', land:'#5a9e6f', overhead:'#8a8a80' };
-  var COST_LABELS = { seed:'Seed', fertilizer:'Fertilizer', chemicals:'Chemicals', insurance:'Insurance', machinery:'Machinery', labor:'Labor', land:'Land', overhead:'Overhead' };
-  var COST_KEYS   = ['seed','fertilizer','chemicals','insurance','machinery','labor','land','overhead'];
-  var _livePrices = null;
-
-  function closeAllHints() {
-    document.querySelectorAll('.hint-popup.hint-open').forEach(function(p) { p.classList.remove('hint-open'); p.setAttribute('inert', ''); });
-    document.querySelectorAll('.hint-icon.active').forEach(function(i) { i.classList.remove('active'); });
+  var CROP_DEFAULTS={corn:{yield:180,price:4.50,seed:125,fertilizer:175,chemicals:65,insurance:35,machinery:85,labor:35,land:250,overhead:38},soybeans:{yield:55,price:10.50,seed:75,fertilizer:45,chemicals:55,insurance:30,machinery:65,labor:30,land:250,overhead:32},wheat:{yield:70,price:5.50,seed:40,fertilizer:110,chemicals:50,insurance:25,machinery:70,labor:30,land:200,overhead:30}};
+  var CROP_PRICE_KEY={corn:'corn',soybeans:'beans',wheat:'wheat'};
+  var CROP_NAMES={corn:'Corn',soybeans:'Soybeans',wheat:'Wheat'};
+  var COST_COLORS={seed:'#3a8b3c',fertilizer:'#4a8fba',chemicals:'#7a6fad',insurance:'#daa520',machinery:'#b84c2a',labor:'#c87a28',land:'#5a9e6f',overhead:'#8a8a80'};
+  var COST_LABELS={seed:'Seed',fertilizer:'Fertilizer',chemicals:'Chemicals',insurance:'Insurance',machinery:'Machinery',labor:'Labor',land:'Land',overhead:'Overhead'};
+  var COST_KEYS=['seed','fertilizer','chemicals','insurance','machinery','labor','land','overhead'];
+  var _livePrices=null;
+  function closeAllHints(){document.querySelectorAll('.hint-popup.hint-open').forEach(function(p){p.classList.remove('hint-open');p.setAttribute('inert','');});document.querySelectorAll('.hint-icon.active').forEach(function(i){i.classList.remove('active');});}
+  (function(){document.querySelectorAll('.hint-icon').forEach(function(icon){icon.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var popup=this.closest('.input-wrap').querySelector('.hint-popup');if(!popup)return;var wasOpen=popup.classList.contains('hint-open');closeAllHints();if(!wasOpen){popup.classList.add('hint-open');popup.removeAttribute('inert');this.classList.add('active');}});});document.addEventListener('click',function(e){if(!e.target.closest('.hint-icon')&&!e.target.closest('.hint-popup'))closeAllHints();});})();
+  function onCropChange(){var d=CROP_DEFAULTS[document.getElementById('crop').value];Object.keys(d).forEach(function(k){var el=document.getElementById(k);if(el)el.value=d[k];});updateLiveBar();calcBreakeven();}
+  function resetDefaults(){onCropChange();}
+  function calcBreakeven(){
+    var yldVal=parseFloat(document.getElementById('yield').value)||0,price=parseFloat(document.getElementById('price').value)||0,costs={};
+    COST_KEYS.forEach(function(k){costs[k]=parseFloat(document.getElementById(k).value)||0;});
+    var totalCost=0;Object.keys(costs).forEach(function(k){totalCost+=costs[k];});
+    var costPerBu=yldVal>0?totalCost/yldVal:0,revenue=yldVal*price,profit=revenue-totalCost,yldNeeded=price>0?totalCost/price:0,roiPct=totalCost>0?profit/totalCost*100:0,acres=parseFloat(document.getElementById('acres').value)||0,farmTotal=profit*acres;
+    document.getElementById('totalCost').textContent='$'+Math.round(totalCost).toLocaleString()+'/ac';
+    document.getElementById('costPerBu').textContent='$'+costPerBu.toFixed(2)+'/bu';
+    document.getElementById('yieldNeeded').textContent=Math.round(yldNeeded)+' bu/ac';
+    document.getElementById('revenue').textContent='$'+Math.round(revenue).toLocaleString()+'/ac';
+    var beEl=document.getElementById('breakeven');beEl.textContent='$'+costPerBu.toFixed(2)+'/bu';beEl.className='result-value be-highlight '+(price>costPerBu&&costPerBu>0?'positive':price<costPerBu&&costPerBu>0?'negative':'highlight');
+    var profEl=document.getElementById('profit');profEl.textContent=(profit>=0?'+$':'-$')+Math.abs(Math.round(profit)).toLocaleString()+'/ac';profEl.className='result-value '+(profit>=0?'positive':'negative');
+    var roiEl=document.getElementById('roi');roiEl.textContent=(roiPct>=0?'+':'')+roiPct.toFixed(1)+'%';roiEl.className='result-value '+(roiPct>=0?'positive':'negative');
+    var farmEl=document.getElementById('farmTotal');farmEl.textContent=(farmTotal>=0?'+$':'-$')+Math.abs(Math.round(farmTotal)).toLocaleString();farmEl.style.color=farmTotal>=0?'var(--green)':'var(--red)';
+    var cropName=CROP_NAMES[document.getElementById('crop').value]||'Corn';
+    var psCrop=document.getElementById('print-crop');if(psCrop)psCrop.textContent=cropName+' — '+Math.round(yldVal)+' bu/ac × '+acres+' acres';
+    var psbe=document.getElementById('ps-breakeven');if(psbe)psbe.textContent='$'+costPerBu.toFixed(2)+'/bu';
+    var psp=document.getElementById('ps-price');if(psp)psp.textContent='$'+price.toFixed(2)+'/bu';
+    var pspr=document.getElementById('ps-profit');if(pspr){pspr.textContent=(profit>=0?'+$':'-$')+Math.abs(Math.round(profit)).toLocaleString()+'/ac';pspr.className='print-stat-value '+(profit>=0?'pos':'neg');}
+    var psal=document.getElementById('ps-acres-label');if(psal)psal.textContent=Math.round(acres).toLocaleString();
+    var psf=document.getElementById('ps-farm');if(psf){psf.textContent=(farmTotal>=0?'+$':'-$')+Math.abs(Math.round(farmTotal)).toLocaleString();psf.className='print-stat-value '+(farmTotal>=0?'pos':'neg');}
+    updateCostBar(costs,totalCost);updateGauge(profit);updateSensitivity(costs,yldVal,price,totalCost);
   }
-  (function() {
-    document.querySelectorAll('.hint-icon').forEach(function(icon) {
-      icon.addEventListener('click', function(e) {
-        e.preventDefault(); e.stopPropagation();
-        var popup = this.closest('.input-wrap').querySelector('.hint-popup');
-        if (!popup) return;
-        var wasOpen = popup.classList.contains('hint-open');
-        closeAllHints();
-        if (!wasOpen) { popup.classList.add('hint-open'); popup.removeAttribute('inert'); this.classList.add('active'); }
-      });
-    });
-    document.addEventListener('click', function(e) { if (!e.target.closest('.hint-icon') && !e.target.closest('.hint-popup')) closeAllHints(); });
-  })();
-
-  function onCropChange() {
-    var d = CROP_DEFAULTS[document.getElementById('crop').value];
-    Object.keys(d).forEach(function(k) { var el = document.getElementById(k); if (el) el.value = d[k]; });
-    updateLiveBar(); calcBreakeven();
+  function updateCostBar(costs,total){if(total<=0)return;var barHTML='',legendHTML='';COST_KEYS.forEach(function(k){var pct=costs[k]/total*100;if(pct<0.5)return;barHTML+='<div class="cost-bar-seg" style="width:'+pct.toFixed(1)+'%;background:'+COST_COLORS[k]+'"><span class="seg-tip">'+COST_LABELS[k]+': $'+Math.round(costs[k])+'/ac ('+pct.toFixed(0)+'%)</span></div>';legendHTML+='<span class="cost-legend-item"><span class="cost-legend-dot" style="background:'+COST_COLORS[k]+'"></span>'+COST_LABELS[k]+' $'+Math.round(costs[k])+' ('+pct.toFixed(0)+'%)</span>';});document.getElementById('cost-bar').innerHTML=barHTML;document.getElementById('cost-legend').innerHTML=legendHTML;}
+  function updateGauge(profit){var pct=((Math.max(-200,Math.min(200,profit))+200)/400*100);document.getElementById('gauge-marker').style.left=pct+'%';var fill=document.getElementById('gauge-fill');fill.style.width=pct+'%';fill.style.background=profit>=0?'linear-gradient(90deg,var(--border) 50%,var(--green) '+pct+'%)':'linear-gradient(90deg,var(--red) 0%,var(--border) '+pct+'%)';}
+  function updateSensitivity(costs,baseYield,basePrice,totalCost){
+    if(baseYield<=0||basePrice<=0)return;
+    var crop=document.getElementById('crop').value;
+    var yDeltas=crop==='corn'?[-30,-20,-10,0,10,20]:crop==='soybeans'?[-10,-7,-3,0,3,7]:[-15,-10,-5,0,5,10];
+    var pDeltas=crop==='corn'?[-0.60,-0.40,-0.20,0,0.20,0.40]:crop==='soybeans'?[-1.50,-1.00,-0.50,0,0.50,1.00]:[-0.75,-0.50,-0.25,0,0.25,0.50];
+    var ySteps=yDeltas.map(function(d){return Math.round(baseYield+d);});
+    var pSteps=pDeltas.map(function(d){return +(basePrice+d).toFixed(2);});
+    var html='<tr><th class="corner">Yield ↓ / Price →</th>'+pSteps.map(function(p){return'<th>$'+p.toFixed(2)+'</th>';}).join('')+'</tr>';
+    ySteps.forEach(function(y){html+='<tr><td class="row-head">'+y+' bu</td>';pSteps.forEach(function(p){var prof=(y*p)-totalCost,cls=prof>5?'sens-positive':prof<-5?'sens-negative':'sens-zero',cur=y===Math.round(baseYield)&&Math.abs(p-basePrice)<0.01;html+='<td class="'+cls+(cur?' sens-current':'')+'">'+( prof>=0?'+$'+Math.round(prof):'-$'+Math.abs(Math.round(prof)))+'</td>';});html+='</tr>';});
+    document.getElementById('sens-table').innerHTML=html;
   }
-  function resetDefaults() { onCropChange(); }
-
-  function calcBreakeven() {
-    var yldVal = parseFloat(document.getElementById('yield').value) || 0;
-    var price  = parseFloat(document.getElementById('price').value) || 0;
-    var costs  = {};
-    COST_KEYS.forEach(function(k) { costs[k] = parseFloat(document.getElementById(k).value) || 0; });
-    var totalCost = 0;
-    Object.keys(costs).forEach(function(k) { totalCost += costs[k]; });
-    var costPerBu  = yldVal > 0 ? totalCost / yldVal : 0;
-    var revenue    = yldVal * price;
-    var profit     = revenue - totalCost;
-    var yldNeeded  = price > 0 ? totalCost / price : 0;
-    var roiPct     = totalCost > 0 ? profit / totalCost * 100 : 0;
-    var acres      = parseFloat(document.getElementById('acres').value) || 0;
-    var farmTotal  = profit * acres;
-
-    document.getElementById('totalCost').textContent  = '$' + Math.round(totalCost).toLocaleString() + '/ac';
-    document.getElementById('costPerBu').textContent  = '$' + costPerBu.toFixed(2) + '/bu';
-    document.getElementById('yieldNeeded').textContent = Math.round(yldNeeded) + ' bu/ac';
-    document.getElementById('revenue').textContent    = '$' + Math.round(revenue).toLocaleString() + '/ac';
-
-    var beEl = document.getElementById('breakeven');
-    beEl.textContent = '$' + costPerBu.toFixed(2) + '/bu';
-    beEl.className = 'result-value be-highlight ' + (price > costPerBu && costPerBu > 0 ? 'positive' : price < costPerBu && costPerBu > 0 ? 'negative' : 'highlight');
-
-    var profEl = document.getElementById('profit');
-    profEl.textContent = (profit >= 0 ? '+$' : '-$') + Math.abs(Math.round(profit)).toLocaleString() + '/ac';
-    profEl.className = 'result-value ' + (profit >= 0 ? 'positive' : 'negative');
-
-    var roiEl = document.getElementById('roi');
-    roiEl.textContent = (roiPct >= 0 ? '+' : '') + roiPct.toFixed(1) + '%';
-    roiEl.className = 'result-value ' + (roiPct >= 0 ? 'positive' : 'negative');
-
-    var farmEl = document.getElementById('farmTotal');
-    farmEl.textContent = (farmTotal >= 0 ? '+$' : '-$') + Math.abs(Math.round(farmTotal)).toLocaleString();
-    farmEl.style.color = farmTotal >= 0 ? 'var(--green)' : 'var(--red)';
-
-    var cropName = CROP_NAMES[document.getElementById('crop').value] || 'Corn';
-    var psCrop = document.getElementById('print-crop'); if (psCrop) psCrop.textContent = cropName + ' — ' + Math.round(yldVal) + ' bu/ac × ' + acres + ' acres';
-    var psbe = document.getElementById('ps-breakeven'); if (psbe) psbe.textContent = '$' + costPerBu.toFixed(2) + '/bu';
-    var psp = document.getElementById('ps-price'); if (psp) psp.textContent = '$' + price.toFixed(2) + '/bu';
-    var pspr = document.getElementById('ps-profit'); if (pspr) { pspr.textContent = (profit >= 0 ? '+$' : '-$') + Math.abs(Math.round(profit)).toLocaleString() + '/ac'; pspr.className = 'print-stat-value ' + (profit >= 0 ? 'pos' : 'neg'); }
-    var psal = document.getElementById('ps-acres-label'); if (psal) psal.textContent = Math.round(acres).toLocaleString();
-    var psf = document.getElementById('ps-farm'); if (psf) { psf.textContent = (farmTotal >= 0 ? '+$' : '-$') + Math.abs(Math.round(farmTotal)).toLocaleString(); psf.className = 'print-stat-value ' + (farmTotal >= 0 ? 'pos' : 'neg'); }
-
-    updateCostBar(costs, totalCost);
-    updateGauge(profit);
-    updateSensitivity(costs, yldVal, price, totalCost);
-  }
-
-  function updateCostBar(costs, total) {
-    if (total <= 0) return;
-    var barHTML = '', legendHTML = '';
-    COST_KEYS.forEach(function(k) {
-      var pct = costs[k] / total * 100;
-      if (pct < 0.5) return;
-      barHTML   += '<div class="cost-bar-seg" style="width:' + pct.toFixed(1) + '%;background:' + COST_COLORS[k] + '"><span class="seg-tip">' + COST_LABELS[k] + ': $' + Math.round(costs[k]) + '/ac (' + pct.toFixed(0) + '%)</span></div>';
-      legendHTML += '<span class="cost-legend-item"><span class="cost-legend-dot" style="background:' + COST_COLORS[k] + '"></span>' + COST_LABELS[k] + ' $' + Math.round(costs[k]) + ' (' + pct.toFixed(0) + '%)</span>';
-    });
-    document.getElementById('cost-bar').innerHTML   = barHTML;
-    document.getElementById('cost-legend').innerHTML = legendHTML;
-  }
-
-  function updateGauge(profit) {
-    var pct = ((Math.max(-200, Math.min(200, profit)) + 200) / 400 * 100);
-    document.getElementById('gauge-marker').style.left = pct + '%';
-    var fill = document.getElementById('gauge-fill');
-    fill.style.width = pct + '%';
-    fill.style.background = profit >= 0 ? 'linear-gradient(90deg, var(--border) 50%, var(--green) ' + pct + '%)' : 'linear-gradient(90deg, var(--red) 0%, var(--border) ' + pct + '%)';
-  }
-
-  function updateSensitivity(costs, baseYield, basePrice, totalCost) {
-    if (baseYield <= 0 || basePrice <= 0) return;
-    var crop = document.getElementById('crop').value;
-    var yDeltas = (crop === 'corn' ? [-30,-20,-10,0,10,20] : crop === 'soybeans' ? [-10,-7,-3,0,3,7] : [-15,-10,-5,0,5,10]);
-    var pDeltas = (crop === 'corn' ? [-0.60,-0.40,-0.20,0,0.20,0.40] : crop === 'soybeans' ? [-1.50,-1.00,-0.50,0,0.50,1.00] : [-0.75,-0.50,-0.25,0,0.25,0.50]);
-    var ySteps = yDeltas.map(function(d) { return Math.round(baseYield + d); });
-    var pSteps = pDeltas.map(function(d) { return +(basePrice + d).toFixed(2); });
-    var html = '<tr><th class="corner">Yield ↓ / Price →</th>' + pSteps.map(function(p) { return '<th>$' + p.toFixed(2) + '</th>'; }).join('') + '</tr>';
-    ySteps.forEach(function(y) {
-      html += '<tr><td class="row-head">' + y + ' bu</td>';
-      pSteps.forEach(function(p) {
-        var prof = (y * p) - totalCost;
-        var cls  = prof > 5 ? 'sens-positive' : prof < -5 ? 'sens-negative' : 'sens-zero';
-        var cur  = y === Math.round(baseYield) && Math.abs(p - basePrice) < 0.01;
-        html += '<td class="' + cls + (cur ? ' sens-current' : '') + '">' + (prof >= 0 ? '+$' + Math.round(prof) : '-$' + Math.abs(Math.round(prof))) + '</td>';
-      });
-      html += '</tr>';
-    });
-    document.getElementById('sens-table').innerHTML = html;
-  }
-
-  function printReport() {
-    document.getElementById('print-date').textContent = new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-    calcBreakeven();
-    setTimeout(function() { window.print(); }, 150);
-  }
-
-  function fetchLivePrices() {
-    fetch('/data/prices.json', { cache: 'no-store' })
-      .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function(data) { _livePrices = data.quotes || {}; updateLiveBar(); })
-      .catch(function() {});
-  }
-  function updateLiveBar() {
-    var bar = document.getElementById('live-bar');
-    if (!_livePrices) { bar.style.display = 'none'; return; }
-    var crop = document.getElementById('crop').value;
-    var q    = _livePrices[CROP_PRICE_KEY[crop]];
-    if (!q || q.close == null) { bar.style.display = 'none'; return; }
-    var priceDollars = (q.close / 100).toFixed(2);
-    document.getElementById('live-price-val').textContent = '$' + priceDollars + '/bu';
-    document.getElementById('live-crop-name').textContent = CROP_NAMES[crop];
-    bar.dataset.price = priceDollars;
-    var chgEl = document.getElementById('live-chg-val');
-    if (q.pctChange != null) { var pct = q.pctChange; chgEl.textContent = (pct >= 0 ? '▲' : '▼') + ' ' + Math.abs(pct).toFixed(2) + '%'; chgEl.className = 'chg-tag ' + (pct >= 0 ? 'up' : 'dn'); } else { chgEl.textContent = ''; }
-    bar.style.display = 'flex';
-  }
-  function useLivePrice() { var p = document.getElementById('live-bar').dataset.price; if (p) { document.getElementById('price').value = p; calcBreakeven(); } }
-
-  document.addEventListener('click', function(e) {
-    var seg = e.target.closest('.cost-bar-seg'); if (!seg) return;
-    var tip = seg.querySelector('.seg-tip'); if (!tip) return;
-    e.stopPropagation();
-    document.querySelectorAll('.seg-tip.seg-open').forEach(function(t) { if (t !== tip) t.classList.remove('seg-open'); });
-    tip.classList.toggle('seg-open');
-    if (tip.classList.contains('seg-open')) setTimeout(function() { tip.classList.remove('seg-open'); }, 3000);
-  });
-
-  if (window.matchMedia('(hover: none)').matches) {
-    document.querySelectorAll('input[type="number"], select').forEach(function(input) {
-      input.addEventListener('focus', function() { closeAllHints(); setTimeout(function() { input.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300); });
-    });
-  }
-
-  calcBreakeven();
-  fetchLivePrices();
+  function printReport(){document.getElementById('print-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});calcBreakeven();setTimeout(function(){window.print();},150);}
+  function fetchLivePrices(){fetch('/data/prices.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(data){_livePrices=data.quotes||{};updateLiveBar();}).catch(function(){});}
+  function updateLiveBar(){var bar=document.getElementById('live-bar');if(!_livePrices){bar.style.display='none';return;}var crop=document.getElementById('crop').value,q=_livePrices[CROP_PRICE_KEY[crop]];if(!q||q.close==null){bar.style.display='none';return;}var priceDollars=(q.close/100).toFixed(2);document.getElementById('live-price-val').textContent='$'+priceDollars+'/bu';document.getElementById('live-crop-name').textContent=CROP_NAMES[crop];bar.dataset.price=priceDollars;var chgEl=document.getElementById('live-chg-val');if(q.pctChange!=null){var pct=q.pctChange;chgEl.textContent=(pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(2)+'%';chgEl.className='chg-tag '+(pct>=0?'up':'dn');}else{chgEl.textContent='';}bar.style.display='flex';}
+  function useLivePrice(){var p=document.getElementById('live-bar').dataset.price;if(p){document.getElementById('price').value=p;calcBreakeven();}}
+  document.addEventListener('click',function(e){var seg=e.target.closest('.cost-bar-seg');if(!seg)return;var tip=seg.querySelector('.seg-tip');if(!tip)return;e.stopPropagation();document.querySelectorAll('.seg-tip.seg-open').forEach(function(t){if(t!==tip)t.classList.remove('seg-open');});tip.classList.toggle('seg-open');if(tip.classList.contains('seg-open'))setTimeout(function(){tip.classList.remove('seg-open');},3000);});
+  if(window.matchMedia('(hover:none)').matches){document.querySelectorAll('input[type="number"],select').forEach(function(input){input.addEventListener('focus',function(){closeAllHints();setTimeout(function(){input.scrollIntoView({behavior:'smooth',block:'center'});},300);});});}
+  calcBreakeven();fetchLivePrices();
+  document.querySelectorAll('.be-faq-q').forEach(function(q){q.addEventListener('click',function(){var it=this.closest('.be-faq-item'),op=it.classList.contains('open');document.querySelectorAll('.be-faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.be-faq-q').setAttribute('aria-expanded','false');});if(!op){it.classList.add('open');q.setAttribute('aria-expanded','true');}});q.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();q.click();}});});
   </script>
-
 </body>
 </html>

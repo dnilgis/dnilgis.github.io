@@ -2,28 +2,29 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#111a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
-<link rel="stylesheet" href="/components/styles.css">
+<link rel="preload" href="/components/styles.css?v=10" as="style">
+<link rel="stylesheet" href="/components/styles.css?v=10">
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-
 <title>All Markets — Grain, Livestock &amp; Commodity Prices | AGSIST</title>
-<meta name="description" content="Live commodity prices for grain farmers. Corn, soybeans, wheat, live cattle, lean hogs, crude oil, natural gas, gold — updated every 30 min, free.">
-<meta name="author" content="Farmers First Agri Service — AGSIST">
+<meta name="description" content="Live commodity prices for grain farmers. Corn, soybeans, wheat, oats, live cattle, lean hogs, crude oil, natural gas, gold — updated every 30 min, free.">
+<meta name="author" content="Sigurd Lindquist">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://agsist.com/markets">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AGSIST">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="All Markets — Grain, Livestock &amp; Commodity Prices | AGSIST">
-<meta property="og:description" content="Corn, soybeans, wheat, cattle, hogs, energy, metals — live commodity prices for farmers, updated every 30 min. Free.">
+<meta property="og:description" content="Corn, soybeans, wheat, oats, cattle, hogs, energy, metals — live commodity prices for farmers, updated every 30 min. Free.">
 <meta property="og:url" content="https://agsist.com/markets">
 <meta property="og:image" content="https://agsist.com/img/og/agsist.jpg">
 <meta property="og:image:width" content="1200">
@@ -33,178 +34,148 @@
 <meta name="twitter:site" content="@agsist">
 <meta name="twitter:creator" content="@agsist">
 <meta name="twitter:title" content="All Markets — AGSIST">
-<meta name="twitter:description" content="Live commodity prices for farmers. Corn, soybeans, wheat, cattle, crude oil, gold — updated every 30 min. Free.">
+<meta name="twitter:description" content="Live commodity prices for farmers. Corn, soybeans, wheat, oats, cattle, crude oil, gold — updated every 30 min. Free.">
 <meta name="twitter:image" content="https://agsist.com/img/og/agsist.jpg">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://agsist.com/markets#webpage",
-      "url": "https://agsist.com/markets",
-      "name": "All Markets — Grain, Livestock & Commodity Prices | AGSIST",
-      "description": "Live commodity prices for grain farmers. Corn, soybeans, wheat, live cattle, lean hogs, crude oil, natural gas, gold — updated every 30 minutes. Free.",
-      "isPartOf": { "@id": "https://agsist.com/#website" },
-      "breadcrumb": { "@id": "https://agsist.com/markets#breadcrumb" }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://agsist.com/markets#breadcrumb",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://agsist.com/" },
-        { "@type": "ListItem", "position": 2, "name": "All Markets","item": "https://agsist.com/markets" }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What are corn futures prices today?",
-          "acceptedAnswer": { "@type": "Answer", "text": "AGSIST displays live CBOT corn futures prices updated every 30 minutes. Both the front-month and December new-crop contracts are shown with net change and percent change. Prices are in dollars per bushel." }
-        },
-        {
-          "@type": "Question",
-          "name": "Where can I find live soybean prices?",
-          "acceptedAnswer": { "@type": "Answer", "text": "AGSIST shows live CBOT soybean futures for the front month and November new-crop contract, updated every 30 minutes via Yahoo Finance. The full chart with 52-week range is available at agsist.com/soybean-futures-prices." }
-        },
-        {
-          "@type": "Question",
-          "name": "How often are grain prices updated?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Grain futures prices on AGSIST are updated every 30 minutes during CME trading hours Monday through Friday via automated GitHub Actions." }
-        }
-      ]
-    }
-  ]
-}
-</script>
-
-<style>button,a,[role="button"]{touch-action:manipulation;}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://agsist.com/markets#webpage","url":"https://agsist.com/markets","name":"All Markets — Grain, Livestock & Commodity Prices | AGSIST","description":"Live commodity prices for grain farmers. Corn, soybeans, wheat, oats, live cattle, lean hogs, crude oil, natural gas, gold — updated every 30 minutes. Free.","isPartOf":{"@id":"https://agsist.com/#website"},"breadcrumb":{"@id":"https://agsist.com/markets#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://agsist.com/markets#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agsist.com/"},{"@type":"ListItem","position":2,"name":"All Markets","item":"https://agsist.com/markets"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are corn futures prices today?","acceptedAnswer":{"@type":"Answer","text":"AGSIST displays live CBOT corn futures prices updated every 30 minutes. Both the front-month and December new-crop contracts are shown with net change and percent change. Prices are in dollars per bushel."}},{"@type":"Question","name":"Where can I find live soybean prices?","acceptedAnswer":{"@type":"Answer","text":"AGSIST shows live CBOT soybean futures for the front month and November new-crop contract, updated every 30 minutes via Yahoo Finance. The full chart with 52-week range is available at agsist.com/soybean-futures-prices."}},{"@type":"Question","name":"How often are grain prices updated?","acceptedAnswer":{"@type":"Answer","text":"Grain futures prices on AGSIST are updated every 30 minutes during CME trading hours Monday through Friday via automated GitHub Actions."}},{"@type":"Question","name":"Why does the Dollar Index matter for grain prices?","acceptedAnswer":{"@type":"Answer","text":"A stronger US Dollar Index (DXY) makes US grain more expensive for foreign buyers, reducing export demand and typically pressuring corn and soybean futures. A weaker dollar supports US grain exports. The Dollar Index is shown alongside grain prices because it is one of the most reliable short-term drivers of futures price direction."}},{"@type":"Question","name":"What does natural gas price mean for farmers?","acceptedAnswer":{"@type":"Answer","text":"Natural gas is the primary feedstock for nitrogen fertilizer production, including anhydrous ammonia and urea. When natural gas prices rise above $3.50–4.00 per mmBtu, nitrogen fertilizer costs typically follow within 60–90 days. Monitoring natural gas prices helps anticipate input cost changes well before fertilizer purchase decisions."}}]}]}</script>
+<style>
+html { overflow-x: hidden; overflow-x: clip; width: 100%; }
+body { overflow-x: hidden; overflow-x: clip; width: 100%; }
+button,a,[role="button"]{touch-action:manipulation;}
+.mkt-faq{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:1.2rem}
+.mkt-faq-hd{padding:10px 16px;border-bottom:1px solid var(--border);font-size:.78rem;font-weight:700;color:var(--gold)}
+.mkt-faq-item{border-bottom:1px solid var(--border)}.mkt-faq-item:last-child{border-bottom:none}
+.mkt-faq-q{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--text);gap:8px;user-select:none;line-height:1.4;min-height:44px}
+.mkt-faq-q::after{content:'+';color:var(--gold);font-size:1.1rem;flex-shrink:0;width:16px;text-align:center}
+.mkt-faq-item.open .mkt-faq-q::after{content:'−'}
+.mkt-faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.mkt-faq-item.open .mkt-faq-a{max-height:500px}
+.mkt-faq-ai{padding:0 16px 13px;font-size:.78rem;color:var(--text-dim);line-height:1.68}
+</style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 <div id="site-header"></div>
 <main id="main" tabindex="-1">
-
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a> → All Markets
-  </nav>
-
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &rarr; All Markets</nav>
   <section class="section">
     <div class="section-inner">
       <div class="sec-head">
-        <div class="sec-title">📈 All Markets</div>
+        <div class="sec-title">&#128200; All Markets</div>
         <span id="price-data-status" style="font-size:.72rem;color:var(--text-muted)"></span>
       </div>
 
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem;margin-top:.25rem">Grain Futures</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem">
         <div class="pc">
-          <div class="pc-label">🌽 Corn <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
-          <div id="pcp-corn-near" class="pc-price">—</div>
-          <div id="pcc-corn-near" class="pc-chg nc">—</div>
-          <div class="pc-range-labels"><span id="rlo-corn">—</span><span>52-wk</span><span id="rhi-corn">—</span></div>
+          <div class="pc-label">&#127805; Corn <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
+          <div id="pcp-corn-near" class="pc-price">&mdash;</div><div id="pcc-corn-near" class="pc-chg nc">&mdash;</div>
+          <div class="pc-range-labels"><span id="rlo-corn">&mdash;</span><span>52-wk</span><span id="rhi-corn">&mdash;</span></div>
           <div class="pc-range-bar"><div class="pc-range-fill" id="pcf-corn-near" style="width:0%"></div><div class="pc-range-dot" id="pcd-corn-near" style="left:0%"></div></div>
-          <div><a href="/corn-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart →</a></div>
+          <div><a href="/corn-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart &rarr;</a></div>
         </div>
+        <div class="pc"><div class="pc-label">&#127805; Corn Dec '26</div><div id="pcp-corn-dec" class="pc-price">&mdash;</div><div id="pcc-corn-dec" class="pc-chg nc">&mdash;</div></div>
         <div class="pc">
-          <div class="pc-label">🌽 Corn Dec '26</div>
-          <div id="pcp-corn-dec" class="pc-price">—</div>
-          <div id="pcc-corn-dec" class="pc-chg nc">—</div>
-        </div>
-        <div class="pc">
-          <div class="pc-label">🫘 Soybeans <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
-          <div id="pcp-bean-near" class="pc-price">—</div>
-          <div id="pcc-bean-near" class="pc-chg nc">—</div>
-          <div class="pc-range-labels"><span id="rlo-beans">—</span><span>52-wk</span><span id="rhi-beans">—</span></div>
+          <div class="pc-label">&#127803; Soybeans <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
+          <div id="pcp-bean-near" class="pc-price">&mdash;</div><div id="pcc-bean-near" class="pc-chg nc">&mdash;</div>
+          <div class="pc-range-labels"><span id="rlo-beans">&mdash;</span><span>52-wk</span><span id="rhi-beans">&mdash;</span></div>
           <div class="pc-range-bar"><div class="pc-range-fill" id="pcf-bean-near" style="width:0%"></div><div class="pc-range-dot" id="pcd-bean-near" style="left:0%"></div></div>
-          <div><a href="/soybean-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart →</a></div>
+          <div><a href="/soybean-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart &rarr;</a></div>
         </div>
-        <div class="pc">
-          <div class="pc-label">🫘 Beans Nov '26</div>
-          <div id="pcp-bean-nov" class="pc-price">—</div>
-          <div id="pcc-bean-nov" class="pc-chg nc">—</div>
-        </div>
-        <div class="pc">
-          <div class="pc-label">🌾 Wheat <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div>
-          <div id="pcp-wheat" class="pc-price">—</div>
-          <div id="pcc-wheat" class="pc-chg nc">—</div>
-          <div><a href="/wheat-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart →</a></div>
-        </div>
-        <div class="pc" style="border:1px dashed var(--border-g)">
-          <div class="pc-label">💵 Cash Bids</div>
-          <div style="font-size:.8rem;color:var(--text-muted);margin:.3rem 0 .6rem;line-height:1.5">Local elevator prices near you</div>
-          <a href="/cash-bids" style="font-size:.78rem;color:var(--gold);font-weight:700;text-decoration:none">Check bids near me →</a>
-        </div>
+        <div class="pc"><div class="pc-label">&#127803; Beans Nov '26</div><div id="pcp-bean-nov" class="pc-price">&mdash;</div><div id="pcc-bean-nov" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">&#127806; Wheat <span style="font-size:.68rem;color:var(--text-muted)">(front)</span></div><div id="pcp-wheat" class="pc-price">&mdash;</div><div id="pcc-wheat" class="pc-chg nc">&mdash;</div><div><a href="/wheat-futures-prices" style="font-size:.68rem;color:var(--gold);text-decoration:none">Full chart &rarr;</a></div></div>
+        <div class="pc"><div class="pc-label">&#127807; Oats (ZO)</div><div id="pcp-oats" class="pc-price">&mdash;</div><div id="pcc-oats" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc" style="border:1px dashed var(--border-g)"><div class="pc-label">&#128181; Cash Bids</div><div style="font-size:.8rem;color:var(--text-muted);margin:.3rem 0 .6rem;line-height:1.5">Local elevator prices near you</div><a href="/cash-bids" style="font-size:.78rem;color:var(--gold);font-weight:700;text-decoration:none">Check bids near me &rarr;</a></div>
       </div>
 
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem">Livestock</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem">
-        <div class="pc"><div class="pc-label">🐄 Live Cattle</div><div id="pcp-cattle" class="pc-price">—</div><div id="pcc-cattle" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">🐄 Feeder Cattle</div><div id="pcp-feeder" class="pc-price">—</div><div id="pcc-feeder" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">🐷 Lean Hogs</div><div id="pcp-hogs" class="pc-price">—</div><div id="pcc-hogs" class="pc-chg nc">—</div></div>
+        <div class="pc"><div class="pc-label">&#128004; Live Cattle</div><div id="pcp-cattle" class="pc-price">&mdash;</div><div id="pcc-cattle" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">&#128004; Feeder Cattle</div><div id="pcp-feeder" class="pc-price">&mdash;</div><div id="pcc-feeder" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">&#128055; Lean Hogs</div><div id="pcp-hogs" class="pc-price">&mdash;</div><div id="pcc-hogs" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">&#129371; Class III Milk</div><div id="pcp-milk" class="pc-price">&mdash;</div><div id="pcc-milk" class="pc-chg nc">&mdash;</div></div>
       </div>
 
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem">Energy &amp; Inputs</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem">
-        <div class="pc"><div class="pc-label">🛢️ Crude WTI</div><div id="pcp-crude" class="pc-price">—</div><div id="pcc-crude" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">🔥 Natural Gas</div><div id="pcp-natgas" class="pc-price">—</div><div id="pcc-natgas" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">Soybean Meal</div><div id="pcp-meal" class="pc-price">—</div><div id="pcc-meal" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">Soybean Oil</div><div id="pcp-oil" class="pc-price">—</div><div id="pcc-oil" class="pc-chg nc">—</div></div>
+        <div class="pc"><div class="pc-label">&#128754;&#65039; Crude WTI</div><div id="pcp-crude" class="pc-price">&mdash;</div><div id="pcc-crude" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">&#128293; Natural Gas</div><div id="pcp-natgas" class="pc-price">&mdash;</div><div id="pcc-natgas" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">Soybean Meal</div><div id="pcp-meal" class="pc-price">&mdash;</div><div id="pcc-meal" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">Soybean Oil</div><div id="pcp-oil" class="pc-price">&mdash;</div><div id="pcc-oil" class="pc-chg nc">&mdash;</div></div>
       </div>
 
       <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.6rem">Metals &amp; Macro</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:.5rem">
-        <div class="pc"><div class="pc-label">🥇 Gold</div><div id="pc-gold" class="pc-price">—</div><div id="pcc-gold" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">Silver</div><div id="pc-silver" class="pc-price">—</div><div id="pcc-silver" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">Dollar Index</div><div id="pcp-dxy" class="pc-price">—</div><div id="pcc-dxy" class="pc-chg nc">—</div></div>
-        <div class="pc"><div class="pc-label">📈 S&amp;P 500</div><div id="pcp-sp500" class="pc-price">—</div><div id="pcc-sp500" class="pc-chg nc">—</div></div>
+        <div class="pc"><div class="pc-label">&#129351; Gold</div><div id="pc-gold" class="pc-price">&mdash;</div><div id="pcc-gold" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">Silver</div><div id="pc-silver" class="pc-price">&mdash;</div><div id="pcc-silver" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">Dollar Index</div><div id="pcp-dxy" class="pc-price">&mdash;</div><div id="pcc-dxy" class="pc-chg nc">&mdash;</div></div>
+        <div class="pc"><div class="pc-label">&#128200; S&amp;P 500</div><div id="pcp-sp500" class="pc-price">&mdash;</div><div id="pcc-sp500" class="pc-chg nc">&mdash;</div></div>
       </div>
 
-      <div style="margin-top:.75rem;font-size:.72rem;color:var(--text-muted)">
-        Updated every 30 min · Source: Yahoo Finance (yfinance) · <a href="/data-sources" style="color:var(--gold)">Data sources →</a>
+      <div style="margin-top:.75rem;font-size:.72rem;color:var(--text-muted)">Updated every 30 min &middot; Source: Yahoo Finance (yfinance) &middot; <a href="/data-sources" style="color:var(--gold)">Data sources &rarr;</a></div>
+
+      <div class="mkt-faq">
+        <div class="mkt-faq-hd">&#10067; Common Questions About Grain &amp; Commodity Prices</div>
+        <div class="mkt-faq-item">
+          <div class="mkt-faq-q" role="button" tabindex="0" aria-expanded="false">How often are grain prices updated on AGSIST?</div>
+          <div class="mkt-faq-a"><div class="mkt-faq-ai">Grain futures prices on AGSIST are updated every 30 minutes during CME trading hours Monday through Friday via automated GitHub Actions scripts that fetch data from Yahoo Finance. The timestamp in the top right shows how long ago the last update ran. Weekend prices reflect the last Friday settlement. For real-time streaming quotes, use the TradingView chart on each commodity's detail page (corn, soybeans, or wheat).</div></div>
+        </div>
+        <div class="mkt-faq-item">
+          <div class="mkt-faq-q" role="button" tabindex="0" aria-expanded="false">Why does the Dollar Index affect corn and soybean prices?</div>
+          <div class="mkt-faq-a"><div class="mkt-faq-ai">US grain futures are priced in US dollars. When the Dollar Index (DXY) rises, US grain becomes more expensive for foreign buyers paying in other currencies &mdash; which reduces export demand and typically pressures corn and soybean futures prices. When the dollar weakens, US exports become more price-competitive globally, which tends to support futures prices. A 5-point swing in DXY can influence corn and soybean prices by 10&ndash;30 cents depending on the export demand environment. This is why the Dollar Index is shown alongside grain prices on the AGSIST markets page.</div></div>
+        </div>
+        <div class="mkt-faq-item">
+          <div class="mkt-faq-q" role="button" tabindex="0" aria-expanded="false">What does natural gas price mean for my farm budget?</div>
+          <div class="mkt-faq-a"><div class="mkt-faq-ai">Natural gas is the primary feedstock for nitrogen fertilizer production, including anhydrous ammonia, urea, and UAN. Ammonia production is energy-intensive &mdash; approximately 33 mmBtu of natural gas per ton of anhydrous ammonia. When natural gas prices rise above $3.50&ndash;$4.00 per mmBtu, nitrogen fertilizer costs typically follow within 60&ndash;90 days as producers reprice inventory. Monitoring natural gas prices lets you anticipate input cost changes before making fertilizer purchase decisions. AGSIST shows Henry Hub natural gas futures so you can track this input alongside grain prices.</div></div>
+        </div>
+        <div class="mkt-faq-item">
+          <div class="mkt-faq-q" role="button" tabindex="0" aria-expanded="false">What is Class III Milk futures price and why is it shown here?</div>
+          <div class="mkt-faq-a"><div class="mkt-faq-ai">Class III Milk (DC=F) is the futures benchmark for fluid milk used in cheese production, priced in dollars per hundredweight (100 lbs). It's included because dairy operations compete for corn and soybean meal as feed inputs &mdash; dairy herd profitability directly affects corn and soy meal demand. Strong milk prices typically support feed grain demand; weak milk prices can cause herd liquidation that temporarily reduces feed grain consumption. For WI/MN producers who grow grain for dairy markets, milk prices are a key demand signal.</div></div>
+        </div>
+        <div class="mkt-faq-item">
+          <div class="mkt-faq-q" role="button" tabindex="0" aria-expanded="false">Where can I find local cash grain bids near me?</div>
+          <div class="mkt-faq-a"><div class="mkt-faq-ai">AGSIST's Cash Bids page shows live local elevator bids sourced from the Barchart OnDemand API, located by your GPS position or ZIP code. This shows the actual price your nearest elevators are paying for corn and soybeans today &mdash; including the local basis, which is the difference between the futures price and what your elevator pays. Cash bid data is essential for storage and marketing decisions because basis varies significantly by location, season, and elevator competition.</div></div>
+        </div>
       </div>
     </div>
   </section>
 </main>
 <div id="site-footer"></div>
-<script src="/components/loader.js"></script>
+<script src="/components/loader.js" defer></script>
 <script>
 (function(){
   'use strict';
-  function grain$(v){ return v!=null ? '$'+(+v/100).toFixed(2) : '—'; }
-  function dollar$(v,d){ return v!=null ? '$'+(+v).toFixed(d||2) : '—'; }
-  function chgStr(net,pct){ if(net==null) return '—'; var a=net>0?'▲':net<0?'▼':'—'; var s=net>=0?'+':''; return a+' '+s+(+pct).toFixed(2)+'%'; }
-  function chgCls(net){ return net>0?'up':net<0?'dn':'nc'; }
+  function grain$(v){return v!=null?'$'+(+v/100).toFixed(2):'—';}
+  function dollar$(v,d){return v!=null?'$'+(+v).toFixed(d||2):'—';}
+  function chgStr(net,pct){if(net==null)return'—';var a=net>0?'▲':net<0?'▼':'—';var s=net>=0?'+':'';return a+' '+s+(+pct).toFixed(2)+'%';}
+  function chgCls(net){return net>0?'up':net<0?'dn':'nc';}
   function setEl(pEl,cEl,val,isGrain,net,pct){
     var pe=document.getElementById(pEl),ce=document.getElementById(cEl);
-    if(pe&&val!=null) pe.textContent=isGrain?grain$(val):dollar$(val);
+    if(pe&&val!=null)pe.textContent=isGrain?grain$(val):dollar$(val);
     if(ce&&net!=null){ce.textContent=chgStr(net,pct);ce.className='pc-chg '+chgCls(net);}
   }
   function setRange(sym,key,q){
-    var d=q[sym]; if(!d||d.close==null||d.wk52_lo==null) return;
-    var lo=d.wk52_lo,hi=d.wk52_hi,cur=d.close;
-    var pct=Math.min(100,Math.max(0,((cur-lo)/(hi-lo))*100));
+    var d=q[sym];if(!d||d.close==null||d.wk52_lo==null)return;
+    var lo=d.wk52_lo,hi=d.wk52_hi,cur=d.close,pct=Math.min(100,Math.max(0,((cur-lo)/(hi-lo))*100));
     var fill=document.getElementById('pcf-'+key),dot=document.getElementById('pcd-'+key);
     var rlo=document.getElementById('rlo-'+sym),rhi=document.getElementById('rhi-'+sym);
-    if(fill) fill.style.width=pct.toFixed(1)+'%';
-    if(dot) dot.style.left=pct.toFixed(1)+'%';
-    if(rlo) rlo.textContent=grain$(lo);
-    if(rhi) rhi.textContent=grain$(hi);
+    if(fill)fill.style.width=pct.toFixed(1)+'%';
+    if(dot)dot.style.left=pct.toFixed(1)+'%';
+    if(rlo)rlo.textContent=grain$(lo);
+    if(rhi)rhi.textContent=grain$(hi);
   }
   fetch('/data/prices.json').then(function(r){return r.json();}).then(function(data){
     var q=data.quotes||{};
     var map=[
-      {key:'corn',      p:'pcp-corn-near',c:'pcc-corn-near',grain:true },
-      {key:'corn-dec',  p:'pcp-corn-dec', c:'pcc-corn-dec', grain:true },
-      {key:'beans',     p:'pcp-bean-near',c:'pcc-bean-near',grain:true },
-      {key:'beans-nov', p:'pcp-bean-nov', c:'pcc-bean-nov', grain:true },
-      {key:'wheat',     p:'pcp-wheat',    c:'pcc-wheat',    grain:true },
+      {key:'corn',      p:'pcp-corn-near',c:'pcc-corn-near',grain:true},
+      {key:'corn-dec',  p:'pcp-corn-dec', c:'pcc-corn-dec', grain:true},
+      {key:'beans',     p:'pcp-bean-near',c:'pcc-bean-near',grain:true},
+      {key:'beans-nov', p:'pcp-bean-nov', c:'pcc-bean-nov', grain:true},
+      {key:'wheat',     p:'pcp-wheat',    c:'pcc-wheat',    grain:true},
+      {key:'oats',      p:'pcp-oats',     c:'pcc-oats',     grain:true},
       {key:'cattle',    p:'pcp-cattle',   c:'pcc-cattle',   grain:false},
       {key:'feeders',   p:'pcp-feeder',   c:'pcc-feeder',   grain:false},
       {key:'hogs',      p:'pcp-hogs',     c:'pcc-hogs',     grain:false},
+      {key:'milk',      p:'pcp-milk',     c:'pcc-milk',     grain:false},
       {key:'crude',     p:'pcp-crude',    c:'pcc-crude',    grain:false},
       {key:'natgas',    p:'pcp-natgas',   c:'pcc-natgas',   grain:false},
       {key:'meal',      p:'pcp-meal',     c:'pcc-meal',     grain:false},
@@ -215,7 +186,7 @@
       {key:'sp500',     p:'pcp-sp500',    c:'pcc-sp500',    grain:false},
     ];
     map.forEach(function(m){
-      var d=q[m.key]; if(!d||d.close==null) return;
+      var d=q[m.key];if(!d||d.close==null)return;
       setEl(m.p,m.c,d.close,m.grain,d.netChange,d.pctChange);
     });
     setRange('corn','corn-near',q);
@@ -227,9 +198,14 @@
     }
   }).catch(function(){
     var s=document.getElementById('price-data-status');
-    if(s) s.textContent='Prices unavailable — market may be closed';
+    if(s)s.textContent='Prices unavailable — market may be closed';
   });
 })();
+
+document.querySelectorAll('.mkt-faq-q').forEach(function(q){
+  q.addEventListener('click',function(){var it=this.closest('.mkt-faq-item'),op=it.classList.contains('open');document.querySelectorAll('.mkt-faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.mkt-faq-q').setAttribute('aria-expanded','false');});if(!op){it.classList.add('open');q.setAttribute('aria-expanded','true');}});
+  q.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();q.click();}});
+});
 </script>
 </body>
 </html>
