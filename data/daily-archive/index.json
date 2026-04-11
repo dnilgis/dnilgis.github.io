@@ -1,6 +1,17 @@
 {
   "briefings": [
     {
+      "date": "2026-04-11",
+      "date_display": "Saturday, April 11, 2026",
+      "headline": "GRAINS MIXED AS PLANTING PRESSURE BUILDS",
+      "teaser": "Mixed signals from the grain pits as planting season anxiety takes hold.",
+      "market_mood": "mixed",
+      "surprise_count": 0,
+      "sections": 3,
+      "url": "/daily/2026-04-11",
+      "market_closed": true
+    },
+    {
       "date": "2026-04-10",
       "date_display": "Friday, April 10, 2026",
       "headline": "GRAINS STEADY AS PLANTING WINDOW OPENS",
@@ -297,6 +308,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-10T12:34:32.107452+00:00",
-  "count": 29
+  "updated": "2026-04-11T12:00:01.988403+00:00",
+  "count": 30
 }
