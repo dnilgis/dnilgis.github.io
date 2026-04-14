@@ -2,37 +2,40 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#111a0a">
-<link rel="stylesheet" href="/components/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="/components/styles.css?v=10" as="style">
+<link rel="stylesheet" href="/components/styles.css?v=10">
 <link rel="icon" type="image/x-icon"            href="/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
 <link rel="apple-touch-icon"                    href="/img/apple-touch-icon.png">
 <link rel="manifest"                            href="/manifest.json">
 
-<title>Daily Ag Briefing — Market Morning Report | AGSIST</title>
-<meta name="description" content="AI-generated morning agricultural market briefing for corn, soybean, and wheat farmers. Published every weekday by 6 AM CT. Market drivers, weather, and what to watch.">
-<meta name="keywords"    content="daily ag briefing, farm morning market report, corn price today, soybean market morning, grain market briefing, agricultural market summary">
-<meta name="author"      content="Farmers First Agri Service — AGSIST">
+<title>Daily Ag Briefing &#8212; Market Morning Report | AGSIST</title>
+<meta name="description" content="Free morning agricultural market briefing for corn, soybean, and wheat farmers across the US. Published every weekday by 6 AM CT. Market drivers, weather, and what to watch.">
+<meta name="keywords"    content="daily ag briefing, farm morning market report, corn price today, soybean market morning, grain market briefing, agricultural market summary, free farm briefing">
+<meta name="author"      content="Farmers First Agri Service &#8212; AGSIST">
 <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical"    href="https://agsist.com/daily">
 
 <meta property="og:type"         content="article">
 <meta property="og:site_name"    content="AGSIST">
 <meta property="og:locale"       content="en_US">
-<meta property="og:title"        content="Daily Ag Briefing — Market Morning Report | AGSIST">
-<meta property="og:description"  content="Morning market briefing for grain farmers. Corn, soybean, wheat, weather, and what to watch today.">
+<meta property="og:title"        content="Daily Ag Briefing &#8212; Market Morning Report | AGSIST">
+<meta property="og:description"  content="Free morning market briefing for grain farmers across the US. Corn, soybean, wheat, weather, and what to watch today.">
 <meta property="og:url"          content="https://agsist.com/daily">
 <meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt"    content="AGSIST Daily Ag Briefing — morning market report for grain farmers">
+<meta property="og:image:alt"    content="AGSIST Daily Ag Briefing &#8212; morning market report for grain farmers">
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:site"        content="@agsist">
 <meta name="twitter:creator"     content="@agsist">
 <meta name="twitter:title"       content="Daily Ag Briefing | AGSIST">
-<meta name="twitter:description" content="Morning market briefing for grain farmers. Published every weekday by 6 AM CT. Free.">
+<meta name="twitter:description" content="Morning market briefing for grain farmers across the US. Published every weekday by 6 AM CT. Free.">
 <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
@@ -46,8 +49,8 @@
       "@type": "WebPage",
       "@id": "https://agsist.com/daily#webpage",
       "url": "https://agsist.com/daily",
-      "name": "Daily Ag Briefing — Market Morning Report | AGSIST",
-      "description": "AI-generated morning agricultural market briefing for corn, soybean, and wheat farmers. Published every weekday by 6 AM CT.",
+      "name": "Daily Ag Briefing \u2014 Market Morning Report | AGSIST",
+      "description": "Free morning agricultural market briefing for corn, soybean, and wheat farmers across the US. Published every weekday by 6 AM CT.",
       "isPartOf": { "@id": "https://agsist.com/#website" }
     },
     {
@@ -63,12 +66,12 @@
         {
           "@type": "Question",
           "name": "What is the AGSIST Daily Ag Briefing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The AGSIST Daily Ag Briefing is a free AI-generated morning market report for corn, soybean, and wheat farmers in Wisconsin and Minnesota. It covers overnight commodity price movements, weather outlook, and key events to watch, published every weekday by 6 AM CT." }
+          "acceptedAnswer": { "@type": "Answer", "text": "The AGSIST Daily Ag Briefing is a free morning market report for corn, soybean, and wheat farmers across the US. It covers overnight commodity price movements, weather outlook, and key events to watch, published every weekday by 6 AM CT. No account required. Available at no charge." }
         },
         {
           "@type": "Question",
           "name": "How do I subscribe to the daily farm market briefing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Click the 'Get It in Your Inbox' button on this page. Enter your email and the AGSIST Daily will be delivered every weekday morning before 6 AM CT. Free, no ads." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Click the 'Get It in Your Inbox' button on this page. Enter your email and the AGSIST Daily will be delivered every weekday morning before 6 AM CT. Free, no ads, no account required. Unsubscribe any time." }
         }
       ]
     }
@@ -78,6 +81,8 @@
 
 <style>
 button,a,[role="button"]{touch-action:manipulation;}
+html{overflow-x:hidden;overflow-x:clip;width:100%;}
+body{overflow-x:hidden;overflow-x:clip;width:100%;}
 
 .dv3-page{max-width:860px;margin:0 auto;padding:0 1rem 4rem;}
 
@@ -85,18 +90,22 @@ button,a,[role="button"]{touch-action:manipulation;}
 .dv3-hero-left h1{font-family:'Oswald',sans-serif;font-size:1.7rem;font-weight:800;text-transform:uppercase;color:var(--text);margin:0 0 .2rem;}
 .dv3-hero-left .dv3-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
 .dv3-hero-left .dv3-sub{font-size:.82rem;color:var(--text-dim);line-height:1.55;}
-.dv3-subscribe-btn{padding:.5rem 1.1rem;background:var(--green);color:#fff;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;transition:background .15s;}
+.dv3-subscribe-btn{padding:.5rem 1.1rem;background:var(--green);color:#fff;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;transition:background .15s;min-height:44px;}
 .dv3-subscribe-btn:hover{background:#1b4d1c;}
 
 .dv3-today{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.4rem;margin-bottom:1.5rem;position:relative;overflow:hidden;}
 .dv3-today::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));}
 .dv3-today-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
 .dv3-today-date{font-size:.82rem;color:var(--text-dim);margin-bottom:.75rem;}
-.dv3-today-headline{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:1rem;}
-.dv3-today-body{font-size:.9rem;color:var(--text-dim);line-height:1.8;}
-.dv3-today-body p{margin:0 0 .9rem;}
-.dv3-today-body p:last-child{margin-bottom:0;}
-.dv3-today-body strong{color:var(--text);}
+.dv3-today-headline{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.65rem;}
+.dv3-today-sub{font-size:.88rem;font-weight:600;color:var(--gold);margin-bottom:.65rem;letter-spacing:.01em;}
+.dv3-today-lead{font-size:.9rem;color:var(--text-dim);line-height:1.8;margin-bottom:1rem;}
+.dv3-today-sections{display:flex;flex-direction:column;gap:.85rem;margin-bottom:.75rem;}
+.dv3-sec{background:var(--surface2);border-radius:8px;padding:.75rem .9rem;border-left:2px solid var(--border);}
+.dv3-sec-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.3rem;}
+.dv3-sec-body{font-size:.84rem;color:var(--text-dim);line-height:1.72;}
+.dv3-sec-body strong{color:var(--text);}
+.dv3-sec-bottomline{font-size:.78rem;font-weight:600;color:var(--gold);margin-top:.45rem;padding-top:.45rem;border-top:1px solid var(--border);}
 .dv3-prices-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0;}
 .dv3-price-pill{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;padding:.3rem .65rem;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--text);}
 .dv3-price-pill.up{border-color:rgba(34,197,94,.3);color:var(--green);}
@@ -121,11 +130,11 @@ button,a,[role="button"]{touch-action:manipulation;}
 .dv3-modal{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.8rem;max-width:400px;width:90%;position:relative;}
 .dv3-modal h2{font-size:1.15rem;color:var(--gold);margin:0 0 .5rem;}
 .dv3-modal p{font-size:.85rem;color:var(--text-dim);line-height:1.65;margin:0 0 1rem;}
-.dv3-modal input[type="email"]{width:100%;padding:.65rem .9rem;background:var(--bg);border:2px solid var(--border);border-radius:6px;color:var(--text);font-size:.9rem;outline:none;margin-bottom:.75rem;}
+.dv3-modal input[type="email"]{width:100%;padding:.65rem .9rem;background:var(--bg);border:2px solid var(--border);border-radius:6px;color:var(--text);font-size:.9rem;outline:none;margin-bottom:.75rem;box-sizing:border-box;}
 .dv3-modal input[type="email"]:focus{border-color:var(--green);}
-.dv3-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);font-size:1.2rem;cursor:pointer;line-height:1;}
+.dv3-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);font-size:1.2rem;cursor:pointer;line-height:1;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;}
 .dv3-modal-close:hover{color:var(--text);}
-.dv3-modal-submit{width:100%;padding:.65rem;background:var(--green);color:#fff;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;text-transform:uppercase;cursor:pointer;letter-spacing:.04em;transition:background .15s;}
+.dv3-modal-submit{width:100%;padding:.65rem;background:var(--green);color:#fff;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;text-transform:uppercase;cursor:pointer;letter-spacing:.04em;transition:background .15s;min-height:44px;}
 .dv3-modal-submit:hover{background:#1b4d1c;}
 .dv3-modal-fine{font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:.5rem;}
 
@@ -143,71 +152,112 @@ button,a,[role="button"]{touch-action:manipulation;}
 
   <div class="dv3-hero">
     <div class="dv3-hero-left">
-      <div class="dv3-eyebrow">📰 Published weekdays by 6 AM CT</div>
+      <div class="dv3-eyebrow">&#x1F4F0; Published weekdays by 6 AM CT</div>
       <h1>Daily Ag Briefing</h1>
-      <p class="dv3-sub">Morning market intelligence for corn, soybean, and wheat producers in Wisconsin and Minnesota.</p>
+      <p class="dv3-sub">Morning market intelligence for corn, soybean, and wheat producers across the US. Free, no account required.</p>
     </div>
-    <button class="dv3-subscribe-btn" id="dv3-sub-btn">✉ Get It in Your Inbox</button>
+    <button class="dv3-subscribe-btn" id="dv3-sub-btn">&#x2709; Get It in Your Inbox</button>
   </div>
 
   <div class="dv3-today" id="dv3-today">
-    <div class="dv3-loading"><div class="dv3-loading-spinner"></div>Loading today's briefing…</div>
+    <div class="dv3-loading"><div class="dv3-loading-spinner"></div>Loading today&rsquo;s briefing&hellip;</div>
   </div>
 
-  <div class="dv3-arc-label">Recent Briefings — Archive</div>
+  <div class="dv3-arc-label">Recent Briefings &#8212; Archive</div>
   <div class="dv3-arc-grid" id="dv3-arc-grid">
-    <div style="grid-column:1/-1;color:var(--text-muted);font-size:.82rem;padding:.5rem 0">Loading archive…</div>
+    <div style="grid-column:1/-1;color:var(--text-muted);font-size:.82rem;padding:.5rem 0">Loading archive&hellip;</div>
   </div>
 
 </main>
 
-<div class="dv3-modal-overlay" id="dv3-modal">
+<div class="dv3-modal-overlay" id="dv3-modal" role="dialog" aria-modal="true" aria-labelledby="dv3-modal-title">
   <div class="dv3-modal">
-    <button class="dv3-modal-close" id="dv3-modal-close">✕</button>
-    <h2>✉ Get the Daily Briefing</h2>
-    <p>Morning market brief delivered to your inbox before 6 AM CT — corn, soybeans, wheat, weather, and what to watch. Free. No spam.</p>
+    <button class="dv3-modal-close" id="dv3-modal-close" aria-label="Close subscribe dialog">&#x2715;</button>
+    <h2 id="dv3-modal-title">&#x2709; Get the Daily Briefing</h2>
+    <p>Morning market brief delivered to your inbox before 6 AM CT &#8212; corn, soybeans, wheat, weather, and what to watch. Available at no charge. No spam.</p>
     <form id="dv3-sub-form" action="https://formspree.io/f/xnjbwepn" method="POST">
-      <input type="email" name="email" placeholder="your@email.com" required>
+      <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
       <input type="hidden" name="source" value="daily-briefing-subscribe">
       <button type="submit" class="dv3-modal-submit">Subscribe Free</button>
     </form>
-    <p class="dv3-modal-fine">Unsubscribe anytime. No ads. WI &amp; MN farmers only please.</p>
+    <p class="dv3-modal-fine">Unsubscribe anytime. No ads. We never sell your data. <a href="/privacy" style="color:var(--gold)">Privacy Policy</a>.</p>
   </div>
 </div>
 
 <div id="site-footer"></div>
-<script src="/components/loader.js"></script>
+<script src="/components/loader.js" defer></script>
 <script>
 (function(){
 'use strict';
 
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fmtDate(iso){if(!iso)return'';var d=new Date(iso+'T12:00:00');return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}
+
+// FIX: strip any existing time component before appending T12:00:00
+// Prevents "2026-04-13T06:00:00T12:00:00" Invalid Date bug
+function fmtDate(iso){
+  if(!iso)return'';
+  var dateOnly=iso.indexOf('T')>-1?iso.split('T')[0]:iso;
+  var d=new Date(dateOnly+'T12:00:00');
+  if(isNaN(d.getTime()))return iso; // fallback: show raw string
+  return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
 
 // ── Today's briefing ──────────────────────────────────────────────────
+// FIX: uses data.lead + data.sections (correct daily.json schema)
+// NOT data.body (which doesn't exist in daily.json)
 function renderToday(data){
   var el=document.getElementById('dv3-today');
   if(!el)return;
   if(!data||!data.headline){
-    el.innerHTML='<div class="dv3-loading" style="padding:2rem"><p style="color:var(--text-dim);font-size:.88rem">Today\'s briefing is not yet available. Published by 6 AM CT on weekday mornings.<br><br><a href="/" style="color:var(--gold)">← Return to dashboard</a></p></div>';
+    el.innerHTML='<div class="dv3-loading" style="padding:2rem"><p style="color:var(--text-dim);font-size:.88rem">Today\'s briefing is not yet available. Published by 6 AM CT on weekday mornings.<br><br><a href="/" style="color:var(--gold)">\u2190 Return to dashboard</a></p></div>';
     return;
   }
+
+  // Price pills (if present)
   var priceHtml='';
-  if(data.prices){
+  if(data.prices&&data.prices.length){
     priceHtml='<div class="dv3-prices-row">';
-    (data.prices||[]).forEach(function(p){priceHtml+='<span class="dv3-price-pill '+(p.dir||'')+'">'+escHtml(p.label)+': '+escHtml(p.value)+'</span>';});
+    data.prices.forEach(function(p){priceHtml+='<span class="dv3-price-pill '+(p.dir||'')+'">'+escHtml(p.label)+': '+escHtml(p.value)+'</span>';});
     priceHtml+='</div>';
   }
-  var bodyHtml=(data.body||'').split('\n\n').filter(Boolean).map(function(p){return'<p>'+escHtml(p)+'</p>';}).join('');
+
+  // Lead paragraph
+  var leadHtml='';
+  if(data.lead){
+    leadHtml='<div class="dv3-today-lead">'+escHtml(data.lead)+'</div>';
+  } else if(data.body){
+    // Fallback for older daily.json format that used data.body
+    var bodyParas=(data.body||'').split('\n\n').filter(Boolean);
+    leadHtml='<div class="dv3-today-lead">'+bodyParas.map(function(p){return escHtml(p);}).join('<br><br>')+'</div>';
+  }
+
+  // Sections (grains, livestock, energy, macro)
+  var sectionsHtml='';
+  if(data.sections&&data.sections.length){
+    sectionsHtml='<div class="dv3-today-sections">';
+    data.sections.forEach(function(sec){
+      if(!sec.body&&!sec.bottom_line)return;
+      sectionsHtml+=
+        '<div class="dv3-sec">'+
+          '<div class="dv3-sec-label">'+(sec.icon||'')+' '+escHtml(sec.title||'')+'</div>'+
+          '<div class="dv3-sec-body">'+escHtml(sec.body||'')+'</div>'+
+          (sec.bottom_line?'<div class="dv3-sec-bottomline">'+escHtml(sec.bottom_line)+'</div>':'')+
+        '</div>';
+    });
+    sectionsHtml+='</div>';
+  }
+
   el.innerHTML=
-    '<div class="dv3-today-label"><span>📰</span>Today\'s Briefing</div>'+
+    '<div class="dv3-today-label"><span>&#x1F4F0;</span>Today\'s Briefing</div>'+
     '<div class="dv3-today-date">'+fmtDate(data.date)+'</div>'+
     '<div class="dv3-today-headline">'+escHtml(data.headline)+'</div>'+
+    (data.subheadline?'<div class="dv3-today-sub">'+escHtml(data.subheadline)+'</div>':'')+
     priceHtml+
-    '<div class="dv3-today-body">'+bodyHtml+'</div>';
+    leadHtml+
+    sectionsHtml;
 }
 
-// ── Archive — dynamic from index.json, no hardcoding ─────────────────
+// ── Archive ───────────────────────────────────────────────────────────
 function renderArchive(){
   var grid=document.getElementById('dv3-arc-grid');
   if(!grid)return;
@@ -215,36 +265,34 @@ function renderArchive(){
   fetch('/data/daily-archive/index.json')
     .then(function(r){return r.ok?r.json():null;})
     .then(function(manifest){
-      // index.json uses "briefings" array
       if(!manifest||!manifest.briefings||!manifest.briefings.length){
         grid.innerHTML='<p style="color:var(--text-muted);font-size:.82rem;grid-column:1/-1">Archive not yet available.</p>';
         return;
       }
       var entries=manifest.briefings.slice(0,30);
       var html='';
+      var dayN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var monN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       entries.forEach(function(item){
-        var d=new Date(item.date+'T12:00:00');
-        var dow=d.getDay(); // 0=Sun
+        var dateOnly=item.date&&item.date.indexOf('T')>-1?item.date.split('T')[0]:item.date;
+        var d=new Date((dateOnly||'')+'T12:00:00');
+        var validDate=d&&!isNaN(d.getTime());
+        var dow=validDate?d.getDay():1;
         var isWkend=dow===0||dow===6||item.market_closed;
-        var dayN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        var monN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var label=item.date_display||item.label||(dayN[dow]+' '+monN[d.getMonth()]+' '+d.getDate());
-        // Use short label for the date chip
-        var shortLabel=dayN[dow]+' '+monN[d.getMonth()]+' '+d.getDate();
+        var shortLabel=validDate?(dayN[dow]+' '+monN[d.getMonth()]+' '+d.getDate()):(item.date_display||item.label||item.date||'');
         var type=isWkend?'wkend':'wkday';
+        // Archive individual pages don't exist yet — link to /daily for now
+        // TODO: update to /daily/'+dateOnly once archive pages are built
         html+=
-          '<a href="/daily/'+item.date+'" class="dv3-arc-card">'+
+          '<a href="/daily" class="dv3-arc-card" title="'+escHtml(shortLabel)+' briefing">'+
             '<div class="dv3-arc-card-head">'+
               '<span class="dv3-arc-card-date">'+escHtml(shortLabel)+'</span>'+
               '<span class="dv3-arc-card-badge '+type+'">'+(type==='wkday'?'Market Day':'Weekend')+'</span>'+
             '</div>'+
-            '<div class="dv3-arc-card-hl">'+
-              (item.headline?escHtml(item.headline):'—')+
-            '</div>'+
+            '<div class="dv3-arc-card-hl">'+(item.headline?escHtml(item.headline):'&#8212;')+'</div>'+
           '</a>';
       });
       grid.innerHTML=html;
-      // Headlines already in manifest — no lazy-loading needed
     })
     .catch(function(){
       grid.innerHTML='<p style="color:var(--text-muted);font-size:.82rem;grid-column:1/-1">Archive unavailable.</p>';
@@ -256,22 +304,34 @@ var modal=document.getElementById('dv3-modal');
 var subBtn=document.getElementById('dv3-sub-btn');
 var closeBtn=document.getElementById('dv3-modal-close');
 var form=document.getElementById('dv3-sub-form');
-if(subBtn)subBtn.addEventListener('click',function(){modal.classList.add('open');});
-if(closeBtn)closeBtn.addEventListener('click',function(){modal.classList.remove('open');});
-if(modal)modal.addEventListener('click',function(e){if(e.target===modal)modal.classList.remove('open');});
+
+function openModal(){if(modal)modal.classList.add('open');}
+function closeModal(){if(modal)modal.classList.remove('open');}
+
+if(subBtn)subBtn.addEventListener('click',openModal);
+if(closeBtn)closeBtn.addEventListener('click',closeModal);
+if(modal)modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
 if(form){
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var data=new FormData(form);
-    fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+    var formData=new FormData(form);
+    fetch(form.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}})
       .then(function(r){
-        if(r.ok){form.innerHTML='<p style="color:var(--green);text-align:center;padding:.5rem 0">✓ Subscribed! Watch for your first briefing.</p>';}
-        else{alert('Something went wrong — try again or email hello@agsist.com');}
+        if(r.ok){
+          form.innerHTML='<p style="color:var(--green);text-align:center;padding:.5rem 0">&#x2713; Subscribed! Watch for your first briefing.</p>';
+        } else {
+          alert('Something went wrong \u2014 try again or email sig@farmers1st.com');
+        }
       })
-      .catch(function(){alert('Network error — try again or email hello@agsist.com');});
+      .catch(function(){
+        alert('Network error \u2014 try again or email sig@farmers1st.com');
+      });
   });
 }
 
+// ── Load briefing ─────────────────────────────────────────────────────
 fetch('/data/daily.json',{cache:'no-store'})
   .then(function(r){return r.ok?r.json():null;})
   .then(renderToday)
