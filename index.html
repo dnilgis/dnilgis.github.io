@@ -783,7 +783,7 @@
   <div style="font-size:.68rem;color:var(--text-muted);line-height:1.65;border-top:1px solid var(--border);padding-top:.75rem;margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:center">
     <span>Prices from Yahoo Finance via AGSIST pipeline &middot; Cash bids via Barchart OnDemand &middot; Weather via Open-Meteo &middot; USDA NASS &middot; NOAA CPC</span>
     <span style="color:var(--border)">|</span>
-    <span>Not financial or trading advice &mdash; verify all prices with your elevator or broker before marketing decisions. Questions? <a href="tel:+17157972428" style="color:var(--gold)">715-797-2428</a> &middot; <a href="/cdn-cgi/l/email-protection#1d6e747a5d7b7c6f70786f6e2c6e69337e7270" style="color:var(--gold)"><span class="__cf_email__" data-cfemail="6f1c06082f090e1d020a1d1c5e1c1b410c0002">[email&#160;protected]</span></a></span>
+    <span>Not financial or trading advice &mdash; verify all prices with your elevator or broker before marketing decisions. Questions? <a href="tel:+17157972428" style="color:var(--gold)">715-797-2428</a> &middot; <a href="mailto:sig@farmers1st.com" style="color:var(--gold)">sig@farmers1st.com</a></span>
     <span style="color:var(--border)">|</span>
     <a href="/privacy" style="color:var(--gold)">Privacy Policy</a>
   </div>
@@ -830,6 +830,12 @@
       if(_cpt)_cpt.textContent=score;
       var _itp=document.getElementById('ffai-interp');
       if(_itp)_itp.textContent=score>=75?'Favorable.':score>=55?'Mixed signals.':score>=35?'Caution.':'Challenging.';
+    } else {
+      // Quarterly static score — update each quarter
+      var _qs=68;
+      var _qm=document.getElementById('ffai-score-main');if(_qm)_qm.textContent=_qs;
+      var _qc=document.getElementById('ffai-score-compact');if(_qc)_qc.textContent=_qs;
+      var _qi=document.getElementById('ffai-interp');if(_qi)_qi.textContent='Mixed signals. Updated quarterly.';
     }
     // Update "prices-age" label with actual fetch time
     if(data.fetched){
@@ -1177,7 +1183,7 @@ Promise.all(fetches).then(function(results){
     var strip=document.getElementById('usda-cal-strip');if(!strip)return;var now=new Date(),events=[];
     var curYr=now.getFullYear();
     var reports=[{name:'Export Sales',weekday:4,time:'8:30am ET',note:''},{name:'Crop Progress',weekday:1,time:'4:00pm ET',note:'Growing season'},{name:'Export Inspections',weekday:1,time:'11:00am ET',note:''}];
-    var majors=[{name:'WASDE',date:'2026-04-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-04-09',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-05-12',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-06-11',time:'11:00am ET',note:'Market-moving'},{name:'Acreage Report',date:'2026-06-30',time:'11:00am ET',note:'Planted acres'},{name:'Grain Stocks',date:'2026-06-30',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-07-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-08-12',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-08-12',time:'11:00am ET',note:'First corn est.'},{name:'WASDE',date:'2026-09-11',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-09-11',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-10-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-10-09',time:'11:00am ET',note:'Final corn est.'},{name:'WASDE',date:'2026-11-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-12-10',time:'11:00am ET',note:'Market-moving'}];
+    var majors=[{name:'WASDE',date:'2026-05-12',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-06-11',time:'11:00am ET',note:'Market-moving'},{name:'Acreage Report',date:'2026-06-30',time:'11:00am ET',note:'Planted acres'},{name:'Grain Stocks',date:'2026-06-30',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-07-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-08-12',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-08-12',time:'11:00am ET',note:'First corn est.'},{name:'WASDE',date:'2026-09-11',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-09-11',time:'11:00am ET',note:''},{name:'WASDE',date:'2026-10-09',time:'11:00am ET',note:'Market-moving'},{name:'Crop Production',date:'2026-10-09',time:'11:00am ET',note:'Final corn est.'},{name:'WASDE',date:'2026-11-10',time:'11:00am ET',note:'Market-moving'},{name:'WASDE',date:'2026-12-10',time:'11:00am ET',note:'Market-moving'}];
     for(var w=0;w<4;w++){reports.forEach(function(r){var dt=new Date(now);dt.setDate(dt.getDate()+((r.weekday-dt.getDay()+7)%7)+(w*7));if(dt<now&&w===0)dt.setDate(dt.getDate()+7);events.push({name:r.name,date:dt,time:r.time,note:r.note});});}
     majors.forEach(function(m){var dt=new Date(m.date+'T12:00:00');if(dt>=new Date(now.getFullYear(),now.getMonth(),now.getDate()))events.push({name:m.name,date:dt,time:m.time,note:m.note});});
     events.sort(function(a,b){return a.date-b.date;});var seen={},unique=[];events.forEach(function(e){var k=e.name+'-'+e.date.toDateString();if(!seen[k]){seen[k]=true;unique.push(e);}});events=unique.slice(0,10);
@@ -1331,11 +1337,17 @@ function loadWeatherEnhancements(state){
   var wx=state.weather||{},lat=wx.lat,lon=wx.lon;
   if(lat==null||lon==null)return;
   var today=new Date(),apr1=new Date(today.getFullYear(),3,1);
-  var d1=apr1.toISOString().split('T')[0],d2=today.toISOString().split('T')[0];
-  var soilUrl='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,relativehumidity_2m_mean&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=5';
+  var d1=apr1.toISOString().split('T')[0];
+  // Use yesterday as archive end_date — today's data is often not yet available
+  var yesterday=new Date(today);yesterday.setDate(yesterday.getDate()-1);
+  var d2=yesterday.toISOString().split('T')[0];
+  var soilUrl='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,relativehumidity_2m_mean&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=7';
   var histUrl='https://archive-api.open-meteo.com/v1/archive?latitude='+lat+'&longitude='+lon+'&start_date='+d1+'&end_date='+d2+'&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=auto';
-  Promise.all([fetch(soilUrl).then(function(r){return r.json();}),fetch(histUrl).then(function(r){return r.json();})]).then(function(results){
-    var forecast=results[0],history=results[1];
+  // Fetch independently — archive failure must not kill forecast/soil temp
+  var fcastPromise=fetch(soilUrl).then(function(r){return r.json();}).catch(function(){return null;});
+  var histPromise=fetch(histUrl).then(function(r){return r.json();}).catch(function(){return null;});
+  Promise.all([fcastPromise,histPromise]).then(function(results){
+    var forecast=results[0]||{},history=results[1]||{};
     var dailyF=forecast.daily||{},dailyH=history.daily||{};
     var maxTemps=dailyH.temperature_2m_max||[],minTemps=dailyH.temperature_2m_min||[];
     var gdu=0;
@@ -1410,6 +1422,33 @@ function loadWeatherEnhancements(state){
       }).join('');
       var sprayW=document.getElementById('spray-windows');if(sprayW)sprayW.classList.add('loaded');
     }
+    // 4-day forecast — populate wx-forecast-full
+    var fcastEl=document.getElementById('wx-forecast-full');
+    if(fcastEl&&forecastMaxArr.length>=4){
+      var dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var todayDow=new Date().getDay();
+      var wxDayEls=fcastEl.querySelectorAll('.wx-day');
+      for(var fd=0;fd<Math.min(4,wxDayEls.length);fd++){
+        var fMax=forecastMaxArr[fd],fMin=forecastMinArr[fd];
+        var fPr=forecastPrecipArr[fd]||0,fWd=forecastWindArr[fd]||0;
+        var fIcon=fPr>0.3?'\uD83C\uDF27\uFE0F':fPr>0.05?'\uD83C\uDF26\uFE0F':fWd>20?'\uD83D\uDCA8':fMax!=null&&fMax>82?'\u2600\uFE0F':'\u26C5';
+        var fName=fd===0?'Today':fd===1?'Tomorrow':dayNames[(todayDow+fd)%7];
+        var wd=wxDayEls[fd];
+        var nmEl=wd.querySelector('.wx-day-name'),icEl=wd.querySelector('.wx-day-icon');
+        var hiEl=wd.querySelector('.wx-day-hi'),loEl=wd.querySelector('.wx-day-lo');
+        if(nmEl)nmEl.textContent=fName;
+        if(icEl)icEl.textContent=fIcon;
+        if(hiEl)hiEl.textContent=(fMax!=null?Math.round(fMax):'--')+'\u00b0';
+        if(loEl)loEl.textContent=(fMin!=null?Math.round(fMin):'--')+'\u00b0';
+      }
+      // Update location label under forecast
+      var locLabelEl=document.getElementById('wx-loc-label');
+      if(locLabelEl){
+        var _st=window.AGSIST_STATE;
+        if(_st&&_st.weather&&_st.weather.city)locLabelEl.textContent=_st.weather.city;
+        else if(_st&&_st.weather&&_st.weather.zip)locLabelEl.textContent='ZIP '+_st.weather.zip;
+      }
+    }
   }).catch(function(){});
 }
 waitForGeo(function(state){loadWeatherEnhancements(state);});
@@ -1434,4 +1473,9 @@ waitForGeo(function(state){loadWeatherEnhancements(state);});
   else if((mo===6&&day>15)||(mo===7)||(mo===8)||(mo===9&&day<=15)){seasonMode='GROWING SEASON \u2014 POLLINATION RISK';seasonIcon='\uD83C\uDF3D';seasonClass='growing';headline='Watching GDU accumulation, rainfall, and pollination weather';}
   else if((mo===9&&day>15)||(mo===10)||(mo===11)){seasonMode='HARVEST SEASON';seasonIcon='\uD83C\uDFDE\uFE0F';seasonClass='harvest';headline='Drying costs, bin space, and basis before December delivery';}
   banner.className='seasonal-banner '+seasonClass;
-  var sbMode=document.getElementById('sb-mode');if(sbMode)sbMode.textContent=
+  var sbMode=document.getElementById('sb-mode');if(sbMode)sbMode.textContent=seasonMode;
+  var sbHeadline=document.getElementById('sb-headline');if(sbHeadline)sbHeadline.textContent=headline;
+  var sbIcon=document.getElementById('sb-icon');if(sbIcon)sbIcon.textContent=seasonIcon;
+})();
+})();
+</script>
