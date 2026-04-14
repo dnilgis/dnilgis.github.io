@@ -65,36 +65,10 @@
   .daily-pre-dismissed .daily-hero-inner{overflow:hidden!important}
   .daily-pre-dismissed .daily-teaser{display:flex!important}
   .daily-pre-dismissed .daily-dismiss-row{display:none!important}
-  .pc-spark{margin:.3rem 0 .15rem;opacity:0;transition:opacity .5s ease;line-height:0;border-radius:2px;overflow:hidden;}
-  .pc-spark.loaded{opacity:1}
-  @media(max-width:380px){.pc-spark{display:none}}
   .signup--hidden{display:none!important;}
   html { overflow-x: hidden; overflow-x: clip; width: 100%; }
   body { overflow-x: hidden; overflow-x: clip; width: 100%; }
   .main{overflow-x:clip;padding-left:max(0px,env(safe-area-inset-left));padding-right:max(0px,env(safe-area-inset-right));}
-  .seasonal-banner{display:flex;align-items:flex-start;gap:.85rem;padding:.85rem 1.1rem;margin-bottom:1rem;border-radius:10px;border:1px solid;position:relative;overflow:hidden;}
-  .seasonal-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-  .seasonal-banner.planting{background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.04) 100%);border-color:rgba(34,197,94,.22);}
-  .seasonal-banner.planting::before{background:linear-gradient(90deg,var(--green),transparent)}
-  .seasonal-banner.growing{background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,.04) 100%);border-color:rgba(34,197,94,.20);}
-  .seasonal-banner.growing::before{background:linear-gradient(90deg,#2d8c4e,transparent)}
-  .seasonal-banner.harvest{background:linear-gradient(135deg,var(--surface) 0%,rgba(218,165,32,.04) 100%);border-color:rgba(218,165,32,.22);}
-  .seasonal-banner.harvest::before{background:linear-gradient(90deg,var(--gold),transparent)}
-  .seasonal-banner.planning{background:var(--surface);border-color:var(--border);}
-  .sb-icon{font-size:1.7rem;flex-shrink:0;line-height:1;padding-top:.1rem;}
-  .sb-body{flex:1;min-width:0;}
-  .sb-mode{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem;}
-  .sb-headline{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.45rem;}
-  .sb-stats{display:flex;flex-wrap:wrap;gap:.35rem .85rem;}
-  .sb-stat{display:flex;flex-direction:column;}
-  .sb-stat-lbl{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);}
-  .sb-stat-val{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;color:var(--text);}
-  .sb-stat-val.good{color:var(--green);} .sb-stat-val.warn{color:var(--gold);} .sb-stat-val.bad{color:#ef4444;}
-  .sb-countdown{display:flex;flex-wrap:wrap;gap:.3rem .7rem;margin-top:.45rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.06);}
-  .sb-cd-item{display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:var(--text-dim);}
-  .sb-cd-item strong{color:var(--text);font-family:'JetBrains Mono',monospace;}
-  .sb-cd-item.urgent strong{color:var(--gold);}
-  @media(max-width:560px){.seasonal-banner{flex-direction:column;gap:.5rem;}}
   .soil-temp-row{display:flex;align-items:center;gap:.55rem;padding:.55rem .65rem;border-radius:6px;background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.18);margin-top:.6rem;display:none;}
   .soil-temp-row.loaded{display:flex;}
   .soil-temp-lbl{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);}
@@ -122,6 +96,32 @@
   .wx-extra-lbl{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.15rem;}
   .wx-extra-val{font-family:'JetBrains Mono',monospace;font-size:.92rem;font-weight:700;color:var(--text);}
   .wx-extra-ctx{font-size:.62rem;color:var(--text-dim);margin-top:.08rem;}
+  /* Planting dates in Quick Tools */
+  .plant-dates-panel{background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:8px;padding:.55rem .7rem;margin-bottom:.5rem;}
+  .plant-dates-loc{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.35rem;}
+  .plant-dates-row{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.2rem 0;}
+  .plant-dates-row+.plant-dates-row{border-top:1px solid rgba(255,255,255,.05);}
+  .plant-dates-label{font-size:.7rem;color:var(--text-dim);}
+  .plant-dates-val{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:var(--text);}
+  .plant-dates-val.urgent{color:var(--gold);}
+  /* USDA calendar card container */
+  .usda-cal-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.75rem .85rem .65rem;margin-top:.15rem;}
+  .usda-cal-card .cal-strip{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.25rem;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+  .usda-cal-card .cal-strip::-webkit-scrollbar{height:4px;}
+  .usda-cal-card .cal-strip::-webkit-scrollbar-track{background:transparent;}
+  .usda-cal-card .cal-strip::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+  /* NOAA grid — full-width taller cards */
+  .noaa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;}
+  .noaa-card img{display:block;width:100%;height:auto;min-height:180px;object-fit:contain;background:var(--surface2);}
+  @media(max-width:540px){.noaa-grid{grid-template-columns:1fr;}}
+  /* Radar section — equal columns, taller */
+  .radar-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:.75rem;align-items:stretch;}
+  .radar-card{border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;}
+  .radar-card iframe{min-height:380px;flex:1;}
+  .radar-sidebar{display:flex;flex-direction:column;}
+  .drought-embed{flex:1;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  .drought-embed img{flex:1;object-fit:contain;}
+  @media(max-width:680px){.radar-grid{grid-template-columns:1fr;}}
   .ffai-health{background:linear-gradient(135deg,var(--surface) 0%,rgba(91,163,224,.05) 100%);border:2px solid rgba(91,163,224,.25);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:1.1rem;margin:.6rem 0;position:relative;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .15s,transform .1s;}
   .ffai-health::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),transparent);}
   .ffai-health:hover{border-color:rgba(91,163,224,.5);transform:translateY(-1px);}
@@ -453,24 +453,6 @@
 </section>
 <main id="main" class="main" role="main" tabindex="-1">
   <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0">Corn, Soybean &amp; Wheat Prices Today &mdash; Free Farm Dashboard | AGSIST</h1>
-  <div class="seasonal-banner planting" id="seasonal-banner" role="status" aria-live="polite">
-    <div class="sb-icon" id="sb-icon">&#x1F331;</div>
-    <div class="sb-body">
-      <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem">Free farm dashboard &mdash; live prices &middot; local weather &middot; spray advisory &middot; cash bids &middot; <span style="color:var(--green)">No account &middot; No ads &middot; No paywalls</span></div>
-      <div class="sb-mode" id="sb-mode">PLANTING SEASON &mdash; CORN BELT</div>
-      <div class="sb-headline" id="sb-headline">Now through early June &mdash; soil temp, spray windows &amp; final planting dates</div>
-      <div class="sb-stats" id="sb-stats">
-        <div class="sb-stat"><span class="sb-stat-lbl">&#x1F321;&#xFE0F; Soil Temp (2&rdquo;)</span><span class="sb-stat-val warn" id="sb-soil">Loading&hellip;</span></div>
-        <div class="sb-stat"><span class="sb-stat-lbl">&#x1F33D; GDU Since Apr 1</span><span class="sb-stat-val" id="sb-gdu">--</span></div>
-        <div class="sb-stat"><span class="sb-stat-lbl">&#x1F327;&#xFE0F; 30-Day Precip</span><span class="sb-stat-val" id="sb-precip">--</span></div>
-      </div>
-      <div class="sb-countdown" id="sb-countdown">
-        <div class="sb-cd-item" id="sb-cd-corn"><span>&#x1F33D; Corn final planting:</span><strong id="sb-corn-days">Loading&hellip;</strong></div>
-        <div class="sb-cd-item" id="sb-cd-bean"><span>&#x1FAD8; Soybean final planting:</span><strong id="sb-bean-days">Loading&hellip;</strong></div>
-        <div style="width:100%;font-size:.6rem;color:var(--text-muted);margin-top:.2rem;display:none;" id="sb-rma-note">RMA final planting dates</div>
-      </div>
-    </div>
-  </div>
   <div class="dash-grid">
     <div class="fade-up" id="f1">
       <div class="sec-head"><div class="sec-title">&#x1F4B5; Cash Bids &amp; Basis <span style="font-size:.62rem;font-weight:600;color:var(--gold);letter-spacing:.04em">+ Worth the Drive&trade;</span></div><a href="/cash-bids" class="sec-all">Find Elevators &rarr;</a></div>
@@ -550,6 +532,17 @@
     <div class="fade-up" id="f3" style="transition-delay:.16s">
       <div class="sec-head"><div class="sec-title">&#x1F6E0;&#xFE0F; Quick Tools</div></div>
       <div class="card"><div class="card-body">
+        <div class="plant-dates-panel" id="plant-dates-panel">
+          <div class="plant-dates-loc" id="plant-dates-loc">&#x1F4CD; RMA Final Planting Dates</div>
+          <div class="plant-dates-row">
+            <span class="plant-dates-label">&#x1F33D; Corn (May 31)</span>
+            <span class="plant-dates-val" id="qt-corn-days">--</span>
+          </div>
+          <div class="plant-dates-row">
+            <span class="plant-dates-label">&#x1FAD8; Soybeans (Jun 20)</span>
+            <span class="plant-dates-val" id="qt-bean-days">--</span>
+          </div>
+        </div>
         <div class="tool-list">
           <a href="/breakeven" class="tool-btn"><span class="tool-name">&#x1F4D0; Break-Even Calculator</span><span class="tool-arr">&rarr;</span></a>
           <a href="/grain-bin-calculator" class="tool-btn"><span class="tool-name">&#x1F3D7;&#xFE0F; Grain Bin Calculator</span><span class="tool-arr">&rarr;</span></a>
@@ -591,10 +584,10 @@
     <div class="sec-head"><div class="sec-title">&#x1F4C8; Market Prices</div><div style="display:flex;align-items:center;gap:.75rem"><span id="prices-age" style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted)">Updated every 30 min</span><a href="/corn-futures-prices" class="sec-all">All Charts &rarr;</a></div></div>
     <div class="pc-section-lbl">&#x1F33D; Grains &mdash; Key Contracts</div>
     <div class="price-cards-grid">
-      <div class="pc pc--highlight" data-spark="corn"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-corn-near">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-near">--</span></div><div class="pc-prev" id="pcprev-corn-near"></div><div class="pc-spark" data-spark="corn"></div><div class="pc-range"><div class="pc-range-labels"><span>$3.90</span><span>52-Wk Range</span><span>$5.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:45%"></div><div class="pc-range-dot" style="left:45%"></div></div></div></div>
-      <div class="pc pc--highlight" data-spark="corn-dec"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn Harvest</span><span class="pc-contract">Dec '26</span></div><div class="pc-price" id="pcp-corn-dec">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-dec">--</span></div><div class="pc-prev" id="pcprev-corn-dec"></div><div class="pc-spark" data-spark="corn-dec"></div><div class="pc-range"><div class="pc-range-labels"><span>$3.85</span><span>52-Wk Range</span><span>$5.25</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:74%"></div><div class="pc-range-dot" style="left:74%"></div></div></div></div>
-      <div class="pc pc--highlight" data-spark="beans"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Soybeans</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-bean-near">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-bean-near">--</span></div><div class="pc-prev" id="pcprev-bean-near"></div><div class="pc-spark" data-spark="beans"></div><div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.75</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:65%"></div><div class="pc-range-dot" style="left:65%"></div></div></div></div>
-      <div class="pc pc--highlight" data-spark="beans-nov"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Beans Harvest</span><span class="pc-contract">Nov '26</span></div><div class="pc-price" id="pcp-bean-nov">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-bean-nov">--</span></div><div class="pc-prev" id="pcprev-bean-nov"></div><div class="pc-spark" data-spark="beans-nov"></div><div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.00</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:79%"></div><div class="pc-range-dot" style="left:79%"></div></div></div></div>
+      <div class="pc pc--highlight" data-spark="corn"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-corn-near">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-near">--</span></div><div class="pc-prev" id="pcprev-corn-near"></div><div class="pc-range"><div class="pc-range-labels"><span>$3.90</span><span>52-Wk Range</span><span>$5.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:45%"></div><div class="pc-range-dot" style="left:45%"></div></div></div></div>
+      <div class="pc pc--highlight" data-spark="corn-dec"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn Harvest</span><span class="pc-contract">Dec '26</span></div><div class="pc-price" id="pcp-corn-dec">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-dec">--</span></div><div class="pc-prev" id="pcprev-corn-dec"></div><div class="pc-range"><div class="pc-range-labels"><span>$3.85</span><span>52-Wk Range</span><span>$5.25</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:74%"></div><div class="pc-range-dot" style="left:74%"></div></div></div></div>
+      <div class="pc pc--highlight" data-spark="beans"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Soybeans</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-bean-near">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-bean-near">--</span></div><div class="pc-prev" id="pcprev-bean-near"></div><div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.75</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:65%"></div><div class="pc-range-dot" style="left:65%"></div></div></div></div>
+      <div class="pc pc--highlight" data-spark="beans-nov"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Beans Harvest</span><span class="pc-contract">Nov '26</span></div><div class="pc-price" id="pcp-bean-nov">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-bean-nov">--</span></div><div class="pc-prev" id="pcprev-bean-nov"></div><div class="pc-range"><div class="pc-range-labels"><span>$9.50</span><span>52-Wk Range</span><span>$12.00</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:79%"></div><div class="pc-range-dot" style="left:79%"></div></div></div></div>
     </div>
     <a href="https://farmers1st.com" target="_blank" rel="noopener" class="ffai-health" aria-label="FFAI Agricultural Market Health Score &mdash; view methodology at farmers1st.com">
       <div><div class="ffai-score-big" id="ffai-score-main">--</div><div class="ffai-score-unit">/ 100</div></div>
@@ -663,23 +656,23 @@
     </div>
     <div class="pc-section-lbl">&#x1F33E; More Grains, Feed &amp; Livestock</div>
     <div class="price-cards-grid-2">
-      <div class="pc pc-sm" data-spark="wheat"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33E;</span>Wheat</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-wheat">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-wheat">--</span></div><div class="pc-prev" id="pcprev-wheat"></div><div class="pc-spark" data-spark="wheat"></div><div class="pc-range"><div class="pc-range-labels"><span>$4.88</span><span></span><span>$7.20</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:42%"></div><div class="pc-range-dot" style="left:42%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="oats"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33E;</span>Oats</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-oats">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-oats">--</span></div><div class="pc-prev" id="pcprev-oats"></div><div class="pc-spark" data-spark="oats"></div><div class="pc-range"><div class="pc-range-labels"><span>$2.80</span><span></span><span>$4.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:32%"></div><div class="pc-range-dot" style="left:32%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="meal"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Soy Meal</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-meal">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-meal">--</span></div><div class="pc-prev" id="pcprev-meal"></div><div class="pc-spark" data-spark="meal"></div><div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$375</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:44%"></div><div class="pc-range-dot" style="left:44%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="wheat"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33E;</span>Wheat</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-wheat">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-wheat">--</span></div><div class="pc-prev" id="pcprev-wheat"></div><div class="pc-range"><div class="pc-range-labels"><span>$4.88</span><span></span><span>$7.20</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:42%"></div><div class="pc-range-dot" style="left:42%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="oats"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33E;</span>Oats</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-oats">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-oats">--</span></div><div class="pc-prev" id="pcprev-oats"></div><div class="pc-range"><div class="pc-range-labels"><span>$2.80</span><span></span><span>$4.50</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:32%"></div><div class="pc-range-dot" style="left:32%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="meal"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1FAD8;</span>Soy Meal</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-meal">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-meal">--</span></div><div class="pc-prev" id="pcprev-meal"></div><div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$375</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:44%"></div><div class="pc-range-dot" style="left:44%"></div></div></div></div>
     </div>
     <div class="price-cards-grid-2" style="margin-bottom:.5rem">
-      <div class="pc pc-sm" data-spark="cattle"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F404;</span>Live Cattle</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-cattle">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-cattle">--</span></div><div class="pc-prev" id="pcprev-cattle"></div><div class="pc-spark" data-spark="cattle"></div><div class="pc-range"><div class="pc-range-labels"><span>$215</span><span></span><span>$265</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:29%"></div><div class="pc-range-dot" style="left:29%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="feeders"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F404;</span>Feeder Cattle</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-feeders">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-feeders">--</span></div><div class="pc-prev" id="pcprev-feeders"></div><div class="pc-spark" data-spark="feeders"></div><div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$385</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:52%"></div><div class="pc-range-dot" style="left:52%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="hogs"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F416;</span>Lean Hogs</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-hogs">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-hogs">--</span></div><div class="pc-prev" id="pcprev-hogs"></div><div class="pc-spark" data-spark="hogs"></div><div class="pc-range"><div class="pc-range-labels"><span>$70</span><span></span><span>$110</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:38%"></div><div class="pc-range-dot" style="left:38%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="milk"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F95B;</span>Class III Milk</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-milk">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-milk">--</span></div><div class="pc-prev" id="pcprev-milk"></div><div class="pc-spark" data-spark="milk"></div><div class="pc-range"><div class="pc-range-labels"><span>$14</span><span></span><span>$21</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="cattle"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F404;</span>Live Cattle</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-cattle">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-cattle">--</span></div><div class="pc-prev" id="pcprev-cattle"></div><div class="pc-range"><div class="pc-range-labels"><span>$215</span><span></span><span>$265</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:29%"></div><div class="pc-range-dot" style="left:29%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="feeders"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F404;</span>Feeder Cattle</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-feeders">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-feeders">--</span></div><div class="pc-prev" id="pcprev-feeders"></div><div class="pc-range"><div class="pc-range-labels"><span>$285</span><span></span><span>$385</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:52%"></div><div class="pc-range-dot" style="left:52%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="hogs"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F416;</span>Lean Hogs</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-hogs">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-hogs">--</span></div><div class="pc-prev" id="pcprev-hogs"></div><div class="pc-range"><div class="pc-range-labels"><span>$70</span><span></span><span>$110</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:38%"></div><div class="pc-range-dot" style="left:38%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="milk"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F95B;</span>Class III Milk</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-milk">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-milk">--</span></div><div class="pc-prev" id="pcprev-milk"></div><div class="pc-range"><div class="pc-range-labels"><span>$14</span><span></span><span>$21</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div></div>
     </div>
     <div class="pc-section-lbl">&#x26A1; Energy &amp; Outside Markets</div>
     <div class="price-cards-grid-2">
-      <div class="pc pc-sm" data-spark="crude"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F6E2;&#xFE0F;</span>Crude Oil WTI</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-crude">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-crude">--</span></div><div class="pc-prev" id="pcprev-crude"></div><div class="pc-spark" data-spark="crude"></div><div class="pc-range"><div class="pc-range-labels"><span>$62</span><span></span><span>$106</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:68%"></div><div class="pc-range-dot" style="left:68%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="natgas"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F525;</span>Natural Gas</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-natgas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-natgas">--</span></div><div class="pc-prev" id="pcprev-natgas"></div><div class="pc-spark" data-spark="natgas"></div><div class="pc-range"><div class="pc-range-labels"><span>$1.56</span><span></span><span>$4.88</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:40%"></div><div class="pc-range-dot" style="left:40%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="dollar"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4B5;</span>Dollar Index</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-dollar">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-dollar">--</span></div><div class="pc-prev" id="pcprev-dollar"></div><div class="pc-spark" data-spark="dollar"></div><div class="pc-range"><div class="pc-range-labels"><span>$95.55</span><span></span><span>$107.66</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="sp500"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4C8;</span>S&amp;P 500</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-sp500">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-sp500">--</span></div><div class="pc-prev" id="pcprev-sp500"></div><div class="pc-spark" data-spark="sp500"></div><div class="pc-range"><div class="pc-range-labels"><span>4,900</span><span></span><span>6,700</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:92%"></div><div class="pc-range-dot" style="left:92%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="treasury10"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F3E6;</span>10-Yr Treasury</span><span class="pc-contract">Yield %</span></div><div class="pc-price" id="pcp-treasury">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-treasury">--</span></div><div class="pc-prev" id="pcprev-treasury"></div><div class="pc-spark" data-spark="treasury10"></div><div class="pc-range"><div class="pc-range-labels"><span>3.5%</span><span>Land &amp; Loan Rates</span><span>5.0%</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:70%"></div><div class="pc-range-dot" style="left:70%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="crude"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F6E2;&#xFE0F;</span>Crude Oil WTI</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-crude">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-crude">--</span></div><div class="pc-prev" id="pcprev-crude"></div><div class="pc-range"><div class="pc-range-labels"><span>$62</span><span></span><span>$106</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:68%"></div><div class="pc-range-dot" style="left:68%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="natgas"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F525;</span>Natural Gas</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-natgas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-natgas">--</span></div><div class="pc-prev" id="pcprev-natgas"></div><div class="pc-range"><div class="pc-range-labels"><span>$1.56</span><span></span><span>$4.88</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:40%"></div><div class="pc-range-dot" style="left:40%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="dollar"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4B5;</span>Dollar Index</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-dollar">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-dollar">--</span></div><div class="pc-prev" id="pcprev-dollar"></div><div class="pc-range"><div class="pc-range-labels"><span>$95.55</span><span></span><span>$107.66</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="sp500"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4C8;</span>S&amp;P 500</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-sp500">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-sp500">--</span></div><div class="pc-prev" id="pcprev-sp500"></div><div class="pc-range"><div class="pc-range-labels"><span>4,900</span><span></span><span>6,700</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:92%"></div><div class="pc-range-dot" style="left:92%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="treasury10"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F3E6;</span>10-Yr Treasury</span><span class="pc-contract">Yield %</span></div><div class="pc-price" id="pcp-treasury">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-treasury">--</span></div><div class="pc-prev" id="pcprev-treasury"></div><div class="pc-range"><div class="pc-range-labels"><span>3.5%</span><span>Land &amp; Loan Rates</span><span>5.0%</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:70%"></div><div class="pc-range-dot" style="left:70%"></div></div></div></div>
     </div>
   </div>
   <div class="radar-section fade-up" id="f-radar">
@@ -690,7 +683,7 @@
           <span style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)"><span class="live-dot" style="display:inline-block" aria-hidden="true"></span> Live Radar</span>
           <span style="font-size:.68rem;color:var(--text-muted)">Powered by Windy</span>
         </div>
-        <iframe id="windy-frame" src="" data-src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=in&metricTemp=%C2%B0F&metricWind=mph&zoom=6&overlay=radar&product=radar&level=surface&lat=44.5&lon=-93.0&detailLat=44.5&detailLon=-93.0&detail=false&pressure=false&menu=false&message=false&marker=false&calendar=now&thunder=false" width="100%" style="border:none;display:block;min-height:320px;height:100%;aspect-ratio:unset" loading="lazy" title="Live Radar &mdash; Windy" allow="geolocation; fullscreen" allowfullscreen></iframe>
+        <iframe id="windy-frame" src="" data-src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=in&metricTemp=%C2%B0F&metricWind=mph&zoom=5&overlay=radar&product=radar&level=surface&lat=42.0&lon=-93.5&detailLat=42.0&detailLon=-93.5&detail=false&pressure=false&menu=false&message=false&marker=false&calendar=now&thunder=false" width="100%" style="border:none;display:block;min-height:320px;height:100%;aspect-ratio:unset" loading="lazy" title="Live Radar &mdash; Windy" allow="geolocation; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="radar-sidebar" style="display:flex;flex-direction:column;">
         <div class="drought-embed" style="flex:1;display:flex;flex-direction:column;">
@@ -731,18 +724,18 @@
   </div>
   <div class="fade-up" id="f5">
     <div class="sec-head"><div class="sec-title">&#x1F4C5; Upcoming USDA Reports</div><a href="/usda-calendar" class="sec-all">Full Calendar &rarr;</a></div>
-    <div class="cal-strip" id="usda-cal-strip" role="list" aria-label="Upcoming USDA report dates"></div>
+    <div class="usda-cal-card"><div class="cal-strip" id="usda-cal-strip" role="list" aria-label="Upcoming USDA report dates"></div></div>
   </div>
   <div class="fade-up" id="f-crypto">
     <div class="pc-section-lbl">&#x1F947; Metals &amp; Digital Assets</div>
     <div class="price-cards-grid-2" style="margin-bottom:1rem">
-      <div class="pc pc-sm" data-spark="gold"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F947;</span>Gold</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-gold">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-gold">--</span></div><div class="pc-prev" id="pcprev-gold"></div><div class="pc-spark" data-spark="gold"></div><div class="pc-range"><div class="pc-range-labels"><span>$2,800</span><span></span><span>$5,400</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:61%"></div><div class="pc-range-dot" style="left:61%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="silver"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F948;</span>Silver</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-silver">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-silver">--</span></div><div class="pc-prev" id="pcprev-silver"></div><div class="pc-spark" data-spark="silver"></div><div class="pc-range"><div class="pc-range-labels"><span>$55</span><span></span><span>$100</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="bitcoin"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x20BF;</span>Bitcoin</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-btc">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-btc">--</span></div><div class="pc-prev" id="pcprev-btc"></div><div class="pc-spark" data-spark="bitcoin"></div><div class="pc-range"><div class="pc-range-labels"><span>$49,000</span><span></span><span>$106,000</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div></div>
-      <div class="pc pc-sm" data-spark="ripple"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x25CE;</span>XRP</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-xrp">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-xrp">--</span></div><div class="pc-prev" id="pcprev-xrp"></div><div class="pc-spark" data-spark="ripple"></div><div class="pc-range"><div class="pc-range-labels"><span>$0.40</span><span></span><span>$3.40</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:34%"></div><div class="pc-range-dot" style="left:34%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="gold"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F947;</span>Gold</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-gold">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-gold">--</span></div><div class="pc-prev" id="pcprev-gold"></div><div class="pc-range"><div class="pc-range-labels"><span>$2,800</span><span></span><span>$5,400</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:61%"></div><div class="pc-range-dot" style="left:61%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="silver"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F948;</span>Silver</span><span class="pc-contract">Spot</span></div><div class="pc-price" id="pcp-silver">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-silver">--</span></div><div class="pc-prev" id="pcprev-silver"></div><div class="pc-range"><div class="pc-range-labels"><span>$55</span><span></span><span>$100</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:30%"></div><div class="pc-range-dot" style="left:30%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="bitcoin"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x20BF;</span>Bitcoin</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-btc">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-btc">--</span></div><div class="pc-prev" id="pcprev-btc"></div><div class="pc-range"><div class="pc-range-labels"><span>$49,000</span><span></span><span>$106,000</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:37%"></div><div class="pc-range-dot" style="left:37%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="ripple"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x25CE;</span>XRP</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-xrp">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-xrp">--</span></div><div class="pc-prev" id="pcprev-xrp"></div><div class="pc-range"><div class="pc-range-labels"><span>$0.40</span><span></span><span>$3.40</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:34%"></div><div class="pc-range-dot" style="left:34%"></div></div></div></div>
     </div>
     <div class="price-cards-grid-2" style="margin-bottom:2rem">
-      <div class="pc pc-sm" data-spark="kaspa"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F48E;</span>Kaspa</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-kas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-kas">--</span></div><div class="pc-prev" id="pcprev-kas"></div><div class="pc-spark" data-spark="kaspa"></div><div class="pc-range"><div class="pc-range-labels"><span>$0.025</span><span></span><span>$0.210</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:7%"></div><div class="pc-range-dot" style="left:7%"></div></div></div></div>
+      <div class="pc pc-sm" data-spark="kaspa"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F48E;</span>Kaspa</span><span class="pc-contract">USD</span></div><div class="pc-price" id="pc-kas">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-kas">--</span></div><div class="pc-prev" id="pcprev-kas"></div><div class="pc-range"><div class="pc-range-labels"><span>$0.025</span><span></span><span>$0.210</span></div><div class="pc-range-track"><div class="pc-range-fill" style="width:7%"></div><div class="pc-range-dot" style="left:7%"></div></div></div></div>
       <a href="https://farmers1st.com" target="_blank" rel="noopener" class="pc pc-sm" style="display:flex;flex-direction:column;text-decoration:none;color:inherit;cursor:pointer;border-color:rgba(91,163,224,.25);background:linear-gradient(135deg,var(--surface) 0%,rgba(91,163,224,.04) 100%);transition:border-color .15s,transform .1s" onmouseenter="this.style.borderColor='var(--blue)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(91,163,224,.25)';this.style.transform='none'">
         <div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F4CA;</span>FFAI Index</span><span class="pc-contract" style="color:var(--blue)">Farmers First</span></div>
         <div style="display:flex;align-items:baseline;gap:.5rem;margin:.35rem 0 .15rem"><span id="ffai-score-compact" style="font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:800;color:var(--blue);line-height:1">--</span><span style="font-size:.72rem;color:var(--text-muted);font-weight:600">/ 100</span></div>
@@ -792,7 +785,6 @@
 <script src="/components/loader.js" defer></script>
 <script src="/components/geo.js" defer></script>
 <script src="/components/bids-homepage.js" defer></script>
-<script src="/components/sparklines.js" defer></script>
 <script>
 (function() {
   'use strict';
@@ -846,9 +838,9 @@
         _pa.style.color=_mins>60?'#f0913a':_mins>30?'var(--gold)':'var(--text-muted)';
       }
     }
-    // Wire sparklines if geo.js hasn't already
-    window.AGSIST_PRICE_DATA=q; // expose for sparklines.js polling
-    if(window.AGSIST_WIRE_SPARKS)window.AGSIST_WIRE_SPARKS(q);
+    // Wire sparklines if geo.js hasn't already — REMOVED (sparklines disabled)
+    // window.AGSIST_PRICE_DATA exposed for any future charting
+    window.AGSIST_PRICE_DATA=q;
   }).catch(function(){});
 })();
 </script>
@@ -1046,33 +1038,6 @@ fetch('/data/fertilizer.json')
     }).join('');
   })
   .catch(function(){var d=document.getElementById('fert-date');if(d)d.textContent='Price data unavailable';});
-})();
-</script>
-<script>
-/* Inline micro-sparklines — replaces missing sparklines.js */
-(function(){
-  function drawSparkline(canvas,data,color){
-    var ctx=canvas.getContext('2d');
-    var w=canvas.width,h=canvas.height;
-    ctx.clearRect(0,0,w,h);
-    if(!data||data.length<2)return;
-    var mn=Math.min.apply(null,data),mx=Math.max.apply(null,data),rng=mx-mn||1;
-    ctx.strokeStyle=color||'rgba(230,176,66,.7)';
-    ctx.lineWidth=1.5;
-    ctx.lineJoin='round';
-    ctx.lineCap='round';
-    ctx.beginPath();
-    data.forEach(function(v,i){
-      var x=i/(data.length-1)*w,y=h-((v-mn)/rng*(h*0.75)+h*0.125);
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    });
-    ctx.stroke();
-    // fill
-    ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();
-    ctx.fillStyle=color?color.replace(')',', 0.08)').replace('rgb','rgba'):'rgba(230,176,66,.06)';
-    ctx.fill();
-  }
-  window.AGSIST_SPARKLINE=drawSparkline;
 })();
 </script>
 <script>
@@ -1382,19 +1347,13 @@ function loadWeatherEnhancements(state){
     var gduStat=document.getElementById('gdu-stat');if(gduStat)gduStat.classList.add('loaded');
     var precipEl=document.getElementById('precip-val');if(precipEl)precipEl.textContent=precip30+'"';
     var precipStat=document.getElementById('precip-stat');if(precipStat)precipStat.classList.add('loaded');
-    var sbSoil=document.getElementById('sb-soil');
-    if(sbSoil){sbSoil.textContent=soilEstF!=null?soilEstF+'\xb0F (est.)':'--';sbSoil.className='sb-stat-val '+(soilClass==='good'?'good':soilClass==='cold'?'bad':'warn');}
-    var sbGdu=document.getElementById('sb-gdu');if(sbGdu)sbGdu.textContent=gdu+' GDU';
-    var sbPrecip=document.getElementById('sb-precip');
-    if(sbPrecip){var normal=3.6,diff=Math.round((precip30-normal)*10)/10;sbPrecip.textContent=precip30+'" ('+(diff>=0?'+':'')+diff+'" vs normal)';sbPrecip.className='sb-stat-val '+(diff>0.5?'good':diff<-0.5?'bad':'warn');}
-    var cornDays=daysUntil(RMA_DATES.corn.insurance_final),beanDays=daysUntil(RMA_DATES.soybeans.insurance_final);
-    var sbCorn=document.getElementById('sb-corn-days'),sbBean=document.getElementById('sb-bean-days');
-    var cdCorn=document.getElementById('sb-cd-corn'),cdBean=document.getElementById('sb-cd-bean');
-    if(sbCorn)sbCorn.textContent=formatCountdown(cornDays);
-    if(sbBean)sbBean.textContent=formatCountdown(beanDays);
-    if(cdCorn&&cornDays!=null&&cornDays<7)cdCorn.classList.add('urgent');
-    if(cdBean&&beanDays!=null&&beanDays<7)cdBean.classList.add('urgent');
-    var rmaNote=document.getElementById('sb-rma-note');if(rmaNote)rmaNote.style.display='block';
+    // Update Quick Tools planting dates location label with detected city
+    var _wxSt=state.weather||{};
+    var _locLabel=document.getElementById('plant-dates-loc');
+    if(_locLabel&&(_wxSt.city||_wxSt.zip)){
+      var _locTxt=_wxSt.city?'\uD83D\uDCCD RMA Dates \u2014 '+_wxSt.city:'\uD83D\uDCCD RMA Dates \u2014 ZIP '+_wxSt.zip;
+      _locLabel.textContent=_locTxt;
+    }
     var forecastMaxArr=dailyF.temperature_2m_max||[],forecastMinArr=dailyF.temperature_2m_min||[];
     var forecastPrecipArr=dailyF.precipitation_sum||[],forecastWindArr=dailyF.windspeed_10m_max||[];
     var forecastHumidArr=dailyF.relativehumidity_2m_mean||[];
@@ -1451,31 +1410,29 @@ function loadWeatherEnhancements(state){
     }
   }).catch(function(){});
 }
-waitForGeo(function(state){loadWeatherEnhancements(state);});
-// Planting dates are pure date math — render immediately, no geo needed
+var _geoEnhDone=false;
+function _runEnhancements(lat,lon,state){
+  if(_geoEnhDone)return;_geoEnhDone=true;
+  loadWeatherEnhancements(state||{weather:{lat:lat,lon:lon}});
+}
+// Primary: wait for geo.js state
+waitForGeo(function(state){_runEnhancements(state.weather.lat,state.weather.lon,state);});
+// Fallback: browser geolocation after 3.5s if geo.js hasn't resolved
+setTimeout(function(){
+  if(_geoEnhDone)return;
+  if(!navigator.geolocation)return;
+  navigator.geolocation.getCurrentPosition(
+    function(pos){_runEnhancements(pos.coords.latitude,pos.coords.longitude,null);},
+    function(){},
+    {timeout:8000,maximumAge:300000}
+  );
+},3500);
+// Planting dates — pure date math, render immediately into Quick Tools panel
 (function(){
   var cornDays=daysUntil(RMA_DATES.corn.insurance_final),beanDays=daysUntil(RMA_DATES.soybeans.insurance_final);
-  var sbCorn=document.getElementById('sb-corn-days'),sbBean=document.getElementById('sb-bean-days');
-  var cdCorn=document.getElementById('sb-cd-corn'),cdBean=document.getElementById('sb-cd-bean');
-  if(sbCorn)sbCorn.textContent=formatCountdown(cornDays);
-  if(sbBean)sbBean.textContent=formatCountdown(beanDays);
-  if(cdCorn&&cornDays!=null&&cornDays<7)cdCorn.classList.add('urgent');
-  if(cdBean&&beanDays!=null&&beanDays<7)cdBean.classList.add('urgent');
-  var rmaNote=document.getElementById('sb-rma-note');if(rmaNote)rmaNote.style.display='block';
-})();
-(function(){
-  var banner=document.getElementById('seasonal-banner');
-  if(!banner)return;
-  var now=new Date(),mo=now.getMonth()+1,day=now.getDate();
-  var seasonMode='PLANTING SEASON \u2014 CORN BELT',seasonIcon='\uD83C\uDF31',seasonClass='planting',headline='Now through early June \u2014 soil temp, spray windows & final planting dates';
-  if((mo===12)||(mo<=2)||(mo===3&&day<15)){seasonMode='PLANNING SEASON \u2014 PRE-PLANT';seasonIcon='\uD83D\uDCCB';seasonClass='planning';headline='Input budgets, new-crop contracts, and acreage decisions';}
-  else if((mo===3&&day>=15)||(mo===4)||(mo===5)||(mo===6&&day<=15)){seasonMode='PLANTING SEASON \u2014 CORN BELT';seasonIcon='\uD83C\uDF31';seasonClass='planting';headline='Now through early June \u2014 soil temp, spray windows & final planting dates';}
-  else if((mo===6&&day>15)||(mo===7)||(mo===8)||(mo===9&&day<=15)){seasonMode='GROWING SEASON \u2014 POLLINATION RISK';seasonIcon='\uD83C\uDF3D';seasonClass='growing';headline='Watching GDU accumulation, rainfall, and pollination weather';}
-  else if((mo===9&&day>15)||(mo===10)||(mo===11)){seasonMode='HARVEST SEASON';seasonIcon='\uD83C\uDFDE\uFE0F';seasonClass='harvest';headline='Drying costs, bin space, and basis before December delivery';}
-  banner.className='seasonal-banner '+seasonClass;
-  var sbMode=document.getElementById('sb-mode');if(sbMode)sbMode.textContent=seasonMode;
-  var sbHeadline=document.getElementById('sb-headline');if(sbHeadline)sbHeadline.textContent=headline;
-  var sbIcon=document.getElementById('sb-icon');if(sbIcon)sbIcon.textContent=seasonIcon;
+  var qtCorn=document.getElementById('qt-corn-days'),qtBean=document.getElementById('qt-bean-days');
+  if(qtCorn){qtCorn.textContent=formatCountdown(cornDays);if(cornDays!=null&&cornDays<14)qtCorn.classList.add('urgent');}
+  if(qtBean){qtBean.textContent=formatCountdown(beanDays);if(beanDays!=null&&beanDays<14)qtBean.classList.add('urgent');}
 })();
 })();
 </script>
