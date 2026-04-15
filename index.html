@@ -19,7 +19,7 @@
 <title>Corn, Soybean &amp; Wheat Prices Today &#8212; Farm Dashboard | AGSIST</title>
 <meta name="description" content="Live corn, soybean, and wheat futures updated every 30 min. Farm dashboard with spray advisory, urea risk, cash grain bids, USDA reports, and daily briefing.">
 <meta name="keywords" content="corn futures prices today, soybean futures prices today, wheat futures price today, grain prices today, farm weather, spray advisory, urea volatilization risk, cash grain bids near me, USDA reports, agricultural market dashboard, farm break even calculator, grain elevator prices, CBOT corn, crop insurance, grain elevator prices near me">
-<meta name="author"  content="Sigurd Lindquist">
+<meta name="author"  content="Sigurd Lindquist — Farmers First Agri Service">
 <meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://agsist.com/">
 <meta property="og:type"         content="website">
@@ -225,8 +225,6 @@
   .noaa-card-head{display:flex;align-items:center;gap:.4rem;padding:.5rem .8rem;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
   .noaa-card-head.temp{color:#f4834a} .noaa-card-head.precip{color:#5bb8f5}
   .noaa-card img{display:block;width:100%;height:auto;background:var(--surface2);min-height:100px}
-  .noaa-legend{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.55rem;font-size:.68rem;color:var(--text-dim);}
-  .noaa-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0;vertical-align:middle;margin-right:3px}
   .noaa-note{margin-top:.5rem;font-size:.68rem;color:var(--text-muted);line-height:1.55}
   .noaa-note a{color:var(--gold);text-decoration:none}
   .noaa-note a:hover{text-decoration:underline}
@@ -235,9 +233,6 @@
   button,a,[role="button"]{touch-action:manipulation;}
   .btn-dismiss{min-height:44px;display:inline-flex;align-items:center;}
   #kalshi-grid{min-height:160px;}
-  .noaa-legend{flex-direction:column;gap:.3rem;}
-  @media(min-width:480px){.noaa-legend{flex-direction:row;gap:.3rem 1rem;}}
-  .noaa-legend span{margin-left:0!important;}
   @media(prefers-reduced-motion:reduce){
     .ticker-track{animation:none!important}
     .live-dot,.status-dot,.daily-eyebrow-dot{animation:none!important}
@@ -726,11 +721,7 @@
       <div class="noaa-card"><div class="noaa-card-head temp">&#x1F321;&#xFE0F; Temperature Outlook</div><img id="noaa-temp-img" src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif" alt="NOAA 1-month temperature outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noaa-img-err"><span>&#x1F321;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div></div>
       <div class="noaa-card"><div class="noaa-card-head precip">&#x1F327;&#xFE0F; Precipitation Outlook</div><img id="noaa-precip-img" src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif" alt="NOAA 1-month precipitation outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noaa-img-err"><span>&#x1F327;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div></div>
     </div>
-    <div class="noaa-legend">
-      <span>Temp: <span class="noaa-swatch" style="background:#c1440e"></span>Above normal &nbsp;<span class="noaa-swatch" style="background:#888;opacity:.5"></span>Equal chances &nbsp;<span class="noaa-swatch" style="background:#1a7abf"></span>Below normal</span>
-      <span style="margin-left:.5rem">Precip: <span class="noaa-swatch" style="background:#2d8c4e"></span>Above normal &nbsp;<span class="noaa-swatch" style="background:#888;opacity:.5"></span>Equal chances &nbsp;<span class="noaa-swatch" style="background:#b07d2a"></span>Below normal</span>
-    </div>
-    <div class="noaa-note">Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener" style="text-decoration:underline;">NOAA Climate Prediction Center</a> &middot; 1-Month issued last day of month &middot; 3-Month issued 3rd Thursday &middot; Darker shading = higher confidence &middot; Currently showing: <span id="noaa-period-label">1-Month (30-Day)</span></div>
+    <div class="noaa-note">Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA Climate Prediction Center</a> &middot; 1-Month issued last day of month &middot; 3-Month issued 3rd Thursday &middot; <span id="noaa-period-label">1-Month (30-Day)</span></div>
   </div>
   <div class="fade-up" id="f5">
     <div class="sec-head"><div class="sec-title">&#x1F4C5; Upcoming USDA Reports</div><a href="/usda-calendar" class="sec-all">Full Calendar &rarr;</a></div>
@@ -1324,7 +1315,7 @@ function formatCountdown(days){if(days==null)return'\u2014';if(days<0)return'Pas
 function waitForGeo(cb,retries){retries=retries||0;if(retries>20)return;var st=window.AGSIST_STATE;if(st&&st.weather&&st.weather.lat!=null){cb(st);}else{setTimeout(function(){waitForGeo(cb,retries+1);},400);}}
 function loadWeatherEnhancements(state){
   var wx=state.weather||{},lat=wx.lat,lon=wx.lon;
-  if(lat==null||lon==null)return;
+  if(lat==null||lon==null||isNaN(+lat)||isNaN(+lon))return;
   var today=new Date(),apr1=new Date(today.getFullYear(),3,1);
   var d1=apr1.toISOString().split('T')[0];
   // Use yesterday as archive end_date — today's data is often not yet available
