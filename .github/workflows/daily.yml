@@ -2,7 +2,16 @@ name: Generate Daily Briefing
 
 on:
   schedule:
-    - cron: '45 11 * * *'
+    # 11:02 UTC every day.
+    #   = 6:02 AM Central (CDT, summer) / 5:02 AM Central (CST, winter)
+    #
+    # Offset 2 min from the prices-fetch workflow (which fires at :00
+    # and :30 of every hour) so prices.json has time to commit before
+    # the briefing reads it. No DST adjustment needed year-round —
+    # both seasons publish comfortably before the 7 AM Central deadline,
+    # even with typical GitHub Actions cron delays (occasionally 30+ min
+    # during peak load).
+    - cron: '2 11 * * *'
   workflow_dispatch:
 
 jobs:
@@ -31,8 +40,10 @@ jobs:
         run: python scripts/generate_daily.py
 
       - name: Validate schema
-        # Fails the workflow if daily.json drifts from canonical field names
-        # or contains filler content like "Unknown" attributions.
+        # Fails the workflow if daily.json drifts from canonical field
+        # names or contains filler content like "Unknown" attributions.
+        # On failure, yesterday's briefing stays live until the next
+        # successful run. GitHub emails the workflow owner on failure.
         run: python scripts/daily_schema.py data/daily.json
 
       - name: Generate RSS feed
