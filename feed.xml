@@ -5,13 +5,26 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Apr 2026 12:43:39 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2026 11:38:31 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>GRAINS CAP CHOPPY WEEK AS PLANTING ACCELERATES</title>
+      <link>https://agsist.com/daily/2026-04-18</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-18</guid>
+      <pubDate>Sat, 18 Apr 2026 05:00:00 -0600</pubDate>
+      <description>A turbulent week in ag markets wrapped up with grain futures pulling back as spring planting gained momentum across the Corn Belt. Corn closed at $4.49 per bushel, down 10 cents Friday, while Chicago wheat dropped to $5.91. The week's bigger story played out in livestock, where cattle strength collided with an 8% hog collapse that left lean hogs at $93.40.
+Corn and wheat finished lower while livestock diverged sharply in volatile Friday trading.
+• Week In Review
+• Livestock Divide
+  → Cattle producers should lock protection if live futures break below $245 on Monday. Hog producers consider aggressive forward pricing if June futures rally above $95.
+• Energy Pressure
+Read more: https://agsist.com/daily/2026-04-18</description>
+    </item>
     <item>
       <title>GRAINS DRIFT LOWER AS PLANTING PICKS UP</title>
       <link>https://agsist.com/daily/2026-04-17</link>
@@ -446,21 +459,6 @@ Wall Street's worst day in months sends safe-haven flows into commodities as spr
 • ENERGY &amp; INPUTS
   → Lock in diesel needs now if you haven't—oil's momentum suggests higher prices ahead.
 Read more: https://agsist.com/daily/2026-03-13</description>
-    </item>
-    <item>
-      <title>CRUDE OIL ROCKETS 11% HIGHER OVERNIGHT</title>
-      <link>https://agsist.com/daily/2026-03-12</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-12</guid>
-      <pubDate>Thu, 12 Mar 2026 05:00:00 -0600</pubDate>
-      <description>Crude oil exploded 11.2% higher overnight to $92.16, dragging natural gas (+7.2%) and diesel prices sharply higher just as spring fieldwork approaches. The energy rally lifted corn 8¼¢ to $4.61 and sent oats screaming 15¢ higher (+4.3%) on ethanol optimism and higher input costs. Cattle dropped 1-1.7% as higher feed and energy costs squeezed margins.
-Energy surge lifts corn and oats while cattle slide on higher feed costs.
-• GRAINS &amp; OILSEEDS
-  → Watch diesel prices today — if they follow crude higher, your spring input costs just jumped. Price some corn if margins still work.
-• LIVESTOCK &amp; DAIRY
-  → Cattle feeders should consider hedging more summer cattle — this margin squeeze isn't going away quickly.
-• ENERGY &amp; INPUTS
-  → Lock in remaining fuel and nitrogen needs TODAY if you haven't already — this energy rally has legs.
-Read more: https://agsist.com/daily/2026-03-12</description>
     </item>
   </channel>
 </rss>

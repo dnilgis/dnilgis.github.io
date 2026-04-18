@@ -1,6 +1,17 @@
 {
   "briefings": [
     {
+      "date": "2026-04-18",
+      "date_display": "Saturday, April 18, 2026",
+      "headline": "GRAINS CAP CHOPPY WEEK AS PLANTING ACCELERATES",
+      "teaser": "Grain futures ease as planting picks up pace, but livestock tells a different story.",
+      "market_mood": "mixed",
+      "surprise_count": 0,
+      "sections": 4,
+      "url": "/daily/2026-04-18",
+      "market_closed": true
+    },
+    {
       "date": "2026-04-17",
       "date_display": "Friday, April 17, 2026",
       "headline": "GRAINS DRIFT LOWER AS PLANTING PICKS UP",
@@ -374,6 +385,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-17T12:43:39.678914+00:00",
-  "count": 36
+  "updated": "2026-04-18T11:38:31.761601+00:00",
+  "count": 37
 }
