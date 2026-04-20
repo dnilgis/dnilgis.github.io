@@ -14,16 +14,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<title>Spray Advisory &#8212; Is It Safe to Spray Today? | AGSIST</title>
-<meta name="description" content="Real-time spray advisory for farmers. Wind speed, temperature, humidity, and inversion risk at your location. 24-hour spray window forecast. Free.">
+<title>Can I Spray Today? Live Wind, Temp &amp; Inversion Check | AGSIST</title>
+<meta name="description" content="Check spray conditions at your location now: wind speed, temperature, humidity, thermal inversion risk, and 24-hour spray window forecast. No account.">
 <meta name="author" content="Farmers First Agri Service &#8212; AGSIST">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://agsist.com/spray">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AGSIST">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="Spray Advisory &#8212; Is It Safe to Spray Today? | AGSIST">
-<meta property="og:description" content="Real-time spray advisory showing wind, temperature, humidity, and inversion risk at your location. 24-hour spray window, tank mix guide, and herbicide drift tips. Free for farmers.">
+<meta property="og:title" content="Can I Spray Today? Live Wind, Temp &amp; Inversion Check | AGSIST">
+<meta property="og:description" content="Check spray conditions at your location now: wind speed, temperature, humidity, thermal inversion risk, and 24-hour spray window forecast. No account.">
 <meta property="og:url" content="https://agsist.com/spray">
 <meta property="og:image" content="https://agsist.com/img/og/spray.jpg">
 <meta property="og:image:width" content="1200">
@@ -32,8 +32,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@agsist">
 <meta name="twitter:creator" content="@agsist">
-<meta name="twitter:title" content="Spray Advisory &#8212; Is It Safe to Spray Today? | AGSIST">
-<meta name="twitter:description" content="Real-time spray advisory: wind, temp, humidity, inversion risk at your location. 24-hour window, tank mix order guide. Free for farmers.">
+<meta name="twitter:title" content="Can I Spray Today? | AGSIST">
+<meta name="twitter:description" content="Live wind, temperature, humidity, and inversion check at your location. 24-hour spray window forecast. No account.">
 <meta name="twitter:image" content="https://agsist.com/img/og/spray.jpg">
 <script type="application/ld+json">
 {
@@ -53,9 +53,9 @@
       "@type": "WebPage",
       "@id": "https://agsist.com/spray#webpage",
       "url": "https://agsist.com/spray",
-      "name": "Spray Advisory \u2014 Is It Safe to Spray Today? | AGSIST",
-      "description": "Real-time spray advisory for farmers showing wind, temperature, humidity, and inversion risk at your location. Free 24-hour spray window forecast.",
-      "dateModified": "2026-04-14",
+      "name": "Can I Spray Today? Live Wind, Temp & Inversion Check | AGSIST",
+      "description": "Check spray conditions at your location now: wind speed, temperature, humidity, thermal inversion risk, and 24-hour spray window forecast. No account.",
+      "dateModified": "2026-04-18",
       "isPartOf": { "@id": "https://agsist.com/#website" },
       "breadcrumb": {
         "@type": "BreadcrumbList",
@@ -396,8 +396,8 @@ h2.edu-title,h2.dicamba-box-head,h2.window-head,h3.inv-title,h3.nozzle-card-head
   function ratingAbbr(r){return{good:'GOOD',marginal:'FAIR',poor:'POOR',frozen:'FROZEN'}[r]||'--';}
   // FIX: Use Unicode character literals not HTML entities.
   // HTML entities like '&#128683;' in a JS string assigned via .textContent
-  // render as literal text ("&#128683;") instead of the emoji (🚫).
-  // Unicode escapes are parsed by the JS engine at parse time — correct.
+  // render as literal text ("&#128683;") instead of the emoji (\ud83d\udeab).
+  // Unicode escapes are parsed by the JS engine at parse time \u2014 correct.
   var rIcons={good:'\u2705\ufe0f',marginal:'\u26a0\ufe0f',poor:'\uD83D\uDEAB',frozen:'\uD83E\uDD76'};
   var rMainText={good:'Good \u2014 Safe to Apply',marginal:'Marginal \u2014 Use Caution',poor:'Poor \u2014 Do Not Spray',frozen:'Frozen \u2014 No Application'};
   var rSubs={good:'Conditions are within acceptable spray parameters. Monitor wind direction and watch for inversion indicators.',marginal:'One or more factors are outside the ideal range. Review the breakdown below and check your product label before proceeding.',poor:'Conditions are unfavorable for spray application. Risk of drift, volatilization, or reduced efficacy is significant.',frozen:'Below freezing \u2014 ground and plant tissue are frozen. No spray applications are possible or effective under these conditions.'};
@@ -453,7 +453,7 @@ h2.edu-title,h2.dicamba-box-head,h2.window-head,h3.inv-title,h3.nozzle-card-head
           var r=results[0];
           // FIX: Nominatim postal code search returns display_name like
           // "61801, Champaign County, Illinois, United States"
-          // parts[0]=ZIP, parts[1]=County, parts[2]=State — not city, Ch
+          // parts[0]=ZIP, parts[1]=County, parts[2]=State \u2014 not city, Ch
           // Detect postal code name and build a clean label
           var parts=(r.display_name||'').split(',');
           var p0=(parts[0]||'').trim();
