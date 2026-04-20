@@ -5,13 +5,27 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Apr 2026 11:39:03 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2026 12:08:04 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>CORN JUMPS ON PLANTING CONCERNS</title>
+      <link>https://agsist.com/daily/2026-04-20</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-20</guid>
+      <pubDate>Mon, 20 Apr 2026 05:00:00 -0600</pubDate>
+      <description>Corn nearby futures jumped to $4.58, up 8.5 cents in a move that caught traders off guard as planting window pressure builds. The rally came as crude oil spiked 5.7% to $87.26, adding input cost concerns to weather worries. December corn held steady at $4.78, suggesting the market sees this as a short-term squeeze rather than a fundamental shift.
+Nearby corn rallied sharply while energy spiked, but livestock struggled across the board.
+• Grains Split Story
+  → Price 25% of remaining old crop corn if nearby futures hold above $4.55 through Wednesday close.
+• Livestock Pressure
+• Energy Shock
+  → Lock remaining diesel needs if WTI breaks above $88 on Tuesday morning.
+Read more: https://agsist.com/daily/2026-04-20</description>
+    </item>
     <item>
       <title>MIXED WEEK SETS STAGE FOR WEATHER WATCH</title>
       <link>https://agsist.com/daily/2026-04-19</link>
@@ -442,21 +456,6 @@ Hogs surge 8.6% overnight while soybeans collapse 3.8% in stunning reversal that
 • ENERGY &amp; INPUTS
   → Lock in diesel prices now if you haven't — this energy weakness might not last.
 Read more: https://agsist.com/daily/2026-03-17</description>
-    </item>
-    <item>
-      <title>CRUDE SPIKES 4%, MILK EXPLODES 7% OVERNIGHT</title>
-      <link>https://agsist.com/daily/2026-03-16</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-16</guid>
-      <pubDate>Mon, 16 Mar 2026 05:00:00 -0600</pubDate>
-      <description>Crude oil's unexpected 4% overnight rally to $99.31 signals rising input costs just as spring field prep begins, while Class III milk's shocking 7% jump to $17.30 reshuffles livestock feed economics. Corn managed a modest 9¢ gain to $4.67, but the real story is how energy and dairy volatility will ripple through your spring planting decisions.
-Energy rally pressures input costs while dairy surge creates livestock feed dynamic shift.
-• GRAINS &amp; OILSEEDS
-  → Consider locking diesel prices now before crude breaks $100 — grain prices haven't caught up to input cost reality yet.
-• LIVESTOCK &amp; DAIRY
-  → If you're considering livestock expansion, dairy operations now offer significantly better margins than beef.
-• ENERGY &amp; INPUTS
-  → Prioritize diesel and liquid fertilizer purchases this week before crude breaks $100 — prices only go one way from here.
-Read more: https://agsist.com/daily/2026-03-16</description>
     </item>
   </channel>
 </rss>

@@ -1,6 +1,17 @@
 {
   "briefings": [
     {
+      "date": "2026-04-20",
+      "date_display": "Monday, April 20, 2026",
+      "headline": "CORN JUMPS ON PLANTING CONCERNS",
+      "teaser": "Corn jumps 8.5 cents as planting window tightens and energy costs spike.",
+      "market_mood": "mixed",
+      "surprise_count": 2,
+      "sections": 4,
+      "url": "/daily/2026-04-20",
+      "market_closed": false
+    },
+    {
       "date": "2026-04-19",
       "date_display": "Sunday, April 19, 2026",
       "headline": "MIXED WEEK SETS STAGE FOR WEATHER WATCH",
@@ -396,6 +407,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-19T11:39:03.383939+00:00",
-  "count": 38
+  "updated": "2026-04-20T12:08:04.454038+00:00",
+  "count": 39
 }
