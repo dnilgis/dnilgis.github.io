@@ -5,13 +5,25 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Apr 2026 12:08:04 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2026 12:02:04 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>CORN HOLDS GAINS AS BEANS EDGE HIGHER</title>
+      <link>https://agsist.com/daily/2026-04-21</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-21</guid>
+      <pubDate>Tue, 21 Apr 2026 05:00:00 -0600</pubDate>
+      <description>Corn held steady at $4.59 after Monday's weather-driven rally, while soybeans added 2.75 cents to $11.87 on continued South American tightness. Livestock struggled with feeder cattle dropping 1.1% as producers face margin pressure.
+Markets consolidate after Monday's planting scare as weather watch intensifies.
+• Grains Hold Steady
+• Livestock Divergence
+• Energy Steady
+Read more: https://agsist.com/daily/2026-04-21</description>
+    </item>
     <item>
       <title>CORN JUMPS ON PLANTING CONCERNS</title>
       <link>https://agsist.com/daily/2026-04-20</link>
@@ -441,21 +453,6 @@ Wheat tumbles 15¢ as Black Sea competition intensifies before spring planting d
 • ENERGY &amp; INPUTS
   → Lock in diesel and propane needs for spring — current levels may be as good as it gets this season.
 Read more: https://agsist.com/daily/2026-03-18</description>
-    </item>
-    <item>
-      <title>LIVESTOCK EXPLODES AS GRAIN COMPLEX CRATERS</title>
-      <link>https://agsist.com/daily/2026-03-17</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-17</guid>
-      <pubDate>Tue, 17 Mar 2026 05:00:00 -0600</pubDate>
-      <description>The agricultural complex split violently overnight with livestock futures exploding higher while grains and oilseeds cratered. &lt;strong&gt;Lean hogs rocketed 8.6% to $93.50&lt;/strong&gt; — the biggest single-session move in over a year — while soybeans collapsed 3.8% to $11.55 as fund liquidation accelerated. The divergence creates a massive shift in feed cost dynamics just as spring planting decisions lock in.
-Hogs surge 8.6% overnight while soybeans collapse 3.8% in stunning reversal that flips feed cost math.
-• GRAINS &amp; OILSEEDS
-  → Hold pricing decisions — this looks like technical washout, not fundamental shift.
-• LIVESTOCK &amp; DAIRY
-  → Consider forward pricing summer hogs if you're unhedged — this momentum could continue.
-• ENERGY &amp; INPUTS
-  → Lock in diesel prices now if you haven't — this energy weakness might not last.
-Read more: https://agsist.com/daily/2026-03-17</description>
     </item>
   </channel>
 </rss>
