@@ -1,106 +1,136 @@
 {
-  "updated": "2026-04-04",
-  "status": "elevated",
-  "status_label": "Trade War Active",
-  "status_note": "US–China tariff escalation in effect. Significant impact on grain export demand.",
-  "headline": "China imposed 125% retaliatory tariffs on all US goods April 4, 2026 following US tariff increases to 145%.",
+  "updated": "2026-04-23",
+  "status": "mixed",
+  "status_label": "Truce Holding — Pending Investigations",
+  "status_note": "US-China retaliatory ag tariffs were suspended under the October 30, 2025 Busan agreement (extended through Nov 10, 2026). SCOTUS struck down IEEPA tariffs Feb 20, 2026; Section 122 global 10% tariff took effect Feb 24, 2026. March 2026 USTR Section 301 investigations against China and 15 other trading partners are pending (hearings April 28). Rates below reflect the post-Busan truce state — verify against USTR and Federal Register before trading decisions.",
+  "headline": "Ag tariff truce with China holding post-Busan agreement; Section 301 investigations and SCOTUS-IEEPA aftermath create policy uncertainty.",
   "rows": [
     {
       "commodity": "Soybeans",
-      "icon": "🫘",
+      "icon": "\ud83e\uded8",
       "destination": "China",
-      "rate": "125%",
+      "rate": "3%",
       "baseline": "3%",
-      "status": "elevated",
-      "note": "Primary buyer — severe demand risk",
-      "effective": "2026-04-04"
+      "status": "normal",
+      "note": "March 2025 retaliatory 10% was suspended under the Oct 30, 2025 Busan agreement. Section 301 investigation pending (Apr 28 hearing) could re-escalate.",
+      "effective": "2025-11-10",
+      "source_url": "https://www.congress.gov/crs-product/R48549"
     },
     {
       "commodity": "Corn",
-      "icon": "🌽",
+      "icon": "\ud83c\udf3d",
       "destination": "China",
-      "rate": "125%",
+      "rate": "1%",
       "baseline": "1%",
-      "status": "elevated",
-      "note": "Discretionary purchases likely halted",
-      "effective": "2026-04-04"
+      "status": "normal",
+      "note": "March 2025 retaliatory 15% was suspended under the Busan agreement. China purchases remain below pre-trade-war levels; Brazil retains market share.",
+      "effective": "2025-11-10",
+      "source_url": "https://www.congress.gov/crs-product/R48549"
     },
     {
       "commodity": "Wheat",
-      "icon": "🌾",
+      "icon": "\ud83c\udf3e",
       "destination": "China",
-      "rate": "125%",
+      "rate": "1%",
       "baseline": "1%",
-      "status": "elevated",
-      "note": "Minimal baseline China exposure",
-      "effective": "2026-04-04"
+      "status": "normal",
+      "note": "March 2025 retaliatory 15% suspended under Busan agreement. Minimal baseline China exposure; trade impact modest compared to soybeans/pork.",
+      "effective": "2025-11-10",
+      "source_url": "https://www.congress.gov/crs-product/R48549"
     },
     {
       "commodity": "Pork",
-      "icon": "🐖",
+      "icon": "\ud83d\udc16",
       "destination": "China",
-      "rate": "125%",
+      "rate": "12%",
       "baseline": "12%",
-      "status": "elevated",
-      "note": "Major US export market at risk",
-      "effective": "2026-04-04"
+      "status": "normal",
+      "note": "March 2025 retaliatory 10% suspended under Busan agreement. Baseline MFN rate returned. China remains a major US pork market.",
+      "effective": "2025-11-10",
+      "source_url": "https://www.congress.gov/crs-product/R48549"
     },
     {
       "commodity": "Soybeans",
-      "icon": "🫘",
+      "icon": "\ud83e\uded8",
       "destination": "Canada / Mexico",
       "rate": "0%",
       "baseline": "0%",
       "status": "normal",
-      "note": "USMCA compliant — no change",
-      "effective": "2025-01-01"
+      "note": "USMCA-compliant. Penn Wharton data: USMCA exemption share reached 86.3% of Canada/Mexico imports by February 2026.",
+      "effective": "2020-07-01",
+      "source_url": "https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement"
     },
     {
       "commodity": "Corn",
-      "icon": "🌽",
+      "icon": "\ud83c\udf3d",
       "destination": "Canada / Mexico",
       "rate": "0%",
       "baseline": "0%",
       "status": "normal",
-      "note": "USMCA compliant — no change",
-      "effective": "2025-01-01"
+      "note": "USMCA-compliant. Mexico remains the top corn export destination; Canadian demand steady.",
+      "effective": "2020-07-01",
+      "source_url": "https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement"
     },
     {
       "commodity": "Ethanol",
-      "icon": "⛽",
+      "icon": "\u26fd",
       "destination": "EU",
-      "rate": "10%",
-      "baseline": "6.5%",
-      "status": "elevated",
-      "note": "Part of broad EU tariff package",
-      "effective": "2026-04-09"
+      "rate": "\u20ac83-192/m\u00b3",
+      "baseline": "\u20ac83/mt (2013)",
+      "status": "mixed",
+      "note": "EU anti-dumping duty on US undenatured ethanol in place since 2013 (\u20ac83.03/metric ton base); some member states (e.g., Netherlands under RED III) apply higher max rates up to \u20ac192/m\u00b3. UK-US trade deal (May 2025) opened 1.4B L/yr duty-free quota for UK only. Verify member-state customs for specific shipments.",
+      "effective": "2013-02-01",
+      "source_url": "https://policy.trade.ec.europa.eu/enforcement-and-protection/trade-defence/actions-against-imports-into-eu_en"
     }
   ],
   "timeline": [
     {
-      "date": "2026-04-04",
-      "event": "China raises retaliatory tariffs to 125% on all US goods",
-      "impact": "high"
+      "date": "2026-04-10",
+      "event": "Court of International Trade hears oral arguments on Section 122 global-tariff challenges (Oregon v. Trump, Burlap & Barrel v. Trump); ruling timeline unclear.",
+      "impact": "medium",
+      "source_url": "https://www.cit.uscourts.gov/"
     },
     {
-      "date": "2026-04-02",
-      "event": "US raises tariffs on Chinese goods to 145% (54% base + 91% fentanyl)",
-      "impact": "high"
+      "date": "2026-03-27",
+      "event": "China's MOFCOM launches retaliatory investigations into US trade practices on 'green products' and 'supply chain disruption' in response to US Section 301 probes.",
+      "impact": "medium",
+      "source_url": "http://english.mofcom.gov.cn/"
     },
     {
-      "date": "2026-03-10",
-      "event": "US imposes 25% steel/aluminum tariffs, Canada retaliates on $20B in goods",
-      "impact": "medium"
+      "date": "2026-03-11",
+      "event": "USTR initiates Section 301 investigations targeting China, EU, Mexico, and 13 other trading partners for 'excess capacity' and 'forced labor'; hearings scheduled April 28.",
+      "impact": "medium",
+      "source_url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2026"
     },
     {
-      "date": "2026-02-01",
-      "event": "US announces 10% blanket tariff on Chinese imports; China retaliates on select ag",
-      "impact": "medium"
+      "date": "2026-02-24",
+      "event": "IEEPA tariffs (reciprocal, fentanyl, Russian oil, Brazil) terminated; Section 122 global 10% tariff takes effect under Proclamation 11012 (150 days).",
+      "impact": "high",
+      "source_url": "https://www.federalregister.gov/agencies/trade-representative-office-of-united-states"
     },
     {
-      "date": "2025-09-01",
-      "event": "Phase 1 trade deal purchase commitments expire without renewal",
-      "impact": "medium"
+      "date": "2026-02-20",
+      "event": "US Supreme Court rules IEEPA does not authorize tariff imposition; April 2025 reciprocal tariffs voided; refund process under CBP CAPE system begins April 20.",
+      "impact": "high",
+      "source_url": "https://www.supremecourt.gov/"
+    },
+    {
+      "date": "2025-10-30",
+      "event": "Trump-Xi meeting in Busan, South Korea: extends US 10% tariff rate on China through Nov 10, 2026; China lifts retaliatory agricultural tariffs in exchange for US dropping additional 10% fentanyl tariff.",
+      "impact": "high",
+      "source_url": "https://www.whitehouse.gov/presidential-actions/"
+    },
+    {
+      "date": "2025-05-12",
+      "event": "US-China Geneva agreement: both sides cut reciprocal tariffs from April peaks (US 145%, China 125%) to 10% each for 90 days, later extended.",
+      "impact": "high",
+      "source_url": "https://www.congress.gov/crs-product/R48549"
+    },
+    {
+      "date": "2025-03-04",
+      "event": "China imposes first-tranche retaliatory tariffs on US ag: 15% on wheat, corn, cotton, chicken; 10% on soybeans, pork, beef, dairy (suspended under Oct 30, 2025 Busan agreement).",
+      "impact": "medium",
+      "source_url": "https://www.congress.gov/crs-product/R48549"
     }
   ]
 }
