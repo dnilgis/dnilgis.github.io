@@ -17,7 +17,7 @@
 <title>Daily Ag Briefing &#8212; Market Morning Report | AGSIST</title>
 <meta name="description" content="Free morning agricultural market briefing for corn, soybean, and wheat farmers across the US. Published every weekday by 6 AM CT. Market drivers, weather, and what to watch.">
 <meta name="keywords"    content="daily ag briefing, farm morning market report, corn price today, soybean market morning, grain market briefing, agricultural market summary, free farm briefing">
-<meta name="author"      content="Farmers First Agri Service &#8212; AGSIST">
+<meta name="author"      content="Sigurd Lindquist">
 <meta name="robots"      content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical"    href="https://agsist.com/daily">
 
@@ -25,7 +25,7 @@
 <meta property="og:site_name"    content="AGSIST">
 <meta property="og:locale"       content="en_US">
 <meta property="og:title"        content="Daily Ag Briefing &#8212; Market Morning Report | AGSIST">
-<meta property="og:description"  content="Free morning market briefing for grain farmers across the US. Corn, soybean, wheat, weather, and what to watch today.">
+<meta property="og:description"  content="Morning market briefing for grain farmers across the US. Corn, soybean, wheat, weather, and what to watch today.">
 <meta property="og:url"          content="https://agsist.com/daily">
 <meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
 <meta property="og:image:width"  content="1200">
@@ -35,7 +35,7 @@
 <meta name="twitter:site"        content="@agsist">
 <meta name="twitter:creator"     content="@agsist">
 <meta name="twitter:title"       content="Daily Ag Briefing | AGSIST">
-<meta name="twitter:description" content="Morning market briefing for grain farmers across the US. Published every weekday by 6 AM CT. Free.">
+<meta name="twitter:description" content="Morning market briefing for grain farmers across the US. Published every weekday by 6 AM CT.">
 <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
@@ -71,7 +71,7 @@
         {
           "@type": "Question",
           "name": "How do I subscribe to the daily farm market briefing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Click the 'Get It in Your Inbox' button on this page. Enter your email and the AGSIST Daily will be delivered every weekday morning before 6 AM CT. Free, no ads, no account required. Unsubscribe any time." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Click the 'Get It in Your Inbox' button on this page. Enter your email and the AGSIST Daily will be delivered every weekday morning before 6 AM CT. Free, no account required. Unsubscribe any time." }
         }
       ]
     }
@@ -88,43 +88,130 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
 
 .dv3-hero{padding:1.2rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
 .dv3-hero-left h1{font-family:'Oswald',sans-serif;font-size:1.7rem;font-weight:800;text-transform:uppercase;color:var(--text);margin:0 0 .2rem;}
-.dv3-hero-left .dv3-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
-.dv3-hero-left .dv3-sub{font-size:.82rem;color:var(--text-dim);line-height:1.55;}
+.dv3-hero-left .dv3-eyebrow{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+.dv3-hero-left .dv3-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.dv3-hero-left .dv3-sub{font-size:.82rem;color:var(--text-dim);line-height:1.55;margin:0;}
+.dv3-hero-meta{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--text-muted);margin-top:.4rem;letter-spacing:.04em;}
+.dv3-hero-meta b{color:var(--green);font-weight:700;}
 .dv3-subscribe-btn{padding:.5rem 1.1rem;background:var(--green);color:#fff;border:none;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;transition:background .15s;min-height:44px;}
 .dv3-subscribe-btn:hover{background:#1b4d1c;}
 
 .dv3-today{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.4rem;margin-bottom:1.5rem;position:relative;overflow:hidden;}
 .dv3-today::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));}
-.dv3-today-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+
+.dv3-today-label{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.dv3-mood-pill{display:inline-flex;align-items:center;gap:.25rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.12rem .5rem;border-radius:3px;background:rgba(218,165,32,.08);color:var(--gold);border:1px solid rgba(218,165,32,.25);}
 .dv3-today-date{font-size:.82rem;color:var(--text-dim);margin-bottom:.75rem;}
-.dv3-today-headline{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.65rem;}
-.dv3-today-sub{font-size:.88rem;font-weight:600;color:var(--gold);margin-bottom:.65rem;letter-spacing:.01em;}
-.dv3-today-lead{font-size:.9rem;color:var(--text-dim);line-height:1.8;margin-bottom:1rem;}
-.dv3-today-sections{display:flex;flex-direction:column;gap:.85rem;margin-bottom:.75rem;}
-.dv3-sec{background:var(--surface2);border-radius:8px;padding:.75rem .9rem;border-left:2px solid var(--border);}
-.dv3-sec-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.3rem;}
-.dv3-sec-body{font-size:.84rem;color:var(--text-dim);line-height:1.72;}
+.dv3-today-headline{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:700;color:var(--text);line-height:1.2;margin:0 0 .5rem;text-transform:uppercase;letter-spacing:-.005em;}
+.dv3-today-sub{font-size:.9rem;font-weight:600;color:var(--gold);margin:0 0 .65rem;letter-spacing:.01em;}
+
+/* Ticker */
+.dv3-ticker{display:flex;gap:0;background:rgba(5,10,5,.45);border:1px solid var(--border);border-radius:6px;overflow-x:auto;margin:.75rem 0 1rem;-webkit-overflow-scrolling:touch;}
+.dv3-ticker::-webkit-scrollbar{height:4px;}
+.dv3-ticker::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.dv3-ticker-cell{flex:0 0 auto;padding:.55rem .9rem;border-right:1px solid var(--border);font-family:'JetBrains Mono',monospace;min-width:108px;}
+.dv3-ticker-cell:last-child{border-right:none;}
+.dv3-ticker-label{font-size:.62rem;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15rem;font-weight:700;}
+.dv3-ticker-value{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.1;margin-bottom:.12rem;}
+.dv3-ticker-change{font-size:.7rem;font-weight:700;}
+.dv3-ticker-change.up{color:var(--green);}
+.dv3-ticker-change.dn{color:#e05a42;}
+.dv3-ticker-change.flat{color:var(--text-muted);}
+
+/* Surprise banner */
+.dv3-surprise-banner{display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;background:linear-gradient(135deg,rgba(218,165,32,.08) 0%,rgba(240,145,58,.04) 100%);border:1px solid rgba(218,165,32,.25);border-radius:8px;margin:.5rem 0 1rem;}
+.dv3-surprise-banner .surprise-icon{font-size:1.1rem;flex-shrink:0;}
+.dv3-surprise-banner .surprise-text{font-size:.85rem;color:var(--text-dim);line-height:1.45;}
+.dv3-surprise-banner .surprise-text strong{color:var(--gold);font-weight:700;}
+
+.dv3-today-lead{font-size:.93rem;color:var(--text-dim);line-height:1.75;margin:.5rem 0 1rem;}
+
+/* Top bar: number + quote */
+.dv3-topbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.9rem;margin:1rem 0 1.25rem;}
+.dv3-one-number{background:var(--surface2);border:2px solid rgba(58,139,60,.22);border-radius:8px;padding:1rem 1.15rem;}
+.dv3-one-number-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;}
+.dv3-one-number-val{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.15rem;}
+.dv3-one-number-unit{font-size:.8rem;color:var(--text-dim);margin-bottom:.4rem;}
+.dv3-one-number-ctx{font-size:.82rem;line-height:1.6;color:var(--text-dim);}
+.dv3-quote-card{background:var(--surface2);border:2px solid rgba(218,165,32,.18);border-radius:8px;padding:1rem 1.15rem;display:flex;flex-direction:column;justify-content:center;}
+.dv3-quote-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.dv3-quote-text{font-size:.9rem;font-style:italic;color:var(--text-dim);line-height:1.6;margin:0 0 .35rem;}
+.dv3-quote-attr{font-size:.74rem;color:var(--text-muted);font-style:normal;}
+
+/* Sparklines (activate once data.chart_series ships in daily.json) */
+.dv3-sparks{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem;margin:0 0 1rem;padding:.75rem;background:rgba(5,10,5,.35);border:1px solid var(--border);border-radius:8px;}
+.dv3-spark{display:flex;flex-direction:column;align-items:stretch;gap:.2rem;}
+.dv3-spark-head{display:flex;justify-content:space-between;align-items:baseline;gap:.4rem;}
+.dv3-spark-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+.dv3-spark-last{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;color:var(--text);}
+.dv3-spark svg{width:100%;height:28px;display:block;}
+
+/* Sections */
+.dv3-sections{display:flex;flex-direction:column;gap:1rem;margin:1rem 0 1.25rem;}
+.dv3-sec{background:var(--surface2);border:2px solid var(--border);border-radius:8px;padding:1rem 1.15rem;position:relative;transition:border-color .15s;}
+.dv3-sec:hover{border-color:var(--border-g,var(--gold));}
+.dv3-sec-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;}
+.dv3-sec-icon{font-size:1.15rem;flex-shrink:0;}
+.dv3-sec-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);flex:1;}
+.dv3-sec-cnv{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .45rem;border-radius:3px;white-space:nowrap;}
+.dv3-sec-cnv--hi{color:var(--green);background:rgba(58,139,60,.1);border:1px solid rgba(58,139,60,.28);}
+.dv3-sec-cnv--md{color:var(--gold);background:rgba(218,165,32,.1);border:1px solid rgba(218,165,32,.28);}
+.dv3-sec-cnv--lo{color:var(--text-muted);background:var(--surface);border:1px solid var(--border);}
+.dv3-sec-body{font-size:.88rem;line-height:1.72;color:var(--text-dim);margin-bottom:.55rem;}
 .dv3-sec-body strong{color:var(--text);}
-.dv3-sec-bottomline{font-size:.78rem;font-weight:600;color:var(--gold);margin-top:.45rem;padding-top:.45rem;border-top:1px solid var(--border);}
-.dv3-prices-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0;}
-.dv3-price-pill{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;padding:.3rem .65rem;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--text);}
-.dv3-price-pill.up{border-color:rgba(34,197,94,.3);color:var(--green);}
-.dv3-price-pill.dn{border-color:rgba(239,68,68,.3);color:#ef4444;}
+.dv3-sec-bottomline{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:700;color:var(--text);padding:.5rem .75rem;background:var(--surface);border-radius:4px;border-left:3px solid var(--gold);margin-bottom:.5rem;line-height:1.45;}
+.dv3-sec-action{font-size:.8rem;font-weight:600;color:var(--green);padding:.45rem .7rem;background:rgba(74,171,76,.04);border:1px solid rgba(74,171,76,.18);border-radius:6px;line-height:1.45;}
+.dv3-sec--heat{border-color:rgba(58,139,60,.38)!important;}
+.dv3-sec--heat::after{content:'\1F525 TOP STORY';position:absolute;top:-.55rem;left:.75rem;font-family:'JetBrains Mono',monospace;font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--green);padding:.12rem .55rem;border-radius:2px;}
+.dv3-sec--surprise{border-color:rgba(218,165,32,.32)!important;}
+.dv3-sec--surprise::before{content:'\26A1 OVERNIGHT SURPRISE';position:absolute;top:-.55rem;right:.75rem;font-family:'JetBrains Mono',monospace;font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--gold);padding:.12rem .55rem;border-radius:2px;}
+
+/* TMYK */
+.dv3-tmyk{background:linear-gradient(135deg,var(--surface) 0%,rgba(74,143,186,.04) 100%);border:2px solid rgba(74,143,186,.22);border-radius:8px;padding:1rem 1.15rem;margin:1rem 0 1.25rem;}
+.dv3-tmyk-label{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5aa0d2;margin-bottom:.5rem;}
+.dv3-tmyk-title{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.35rem;}
+.dv3-tmyk-body{font-size:.86rem;line-height:1.7;color:var(--text-dim);}
+
+/* Watch list */
+.dv3-watch{background:var(--surface2);border:2px solid var(--border);border-radius:8px;padding:1rem 1.15rem;margin:1rem 0 1.25rem;}
+.dv3-watch-label{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.65rem;}
+.dv3-watch-list{list-style:none;padding:0;margin:0;}
+.dv3-watch-item{display:flex;gap:.75rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.dv3-watch-item:last-child{border-bottom:none;padding-bottom:0;}
+.dv3-watch-time{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:600;font-size:.8rem;white-space:nowrap;flex-shrink:0;min-width:110px;}
+.dv3-watch-desc{color:var(--text-dim);font-size:.84rem;line-height:1.55;}
+.dv3-watch-desc strong{color:var(--text);}
+
+/* Share row */
+.dv3-share{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1.25rem 0 .75rem;padding:.75rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.dv3-share-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-right:.25rem;}
+.dv3-share-btn{display:inline-flex;align-items:center;gap:.35rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;padding:.4rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);cursor:pointer;transition:border-color .15s,color .15s;min-height:36px;touch-action:manipulation;}
+.dv3-share-btn:hover{border-color:var(--gold);color:var(--text);}
+.dv3-share-btn svg{flex-shrink:0;}
+
+/* Source + permalink footer */
+.dv3-source{font-size:.7rem;color:var(--text-muted);text-align:center;padding:.75rem 0 .25rem;}
+.dv3-perm{text-align:center;padding-bottom:.25rem;}
+.dv3-perm a{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;}
+
+/* Loading */
 .dv3-loading{text-align:center;padding:2.5rem 1rem;color:var(--text-muted);}
 .dv3-loading-spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto .75rem;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-.dv3-arc-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.75rem;}
+/* Archive */
+.dv3-arc-label{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.75rem;}
 .dv3-arc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-bottom:2rem;}
 .dv3-arc-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;text-decoration:none;transition:border-color .15s;display:block;}
 .dv3-arc-card:hover{border-color:var(--gold);}
 .dv3-arc-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem;}
-.dv3-arc-card-date{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);}
+.dv3-arc-card-date{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--text-muted);}
 .dv3-arc-card-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;}
 .dv3-arc-card-badge.wkday{background:rgba(58,139,60,.12);color:var(--green);border:1px solid rgba(58,139,60,.25);}
 .dv3-arc-card-badge.wkend{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border);}
 .dv3-arc-card-hl{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4;}
 
+/* Modal */
 .dv3-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;}
 .dv3-modal-overlay.open{display:flex;}
 .dv3-modal{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.8rem;max-width:400px;width:90%;position:relative;}
@@ -138,10 +225,20 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
 .dv3-modal-submit:hover{background:#1b4d1c;}
 .dv3-modal-fine{font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:.5rem;}
 
+@media(max-width:640px){
+  .dv3-today-headline{font-size:1.3rem;}
+  .dv3-topbar{grid-template-columns:minmax(0,1fr);}
+  .dv3-one-number-val{font-size:2.2rem;}
+}
 @media(max-width:500px){
   .dv3-hero{flex-direction:column;align-items:flex-start;}
-  .dv3-today-headline{font-size:1.2rem;}
   .dv3-arc-grid{grid-template-columns:1fr;}
+  .dv3-watch-time{min-width:88px;}
+}
+@media(max-width:380px){
+  .dv3-today-headline{font-size:1.15rem;}
+  .dv3-one-number-val{font-size:1.9rem;}
+  .dv3-sec--surprise::before,.dv3-sec--heat::after{font-size:.48rem;padding:.1rem .4rem;}
 }
 </style>
 </head>
@@ -152,11 +249,12 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
 
   <div class="dv3-hero">
     <div class="dv3-hero-left">
-      <div class="dv3-eyebrow">&#x1F4F0; Published weekdays by 6 AM CT</div>
+      <div class="dv3-eyebrow"><span class="dv3-eyebrow-dot"></span> AGSIST Daily &middot; Published weekdays by 6:02 AM CT</div>
       <h1>Daily Ag Briefing</h1>
-      <p class="dv3-sub">Morning market intelligence for corn, soybean, and wheat producers across the US. Free, no account required.</p>
+      <p class="dv3-sub">Morning market intelligence for corn, soybean, and wheat producers across the US. Available at no charge, no account required.</p>
+      <div class="dv3-hero-meta" id="dv3-hero-meta" aria-live="polite"></div>
     </div>
-    <button class="dv3-subscribe-btn" id="dv3-sub-btn">&#x2709; Get It in Your Inbox</button>
+    <button class="dv3-subscribe-btn" id="dv3-sub-btn">&#x2709; Get it in your inbox</button>
   </div>
 
   <div class="dv3-today" id="dv3-today">
@@ -164,8 +262,8 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
   </div>
 
   <div class="dv3-arc-label" style="display:flex;align-items:center;justify-content:space-between;">
-    <span>Recent Briefings &#8212; Archive</span>
-    <a href="/daily/archive" style="font-size:.68rem;color:var(--gold);font-weight:600;text-decoration:none;white-space:nowrap;">View All &#x2192;</a>
+    <span>Recent briefings &middot; archive</span>
+    <a href="/daily/archive" style="font-size:.68rem;color:var(--gold);font-weight:600;text-decoration:none;white-space:nowrap;">View all &#x2192;</a>
   </div>
   <div class="dv3-arc-grid" id="dv3-arc-grid">
     <div style="grid-column:1/-1;color:var(--text-muted);font-size:.82rem;padding:.5rem 0">Loading archive&hellip;</div>
@@ -177,13 +275,13 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
   <div class="dv3-modal">
     <button class="dv3-modal-close" id="dv3-modal-close" aria-label="Close subscribe dialog">&#x2715;</button>
     <h2 id="dv3-modal-title">&#x2709; Get the Daily Briefing</h2>
-    <p>Morning market brief delivered to your inbox before 6 AM CT &#8212; corn, soybeans, wheat, weather, and what to watch. Available at no charge. No spam.</p>
+    <p>Morning market brief delivered to your inbox before 6 AM CT &#8212; corn, soybeans, wheat, weather, and what to watch. Available at no charge.</p>
     <form id="dv3-sub-form" action="https://formspree.io/f/xnjbwepn" method="POST">
       <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
       <input type="hidden" name="source" value="daily-briefing-subscribe">
-      <button type="submit" class="dv3-modal-submit">Subscribe Free</button>
+      <button type="submit" class="dv3-modal-submit">Subscribe at no charge</button>
     </form>
-    <p class="dv3-modal-fine">Unsubscribe anytime. No ads. We never sell your data. <a href="/privacy" style="color:var(--gold)">Privacy Policy</a>.</p>
+    <p class="dv3-modal-fine">Unsubscribe anytime. Your data is never sold. <a href="/privacy" style="color:var(--gold)">Privacy policy</a>.</p>
   </div>
 </div>
 
@@ -193,21 +291,47 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
 (function(){
 'use strict';
 
-function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-
-// FIX: strip any existing time component before appending T12:00:00
-// Prevents "2026-04-13T06:00:00T12:00:00" Invalid Date bug
+// ── helpers ────────────────────────────────────────────────────────────
+function escHtml(s){return(s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function dateOnly(iso){if(!iso)return'';return iso.indexOf('T')>-1?iso.split('T')[0]:iso;}
 function fmtDate(iso){
   if(!iso)return'';
-  var dateOnly=iso.indexOf('T')>-1?iso.split('T')[0]:iso;
-  var d=new Date(dateOnly+'T12:00:00');
-  if(isNaN(d.getTime()))return iso; // fallback: show raw string
+  var d=new Date(dateOnly(iso)+'T12:00:00');
+  if(isNaN(d.getTime()))return iso;
   return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
 }
+function convictionClass(c){
+  var v=(c||'').toUpperCase();
+  if(v.indexOf('HIGH')===0)return'hi';
+  if(v.indexOf('LOW')===0)return'lo';
+  return'md';
+}
 
-// ── Today's briefing ──────────────────────────────────────────────────
-// FIX: uses data.lead + data.sections (correct daily.json schema)
-// NOT data.body (which doesn't exist in daily.json)
+// ── sparkline renderer (activates once daily.json includes chart_series) ──
+function renderSpark(series,width,height){
+  if(!series||!series.length||series.length<2)return'';
+  var W=width||120,H=height||28,P=2;
+  var min=Math.min.apply(null,series),max=Math.max.apply(null,series);
+  var range=max-min||1;
+  var step=(W-P*2)/(series.length-1);
+  var pts=series.map(function(v,i){
+    var x=P+i*step;
+    var y=H-P-((v-min)/range)*(H-P*2);
+    return x.toFixed(1)+','+y.toFixed(1);
+  }).join(' ');
+  var last=series[series.length-1],first=series[0];
+  var stroke=last>=first?'#4aab4c':'#e05a42';
+  var fill=last>=first?'rgba(74,171,76,.14)':'rgba(224,90,66,.14)';
+  var lastX=(P+(series.length-1)*step).toFixed(1);
+  var lastY=(H-P-((last-min)/range)*(H-P*2)).toFixed(1);
+  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true">'+
+    '<polyline points="'+pts+' '+lastX+','+H+' '+P+','+H+'" fill="'+fill+'" stroke="none"/>'+
+    '<polyline points="'+pts+'" fill="none" stroke="'+stroke+'" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<circle cx="'+lastX+'" cy="'+lastY+'" r="2" fill="'+stroke+'"/>'+
+  '</svg>';
+}
+
+// ── today's briefing ──────────────────────────────────────────────────
 function renderToday(data){
   var el=document.getElementById('dv3-today');
   if(!el)return;
@@ -216,84 +340,253 @@ function renderToday(data){
     return;
   }
 
-  // Price pills (if present)
-  var priceHtml='';
+  var iso=dateOnly(data.date);
+  var permalink='https://agsist.com/daily'+(iso?'/'+iso:'');
+
+  // Header block
+  var mood=(data.meta && data.meta.market_mood) || '';
+  var header=
+    '<div class="dv3-today-label"><span>\u{1F4F0}</span>Today\'s briefing'+
+      (mood?'<span class="dv3-mood-pill">'+escHtml(mood)+'</span>':'')+
+    '</div>'+
+    '<div class="dv3-today-date">'+escHtml(fmtDate(data.date))+'</div>'+
+    '<h2 class="dv3-today-headline">'+escHtml(data.headline)+'</h2>'+
+    (data.subheadline?'<p class="dv3-today-sub">'+escHtml(data.subheadline)+'</p>':'');
+
+  // Ticker
+  var ticker='';
   if(data.prices&&data.prices.length){
-    priceHtml='<div class="dv3-prices-row">';
-    data.prices.forEach(function(p){priceHtml+='<span class="dv3-price-pill '+(p.dir||'')+'">'+escHtml(p.label)+': '+escHtml(p.value)+'</span>';});
-    priceHtml+='</div>';
+    ticker='<div class="dv3-ticker" role="list" aria-label="Market prices">';
+    data.prices.forEach(function(p){
+      var dir=p.dir||(p.change&&(''+p.change).charAt(0)==='-'?'dn':(p.change?'up':'flat'));
+      var arrow=dir==='up'?'\u25B2':(dir==='dn'?'\u25BC':'\u00B7');
+      ticker+='<div class="dv3-ticker-cell" role="listitem">'+
+        '<div class="dv3-ticker-label">'+escHtml(p.label)+'</div>'+
+        '<div class="dv3-ticker-value">'+escHtml(p.value)+'</div>'+
+        (p.change?'<div class="dv3-ticker-change '+dir+'">'+arrow+' '+escHtml(p.change)+'</div>':'')+
+      '</div>';
+    });
+    ticker+='</div>';
+  }
+
+  // Overnight surprise banner — uses data.surprises (array of objects from generator)
+  var surprise='';
+  var sArr=Array.isArray(data.surprises)?data.surprises:[];
+  if(sArr.length){
+    var sNames=sArr.map(function(x){
+      var arrow=x.direction==='up'?'\u25B2':'\u25BC';
+      var pct=Math.abs(Number(x.pct_change)||0).toFixed(1);
+      return escHtml(x.commodity||'')+' '+arrow+' '+pct+'%';
+    });
+    surprise='<div class="dv3-surprise-banner">'+
+      '<span class="surprise-icon">\u26A1</span>'+
+      '<span class="surprise-text"><strong>Overnight surprise'+(sArr.length>1?'s':'')+':</strong> '+sNames.join(' / ')+'</span>'+
+    '</div>';
   }
 
   // Lead paragraph
-  var leadHtml='';
-  if(data.lead){
-    leadHtml='<div class="dv3-today-lead">'+escHtml(data.lead)+'</div>';
-  } else if(data.body){
-    // Fallback for older daily.json format that used data.body
-    var bodyParas=(data.body||'').split('\n\n').filter(Boolean);
-    leadHtml='<div class="dv3-today-lead">'+bodyParas.map(function(p){return escHtml(p);}).join('<br><br>')+'</div>';
+  var lead='';
+  if(data.lead){lead='<p class="dv3-today-lead">'+escHtml(data.lead)+'</p>';}
+  else if(data.body){
+    var paras=(data.body||'').split('\n\n').filter(Boolean);
+    lead='<p class="dv3-today-lead">'+paras.map(escHtml).join('<br><br>')+'</p>';
   }
 
-  // Sections (grains, livestock, energy, macro)
-  var sectionsHtml='';
-  if(data.sections&&data.sections.length){
-    sectionsHtml='<div class="dv3-today-sections">';
-    data.sections.forEach(function(sec){
-      if(!sec.body&&!sec.bottom_line)return;
-      sectionsHtml+=
-        '<div class="dv3-sec">'+
-          '<div class="dv3-sec-label">'+(sec.icon||'')+' '+escHtml(sec.title||'')+'</div>'+
-          '<div class="dv3-sec-body">'+escHtml(sec.body||'')+'</div>'+
-          (sec.bottom_line?'<div class="dv3-sec-bottomline">'+escHtml(sec.bottom_line)+'</div>':'')+
+  // Topbar: one number + daily quote
+  var topbar='';
+  var onum=data.one_number;
+  var q=data.daily_quote||data.quote;
+  if(onum||q){
+    topbar='<div class="dv3-topbar">';
+    if(onum){
+      topbar+='<div class="dv3-one-number">'+
+        '<div class="dv3-one-number-label">\u{1F4CA} The number</div>'+
+        '<div class="dv3-one-number-val">'+escHtml(onum.value||onum.number||'')+'</div>'+
+        '<div class="dv3-one-number-unit">'+escHtml(onum.unit||onum.label||'')+'</div>'+
+        '<div class="dv3-one-number-ctx">'+escHtml(onum.context||onum.ctx||'')+'</div>'+
+      '</div>';
+    }
+    if(q){
+      topbar+='<div class="dv3-quote-card">'+
+        '<div class="dv3-quote-label">\u{1F4AC} Daily quote</div>'+
+        '<p class="dv3-quote-text">\u201C'+escHtml(q.text||q.quote||'')+'\u201D</p>'+
+        '<cite class="dv3-quote-attr">'+escHtml(q.attr||q.attribution||q.author||'')+'</cite>'+
+      '</div>';
+    }
+    topbar+='</div>';
+  }
+
+  // Sparklines (progressive enhancement)
+  var sparks='';
+  if(data.chart_series&&typeof data.chart_series==='object'){
+    var keys=['corn','soybeans','wheat'];
+    var present=keys.filter(function(k){return Array.isArray(data.chart_series[k])&&data.chart_series[k].length>=2;});
+    if(present.length){
+      sparks='<div class="dv3-sparks">';
+      present.forEach(function(k){
+        var series=data.chart_series[k];
+        var last=series[series.length-1];
+        var lastStr=typeof last==='number'?('$'+last.toFixed(2)):String(last);
+        sparks+='<div class="dv3-spark">'+
+          '<div class="dv3-spark-head">'+
+            '<span class="dv3-spark-label">'+k+'</span>'+
+            '<span class="dv3-spark-last">'+lastStr+'</span>'+
+          '</div>'+
+          renderSpark(series,160,28)+
         '</div>';
-    });
-    sectionsHtml+='</div>';
+      });
+      sparks+='</div>';
+    }
   }
 
-  el.innerHTML=
-    '<div class="dv3-today-label"><span>&#x1F4F0;</span>Today\'s Briefing</div>'+
-    '<div class="dv3-today-date">'+fmtDate(data.date)+'</div>'+
-    '<div class="dv3-today-headline">'+escHtml(data.headline)+'</div>'+
-    (data.subheadline?'<div class="dv3-today-sub">'+escHtml(data.subheadline)+'</div>':'')+
-    priceHtml+
-    leadHtml+
-    sectionsHtml;
+  // Sections
+  var sections='';
+  if(data.sections&&data.sections.length){
+    // heat_section is a numeric index in meta (matches archive template)
+    var heatIdx=(data.meta && typeof data.meta.heat_section==='number')?data.meta.heat_section:-1;
+    sections='<div class="dv3-sections">';
+    data.sections.forEach(function(sec,i){
+      if(!sec.body&&!sec.bottom_line&&!sec.farmer_action)return;
+      var classes=['dv3-sec'];
+      if(i===heatIdx)classes.push('dv3-sec--heat');
+      if(sec.overnight_surprise)classes.push('dv3-sec--surprise');
+      var cnv=sec.conviction_level||'';
+      var cnvCls=convictionClass(cnv);
+      sections+='<div class="'+classes.join(' ')+'">'+
+        '<div class="dv3-sec-header">'+
+          (sec.icon?'<span class="dv3-sec-icon">'+escHtml(sec.icon)+'</span>':'')+
+          '<span class="dv3-sec-title">'+escHtml(sec.title||'')+'</span>'+
+          (cnv?'<span class="dv3-sec-cnv dv3-sec-cnv--'+cnvCls+'">'+escHtml(cnv)+' CONVICTION</span>':'')+
+        '</div>'+
+        (sec.body?'<div class="dv3-sec-body">'+escHtml(sec.body)+'</div>':'')+
+        (sec.bottom_line?'<div class="dv3-sec-bottomline">'+escHtml(sec.bottom_line)+'</div>':'')+
+        (sec.farmer_action?'<div class="dv3-sec-action">\u{1F3AF} '+escHtml(sec.farmer_action)+'</div>':'')+
+      '</div>';
+    });
+    sections+='</div>';
+  }
+
+  // TMYK
+  var tmyk='';
+  var t=data.the_more_you_know||data.tmyk;
+  if(t&&(t.body||t.text)){
+    tmyk='<div class="dv3-tmyk">'+
+      '<div class="dv3-tmyk-label">\u{1F9E0} The more you know</div>'+
+      (t.title?'<div class="dv3-tmyk-title">'+escHtml(t.title)+'</div>':'')+
+      '<div class="dv3-tmyk-body">'+escHtml(t.body||t.text||'')+'</div>'+
+    '</div>';
+  }
+
+  // Watch list
+  var watch='';
+  if(data.watch_list&&data.watch_list.length){
+    watch='<div class="dv3-watch">'+
+      '<div class="dv3-watch-label">\u{1F4C5} Today\'s watch list</div>'+
+      '<ul class="dv3-watch-list">';
+    data.watch_list.forEach(function(w){
+      watch+='<li class="dv3-watch-item">'+
+        '<span class="dv3-watch-time">'+escHtml(w.time||'')+'</span>'+
+        '<span class="dv3-watch-desc">'+escHtml(w.desc||'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')+'</span>'+
+      '</li>';
+    });
+    watch+='</ul></div>';
+  }
+
+  // Share row
+  var share='<div class="dv3-share" role="group" aria-label="Share this briefing">'+
+    '<span class="dv3-share-label">Share</span>'+
+    '<button class="dv3-share-btn" data-share="twitter" type="button" aria-label="Post on X">'+
+      '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>'+
+      ' Post'+
+    '</button>'+
+    '<button class="dv3-share-btn" data-share="copy" type="button" aria-label="Copy link to this briefing">\u{1F517} Copy link</button>'+
+    '<button class="dv3-share-btn" data-share="email" type="button" aria-label="Email this briefing">\u2709 Email</button>'+
+  '</div>';
+
+  // Source + permalink
+  var src='<div class="dv3-source">CME futures &middot; EIA energy data &middot; USDA crop data &middot; Auto-compiled at 6:02 AM CT</div>';
+  var perm=iso?'<div class="dv3-perm"><a href="/daily/'+escHtml(iso)+'">Permalink to this briefing \u2192</a></div>':'';
+
+  el.innerHTML=header+ticker+surprise+lead+topbar+sparks+sections+tmyk+watch+share+src+perm;
+
+  // Wire share buttons
+  var btns=el.querySelectorAll('.dv3-share-btn');
+  Array.prototype.forEach.call(btns,function(btn){
+    btn.addEventListener('click',function(){
+      var kind=btn.getAttribute('data-share');
+      var hl=data.headline||'AGSIST Daily Briefing';
+      var d=fmtDate(data.date);
+      if(kind==='twitter'){
+        var text=encodeURIComponent('AGSIST Daily '+d+': '+hl);
+        var url=encodeURIComponent(permalink);
+        window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url,'_blank','noopener,noreferrer');
+      } else if(kind==='copy'){
+        var doCopy=function(){
+          if(navigator.clipboard&&navigator.clipboard.writeText){
+            return navigator.clipboard.writeText(permalink);
+          }
+          return new Promise(function(res,rej){
+            var ta=document.createElement('textarea');
+            ta.value=permalink;ta.style.position='fixed';ta.style.opacity='0';
+            document.body.appendChild(ta);ta.select();
+            try{document.execCommand('copy');res();}catch(e){rej(e);}
+            document.body.removeChild(ta);
+          });
+        };
+        doCopy().then(function(){
+          var orig=btn.innerHTML;
+          btn.innerHTML='\u2713 Copied';
+          setTimeout(function(){btn.innerHTML=orig;},1500);
+        }).catch(function(){
+          prompt('Copy this link:',permalink);
+        });
+      } else if(kind==='email'){
+        var subj=encodeURIComponent('AGSIST Daily '+d+': '+hl);
+        var body=encodeURIComponent(hl+'\n\n'+permalink+'\n\nFrom AGSIST (https://agsist.com/daily)');
+        window.location.href='mailto:?subject='+subj+'&body='+body;
+      }
+    });
+  });
 }
 
-// ── Archive ───────────────────────────────────────────────────────────
+// ── archive ───────────────────────────────────────────────────────────
 function renderArchive(){
   var grid=document.getElementById('dv3-arc-grid');
+  var heroMeta=document.getElementById('dv3-hero-meta');
   if(!grid)return;
 
-  fetch('/data/daily-archive/index.json')
+  fetch('/data/daily-archive/index.json',{cache:'no-store'})
     .then(function(r){return r.ok?r.json():null;})
     .then(function(manifest){
       if(!manifest||!manifest.briefings||!manifest.briefings.length){
         grid.innerHTML='<p style="color:var(--text-muted);font-size:.82rem;grid-column:1/-1">Archive not yet available.</p>';
         return;
       }
+      // Hero meta: briefings published count
+      if(heroMeta){
+        var count=manifest.briefings.length;
+        heroMeta.innerHTML='\u2713 <b>'+count+'</b> briefing'+(count===1?'':'s')+' published &middot; never missed a market day';
+      }
       var entries=manifest.briefings.slice(0,30);
       var html='';
       var dayN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       var monN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       entries.forEach(function(item){
-        var dateOnly=item.date&&item.date.indexOf('T')>-1?item.date.split('T')[0]:item.date;
-        var d=new Date((dateOnly||'')+'T12:00:00');
-        var validDate=d&&!isNaN(d.getTime());
-        var dow=validDate?d.getDay():1;
+        var iso=dateOnly(item.date);
+        var d=new Date((iso||'')+'T12:00:00');
+        var valid=d&&!isNaN(d.getTime());
+        var dow=valid?d.getDay():1;
         var isWkend=dow===0||dow===6||item.market_closed;
-        var shortLabel=validDate?(dayN[dow]+' '+monN[d.getMonth()]+' '+d.getDate()):(item.date_display||item.label||item.date||'');
+        var shortLabel=valid?(dayN[dow]+' '+monN[d.getMonth()]+' '+d.getDate()):(item.date_display||item.label||item.date||'');
         var type=isWkend?'wkend':'wkday';
-        // Archive individual pages don't exist yet — link to /daily for now
-        // TODO: update to /daily/'+dateOnly once archive pages are built
-        html+=
-          '<a href="/daily" class="dv3-arc-card" title="'+escHtml(shortLabel)+' briefing">'+
-            '<div class="dv3-arc-card-head">'+
-              '<span class="dv3-arc-card-date">'+escHtml(shortLabel)+'</span>'+
-              '<span class="dv3-arc-card-badge '+type+'">'+(type==='wkday'?'Market Day':'Weekend')+'</span>'+
-            '</div>'+
-            '<div class="dv3-arc-card-hl">'+(item.headline?escHtml(item.headline):'&#8212;')+'</div>'+
-          '</a>';
+        // FIXED: point to actual archive permalink, not /daily
+        html+='<a href="/daily/'+escHtml(iso)+'" class="dv3-arc-card" title="'+escHtml(shortLabel)+' briefing">'+
+          '<div class="dv3-arc-card-head">'+
+            '<span class="dv3-arc-card-date">'+escHtml(shortLabel)+'</span>'+
+            '<span class="dv3-arc-card-badge '+type+'">'+(type==='wkday'?'Market day':'Weekend')+'</span>'+
+          '</div>'+
+          '<div class="dv3-arc-card-hl">'+(item.headline?escHtml(item.headline):'&mdash;')+'</div>'+
+        '</a>';
       });
       grid.innerHTML=html;
     })
@@ -302,7 +595,7 @@ function renderArchive(){
     });
 }
 
-// ── Subscribe modal ───────────────────────────────────────────────────
+// ── subscribe modal ───────────────────────────────────────────────────
 var modal=document.getElementById('dv3-modal');
 var subBtn=document.getElementById('dv3-sub-btn');
 var closeBtn=document.getElementById('dv3-modal-close');
@@ -323,7 +616,7 @@ if(form){
     fetch(form.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}})
       .then(function(r){
         if(r.ok){
-          form.innerHTML='<p style="color:var(--green);text-align:center;padding:.5rem 0">&#x2713; Subscribed! Watch for your first briefing.</p>';
+          form.innerHTML='<p style="color:var(--green);text-align:center;padding:.5rem 0">\u2713 Subscribed. Watch for your first briefing.</p>';
         } else {
           alert('Something went wrong \u2014 try again or email sig@farmers1st.com');
         }
@@ -334,7 +627,7 @@ if(form){
   });
 }
 
-// ── Load briefing ─────────────────────────────────────────────────────
+// ── load ──────────────────────────────────────────────────────────────
 fetch('/data/daily.json',{cache:'no-store'})
   .then(function(r){return r.ok?r.json():null;})
   .then(renderToday)
