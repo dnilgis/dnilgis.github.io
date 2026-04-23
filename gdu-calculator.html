@@ -17,7 +17,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
 
 <title>GDU Calculator &#8212; Growing Degree Units for Corn &amp; Soybeans | AGSIST</title>
-<meta name="description" content="The most accurate free GDU calculator available. Auto-fetches real accumulated growing degree units from your actual planting date using historical weather data. Track corn and soybean crop stage, project maturity date, and monitor heat unit accumulation for WI and MN.">
+<meta name="description" content="Free GDU calculator that auto-fetches real accumulated growing degree units from your actual planting date using historical weather data. Track corn and soybean crop stage, project black layer, and monitor heat unit accumulation. Works anywhere in the US.">
 <meta name="keywords" content="growing degree unit calculator, GDU calculator corn, GDD calculator, corn GDU tracker, soybean GDU, crop stage calculator, heat unit accumulation, growing degree days Wisconsin, corn maturity calculator, black layer date estimate">
 <meta name="author" content="Sigurd Lindquist">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -26,23 +26,27 @@
 <meta property="og:site_name"    content="AGSIST">
 <meta property="og:locale"       content="en_US">
 <meta property="og:title"        content="GDU Calculator &#8212; Real Accumulated Heat Units from Planting | AGSIST">
-<meta property="og:description"  content="Auto-fetches real GDU accumulation from your planting date using historical weather. Track corn stage, estimate maturity, and project black layer date. Free for WI and MN farmers.">
+<meta property="og:description"  content="Auto-fetches real GDU accumulation from your planting date using historical weather. Track corn stage, estimate maturity, and project black layer. No charge, any US location.">
 <meta property="og:url"          content="https://agsist.com/gdu-calculator">
 <meta property="og:image"        content="https://agsist.com/img/og/agsist.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:site"        content="@agsist">
+<meta name="twitter:creator"     content="@agsist">
 <meta name="twitter:title"       content="GDU Calculator &#8212; Real Accumulated Heat Units | AGSIST">
-<meta name="twitter:description" content="Auto-fetches real GDU accumulation from your planting date. Track corn and soybean stage, project maturity. Free for WI/MN farmers.">
+<meta name="twitter:description" content="Auto-fetches real GDU accumulation from your planting date. Track corn and soybean stage, project maturity. No charge, any US location.">
 <meta name="twitter:image"       content="https://agsist.com/img/og/agsist.jpg">
 
 <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agsist.com/"},{"@type":"ListItem","position":2,"name":"GDU Calculator","item":"https://agsist.com/gdu-calculator"}]}
+</script>
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
   {"@type":"Question","name":"What is a growing degree unit (GDU)?","acceptedAnswer":{"@type":"Answer","text":"A growing degree unit (GDU), also called a growing degree day (GDD), measures daily heat accumulation above a base temperature of 50\u00b0F for corn. Formula: GDU/day = ((min(daily high, 86\u00b0F) + max(daily low, 50\u00b0F)) / 2) - 50. GDUs accumulate daily from planting and determine crop growth stage progression."}},
-  {"@type":"Question","name":"How many GDUs does corn need to reach black layer?","acceptedAnswer":{"@type":"Answer","text":"Corn GDU requirement to physiological maturity (black layer) is approximately (Relative Maturity \u00d7 9) + 375. Example: a 108-day RM hybrid needs roughly 1,347 GDUs. This is a rule of thumb \u2014 always verify with your seed company\u2019s published GDU requirement for your specific hybrid."}},
-  {"@type":"Question","name":"What GDU accumulation does Wisconsin average per season?","acceptedAnswer":{"@type":"Answer","text":"Wisconsin typically accumulates 2,200\u20132,700 GDUs between May 1 and September 30, varying by location and year. Southern Wisconsin averages 2,400\u20132,600 GDUs in a normal season. Northern Wisconsin averages 1,900\u20132,200 GDUs. Corn hybrids should be matched to your location\u2019s typical GDU accumulation."}},
-  {"@type":"Question","name":"What is the difference between GDU and GDD?","acceptedAnswer":{"@type":"Answer","text":"Growing Degree Units (GDU) and Growing Degree Days (GDD) are the same thing \u2014 different names for the same calculation. GDU is the terminology more commonly used in Wisconsin and Minnesota Extension publications. Both use base 50\u00b0F for corn with a maximum cap of 86\u00b0F."}},
+  {"@type":"Question","name":"How many GDUs does corn need to reach black layer?","acceptedAnswer":{"@type":"Answer","text":"Corn GDU requirement to physiological maturity (black layer) is approximately (Relative Maturity \u00d7 22) + 250, per Purdue Extension and Pioneer catalog analysis. Example: a 108-day RM hybrid needs roughly 2,626 GDUs; a 110-day hybrid roughly 2,670. This is a rule of thumb \u2014 always verify with your seed company\u2019s published GDU requirement for your specific hybrid."}},
+  {"@type":"Question","name":"What GDU accumulation does the US Corn Belt average per season?","acceptedAnswer":{"@type":"Answer","text":"May 1 through September 30 GDU accumulation ranges roughly 2,000 (northern Minnesota, Upper Peninsula) to 3,200+ (southern Illinois, Missouri, Kentucky). Central Iowa, Indiana, and Ohio typically accumulate 2,700\u20133,000. Northern Wisconsin and Minnesota run 2,000\u20132,400; southern Wisconsin 2,400\u20132,600. Corn hybrids should be matched to your location\u2019s typical GDU accumulation."}},
+  {"@type":"Question","name":"What is the difference between GDU and GDD?","acceptedAnswer":{"@type":"Answer","text":"Growing Degree Units (GDU) and Growing Degree Days (GDD) are the same thing \u2014 different names for the same calculation. Both use a base temperature of 50\u00b0F for corn with a maximum cap at 86\u00b0F. GDU is the more common term in Corn Belt Extension publications; GDD is used interchangeably."}},
   {"@type":"Question","name":"How do I use this GDU calculator?","acceptedAnswer":{"@type":"Answer","text":"Enter your planting date and click \u2018Fetch Real GDUs\u2019 \u2014 the calculator automatically retrieves historical weather data for your location and computes exact accumulated GDUs from planting to today. Or enter your relative maturity and average daily temperatures for a manual estimate."}}
 ]}
 </script>
@@ -91,7 +95,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 .method-divider { display:flex; align-items:center; gap:.5rem; margin:.75rem 0; }
 .method-divider::before,.method-divider::after { content:''; flex:1; height:1px; background:var(--border); }
-.method-divider span { font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); white-space:nowrap; }
+.method-divider span { font-size:.62rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); white-space:nowrap; }
 
 /* Result rows */
 .r-row { display:flex; justify-content:space-between; align-items:baseline; padding:.3rem 0; border-bottom:1px solid rgba(255,255,255,.04); }
@@ -117,14 +121,14 @@ button,a,[role="button"]{touch-action:manipulation;}
 .prog-track { height:10px; background:var(--border); border-radius:5px; position:relative; overflow:visible; }
 .prog-fill { height:100%; border-radius:5px; background:linear-gradient(90deg,var(--green) 0%,var(--gold) 65%,#e05c5c 100%); transition:width .6s ease; }
 .prog-marker { position:absolute; top:-5px; width:4px; height:20px; background:#fff; border-radius:2px; transition:left .6s ease; box-shadow:0 0 4px rgba(0,0,0,.4); }
-.prog-labels { display:flex; justify-content:space-between; font-size:.58rem; color:var(--text-muted); margin-top:.4rem; }
+.prog-labels { display:flex; justify-content:space-between; font-size:.62rem; color:var(--text-muted); margin-top:.4rem; }
 
 /* Maturity dates */
 .mat-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem; margin:.75rem 0; }
 .mat-card { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:.65rem .6rem; text-align:center; }
-.mat-card-lbl { font-size:.56rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.25rem; }
+.mat-card-lbl { font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.25rem; }
 .mat-card-val { font-family:'JetBrains Mono',monospace; font-size:.95rem; font-weight:800; color:var(--gold); line-height:1.2; }
-.mat-card-sub { font-size:.58rem; color:var(--text-muted); margin-top:.15rem; }
+.mat-card-sub { font-size:.62rem; color:var(--text-muted); margin-top:.15rem; }
 
 /* ── MILESTONES ───────────────────────────────────────────────────────── */
 .milestones-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:.5rem; margin-top:.75rem; }
@@ -134,7 +138,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 .ms-icon { font-size:.9rem; margin-bottom:.15rem; }
 .ms-stage { font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:900; color:var(--text); }
 .ms-gdu { font-size:.62rem; color:var(--text-muted); margin:.1rem 0; }
-.ms-desc { font-size:.6rem; color:var(--text-dim); line-height:1.3; }
+.ms-desc { font-size:.62rem; color:var(--text-dim); line-height:1.3; }
 
 /* ── REFERENCE TABLES ─────────────────────────────────────────────────── */
 .ref-layout { display:grid; grid-template-columns:minmax(0,1fr); gap:1.25rem; margin-top:1.25rem; }
@@ -142,7 +146,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 .ref-table-wrap { overflow-x:auto; }
 .ref-table { width:100%; border-collapse:collapse; font-size:.74rem; }
-.ref-table th { background:rgba(230,176,66,.1); color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:.6rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.45rem .55rem; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; }
+.ref-table th { background:rgba(230,176,66,.1); color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.45rem .55rem; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; }
 .ref-table td { padding:.38rem .55rem; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-dim); font-size:.74rem; }
 .ref-table td:first-child { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--gold); }
 .ref-table td:nth-child(2) { font-family:'JetBrains Mono',monospace; color:var(--text); }
@@ -158,7 +162,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 /* WI avg table */
 .wi-avg-table { width:100%; border-collapse:collapse; font-size:.74rem; }
-.wi-avg-table th { background:rgba(230,176,66,.1); color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:.6rem; padding:.4rem .5rem; text-align:left; border-bottom:1px solid var(--border); }
+.wi-avg-table th { background:rgba(230,176,66,.1); color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:.62rem; padding:.4rem .5rem; text-align:left; border-bottom:1px solid var(--border); }
 .wi-avg-table td { padding:.35rem .5rem; border-bottom:1px solid rgba(255,255,255,.04); }
 .wi-avg-table td:first-child { color:var(--text); font-weight:600; }
 .wi-avg-table td:nth-child(4) { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--gold); }
@@ -175,7 +179,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 
 /* ── LIVE BADGE ───────────────────────────────────────────────────────── */
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-.live-badge { display:inline-flex; align-items:center; gap:.3rem; font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--green); background:rgba(58,139,60,.1); border:1px solid rgba(58,139,60,.3); border-radius:20px; padding:.15rem .5rem; }
+.live-badge { display:inline-flex; align-items:center; gap:.3rem; font-size:.62rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--green); background:rgba(58,139,60,.1); border:1px solid rgba(58,139,60,.3); border-radius:20px; padding:.15rem .5rem; }
 .live-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; display:inline-block; }
 
 /* ── RESPONSIVE ───────────────────────────────────────────────────────── */
@@ -198,9 +202,9 @@ button,a,[role="button"]{touch-action:manipulation;}
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &rarr; GDU Calculator</nav>
 
 <div class="gdu-hero">
-  <div class="gdu-eyebrow">&#127813; Heat Unit Tracker &middot; Real Weather Data &middot; WI &amp; MN</div>
+  <div class="gdu-eyebrow">&#127813; Heat Unit Tracker &middot; Real Weather Data &middot; Any US Location</div>
   <h1>GDU Calculator</h1>
-  <p>The only free GDU calculator that auto-fetches <em>actual</em> accumulated heat units from your planting date using real historical weather data &mdash; no manual temperature entry needed. Track corn and soybean crop stage, project black layer date, and monitor season progress by field. Built for Wisconsin and Minnesota farmers.</p>
+  <p>Auto-fetches <em>actual</em> accumulated heat units from your planting date using real historical weather data &mdash; no manual temperature entry needed. Track corn and soybean crop stage, project black layer date, and monitor season progress by field. Works anywhere in the continental US.</p>
 </div>
 
 <div class="gdu-layout">
@@ -217,7 +221,7 @@ button,a,[role="button"]{touch-action:manipulation;}
       <div class="f-group">
         <label class="f-label" for="g-rm" id="rm-lbl">Relative Maturity (RM days)</label>
         <input class="f-input" id="g-rm" type="number" value="108" min="70" max="135" step="1">
-        <div class="f-hint" id="rm-hint">Corn 80&ndash;130 RM &middot; GDU to maturity &asymp; RM &times; 9 + 375</div>
+        <div class="f-hint" id="rm-hint">Corn 80&ndash;130 RM &middot; GDU to black layer &asymp; RM &times; 22 + 250</div>
       </div>
 
       <div class="f-group">
@@ -248,7 +252,7 @@ button,a,[role="button"]{touch-action:manipulation;}
       <button class="fetch-btn" id="g-fetch-btn">
         <span>&#9889;</span> Fetch Real GDUs from Weather Data
       </button>
-      <div class="fetch-status" id="g-fetch-status">Ready &mdash; enter planting date and click above</div>
+      <div class="fetch-status" id="g-fetch-status" role="status" aria-live="polite">Ready &mdash; enter planting date and click above</div>
 
       <div class="method-divider"><span>or enter manually</span></div>
 
@@ -257,7 +261,7 @@ button,a,[role="button"]{touch-action:manipulation;}
         <select class="f-select" id="g-method">
           <option value="avg">Average Daily High &amp; Low</option>
           <option value="cumulative">Enter Cumulative GDUs</option>
-          <option value="wi_hist">WI 30-Year Historical Average</option>
+          <option value="wi_hist">Upper Midwest 30-Year Historical Avg (WI/MN reference)</option>
         </select>
       </div>
 
@@ -283,13 +287,13 @@ button,a,[role="button"]{touch-action:manipulation;}
       </div>
 
       <div id="g-hist-note" style="display:none">
-        <div class="info-box green" style="margin-top:.5rem"><strong>WI Historical Average:</strong> Using 30-year NOAA normals for Wisconsin &mdash; ~7.5 GDU/day in May, 15.5 in June, 21.5 in July, 19.5 in August, 10.0 in September.</div>
+        <div class="info-box green" style="margin-top:.5rem"><strong>Upper Midwest reference:</strong> 30-year NOAA normals for Wisconsin &mdash; ~7.5 GDU/day in May, 15.5 in June, 21.5 in July, 19.5 in August, 10.0 in September. Central Corn Belt runs ~15&ndash;20% higher. If you&rsquo;re outside the Upper Midwest, use the &ldquo;Fetch Real GDUs&rdquo; feature instead for location-accurate data.</div>
       </div>
     </div>
 
     <!-- WI Monthly Averages -->
     <div class="gdu-card">
-      <div class="gdu-card-title">&#128197; WI Avg GDU/Day by Month</div>
+      <div class="gdu-card-title">&#128197; Upper Midwest GDU Reference (WI example)</div>
       <table class="wi-avg-table">
         <thead><tr><th>Month</th><th>Avg Hi</th><th>Avg Lo</th><th>GDU/Day</th><th>Monthly</th></tr></thead>
         <tbody>
@@ -300,7 +304,7 @@ button,a,[role="button"]{touch-action:manipulation;}
           <tr><td>September</td><td>70&deg;F</td><td>50&deg;F</td><td>10.0</td><td>300</td></tr>
         </tbody>
       </table>
-      <div class="f-hint" style="margin-top:.4rem">Southern WI runs ~5&ndash;8% higher; northern WI lower. Source: NOAA 30-year normals.</div>
+      <div class="f-hint" style="margin-top:.4rem">WI 30-year NOAA normals shown as one reference. Southern WI runs ~5&ndash;8% higher; central Corn Belt (IA/IL/IN) runs ~15&ndash;20% higher; Northern Plains similar to WI. For your exact location, use the Fetch Real GDUs button above.</div>
     </div>
   </div>
 
@@ -314,7 +318,7 @@ button,a,[role="button"]{touch-action:manipulation;}
           <span class="live-badge" id="live-badge" style="display:none"><span class="live-dot"></span>Live data</span>
         </div>
         <div class="gauge-arc">
-          <svg viewBox="0 0 200 108" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 200 108" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Season progress to physiological maturity (arc gauge)">
             <path d="M 18 100 A 82 82 0 0 1 182 100" fill="none" stroke="var(--border)" stroke-width="13" stroke-linecap="round"/>
             <path id="arc-fill" d="M 18 100 A 82 82 0 0 1 182 100" fill="none" stroke="var(--gold)" stroke-width="13" stroke-linecap="round" stroke-dasharray="257" stroke-dashoffset="257" style="transition:stroke-dashoffset .7s ease,stroke .4s"/>
           </svg>
@@ -427,12 +431,12 @@ button,a,[role="button"]{touch-action:manipulation;}
     </div>
     <div class="formula-card">
       <div class="formula-card-title">RM &rarr; GDU Rule of Thumb</div>
-      <p>GDUs to black layer &asymp; <code>(RM &times; 9) + 375</code><br><br>
-      Example: 108-day hybrid &asymp; <strong>1,347 GDUs</strong>. Always verify with your seed company&rsquo;s published hybrid-specific GDU requirement.</p>
+      <p>GDUs to black layer &asymp; <code>(RM &times; 22) + 250</code><br><br>
+      Example: 108-day hybrid &asymp; <strong>2,626 GDUs</strong>; 110-day &asymp; 2,670. Based on Purdue/Pioneer catalog analysis. Always verify with your seed company&rsquo;s published hybrid-specific GDU requirement.</p>
     </div>
     <div class="formula-card">
       <div class="formula-card-title">Soybean Notes</div>
-      <p>Soybeans use the same base formula but are <strong>photoperiod-sensitive</strong> &mdash; flowering is triggered by day length (short-day plant), not GDUs alone. Maturity group 2.0&ndash;3.5 typical for WI/MN.</p>
+      <p>Soybeans use the same base formula but are <strong>photoperiod-sensitive</strong> &mdash; flowering is triggered by day length (short-day plant), not GDUs alone. Maturity groups range from 0.5 (North Dakota) to 5.5 (Gulf Coast); check your local Extension for recommended MGs.</p>
     </div>
     <div class="formula-card">
       <div class="formula-card-title">Data Source</div>
@@ -454,8 +458,8 @@ button,a,[role="button"]{touch-action:manipulation;}
 </div>
 
 <div class="gdu-source">
-  Formula: USDA / University of Wisconsin-Extension &middot; Weather data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> (ERA5 archive) &middot;
-  Stage data: UW-Extension &amp; UMN Extension &middot;
+  Formula: USDA / Purdue / UW-Extension &middot; Weather data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> (ERA5 archive) &middot;
+  Stage data: Iowa State, Purdue, UW-Extension &middot;
   <a href="/">&#8592; AGSIST Dashboard</a> &middot;
   Built by <a href="/about">Sigurd Lindquist</a> &middot; <a href="tel:+17157972428">715-797-2428</a>
 </div>
@@ -528,25 +532,25 @@ var userLat=null, userLon=null;
 
 /* ─── CROP PILLS ────────────────────────────────────────────────────── */
 document.getElementById('pill-corn').addEventListener('click',function(){
+  if(crop==='corn')return; // no-op if already selected
   crop='corn';
   document.getElementById('pill-corn').classList.add('active');
   document.getElementById('pill-bean').classList.remove('active');
   document.getElementById('rm-lbl').textContent='Relative Maturity (RM days)';
-  document.getElementById('rm-hint').textContent='Corn 80\u2013130 RM \u00b7 GDU to maturity \u2248 RM \u00d7 9 + 375';
+  document.getElementById('rm-hint').textContent='Corn 80\u2013130 RM \u00b7 GDU to black layer \u2248 RM \u00d7 22 + 250';
   document.getElementById('g-rm').value=108;
   document.getElementById('ms-title').textContent='\uD83C\uDF3D Key Growth Stage Milestones';
-  realAccum=null;
   calcGDU();
 });
 document.getElementById('pill-bean').addEventListener('click',function(){
+  if(crop==='bean')return;
   crop='bean';
   document.getElementById('pill-bean').classList.add('active');
   document.getElementById('pill-corn').classList.remove('active');
   document.getElementById('rm-lbl').textContent='Maturity Group (e.g. 3.0)';
-  document.getElementById('rm-hint').textContent='WI/MN typical: MG 2.0\u20133.5 \u00b7 GDU to maturity \u2248 MG \u00d7 500 + 800';
+  document.getElementById('rm-hint').textContent='MG 0.5\u20135.5 range \u00b7 GDU to maturity \u2248 MG \u00d7 500 + 800';
   document.getElementById('g-rm').value=3;
   document.getElementById('ms-title').textContent='\uD83C\uDF3F Key Growth Stage Milestones';
-  realAccum=null;
   calcGDU();
 });
 
@@ -556,7 +560,6 @@ document.getElementById('g-method').addEventListener('change',function(){
   document.getElementById('g-avg-inputs').style.display=m==='avg'?'block':'none';
   document.getElementById('g-cum-inputs').style.display=m==='cumulative'?'block':'none';
   document.getElementById('g-hist-note').style.display=m==='wi_hist'?'block':'none';
-  realAccum=null;
   calcGDU();
 });
 
@@ -649,9 +652,19 @@ document.getElementById('g-fetch-btn').addEventListener('click',function(){
 });
 
 /* ─── MAIN CALCULATION ──────────────────────────────────────────────── */
-['g-rm','g-plant','g-today','g-hi','g-lo','g-cumgdu'].forEach(function(id){
+// Inputs that INVALIDATE real weather data (dates force refetch)
+['g-plant','g-today'].forEach(function(id){
   var el=document.getElementById(id);
-  if(el)el.addEventListener('input',function(){realAccum=null;calcGDU();});
+  if(el)el.addEventListener('input',function(){
+    realAccum=null;
+    var badge=document.getElementById('live-badge');if(badge)badge.style.display='none';
+    calcGDU();
+  });
+});
+// Inputs that DO NOT invalidate real weather data (RM, manual fields)
+['g-rm','g-hi','g-lo','g-cumgdu'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el)el.addEventListener('input',calcGDU);
 });
 
 function calcGDU(){
@@ -694,7 +707,7 @@ function calcGDU(){
   var stages=crop==='corn'?CORN_STAGES:BEAN_STAGES;
   var gduTarget;
   if(crop==='corn'){
-    gduTarget=Math.round(rm*9+375);
+    gduTarget=Math.round(rm*22+250);
   } else {
     gduTarget=Math.round(rm*500+800);
     gduTarget=Math.min(Math.max(gduTarget,1600),2400);
@@ -749,15 +762,15 @@ function calcGDU(){
 /* ─── MILESTONES ────────────────────────────────────────────────────── */
 function renderMilestones(stages,accum){
   var keyStages=stages.filter(function(st){return st.key;});
-  var html=keyStages.map(function(st){
+  // Find the last-reached key stage; mark it as "current"
+  var currentIdx=-1;
+  for(var k=0;k<keyStages.length;k++){if(accum>=keyStages[k].gdu)currentIdx=k;}
+  var html=keyStages.map(function(st,idx){
     var reached=accum>=st.gdu;
-    var isCurrent=accum>=st.gdu&&(function(){
-      var idx=stages.indexOf(st);
-      return idx===stages.length-1||accum<stages[idx+1].gdu;
-    })();
+    var isCurrent=idx===currentIdx;
     var cls='ms'+(isCurrent?' current':reached?' reached':'');
     return '<div class="'+cls+'">'
-      +'<div class="ms-icon">'+(reached?'&#10003;':st.icon)+'</div>'
+      +'<div class="ms-icon">'+(isCurrent?st.icon:reached?'&#10003;':st.icon)+'</div>'
       +'<div class="ms-stage">'+st.s+'</div>'
       +'<div class="ms-gdu">'+st.gdu.toLocaleString()+' GDU</div>'
       +'<div class="ms-desc">'+st.desc+'</div>'
