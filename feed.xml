@@ -5,13 +5,26 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Apr 2026 12:00:56 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2026 12:00:57 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>NATURAL GAS SPIKES AS GRAINS HOLD STEADY</title>
+      <link>https://agsist.com/daily/2026-04-23</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-23</guid>
+      <pubDate>Thu, 23 Apr 2026 05:00:00 -0600</pubDate>
+      <description>Grain futures drifted in narrow ranges Thursday as corn reached $4.64 per bushel and December corn climbed to $4.84. Natural gas provided the day's fireworks with a 5.5% surge to $2.87, breaking a string of quiet energy sessions. Planting pressure kept crop futures anchored despite decent demand underneath.
+Energy volatility returns while crop futures mark time during planting season.
+• Grains Mark Time
+• Livestock Pressure
+• Energy Volatility Returns
+  → Lock remaining propane and diesel if natural gas holds above $2.75 through Friday close.
+Read more: https://agsist.com/daily/2026-04-23</description>
+    </item>
     <item>
       <title>GRAINS DRIFT AS PLANTING PRESSURE MOUNTS</title>
       <link>https://agsist.com/daily/2026-04-22</link>
@@ -435,21 +448,6 @@ Soybeans follow meal higher while precious metals crater on dollar strength.
 • ENERGY &amp; INPUTS
   → Watch for diesel price drops in 1-2 weeks — good timing for spring fieldwork prep.
 Read more: https://agsist.com/daily/2026-03-20</description>
-    </item>
-    <item>
-      <title>ENERGY SHOCK LIFTS GRAINS AS NATGAS ROCKETS 8.4%</title>
-      <link>https://agsist.com/daily/2026-03-19</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-19</guid>
-      <pubDate>Thu, 19 Mar 2026 05:00:00 -0600</pubDate>
-      <description>Energy markets exploded overnight with natural gas up 8.4% and crude jumping $5.50 to $97.75 — the biggest energy shock in months. Corn responded with a 11¢ rally to $4.63, wheat jumped 19¼¢, and soybean meal surged 2.8% as markets price in higher fertilizer and diesel costs. With planting season weeks away, this energy surge couldn't come at a worse time for input planning.
-Crude up $5+ overnight sends input costs soaring while corn rallies on production concerns.
-• GRAINS &amp; OILSEEDS
-  → Lock diesel fuel for spring work immediately — prices climbing 15-20¢/gallon this week.
-• LIVESTOCK &amp; DAIRY
-  → Cattle feeders should consider locking Q2 margins — energy rally supports beef values.
-• ENERGY &amp; INPUTS
-  → Secure remaining nitrogen needs immediately — prices climbing $50-75/ton this week.
-Read more: https://agsist.com/daily/2026-03-19</description>
     </item>
   </channel>
 </rss>

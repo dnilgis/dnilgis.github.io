@@ -1,6 +1,17 @@
 {
   "briefings": [
     {
+      "date": "2026-04-23",
+      "date_display": "Thursday, April 23, 2026",
+      "headline": "NATURAL GAS SPIKES AS GRAINS HOLD STEADY",
+      "teaser": "Gas spikes 5.5% while corn and beans treade water in planting season doldrums.",
+      "market_mood": "mixed",
+      "surprise_count": 1,
+      "sections": 3,
+      "url": "/daily/2026-04-23",
+      "market_closed": false
+    },
+    {
       "date": "2026-04-22",
       "date_display": "Wednesday, April 22, 2026",
       "headline": "GRAINS DRIFT AS PLANTING PRESSURE MOUNTS",
@@ -429,6 +440,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-22T12:00:56.414338+00:00",
-  "count": 41
+  "updated": "2026-04-23T12:00:56.913851+00:00",
+  "count": 42
 }
