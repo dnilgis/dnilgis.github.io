@@ -1,47 +1,45 @@
 #!/usr/bin/env python3
 """
-AGSIST Daily Briefing Generator — v3.5
+AGSIST Daily Briefing Generator — v3.6
 ═══════════════════════════════════════════════════════════════════
 Generates the daily agricultural intelligence briefing via Claude API.
 Runs every morning at 5:45 AM CT via GitHub Actions (7 days/week).
 
-v3.5 changes (2026-04-17):
-  - QUOTE POOL: Reads from data/quote-pool.json instead of in-file
-    QUOTE_BANK. Never emits "Unknown" attributions. The schema
-    validator will fail the workflow if a filler attribution leaks
-    through.
-  - NATIONAL SCOPE: Removed all "Wisconsin and Minnesota" language —
-    AGSIST serves US grain producers. Voice and farmer-action prompts
-    updated to reflect national audience.
-  - NO EM-DASH RULE: Prompt now explicitly bans em dashes (U+2014)
-    and en dashes (U+2013) in generated prose. Periods, commas, or
-    parentheses instead. Post-generation validation catches drift.
-  - FLEXIBLE SECTIONS: Minimum 2 sections instead of a fixed 4.
-    Quiet days collapse naturally. Macro bucket folds into adjacent
-    sections when nothing's happening.
-  - CONDITIONAL FARMER ACTIONS: Generic boilerplate like "lock in
-    diesel when prices soften" is explicitly disallowed. Action is
-    omitted unless tied to a specific, thresholded recommendation.
-  - ONE_NUMBER STRICTER: Must be a number that is either surprising
-    on its own, or illuminated by meaningful context. Trivial
-    non-events (like "down 0.2%") must be passed over in favor of a
-    streak stat or context figure.
-  - YESTERDAY'S TMYK EXCLUSION: Strengthened past-briefing prompt so
-    the model cannot repeat a topic from the last 3 days.
-  - CANONICAL FIELD NAMES: Output uses daily_quote, the_more_you_know,
-    one_number, watch_list exclusively. Matches data/quote-pool.json
-    and scripts/daily_schema.py.
+v3.6 changes (2026-04-20):
+  - CHART SERIES: briefing["chart_series"] built post-generation from
+    the last ~10 days of archive JSONs (corn / soybeans / wheat).
+    Powers sparklines on daily.html and archive pages.
+  - LOCKED PRICES PERSISTED: briefing["locked_prices"] is now written
+    to daily.json and every archive JSON so chart_series can be
+    reconstructed for any future day.
+  - ARCHIVE HTML HYGIENE: generate_archive_html() emits pages with:
+    * GA tag (G-6KXCTD5Z9H)
+    * viewport-fit=cover + theme-color
+    * <meta name="author" content="Sigurd Lindquist">
+    * loader.js with defer
+    * /components/styles.css?v=10 (versioned)
+    * Twitter card + proper OG image meta
+    * Favicons matching main site (/img/favicon* + manifest.json)
+    * skip-link target #main (matches site standard)
+    * Inter font removed from Google Fonts URL
+  - SHARE BUTTONS: every archive page gets Post / Copy link / Email
+    buttons wired inline. Identical pattern to daily.html.
+  - SPARKLINE RENDER: when chart_series is present, archive HTML
+    emits a pre-rendered SVG row (no JS fetch needed).
+  - OG IMAGE HOOK: og:image defaults to /img/og/agsist.jpg. When the
+    agsist-og Worker ships, swap the OG_IMAGE_BASE constant to
+    https://agsist-og.dnilgis.workers.dev/og/ and archives auto-use
+    per-day images (agsist-og/<date>.png).
 
-Data pipeline:
-  1. Read /data/prices.json (yfinance, fetched every 30 min including weekends)
-  2. Detect weekend/holiday — adjust prompt accordingly
-  3. Load last 3 /data/daily-archive/DATE.json for continuity
-  4. Pick today's quote from /data/quote-pool.json
-  5. Fetch ag RSS feeds
-  6. Call Claude API
-  7. Validate output against source prices + schema
-  8. Write /data/daily.json
-  9. Archive: /data/daily-archive/DATE.json + /daily/DATE.html + index.json
+v3.5 changes (2026-04-17):
+  - QUOTE POOL from data/quote-pool.json; filler attribution rejected.
+  - NATIONAL SCOPE; no Wisconsin/Minnesota language in prompt.
+  - NO EM-DASH RULE enforced in prompt + validator.
+  - FLEXIBLE SECTIONS (2–5 instead of fixed 4).
+  - CONDITIONAL FARMER ACTIONS (thresholds required or omit).
+  - STRICTER one_number (no trivial non-events).
+  - TMYK topic exclusion over last 3 days.
+  - CANONICAL FIELD NAMES (daily_quote / the_more_you_know / one_number / watch_list).
 
 Env vars required:
   ANTHROPIC_API_KEY
@@ -77,6 +75,11 @@ OUTPUT_PATH = REPO_ROOT / "data" / "daily.json"
 QUOTE_POOL_PATH = REPO_ROOT / "data" / "quote-pool.json"
 ANTHROPIC_API = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-sonnet-4-20250514"
+
+# When the agsist-og Worker ships, change to:
+#   OG_IMAGE_BASE = "https://agsist-og.dnilgis.workers.dev/og/"
+# and og_image_url will become {base}{date_iso}.png. Until then, generic.
+OG_IMAGE_BASE = None  # None => use /img/og/agsist.jpg fallback
 
 SURPRISE_THRESHOLDS = {
     "corn":      1.5,
@@ -132,7 +135,7 @@ AG_RSS_FEEDS = [
     "https://www.reuters.com/arc/outboundfeeds/v3/all/tag%3Aagriculture/?outputType=xml&size=10",
 ]
 
-FILLER_ATTRIBUTIONS = {"unknown", "anonymous", "n/a", "", "—", "-"}
+FILLER_ATTRIBUTIONS = {"unknown", "anonymous", "n/a", "", "\u2014", "\u2013", "-"}
 
 # ═══════════════════════════════════════════════════════════════════
 # WEEKEND / HOLIDAY DETECTION
@@ -266,10 +269,6 @@ def get_todays_quote():
     """
     Pick today's quote from data/quote-pool.json. Seeded by day-of-year
     so the same quote shows on every run within the same day.
-
-    Filters out any "Unknown" / "Anonymous" attributions before selection,
-    even if they slip into the pool file. The schema validator will also
-    catch this downstream, but we want to avoid emitting them at all.
     """
     if not QUOTE_POOL_PATH.exists():
         print(f"  [warn] quote pool not found at {QUOTE_POOL_PATH} — using fallback", file=sys.stderr)
@@ -289,7 +288,6 @@ def get_todays_quote():
         }
 
     quotes = pool.get("quotes", [])
-    # Reject any quote with a filler attribution
     quotes = [
         q for q in quotes
         if q.get("text") and q.get("attribution")
@@ -325,7 +323,7 @@ def http_get(url, timeout=10):
             return None
     else:
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "AGSIST-Daily/3.5"})
+            req = urllib.request.Request(url, headers={"User-Agent": "AGSIST-Daily/3.6"})
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.read().decode("utf-8", errors="replace")
         except Exception as e:
@@ -464,7 +462,6 @@ def load_past_dailies(num_days=3):
                 mood          = b.get("meta", {}).get("market_mood", "")
                 surprises     = b.get("surprises", [])
                 surprise_names = [s.get("commodity","") + f" {s.get('pct_change',0):+.1f}%" for s in surprises[:4]]
-                # canonical field first, then legacy fallbacks
                 tmyk = b.get("the_more_you_know") or b.get("tmyk") or {}
                 tmyk_title = tmyk.get("title", "")
                 if tmyk_title:
@@ -498,6 +495,66 @@ def load_past_dailies(num_days=3):
         "Do not recount yesterday's story as if it were fresh news.\n\n"
     )
     return header + "\n\n".join(blocks), past_tmyk_topics
+
+
+def build_chart_series(today_locked_prices, num_days=9):
+    """
+    Assemble rolling grain price series (corn, soybeans, wheat) from archive
+    JSONs plus today's locked_prices. Returns dict like:
+        {"corn": [4.49, 4.50, ..., 4.58], "soybeans": [...], "wheat": [...]}
+    Values in dollars, rounded to 2 decimals.
+
+    Requires archive JSONs to carry `locked_prices` (added in v3.6). Days
+    archived before v3.6 are silently skipped; sparklines just start shorter.
+    Series with fewer than 2 points are dropped — daily.html hides them
+    automatically.
+    """
+    archive_dir = REPO_ROOT / "data" / "daily-archive"
+    index_path = archive_dir / "index.json"
+    if not index_path.exists():
+        return {}
+
+    try:
+        with open(index_path) as f:
+            idx = json.load(f)
+    except Exception:
+        return {}
+
+    entries = idx.get("briefings", [])
+    today_iso = datetime.now().strftime("%Y-%m-%d")
+    past = sorted(
+        [e for e in entries if e.get("date") and e["date"] != today_iso],
+        key=lambda e: e["date"]
+    )[-num_days:]
+
+    # External key -> source key in locked_prices
+    key_map = {"corn": "corn", "soybeans": "beans", "wheat": "wheat"}
+    series = {k: [] for k in key_map}
+
+    for entry in past:
+        date_iso = entry.get("date", "")
+        json_path = archive_dir / f"{date_iso}.json"
+        if not json_path.exists():
+            continue
+        try:
+            with open(json_path) as f:
+                b = json.load(f)
+            lp = b.get("locked_prices", {})
+            for ser_key, src_key in key_map.items():
+                v = lp.get(src_key)
+                if v and v > 0:
+                    series[ser_key].append(round(float(v), 2))
+        except Exception:
+            continue
+
+    # Append today
+    for ser_key, src_key in key_map.items():
+        v = today_locked_prices.get(src_key)
+        if v and v > 0:
+            series[ser_key].append(round(float(v), 2))
+
+    # Drop series that can't render a sparkline
+    return {k: v for k, v in series.items() if len(v) >= 2}
 
 
 def fetch_ag_news():
@@ -811,12 +868,10 @@ def validate_briefing(briefing, locked_prices):
     for sec in briefing.get("sections", []):
         all_text.append(sec.get("body", ""))
         all_text.append(sec.get("bottom_line", ""))
-    # canonical + legacy for safety
     tmyk = briefing.get("the_more_you_know") or briefing.get("tmyk") or {}
     all_text.append(tmyk.get("body", ""))
     full_text = " ".join(all_text)
 
-    # Em-dash / en-dash detection
     em_count = full_text.count("\u2014")
     en_count = full_text.count("\u2013")
     if em_count > 0:
@@ -824,19 +879,16 @@ def validate_briefing(briefing, locked_prices):
     if en_count > 0:
         warnings.append(f"En dash (U+2013) found {en_count} times. Prompt rule violation.")
 
-    # WI/MN scope creep
     lower = full_text.lower()
     for phrase in ("wisconsin", "minnesota", "wi/mn", "wi and mn"):
         if phrase in lower:
             warnings.append(f"Geographic scope violation: '{phrase}' found. AGSIST is national.")
 
-    # Quote attribution filler check
     q = briefing.get("daily_quote") or briefing.get("quote") or {}
     attr = (q.get("attribution") or "").strip().lower()
     if attr in FILLER_ATTRIBUTIONS:
         warnings.append(f"daily_quote.attribution is filler ({q.get('attribution')!r}).")
 
-    # Price invention check
     dollar_pattern = re.compile(r'\$([0-9,]+(?:\.[0-9]+)?)')
     found_values = []
     for match in dollar_pattern.finditer(full_text):
@@ -874,7 +926,38 @@ def validate_briefing(briefing, locked_prices):
 
 
 # ═══════════════════════════════════════════════════════════════════
-# ARCHIVE (unchanged from v3.4 — same HTML output)
+# SPARKLINE RENDERING (used by archive HTML template)
+# ═══════════════════════════════════════════════════════════════════
+
+def render_sparkline_svg(series, width=180, height=32):
+    """Inline SVG sparkline. Green if up, red if down. Filled area + stroke."""
+    if not series or len(series) < 2:
+        return ""
+    mn, mx = min(series), max(series)
+    rng = (mx - mn) or 1
+    p = 3
+    step = (width - p * 2) / (len(series) - 1)
+    pts = [(p + i * step, height - p - ((v - mn) / rng) * (height - p * 2))
+           for i, v in enumerate(series)]
+    first, last = series[0], series[-1]
+    stroke = "#4aab4c" if last >= first else "#e05a42"
+    fill = "rgba(74,171,76,.14)" if last >= first else "rgba(224,90,66,.14)"
+    pts_str = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+    last_x, last_y = pts[-1]
+    area_pts = pts_str + f" {last_x:.1f},{height} {p},{height}"
+    return (
+        f'<svg viewBox="0 0 {width} {height}" preserveAspectRatio="none" '
+        f'aria-hidden="true" style="width:100%;height:30px;display:block">'
+        f'<polyline points="{area_pts}" fill="{fill}" stroke="none"/>'
+        f'<polyline points="{pts_str}" fill="none" stroke="{stroke}" '
+        f'stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>'
+        f'<circle cx="{last_x:.1f}" cy="{last_y:.1f}" r="2" fill="{stroke}"/>'
+        f'</svg>'
+    )
+
+
+# ═══════════════════════════════════════════════════════════════════
+# ARCHIVE HTML (v3.6 — hygiene + share + sparklines + OG)
 # ═══════════════════════════════════════════════════════════════════
 
 ARCHIVE_JSON_DIR = REPO_ROOT / "data" / "daily-archive"
@@ -900,6 +983,30 @@ def html_esc_preserve_strong(s):
     return "".join(result)
 
 
+def js_esc(s):
+    """Escape string for embedding inside a single-quoted JS string literal."""
+    if s is None:
+        return ""
+    return (str(s)
+            .replace("\\", "\\\\")
+            .replace("'", "\\'")
+            .replace("\n", " ")
+            .replace("\r", " ")
+            .replace("\u2028", " ")
+            .replace("\u2029", " "))
+
+
+def og_image_for(date_iso):
+    """Return the OG image URL for a given date.
+
+    When OG_IMAGE_BASE is set (the agsist-og Cloudflare Worker is live),
+    emits a per-day image URL. Until then, falls back to the generic image.
+    """
+    if OG_IMAGE_BASE:
+        return f"{OG_IMAGE_BASE}{date_iso}.png"
+    return "https://agsist.com/img/og/agsist.jpg"
+
+
 def generate_archive_html(briefing, date_iso):
     date_display = briefing.get("date", date_iso)
     headline = html_esc(briefing.get("headline", "AGSIST Daily Briefing"))
@@ -911,6 +1018,12 @@ def generate_archive_html(briefing, date_iso):
     surprises = briefing.get("surprises", [])
     surprise_count = meta.get("overnight_surprises_count", 0)
     is_weekend_brief = briefing.get("market_closed", False)
+    gen_at = briefing.get("generated_at", "")
+
+    og_image_url = og_image_for(date_iso)
+    og_description_raw = briefing.get("teaser") or briefing.get("lead") or briefing.get("subheadline") or "AGSIST Daily morning market briefing"
+    og_description = html_esc(og_description_raw[:180])
+    desc_escaped = html_esc(lead[:160]) if lead else og_description
 
     surprise_html = ""
     if surprise_count > 0 and not is_weekend_brief:
@@ -944,6 +1057,33 @@ def generate_archive_html(briefing, date_iso):
             f'color:{mc[0]};background:{mc[1]};border:1px solid {mc[2]}">'
             f'{mi} {mood.capitalize()}</span>'
         )
+
+    # Sparklines (pre-rendered inline SVG)
+    chart_series = briefing.get("chart_series") or {}
+    sparks_html = ""
+    if chart_series:
+        label_map = [("corn", "Corn"), ("soybeans", "Soybeans"), ("wheat", "Wheat")]
+        cells = []
+        for key, label in label_map:
+            ser = chart_series.get(key) or []
+            if len(ser) >= 2:
+                last = ser[-1]
+                try:
+                    last_str = f"${float(last):.2f}"
+                except (TypeError, ValueError):
+                    last_str = str(last)
+                svg = render_sparkline_svg(ser)
+                cells.append(
+                    f'<div class="dv3-spark">'
+                    f'<div class="dv3-spark-head">'
+                    f'<span class="dv3-spark-label">{label}</span>'
+                    f'<span class="dv3-spark-last">{last_str}</span>'
+                    f'</div>'
+                    f'{svg}'
+                    f'</div>'
+                )
+        if cells:
+            sparks_html = '<div class="dv3-sparks">' + "".join(cells) + '</div>'
 
     sections_html = ""
     for i, sec in enumerate(briefing.get("sections", [])):
@@ -1045,7 +1185,6 @@ def generate_archive_html(briefing, date_iso):
         )
 
     source = html_esc(briefing.get("source_summary", "USDA / CME Group / Open-Meteo"))
-    gen_at = briefing.get("generated_at", "")
 
     weekend_badge = ""
     if is_weekend_brief:
@@ -1064,25 +1203,72 @@ def generate_archive_html(briefing, date_iso):
     if one_num_html or quote_html:
         topbar_html = f'<div class="dv3-topbar">\n      {one_num_html}\n      {quote_html}\n    </div>'
 
+    # Share block — identical pattern to daily.html
+    share_html = (
+        '<div class="dv3-share" role="group" aria-label="Share this briefing">'
+        '<span class="dv3-share-label">Share</span>'
+        '<button class="dv3-share-btn" data-share="twitter" type="button" aria-label="Post on X">'
+        '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">'
+        '<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>'
+        '</svg> Post'
+        '</button>'
+        '<button class="dv3-share-btn" data-share="copy" type="button" aria-label="Copy link to this briefing">&#x1F517; Copy link</button>'
+        '<button class="dv3-share-btn" data-share="email" type="button" aria-label="Email this briefing">&#x2709; Email</button>'
+        '</div>'
+    )
+
+    # Data for share JS (escape for single-quoted JS literal)
+    js_permalink = f"https://agsist.com/daily/{date_iso}"
+    js_headline  = js_esc(briefing.get("headline", "AGSIST Daily Briefing"))
+    js_datedisp  = js_esc(date_display)
+
     page = f'''<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#111a0a">
 <title>AGSIST Daily &mdash; {html_esc(date_display)}: {headline}</title>
-<meta name="description" content="{headline} &mdash; {html_esc(lead[:160])}">
-<meta name="robots" content="index, follow">
+<meta name="description" content="{headline} &mdash; {desc_escaped}">
+<meta name="author" content="Sigurd Lindquist">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://agsist.com/daily/{date_iso}">
-<meta property="og:title" content="AGSIST Daily &mdash; {html_esc(date_display)}">
-<meta property="og:description" content="{headline}">
+
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="AGSIST">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="AGSIST Daily &mdash; {html_esc(date_display)}: {headline}">
+<meta property="og:description" content="{og_description}">
 <meta property="og:url" content="https://agsist.com/daily/{date_iso}">
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<meta property="og:image" content="{og_image_url}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AGSIST Daily &mdash; {headline}">
+<meta property="article:published_time" content="{date_iso}">
+<meta property="article:modified_time" content="{gen_at}">
+<meta property="article:author" content="Sigurd Lindquist">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@agsist">
+<meta name="twitter:creator" content="@agsist">
+<meta name="twitter:title" content="AGSIST Daily &mdash; {html_esc(date_display)}">
+<meta name="twitter:description" content="{og_description}">
+<meta name="twitter:image" content="{og_image_url}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="/components/styles.css">
-<link rel="icon" type="image/png" href="/images/corn-favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="/images/corn-favicon-180.png">
+<link rel="preload" href="/components/styles.css?v=10" as="style">
+<link rel="stylesheet" href="/components/styles.css?v=10">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');</script>
+
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -1091,7 +1277,8 @@ def generate_archive_html(briefing, date_iso):
   "datePublished": "{date_iso}",
   "dateModified": "{gen_at}",
   "description": "{html_esc(lead[:200])}",
-  "author": {{"@type": "Organization", "name": "AGSIST", "url": "https://agsist.com"}},
+  "image": "{og_image_url}",
+  "author": {{"@type": "Person", "name": "Sigurd Lindquist", "url": "https://agsist.com"}},
   "publisher": {{"@type": "Organization", "name": "AGSIST", "url": "https://agsist.com"}},
   "mainEntityOfPage": {{"@type": "WebPage", "@id": "https://agsist.com/daily/{date_iso}"}},
   "isPartOf": {{"@type": "WebSite", "name": "AGSIST", "url": "https://agsist.com"}},
@@ -1106,6 +1293,9 @@ def generate_archive_html(briefing, date_iso):
 }}
 </script>
 <style>
+button,a,[role="button"]{{touch-action:manipulation;}}
+html{{overflow-x:hidden;overflow-x:clip;width:100%;}}
+body{{overflow-x:hidden;overflow-x:clip;width:100%;}}
 .dv3-page{{max-width:900px;margin:0 auto;padding:2rem 1.25rem}}
 .dv3-header{{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid var(--border)}}
 .dv3-eyebrow{{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem;padding:.3rem .75rem;background:rgba(74,171,76,.06);border:1px solid rgba(74,171,76,.18);border-radius:3px}}
@@ -1119,6 +1309,11 @@ def generate_archive_html(briefing, date_iso):
 .dv3-surprise-banner .surprise-text{{font-size:.85rem;color:var(--text-dim);line-height:1.45}}
 .dv3-surprise-banner .surprise-text strong{{color:var(--gold);font-weight:700}}
 .dv3-mood{{display:none;align-items:center;gap:.3rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .6rem;border-radius:3px;white-space:nowrap;margin-left:.75rem}}
+.dv3-sparks{{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin:0 0 1.5rem;padding:1rem;background:rgba(5,10,5,.35);border:1px solid var(--border);border-radius:var(--r-md)}}
+.dv3-spark{{display:flex;flex-direction:column;gap:.2rem}}
+.dv3-spark-head{{display:flex;justify-content:space-between;align-items:baseline;gap:.4rem}}
+.dv3-spark-label{{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}}
+.dv3-spark-last{{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:var(--text)}}
 .dv3-topbar{{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.25rem;margin-bottom:2rem}}
 .dv3-one-number{{background:var(--surface);border:2px solid var(--border-g);border-radius:var(--r-md);padding:1.2rem 1.4rem}}
 .dv3-one-number-label{{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem}}
@@ -1156,6 +1351,11 @@ def generate_archive_html(briefing, date_iso):
 .dv3-watch-time{{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;white-space:nowrap;flex-shrink:0;min-width:72px}}
 .dv3-watch-desc{{color:var(--text-dim);font-size:.88rem;line-height:1.55}}
 .dv3-watch-desc strong{{color:var(--text)}}
+.dv3-share{{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0 1rem;padding:.85rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}}
+.dv3-share-label{{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-right:.35rem}}
+.dv3-share-btn{{display:inline-flex;align-items:center;gap:.35rem;font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:700;padding:.45rem .85rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);cursor:pointer;transition:border-color .15s,color .15s;min-height:38px;touch-action:manipulation}}
+.dv3-share-btn:hover{{border-color:var(--gold);color:var(--text)}}
+.dv3-share-btn svg{{flex-shrink:0}}
 .dv3-source{{font-size:.68rem;color:var(--text-muted);text-align:center;padding:.75rem 0;border-top:1px solid var(--border);margin-bottom:2rem}}
 .dv3-nav{{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-top:2px solid var(--border);border-bottom:2px solid var(--border);margin-bottom:2rem}}
 .dv3-nav a{{display:inline-flex;align-items:center;gap:.35rem;font-size:.85rem;font-weight:600;color:var(--green);transition:opacity .15s}}
@@ -1166,9 +1366,9 @@ def generate_archive_html(briefing, date_iso):
 </style>
 </head>
 <body>
-<a class="skip" href="#main-content">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 <div id="site-header"></div>
-<main id="main-content">
+<main id="main" tabindex="-1">
 <div class="dv3-page">
   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/daily">Daily Briefing</a> / <strong>{html_esc(date_display)}</strong></nav>
 
@@ -1186,6 +1386,8 @@ def generate_archive_html(briefing, date_iso):
       <p class="dv3-lead">{lead}</p>
     </header>
 
+    {sparks_html}
+
     {topbar_html}
 
     <div class="dv3-sections">
@@ -1195,8 +1397,10 @@ def generate_archive_html(briefing, date_iso):
     {tmyk_html}
     {watch_html}
 
+    {share_html}
+
     <div class="dv3-source">
-      {source} &middot; Generated by AGSIST AI
+      {source} &middot; Auto-compiled at 6:02 AM CT
     </div>
   </article>
 
@@ -1215,17 +1419,18 @@ def generate_archive_html(briefing, date_iso):
 </div>
 </main>
 <div id="site-footer"></div>
-<script src="/components/loader.js"></script>
+<script src="/components/loader.js" defer></script>
 <script>
 (function(){{
+  // Prev/next navigation via index.json
   fetch('/data/daily-archive/index.json',{{cache:'no-store'}})
-    .then(function(r){{return r.ok?r.json():null}})
+    .then(function(r){{return r.ok?r.json():null;}})
     .then(function(idx){{
       if(!idx||!idx.briefings)return;
       var current='{date_iso}';
       var entries=idx.briefings;
       var curIdx=-1;
-      for(var i=0;i<entries.length;i++){{if(entries[i].date===current){{curIdx=i;break}}}}
+      for(var i=0;i<entries.length;i++){{if(entries[i].date===current){{curIdx=i;break;}}}}
       if(curIdx<0)return;
       var nav=document.getElementById('dv3-archive-nav');
       if(!nav)return;
@@ -1235,6 +1440,44 @@ def generate_archive_html(briefing, date_iso):
       if(prev&&spans[0])spans[0].innerHTML='<a href="/daily/'+prev.date+'">\u2190 '+prev.date+'</a>';
       if(next&&spans[2])spans[2].innerHTML='<a href="/daily/'+next.date+'">'+next.date+' \u2192</a>';
     }}).catch(function(){{}});
+
+  // Share buttons
+  var permalink='{js_permalink}';
+  var headline='{js_headline}';
+  var dateDisplay='{js_datedisp}';
+  var btns=document.querySelectorAll('.dv3-share-btn');
+  Array.prototype.forEach.call(btns,function(btn){{
+    btn.addEventListener('click',function(){{
+      var kind=btn.getAttribute('data-share');
+      if(kind==='twitter'){{
+        var text=encodeURIComponent('AGSIST Daily '+dateDisplay+': '+headline);
+        var url=encodeURIComponent(permalink);
+        window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url,'_blank','noopener,noreferrer');
+      }} else if(kind==='copy'){{
+        var doCopy=function(){{
+          if(navigator.clipboard&&navigator.clipboard.writeText){{
+            return navigator.clipboard.writeText(permalink);
+          }}
+          return new Promise(function(res,rej){{
+            var ta=document.createElement('textarea');
+            ta.value=permalink;ta.style.position='fixed';ta.style.opacity='0';
+            document.body.appendChild(ta);ta.select();
+            try{{document.execCommand('copy');res();}}catch(e){{rej(e);}}
+            document.body.removeChild(ta);
+          }});
+        }};
+        doCopy().then(function(){{
+          var orig=btn.innerHTML;
+          btn.innerHTML='\u2713 Copied';
+          setTimeout(function(){{btn.innerHTML=orig;}},1500);
+        }}).catch(function(){{prompt('Copy this link:',permalink);}});
+      }} else if(kind==='email'){{
+        var subj=encodeURIComponent('AGSIST Daily '+dateDisplay+': '+headline);
+        var body=encodeURIComponent(headline+'\\n\\n'+permalink+'\\n\\nFrom AGSIST (https://agsist.com/daily)');
+        window.location.href='mailto:?subject='+subj+'&body='+body;
+      }}
+    }});
+  }});
 }})();
 </script>
 </body>
@@ -1316,7 +1559,7 @@ def save_archive(briefing):
 # ═══════════════════════════════════════════════════════════════════
 
 def main():
-    print("=== AGSIST Daily Briefing Generator v3.5 ===")
+    print("=== AGSIST Daily Briefing Generator v3.6 ===")
     print(f"  Time: {datetime.now().isoformat()}")
 
     market_status = get_market_status()
@@ -1369,8 +1612,20 @@ def main():
     else:
         print("  Validation passed (no em dashes, no scope creep, no filler attributions)")
 
+    # Persist locked_prices so future chart_series builds can reach back.
+    briefing["locked_prices"] = locked_prices
+
+    # Build rolling sparkline series from archived locked_prices + today.
+    chart_series = build_chart_series(locked_prices)
+    if chart_series:
+        briefing["chart_series"] = chart_series
+        series_depths = {k: len(v) for k, v in chart_series.items()}
+        print(f"  Chart series built: {series_depths}")
+    else:
+        print("  Chart series: not enough history yet (need 2+ days with locked_prices)")
+
     briefing["generated_at"] = datetime.now(timezone.utc).isoformat()
-    briefing["generator_version"] = "3.5"
+    briefing["generator_version"] = "3.6"
     briefing["surprise_count"] = len(surprises)
     briefing["surprises"] = surprises
     briefing["price_validation_clean"] = is_clean
@@ -1392,6 +1647,7 @@ def main():
     print(f"  Sections: {len(briefing.get('sections', []))}")
     print(f"  Market status: {'CLOSED (' + market_status['day_name'] + ')' if market_status['is_closed'] else 'open'}")
     print(f"  Surprises: {len(surprises)}")
+    print(f"  Chart series: {list(chart_series.keys()) if chart_series else 'none yet'}")
     print(f"  Validation: {'clean' if is_clean else str(len(val_warnings)) + ' warning(s)'}")
     print("=== Done ===")
 
