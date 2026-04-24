@@ -8,6 +8,13 @@
  *   3. Open-Meteo         — weather
  *   4. Nominatim OSM      — reverse geocoding
  *
+ * v15 — 2026-04-24
+ *   propagateLocation() now extracts county separately from city and writes
+ *   city/state/county/zip to window.AGSIST_STATE.weather (alongside lat/lon
+ *   set by fetchWeather v13). Other pages (e.g. index.html RMA county-level
+ *   planting dates lookup) can now read refined location without firing a
+ *   second Nominatim round-trip.
+ *
  * v14 — 2026-04-14
  *   FIX: loadWeatherZip() ZIP city label truncation.
  *   Open-Meteo geocoding returns the postal code itself as r.name (e.g. "61801")
@@ -44,9 +51,9 @@ var WX_CODES = {
   95:'Thunderstorm',96:'T-Storm w/Hail',99:'Severe T-Storm'
 };
 var WX_ICONS = {
-  0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌧️',55:'🌧️',
-  61:'🌦️',63:'🌧️',65:'⛈️',71:'🌨️',73:'❄️',75:'❄️',80:'🌦️',81:'🌧️',
-  82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'
+  0:'\u2600\uFE0F',1:'\u{1F324}\uFE0F',2:'\u26C5',3:'\u2601\uFE0F',45:'\u{1F32B}\uFE0F',48:'\u{1F32B}\uFE0F',51:'\u{1F326}\uFE0F',53:'\u{1F327}\uFE0F',55:'\u{1F327}\uFE0F',
+  61:'\u{1F326}\uFE0F',63:'\u{1F327}\uFE0F',65:'\u26C8\uFE0F',71:'\u{1F328}\uFE0F',73:'\u2744\uFE0F',75:'\u2744\uFE0F',80:'\u{1F326}\uFE0F',81:'\u{1F327}\uFE0F',
+  82:'\u26C8\uFE0F',95:'\u26C8\uFE0F',96:'\u26C8\uFE0F',99:'\u26C8\uFE0F'
 };
 
 // ─────────────────────────────────────────────────────────────────
@@ -55,8 +62,8 @@ var WX_ICONS = {
 function requestGeo() {
   if (!navigator.geolocation) { showZipEntry(); return; }
   var wl = document.getElementById('wx-loading');
-  if (wl) wl.innerHTML = '<div style="font-size:1.5rem;margin-bottom:.5rem">📍</div>'
-    + '<div style="font-size:.88rem;color:var(--text-dim)">Detecting location…</div>';
+  if (wl) wl.innerHTML = '<div style="font-size:1.5rem;margin-bottom:.5rem">\u{1F4CD}</div>'
+    + '<div style="font-size:.88rem;color:var(--text-dim)">Detecting location\u2026</div>';
   navigator.geolocation.getCurrentPosition(
     function(pos) { fetchWeather(pos.coords.latitude, pos.coords.longitude, null); },
     function() { showZipEntry(); },
@@ -146,14 +153,15 @@ function fetchWeather(lat, lon, label) {
   try { localStorage.setItem('agsist-wx-loc', JSON.stringify({lat:lat, lon:lon, label:label})); } catch(e) {}
 
   // Expose geo globally for bids-homepage.js and other scripts
-  window.AGSIST_GEO = { lat: lat, lng: lon, city: '', state: '', zip: '' };
+  window.AGSIST_GEO = { lat: lat, lng: lon, city: '', state: '', zip: '', county: '' };
 
   // FIX v13: Expose lat/lon on AGSIST_STATE.weather so that waitForGeo()
   // in index.html can resolve. Previously only AGSIST_GEO was set here,
   // causing soil temp and planting date logic to stall indefinitely.
-  if (window.AGSIST_STATE && typeof window.AGSIST_STATE === 'object') {
-    window.AGSIST_STATE.weather = { lat: lat, lon: lon };
-  }
+  // v15: city/state/county/zip are filled in later by propagateLocation() once
+  // Nominatim reverse-geocode resolves — pages that need them should poll.
+  if (!window.AGSIST_STATE || typeof window.AGSIST_STATE !== 'object') window.AGSIST_STATE = {};
+  window.AGSIST_STATE.weather = { lat: lat, lon: lon };
 
   var wl = document.getElementById('wx-loading');
   var ze = document.getElementById('wx-zip-entry');
@@ -163,7 +171,7 @@ function fetchWeather(lat, lon, label) {
   if (wd) wd.style.display = 'block';
 
   var wxLoc = document.getElementById('wx-loc');
-  if (wxLoc) wxLoc.textContent = '📍 ' + (label || 'Your Location');
+  if (wxLoc) wxLoc.textContent = '\u{1F4CD} ' + (label || 'Your Location');
 
   var frame = document.getElementById('windy-frame');
   if (frame) {
@@ -200,28 +208,28 @@ function fetchWeather(lat, lon, label) {
       var dew    = Math.round(c.dew_point_2m);
 
       var el;
-      el = document.getElementById('wx-temp');  if(el) el.textContent = tempF + '°F';
-      el = document.getElementById('wx-icon');  if(el) el.textContent = WX_ICONS[code] || '🌡️';
-      el = document.getElementById('wx-desc');  if(el) el.textContent = (WX_CODES[code]||'Current Conditions') + ' · Feels ' + feelsF + '°';
+      el = document.getElementById('wx-temp');  if(el) el.textContent = tempF + '\u00B0F';
+      el = document.getElementById('wx-icon');  if(el) el.textContent = WX_ICONS[code] || '\u{1F321}\uFE0F';
+      el = document.getElementById('wx-desc');  if(el) el.textContent = (WX_CODES[code]||'Current Conditions') + ' \u00B7 Feels ' + feelsF + '\u00B0';
       el = document.getElementById('wx-wind');  if(el) el.textContent = degToCompass(c.wind_direction_10m) + ' ' + wind + ' mph';
       el = document.getElementById('wx-humid'); if(el) el.textContent = humid + '%';
       el = document.getElementById('wx-precip');if(el) el.textContent = precip + '%';
-      el = document.getElementById('wx-dew');   if(el) el.textContent = dew + '°F';
+      el = document.getElementById('wx-dew');   if(el) el.textContent = dew + '\u00B0F';
 
       var spray = document.getElementById('wx-spray');
       if (spray) {
         var sprayR = calcSprayRating(tempF, humid, wind);
         var sprayMsg;
         if (sprayR === 'poor') {
-          if (tempF < 32)       sprayMsg = '🚫 Do Not Spray — Frozen (' + tempF + '°F) →';
-          else if (tempF < 40)  sprayMsg = '🚫 Do Not Spray — Too cold (' + tempF + '°F) →';
-          else if (wind > 15)   sprayMsg = '🚫 Poor Spray Conditions — Wind too high (' + wind + ' mph) →';
-          else if (tempF > 90)  sprayMsg = '🚫 Poor Spray Conditions — Too hot (' + tempF + '°F) →';
-          else                  sprayMsg = '🚫 Poor Spray Conditions — Humidity too low (' + humid + '%) →';
+          if (tempF < 32)       sprayMsg = '\u{1F6AB} Do Not Spray \u2014 Frozen (' + tempF + '\u00B0F) \u2192';
+          else if (tempF < 40)  sprayMsg = '\u{1F6AB} Do Not Spray \u2014 Too cold (' + tempF + '\u00B0F) \u2192';
+          else if (wind > 15)   sprayMsg = '\u{1F6AB} Poor Spray Conditions \u2014 Wind too high (' + wind + ' mph) \u2192';
+          else if (tempF > 90)  sprayMsg = '\u{1F6AB} Poor Spray Conditions \u2014 Too hot (' + tempF + '\u00B0F) \u2192';
+          else                  sprayMsg = '\u{1F6AB} Poor Spray Conditions \u2014 Humidity too low (' + humid + '%) \u2192';
         } else if (sprayR === 'caution') {
-          sprayMsg = '⚠️ Marginal Spray Conditions — Review before applying →';
+          sprayMsg = '\u26A0\uFE0F Marginal Spray Conditions \u2014 Review before applying \u2192';
         } else {
-          sprayMsg = '✅ Good Spray Conditions →';
+          sprayMsg = '\u2705 Good Spray Conditions \u2192';
         }
         spray.className = 'spray-badge ' + sprayR;
         spray.textContent = sprayMsg;
@@ -231,7 +239,7 @@ function fetchWeather(lat, lon, label) {
       if (ureaWrap) {
         var u = calcUrea(tempF, humid, wind, precip);
         var uPalette = {frozen:'91,163,224', low:'62,207,110', moderate:'230,176,66', high:'240,145,58', extreme:'240,96,96'};
-        var uLabels  = {frozen:'Frozen — N/A', low:'Low', moderate:'Moderate', high:'High', extreme:'Extreme'};
+        var uLabels  = {frozen:'Frozen \u2014 N/A', low:'Low', moderate:'Moderate', high:'High', extreme:'Extreme'};
         var uColors  = {frozen:'var(--blue)', low:'var(--green)', moderate:'var(--gold)', high:'#f0913a', extreme:'var(--red)'};
         var sEl = document.getElementById('wx-urea-score');
         var bEl = document.getElementById('wx-urea-badge');
@@ -257,7 +265,7 @@ function fetchWeather(lat, lon, label) {
         msg.style.cssText = 'font-size:.88rem;color:var(--text-dim)';
         msg.textContent = 'Weather unavailable. ';
         var btn = document.createElement('button');
-        btn.textContent = 'Try ZIP →';
+        btn.textContent = 'Try ZIP \u2192';
         btn.setAttribute('style','background:none;border:none;color:var(--gold);cursor:pointer;font-size:.88rem;font-family:inherit');
         btn.onclick = showZipEntry;
         msg.appendChild(btn);
@@ -269,19 +277,46 @@ function fetchWeather(lat, lon, label) {
   renderForecast(lat, lon);
 }
 
+// v15: Reverse-geocode via Nominatim to get city/state/county/zip.
+// Writes to BOTH window.AGSIST_GEO (legacy, used by bids-homepage.js) and
+// window.AGSIST_STATE.weather (primary, read by homepage RMA date lookup
+// and other pages that need refined location without another fetch).
 function propagateLocation(lat, lon, label) {
-  fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lon+'&format=json')
+  fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lon+'&format=json&zoom=10&addressdetails=1')
     .then(function(r) { return r.json(); })
     .then(function(geo) {
-      var city = geo.address.city || geo.address.town || geo.address.village || geo.address.county || '';
-      var st   = geo.address.state_code || '';
-      var zip  = geo.address.postcode || '';
+      var addr = (geo && geo.address) || {};
+      // Extract county independently — do NOT fall back to county for city,
+      // we want them as separate fields.
+      var county = addr.county || '';
+      // City: try named populated places first, then county as last-resort display label.
+      // (Preserves pre-v15 display behavior for rural addresses with no village/town.)
+      var city = addr.city || addr.town || addr.village || addr.hamlet || addr.municipality || county || '';
+      // State 2-letter code. Nominatim usually returns address.state_code; fall back
+      // to parsing ISO3166-2-lvl4 ("US-WI" -> "WI") if state_code is absent.
+      var st = (addr.state_code || '').toUpperCase();
+      if (!st && addr['ISO3166-2-lvl4']) {
+        var iso = String(addr['ISO3166-2-lvl4']).split('-');
+        if (iso.length > 1) st = iso[1].toUpperCase();
+      }
+      var zip = addr.postcode || '';
       var name = city + (st ? ', '+st : '');
 
       if (window.AGSIST_GEO) {
         window.AGSIST_GEO.city = city;
         window.AGSIST_GEO.state = st;
         window.AGSIST_GEO.zip = zip;
+        window.AGSIST_GEO.county = county;
+      }
+
+      // v15: Expose refined location on AGSIST_STATE.weather. Other pages poll
+      // for .state + .county appearing here to do follow-up lookups (e.g. RMA
+      // planting dates by county FIPS) without a second reverse-geocode.
+      if (window.AGSIST_STATE && window.AGSIST_STATE.weather) {
+        window.AGSIST_STATE.weather.city = city;
+        window.AGSIST_STATE.weather.state = st;
+        window.AGSIST_STATE.weather.county = county;
+        window.AGSIST_STATE.weather.zip = zip;
       }
 
       if (typeof window.loadHomepageBids === 'function' && zip) {
@@ -289,7 +324,7 @@ function propagateLocation(lat, lon, label) {
       }
 
       var wxLoc = document.getElementById('wx-loc');
-      if (wxLoc && name) wxLoc.textContent = '📍 ' + name;
+      if (wxLoc && name) wxLoc.textContent = '\u{1F4CD} ' + name;
 
       var radarLbl = document.getElementById('wx-loc-label');
       if (radarLbl && name) radarLbl.textContent = name;
@@ -298,7 +333,7 @@ function propagateLocation(lat, lon, label) {
       if (bidsGeoTxt && name) {
         var cur = bidsGeoTxt.textContent || '';
         if (cur.indexOf('Location found') !== -1 || cur.indexOf('Detecting') !== -1) {
-          bidsGeoTxt.textContent = '📍 ' + name;
+          bidsGeoTxt.textContent = '\u{1F4CD} ' + name;
         }
       }
 
@@ -321,8 +356,8 @@ function updateWidgetPreviews(tempF, humid, wind, pop) {
   var sprayDisplay = sprayRating === 'caution' ? 'marginal' : sprayRating;
   var sprayColors  = {good:'rgba(62,207,110,.08)',marginal:'rgba(230,176,66,.08)',poor:'rgba(240,96,96,.08)'};
   var sprayBorders = {good:'rgba(62,207,110,.2)',marginal:'rgba(230,176,66,.2)',poor:'rgba(240,96,96,.2)'};
-  var sprayIcons   = {good:'✅',marginal:'⚠️',poor:'🚫'};
-  var sprayLabels  = {good:'Good — Apply Now',marginal:'Use Caution',poor:'Do Not Spray'};
+  var sprayIcons   = {good:'\u2705',marginal:'\u26A0\uFE0F',poor:'\u{1F6AB}'};
+  var sprayLabels  = {good:'Good \u2014 Apply Now',marginal:'Use Caution',poor:'Do Not Spray'};
   var sprayEl  = document.getElementById('wsp-spray-icon');
   var statusEl = document.getElementById('wsp-spray-status');
   var detailEl = document.getElementById('wsp-spray-detail');
@@ -332,7 +367,7 @@ function updateWidgetPreviews(tempF, humid, wind, pop) {
     statusEl.textContent = sprayLabels[sprayDisplay];
     statusEl.style.color = {good:'var(--green)',marginal:'var(--gold)',poor:'var(--red)'}[sprayDisplay];
   }
-  if (detailEl) detailEl.textContent = 'Wind '+wind+' mph · '+tempF+'°F · Humidity '+humid+'%';
+  if (detailEl) detailEl.textContent = 'Wind '+wind+' mph \u00B7 '+tempF+'\u00B0F \u00B7 Humidity '+humid+'%';
   if (wrapEl) {
     var inner = wrapEl.querySelector('div');
     if (inner) {
@@ -343,8 +378,8 @@ function updateWidgetPreviews(tempF, humid, wind, pop) {
 
   var u = calcUrea(tempF, humid, wind, pop);
   var uPalette = {frozen:'91,163,224', low:'62,207,110', moderate:'230,176,66', high:'240,145,58', extreme:'240,96,96'};
-  var uLbls    = {frozen:'Frozen — No Risk', low:'Low Risk', moderate:'Moderate Risk', high:'High Risk', extreme:'Extreme Risk'};
-  var uRecs    = {frozen:'Ground frozen — urease inactive', low:'Favorable for application', moderate:'Consider NBPT stabilizer', high:'Use stabilizer or wait', extreme:'Do not apply without stabilizer'};
+  var uLbls    = {frozen:'Frozen \u2014 No Risk', low:'Low Risk', moderate:'Moderate Risk', high:'High Risk', extreme:'Extreme Risk'};
+  var uRecs    = {frozen:'Ground frozen \u2014 urease inactive', low:'Favorable for application', moderate:'Consider NBPT stabilizer', high:'Use stabilizer or wait', extreme:'Do not apply without stabilizer'};
   var uColors  = {frozen:'var(--blue)', low:'var(--green)', moderate:'var(--gold)', high:'#f0913a', extreme:'var(--red)'};
   var uSc = document.getElementById('wsp-urea-score');
   var uBd = document.getElementById('wsp-urea-badge');
@@ -372,7 +407,7 @@ function renderForecast(lat, lon) {
       var fcFull = document.getElementById('wx-forecast-full');
       var locLabel = document.getElementById('wx-loc-label');
       var wxLocEl  = document.getElementById('wx-loc');
-      if (locLabel && wxLocEl) locLabel.textContent = wxLocEl.textContent.replace('📍 ','');
+      if (locLabel && wxLocEl) locLabel.textContent = wxLocEl.textContent.replace('\u{1F4CD} ','');
 
       if (fc) {
         fc.innerHTML = '';
@@ -383,10 +418,10 @@ function renderForecast(lat, lon) {
           el.style.cssText = 'flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:.5rem .4rem;text-align:center';
           var pop = days.precipitation_probability_max[i];
           el.innerHTML = '<div style="font-size:.64rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem">'+dname+'</div>'
-            + '<div style="font-size:1.3rem;line-height:1;margin-bottom:.2rem">'+(WX_ICONS[days.weather_code[i]]||'🌡️')+'</div>'
-            + '<div style="font-size:.82rem;font-weight:700;color:var(--text)">'+Math.round(days.temperature_2m_max[i])+'°</div>'
-            + '<div style="font-size:.74rem;color:var(--text-muted)">'+Math.round(days.temperature_2m_min[i])+'°</div>'
-            + (pop>20?'<div style="font-size:.68rem;color:var(--blue);margin-top:.15rem">💧'+pop+'%</div>':'');
+            + '<div style="font-size:1.3rem;line-height:1;margin-bottom:.2rem">'+(WX_ICONS[days.weather_code[i]]||'\u{1F321}\uFE0F')+'</div>'
+            + '<div style="font-size:.82rem;font-weight:700;color:var(--text)">'+Math.round(days.temperature_2m_max[i])+'\u00B0</div>'
+            + '<div style="font-size:.74rem;color:var(--text-muted)">'+Math.round(days.temperature_2m_min[i])+'\u00B0</div>'
+            + (pop>20?'<div style="font-size:.68rem;color:var(--blue);margin-top:.15rem">\u{1F4A7}'+pop+'%</div>':'');
           fc.appendChild(el);
         }
       }
@@ -400,10 +435,10 @@ function renderForecast(lat, lon) {
           elj.className = 'wx-day';
           var popj = days.precipitation_probability_max[j];
           elj.innerHTML = '<div class="wx-day-name">'+dnj+'</div>'
-            + '<div class="wx-day-icon">'+(WX_ICONS[days.weather_code[j]]||'🌡️')+'</div>'
-            + '<div class="wx-day-hi">'+Math.round(days.temperature_2m_max[j])+'°</div>'
-            + '<div class="wx-day-lo">'+Math.round(days.temperature_2m_min[j])+'°</div>'
-            + (popj>15?'<div class="wx-day-pop">💧'+popj+'%</div>':'');
+            + '<div class="wx-day-icon">'+(WX_ICONS[days.weather_code[j]]||'\u{1F321}\uFE0F')+'</div>'
+            + '<div class="wx-day-hi">'+Math.round(days.temperature_2m_max[j])+'\u00B0</div>'
+            + '<div class="wx-day-lo">'+Math.round(days.temperature_2m_min[j])+'\u00B0</div>'
+            + (popj>15?'<div class="wx-day-pop">\u{1F4A7}'+popj+'%</div>':'');
           fcFull.appendChild(elj);
         }
       }
@@ -466,7 +501,7 @@ function fmtChange(close, open, grain, netChg, pctChg) {
   var diff  = netChg !== undefined && netChg !== null ? parseFloat(netChg) : (c - o);
   var pct   = pctChg !== undefined && pctChg !== null ? parseFloat(pctChg) : (o !== 0 ? (diff/o)*100 : 0);
   var dir   = diff > 0 ? 'up' : diff < 0 ? 'dn' : 'nc';
-  var arrow = diff > 0 ? '▲' : diff < 0 ? '▼' : '—';
+  var arrow = diff > 0 ? '\u25B2' : diff < 0 ? '\u25BC' : '\u2014';
   var sign  = diff > 0 ? '+' : '';
   return {text: arrow + ' ' + sign + pct.toFixed(1) + '%', cls: dir};
 }
@@ -477,7 +512,7 @@ function fmtTickerChange(close, open, grain, netChg, pctChg) {
   var diff  = netChg !== undefined && netChg !== null ? parseFloat(netChg) : (c - o);
   var pct   = pctChg !== undefined && pctChg !== null ? parseFloat(pctChg) : (o !== 0 ? (diff/o)*100 : 0);
   var dir   = diff > 0 ? 'up' : diff < 0 ? 'dn' : 'nc';
-  var arrow = diff > 0 ? '▲' : diff < 0 ? '▼' : '';
+  var arrow = diff > 0 ? '\u25B2' : diff < 0 ? '\u25BC' : '';
   return {text: arrow + ' ' + Math.abs(pct).toFixed(2) + '%', cls: dir};
 }
 
@@ -599,7 +634,7 @@ function fetchFFAILive() {
       var prev  = d.previous ? d.previous.composite : null;
       var diff  = prev !== null ? parseFloat((score - prev).toFixed(1)) : null;
       var dir   = diff && diff > 0 ? 'up' : 'dn';
-      var sign  = diff && diff > 0 ? '▲' : '▼';
+      var sign  = diff && diff > 0 ? '\u25B2' : '\u25BC';
       var priceTxt = score.toFixed(1);
       var chgTxt   = diff ? sign + ' ' + Math.abs(diff) + ' pts' : '--';
 
@@ -646,13 +681,13 @@ function rebuildTickerLoop() {
 // ─────────────────────────────────────────────────────────────────
 
 var MARKET_CATEGORIES = {
-  'Commodities':       { icon: '🌽', order: 1 },
-  'Trade & Policy':    { icon: '🏛️', order: 2 },
-  'Energy & Inputs':   { icon: '⛽', order: 3 },
-  'Weather & Climate': { icon: '🌦️', order: 4 },
-  'Economy & Markets': { icon: '📊', order: 5 },
-  'Infrastructure':    { icon: '🚂', order: 6 },
-  'Other':             { icon: '🎯', order: 7 }
+  'Commodities':       { icon: '\u{1F33D}', order: 1 },
+  'Trade & Policy':    { icon: '\u{1F3DB}\uFE0F', order: 2 },
+  'Energy & Inputs':   { icon: '\u26FD', order: 3 },
+  'Weather & Climate': { icon: '\u{1F326}\uFE0F', order: 4 },
+  'Economy & Markets': { icon: '\u{1F4CA}', order: 5 },
+  'Infrastructure':    { icon: '\u{1F682}', order: 6 },
+  'Other':             { icon: '\u{1F3AF}', order: 7 }
 };
 
 var RELEVANCE_TIERS = {
@@ -686,14 +721,14 @@ function fetchKalshiMarkets() {
 
       if (!markets.length) {
         container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem 1rem">'
-          + '<div style="font-size:2rem;margin-bottom:.5rem;opacity:.6">🎯</div>'
+          + '<div style="font-size:2rem;margin-bottom:.5rem;opacity:.6">\u{1F3AF}</div>'
           + '<div style="font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:.35rem">No active prediction markets right now</div>'
           + '<div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;max-width:32rem;margin:0 auto">'
-          + 'We scan Kalshi and Polymarket every 2 hours for events that affect agriculture — tariffs, weather, trade, energy, USDA reports, and more.</div>'
+          + 'We scan Kalshi and Polymarket every 2 hours for events that affect agriculture \u2014 tariffs, weather, trade, energy, USDA reports, and more.</div>'
           + '<div style="margin-top:.75rem;font-size:.78rem">'
-          + '<a href="https://kalshi.com/markets" target="_blank" rel="noopener" style="color:var(--gold)">Browse Kalshi →</a>'
-          + '<span style="color:var(--text-muted);margin:0 .5rem">·</span>'
-          + '<a href="https://polymarket.com" target="_blank" rel="noopener" style="color:var(--gold)">Browse Polymarket →</a></div></div>';
+          + '<a href="https://kalshi.com/markets" target="_blank" rel="noopener" style="color:var(--gold)">Browse Kalshi \u2192</a>'
+          + '<span style="color:var(--text-muted);margin:0 .5rem">\u00B7</span>'
+          + '<a href="https://polymarket.com" target="_blank" rel="noopener" style="color:var(--gold)">Browse Polymarket \u2192</a></div></div>';
         return;
       }
 
@@ -705,7 +740,7 @@ function fetchKalshiMarkets() {
         catKeys.forEach(function(catName) {
           var catMarkets = data.categories[catName];
           if (!catMarkets || !catMarkets.length) return;
-          var catMeta = MARKET_CATEGORIES[catName] || { icon: '🎯', order: 99 };
+          var catMeta = MARKET_CATEGORIES[catName] || { icon: '\u{1F3AF}', order: 99 };
 
           var header = document.createElement('div');
           header.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;gap:.45rem;'
@@ -747,22 +782,22 @@ function fetchKalshiMarkets() {
       footer.style.cssText = 'grid-column:1/-1;font-size:.62rem;color:var(--text-muted);'
         + 'text-align:center;padding:.5rem 0 .15rem;border-top:1px solid var(--border);'
         + 'margin-top:.25rem;line-height:1.6';
-      footer.innerHTML = footerParts.join(' · ');
+      footer.innerHTML = footerParts.join(' \u00B7 ');
       container.appendChild(footer);
     })
     .catch(function() {
       if (loading) {
-        loading.innerHTML = '<div style="font-size:1.3rem;margin-bottom:.4rem;opacity:.6">🎯</div>'
+        loading.innerHTML = '<div style="font-size:1.3rem;margin-bottom:.4rem;opacity:.6">\u{1F3AF}</div>'
           + 'Market data updating shortly. '
-          + '<a href="https://kalshi.com/markets" target="_blank" rel="noopener" style="color:var(--gold)">Kalshi →</a> · '
-          + '<a href="https://polymarket.com" target="_blank" rel="noopener" style="color:var(--gold)">Polymarket →</a>';
+          + '<a href="https://kalshi.com/markets" target="_blank" rel="noopener" style="color:var(--gold)">Kalshi \u2192</a> \u00B7 '
+          + '<a href="https://polymarket.com" target="_blank" rel="noopener" style="color:var(--gold)">Polymarket \u2192</a>';
       }
     });
 }
 
 function buildMarketCard(m, showExtras) {
   var yes   = m.yes || 50;
-  var title = (m.title || '').length > 100 ? m.title.slice(0, 97) + '…' : (m.title || 'Market');
+  var title = (m.title || '').length > 100 ? m.title.slice(0, 97) + '\u2026' : (m.title || 'Market');
 
   var color, bgAlpha, borderC;
   if (yes >= 65)      { color = 'var(--green)'; bgAlpha = 'rgba(62,207,110,.05)';  borderC = 'rgba(62,207,110,.18)'; }
@@ -788,7 +823,7 @@ function buildMarketCard(m, showExtras) {
 
   var whyHTML = '';
   if (showExtras && m.why_it_matters) {
-    var whyText = m.why_it_matters.length > 150 ? m.why_it_matters.slice(0, 147) + '…' : m.why_it_matters;
+    var whyText = m.why_it_matters.length > 150 ? m.why_it_matters.slice(0, 147) + '\u2026' : m.why_it_matters;
     whyHTML = '<div style="font-size:.7rem;line-height:1.55;color:var(--text-dim);'
       + 'padding:.45rem .55rem;background:var(--surface2);border-radius:6px;'
       + 'border:1px solid var(--border);margin-top:.1rem">'
@@ -832,13 +867,13 @@ function buildMarketCard(m, showExtras) {
     + '<div style="display:flex;justify-content:space-between;align-items:center;'
       + 'padding-top:.35rem;border-top:1px solid var(--border);margin-top:.1rem">'
       + '<span style="font-size:.66rem;color:var(--text-muted)">NO: '
-        + (m.no || (100 - yes)) + '%' + (volStr ? ' · ' + volStr : '') + '</span>'
+        + (m.no || (100 - yes)) + '%' + (volStr ? ' \u00B7 ' + volStr : '') + '</span>'
       + '<a href="' + m.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" '
         + 'style="font-size:.64rem;color:' + color + ';text-decoration:none;font-weight:600;'
         + 'border:1px solid currentColor;border-radius:4px;padding:.12rem .4rem;'
         + 'white-space:nowrap;transition:opacity .15s"'
         + ' onmouseenter="this.style.opacity=\'.8\'" onmouseleave="this.style.opacity=\'1\'">'
-        + 'View Market →</a>'
+        + 'View Market \u2192</a>'
     + '</div>';
 
   return div;
@@ -884,8 +919,8 @@ function loadDailyBriefing() {
           volatile: { color: 'var(--orange)',bg: 'rgba(200,122,40,.08)',border: 'rgba(200,122,40,.22)' }
         };
         var mc = moodColors[mood] || moodColors.mixed;
-        var moodIcons = { bullish:'📈', bearish:'📉', mixed:'↔️', cautious:'⚠️', volatile:'🔥' };
-        moodEl.textContent = (moodIcons[mood] || '📊') + ' ' + mood.charAt(0).toUpperCase() + mood.slice(1);
+        var moodIcons = { bullish:'\u{1F4C8}', bearish:'\u{1F4C9}', mixed:'\u2194\uFE0F', cautious:'\u26A0\uFE0F', volatile:'\u{1F525}' };
+        moodEl.textContent = (moodIcons[mood] || '\u{1F4CA}') + ' ' + mood.charAt(0).toUpperCase() + mood.slice(1);
         moodEl.style.color = mc.color;
         moodEl.style.background = mc.bg;
         moodEl.style.border = '1px solid ' + mc.border;
@@ -899,14 +934,14 @@ function loadDailyBriefing() {
           var surpriseNames = [];
           if (d.surprises && d.surprises.length) {
             d.surprises.forEach(function(s) {
-              var arrow = s.direction === 'up' ? '▲' : '▼';
+              var arrow = s.direction === 'up' ? '\u25B2' : '\u25BC';
               surpriseNames.push(s.commodity + ' ' + arrow + Math.abs(s.pct_change).toFixed(1) + '%');
             });
           }
-          surpriseBanner.innerHTML = '<span class="surprise-icon">⚡</span>'
+          surpriseBanner.innerHTML = '<span class="surprise-icon">\u26A1</span>'
             + '<span class="surprise-text">'
             + '<strong>Overnight Surprise' + (surpriseCount > 1 ? 's' : '') + ':</strong> '
-            + (surpriseNames.length ? surpriseNames.join(' · ') : surpriseCount + ' unusual move' + (surpriseCount > 1 ? 's' : ''))
+            + (surpriseNames.length ? surpriseNames.join(' \u00B7 ') : surpriseCount + ' unusual move' + (surpriseCount > 1 ? 's' : ''))
             + '</span>';
           surpriseBanner.style.display = 'flex';
         } else {
@@ -945,7 +980,7 @@ function loadDailyBriefing() {
           }
 
           el = document.getElementById('daily-section-' + n + '-action');
-          if (el && sec.farmer_action) { el.textContent = '🎯 ' + sec.farmer_action; el.style.display = 'block'; }
+          if (el && sec.farmer_action) { el.textContent = '\u{1F3AF} ' + sec.farmer_action; el.style.display = 'block'; }
 
           var secEl = document.getElementById('daily-sec-' + n);
           if (secEl) {
@@ -984,7 +1019,7 @@ function loadDailyBriefing() {
         });
       }
 
-      el = document.getElementById('daily-source');  if (el) el.textContent = d.source_summary || d.source || 'USDA · CME Group · Open-Meteo';
+      el = document.getElementById('daily-source');  if (el) el.textContent = d.source_summary || d.source || 'USDA \u00B7 CME Group \u00B7 Open-Meteo';
       el = document.getElementById('daily-loading'); if (el) el.style.display = 'none';
       el = document.getElementById('daily-content'); if (el) el.style.display = 'block';
     })
