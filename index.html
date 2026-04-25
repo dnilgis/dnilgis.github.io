@@ -462,6 +462,7 @@
         <div class="daily-left">
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem"><div class="daily-eyebrow"><span class="daily-eyebrow-dot"></span> AGSIST DAILY</div><span id="daily-mood" class="daily-mood" style="display:none"></span></div>
           <div id="daily-date" class="daily-date"></div>
+          <div class="daily-snapshot-note" aria-label="Briefing snapshot context" style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin:-.4rem 0 .8rem;line-height:1.5">Snapshot at briefing publish &middot; <span style="color:var(--gold)">live ticker above shows current prices</span></div>
           <div id="site-greeting" class="daily-greeting">Good Morning</div>
           <h1 id="daily-headline" class="daily-headline">Loading Today's Briefing&hellip;</h1>
           <p id="daily-subheadline" style="font-size:.88rem;color:var(--gold);font-weight:600;margin-bottom:.5rem;letter-spacing:.02em"></p>
@@ -563,7 +564,7 @@
             <div class="wx-chart-legend"><span><span class="wx-chart-legend-sw" style="background:rgba(58,139,60,.45)"></span>5-yr avg</span><span><span class="wx-chart-legend-sw" style="background:var(--gold)"></span>This year</span></div>
           </div>
           <div class="wx-summary-card" style="margin-top:.85rem">
-            <div class="wx-summary-title">&#x1F4C5; 7-Day Forecast</div>
+            <div class="wx-summary-title">&#x1F4C5; 5-Day Forecast</div>
             <div id="wx-forecast-7day" class="wx-7day-strip">
               <div class="wx-7day-cell"><div class="wx-7day-name">Today</div><div class="wx-7day-icon">&#x26C5;</div><div class="wx-7day-temps"><span class="hi">--&deg;</span><span class="lo">--&deg;</span></div><div class="wx-7day-meta">--</div></div>
               <div class="wx-7day-cell"><div class="wx-7day-name">&mdash;</div><div class="wx-7day-icon">&#x26C5;</div><div class="wx-7day-temps"><span class="hi">--&deg;</span><span class="lo">--&deg;</span></div><div class="wx-7day-meta">--</div></div>
@@ -769,8 +770,8 @@
       <button class="noaa-tab" data-period="90" data-label="3-Month (Seasonal)">3-Month</button>
     </div>
     <div class="noaa-grid">
-      <div class="noaa-card"><div class="noaa-card-head temp">&#x1F321;&#xFE0F; Temperature Outlook</div><img id="noaa-temp-img" src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif" alt="NOAA 1-month temperature outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noaa-img-err"><span>&#x1F321;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div></div>
-      <div class="noaa-card"><div class="noaa-card-head precip">&#x1F327;&#xFE0F; Precipitation Outlook</div><img id="noaa-precip-img" src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif" alt="NOAA 1-month precipitation outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noaa-img-err"><span>&#x1F327;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div></div>
+      <div class="noaa-card"><div class="noaa-card-head temp">&#x1F321;&#xFE0F; Temperature Outlook</div><img id="noaa-temp-img" data-src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif" alt="NOAA 1-month temperature outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noaa-img-err"><span>&#x1F321;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div></div>
+      <div class="noaa-card"><div class="noaa-card-head precip">&#x1F327;&#xFE0F; Precipitation Outlook</div><img id="noaa-precip-img" data-src="https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif" alt="NOAA 1-month precipitation outlook" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="noaa-img-err"><span>&#x1F327;&#xFE0F; Image unavailable</span><a href="https://www.cpc.ncep.noaa.gov/products/predictions/30day/" target="_blank" rel="noopener">View on NOAA CPC &rarr;</a></div></div>
     </div>
     <div class="noaa-note">Source: <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA Climate Prediction Center</a> &middot; 1-Month issued last day of month &middot; 3-Month issued 3rd Thursday &middot; <span id="noaa-period-label">1-Month (30-Day)</span></div>
   </div>
@@ -1005,8 +1006,19 @@
       var a=err.querySelector('a');if(a)a.setAttribute('href',fallbackUrl);
     }
     img.alt=alt;
+    img._loaded=true;
     img.src=src;
   }
+  // Lazy-init: defer initial NOAA image load until scrolled into view (rural-bandwidth friendly)
+  function lazyInit(img){
+    if(!img||!img.dataset.src||img._loaded)return;
+    function loadNow(){if(img._loaded)return;img._loaded=true;img.src=img.dataset.src;}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){loadNow();io.disconnect();}},{rootMargin:'400px'});
+      io.observe(img);
+    } else loadNow();
+  }
+  lazyInit(tempImg);lazyInit(precipImg);
   document.querySelectorAll('#noaa-tabs .noaa-tab').forEach(function(btn){
     btn.addEventListener('click',function(){
       document.querySelectorAll('#noaa-tabs .noaa-tab').forEach(function(b){b.classList.remove('active');});
@@ -1059,11 +1071,18 @@ fetch('/data/crop-progress.json')
     ['corn','soybeans'].forEach(function(comm){
       var key=comm==='soybeans'?'bean':comm,d=data[comm];if(!d)return;
       var geEl=document.getElementById('crop-'+key+'-ge');
-      if(geEl){if(d.good_excellent!=null){geEl.textContent=fmtPct(d.good_excellent);geEl.className='crop-ge-val '+geClass(d.good_excellent);allNull=false;}else{geEl.textContent='\u2014';geEl.className='crop-ge-val fair';}}
-      var wkChg=fmtChg(d.good_excellent,d.good_excellent_prev_week,'%'),yrChg=fmtChg(d.good_excellent,d.good_excellent_prev_year,'%');
       var wkEl=document.getElementById('crop-'+key+'-wk'),yrEl=document.getElementById('crop-'+key+'-yr');
-      if(wkEl){wkEl.textContent=wkChg.txt;wkEl.className='crop-chg '+wkChg.cls;}
-      if(yrEl){yrEl.textContent=yrChg.txt;yrEl.className='crop-chg '+yrChg.cls;}
+      var changeRow=wkEl?wkEl.parentElement:null;
+      if(d.good_excellent!=null){
+        if(geEl){geEl.textContent=fmtPct(d.good_excellent);geEl.className='crop-ge-val '+geClass(d.good_excellent);geEl.style.display='';allNull=false;}
+        var wkChg=fmtChg(d.good_excellent,d.good_excellent_prev_week,'%'),yrChg=fmtChg(d.good_excellent,d.good_excellent_prev_year,'%');
+        if(wkEl){wkEl.textContent=wkChg.txt;wkEl.className='crop-chg '+wkChg.cls;}
+        if(yrEl){yrEl.textContent=yrChg.txt;yrEl.className='crop-chg '+yrChg.cls;}
+        if(changeRow)changeRow.style.display='';
+      }else{
+        if(geEl)geEl.style.display='none';
+        if(changeRow)changeRow.style.display='none';
+      }
       var plantEl=document.getElementById('crop-'+key+'-plant'),barEl=document.getElementById('crop-'+key+'-bar');
       if(plantEl)plantEl.textContent=d.planting_pct!=null?fmtPct(d.planting_pct):'\u2014';
       if(barEl)barEl.style.width=Math.min(d.planting_pct||0,100)+'%';
@@ -1219,7 +1238,11 @@ gj('/data/markets.json').then(function(cached){
     var tue=getMostRecentTuesday(),ds=fmtDate(tue),prev=new Date(tue);prev.setDate(prev.getDate()-7);
     var urls=['https://droughtmonitor.unl.edu/data/png/'+ds+'/'+ds+'_usdm.png','https://droughtmonitor.unl.edu/data/png/'+fmtDate(prev)+'/'+fmtDate(prev)+'_usdm.png','https://droughtmonitor.unl.edu/data/png/current/current_usdm.png'];
     var attempt=0;function tryNext(){if(attempt>=urls.length){img.style.display='none';if(fallback)fallback.style.display='flex';return;}img.src=urls[attempt++];}
-    img.addEventListener('error',tryNext);img.addEventListener('load',function(){if(fallback)fallback.style.display='none';});tryNext();
+    img.addEventListener('error',tryNext);img.addEventListener('load',function(){if(fallback)fallback.style.display='none';});
+    if('IntersectionObserver' in window){
+      var _dio=new IntersectionObserver(function(e){if(e[0].isIntersecting){tryNext();_dio.disconnect();}},{rootMargin:'400px'});
+      _dio.observe(img);
+    } else { tryNext(); }
   })();
   var teaser=document.getElementById('daily-teaser');
   if(teaser){teaser.addEventListener('click',expandDaily);teaser.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();expandDaily();}});}
@@ -1752,7 +1775,7 @@ function loadWeatherEnhancements(state){
       else if(soilEstF<60){soilClass='good';soilCtx='Good for planting';}
       else{soilClass='good';soilCtx='Excellent planting conditions';}
     }
-    var soilDisplay=soilEstF!=null?soilEstF+'\xb0F (6cm)':'--\xb0F';
+    var soilDisplay=soilEstF!=null?soilEstF+'\xb0F':'--\xb0F';
     var stv=document.getElementById('soil-temp-val');
     if(stv){stv.textContent=soilDisplay;stv.className='soil-temp-val '+soilClass;}
     var stc=document.getElementById('soil-temp-ctx');if(stc)stc.textContent=soilCtx;
