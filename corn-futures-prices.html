@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KXCTD5Z9H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6KXCTD5Z9H');window.gaEvent=function(n,p){try{gtag('event',n,p||{});}catch(e){};};</script>
-<link rel="preload" href="/components/styles.css?v=10" as="style">
-<link rel="stylesheet" href="/components/styles.css?v=10">
+<link rel="preload" href="/components/styles.css?v=14" as="style">
+<link rel="stylesheet" href="/components/styles.css?v=14">
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
@@ -121,6 +121,159 @@ button,a,[role="button"]{touch-action:manipulation;}
 .ra:hover{border-color:var(--border-g)}.ra-i{font-size:1.2rem;margin-bottom:3px}.ra-n{font-size:.8rem;font-weight:600;color:var(--text)}.ra-d{font-size:.65rem;color:var(--text-dim);margin-top:1px}
 .disc{font-size:.68rem;color:var(--text-dim);text-align:center;padding:8px;border-top:1px solid var(--border);margin-top:14px}
 @media(max-width:520px){.ph{padding:.9rem}.ph-icon{font-size:2rem}.ph-val{font-size:1.7rem}.cg{grid-template-columns:repeat(2,minmax(0,1fr))}.rat-row{grid-template-columns:1fr}}
+
+/* NEW v11: daily briefing strip */
+.brief-strip{display:flex;gap:10px;align-items:center;background:linear-gradient(135deg,rgba(230,176,66,.08) 0%,var(--surface) 100%);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:10px;padding:10px 12px;margin:0 0 10px}
+.brief-icon{font-size:1.3rem;flex-shrink:0}
+.brief-text{flex:1;min-width:0}
+.brief-hd{font-size:.78rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:2px}
+.brief-teaser{font-size:.68rem;color:var(--text-dim);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.brief-cta{font-size:.68rem;color:var(--gold);text-decoration:none;white-space:nowrap;padding:6px 10px;border:1px solid var(--border);border-radius:6px;flex-shrink:0;min-height:32px;display:flex;align-items:center}
+.brief-cta:hover{border-color:var(--gold)}
+/* NEW v11: forward curve */
+.fwd-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:14px}
+.fwd-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+.fwd-title{font-size:.78rem;font-weight:700;color:var(--gold)}
+.fwd-shape{font-size:.68rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+.fwd-svg{width:100%;height:auto;display:block;max-height:180px}
+.fwd-interp{font-size:.72rem;color:var(--text-dim);line-height:1.55;margin-top:8px;border-top:1px solid var(--border);padding-top:7px}
+.fwd-interp strong{color:var(--text)}
+.fwd-empty{font-size:.72rem;color:var(--text-muted);padding:20px;text-align:center}
+/* NEW v11: personal breakeven */
+.be-strip{background:rgba(58,139,60,.04);border:1px dashed var(--border-g);border-radius:8px;padding:9px 12px;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.be-strip label{font-size:.72rem;color:var(--text-dim);font-weight:600}
+.be-strip input{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:1rem;color:var(--text);width:110px;font-family:'JetBrains Mono',monospace;min-height:36px}
+.be-strip input:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+.be-result{font-size:.72rem;color:var(--text);flex:1;min-width:0}
+.be-result.over{color:var(--green);font-weight:600}
+.be-result.under{color:var(--red);font-weight:600}
+.be-clear{font-size:.65rem;color:var(--text-dim);background:none;border:none;cursor:pointer;padding:4px;text-decoration:underline}
+/* NEW v11: FFAI badge */
+.ffai-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--surface) 0%,rgba(58,139,60,.08) 100%);border:1px solid var(--border-g);border-radius:20px;padding:5px 10px;font-size:.62rem;color:var(--text-dim);text-decoration:none;font-weight:600}
+.ffai-badge:hover{border-color:var(--green)}
+.ffai-score{color:var(--green);font-family:'Oswald',sans-serif;font-size:.72rem}
+.ffai-lbl{text-transform:uppercase;letter-spacing:.08em}
+/* NEW v11: signup card + big CTA */
+.signup-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(58,139,60,.05) 100%);border:1px solid var(--border-g);border-radius:12px;padding:14px;margin-bottom:14px;text-align:center}
+.signup-card h3{font-size:.85rem;color:var(--gold);margin:0 0 4px 0}
+.signup-card p{font-size:.72rem;color:var(--text-dim);margin:0 0 10px 0;line-height:1.5}
+.signup-form{display:flex;gap:6px;max-width:420px;margin:0 auto;flex-wrap:wrap}
+.signup-form input{flex:1;min-width:180px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:1rem;color:var(--text);min-height:40px}
+.signup-form input:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+.signup-form button{background:var(--green);color:#fff;border:none;border-radius:6px;padding:10px 16px;font-size:.78rem;font-weight:700;cursor:pointer;min-height:40px}
+.signup-form button:hover{background:#4aab4c}
+.signup-ok{color:var(--green);font-size:.78rem;margin-top:8px;font-weight:600;display:none}
+.signup-sub{font-size:.62rem;color:var(--text-dim);margin-top:6px}
+.big-cta{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(58,139,60,.1) 0%,var(--surface) 100%);border:1px solid var(--border-g);border-left:3px solid var(--green);border-radius:12px;padding:14px;margin-bottom:14px;text-decoration:none;transition:transform .15s,border-color .2s;min-height:44px}
+.big-cta:hover{border-color:var(--green);transform:translateX(2px)}
+.big-cta-i{font-size:1.8rem;flex-shrink:0}
+.big-cta-hd{font-size:.88rem;font-weight:700;color:var(--text);line-height:1.3}
+.big-cta-sub{font-size:.68rem;color:var(--text-dim);line-height:1.4;margin-top:2px}
+
+
+/* NEW v12: Crop Progress card */
+.crop-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:14px;display:none}
+.crop-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+.crop-title{font-size:.78rem;font-weight:700;color:var(--gold)}
+.crop-asof{font-size:.62rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+.crop-section{margin-bottom:12px}
+.crop-section:last-child{margin-bottom:0}
+.crop-sec-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:700;margin-bottom:6px}
+.crop-bar-wrap{position:relative;height:20px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.crop-bar-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--green) 0%,#5dbf61 100%);border-radius:4px;transition:width .6s ease}
+.crop-bar-pct{position:absolute;top:50%;left:9px;transform:translateY(-50%);font-size:.72rem;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5);font-family:'Oswald',sans-serif;z-index:1;line-height:1}
+.crop-row{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-dim);padding:1px 0;line-height:1.5}
+.crop-row .v{color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+.crop-pace{font-size:.7rem;margin-top:6px;padding:6px 9px;border-radius:5px;font-weight:600;line-height:1.4}
+.crop-pace.behind{background:rgba(200,86,46,.12);color:var(--red);border:1px solid rgba(200,86,46,.3)}
+.crop-pace.ahead{background:rgba(58,139,60,.12);color:var(--green);border:1px solid rgba(58,139,60,.3)}
+.crop-pace.onpace{background:rgba(230,176,66,.1);color:var(--gold);border:1px solid rgba(230,176,66,.25)}
+.crop-pending{font-size:.68rem;color:var(--text-muted);font-style:italic;padding:6px 0;line-height:1.5}
+.crop-src{font-size:.6rem;color:var(--text-muted);margin-top:10px;border-top:1px solid var(--border);padding-top:7px}
+.crop-src a{color:var(--gold);text-decoration:none}
+/* NEW v12: COT positioning card */
+.cot-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:14px;display:none}
+.cot-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.cot-title{font-size:.78rem;font-weight:700;color:var(--gold)}
+.cot-asof{font-size:.62rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+.cot-net{font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;line-height:1;margin-bottom:2px;color:var(--text)}
+.cot-net.long{color:var(--green)}
+.cot-net.short{color:var(--red)}
+.cot-sub{font-size:.7rem;color:var(--text-dim);margin-bottom:12px}
+.cot-gauge{position:relative;height:8px;background:linear-gradient(to right,var(--red) 0%,var(--gold) 50%,var(--green) 100%);border-radius:4px;margin-bottom:6px}
+.cot-dot{position:absolute;top:-4px;width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid #fff;transition:left .6s ease;box-shadow:0 0 0 2px var(--gold)}
+.cot-labels{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-dim);margin-bottom:8px}
+.cot-pct{font-size:.7rem;color:var(--text);margin-bottom:5px}
+.cot-pct strong{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.cot-chg{font-size:.7rem;color:var(--text-dim);margin-bottom:5px}
+.cot-chg .delta{font-family:'JetBrains Mono',monospace;font-weight:700}
+.cot-chg .delta.up{color:var(--green)}.cot-chg .delta.dn{color:var(--red)}
+.cot-interp{font-size:.72rem;color:var(--text-dim);line-height:1.55;margin-top:8px;border-top:1px solid var(--border);padding-top:8px}
+.cot-interp strong{color:var(--text)}
+.cot-src{font-size:.6rem;color:var(--text-muted);margin-top:8px}
+.cot-src a{color:var(--gold);text-decoration:none}
+
+
+/* NEW v13: Market session status badge */
+.session-badge{display:inline-flex;align-items:center;gap:6px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 9px;border-radius:12px;margin-left:auto;font-family:'JetBrains Mono',monospace}
+.session-badge .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.session-badge.open{background:rgba(58,139,60,.15);color:var(--green);border:1px solid rgba(58,139,60,.4)}
+.session-badge.open .dot{background:var(--green);animation:pulse 2s infinite}
+.session-badge.overnight{background:rgba(230,176,66,.12);color:var(--gold);border:1px solid rgba(230,176,66,.35)}
+.session-badge.overnight .dot{background:var(--gold)}
+.session-badge.closed{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
+.session-badge.closed .dot{background:var(--text-muted)}
+.session-sub{font-size:.6rem;color:var(--text-dim);font-weight:500;text-transform:none;letter-spacing:0;margin-left:4px}
+
+/* NEW v13: Sectioned Market Read */
+.mr-section{margin-bottom:11px}
+.mr-section:last-child{margin-bottom:0}
+.mr-sec-lbl{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.mr-sec-lbl .em{font-size:.78rem;line-height:1}
+.mr-sec-body{font-size:.82rem;line-height:1.7;color:var(--text-dim);margin:0}
+.mr-sec-body strong{color:var(--text);font-weight:700}
+.mr-do{background:rgba(58,139,60,.07);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:8px 10px;margin-top:2px}
+.mr-do .mr-sec-body{color:var(--text)}
+
+/* NEW v13: WASDE imminence — when within 7 days */
+.snap-cat.imminent{background:rgba(230,176,66,.15);border:1px solid rgba(230,176,66,.4);color:var(--gold);padding:5px 9px;border-radius:5px;font-weight:700;animation:wasdePulse 3s ease-in-out infinite}
+.snap-cat.imminent strong{color:var(--gold)}
+@keyframes wasdePulse{0%,100%{box-shadow:0 0 0 0 rgba(230,176,66,0)}50%{box-shadow:0 0 0 4px rgba(230,176,66,.08)}}
+
+/* NEW v13: Sigurd trust block */
+.author-block{background:linear-gradient(135deg,var(--surface) 0%,rgba(58,139,60,.03) 100%);border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin-bottom:14px;display:flex;align-items:flex-start;gap:12px}
+.author-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--green) 0%,#5dbf61 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;flex-shrink:0;border:2px solid rgba(255,255,255,.1)}
+.author-text{flex:1;min-width:0}
+.author-name{font-size:.78rem;font-weight:700;color:var(--text);margin:0 0 2px 0}
+.author-role{font-size:.66rem;color:var(--text-dim);margin:0 0 6px 0;line-height:1.5}
+.author-meta{font-size:.66rem;color:var(--text-dim);line-height:1.5}
+.author-meta a{color:var(--gold);text-decoration:none}
+.author-meta a:hover{text-decoration:underline}
+@media(max-width:480px){.author-block{flex-direction:column;gap:8px}.author-avatar{width:38px;height:38px;font-size:1rem}}
+
+
+/* NEW v14: Local cash bid (basis) card */
+.basis-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(58,139,60,.04) 100%);border:1px solid var(--border-g);border-left:3px solid var(--green);border-radius:12px;padding:13px 14px;margin-bottom:14px;display:none}
+.basis-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+.basis-title{font-size:.78rem;font-weight:700;color:var(--gold)}
+.basis-loc{font-size:.62rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right;flex-shrink:0;line-height:1.4}
+.basis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.basis-cell{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 8px;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:60px}
+.basis-cell-lbl{font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);margin-bottom:4px;font-weight:700}
+.basis-cell-val{font-family:'Oswald',sans-serif;font-size:1.35rem;font-weight:700;color:var(--text);line-height:1}
+.basis-cell-val.basis-pos{color:var(--green)}
+.basis-cell-val.basis-neg{color:var(--gold)}
+.basis-interp{font-size:.74rem;color:var(--text-dim);line-height:1.65;margin-top:4px;border-top:1px solid var(--border);padding-top:9px}
+.basis-interp strong{color:var(--text)}
+.basis-empty-msg{font-size:.74rem;color:var(--text-dim);line-height:1.65;padding:8px 4px;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);margin:6px 0 4px}
+.basis-empty-msg strong{color:var(--text);font-weight:700}
+.basis-actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.basis-actions a,.basis-actions button{font-size:.7rem;color:var(--gold);background:transparent;border:1px solid var(--border);border-radius:6px;padding:7px 12px;text-decoration:none;cursor:pointer;font-family:inherit;min-height:34px;display:inline-flex;align-items:center}
+.basis-actions a:hover,.basis-actions button:hover{border-color:var(--gold)}
+.basis-src{font-size:.6rem;color:var(--text-muted);margin-top:9px;line-height:1.5}
+.basis-src a{color:var(--gold);text-decoration:none}
+@media(max-width:480px){.basis-grid{grid-template-columns:1fr}.basis-cell{flex-direction:row;text-align:left;padding:9px 12px;min-height:42px;justify-content:space-between}.basis-cell-lbl{margin-bottom:0}}
+
 </style>
 </head>
 <body>
@@ -129,6 +282,14 @@ button,a,[role="button"]{touch-action:manipulation;}
 <div id="site-header"></div>
 <main id="main" class="fut" tabindex="-1">
   <nav class="bc" aria-label="Breadcrumb"><a href="/">Home</a> → Corn Futures Prices</nav>
+  <div class="brief-strip" id="brief-strip" style="display:none">
+    <div class="brief-icon">📰</div>
+    <div class="brief-text">
+      <div class="brief-hd" id="brief-hd">—</div>
+      <div class="brief-teaser" id="brief-teaser">—</div>
+    </div>
+    <a href="/daily" class="brief-cta">Read →</a>
+  </div>
 
   <div class="ph">
     <div class="ph-icon">🌽</div>
@@ -143,16 +304,39 @@ button,a,[role="button"]{touch-action:manipulation;}
     </div>
   </div>
 
-  <div class="ps"><span class="ps-dot" aria-hidden="true"></span><span id="status">Loading prices…</span></div>
+  <div class="ps"><span class="ps-dot" aria-hidden="true"></span><span id="status">Loading prices…</span><span class="session-badge closed" id="session-badge"><span class="dot" aria-hidden="true"></span>Loading…</span></div>
+
+  <div class="be-strip">
+    <label for="be-input">My cost of production:</label>
+    <input type="number" id="be-input" placeholder="$/bu (typical $3.50-4.50)" step="0.01" inputmode="decimal" aria-label="Your cost of production in dollars per bushel">
+    <span class="be-result" id="be-result"></span>
+    <button type="button" class="be-clear" id="be-clear">clear</button>
+  </div>
 
   <div class="snap-card">
     <div class="snap-hd">
       <span class="snap-lbl">🧭 Today's Market Read</span>
       <span class="snap-age" id="snap-age"></span>
+      <a href="/ffai-index" class="ffai-badge"><span class="ffai-lbl">FFAI Corn:</span> <span class="ffai-score">—</span> <span style="opacity:.5">preview</span></a>
     </div>
-    <p class="snap-body" id="snap-body">Analyzing current prices…</p>
+
+    <div class="mr-section">
+      <div class="mr-sec-lbl"><span class="em">📍</span> Where the market is</div>
+      <p class="mr-sec-body" id="mr-where">Analyzing current prices…</p>
+    </div>
+
+    <div class="mr-section">
+      <div class="mr-sec-lbl"><span class="em">🔍</span> What's moving it</div>
+      <p class="mr-sec-body" id="mr-what"><em style="opacity:.6">Loading fundamentals…</em></p>
+    </div>
+
+    <div class="mr-section mr-do" id="mr-do-wrap" style="display:none">
+      <div class="mr-sec-lbl"><span class="em">🎯</span> What I'd do</div>
+      <p class="mr-sec-body" id="mr-do"></p>
+    </div>
+
     <div class="snap-ft">
-      <span class="snap-cat">📅 Next WASDE: <strong id="snap-wasde">—</strong></span>
+      <span class="snap-cat" id="snap-wasde-wrap">📅 Next WASDE: <strong id="snap-wasde">—</strong></span>
       <a href="/usda-calendar" class="snap-link">Full USDA Calendar →</a>
     </div>
   </div>
@@ -198,6 +382,78 @@ button,a,[role="button"]{touch-action:manipulation;}
     </div>
   </div>
 
+  <div class="basis-card" id="basis-card">
+    <div class="basis-head">
+      <span class="basis-title">💵 Local Cash Bid · Corn</span>
+      <span class="basis-loc" id="basis-loc">—</span>
+    </div>
+    <div class="basis-grid" id="basis-grid">
+      <div class="basis-cell">
+        <div class="basis-cell-lbl">Cash Bid</div>
+        <div class="basis-cell-val" id="basis-bid">—</div>
+      </div>
+      <div class="basis-cell">
+        <div class="basis-cell-lbl">Basis vs Futures</div>
+        <div class="basis-cell-val" id="basis-spread">—</div>
+      </div>
+      <div class="basis-cell">
+        <div class="basis-cell-lbl">Delivery</div>
+        <div class="basis-cell-val" id="basis-delivery">—</div>
+      </div>
+    </div>
+    <div class="basis-empty-msg" id="basis-empty-msg" style="display:none"></div>
+    <div class="basis-interp" id="basis-interp" style="display:none"></div>
+    <div class="basis-actions">
+      <a href="/cash-bids">See full cash bid map →</a>
+      <button type="button" id="basis-zip-btn">Set my ZIP</button>
+    </div>
+    <div class="basis-src" id="basis-src">Cash bids sourced from Barchart OnDemand API · 50-ZIP grid sample across the grain belt</div>
+  </div>
+  <div class="crop-card" id="crop-card">
+    <div class="crop-head">
+      <span class="crop-title">🌾 USDA Crop Progress · Corn</span>
+      <span class="crop-asof" id="crop-asof"></span>
+    </div>
+    <div class="crop-section" id="crop-plant-sec">
+      <div class="crop-sec-lbl">Planting Progress</div>
+      <div class="crop-bar-wrap"><div class="crop-bar-fill" id="crop-plant-fill" style="width:0%"></div><div class="crop-bar-pct" id="crop-plant-bar-pct">—</div></div>
+      <div class="crop-row"><span id="crop-plant-prev">—</span></div>
+      <div class="crop-pace" id="crop-plant-pace" style="display:none">—</div>
+    </div>
+    <div class="crop-section" id="crop-ge-sec">
+      <div class="crop-sec-lbl">Crop Condition (Good + Excellent)</div>
+      <div class="crop-bar-wrap"><div class="crop-bar-fill" id="crop-ge-fill" style="width:0%"></div><div class="crop-bar-pct" id="crop-ge-bar-pct">—</div></div>
+      <div class="crop-pending" id="crop-ge-pending" style="display:none"></div>
+      <div class="crop-row"><span id="crop-ge-prev-week"></span></div>
+      <div class="crop-row"><span id="crop-ge-prev-yr"></span></div>
+    </div>
+    <div class="crop-src">Source: USDA NASS Weekly Crop Progress · national aggregate · reported Mondays after market close · <a href="https://www.nass.usda.gov/Publications/National_Crop_Progress/" target="_blank" rel="noopener">NASS ↗</a></div>
+  </div>
+  <div class="cot-card" id="cot-card">
+    <div class="cot-head">
+      <span class="cot-title">📊 Managed Money Positioning · Corn</span>
+      <span class="cot-asof" id="cot-asof"></span>
+    </div>
+    <div class="cot-net" id="cot-net">—</div>
+    <div class="cot-sub" id="cot-sub">net contracts</div>
+    <div id="cot-gauge-wrap">
+      <div class="cot-gauge"><div class="cot-dot" id="cot-dot" style="left:50%"></div></div>
+      <div class="cot-labels"><span>← deeply short</span><span>neutral</span><span>deeply long →</span></div>
+      <div class="cot-pct" id="cot-pct">—</div>
+    </div>
+    <div class="cot-chg" id="cot-chg">—</div>
+    <div class="cot-interp" id="cot-interp">Loading positioning data…</div>
+    <div class="cot-src">Source: CFTC Disaggregated Commitments of Traders, futures-only, released Fridays 3:30 PM ET · <a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm" target="_blank" rel="noopener">CFTC ↗</a></div>
+  </div>
+  <div class="fwd-card">
+    <div class="fwd-head">
+      <span class="fwd-title">📊 Forward Curve · All Corn Contracts</span>
+      <span class="fwd-shape" id="fwd-shape">—</span>
+    </div>
+    <svg class="fwd-svg" id="fwd-svg" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="fwd-empty" id="fwd-empty" style="display:none">Not enough deferred contracts available for curve analysis.</div>
+    <div class="fwd-interp" id="fwd-interp">Carry analysis loads with price data.</div>
+  </div>
   <div class="cp">
     <div class="cp-head">
       <h2>📈 Corn Front Month — Interactive Chart</h2>
@@ -306,6 +562,17 @@ button,a,[role="button"]{touch-action:manipulation;}
     </div>
   </div>
 
+  <div class="signup-card">
+    <h3>📬 Daily market briefing, direct from me</h3>
+    <p>Weekday grain market read with the numbers, the USDA calendar, and the context — no fluff, no affiliate links. Written by a farmer, for farmers.</p>
+    <form class="signup-form" id="signup-form" novalidate>
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      <button type="submit">Subscribe</button>
+    </form>
+    <div class="signup-ok" id="signup-ok">✓ Subscribed. Next briefing arrives weekday 6am CT.</div>
+    <div class="signup-sub">Free · unsubscribe anytime · I read every reply</div>
+  </div>
+
   <div class="rl">Related Tools</div>
   <div class="rg">
     <a href="/soybean-futures-prices" class="ra"><div class="ra-i">🫘</div><div class="ra-n">Soybean Futures</div><div class="ra-d">Corn/bean ratio</div></a>
@@ -315,16 +582,916 @@ button,a,[role="button"]{touch-action:manipulation;}
     <a href="/usda-calendar" class="ra"><div class="ra-i">📅</div><div class="ra-n">USDA Calendar</div><div class="ra-d">Next report date</div></a>
     <a href="/fast-facts" class="ra"><div class="ra-i">⚡</div><div class="ra-n">Fast Facts</div><div class="ra-d">N rates, P&amp;K, GDU</div></a>
   </div>
+  <a href="/cash-bids" class="big-cta">
+    <div class="big-cta-i">💵</div>
+    <div>
+      <div class="big-cta-hd">See what your local elevator is paying today</div>
+      <div class="big-cta-sub">Futures are the benchmark. Cash bid minus futures is your basis — the number that actually puts money in your pocket. →</div>
+    </div>
+  </a>
+
+  <div class="author-block">
+    <div class="author-avatar" aria-hidden="true">SL</div>
+    <div class="author-text">
+      <div class="author-name">Built by Sigurd Lindquist</div>
+      <div class="author-role">A farmer in Wisconsin and Minnesota who couldn't find a market dashboard that made sense from a tractor cab. So I built one.</div>
+      <div class="author-meta">Questions, corrections, partnership? <a href="mailto:sig@farmers1st.com">sig@farmers1st.com</a> · <a href="/about">About AGSIST</a></div>
+    </div>
+  </div>
   <div class="disc">Prices from Yahoo Finance via GitHub Actions (delayed ~15 min). Chart shows Capital.com CORN CFD which tracks CBOT corn futures; for exact ZC1! data use the TradingView link. Not financial advice. Verify with your elevator or broker before making marketing decisions.</div>
 </main>
 
 <div id="site-footer"></div>
 <script src="/components/loader.js" defer></script>
+<script src="/components/geo.js" defer></script>
 <script>
 (function(){
 'use strict';
+// Crop config injected by splicer
+var CROP_KEY='corn';
+var CROP_LABEL='Corn';
+var CROP_EMOJI='🌽';
+var CROP_PROGRESS_KEY='corn';
+var FWD_CONTRACTS=[{key:"corn-jul26",month:"Jul 26",idx:319},{key:"corn-sep26",month:"Sep 26",idx:321},{key:"corn-dec",month:"Dec 26",idx:324},{key:"corn-mar27",month:"Mar 27",idx:327},{key:"corn-may27",month:"May 27",idx:329},{key:"corn-jul27",month:"Jul 27",idx:331},{key:"corn-dec27",month:"Dec 27",idx:336}];
+
+
+// ============ MARKET READ ASSEMBLY (v12 refactor) ============
+// Single state object so any data source (price/crop/cot/breakeven) can
+// re-trigger a render without the others stomping on each other.
+window.__agsistMR={base:[],crop:[],cot:[],basis:[],breakeven:null};
+
+function renderMarketRead(){
+  var snapEl=document.getElementById('snap-body');
+  if(!snapEl)return;
+  var mr=window.__agsistMR;
+  if(!mr.base||mr.base.length===0)return;
+  var all=mr.base.slice();
+  if(mr.crop&&mr.crop.length)all=all.concat(mr.crop);
+  if(mr.cot&&mr.cot.length)all=all.concat(mr.cot);
+  if(mr.breakeven)all.push(mr.breakeven);
+  snapEl.innerHTML=all.join('; ')+'.';
+}
+
+// ============ CROP PROGRESS (USDA NASS) ============
+function buildCropPhrases(cropData){
+  if(!cropData||!CROP_PROGRESS_KEY||!cropData[CROP_PROGRESS_KEY])return [];
+  var cp=cropData[CROP_PROGRESS_KEY];
+  var phrases=[];
+  if(cp.planting_pct!=null&&cp.planting_prev_year!=null){
+    var diff=cp.planting_pct-cp.planting_prev_year;
+    if(Math.abs(diff)>5){
+      var tag;
+      if(diff<-15)tag='significantly behind pace, historically supportive for prices';
+      else if(diff<0)tag='running behind pace';
+      else if(diff>15)tag='running well ahead of pace \u2014 modest bearish bias';
+      else tag='running ahead of pace';
+      phrases.push('with planting at <strong>'+cp.planting_pct+'% complete vs '+cp.planting_prev_year+'% prior year</strong> \u2014 '+tag);
+    }
+  }
+  if(cp.good_excellent!=null&&cp.good_excellent_prev_year!=null){
+    var ged=cp.good_excellent-cp.good_excellent_prev_year;
+    if(Math.abs(ged)>=4){
+      phrases.push('crop condition at <strong>'+cp.good_excellent+'% good/excellent vs '+cp.good_excellent_prev_year+'% prior year</strong> ('+Math.abs(ged)+' points '+(ged>0?'better':'worse')+')');
+    }
+  }
+  return phrases;
+}
+
+function renderCropProgress(data){
+  var card=document.getElementById('crop-card');
+  if(!card)return;
+  if(!data||!CROP_PROGRESS_KEY||!data[CROP_PROGRESS_KEY]){card.style.display='none';return;}
+  var d=data[CROP_PROGRESS_KEY];
+  if(d.planting_pct==null&&d.good_excellent==null&&d.good_excellent_prev_year==null){card.style.display='none';return;}
+  card.style.display='block';
+
+  // Planting section
+  var plantSec=document.getElementById('crop-plant-sec');
+  if(d.planting_pct!=null){
+    if(plantSec)plantSec.style.display='block';
+    var fill=document.getElementById('crop-plant-fill');if(fill)fill.style.width=d.planting_pct+'%';
+    var pct=document.getElementById('crop-plant-bar-pct');if(pct)pct.textContent=d.planting_pct+'%';
+    var prevWk=document.getElementById('crop-plant-prev');
+    if(prevWk){
+      if(d.planting_prev_year!=null)prevWk.innerHTML='Prior year same week: <span class="v">'+d.planting_prev_year+'%</span>';
+      else prevWk.textContent='';
+    }
+    var pace=document.getElementById('crop-plant-pace');
+    if(pace&&d.planting_prev_year!=null){
+      var diff=d.planting_pct-d.planting_prev_year;
+      if(Math.abs(diff)<=3){pace.textContent='\u2696\ufe0f On pace with prior year';pace.className='crop-pace onpace';}
+      else if(diff<0){pace.textContent='\u23f3 '+Math.abs(diff)+' points behind prior year';pace.className='crop-pace behind';}
+      else{pace.textContent='\u26a1 '+diff+' points ahead of prior year';pace.className='crop-pace ahead';}
+      pace.style.display='block';
+    }else if(pace){pace.style.display='none';}
+  }else if(plantSec){plantSec.style.display='none';}
+
+  // Good/Excellent section
+  var geSec=document.getElementById('crop-ge-sec');
+  if(d.good_excellent!=null){
+    if(geSec)geSec.style.display='block';
+    var fill=document.getElementById('crop-ge-fill');if(fill)fill.style.width=d.good_excellent+'%';
+    var pct=document.getElementById('crop-ge-bar-pct');if(pct)pct.textContent=d.good_excellent+'% G/E';
+    var pendingEl=document.getElementById('crop-ge-pending');if(pendingEl)pendingEl.style.display='none';
+    var prevWk=document.getElementById('crop-ge-prev-week');
+    if(prevWk&&d.good_excellent_prev_week!=null){
+      var wkChg=d.good_excellent-d.good_excellent_prev_week;
+      var s=wkChg>0?'+':wkChg<0?'':'';
+      prevWk.innerHTML='Prior week: <span class="v">'+d.good_excellent_prev_week+'%</span> ('+s+wkChg+' pts wk-over-wk)';
+    }else if(prevWk)prevWk.textContent='';
+    var prevYr=document.getElementById('crop-ge-prev-yr');
+    if(prevYr&&d.good_excellent_prev_year!=null){
+      prevYr.innerHTML='Prior year same week: <span class="v">'+d.good_excellent_prev_year+'%</span>';
+    }else if(prevYr)prevYr.textContent='';
+  }else{
+    // G/E pending — show context if we have a prior-year value
+    if(geSec)geSec.style.display='block';
+    var fill=document.getElementById('crop-ge-fill');if(fill)fill.style.width='0%';
+    var pct=document.getElementById('crop-ge-bar-pct');if(pct)pct.textContent='\u2014';
+    var pendingEl=document.getElementById('crop-ge-pending');
+    if(pendingEl){
+      var prevYr=d.good_excellent_prev_year;
+      pendingEl.innerHTML=prevYr!=null?'Condition reporting begins later this season. Prior year same week: <span class="v" style="color:var(--text);font-family:JetBrains Mono,monospace;font-weight:600">'+prevYr+'%</span>.':'Condition reporting not yet available for current season.';
+      pendingEl.style.display='block';
+    }
+    var prevWk=document.getElementById('crop-ge-prev-week');if(prevWk)prevWk.textContent='';
+    var prevYrEl=document.getElementById('crop-ge-prev-yr');if(prevYrEl)prevYrEl.textContent='';
+  }
+
+  // As-of stamp
+  var asof=document.getElementById('crop-asof');
+  if(asof){
+    var stamp=d.report_date||data.report_date||data.updated;
+    if(stamp)asof.textContent='Updated '+stamp;
+  }
+}
+
+// ============ COT POSITIONING (CFTC Disaggregated) ============
+function buildCOTPhrases(cotData){
+  if(!cotData||!cotData[CROP_KEY])return [];
+  var d=cotData[CROP_KEY];
+  if(d.net==null||d.min52==null||d.max52==null||d.max52<=d.min52)return [];
+  var pct=Math.round(((d.net-d.min52)/(d.max52-d.min52))*100);
+  pct=Math.max(0,Math.min(100,pct));
+  var stance;
+  if(pct<20)stance='deeply short \u2014 a contrarian bullish setup if news disappoints';
+  else if(pct<40)stance='bearishly leaning';
+  else if(pct<60)stance='in neutral territory';
+  else if(pct<80)stance='bullishly leaning';
+  else stance='deeply long \u2014 vulnerable to long-liquidation if news disappoints';
+  return ['managed money positioning is <strong>'+stance+'</strong> at the '+pct+ord(pct)+' percentile of its 52-week range'];
+}
+
+function fmtKContracts(n){
+  if(n==null)return '\u2014';
+  var sign=n>=0?'+':'\u2212';
+  var abs=Math.abs(n);
+  return sign+(abs>=1000?(abs/1000).toFixed(1)+'k':abs);
+}
+
+function renderCOT(data){
+  var card=document.getElementById('cot-card');
+  if(!card)return;
+  if(!data||!data[CROP_KEY]){card.style.display='none';return;}
+  var d=data[CROP_KEY];
+  if(d.net==null){card.style.display='none';return;}
+  card.style.display='block';
+
+  // Net contracts
+  var netEl=document.getElementById('cot-net');
+  if(netEl){netEl.textContent=fmtKContracts(d.net);netEl.className='cot-net '+(d.net>=0?'long':'short');}
+  var subEl=document.getElementById('cot-sub');
+  if(subEl)subEl.textContent=(d.net>=0?'net long':'net short')+' contracts (managed money, futures-only)';
+
+  // 52w gauge + percentile
+  var pct=null;
+  if(d.min52!=null&&d.max52!=null&&d.max52>d.min52){
+    pct=Math.round(((d.net-d.min52)/(d.max52-d.min52))*100);
+    pct=Math.max(0,Math.min(100,pct));
+    var dot=document.getElementById('cot-dot');if(dot)dot.style.left='calc('+pct+'% - 8px)';
+    var pctEl=document.getElementById('cot-pct');
+    if(pctEl){
+      var rangeStr=fmtKContracts(d.min52)+' to '+fmtKContracts(d.max52);
+      pctEl.innerHTML='<strong>'+pct+ord(pct)+' percentile</strong> of 52-week range ('+rangeStr+' contracts)';
+    }
+  }else{
+    var gauge=document.getElementById('cot-gauge-wrap');
+    if(gauge)gauge.style.display='none';
+  }
+
+  // Week change
+  var chgEl=document.getElementById('cot-chg');
+  if(chgEl){
+    if(d.prev!=null){
+      var delta=d.net-d.prev;
+      var deltaStr=fmtKContracts(delta);
+      var dir;
+      if(delta>0&&d.net>=0)dir='added longs';
+      else if(delta>0&&d.net<0)dir='covered shorts';
+      else if(delta<0&&d.net>0)dir='trimmed longs';
+      else if(delta<0&&d.net<0)dir='added shorts';
+      else dir='unchanged';
+      chgEl.innerHTML='Week-over-week: <span class="delta '+(delta>=0?'up':'dn')+'">'+deltaStr+'</span> contracts ('+dir+')';
+    }else{chgEl.style.display='none';}
+  }
+
+  // Interpretation
+  var interp;
+  if(pct==null){interp='Net positioning loaded; 52-week range data insufficient for percentile context.';}
+  else if(pct<20)interp='<strong>Funds are deeply short.</strong> Historically a contrarian bullish setup at extremes \u2014 when speculative positioning is one-sided, surprise news often forces sharp short-covering rallies.';
+  else if(pct<40)interp='<strong>Funds are bearishly leaning</strong> in the lower portion of their 52-week range. Modest bearish flow but not at an extreme.';
+  else if(pct<60)interp='<strong>Neutral positioning.</strong> Managed money is mid-range; no strong directional bias from speculative flow.';
+  else if(pct<80)interp='<strong>Funds are bullishly leaning</strong> in the upper portion of their 52-week range. Modest bullish flow but not at an extreme.';
+  else interp='<strong>Funds are deeply long.</strong> Historically a contrarian bearish setup at extremes \u2014 crowded longs unwind hard on negative surprises.';
+  var interpEl=document.getElementById('cot-interp');
+  if(interpEl)interpEl.innerHTML=interp;
+
+  // As-of
+  var asof=document.getElementById('cot-asof');
+  if(asof&&data.report_date)asof.textContent='As of '+data.report_date;
+}
+
+// ============ DATA FETCHERS ============
+function loadCropProgress(){
+  if(!CROP_PROGRESS_KEY)return;
+  fetch('/data/crop-progress.json',{cache:'no-store'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){if(!d)return;renderCropProgress(d);window.__agsistMR.crop=buildCropPhrases(d);if(d&&CROP_PROGRESS_KEY&&d[CROP_PROGRESS_KEY]){var __cd=d[CROP_PROGRESS_KEY];window.__agsistMR.cropCtx={planting_diff:(__cd.planting_pct!=null&&__cd.planting_prev_year!=null)?(__cd.planting_pct-__cd.planting_prev_year):null,ge_diff:(__cd.good_excellent!=null&&__cd.good_excellent_prev_year!=null)?(__cd.good_excellent-__cd.good_excellent_prev_year):null};}renderMarketRead();})
+    .catch(function(){var c=document.getElementById('crop-card');if(c)c.style.display='none';});
+}
+
+function loadCOT(){
+  fetch('/data/cot.json',{cache:'no-store'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){if(!d)return;renderCOT(d);window.__agsistMR.cot=buildCOTPhrases(d);if(d&&d[CROP_KEY]){var __ct=d[CROP_KEY];if(__ct.net!=null&&__ct.min52!=null&&__ct.max52!=null&&__ct.max52>__ct.min52){var __cp=Math.round(((__ct.net-__ct.min52)/(__ct.max52-__ct.min52))*100);__cp=Math.max(0,Math.min(100,__cp));window.__agsistMR.cotCtx={pct:__cp};}}renderMarketRead();})
+    .catch(function(){var c=document.getElementById('cot-card');if(c)c.style.display='none';});
+}
+
+
+// ============ MARKET SESSION (v13) ============
+// CME grain futures: Sun-Fri overnight 7:00 PM CT - 7:45 AM CT (next day),
+// Mon-Fri day session 8:30 AM CT - 1:20 PM CT.
+// Returns {state:'open'|'overnight'|'closed', label, sub} where sub is a brief countdown/context.
+function computeMarketSession(){
+  // Get current Central Time using Intl
+  var fmt=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',weekday:'short',hour:'numeric',minute:'numeric',hour12:false});
+  var parts=fmt.formatToParts(new Date());
+  var dayName=parts.find(function(p){return p.type==='weekday';}).value; // Sun,Mon,Tue,Wed,Thu,Fri,Sat
+  var hourStr=parts.find(function(p){return p.type==='hour';}).value;
+  var minStr=parts.find(function(p){return p.type==='minute';}).value;
+  var hr=parseInt(hourStr,10); if(hr===24)hr=0; // some impls return 24 for midnight
+  var mn=parseInt(minStr,10);
+  var dayMap={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  var dow=dayMap[dayName];
+  var tod=hr*60+mn; // minutes since midnight CT
+
+  var DAY_OPEN=8*60+30,    // 510  - 8:30 AM
+      DAY_CLOSE=13*60+20,  // 800  - 1:20 PM
+      OVN_OPEN=19*60,      // 1140 - 7:00 PM
+      OVN_CLOSE=7*60+45;   // 465  - 7:45 AM
+
+  function pad2(n){return n<10?'0'+n:''+n;}
+  function untilToday(targetMin){
+    var d=targetMin-tod;
+    if(d<=0)return null;
+    var h=Math.floor(d/60),m=d%60;
+    return (h>0?h+'h ':'')+m+'m';
+  }
+  function fmtUntil(mins){
+    if(mins<=0)return '0m';
+    var h=Math.floor(mins/60),m=mins%60;
+    if(h>=24){var dys=Math.floor(h/24);return dys+'d '+(h%24)+'h';}
+    return (h>0?h+'h ':'')+m+'m';
+  }
+
+  // Saturday: closed all day until Sunday 7pm
+  if(dow===6){
+    var minsToSunOpen=(24-hr)*60-mn+24*60+OVN_OPEN; // rest of Sat + Sun until 7pm
+    return {state:'closed',label:'Weekend',sub:'reopens Sun '+fmtUntil(minsToSunOpen)};
+  }
+  // Sunday: closed until 7pm CT
+  if(dow===0){
+    if(tod<OVN_OPEN){
+      return {state:'closed',label:'Weekend',sub:'reopens '+untilToday(OVN_OPEN)};
+    }
+    // Sunday >= 7pm: overnight session running into Monday 7:45am
+    var minsToMonOvnEnd=(24-hr)*60-mn+OVN_CLOSE;
+    return {state:'overnight',label:'Overnight Session',sub:'day session opens 8:30am CT'};
+  }
+  // Mon-Fri logic
+  // Pre-7:45 AM: still in overnight from last session
+  if(tod<OVN_CLOSE){
+    return {state:'overnight',label:'Overnight Session',sub:'day session opens '+untilToday(DAY_OPEN)};
+  }
+  // 7:45-8:30 AM: pause between sessions
+  if(tod<DAY_OPEN){
+    return {state:'closed',label:'Pre-Open',sub:'day session opens '+untilToday(DAY_OPEN)};
+  }
+  // 8:30 AM - 1:20 PM: day session open
+  if(tod<DAY_CLOSE){
+    return {state:'open',label:'Day Session Open',sub:'closes '+untilToday(DAY_CLOSE)};
+  }
+  // 1:20 PM - 7:00 PM: closed; reopens overnight at 7pm same day (M-Th) or Sunday (Fri)
+  if(tod<OVN_OPEN){
+    if(dow===5){ // Friday afternoon: closed until Sunday 7pm
+      var minsToSun=(2*24*60)-tod+OVN_OPEN;
+      return {state:'closed',label:'Market Closed',sub:'reopens Sun '+fmtUntil(minsToSun)};
+    }
+    return {state:'closed',label:'Market Closed',sub:'overnight reopens '+untilToday(OVN_OPEN)};
+  }
+  // 7 PM onwards: overnight session
+  if(dow===5){ // Friday evening — there's no Friday overnight; market closed until Sunday
+    var minsToSun=2*24*60-tod+OVN_OPEN;
+    return {state:'closed',label:'Weekend',sub:'reopens Sun '+fmtUntil(minsToSun)};
+  }
+  return {state:'overnight',label:'Overnight Session',sub:'day session opens 8:30am CT'};
+}
+
+function renderMarketSession(){
+  var badge=document.getElementById('session-badge');
+  if(!badge)return;
+  var s=computeMarketSession();
+  badge.className='session-badge '+s.state;
+  badge.innerHTML='<span class="dot" aria-hidden="true"></span>'+s.label+'<span class="session-sub">'+s.sub+'</span>';
+}
+
+// ============ MARKET READ ASSEMBLY (v13 sectioned refactor) ============
+// Replaces v12 single-paragraph render with 3-section render.
+// State unchanged: {base, crop, cot, breakeven, price}.
+// New: buildActionLine(state, ctx) synthesizes a "what I'd do" framework line.
+
+function renderMarketRead(){
+  var mr=window.__agsistMR;
+  if(!mr||!mr.base||mr.base.length===0)return;
+  var whereEl=document.getElementById('mr-where');
+  var whatEl=document.getElementById('mr-what');
+  var doEl=document.getElementById('mr-do');
+  var doWrap=document.getElementById('mr-do-wrap');
+  if(!whereEl||!whatEl)return;
+
+  // WHERE — first phrase from base[] (always the price-percentile phrase)
+  var wherePhrase=mr.base[0]||'';
+  whereEl.innerHTML=wherePhrase?(cap(wherePhrase)+'.'):'';
+
+  // WHAT — remaining base phrases + crop + COT + basis
+  var whatPhrases=[];
+  for(var i=1;i<mr.base.length;i++)whatPhrases.push(mr.base[i]);
+  if(mr.crop&&mr.crop.length)whatPhrases=whatPhrases.concat(mr.crop);
+  if(mr.cot&&mr.cot.length)whatPhrases=whatPhrases.concat(mr.cot);
+  if(mr.basis&&mr.basis.length)whatPhrases=whatPhrases.concat(mr.basis);
+  whatEl.innerHTML=whatPhrases.length?(cap(whatPhrases.join('; '))+'.'):'<em style="opacity:.6">Loading fundamentals\u2026</em>';
+
+  // DO — action-oriented synthesis using breakeven + signal shape
+  var actionLine=buildActionLine(mr);
+  if(actionLine){
+    if(doEl)doEl.innerHTML=actionLine;
+    if(doWrap)doWrap.style.display='block';
+  }else{
+    if(doWrap)doWrap.style.display='none';
+  }
+}
+
+function cap(s){if(!s)return s;return s.charAt(0).toUpperCase()+s.slice(1);}
+
+function getBreakevenPhrase(currentPriceDollars){
+  var be=null;
+  try{var saved=localStorage.getItem('agsist_be_'+CROP_KEY);if(saved)be=parseFloat(saved);}catch(e){}
+  if(!be||!currentPriceDollars||isNaN(be))return null;
+  var diff=currentPriceDollars-be;
+  var result=document.getElementById('be-result');
+  if(diff>=0){
+    if(result){result.innerHTML='\u2713 <strong>$'+diff.toFixed(2)+'/bu above</strong> your $'+be.toFixed(2)+' breakeven';result.className='be-result over';}
+    return {phrase:'at current prices you are <strong>$'+diff.toFixed(2)+'/bu above your stated breakeven</strong> of $'+be.toFixed(2),be:be,diff:diff};
+  }else{
+    if(result){result.innerHTML='<strong>$'+Math.abs(diff).toFixed(2)+'/bu below</strong> your $'+be.toFixed(2)+' breakeven';result.className='be-result under';}
+    return {phrase:'current prices are <strong>$'+Math.abs(diff).toFixed(2)+'/bu below your stated breakeven</strong> of $'+be.toFixed(2),be:be,diff:diff};
+  }
+}
+
+// Action-oriented synthesis. NOT advice — decision framework only.
+// Reads from mr.priceCtx (set by price fetch) and breakeven state.
+function buildActionLine(mr){
+  var p=mr.priceCtx; // {pct, percentile_zone, cropKey}
+  if(!p)return null;
+  var be=mr.breakeven; // {phrase, be, diff} or null
+  var cot=mr.cotCtx;   // {pct, zone}
+  var crop=mr.cropCtx; // {planting_diff, ge_diff} or null
+
+  // Frame the four corners using percentile + breakeven
+  // pct: 0-100 (price percentile), be.diff: $/bu vs BE
+  var pct=p.pct;
+  var hasB=!!be;
+  var diff=hasB?be.diff:null;
+  var lines=[];
+
+  if(hasB){
+    if(diff>=0&&pct>=70){
+      lines.push('You are <strong>above breakeven and price is in the upper third</strong> of its 52-week range. Historically a window where scaling-in forward sales (HTAs, futures hedges, or floor strategies) protects margin without committing all bushels.');
+    }else if(diff>=0&&pct>=40){
+      lines.push('You are <strong>above breakeven in mid-range</strong>. Mixed setup \u2014 if you need to price bushels for cash flow, partial sales lock in margin; if you can wait, the seasonal calendar may give a better window.');
+    }else if(diff>=0&&pct<40){
+      lines.push('You are <strong>above breakeven but price is weak</strong> in its 52-week range. Capacity to wait often pays here \u2014 lower-percentile prices historically rebound; aggressive selling at the bottom is rarely the right move.');
+    }else if(diff<0&&pct<25){
+      lines.push('Below breakeven and in the <strong>lower quartile</strong> of the 52-week range. Patience setup \u2014 selling here locks in losses. Hold what you can store and watch for any catalyst that breaks the pattern.');
+    }else if(diff<0&&pct<60){
+      lines.push('Below breakeven in mid-range. <strong>No forward-selling opportunity at these levels</strong>. Focus on protecting downside (puts) rather than locking in losses through cash sales.');
+    }else if(diff<0){
+      lines.push('Below breakeven but price is in the upper portion of its range \u2014 a <strong>structurally tight market</strong>. Worth examining whether your cost basis can be improved (input timing, basis levels) before assuming current prices are unattainable.');
+    }
+  }else{
+    // No breakeven entered — give a generic price-only frame
+    if(pct>=75){
+      lines.push('Price is in the <strong>upper quartile</strong> of its 52-week range \u2014 a window where many operations evaluate forward sales. Enter your cost of production above to see what these prices mean for your margin.');
+    }else if(pct<25){
+      lines.push('Price is in the <strong>lower quartile</strong> of its 52-week range. Historically a weak pricing window \u2014 selling here locks in losses for most operations. Enter your cost of production above to see how far below your breakeven you are.');
+    }else{
+      lines.push('Price is mid-range. Add your cost of production above to get personalized take.');
+    }
+  }
+
+  // COT extreme overlay — adds nuance
+  if(cot&&cot.pct!=null){
+    if(cot.pct>=85){
+      lines.push('Note: managed money is <strong>deeply long</strong> \u2014 crowded positioning that historically unwinds hard on bearish surprises. Adds urgency to lock in margin if available.');
+    }else if(cot.pct<=15){
+      lines.push('Note: managed money is <strong>deeply short</strong> \u2014 crowded positioning that historically reverses sharply on bullish surprises. The setup favors patience over panic-selling.');
+    }
+  }
+
+  // Crop progress overlay — only when there's a meaningful divergence
+  if(crop&&crop.planting_diff!=null&&Math.abs(crop.planting_diff)>15){
+    if(crop.planting_diff<-15){
+      lines.push('Planting pace is <strong>well behind prior year</strong> \u2014 historically supportive for prices through the May\u2013June weather window.');
+    }else if(crop.planting_diff>15){
+      lines.push('Planting pace is <strong>well ahead of prior year</strong> \u2014 typically removes weather premium; mild bearish bias for the spring.');
+    }
+  }
+
+  return lines.join(' ');
+}
+
+// ============ WASDE IMMINENCE (v13) ============
+function maybeFlagWasdeImminence(daysUntil){
+  var el=document.getElementById('snap-wasde-wrap');
+  if(!el)return;
+  if(daysUntil!=null&&daysUntil<=7){
+    el.classList.add('imminent');
+  }else{
+    el.classList.remove('imminent');
+  }
+}
+
+
+// ============ LOCAL CASH BID + BASIS (v14) ============
+// Reads /data/bids.json containing zip_grid + bids[] from Barchart proxy.
+// Finds nearest grid ZIP to user location, matches bids by commodity,
+// renders best matching bid with basis interpretation. Falls back gracefully
+// when bids[] is empty (currently true at most fetch times) or when user
+// location is unavailable.
+
+function haversineMi(lat1,lng1,lat2,lng2){
+  var R=3959,toRad=function(d){return d*Math.PI/180;};
+  var dLat=toRad(lat2-lat1),dLng=toRad(lng2-lng1);
+  var a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)*Math.sin(dLng/2);
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+// Map any commodity name variant to our canonical CROP_KEY values.
+function normalizeCommodity(name){
+  if(name==null)return null;
+  var n=String(name).toLowerCase().trim();
+  if(n.indexOf('corn')>=0)return 'corn';
+  if(n.indexOf('soy')>=0||n==='beans')return 'beans';
+  if(n.indexOf('wheat')>=0)return 'wheat';
+  return null;
+}
+
+// Pull user location with priority: localStorage ZIP > geo.js state > null.
+function getUserLoc(){
+  var savedZip=null;
+  try{savedZip=localStorage.getItem('agsist_user_zip');}catch(e){}
+  if(savedZip)return{source:'saved',zip:String(savedZip).trim()};
+  var s=window.AGSIST_STATE;
+  if(s){
+    // Try multiple plausible shapes
+    var loc=s.location||s.geo||s.user||s;
+    if(loc){
+      var lat=loc.lat||loc.latitude;
+      var lng=loc.lng||loc.lon||loc.longitude;
+      var zip=loc.zip||loc.postal||loc.postalCode;
+      var city=loc.city||loc.cityName;
+      var st=loc.state||loc.region||loc.stateCode;
+      if((lat!=null&&lng!=null)||zip){
+        return{source:'geo',lat:lat,lng:lng,zip:zip,city:city,state:st};
+      }
+    }
+  }
+  return null;
+}
+
+// Find the closest grid ZIP to the user location.
+function findNearestGridZip(userLoc,grid){
+  if(!userLoc||!grid||!grid.length)return null;
+  // Exact ZIP match
+  if(userLoc.zip){
+    for(var i=0;i<grid.length;i++){
+      if(grid[i].zip===userLoc.zip)return{grid:grid[i],distance:0,exact:true};
+    }
+  }
+  // Haversine to nearest by lat/lng
+  if(userLoc.lat!=null&&userLoc.lng!=null){
+    var nearest=null,nd=Infinity;
+    for(var j=0;j<grid.length;j++){
+      var g=grid[j];
+      if(g.lat==null||g.lng==null)continue;
+      var d=haversineMi(userLoc.lat,userLoc.lng,g.lat,g.lng);
+      if(d<nd){nd=d;nearest=g;}
+    }
+    if(nearest)return{grid:nearest,distance:nd,exact:false};
+  }
+  return null;
+}
+
+// Find the best bid for current crop nearest to the chosen grid ZIP.
+// Returns {bid, distance} or null. Defensive about bid field names.
+function findBestBidForCrop(bids,nearestGridResult,cropKey){
+  if(!bids||!bids.length)return null;
+  var cropBids=[];
+  for(var i=0;i<bids.length;i++){
+    var b=bids[i];
+    var c=normalizeCommodity(b.commodity||b.commodityName||b.crop||b.commodity_name);
+    if(c===cropKey)cropBids.push(b);
+  }
+  if(cropBids.length===0)return null;
+
+  if(nearestGridResult&&nearestGridResult.grid){
+    var ng=nearestGridResult.grid;
+    var best=null,bd=Infinity;
+    for(var j=0;j<cropBids.length;j++){
+      var bid=cropBids[j];
+      // Prefer bids whose own ZIP matches the grid ZIP
+      if(bid.zip&&bid.zip===ng.zip){
+        return{bid:bid,distance:nearestGridResult.distance};
+      }
+      var bLat=bid.lat||bid.latitude;
+      var bLng=bid.lng||bid.lon||bid.longitude;
+      if(bLat!=null&&bLng!=null){
+        var d=haversineMi(ng.lat,ng.lng,bLat,bLng);
+        if(d<bd){bd=d;best=bid;}
+      }
+    }
+    if(best)return{bid:best,distance:Math.round(bd+nearestGridResult.distance)};
+  }
+  // Fallback: highest-priced bid
+  cropBids.sort(function(a,b){return (Number(b.bid_price||b.bidPrice||b.price||0))-(Number(a.bid_price||a.bidPrice||a.price||0));});
+  return{bid:cropBids[0],distance:null};
+}
+
+function fmtBidTime(ts){
+  try{
+    var d=new Date(ts),now=new Date();
+    var m=Math.round((now-d)/60000);
+    if(m<2)return 'just now';
+    if(m<60)return m+'m ago';
+    if(m<24*60)return Math.round(m/60)+'h ago';
+    return Math.round(m/(24*60))+'d ago';
+  }catch(e){return ''+ts;}
+}
+
+function fetchAndRenderBasis(){
+  fetch('/data/bids.json',{cache:'no-store'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(data){
+      if(!data)return;
+      renderBasisCard(data);
+    })
+    .catch(function(){
+      // No bids feed — leave card hidden
+    });
+}
+
+function renderBasisCard(data){
+  var card=document.getElementById('basis-card');
+  if(!card)return;
+
+  var grid=data.zip_grid||[];
+  var bids=data.bids||[];
+  var userLoc=getUserLoc();
+  var nearest=findNearestGridZip(userLoc,grid);
+
+  // Show the card
+  card.style.display='block';
+
+  var locEl=document.getElementById('basis-loc');
+  var bidEl=document.getElementById('basis-bid');
+  var spreadEl=document.getElementById('basis-spread');
+  var deliveryEl=document.getElementById('basis-delivery');
+  var interpEl=document.getElementById('basis-interp');
+  var emptyEl=document.getElementById('basis-empty-msg');
+  var srcEl=document.getElementById('basis-src');
+  var basisGrid=document.getElementById('basis-grid');
+
+  // If no user location at all (no saved ZIP, no geo), force prompt state
+  if(!userLoc){
+    if(basisGrid)basisGrid.style.display='none';
+    if(interpEl)interpEl.style.display='none';
+    if(locEl)locEl.textContent='No location set';
+    if(emptyEl){
+      emptyEl.style.display='block';
+      emptyEl.innerHTML='<strong>Set your ZIP to see your nearest cash bid.</strong> AGSIST samples 50 ZIP locations across the grain belt for representative '+CROP_LABEL.toLowerCase()+' cash bids and basis vs CBOT futures. Tap \u201cSet my ZIP\u201d below to find your nearest sample.';
+    }
+    if(srcEl){srcEl.innerHTML='Cash bids sourced from <a href="https://www.barchart.com/ondemand" target="_blank" rel="noopener">Barchart OnDemand API</a> \u00b7 50-ZIP grid sample across the grain belt';}
+    return;
+  }
+
+  var match=findBestBidForCrop(bids,nearest,CROP_KEY);
+
+  if(match&&match.bid){
+    var b=match.bid;
+    var bidPrice=b.bid_price!=null?b.bid_price:(b.bidPrice!=null?b.bidPrice:b.price);
+    var basis=b.basis!=null?b.basis:b.bidBasis;
+    var deliveryStr=b.delivery||b.delivery_str||b.deliveryDescription||(b.delivery_start?b.delivery_start+(b.delivery_end?' \u2013 '+b.delivery_end:''):null);
+
+    // Resolve the BID\'s actual location for the header label.
+    var bidGrid=null;
+    if(b.zip){
+      for(var i=0;i<grid.length;i++)if(grid[i].zip===b.zip){bidGrid=grid[i];break;}
+    }
+    if(!bidGrid&&b.lat!=null&&b.lng!=null){
+      var nd=Infinity;
+      for(var j=0;j<grid.length;j++){
+        var d=haversineMi(b.lat,b.lng,grid[j].lat,grid[j].lng);
+        if(d<nd){nd=d;bidGrid=grid[j];}
+      }
+    }
+
+    if(basisGrid)basisGrid.style.display='grid';
+    if(emptyEl)emptyEl.style.display='none';
+    if(interpEl)interpEl.style.display='block';
+
+    // Header label: show BID\'s location + distance from user
+    if(locEl){
+      var label=bidGrid?bidGrid.label:(b.city||b.facility||'\u2014');
+      var locStr='\u{1F4CD} '+label;
+      if(bidGrid&&userLoc.lat!=null&&userLoc.lng!=null&&bidGrid.lat!=null){
+        var dMi=haversineMi(userLoc.lat,userLoc.lng,bidGrid.lat,bidGrid.lng);
+        if(dMi<2)locStr+=' \u00b7 your area';
+        else locStr+=' \u00b7 '+Math.round(dMi)+' mi from you';
+      }else if(bidGrid&&userLoc.zip&&bidGrid.zip===userLoc.zip){
+        locStr+=' \u00b7 your ZIP';
+      }
+      locEl.textContent=locStr;
+    }
+
+    if(bidEl)bidEl.textContent=bidPrice!=null?'$'+Number(bidPrice).toFixed(2):'\u2014';
+    if(spreadEl){
+      if(basis!=null){
+        var bv=Number(basis);
+        spreadEl.textContent=(bv>=0?'+':'\u2212')+'$'+Math.abs(bv).toFixed(2);
+        spreadEl.className='basis-cell-val '+(bv>=0?'basis-pos':'basis-neg');
+      }else{spreadEl.textContent='\u2014';spreadEl.className='basis-cell-val';}
+    }
+    if(deliveryEl)deliveryEl.textContent=deliveryStr||'\u2014';
+
+    if(interpEl){
+      var interp;
+      if(basis!=null){
+        var bvi=Number(basis),absV=Math.abs(bvi).toFixed(2);
+        if(bvi>=0)interp='Cash is <strong>$'+absV+' above front-month futures</strong>. Positive basis signals firm local demand \u2014 buyers are willing to pay above the exchange to attract bushels.';
+        else if(bvi>=-0.20)interp='Cash is <strong>$'+absV+' below futures</strong>. A tight basis like this is firm \u2014 typical of strong local demand or proximity to a processor.';
+        else if(bvi>=-0.40)interp='Cash is <strong>$'+absV+' below futures</strong>. Roughly typical interior-state basis. Compare against your usual local levels to gauge whether the elevator is bidding up.';
+        else interp='Cash is <strong>$'+absV+' below futures</strong>. A wide negative basis suggests heavy local supply or soft buyer demand. Storing through to a basis improvement may pay if you have bin space.';
+      }else{
+        interp='Bid <strong>$'+(bidPrice!=null?Number(bidPrice).toFixed(2):'\u2014')+'/bu</strong> at this location. Basis vs futures not reported.';
+      }
+      interpEl.innerHTML=interp;
+    }
+
+    if(srcEl){
+      var srcLine='Source: '+(b.facility||b.bidName||b.location||'local elevator');
+      if(b.timestamp||b.cashPriceTimestamp)srcLine+=' \u00b7 updated '+fmtBidTime(b.timestamp||b.cashPriceTimestamp);
+      else if(data.fetched)srcLine+=' \u00b7 polled '+fmtBidTime(data.fetched);
+      srcLine+=' \u00b7 <a href="https://www.barchart.com/ondemand" target="_blank" rel="noopener">Barchart OnDemand</a>';
+      srcEl.innerHTML=srcLine;
+    }
+
+    if(window.__agsistMR){
+      var bp='local cash basis ';
+      var bidLocLbl=bidGrid?bidGrid.label:'this location';
+      if(basis!=null){
+        var bv2=Number(basis);
+        if(bv2>=0)bp+='at <strong>+$'+bv2.toFixed(2)+' near '+bidLocLbl+'</strong> is positive \u2014 a sign of firm local demand';
+        else bp+='at <strong>\u2212$'+Math.abs(bv2).toFixed(2)+' near '+bidLocLbl+'</strong>';
+        window.__agsistMR.basis=[bp];
+        if(typeof renderMarketRead==='function')renderMarketRead();
+      }
+    }
+  }else{
+    // userLoc is set but no matching bid available
+    if(basisGrid)basisGrid.style.display='none';
+    if(interpEl)interpEl.style.display='none';
+
+    // Header label: show nearest grid point so user knows where we looked
+    if(locEl){
+      if(nearest&&nearest.grid){
+        var ls='\u{1F4CD} '+nearest.grid.label;
+        if(nearest.exact)ls+=' \u00b7 your ZIP';
+        else if(nearest.distance>2)ls+=' \u00b7 '+Math.round(nearest.distance)+' mi from you';
+        locEl.textContent=ls;
+      }else{locEl.textContent='\u2014';}
+    }
+
+    if(emptyEl){
+      emptyEl.style.display='block';
+      var fetched=data.fetched?'Last polled '+fmtBidTime(data.fetched)+'.':'';
+      var hasBidsAtAll=(bids.length>0);
+      var msg;
+      if(hasBidsAtAll){
+        msg='<strong>No '+CROP_LABEL.toLowerCase()+' cash bids in the current sample for your area.</strong> Bids vary by elevator, season, and delivery period \u2014 check the full cash bid map for nearby alternatives. '+fetched;
+      }else{
+        msg='<strong>Cash bid samples are being collected.</strong> AGSIST polls 50 ZIP locations across the grain belt for representative cash bids and basis vs CBOT futures. Bids update during weekday market hours. '+fetched;
+      }
+      emptyEl.innerHTML=msg;
+    }
+    if(srcEl){
+      srcEl.innerHTML='Cash bids sourced from <a href="https://www.barchart.com/ondemand" target="_blank" rel="noopener">Barchart OnDemand API</a> \u00b7 50-ZIP grid sample across the grain belt';
+    }
+  }
+}
+
+
+
+// ZIP override prompt — saves to localStorage and re-renders.
+function initZipPrompt(){
+  var btn=document.getElementById('basis-zip-btn');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    var current='';
+    try{current=localStorage.getItem('agsist_user_zip')||'';}catch(e){}
+    var zip=window.prompt('Enter your 5-digit ZIP code (or leave blank to clear):',current);
+    if(zip===null)return; // user cancelled
+    zip=String(zip||'').trim();
+    if(zip===''){
+      try{localStorage.removeItem('agsist_user_zip');}catch(e){}
+      fetchAndRenderBasis();
+      if(typeof gaEvent==='function')gaEvent('basis_zip_cleared',{});
+    }else if(zip.match(/^\d{5}$/)){
+      try{localStorage.setItem('agsist_user_zip',zip);}catch(e){}
+      fetchAndRenderBasis();
+      if(typeof gaEvent==='function')gaEvent('basis_zip_set',{zip:zip});
+    }else{
+      window.alert('That doesn\'t look like a 5-digit ZIP code. Try again.');
+    }
+  });
+}
+
+// ============ DAILY BRIEFING STRIP ============
+// Fetches /data/daily.json and populates the top strip if today's briefing exists.
+// Schema: {date, headline, subheadline, lead, teaser}
+function loadBriefingStrip(){
+  fetch('/data/daily.json',{cache:'no-store'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(!d||!d.date||!d.headline)return;
+      var today=new Date().toISOString().slice(0,10);
+      if(d.date!==today)return;
+      var strip=document.getElementById('brief-strip');
+      var hd=document.getElementById('brief-hd');
+      var teaser=document.getElementById('brief-teaser');
+      if(strip&&hd&&teaser){
+        hd.textContent=d.headline;
+        teaser.textContent=d.teaser||d.subheadline||d.lead||'';
+        strip.style.display='flex';
+      }
+    })
+    .catch(function(){});
+}
+
+
+// ============ FORWARD CURVE ============
+// Renders every available contract month as an inline SVG scatter+line.
+// Computes carry ($/mo per bushel) vs typical storage cost.
+// cropKey = 'corn'|'beans'|'wheat', contractList = [{key:'corn-dec',month:'Dec',monthIdx:0},...]
+function renderForwardCurve(cropKey,contractList,quotes,isGrain){
+  var svg=document.getElementById('fwd-svg');
+  var shape=document.getElementById('fwd-shape');
+  var interp=document.getElementById('fwd-interp');
+  if(!svg)return;
+  // Gather available points
+  var pts=[];
+  contractList.forEach(function(c){
+    var d=quotes[c.key];
+    if(d&&d.close!=null){
+      pts.push({label:c.month,idx:c.idx,price:isGrain?d.close/100:d.close});
+    }
+  });
+  if(pts.length<2){
+    svg.style.display='none';
+    var empty=document.getElementById('fwd-empty');
+    if(empty)empty.style.display='block';
+    return;
+  }
+  // Compute bounds
+  var minP=Math.min.apply(null,pts.map(function(p){return p.price;}));
+  var maxP=Math.max.apply(null,pts.map(function(p){return p.price;}));
+  var pad=(maxP-minP)*0.15||0.05;
+  minP-=pad;maxP+=pad;
+  var W=700,H=140,mL=40,mR=16,mT=10,mB=28;
+  var pw=W-mL-mR,ph=H-mT-mB;
+  function x(i){return mL+(pts.length===1?pw/2:(i/(pts.length-1))*pw);}
+  function y(p){return mT+ph-((p-minP)/(maxP-minP))*ph;}
+  // Build SVG
+  var s=['<svg class="fwd-svg" id="fwd-svg" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'];
+  // Y-axis labels (min and max price)
+  s.push('<text x="4" y="'+(mT+8)+'" fill="#9aa39c" font-size="13" font-family="JetBrains Mono,monospace">$'+maxP.toFixed(2)+'</text>');
+  s.push('<text x="4" y="'+(mT+ph)+'" fill="#9aa39c" font-size="13" font-family="JetBrains Mono,monospace">$'+minP.toFixed(2)+'</text>');
+  // Connecting line
+  var path='';
+  pts.forEach(function(p,i){path+=(i===0?'M':'L')+x(i)+','+y(p.price);});
+  s.push('<path d="'+path+'" stroke="#daa520" stroke-width="2" fill="none"/>');
+  // Dots + price labels + month labels
+  pts.forEach(function(p,i){
+    s.push('<circle cx="'+x(i)+'" cy="'+y(p.price)+'" r="4" fill="#daa520"/>');
+    s.push('<text x="'+x(i)+'" y="'+(y(p.price)-8)+'" fill="#e8ebe5" font-size="13" font-family="Oswald,sans-serif" text-anchor="middle" font-weight="700">$'+p.price.toFixed(2)+'</text>');
+    s.push('<text x="'+x(i)+'" y="'+(H-8)+'" fill="#9aa39c" font-size="13" text-anchor="middle">'+p.label+'</text>');
+  });
+  s.push('</svg>');
+  svg.outerHTML=s.join('');
+  // Interpretation: contango/backwardation + carry
+  var first=pts[0],last=pts[pts.length-1];
+  var totalDiff=last.price-first.price;
+  var monthsSpan=last.idx-first.idx;if(monthsSpan<=0)monthsSpan=1;
+  var monthlyCarry=totalDiff/monthsSpan;
+  var STORAGE=0.035;
+  var shapeTxt,interpTxt;
+  if(totalDiff>0.05){
+    shapeTxt='contango';
+    if(monthlyCarry>STORAGE*1.1){
+      interpTxt='<strong>Market is paying '+(monthlyCarry*100).toFixed(1)+'\u00a2/bu per month</strong> to store '+first.label+' through '+last.label+' \u2014 above typical storage cost of ~3.5\u00a2/mo. Storing makes sense if you have bin space.';
+    }else if(monthlyCarry>0){
+      interpTxt='<strong>Modest carry of '+(monthlyCarry*100).toFixed(1)+'\u00a2/bu per month</strong> \u2014 near typical storage cost. Storage decision is roughly breakeven on carry alone.';
+    }
+  }else if(totalDiff<-0.05){
+    shapeTxt='backwardation';
+    interpTxt='<strong>Market is inverted</strong> \u2014 '+first.label+' is '+'$'+Math.abs(totalDiff).toFixed(2)+' above '+last.label+'. Front-end demand is strong; storage penalty if you hold. Consider selling sooner.';
+  }else{
+    shapeTxt='flat';
+    interpTxt='<strong>Flat curve</strong> \u2014 deferred contracts are priced near the front month. Market is neutral on storage economics.';
+  }
+  if(shape)shape.textContent=shapeTxt;
+  if(interp)interp.innerHTML=interpTxt;
+}
+
+// ============ PERSONAL BREAKEVEN ============
+// Stored in localStorage under 'agsist_be_<cropKey>'.
+// Integrated into Market Read via a phrase appended to the sp[] array.
+function initBreakeven(cropKey,cropLabel){
+  var input=document.getElementById('be-input');
+  var result=document.getElementById('be-result');
+  var clear=document.getElementById('be-clear');
+  if(!input)return;
+  var key='agsist_be_'+cropKey;
+  var saved=null;
+  try{saved=localStorage.getItem(key);}catch(e){}
+  if(saved){input.value=saved;}
+  function update(){
+    var v=parseFloat(input.value);
+    if(isNaN(v)||v<=0){
+      if(result){result.textContent='';result.className='be-result';}
+      try{localStorage.removeItem(key);}catch(e){}
+      return null;
+    }
+    try{localStorage.setItem(key,v);}catch(e){}
+    return v;
+  }
+  input.addEventListener('input',function(){update();window.dispatchEvent(new Event('be-updated'));});
+  if(clear){clear.addEventListener('click',function(){input.value='';update();window.dispatchEvent(new Event('be-updated'));});}
+  window.__agsistBE=function(){return update();};
+}
+
+// ============ DAILY BRIEFING SIGNUP (Formspree) ============
+function initSignup(){
+  var form=document.getElementById('signup-form');
+  var ok=document.getElementById('signup-ok');
+  if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new FormData(form);
+    fetch('https://formspree.io/f/xnjbwepn',{method:'POST',body:data,headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(r.ok){form.style.display='none';if(ok)ok.style.display='block';if(typeof gaEvent==='function')gaEvent('briefing_signup',{page:location.pathname});}
+        else{alert('Something went wrong. Email sig@farmers1st.com and I will add you manually.');}
+      })
+      .catch(function(){alert('Something went wrong. Email sig@farmers1st.com and I will add you manually.');});
+  });
+}
+
+// Boot widget subsystems on DOMContentLoaded
+document.addEventListener('DOMContentLoaded',function(){renderMarketSession();setInterval(renderMarketSession,60000);loadBriefingStrip();loadCropProgress();loadCOT();fetchAndRenderBasis();initZipPrompt();initBreakeven(CROP_KEY,CROP_LABEL);initSignup();});
+
 function grain$(v){return '$'+(v/100).toFixed(2);}
 function raw$(v,d){return v.toFixed(d||2);}
+function ord(n){var s=['th','st','nd','rd'],v=n%100;return s[(v-20)%10]||s[v]||s[0];}
 function chgTxt(net,pct){if(net==null)return{t:'',c:''};var a=net>=0?'▲':'▼';var s=net>=0?'+':'';return{t:a+' '+s+pct.toFixed(2)+'%',c:net>=0?'up':'dn'};}
 function setEl(id,txt,cls){var el=document.getElementById(id);if(!el)return;el.textContent=txt;el.classList.remove('sk');if(cls){el.classList.remove('up','dn');el.classList.add(cls);}}
 
@@ -364,9 +1531,9 @@ fetch('/data/prices.json',{cache:'no-store'})
 
     var sp=[];
     if(corn&&corn.wk52_lo!=null&&corn.wk52_hi!=null){
-      var pct=Math.round(Math.min(100,Math.max(0,(corn.close-corn.wk52_lo)/(corn.wk52_hi-corn.wk52_lo)*100)));
+      var pct=Math.round(Math.min(100,Math.max(0,(corn.close-corn.wk52_lo)/(corn.wk52_hi-corn.wk52_lo)*100))); window.__agsistMR.priceCtx={pct:pct,cropKey:CROP_KEY};
       var zone=pct<25?'lower quartile — historically a weak pricing window':pct<50?'lower half of its 52-week range':pct<75?'upper half of its range':'upper quartile — near recent highs';
-      sp.push('<strong>Front-month corn at '+grain$(corn.close)+'</strong> is in the <strong>'+pct+'th percentile</strong> of its 52-week range ('+zone+')');
+      sp.push('<strong>Front-month corn at '+grain$(corn.close)+'</strong> is in the <strong>'+pct+ord(pct)+' percentile</strong> of its 52-week range ('+zone+')');
     }
     if(cornDec&&beansNov&&cornDec.close&&beansNov.close){
       var r2=beansNov.close/cornDec.close;
@@ -378,14 +1545,25 @@ fetch('/data/prices.json',{cache:'no-store'})
     var dol=q.dollar;
     if(dol&&dol.close){if(dol.close>104)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is a headwind for US corn export competitiveness');else if(dol.close<100)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is providing a tailwind for US corn export demand');}
     var snapEl=document.getElementById('snap-body');
-    if(snapEl&&sp.length)snapEl.innerHTML=sp.join('; ')+'.';
+    if(sp.length){window.__agsistMR.base=sp;var __feFront=q[CROP_KEY];if(__feFront&&__feFront.close!=null){window.__agsistMR.breakeven=getBreakevenPhrase(__feFront.close/100);}renderMarketRead();}
     var ageEl=document.getElementById('snap-age');
     if(ageEl&&data.fetched){var am=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);ageEl.textContent=am<2?'live':am+'m old';}
     var wEl=document.getElementById('snap-wasde');
-    if(wEl){var sn=new Date(),sw=new Date(sn.getFullYear(),sn.getMonth(),10,11,0,0);if(sn>=sw)sw=new Date(sn.getFullYear(),sn.getMonth()+1,10,11,0,0);var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dd=Math.ceil((sw-sn)/86400000);wEl.textContent=MN[sw.getMonth()]+' '+sw.getDate()+' · '+(dd<=0?'today':dd===1?'tomorrow':'in '+dd+' days');}
+    if(wEl){var sn=new Date(),sw=new Date(sn.getFullYear(),sn.getMonth(),10,11,0,0);if(sn>=sw)sw=new Date(sn.getFullYear(),sn.getMonth()+1,10,11,0,0);var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dd=Math.ceil((sw-sn)/86400000);wEl.textContent=MN[sw.getMonth()]+' '+sw.getDate()+' · '+(dd<=0?'today':dd===1?'tomorrow':'in '+dd+' days');maybeFlagWasdeImminence(dd);}
     var mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
     document.getElementById('status').textContent='Prices updated · '+(mins<2?'Just updated':mins<60?mins+' min ago':Math.round(mins/60)+'h ago');
     if(typeof gaEvent==='function')gaEvent('price_loaded',{page:'corn',mins_old:mins});
+
+    // --- NEW: render forward curve ---
+    renderForwardCurve(CROP_KEY,FWD_CONTRACTS,q,true);
+    // --- v12: keep quotes accessible; reactive Market Read on breakeven change ---
+    window.__agsistLastQ=q;
+    window.addEventListener('be-updated',function(){
+      var qq=window.__agsistLastQ; if(!qq)return;
+      var front=qq[CROP_KEY]; if(!front||front.close==null)return;
+      window.__agsistMR.breakeven=getBreakevenPhrase(front.close/100);
+      renderMarketRead();
+    });
   })
   .catch(function(){document.getElementById('status').textContent='Price data unavailable — market may be closed';});
 
