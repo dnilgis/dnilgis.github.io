@@ -1,5 +1,5 @@
 {
-  "fetched": "2026-04-26T09:51:53Z",
+  "fetched": "2026-04-26T10:41:48Z",
   "ok": 21,
   "failed": 1,
   "quotes": {
@@ -174,19 +174,19 @@
     },
     "bitcoin": {
       "ticker": "BTC-USD",
-      "close": 78010.40625,
+      "close": 78011.47656,
       "open": 77650.71094,
-      "netChange": 359.69531,
-      "pctChange": 0.4632,
+      "netChange": 360.76562,
+      "pctChange": 0.4646,
       "wk52_hi": 126198.0703,
       "wk52_lo": 60074.2031
     },
     "ripple": {
       "ticker": "XRP-USD",
-      "close": 1.4283,
+      "close": 1.4278,
       "open": 1.4244,
-      "netChange": 0.0039,
-      "pctChange": 0.2738,
+      "netChange": 0.0034,
+      "pctChange": 0.2387,
       "wk52_hi": 3.6502,
       "wk52_lo": 1.1335
     },
