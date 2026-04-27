@@ -189,6 +189,69 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
 .dv3-share-btn:hover{border-color:var(--gold);color:var(--text);}
 .dv3-share-btn svg{flex-shrink:0;}
 
+/* WEEKLY THREAD chapter marker — sits above the lead */
+.dv3-thread{display:flex;align-items:center;gap:.6rem;padding:.4rem .8rem;background:rgba(74,143,186,.06);border:1px solid rgba(74,143,186,.20);border-radius:6px;margin:.5rem 0 .9rem;flex-wrap:wrap;}
+.dv3-thread--anchor{background:rgba(74,143,186,.10);border-color:rgba(74,143,186,.32);}
+.dv3-thread-day{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5aa0d2;white-space:nowrap;padding:.18rem .5rem;background:rgba(74,143,186,.08);border-radius:3px;}
+.dv3-thread-q{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4;flex:1;min-width:200px;}
+
+/* YESTERDAY'S CALL — sits between sponsor and sections */
+.dv3-yc{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.85rem 1.1rem;margin:1rem 0 1.25rem;border-left:4px solid var(--green);}
+.dv3-yc-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.dv3-yc-outcome{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.08em;padding:.16rem .5rem;border-radius:3px;white-space:nowrap;}
+.dv3-yc-summary{font-size:.88rem;color:var(--text);line-height:1.65;font-weight:600;margin-bottom:.3rem;}
+.dv3-yc-note{font-size:.82rem;color:var(--text-dim);line-height:1.65;}
+
+/* SPREAD TO WATCH — sits between sections and basis */
+.dv3-spread{background:linear-gradient(135deg,var(--surface2) 0%,rgba(132,89,176,.04) 100%);border:1px solid rgba(132,89,176,.28);border-radius:8px;padding:1rem 1.15rem;margin:1rem 0 1.25rem;}
+.dv3-spread-label{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9b7fc4;margin-bottom:.45rem;}
+.dv3-spread-label-text{font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.25rem;letter-spacing:-.005em;}
+.dv3-spread-level{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;color:var(--gold);margin-bottom:.45rem;letter-spacing:.02em;}
+.dv3-spread-body{font-size:.86rem;line-height:1.7;color:var(--text-dim);}
+.dv3-spread-body strong{color:var(--text);}
+
+/* SPONSOR — sits between topbar and sparks. House-ad fallback uses dashed border. */
+.dv3-sponsor{background:linear-gradient(135deg,var(--surface) 0%,rgba(218,165,32,.04) 100%);border:2px solid rgba(218,165,32,.30);border-radius:8px;padding:1.2rem 1.4rem;margin-bottom:1.25rem;position:relative;overflow:hidden;}
+.dv3-sponsor::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,rgba(218,165,32,.3) 60%,transparent 100%);}
+.dv3-sponsor--house{border-style:dashed;border-color:rgba(218,165,32,.34);}
+.dv3-sponsor-label-row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.55rem;flex-wrap:wrap;}
+.dv3-sponsor-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:.18rem .55rem;border:1px solid rgba(218,165,32,.42);border-radius:3px;background:rgba(218,165,32,.06);}
+.dv3-sponsor-by{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;color:var(--text-muted);letter-spacing:.04em;}
+.dv3-sponsor-headline{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.5rem;letter-spacing:-.005em;}
+.dv3-sponsor-body{font-size:.88rem;line-height:1.7;color:var(--text-dim);margin-bottom:.85rem;}
+.dv3-sponsor-cta{display:inline-flex;align-items:center;gap:.35rem;font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#0a1a0a;background:var(--gold);padding:.6rem 1rem;border-radius:6px;transition:background .15s,transform .1s;min-height:42px;}
+.dv3-sponsor-cta:hover{background:#c9941d;transform:translateY(-1px);}
+.dv3-sponsor-disclosure{font-size:.66rem;color:var(--text-muted);margin-top:.65rem;letter-spacing:.02em;line-height:1.5;}
+
+/* BASIS PULSE — earth-tone amber, sits between sections and TMYK. */
+.dv3-basis{background:linear-gradient(135deg,var(--surface) 0%,rgba(185,122,58,.04) 100%);border:2px solid rgba(185,122,58,.28);border-radius:8px;padding:1rem 1.15rem;margin:1rem 0 1.25rem;}
+.dv3-basis-label{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c98a4a;margin-bottom:.5rem;}
+.dv3-basis-headline{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.35rem;line-height:1.4;}
+.dv3-basis-body{font-size:.86rem;line-height:1.7;color:var(--text-dim);}
+.dv3-basis-body strong{color:var(--text);}
+
+/* FORWARD — sits before share row. */
+.dv3-forward{display:flex;align-items:center;gap:1rem;padding:.95rem 1.15rem;background:rgba(58,139,60,.05);border:1px solid rgba(58,139,60,.22);border-radius:8px;margin:1rem 0 .65rem;flex-wrap:wrap;}
+.dv3-forward-icon{font-size:1.4rem;flex-shrink:0;line-height:1;}
+.dv3-forward-content{flex:1;min-width:200px;}
+.dv3-forward-headline{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.15rem;}
+.dv3-forward-sub{font-size:.78rem;color:var(--text-dim);line-height:1.5;}
+.dv3-forward-cta{display:inline-flex;align-items:center;gap:.3rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--green);padding:.5rem .9rem;border-radius:6px;transition:background .15s;min-height:40px;white-space:nowrap;}
+.dv3-forward-cta:hover{background:#1b4d1c;}
+
+/* BYLINE — sits just above forward. */
+.dv3-byline{font-size:.82rem;color:var(--text-dim);line-height:1.65;padding:.75rem 0;border-top:1px solid var(--border);margin-top:.5rem;}
+.dv3-byline strong{color:var(--text);font-weight:700;}
+.dv3-byline a{color:var(--gold);text-decoration:none;}
+.dv3-byline a:hover{text-decoration:underline;}
+
+@media(max-width:640px){
+  .dv3-sponsor{padding:1rem 1.15rem;}
+  .dv3-sponsor-headline{font-size:1rem;}
+  .dv3-forward{flex-direction:column;align-items:flex-start;gap:.6rem;}
+  .dv3-forward-cta{width:100%;justify-content:center;}
+}
+
 /* Source + permalink footer */
 .dv3-source{font-size:.7rem;color:var(--text-muted);text-align:center;padding:.75rem 0 .25rem;}
 .dv3-perm{text-align:center;padding-bottom:.25rem;}
@@ -206,6 +269,7 @@ body{overflow-x:hidden;overflow-x:clip;width:100%;}
 .dv3-arc-card:hover{border-color:var(--gold);}
 .dv3-arc-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem;}
 .dv3-arc-card-date{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--text-muted);}
+.dv3-arc-yc-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.4rem;vertical-align:middle;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.4);}
 .dv3-arc-card-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;}
 .dv3-arc-card-badge.wkday{background:rgba(58,139,60,.12);color:var(--green);border:1px solid rgba(58,139,60,.25);}
 .dv3-arc-card-badge.wkend{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border);}
@@ -503,11 +567,124 @@ function renderToday(data){
     '<button class="dv3-share-btn" data-share="email" type="button" aria-label="Email this briefing">\u2709 Email</button>'+
   '</div>';
 
+  // Weekly thread chapter marker (above lead)
+  var thread='';
+  var wt=data.weekly_thread||null;
+  if(wt && wt.question && !marketClosed){
+    var dayLabels={1:'MONDAY SETUP',2:'TUE UPDATE',3:'WED UPDATE',4:'THU UPDATE',5:'FRIDAY RESOLUTION'};
+    var dayText=dayLabels[wt.day]||'THIS WEEK';
+    var anchorCls=(wt.day===1||wt.day===5)?' dv3-thread--anchor':'';
+    thread='<div class="dv3-thread'+anchorCls+'">'+
+      '<span class="dv3-thread-day">\u{1F9F5} '+escHtml(dayText)+'</span>'+
+      '<span class="dv3-thread-q">'+escHtml(wt.question)+'</span>'+
+    '</div>';
+  }
+
+  // Yesterday's Call (between sponsor and sections)
+  var yc='';
+  var ycData=data.yesterdays_call||null;
+  if(ycData && ycData.summary && !marketClosed){
+    var outcome=(ycData.outcome||'pending').toLowerCase();
+    var outcomeMap={
+      played_out:['PLAYED OUT','#4aab4c','rgba(74,171,76,.10)','rgba(74,171,76,.32)'],
+      didnt:['DIDN\u2019T','#e05a42','rgba(224,90,66,.10)','rgba(224,90,66,.32)'],
+      pending:['STILL PENDING','#e6b042','rgba(218,165,32,.10)','rgba(218,165,32,.32)']
+    };
+    var oCfg=outcomeMap[outcome]||outcomeMap.pending;
+    var ycNote=ycData.note?'<div class="dv3-yc-note">'+escHtml(ycData.note).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')+'</div>':'';
+    yc='<div class="dv3-yc">'+
+      '<div class="dv3-yc-label">\u21BA YESTERDAY\u2019S CALL '+
+        '<span class="dv3-yc-outcome" style="color:'+oCfg[1]+';background:'+oCfg[2]+';border:1px solid '+oCfg[3]+';">'+oCfg[0]+'</span>'+
+      '</div>'+
+      '<div class="dv3-yc-summary">'+escHtml(ycData.summary)+'</div>'+
+      ycNote+
+    '</div>';
+  }
+
+  // Spread to Watch (between sections and basis)
+  var spread='';
+  var spData=data.spread_to_watch||null;
+  if(spData && (spData.label||spData.commentary) && !marketClosed){
+    var spLabelText=spData.label?'<div class="dv3-spread-label-text">'+escHtml(spData.label)+'</div>':'';
+    var spLevel=spData.level?'<div class="dv3-spread-level">'+escHtml(spData.level)+'</div>':'';
+    var spBody=spData.commentary?'<div class="dv3-spread-body">'+escHtml(spData.commentary).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')+'</div>':'';
+    spread='<div class="dv3-spread">'+
+      '<div class="dv3-spread-label">\u21C4 THE SPREAD TO WATCH</div>'+
+      spLabelText+spLevel+spBody+
+    '</div>';
+  }
+
+  // Sponsor block (paid or house-ad fallback)
+  var sponsor='';
+  var sp=data.sponsor||null;
+  if(!sp){
+    sp={
+      label:'SPONSORED',
+      advertiser:'AGSIST',
+      headline:'This slot reaches US grain producers at 6 AM CT \u2014 before the open.',
+      body:'AGSIST Daily lands in the inbox of working US grain and livestock farmers every weekday morning, before the first call to the elevator. One sponsor per briefing. No retargeting. No programmatic auctions.',
+      cta_text:'Inquire about sponsorship',
+      cta_url:'mailto:sig@farmers1st.com?subject=AGSIST%20Daily%20sponsorship%20inquiry',
+      disclosure:'Single placement. Contact for pricing and availability.',
+      is_house_ad:true
+    };
+  }
+  var spLabel=escHtml(sp.label||'SPONSORED');
+  var spAdv=escHtml(sp.advertiser||'');
+  var spHeadline=escHtml(sp.headline||'');
+  var spBody=escHtml(sp.body||'');
+  var spCtaText=escHtml(sp.cta_text||'Learn more');
+  var spCtaUrl=escHtml(sp.cta_url||'#');
+  var spDisclosure=escHtml(sp.disclosure||'');
+  var spHouse=sp.is_house_ad?' dv3-sponsor--house':'';
+  var spAdvHtml=(spAdv && !sp.is_house_ad)?'<span class="dv3-sponsor-by">'+spAdv+'</span>':'';
+  var spDiscHtml=spDisclosure?'<div class="dv3-sponsor-disclosure">'+spDisclosure+'</div>':'';
+  var spTarget=spCtaUrl.indexOf('http')===0?' target="_blank"':'';
+  sponsor='<aside class="dv3-sponsor'+spHouse+'" aria-label="Sponsored content">'+
+    '<div class="dv3-sponsor-label-row"><span class="dv3-sponsor-label">'+spLabel+'</span>'+spAdvHtml+'</div>'+
+    '<div class="dv3-sponsor-headline">'+spHeadline+'</div>'+
+    '<div class="dv3-sponsor-body">'+spBody+'</div>'+
+    '<a class="dv3-sponsor-cta" href="'+spCtaUrl+'" rel="sponsored noopener"'+spTarget+'>'+spCtaText+' \u2192</a>'+
+    spDiscHtml+
+  '</aside>';
+
+  // Basis Pulse (omit on weekends/holidays)
+  var basis='';
+  var basisData=data.basis||null;
+  var marketClosed=data.market_closed===true;
+  if(basisData && !marketClosed){
+    var bH=escHtml((basisData.headline||'').trim());
+    var bB=escHtml((basisData.body||'').trim()).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    if(bH||bB){
+      basis='<div class="dv3-basis">'+
+        '<div class="dv3-basis-label">\u{1F4CD} BASIS PULSE</div>'+
+        (bH?'<div class="dv3-basis-headline">'+bH+'</div>':'')+
+        (bB?'<div class="dv3-basis-body">'+bB+'</div>':'')+
+      '</div>';
+    }
+  }
+
+  // Forward block
+  var forward='<div class="dv3-forward">'+
+    '<span class="dv3-forward-icon">\u{1F4E8}</span>'+
+    '<div class="dv3-forward-content">'+
+      '<div class="dv3-forward-headline">Know a farmer who\u2019d want this?</div>'+
+      '<div class="dv3-forward-sub">Forward this briefing. Or new here? Subscribe in one tap.</div>'+
+    '</div>'+
+    '<a class="dv3-forward-cta" href="https://agsist.com/daily?subscribe=1">Subscribe \u2192</a>'+
+  '</div>';
+
+  // Byline (Sigurd, founder)
+  var byline='<div class="dv3-byline">'+
+    'Written by <strong>Sigurd Lindquist</strong>, founder. Reply at '+
+    '<a href="mailto:sig@farmers1st.com">sig@farmers1st.com</a> \u2014 I read everything.'+
+  '</div>';
+
   // Source + permalink
   var src='<div class="dv3-source">CME futures &middot; EIA energy data &middot; USDA crop data &middot; Auto-compiled at 6:02 AM CT</div>';
   var perm=iso?'<div class="dv3-perm"><a href="/daily/'+escHtml(iso)+'">Permalink to this briefing \u2192</a></div>':'';
 
-  el.innerHTML=header+ticker+surprise+lead+topbar+sparks+sections+tmyk+watch+share+src+perm;
+  el.innerHTML=header+thread+ticker+surprise+lead+topbar+sponsor+yc+sparks+sections+spread+basis+tmyk+watch+byline+forward+share+src+perm;
 
   // Wire share buttons
   var btns=el.querySelectorAll('.dv3-share-btn');
@@ -579,10 +756,17 @@ function renderArchive(){
         var isWkend=dow===0||dow===6||item.market_closed;
         var shortLabel=valid?(dayN[dow]+' '+monN[d.getMonth()]+' '+d.getDate()):(item.date_display||item.label||item.date||'');
         var type=isWkend?'wkend':'wkday';
+        // v4.1: yesterday's-call outcome dot (green=played out, red=didn't, amber=pending)
+        var ycDot='';
+        if(item.yc_outcome){
+          var ycMap={played_out:['#4aab4c','PLAYED OUT'],didnt:['#e05a42','DIDN\u2019T'],pending:['#e6b042','PENDING']};
+          var ycCfg=ycMap[item.yc_outcome];
+          if(ycCfg){ycDot='<span class="dv3-arc-yc-dot" title="Yesterday\u2019s call: '+ycCfg[1]+'" aria-label="Yesterday\u2019s call '+ycCfg[1]+'" style="background:'+ycCfg[0]+'"></span>';}
+        }
         // FIXED: point to actual archive permalink, not /daily
         html+='<a href="/daily/'+escHtml(iso)+'" class="dv3-arc-card" title="'+escHtml(shortLabel)+' briefing">'+
           '<div class="dv3-arc-card-head">'+
-            '<span class="dv3-arc-card-date">'+escHtml(shortLabel)+'</span>'+
+            '<span class="dv3-arc-card-date">'+ycDot+escHtml(shortLabel)+'</span>'+
             '<span class="dv3-arc-card-badge '+type+'">'+(type==='wkday'?'Market day':'Weekend')+'</span>'+
           '</div>'+
           '<div class="dv3-arc-card-hl">'+(item.headline?escHtml(item.headline):'&mdash;')+'</div>'+
@@ -634,6 +818,21 @@ fetch('/data/daily.json',{cache:'no-store'})
   .catch(function(){renderToday(null);});
 
 renderArchive();
+
+// ── ?subscribe=1 deep link ──────────────────────────────────────
+// Forwarded emails carry this query param. Auto-open the modal.
+(function(){
+  try{
+    var params=new URLSearchParams(window.location.search);
+    if(params.get('subscribe')==='1'){
+      setTimeout(function(){
+        openModal();
+        var emailInput=document.querySelector('#dv3-sub-form input[type="email"]');
+        if(emailInput)emailInput.focus();
+      },120);
+    }
+  }catch(e){/* old browsers without URLSearchParams */}
+})();
 })();
 </script>
 </body>
