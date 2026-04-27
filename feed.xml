@@ -5,13 +5,26 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Apr 2026 11:42:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2026 12:21:45 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>GRAINS FLATLINE AS PLANTING WINDOW TIGHTENS</title>
+      <link>https://agsist.com/daily/2026-04-27</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-27</guid>
+      <pubDate>Mon, 27 Apr 2026 05:00:00 -0600</pubDate>
+      <description>Corn barely moved to $4.67, up just 1.5 cents, as traders wait for weather drama that hasn't arrived yet. Soybeans sat virtually unchanged at $11.80 while cattle futures extended last week's surge, with live cattle adding another 0.7% to $245.22. The grain complex is marking time in narrow ranges, but planting pressure builds with each passing day.
+Corn and beans drift sideways while cattle hold recent gains and energy weakens.
+• Grains Mark Time
+• Cattle Momentum Holds
+  → Price summer cattle if live futures close above $245 for three consecutive sessions.
+• Energy Retreat
+Read more: https://agsist.com/daily/2026-04-27</description>
+    </item>
     <item>
       <title>MIXED SIGNALS AHEAD OF CRITICAL PLANTING WEEK</title>
       <link>https://agsist.com/daily/2026-04-26</link>
@@ -427,21 +440,6 @@ Corn, soybeans, and wheat all gained as energy costs climbed and pre-plant posit
 • ENERGY &amp; INPUTS
   → Lock in any remaining diesel and fertilizer needs immediately — energy momentum suggests higher input costs ahead.
 Read more: https://agsist.com/daily/2026-03-26</description>
-    </item>
-    <item>
-      <title>METALS EXPLODE WHILE GRAINS DRIFT SIDEWAYS</title>
-      <link>https://agsist.com/daily/2026-03-25</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-25</guid>
-      <pubDate>Wed, 25 Mar 2026 05:00:00 -0600</pubDate>
-      <description>Markets split dramatically overnight — precious metals exploded higher while grains marked time. Silver spiked to $71.75, up 7.1%, dragging gold along for a 3.2% rally to $4,487. Meanwhile, corn managed just a quarter-cent gain to $4.62/bu as traders wait for USDA's planting intentions report. The divergence highlights how grain markets are stuck in neutral while global uncertainty drives flight-to-safety trades.
-Silver surged 7.1% overnight as corn barely budged ahead of planting intentions.
-• Grains Mark Time
-  → Hold pricing decisions until Friday's report — no urgency to move on these modest changes.
-• Livestock Softens
-  → Dairy producers should consider forward contracting 15-20% of spring production on this milk rally.
-• Energy Retreats
-  → Lock diesel prices for spring operations if offered fixed contracts — this dip may not last.
-Read more: https://agsist.com/daily/2026-03-25</description>
     </item>
   </channel>
 </rss>

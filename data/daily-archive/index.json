@@ -1,6 +1,17 @@
 {
   "briefings": [
     {
+      "date": "2026-04-27",
+      "date_display": "Monday, April 27, 2026",
+      "headline": "GRAINS FLATLINE AS PLANTING WINDOW TIGHTENS",
+      "teaser": "Quiet grain trade masks growing planting urgency across the Corn Belt.",
+      "market_mood": "mixed",
+      "surprise_count": 0,
+      "sections": 3,
+      "url": "/daily/2026-04-27",
+      "market_closed": false
+    },
+    {
       "date": "2026-04-26",
       "date_display": "Sunday, April 26, 2026",
       "headline": "MIXED SIGNALS AHEAD OF CRITICAL PLANTING WEEK",
@@ -473,6 +484,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-26T11:42:39.148192+00:00",
-  "count": 45
+  "updated": "2026-04-27T12:21:45.175516+00:00",
+  "count": 46
 }
