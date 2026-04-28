@@ -8,6 +8,22 @@
  *   3. Open-Meteo         — weather
  *   4. Nominatim OSM      — reverse geocoding
  *
+ * v16 — 2026-04-28
+ *   FIX: Stale localStorage cache made the site stick to whatever location
+ *   was first detected (e.g. office) even after the user had physically
+ *   moved miles away. boot() used to read cache and `return` without ever
+ *   verifying the current position. Now:
+ *   (a) Cache entries are stamped with ts on save (fetchWeather)
+ *   (b) Cache is treated as stale if older than WX_CACHE_TTL_MS (30 min)
+ *      OR if no ts present (legacy entries from v15 and earlier)
+ *   (c) On every page load, after rendering from cache instantly, a fresh
+ *      navigator.geolocation fix is requested in the background. If the
+ *      new coords are more than WX_REFRESH_DISTANCE_MI (3 miles) from
+ *      cached, fetchWeather is called again with fresh coords, silently
+ *      updating weather/cash bids/spray/urea/forecast for the new spot.
+ *   (d) Public refreshLocation() exposed on window for manual refresh
+ *      callers (e.g. a future "Update location" button).
+ *
  * v15 — 2026-04-24
  *   propagateLocation() now extracts county separately from city and writes
  *   city/state/county/zip to window.AGSIST_STATE.weather (alongside lat/lon
@@ -56,6 +72,67 @@ var WX_ICONS = {
   82:'\u26C8\uFE0F',95:'\u26C8\uFE0F',96:'\u26C8\uFE0F',99:'\u26C8\uFE0F'
 };
 
+// v16: Cache TTL & distance threshold for stale-cache detection.
+// If a cached coord is older than WX_CACHE_TTL_MS, force fresh geolocation.
+// On every page load, kick off a fresh geo fix in background — if the new
+// fix is more than WX_REFRESH_DISTANCE_MI from the cached one, refetch.
+var WX_CACHE_TTL_MS = 30 * 60 * 1000;  // 30 minutes
+var WX_REFRESH_DISTANCE_MI = 3;        // re-fetch if user has moved this far
+
+// v16: Haversine great-circle distance in miles between two coordinates.
+function _wxDist(lat1, lon1, lat2, lon2) {
+  function toRad(d) { return d * Math.PI / 180; }
+  var R = 3959; // Earth radius in miles
+  var dLat = toRad(lat2 - lat1);
+  var dLon = toRad(lon2 - lon1);
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+// v16: After rendering from cache, request a fresh geolocation fix.
+// If the fresh coords differ from cached by more than WX_REFRESH_DISTANCE_MI,
+// re-fetch weather/cash bids/spray/urea/forecast with the new position.
+// Silent on permission denial or timeout — user keeps cached view.
+// maximumAge:0 forces the browser to give us a fresh GPS fix, not its own
+// internal cached position (critical on mobile where the browser may keep
+// a 30+ min old fix in memory).
+function _wxRefreshIfMoved(cachedLat, cachedLon) {
+  if (!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      var freshLat = pos.coords.latitude;
+      var freshLon = pos.coords.longitude;
+      // No cache to compare against — always update.
+      if (cachedLat == null || cachedLon == null) {
+        fetchWeather(freshLat, freshLon, null);
+        return;
+      }
+      // Has cache — only update if user has moved meaningfully.
+      var dist = _wxDist(cachedLat, cachedLon, freshLat, freshLon);
+      if (dist > WX_REFRESH_DISTANCE_MI) {
+        fetchWeather(freshLat, freshLon, null);
+      }
+    },
+    function() { /* permission denied or timeout — keep cached view */ },
+    { timeout: 8000, maximumAge: 0 }
+  );
+}
+
+// v16: Public force-refresh — always re-fetches weather using a fresh
+// geolocation fix, regardless of cache. Useful for a manual "Update
+// location" button or for callers that need to break out of cache.
+function refreshLocation() {
+  if (!navigator.geolocation) { showZipEntry(); return; }
+  navigator.geolocation.getCurrentPosition(
+    function(pos) { fetchWeather(pos.coords.latitude, pos.coords.longitude, null); },
+    function() { /* silent — keep current view */ },
+    { timeout: 8000, maximumAge: 0 }
+  );
+}
+window.refreshLocation = refreshLocation;
+
 // ─────────────────────────────────────────────────────────────────
 // GEOLOCATION + WEATHER
 // ─────────────────────────────────────────────────────────────────
@@ -67,7 +144,7 @@ function requestGeo() {
   navigator.geolocation.getCurrentPosition(
     function(pos) { fetchWeather(pos.coords.latitude, pos.coords.longitude, null); },
     function() { showZipEntry(); },
-    { timeout: 8000 }
+    { timeout: 8000, maximumAge: 0 }
   );
 }
 
@@ -150,7 +227,8 @@ function calcSprayRating(tempF, humid, wind) {
 }
 
 function fetchWeather(lat, lon, label) {
-  try { localStorage.setItem('agsist-wx-loc', JSON.stringify({lat:lat, lon:lon, label:label})); } catch(e) {}
+  // v16: stamp localStorage save with ts so boot() can detect stale cache.
+  try { localStorage.setItem('agsist-wx-loc', JSON.stringify({lat:lat, lon:lon, label:label, ts: Date.now()})); } catch(e) {}
 
   // Expose geo globally for bids-homepage.js and other scripts
   window.AGSIST_GEO = { lat: lat, lng: lon, city: '', state: '', zip: '', county: '' };
@@ -171,7 +249,15 @@ function fetchWeather(lat, lon, label) {
   if (wd) wd.style.display = 'block';
 
   var wxLoc = document.getElementById('wx-loc');
-  if (wxLoc) wxLoc.textContent = '\u{1F4CD} ' + (label || 'Your Location');
+  if (wxLoc) {
+    wxLoc.textContent = '\u{1F4CD} ' + (label || 'Your Location');
+    // v16: Make location label clickable as a manual "update my location" trigger.
+    // Useful when the user has moved less than the 3-mile threshold but still
+    // wants a forced refresh, or if they suspect the cache is wrong.
+    wxLoc.style.cursor = 'pointer';
+    wxLoc.title = 'Tap to update your location';
+    wxLoc.onclick = function() { refreshLocation(); };
+  }
 
   var frame = document.getElementById('windy-frame');
   if (frame) {
@@ -1050,15 +1136,30 @@ function loadDailyBriefing() {
       fetchAllPrices();
       fetchFFAILive();
     }, 5 * 60 * 1000);
+
+    // v16: Stale-cache-aware boot. Read cache for instant render only if it
+    // has a timestamp and is within WX_CACHE_TTL_MS. Always fire a background
+    // geo fix to detect if user has moved more than WX_REFRESH_DISTANCE_MI
+    // since the cached coords were saved.
     setTimeout(function() {
+      var usedCache = false;
       try {
         var saved = localStorage.getItem('agsist-wx-loc');
         if (saved) {
           var p = JSON.parse(saved);
-          if (p.lat && p.lon) { fetchWeather(p.lat, p.lon, p.label); return; }
+          var age = (typeof p.ts === 'number') ? (Date.now() - p.ts) : Infinity;
+          if (p.lat && p.lon && age < WX_CACHE_TTL_MS) {
+            // Fresh-enough cache — render instantly, then verify in background.
+            fetchWeather(p.lat, p.lon, p.label);
+            _wxRefreshIfMoved(p.lat, p.lon);
+            usedCache = true;
+          }
         }
       } catch(e) {}
-      requestGeo();
+      if (!usedCache) {
+        // No cache, expired cache, or legacy entry without ts — request fresh.
+        requestGeo();
+      }
     }, 400);
   }
   if (document.readyState === 'loading') {
