@@ -406,6 +406,17 @@
   .daily-byline strong{color:var(--text);font-weight:700}
   .daily-byline a{color:var(--gold);text-decoration:none}
   .daily-byline a:hover{text-decoration:underline}
+  /* v4.0 share strip — sits between hero-grid and dismiss row */
+  .daily-share{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.85rem var(--sp-lg,1.5rem);border-top:1px solid var(--border);max-width:1400px;margin:0 auto}
+  .daily-hero.dismissed .daily-share{display:none}
+  .daily-share-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-right:.3rem}
+  .daily-share-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;cursor:pointer;transition:border-color .15s,color .15s,background .15s;min-height:36px;white-space:nowrap}
+  .daily-share-btn:hover{border-color:var(--gold);color:var(--text);background:var(--surface2)}
+  .daily-share-btn .dsb-icon{font-size:.85rem;line-height:1}
+  .daily-share-btn svg.dsb-svg{width:11px;height:11px;display:inline-block;vertical-align:-1px;flex-shrink:0}
+  .daily-share-toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--green);color:#fff;padding:.65rem 1.25rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;z-index:9999;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+  .daily-share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:520px){.daily-share{padding:.65rem .9rem;gap:.4rem}.daily-share-lbl{display:none}.daily-share-btn{padding:.4rem .65rem;font-size:.62rem;gap:.3rem}}
 </style>
 </head>
 <body>
@@ -524,6 +535,15 @@
           <div class="s-card" style="border-color:rgba(218,165,32,.15)"><div class="s-card-label" style="color:var(--gold)">&#x1F4AC; DAILY QUOTE</div><blockquote style="margin:0;padding:0"><p id="daily-quote-text" style="font-size:.92rem;font-style:italic;color:var(--text-dim);line-height:1.65;margin-bottom:.4rem">"&mdash;"</p><cite id="daily-quote-attr" style="font-size:.76rem;color:var(--text-muted);font-style:normal"></cite></blockquote></div>
           <div style="font-size:.62rem;color:var(--text-muted);text-align:center;padding:.2rem 0"><span id="daily-source">USDA &middot; CME Group &middot; Open-Meteo</span></div>
         </div>
+      </div>
+      <div class="daily-share" id="daily-share" role="region" aria-label="Share today's briefing">
+        <span class="daily-share-lbl">&#x1F4E2; Share</span>
+        <button class="daily-share-btn" id="dsb-native" data-net="native" style="display:none" aria-label="Share via system share sheet"><span class="dsb-icon">&#x1F4E4;</span> Share</button>
+        <a class="daily-share-btn" id="dsb-x" data-net="x" href="#" target="_blank" rel="noopener" aria-label="Share on X"><svg class="dsb-icon dsb-svg" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"><path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/></svg> X</a>
+        <a class="daily-share-btn" id="dsb-fb" data-net="fb" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook"><span class="dsb-icon">f</span> Facebook</a>
+        <a class="daily-share-btn" id="dsb-li" data-net="li" href="#" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><span class="dsb-icon">in</span> LinkedIn</a>
+        <a class="daily-share-btn" id="dsb-em" data-net="em" href="#" aria-label="Share via email"><span class="dsb-icon">&#x2709;&#xFE0F;</span> Email</a>
+        <button class="daily-share-btn" id="dsb-copy" data-net="copy" aria-label="Copy link to clipboard"><span class="dsb-icon">&#x1F517;</span> Copy Link</button>
       </div>
       <div class="daily-dismiss-row" id="daily-dismiss-row">
         <div style="display:flex;align-items:center;gap:.5rem"><span style="font-size:.82rem;color:var(--text-muted)">Published every weekday by 6am CT.</span></div>
@@ -1399,8 +1419,12 @@ window.hydrateDaily = function(data) {
       var sec=sections[si-1];
       setText('daily-section-'+si+'-title',sec.title||'');
       setHTML('daily-section-'+si+'-body',sec.body||'');
-      setText('daily-section-'+si+'-bottomline',sec.bottom_line||'');
-      setText('daily-section-'+si+'-action',pick(sec.farmer_action,sec.action)||'');
+      // bottom_line + farmer_action default to display:none in CSS — must flip when populated
+      var blEl=el('daily-section-'+si+'-bottomline');
+      if(blEl){if(sec.bottom_line){blEl.textContent=sec.bottom_line;blEl.style.display='block';}else{blEl.style.display='none';}}
+      var acEl=el('daily-section-'+si+'-action');
+      var acTxt=pick(sec.farmer_action,sec.action);
+      if(acEl){if(acTxt){acEl.textContent=acTxt;acEl.style.display='block';}else{acEl.style.display='none';}}
       if(sec.icon){var ic=el('daily-section-'+si+'-icon');if(ic)ic.textContent=sec.icon;}
       var conv=el('daily-section-'+si+'-conviction');
       if(conv){
@@ -1550,11 +1574,61 @@ window.hydrateDaily = function(data) {
 };
 (function(){
   fetch('/data/daily.json').then(function(r){if(!r.ok)throw new Error('no-daily');return r.json();})
-  .then(function(data){if(typeof window.hydrateDaily==='function')window.hydrateDaily(data);})
+  .then(function(data){if(typeof window.hydrateDaily==='function')window.hydrateDaily(data);wireShare();})
   .catch(function(){
     var el=document.getElementById('daily-headline');
     if(el)el.textContent='Daily briefing loading\u2026';
+    wireShare();
   });
+  // Share strip wiring — runs after hydrateDaily so headline reflects current briefing
+  function wireShare(){
+    var SHARE_URL='https://agsist.com/daily';
+    var hl=document.getElementById('daily-headline');
+    var headlineText=hl?hl.textContent.trim():'Today\u2019s AGSIST Daily';
+    if(/loading/i.test(headlineText))headlineText='Today\u2019s AGSIST Daily';
+    var shareTitle='AGSIST Daily \u2014 '+headlineText;
+    var ld=document.getElementById('daily-lead');
+    var leadText=ld?ld.textContent.trim():'';
+    var shareSummary=leadText||'Today\u2019s ag market briefing on AGSIST: overnight markets, what to watch, one number to know.';
+    var enc=encodeURIComponent;
+    var x=document.getElementById('dsb-x');if(x)x.href='https://x.com/intent/post?text='+enc(shareTitle)+'&url='+enc(SHARE_URL)+'&via=agsist';
+    var fb=document.getElementById('dsb-fb');if(fb)fb.href='https://www.facebook.com/sharer/sharer.php?u='+enc(SHARE_URL);
+    var li=document.getElementById('dsb-li');if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+enc(SHARE_URL);
+    var em=document.getElementById('dsb-em');if(em)em.href='mailto:?subject='+enc(shareTitle)+'&body='+enc(shareSummary+'\n\n'+SHARE_URL);
+    // Native share (mobile) — show button if API available
+    if(navigator.share){
+      var nat=document.getElementById('dsb-native');
+      if(nat){
+        nat.style.display='inline-flex';
+        nat.addEventListener('click',function(){
+          navigator.share({title:shareTitle,text:shareSummary,url:SHARE_URL}).catch(function(){});
+        });
+      }
+    }
+    // Copy to clipboard with toast
+    var cp=document.getElementById('dsb-copy');
+    if(cp){
+      cp.addEventListener('click',function(){
+        var t=SHARE_URL;
+        function showToast(msg,ok){
+          var existing=document.getElementById('daily-share-toast');if(existing)existing.remove();
+          var toast=document.createElement('div');
+          toast.id='daily-share-toast';toast.className='daily-share-toast';toast.textContent=msg;
+          if(!ok)toast.style.background='var(--red)';
+          document.body.appendChild(toast);
+          requestAnimationFrame(function(){toast.classList.add('show');});
+          setTimeout(function(){toast.classList.remove('show');setTimeout(function(){if(toast.parentNode)toast.parentNode.removeChild(toast);},300);},2200);
+        }
+        if(navigator.clipboard&&navigator.clipboard.writeText){
+          navigator.clipboard.writeText(t).then(function(){showToast('\u2713 Link copied',true);},function(){showToast('Copy failed',false);});
+        } else {
+          // Fallback for older browsers
+          try{var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.top='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();showToast('\u2713 Link copied',true);}
+          catch(e){showToast('Copy failed',false);}
+        }
+      });
+    }
+  }
 })();
 </script>
 <script>
