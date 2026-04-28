@@ -1467,9 +1467,20 @@ window.hydrateDaily = function(data) {
   }
 
   // Mood — canonical: meta.market_mood, legacy: mood
+  // v4.0: also adds tone class (bullish/bearish/mixed/neutral/cautious) so styles.css v9.4 pill variants apply
   var mood=pick(data.mood,(data.meta&&data.meta.market_mood));
   var moodEl=el('daily-mood');
-  if(moodEl&&mood){moodEl.textContent=mood;moodEl.style.display='inline-block';}
+  if(moodEl&&mood){
+    moodEl.textContent=mood;
+    var moodLc=String(mood).toLowerCase();
+    var moodClass='neutral';
+    if(/bull/.test(moodLc))moodClass='bullish';
+    else if(/bear/.test(moodLc))moodClass='bearish';
+    else if(/mixed|choppy|sideways/.test(moodLc))moodClass='mixed';
+    else if(/caution|wary|risk/.test(moodLc))moodClass='cautious';
+    moodEl.className='daily-mood '+moodClass;
+    moodEl.style.display='inline-block';
+  }
 
   // Surprise banner
   if(data.surprise_magnitude&&data.surprise_magnitude!=='none'){
