@@ -1,5 +1,11 @@
 /* ═══════════════════════════════════════════════════════════════════
-   AGSIST — Shared Stylesheet v9.3 — 2026-04-18
+   AGSIST — Shared Stylesheet v9.4 — 2026-04-28
+   v9.4: Mood + conviction pill variants
+     `.daily-mood` was activated inline by JS but had no color rules,
+     so "BULLISH" rendered as bare white text with no pill background.
+     Added bullish/bearish/mixed tone variants for both `.daily-mood`
+     and `.daily-sec-conviction` (conviction--bull/bear/mixed classes
+     emitted by hydrateDaily v4.0).
    v9.3: Mobile selector scope fix
      `.daily-sec:nth-child(n+4)` and `.daily-sec:nth-child(n+3)` were
      inadvertently hitting `#daily-tmyk-wrap` (which uses `.daily-sec`
@@ -555,3 +561,21 @@ main.tool-main, main#main-content { max-width: 1100px; margin: 0 auto; padding: 
   .daily-sec-action { display: none }
   .daily-sec-bottomline { font-size: .62rem; padding: .3rem .4rem }
 }
+
+/* ── v9.4: Mood + conviction pill variants ───────────────────────── */
+/* `.daily-mood` is activated inline by hydrateDaily JS (display:inline-block).
+   Without these rules, the mood label rendered as bare unstyled text.
+   These variants give it a pill background matching the tone. */
+.daily-mood { color: var(--text-dim); background: var(--surface2); border: 1px solid var(--border); }
+.daily-mood.bullish { color: var(--green); background: rgba(74,171,76,.08); border-color: rgba(74,171,76,.22); }
+.daily-mood.bearish { color: var(--red); background: rgba(200,86,46,.08); border-color: rgba(200,86,46,.22); }
+.daily-mood.mixed,
+.daily-mood.neutral,
+.daily-mood.cautious { color: var(--gold); background: rgba(218,165,32,.08); border-color: rgba(218,165,32,.22); }
+
+/* `.daily-sec-conviction` — class names emitted by hydrateDaily v4.0.
+   Without these, all conviction pills used the default `.daily-sec-conviction`
+   styling (no background, no color differentiation between high/medium/low). */
+.daily-sec-conviction.conviction--bull { color: var(--green); background: rgba(74,171,76,.08); border: 1px solid rgba(74,171,76,.22); }
+.daily-sec-conviction.conviction--bear { color: var(--red); background: rgba(200,86,46,.08); border: 1px solid rgba(200,86,46,.22); }
+.daily-sec-conviction.conviction--mixed { color: var(--gold); background: rgba(218,165,32,.08); border: 1px solid rgba(218,165,32,.22); }
