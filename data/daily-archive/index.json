@@ -1,6 +1,18 @@
 {
   "briefings": [
     {
+      "date": "2026-04-29",
+      "date_display": "Wednesday, April 29, 2026",
+      "headline": "CATTLE HIT 52-WEEK HIGH AS CRUDE EXPLODES",
+      "teaser": "Cattle reach new highs while crude oil's 4% surge reshuffles the cost structure for spring planting.",
+      "market_mood": "bullish",
+      "surprise_count": 3,
+      "sections": 3,
+      "url": "/daily/2026-04-29",
+      "market_closed": false,
+      "yc_outcome": "played_out"
+    },
+    {
       "date": "2026-04-28",
       "date_display": "Tuesday, April 28, 2026",
       "headline": "CATTLE BREAK THROUGH AS CRUDE SURGES",
@@ -496,6 +508,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-28T12:25:34.992532+00:00",
-  "count": 47
+  "updated": "2026-04-29T12:19:20.777983+00:00",
+  "count": 48
 }

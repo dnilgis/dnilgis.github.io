@@ -5,13 +5,26 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Apr 2026 12:25:40 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Apr 2026 12:19:26 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>CATTLE HIT 52-WEEK HIGH AS CRUDE EXPLODES</title>
+      <link>https://agsist.com/daily/2026-04-29</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-29</guid>
+      <pubDate>Wed, 29 Apr 2026 05:00:00 -0600</pubDate>
+      <description>Live cattle hit a 52-week high at $253.45, up 1.8%, extending Monday's breakout call to an eighth straight session above $245. The funds are backing the move with fresh length as crude oil exploded 4% overnight to $103.34, dragging energy costs higher just as planting season hits the critical May window. Yesterday's cattle breakout call is paying off, but the energy surge changes the input cost equation for producers racing against calendar pressure.
+Live cattle reached $253.45 while crude oil surged 4% overnight on Middle East tensions.
+• Cattle Extend Breakout
+  → Hold remaining fed cattle inventory — momentum is accelerating with fund support.
+• Crude Oil Explodes Higher
+• Grains Mark Time
+Read more: https://agsist.com/daily/2026-04-29</description>
+    </item>
     <item>
       <title>CATTLE BREAK THROUGH AS CRUDE SURGES</title>
       <link>https://agsist.com/daily/2026-04-28</link>
@@ -423,21 +436,6 @@ Energy costs spike 8.3% while corn and beans ease on profit-taking ahead of plan
 • ENERGY &amp; INPUTS
   → Lock in remaining diesel needs immediately — this crude rally could have more room to run with spring demand hitting.
 Read more: https://agsist.com/daily/2026-03-30</description>
-    </item>
-    <item>
-      <title>QUIET FRIDAY KEEPS GRAINS STEADY</title>
-      <link>https://agsist.com/daily/2026-03-27</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-27</guid>
-      <pubDate>Fri, 27 Mar 2026 05:00:00 -0600</pubDate>
-      <description>Grain markets closed another sleepy Friday with corn at $4.66 per bushel, down just 1¼¢, and soybeans easing 4¢ to $11.71. The lack of drama is typical pre-planting season — traders waiting for acreage intentions data while farmers gear up for fieldwork. Energy costs climbed with crude oil gaining 1.8%, adding pressure to input expenses.
-Oats jump 2% on small volume while corn and beans drift lower ahead of weekend.
-• Grains Stay Calm
-  → Use the calm to evaluate new-crop sales — December corn above $4.90 covers most production costs.
-• Livestock Edges Higher
-  → Monitor feed cost ratios — current levels support maintaining herd sizes through spring.
-• Energy Costs Climb
-  → Consider locking diesel prices if you haven't — crude oil momentum looks bullish short-term.
-Read more: https://agsist.com/daily/2026-03-27</description>
     </item>
   </channel>
 </rss>
