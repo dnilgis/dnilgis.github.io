@@ -63,7 +63,7 @@ button,a,[role="button"],input,select{touch-action:manipulation}
 .cb-geo-row button{background:none;border:none;color:var(--gold);cursor:pointer;font-size:.78rem;padding:0;text-decoration:underline;min-height:32px}
 .cb-status{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:1rem;padding:.6rem 0;border-bottom:2px solid var(--border)}
 .cb-status-loc{font-size:.85rem;color:var(--text-dim);display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
-.cb-status-meta{font-size:.7rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+.cb-status-meta{font-size:.7rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;display:inline-flex;align-items:center;gap:.4rem}
 .cb-count{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.18rem .55rem;border-radius:20px;background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
 .share-btn{display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border);border-radius:50%;color:var(--text-muted);font-size:.92rem;cursor:pointer;transition:all .15s;min-height:36px;min-width:36px;padding:0}
 .share-btn:hover{border-color:var(--gold);color:var(--gold)}
@@ -272,7 +272,6 @@ button,a,[role="button"],input,select{touch-action:manipulation}
 .bbc-call-btn:hover,.bbc-dir-btn:hover{opacity:.8}
 .bbc-scroll-hint{display:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:.3rem 0 .2rem;opacity:.7}
 @media(max-width:719px){.bbc-scroll-hint{display:block}}
-.elev-as-of{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-muted);margin-top:.1rem}
 .elev-actions{display:flex;gap:.4rem;padding:.4rem 1rem;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
 .elev-call-btn{display:inline-flex;align-items:center;gap:.25rem;background:rgba(58,139,60,.12);border:1px solid rgba(58,139,60,.35);border-radius:6px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;text-decoration:none;padding:.28rem .65rem;min-height:36px;letter-spacing:.04em;transition:background .15s}
 .elev-call-btn:hover{background:rgba(58,139,60,.22)}
@@ -339,7 +338,10 @@ button,a,[role="button"],input,select{touch-action:manipulation}
         <span class="cb-count" id="cb-elev-count">0</span>
       </div>
       <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-        <div class="cb-status-meta" id="cb-status-meta">Barchart OnDemand</div>
+        <div class="cb-status-meta">
+          <span id="cb-status-timer" data-agsist-timer data-mode="since" style="display:none"></span>
+          <span id="cb-status-source">Barchart OnDemand</span>
+        </div>
         <span class="market-badge" id="market-badge"></span>
         <button class="share-btn" id="share-btn" aria-label="Share these results" title="Share results">&#128228;</button>
       </div>
@@ -500,7 +502,7 @@ button,a,[role="button"],input,select{touch-action:manipulation}
   </div>
 </div>
 <div id="site-footer"></div>
-<script src="/components/loader.js" defer></script>
+<script src="/components/loader.js?v=2" defer></script>
 <script src="/components/geo.js" defer></script>
 <script>
 (function(){
@@ -515,7 +517,7 @@ var radiusTimer=null;
 
 var $=function(id){return document.getElementById(id);};
 var zipInput=$('cb-zip'),goBtn=$('cb-go'),radiusSel=$('cb-radius'),results=$('cb-results');
-var statusBar=$('cb-status'),statusLbl=$('cb-status-label'),statusMeta=$('cb-status-meta'),elevCount=$('cb-elev-count');
+var statusBar=$('cb-status'),statusLbl=$('cb-status-label'),elevCount=$('cb-elev-count');
 var toolbar=$('cb-toolbar'),sortSel=$('cb-sort-select'),geoTxt=$('cb-geo-txt'),geoUseBtn=$('cb-use-detect');
 var bestSec=$('best-bids-section'),bestGrid=$('best-bids-grid');
 var wtdBu=$('wtd-bushels'),wtdFuel=$('wtd-fuel'),wtdTbody=$('wtd-tbody'),wtdWinner=$('wtd-winner-banner');
@@ -837,7 +839,9 @@ function renderBids(bids){
   elevators.sort(function(a,b){switch(currentSort){case 'best-cash':return(b.bestCash||0)-(a.bestCash||0);case 'best-basis':return(b.bestBasis||-9999)-(a.bestBasis||-9999);case 'name':return(a.facility||'').localeCompare(b.facility||'');default:return(a.distance||999)-(b.distance||999);}});
   currentElevators=elevators;
   elevCount.textContent=elevators.length+' elevator'+(elevators.length!==1?'s':'');
-  var asOf=lastFetchTime?lastFetchTime.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true})+' CT':'';
+  /* Per-elevator "as of" line removed — freshness is surfaced once
+     in the status bar timer (cb-status-timer) so it doesn't repeat
+     on every card. */
   var html='<div class="cb-grid">';
   elevators.forEach(function(elev){
     var cs=(elev.city||'')+(elev.city&&elev.state?', ':''+(elev.state||''));
@@ -847,7 +851,6 @@ function renderBids(bids){
     html+='<div class="elev-head"><div class="elev-info"><div class="elev-name" title="'+escH(elev.facility)+'">'+escH(elev.facility)+'</div>';
     if(elev.branch&&elev.branch!==elev.facility)html+='<div class="elev-branch">'+escH(elev.branch)+'</div>';
     if(cs)html+='<div class="elev-loc">'+escH(cs)+'</div>';
-    if(asOf)html+='<div class="elev-as-of">as of '+asOf+'</div>';
     html+='</div><div class="elev-meta">';
     if(elev.distance!=null)html+='<div class="elev-dist">'+elev.distance.toFixed(0)+' mi away</div>';
     html+='<button class="pin-btn'+(isPinned?' pinned':'')+'" data-key="'+escH(elev.key)+'" aria-pressed="'+(isPinned?'true':'false')+'" aria-label="'+(isPinned?'Remove':'Add')+' '+escH(elev.facility)+' from comparison">&#43; '+(isPinned?'&#10003; Added':'Compare')+'</button>';
@@ -913,7 +916,15 @@ function doSearch(zip){
     currentBids=bids;pinnedKeys=[];
     statusBar.style.display='flex';toolbar.style.display='flex';internalLinks.style.display='block';
     statusLbl.textContent='Live bids within '+radius+' mi of ZIP '+zip;
-    statusMeta.textContent='Barchart OnDemand';
+    /* Wire the freshness timer to lastFetchTime — ticks every 30s.
+       Falls back gracefully if loader.js timer module didn't load. */
+    var srcEl=document.getElementById('cb-status-source');
+    var tmrEl=document.getElementById('cb-status-timer');
+    if(window.agsistTimer&&tmrEl&&srcEl){
+      window.agsistTimer.set(tmrEl,{mode:'since',target:lastFetchTime.toISOString(),label:'Bids pulled'});
+      tmrEl.style.display='inline-flex';
+      srcEl.style.display='none';
+    }
     updateMarketBadge();
     if(!detectedLabel){
       var closest=bids.slice().sort(function(a,b){return(a.distance||999)-(b.distance||999);})[0];

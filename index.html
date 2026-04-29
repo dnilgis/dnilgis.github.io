@@ -777,7 +777,7 @@
     </div>
   </div>
   <div class="price-cards-section fade-up" id="f-prices">
-    <div class="sec-head"><div class="sec-title">&#x1F4C8; Market Prices</div><div style="display:flex;align-items:center;gap:.75rem"><span id="prices-age" style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted)">Updated every 30 min</span><a href="/corn-futures-prices" class="sec-all">All Charts &rarr;</a></div></div>
+    <div class="sec-head"><div class="sec-title">&#x1F4C8; Market Prices</div><div style="display:flex;align-items:center;gap:.75rem"><span id="prices-age" data-agsist-timer data-mode="live" data-interval="30" data-label="Markets" data-show-next="false" style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted)">Updated every 30 min</span><a href="/corn-futures-prices" class="sec-all">All Charts &rarr;</a></div></div>
     <div class="pc-section-lbl">&#x1F33D; Grains &mdash; Key Contracts</div>
     <div class="price-cards-grid">
       <div class="pc pc--highlight" data-spark="corn"><div class="pc-head"><span class="pc-name"><span class="pc-name-icon">&#x1F33D;</span>Corn</span><span class="pc-contract">Front Month</span></div><div class="pc-price" id="pcp-corn-near">--</div><div class="pc-change"><span class="pc-chg-val nc" id="pcc-corn-near">--</span></div><div class="pc-prev" id="pcprev-corn-near"></div><div class="pc-range"><div class="pc-range-labels"><span id="pcrl-corn-lo">$3.69</span><span>52-Wk Range</span><span id="pcrl-corn-hi">$4.81</span></div><div class="pc-range-track"><div class="pc-range-fill" id="pcrf-corn" style="width:84.8%"></div><div class="pc-range-dot" id="pcrd-corn" style="left:84.8%"></div></div></div></div>
@@ -974,7 +974,7 @@
   </div>
 </div>
 <div id="site-footer"></div>
-<script src="/components/loader.js" defer></script>
+<script src="/components/loader.js?v=2" defer></script>
 <script src="/components/geo.js" defer></script>
 <script src="/components/bids-homepage.js" defer></script>
 <script>
@@ -1050,13 +1050,20 @@
       var _qc=document.getElementById('ffai-score-compact');if(_qc)_qc.textContent=_qs;
       var _qi=document.getElementById('ffai-interp');if(_qi)_qi.textContent='Mixed signals. Updated quarterly.';
     }
-    // Update "prices-age" label with actual fetch time
+    // v15: Wire #prices-age to live ticking timer. Auto-degrades to gold STALE
+    // at 1.5× interval (45m) and red OFFLINE at 3× (90m). Falls back to original
+    // frozen single-shot calc if loader.js timer module didn't load.
     if(data.fetched){
       var _pa=document.getElementById('prices-age');
       if(_pa){
-        var _mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
-        _pa.textContent=_mins<2?'• Live now':'• Updated '+_mins+' min ago';
-        _pa.style.color=_mins>60?'#f0913a':_mins>30?'var(--gold)':'var(--text-muted)';
+        if(window.agsistTimer){
+          window.agsistTimer.set(_pa,{mode:'live',fetched:data.fetched,interval:30,label:'Markets',showNext:false});
+          _pa.style.color='';
+        }else{
+          var _mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
+          _pa.textContent=_mins<2?'• Live now':'• Updated '+_mins+' min ago';
+          _pa.style.color=_mins>60?'#f0913a':_mins>30?'var(--gold)':'var(--text-muted)';
+        }
       }
     }
     // Wire sparklines if geo.js hasn't already — REMOVED (sparklines disabled)

@@ -304,7 +304,7 @@ button,a,[role="button"]{touch-action:manipulation;}
     </div>
   </div>
 
-  <div class="ps"><span class="ps-dot" aria-hidden="true"></span><span id="status">Loading prices…</span><span class="session-badge closed" id="session-badge"><span class="dot" aria-hidden="true"></span>Loading…</span></div>
+  <div class="ps"><span id="status-timer" data-agsist-timer data-mode="live" data-interval="30" data-label="Markets" style="display:none"></span><span id="status"><span class="ps-dot" aria-hidden="true"></span>Loading prices…</span><span class="session-badge closed" id="session-badge"><span class="dot" aria-hidden="true"></span>Loading…</span></div>
 
   <div class="be-strip">
     <label for="be-input">My cost of production:</label>
@@ -316,7 +316,7 @@ button,a,[role="button"]{touch-action:manipulation;}
   <div class="snap-card">
     <div class="snap-hd">
       <span class="snap-lbl">🧭 Today's Market Read</span>
-      <span class="snap-age" id="snap-age"></span>
+      <span class="snap-age" id="snap-age" data-agsist-timer data-mode="since" data-show-next="false"></span>
       <a href="/ffai-index" class="ffai-badge"><span class="ffai-lbl">FFAI Corn:</span> <span class="ffai-score">—</span> <span style="opacity:.5">preview</span></a>
     </div>
 
@@ -602,7 +602,7 @@ button,a,[role="button"]{touch-action:manipulation;}
 </main>
 
 <div id="site-footer"></div>
-<script src="/components/loader.js" defer></script>
+<script src="/components/loader.js?v=2" defer></script>
 <script src="/components/geo.js" defer></script>
 <script>
 (function(){
@@ -1546,13 +1546,32 @@ fetch('/data/prices.json',{cache:'no-store'})
     if(dol&&dol.close){if(dol.close>104)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is a headwind for US corn export competitiveness');else if(dol.close<100)sp.push('the <strong>dollar at '+dol.close.toFixed(1)+'</strong> is providing a tailwind for US corn export demand');}
     var snapEl=document.getElementById('snap-body');
     if(sp.length){window.__agsistMR.base=sp;var __feFront=q[CROP_KEY];if(__feFront&&__feFront.close!=null){window.__agsistMR.breakeven=getBreakevenPhrase(__feFront.close/100);}renderMarketRead();}
-    var ageEl=document.getElementById('snap-age');
-    if(ageEl&&data.fetched){var am=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);ageEl.textContent=am<2?'live':am+'m old';}
+    /* v15: Wire freshness timers — both tick every 30s automatically.
+       Falls back gracefully if loader.js timer module didn't load. */
+    if(window.agsistTimer&&data.fetched){
+      var statusTmr=document.getElementById('status-timer');
+      var statusOld=document.getElementById('status');
+      if(statusTmr&&statusOld){
+        window.agsistTimer.set(statusTmr,{mode:'live',fetched:data.fetched,interval:30,label:'Markets'});
+        statusTmr.style.display='inline-flex';
+        statusOld.style.display='none';
+      }
+      var snapTmr=document.getElementById('snap-age');
+      if(snapTmr){
+        window.agsistTimer.set(snapTmr,{mode:'since',target:data.fetched,showNext:false});
+      }
+    }else if(data.fetched){
+      /* loader.js timer missing — fallback to original frozen behavior */
+      var ageEl=document.getElementById('snap-age');
+      if(ageEl){var am=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);ageEl.textContent=am<2?'live':am+'m old';}
+      var minsFB=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
+      document.getElementById('status').textContent='Prices updated · '+(minsFB<2?'Just updated':minsFB<60?minsFB+' min ago':Math.round(minsFB/60)+'h ago');
+    }
+    /* WASDE imminence still computes from data.fetched — preserved verbatim */
     var wEl=document.getElementById('snap-wasde');
     if(wEl){var sn=new Date(),sw=new Date(sn.getFullYear(),sn.getMonth(),10,11,0,0);if(sn>=sw)sw=new Date(sn.getFullYear(),sn.getMonth()+1,10,11,0,0);var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dd=Math.ceil((sw-sn)/86400000);wEl.textContent=MN[sw.getMonth()]+' '+sw.getDate()+' · '+(dd<=0?'today':dd===1?'tomorrow':'in '+dd+' days');maybeFlagWasdeImminence(dd);}
-    var mins=Math.round((Date.now()-new Date(data.fetched).getTime())/60000);
-    document.getElementById('status').textContent='Prices updated · '+(mins<2?'Just updated':mins<60?mins+' min ago':Math.round(mins/60)+'h ago');
-    if(typeof gaEvent==='function')gaEvent('price_loaded',{page:'corn',mins_old:mins});
+    var minsForGA=data.fetched?Math.round((Date.now()-new Date(data.fetched).getTime())/60000):null;
+    if(typeof gaEvent==='function')gaEvent('price_loaded',{page:'corn',mins_old:minsForGA});
 
     // --- NEW: render forward curve ---
     renderForwardCurve(CROP_KEY,FWD_CONTRACTS,q,true);
