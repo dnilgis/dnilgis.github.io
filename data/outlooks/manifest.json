@@ -1,14 +1,14 @@
 {
-  "fetched_at": "2026-04-30T18:44:51+00:00",
+  "fetched_at": "2026-04-30T20:19:27+00:00",
   "files": {
     "noaa_prcp_30day.gif": {
-      "bytes": 210201,
-      "changed": false,
-      "last_modified": "2026-04-16T12:31:30+00:00",
-      "sha256": "c1c2a0f2f21e56d428765a9240c8b97d8f25cf7393dbc0d7e1c400654b09f447",
-      "source": "https://www.cpc.ncep.noaa.gov/products/predictions/long_range/lead14/off14_prcp.gif",
+      "bytes": 227214,
+      "changed": true,
+      "last_modified": "2026-04-30T19:00:27+00:00",
+      "sha256": "6ba0f1216c63ca967ea38c1d926ab9165728a0f85ab6076d85da784d8f06fd7b",
+      "source": "https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_prcp.gif",
       "status": "ok",
-      "variant": "lead14"
+      "variant": "lead15"
     },
     "noaa_prcp_90day.gif": {
       "bytes": 235514,
@@ -19,13 +19,13 @@
       "status": "ok"
     },
     "noaa_temp_30day.gif": {
-      "bytes": 229685,
-      "changed": false,
-      "last_modified": "2026-04-16T12:31:30+00:00",
-      "sha256": "e7be07b02fff16c6d8561d96f18d78a718d14dc7e06a4dae6b44b3df31b881e6",
-      "source": "https://www.cpc.ncep.noaa.gov/products/predictions/long_range/lead14/off14_temp.gif",
+      "bytes": 246633,
+      "changed": true,
+      "last_modified": "2026-04-30T19:00:27+00:00",
+      "sha256": "ec19df4d0b84e752b7071de2f9884cda089c0da22bebbdf6442106e2124fb37e",
+      "source": "https://www.cpc.ncep.noaa.gov/products/predictions/30day/off15_temp.gif",
       "status": "ok",
-      "variant": "lead14"
+      "variant": "lead15"
     },
     "noaa_temp_90day.gif": {
       "bytes": 231677,
