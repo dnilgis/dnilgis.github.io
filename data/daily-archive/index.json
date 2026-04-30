@@ -1,6 +1,18 @@
 {
   "briefings": [
     {
+      "date": "2026-04-30",
+      "date_display": "Thursday, April 30, 2026",
+      "headline": "CRUDE CRASHES AS CATTLE HOLD GAINS",
+      "teaser": "Crude crashes 4.4% but cattle hold the breakout — funds picking their spots.",
+      "market_mood": "mixed",
+      "surprise_count": 2,
+      "sections": 4,
+      "url": "/daily/2026-04-30",
+      "market_closed": false,
+      "yc_outcome": "played_out"
+    },
+    {
       "date": "2026-04-29",
       "date_display": "Wednesday, April 29, 2026",
       "headline": "CATTLE HIT 52-WEEK HIGH AS CRUDE EXPLODES",
@@ -508,6 +520,6 @@
       "url": "/daily/2026-03-04"
     }
   ],
-  "updated": "2026-04-29T12:19:20.777983+00:00",
-  "count": 48
+  "updated": "2026-04-30T12:17:43.309113+00:00",
+  "count": 49
 }

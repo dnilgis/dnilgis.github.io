@@ -5,13 +5,26 @@
     <link>https://agsist.com/daily</link>
     <description>Free daily agricultural market briefing for corn, soybean, and grain producers. Overnight surprises, farmer actions, market analysis — every morning at 5 AM CT.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Apr 2026 12:19:26 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2026 12:17:48 +0000</lastBuildDate>
     <atom:link href="https://agsist.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://agsist.com/img/og/daily.jpg</url>
       <title>AGSIST Daily — Morning Agricultural Intelligence Briefing</title>
       <link>https://agsist.com/daily</link>
     </image>
+    <item>
+      <title>CRUDE CRASHES AS CATTLE HOLD GAINS</title>
+      <link>https://agsist.com/daily/2026-04-30</link>
+      <guid isPermaLink="true">https://agsist.com/daily/2026-04-30</guid>
+      <pubDate>Thu, 30 Apr 2026 05:00:00 -0600</pubDate>
+      <description>Crude oil crashed $4.81 to $104.22 — its worst single-day drop in three months — but cattle shrugged off the energy selloff and held yesterday's breakout above $255. The divergence says something important: cattle's momentum has fund support that crude's flash rally never earned. Live futures closed at $255.10, down just 70 cents from yesterday's 52-week high.
+Oil's 4.4% plunge reverses Tuesday's energy rally while livestock extends breakout.
+• Cattle Hold Breakout
+  → Price remaining summer cattle inventory above $250 — the breakout has legs.
+• Energy Complex Reverses
+• Grains Track Lower
+Read more: https://agsist.com/daily/2026-04-30</description>
+    </item>
     <item>
       <title>CATTLE HIT 52-WEEK HIGH AS CRUDE EXPLODES</title>
       <link>https://agsist.com/daily/2026-04-29</link>
@@ -421,21 +434,6 @@ Energy surge squeezes grain margins while cattle rally ahead of planting season.
 • Energy Costs Surge
   → Lock diesel contracts now if you haven't — this crude rally has more room to run.
 Read more: https://agsist.com/daily/2026-03-31</description>
-    </item>
-    <item>
-      <title>CRUDE EXPLODES ABOVE $101, GRAINS SLIDE</title>
-      <link>https://agsist.com/daily/2026-03-30</link>
-      <guid isPermaLink="true">https://agsist.com/daily/2026-03-30</guid>
-      <pubDate>Mon, 30 Mar 2026 05:00:00 -0600</pubDate>
-      <description>Crude oil surged to $101.18 per barrel overnight — an 8.3% jump that's putting immediate pressure on input costs while corn slid 5¼¢ to $4.62 and soybeans dropped 15¼¢ to $11.60. The energy spike comes at the worst possible time for spring field prep, with nitrogen applications starting and diesel demand about to ramp. USDA's Prospective Plantings report looms at month-end.
-Energy costs spike 8.3% while corn and beans ease on profit-taking ahead of planting report.
-• GRAINS &amp; OILSEEDS
-  → Hold pricing decisions until Thursday's plantings data — this dip could reverse quickly if intended acres disappoint.
-• LIVESTOCK &amp; DAIRY
-  → Consider forward contracting cattle if you're current — this rally has legs but higher feed costs will eventually matter.
-• ENERGY &amp; INPUTS
-  → Lock in remaining diesel needs immediately — this crude rally could have more room to run with spring demand hitting.
-Read more: https://agsist.com/daily/2026-03-30</description>
     </item>
   </channel>
 </rss>
